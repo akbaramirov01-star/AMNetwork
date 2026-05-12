@@ -344,33 +344,14 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:56
     <div class="section-eyebrow" style="justify-content:center" data-t="wl_tag">Early Access</div>
     <h2 class="section-title" style="text-align:center" data-t="wl_title">Be among the first. Shape the future.</h2>
     <p style="font-size:15px;color:var(--text2);text-align:center;line-height:1.7" data-t="wl_sub">Join the waitlist. We will reach out personally before launch.</p>
-    <div class="form-card">
-      <div id="formContent">
-        <div class="field"><label data-t="f_name">Name (optional)</label><input type="text" id="fname" placeholder="Abu Abdullah" data-t-ph="f_name_ph"></div>
-        <div class="field"><label data-t="f_email">Email address</label><input type="email" id="femail" placeholder="you@example.com" data-t-ph="f_email_ph"></div>
-        <div class="field">
-          <label data-t="f_country">Country</label>
-          <select id="fcountry" onchange="this.dataset.selected=this.value"></select>
-        </div>
-        <div class="field">
-          <label data-t="f_role">I want to</label>
-          <div class="role-grid">
-            <button class="role-btn" onclick="toggleRole(this,'donor')" data-t="r1">Give Zakat</button>
-            <button class="role-btn" onclick="toggleRole(this,'sadaka')" data-t="r2">Give Sadaka</button>
-            <button class="role-btn" onclick="toggleRole(this,'recipient')" data-t="r3">Receive Help</button>
-            <button class="role-btn" onclick="toggleRole(this,'team')" data-t="r4">Join the Team</button>
-          </div>
-        </div>
-        <button class="submit-btn" id="submitBtn" onclick="submitForm()" data-t="submit">Reserve My Spot</button>
-        <p class="form-note" data-t="form_note">No spam. No data selling. Just launch updates.</p>
+    <div class="form-card" style="text-align:center;padding:44px">
+        <div style="font-size:44px;margin-bottom:18px">🌿</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;margin-bottom:12px;color:var(--text)">Join the Waitlist</h3>
+        <p style="font-size:14px;color:var(--text2);margin-bottom:32px;line-height:1.7;max-width:360px;margin-left:auto;margin-right:auto" data-t="wl_sub">We will reach out personally before launch with early access and updates.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgBfQT1Yiy1uaVL9AFXJcS8z7wxo3DDLu-3cS3dobEkNevHQ/viewform?usp=publish-editor" target="_blank" style="display:inline-block;padding:15px 44px;background:var(--gold);border-radius:8px;color:#0D2119;font-size:15px;font-weight:700;text-decoration:none;font-family:'DM Sans',sans-serif;transition:all 0.2s" onmouseover="this.style.background='var(--gold2)';this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 36px rgba(201,168,76,0.3)'" onmouseout="this.style.background='var(--gold)';this.style.transform='translateY(0)';this.style.boxShadow='none'" data-t="submit">Reserve My Spot →</a>
+        <p style="font-size:11px;color:var(--text3);margin-top:16px" data-t="form_note">No spam. No data selling. Just launch updates.</p>
+        <div style="margin-top:20px;font-family:'Noto Naskh Arabic',serif;font-size:18px;color:var(--gold);direction:rtl">جَزَاكَ اللَّهُ خَيْرًا</div>
       </div>
-      <div class="success-msg" id="successMsg">
-        <div class="success-check">✓</div>
-        <h3 data-t="success_h">JazakAllahu Khayran!</h3>
-        <span class="success-arabic">جَزَاكَ اللَّهُ خَيْرًا</span>
-        <p data-t="success_p">May Allah reward you with goodness. You are on the list.</p>
-      </div>
-    </div>
   </div>
 </div>
 
