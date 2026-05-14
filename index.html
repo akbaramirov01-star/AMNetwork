@@ -22,24 +22,24 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
 [data-theme="dark"]{
-  --bg1:#060E09;--bg2:#0D1F14;--bg3:#1C4532;--bg4:#2D6A4F;
+  --bg1:#0A1A11;--bg2:#0F2117;--bg3:#1C4532;--bg4:#2D6A4F;
   --gold:#C9A84C;--gold2:#E8C87A;--gold3:rgba(201,168,76,0.12);
-  --text:#FFFFFF;--text2:rgba(255,255,255,0.58);--text3:rgba(255,255,255,0.32);
-  --border:rgba(255,255,255,0.08);--card:rgba(255,255,255,0.04);
-  --nav-bg:rgba(6,14,9,0.94);--input-bg:rgba(255,255,255,0.06);
-  --input-border:rgba(255,255,255,0.12);--step-bg:#060E09;
+  --text:#FFFFFF;--text2:rgba(255,255,255,0.60);--text3:rgba(255,255,255,0.38);
+  --border:rgba(255,255,255,0.09);--card:rgba(255,255,255,0.04);
+  --nav-bg:rgba(10,26,17,0.92);--input-bg:rgba(255,255,255,0.06);
+  --input-border:rgba(255,255,255,0.14);--step-bg:#0A1A11;
 }
 [data-theme="light"]{
-  --bg1:#F5F0E8;--bg2:#EDE5D6;--bg3:#DDD0BB;--bg4:#C8B896;
-  --gold:#A07828;--gold2:#C9A84C;--gold3:rgba(160,120,40,0.1);
-  --text:#1C2E1F;--text2:rgba(28,46,31,0.65);--text3:rgba(28,46,31,0.38);
-  --border:rgba(28,69,50,0.12);--card:rgba(255,255,255,0.75);
-  --nav-bg:rgba(245,240,232,0.96);--input-bg:rgba(245,240,232,0.8);
-  --input-border:rgba(28,69,50,0.2);--step-bg:rgba(255,255,255,0.6);
+  --bg1:#F5F0E8;--bg2:#EDE8DE;--bg3:#DDD0BB;--bg4:#C8B896;
+  --gold:#C9A84C;--gold2:#E8C87A;--gold3:rgba(201,168,76,0.12);
+  --text:#1C2E1F;--text2:rgba(28,46,31,0.68);--text3:rgba(28,46,31,0.42);
+  --border:rgba(28,69,50,0.12);--card:rgba(255,255,255,0.80);
+  --nav-bg:rgba(245,240,232,0.95);--input-bg:rgba(255,255,255,0.7);
+  --input-border:rgba(28,69,50,0.18);--step-bg:rgba(255,255,255,0.65);
 }
 
-html{scroll-behavior:smooth;transition:none}
-body{font-family:'DM Sans',sans-serif;background:var(--bg1);color:var(--text);overflow-x:hidden;line-height:1.6}
+html{scroll-behavior:smooth;background:var(--bg1);transition:background-color 0.35s ease}
+body{font-family:'DM Sans',sans-serif;background:var(--bg1);color:var(--text);overflow-x:hidden;line-height:1.6;transition:background-color 0.35s ease,color 0.35s ease}
 
 [lang="tj"]{font-family:'Times New Roman',serif}
 [lang="ar"]{font-family:'Noto Naskh Arabic',sans-serif;direction:rtl}
@@ -53,7 +53,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg1);color:var(--text);ov
 .topline{position:fixed;top:0;left:0;right:0;z-index:200;height:3px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent)}
 
 /* ── NAV ── */
-nav{position:fixed;top:3px;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:var(--nav-bg);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);transition:background 0.4s}
+nav{position:fixed;top:3px;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:var(--nav-bg);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);transition:background-color 0.35s ease}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-logo img{height:52px;width:auto;filter:drop-shadow(0 2px 8px rgba(201,168,76,0.2))}
 .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--text)}.nav-logo-text .am{color:var(--gold)}
@@ -228,6 +228,86 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:52
   .roadmap{grid-template-columns:1fr}
   .trust{grid-template-columns:1fr 1fr}
 }
+
+/* Smooth theme transitions */
+nav,.pcard,.step,.scard,.titem,.ppartner,.ritem,.form-card,.fq,.aud-grid,.gcanvas-wrap{
+  transition:background-color 0.35s ease,border-color 0.35s ease,color 0.35s ease;
+}
+
+/* Full theme coverage */
+html, body { min-height: 100vh; }
+
+/* DARK MODE — everything inherits bg1 (#0A1A11 emerald dark) */
+[data-theme="dark"] * {
+  --step-bg: #0F2117;
+}
+[data-theme="dark"] body,
+[data-theme="dark"] html {
+  background-color: #0A1A11 !important;
+}
+[data-theme="dark"] .step,
+[data-theme="dark"] .titem,
+[data-theme="dark"] .ritem {
+  background-color: #0F2117 !important;
+}
+[data-theme="dark"] .steps,
+[data-theme="dark"] .trust,
+[data-theme="dark"] .roadmap {
+  background-color: rgba(255,255,255,0.03) !important;
+}
+[data-theme="dark"] .pcard,
+[data-theme="dark"] .scard,
+[data-theme="dark"] .aud-grid,
+[data-theme="dark"] .ppartner,
+[data-theme="dark"] .fq,
+[data-theme="dark"] .fitem {
+  background-color: rgba(255,255,255,0.04) !important;
+}
+[data-theme="dark"] .form-card,
+[data-theme="dark"] .wl-section {
+  background-color: rgba(28,69,50,0.15) !important;
+}
+[data-theme="dark"] .hero-stats {
+  background-color: rgba(255,255,255,0.03) !important;
+}
+[data-theme="dark"] .gcanvas-wrap {
+  background-color: #0F2117 !important;
+}
+
+/* LIGHT MODE — everything beige/cream */
+[data-theme="light"] body,
+[data-theme="light"] html {
+  background-color: #F5F0E8 !important;
+}
+[data-theme="light"] .step,
+[data-theme="light"] .titem,
+[data-theme="light"] .ritem {
+  background-color: rgba(255,255,255,0.75) !important;
+}
+[data-theme="light"] .steps,
+[data-theme="light"] .trust,
+[data-theme="light"] .roadmap {
+  background-color: rgba(28,69,50,0.05) !important;
+}
+[data-theme="light"] .pcard,
+[data-theme="light"] .scard,
+[data-theme="light"] .aud-grid,
+[data-theme="light"] .ppartner,
+[data-theme="light"] .fq,
+[data-theme="light"] .fitem {
+  background-color: rgba(255,255,255,0.85) !important;
+}
+[data-theme="light"] .form-card,
+[data-theme="light"] .wl-section {
+  background-color: rgba(245,240,232,0.6) !important;
+}
+[data-theme="light"] .hero-stats {
+  background-color: rgba(255,255,255,0.7) !important;
+}
+[data-theme="light"] .gcanvas-wrap {
+  background-color: rgba(255,255,255,0.5) !important;
+}
+
 </style>
 </head>
 <body>
@@ -476,7 +556,6 @@ function toggleTheme(){
   // Force repaint trick for all browsers including desktop
   root.setAttribute('data-theme', theme);
   root.style.colorScheme = theme;
-  void root.offsetHeight; // force reflow
   document.getElementById('themeBtn').textContent = theme==='dark'?'🌙':'☀️';
   localStorage.setItem('amn_theme', theme);
   // Redraw canvases with new theme
@@ -566,89 +645,255 @@ function updateCanvasLang(l){ canvasLang = l; }
 // ── LEDGER ──
 function startLedger(){
   const c = document.getElementById('ledgerCanvas');
+  if(!c) return;
   const ctx = c.getContext('2d');
-  c.width = c.offsetWidth * devicePixelRatio;
-  c.height = c.offsetHeight * devicePixelRatio;
-  ctx.scale(devicePixelRatio, devicePixelRatio);
-  const W=c.offsetWidth, H=c.offsetHeight;
+  const dpr = window.devicePixelRatio || 1;
+  c.width = c.offsetWidth * dpr;
+  c.height = c.offsetHeight * dpr;
+  ctx.scale(dpr, dpr);
+  const W = c.offsetWidth, H = c.offsetHeight;
+  const isMobile = W < 500;
+
   const txBase=[
-    {hash:'0x7f3a...c842',from:'Donor #1,247',to:'Family #89 · Tajikistan',amt:'$120',status:'Confirmed',time:'2s ago'},
-    {hash:'0x2b9e...f103',from:'Donor #892',to:'Student #34 · Indonesia',amt:'$50',status:'Confirmed',time:'8s ago'},
-    {hash:'0x5d1c...a7f9',from:'Donor #2,103',to:'Patient #12 · Malaysia',amt:'$300',status:'Verified',time:'15s ago'},
-    {hash:'0x9a4b...e621',from:'Donor #445',to:'Family #201 · Egypt',amt:'$75',status:'Confirmed',time:'23s ago'},
-    {hash:'0x3e8d...b294',from:'Donor #1,891',to:'Business #7 · UAE',amt:'$500',status:'Pending',time:'31s ago'},
+    {hash:'0x7f3a...c842', donor:'Donor #1,247', recipient:'Family · Tajikistan', amt:'$120', status:'Confirmed', time:'2s'},
+    {hash:'0x2b9e...f103', donor:'Donor #892',   recipient:'Student · Indonesia',  amt:'$50',  status:'Confirmed', time:'8s'},
+    {hash:'0x5d1c...a7f9', donor:'Donor #2,103', recipient:'Patient · Malaysia',   amt:'$300', status:'Verified',  time:'15s'},
+    {hash:'0x9a4b...e621', donor:'Donor #445',   recipient:'Family · Egypt',       amt:'$75',  status:'Confirmed', time:'23s'},
+    {hash:'0x3e8d...b294', donor:'Donor #1,891', recipient:'Business · UAE',       amt:'$500', status:'Pending',   time:'31s'},
   ];
   let txs=[...txBase], scrollY=0;
 
   function rrect(x,y,w,h,r){
-    ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-    ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);
-    ctx.quadraticCurveTo(x,y+h,x,y+h+r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
+    ctx.beginPath();
+    ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+    ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+    ctx.closePath();
+  }
+
+  function truncate(text, maxW, font){
+    ctx.font = font;
+    if(ctx.measureText(text).width <= maxW) return text;
+    while(text.length > 3 && ctx.measureText(text+'...').width > maxW){
+      text = text.slice(0,-1);
+    }
+    return text + '...';
   }
 
   function frame(ts){
     if(activeGraph!=='ledger') return;
-    const t=T[canvasLang]||T.en;
-    const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+    const t = T[canvasLang]||T.en;
+    const isDark = document.documentElement.getAttribute('data-theme')==='dark';
+
     ctx.clearRect(0,0,W,H);
-    ctx.fillStyle=isDark?'#060E09':'#F0EBE2';ctx.fillRect(0,0,W,H);
-    // Header
-    ctx.fillStyle=isDark?'#0D1F14':'rgba(28,69,50,0.08)';ctx.fillRect(0,0,W,52);
-    ctx.font='bold 11px DM Mono,monospace';ctx.fillStyle='#C9A84C';ctx.textAlign='left';
-    ctx.fillText(t.ledger_title||'LIVE BLOCKCHAIN LEDGER', 16, 20);
-    ctx.font='400 10px DM Mono,monospace';ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':'rgba(28,69,50,0.4)';
-    ctx.fillText('Base Network · Block #'+(18450000+Math.floor(ts/3000)), 16, 38);
+
+    // Background
+    ctx.fillStyle = isDark ? '#0A1A11' : '#F0EBE2';
+    ctx.fillRect(0,0,W,H);
+
+    // ── HEADER ──
+    const headerH = isMobile ? 44 : 52;
+    ctx.fillStyle = isDark ? '#0D1F14' : 'rgba(28,69,50,0.08)';
+    ctx.fillRect(0,0,W,headerH);
+
+    ctx.font = `bold ${isMobile?9:11}px DM Mono,monospace`;
+    ctx.fillStyle = '#C9A84C';
+    ctx.textAlign = 'left';
+    const title = t.ledger_title||'LIVE BLOCKCHAIN LEDGER';
+    ctx.fillText(isMobile ? 'AM ZAKAT · LIVE LEDGER' : title, 12, isMobile?16:20);
+
+    ctx.font = `400 ${isMobile?8:10}px DM Mono,monospace`;
+    ctx.fillStyle = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(28,69,50,0.4)';
+    ctx.fillText('Base Network · Block #'+(18450000+Math.floor(ts/3000)), 12, isMobile?30:38);
+
     // Live dot
-    ctx.beginPath();ctx.arc(W-18,26,4,0,Math.PI*2);ctx.fillStyle='#52996E';ctx.fill();
-    ctx.beginPath();ctx.arc(W-18,26,7+Math.sin(ts*0.005)*2,0,Math.PI*2);ctx.fillStyle='rgba(82,153,110,0.25)';ctx.fill();
-    ctx.font='bold 9px DM Sans,sans-serif';ctx.fillStyle='#52996E';ctx.textAlign='right';
-    ctx.fillText('LIVE',W-26,30);
-    // Col headers
-    const cols=[{l:'TX HASH',x:16},{l:'FROM',x:W*0.22},{l:'RECIPIENT',x:W*0.44},{l:'AMOUNT',x:W*0.67},{l:'STATUS',x:W*0.79},{l:'TIME',x:W*0.91}];
-    ctx.font='bold 9px DM Sans,sans-serif';ctx.fillStyle='rgba(201,168,76,0.5)';ctx.textAlign='left';
-    cols.forEach(col=>ctx.fillText(col.l,col.x,68));
-    ctx.strokeStyle=isDark?'rgba(255,255,255,0.05)':'rgba(28,69,50,0.1)';ctx.lineWidth=1;
-    ctx.beginPath();ctx.moveTo(0,76);ctx.lineTo(W,76);ctx.stroke();
-    // Scroll
-    scrollY-=0.25;
-    if(scrollY<-62){ scrollY=0; txs.push(txs.shift()); }
-    // Rows
-    txs.forEach((tx,i)=>{
-      const y=86+i*62+scrollY;
-      if(y<60||y>H+10) return;
-      const alpha=i===0?0.07:0.03;
-      ctx.fillStyle=`rgba(45,106,79,${alpha})`;ctx.fillRect(0,y-12,W,54);
-      if(i===0&&scrollY>-8){ ctx.fillStyle='rgba(201,168,76,0.04)';ctx.fillRect(0,y-12,W,54);ctx.fillStyle='#C9A84C';ctx.fillRect(0,y-12,2,54); }
-      ctx.font='400 11px DM Mono,monospace';ctx.fillStyle='#C9A84C';ctx.textAlign='left';ctx.fillText(tx.hash,cols[0].x,y+2);
-      ctx.font='400 11px DM Sans,sans-serif';ctx.fillStyle=isDark?'rgba(255,255,255,0.7)':'rgba(28,69,50,0.8)';ctx.fillText(tx.from,cols[1].x,y+2);
-      ctx.fillStyle=isDark?'rgba(255,255,255,0.5)':'rgba(28,69,50,0.55)';ctx.fillText(tx.to,cols[2].x,y+2);
-      ctx.font='bold 12px DM Sans,sans-serif';ctx.fillStyle='#E8C87A';ctx.fillText(tx.amt,cols[3].x,y+2);
-      const sc=tx.status==='Confirmed'?'#52996E':tx.status==='Verified'?'#4A90D9':'#C9A84C';
-      ctx.fillStyle=sc+'20';rrect(cols[4].x,y-8,64,18,3);ctx.fill();
-      ctx.font='500 9px DM Sans,sans-serif';ctx.fillStyle=sc;ctx.textAlign='center';
-      const sl=t['ledger_'+tx.status.toLowerCase()]||tx.status;
-      ctx.fillText(sl,cols[4].x+32,y+4);ctx.textAlign='left';
-      ctx.font='400 10px DM Sans,sans-serif';ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':'rgba(28,69,50,0.4)';ctx.fillText(tx.time,cols[5].x,y+2);
-      ctx.strokeStyle=isDark?'rgba(255,255,255,0.04)':'rgba(28,69,50,0.08)';ctx.lineWidth=1;
-      ctx.beginPath();ctx.moveTo(0,y+38);ctx.lineTo(W,y+38);ctx.stroke();
-    });
-    // Bottom bar
-    ctx.fillStyle=isDark?'#0D1F14':'rgba(28,69,50,0.06)';ctx.fillRect(0,H-42,W,42);
-    const stats2=[
-      {l:t.ledger_total||'Total Distributed',v:'$2,847,293'},
-      {l:t.ledger_txs||'Transactions',v:'18,492'},
-      {l:t.ledger_helped||'Recipients Helped',v:'9,247'},
-      {l:t.ledger_countries||'Countries',v:'43'},
-    ];
-    stats2.forEach((s,i)=>{
-      const x=16+i*(W/4);
-      ctx.font='bold 12px DM Sans,sans-serif';ctx.fillStyle='#C9A84C';ctx.textAlign='left';ctx.fillText(s.v,x,H-25);
-      ctx.font='400 9px DM Sans,sans-serif';ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':'rgba(28,69,50,0.4)';ctx.fillText(s.l,x,H-11);
-    });
-    ledgerRAF=requestAnimationFrame(frame);
+    const dotX = W - 14;
+    const dotY = headerH/2;
+    ctx.beginPath(); ctx.arc(dotX,dotY,isMobile?3:4,0,Math.PI*2);
+    ctx.fillStyle='#52996E'; ctx.fill();
+    ctx.beginPath(); ctx.arc(dotX,dotY,(isMobile?5:7)+Math.sin(ts*0.005),0,Math.PI*2);
+    ctx.fillStyle='rgba(82,153,110,0.25)'; ctx.fill();
+
+    // ── MOBILE LAYOUT: Card-based ──
+    if(isMobile){
+      const cardH = 72;
+      const cardGap = 4;
+      const startY = headerH + 6;
+
+      scrollY -= 0.2;
+      if(scrollY < -(cardH + cardGap)) { scrollY = 0; txs.push(txs.shift()); }
+
+      txs.forEach((tx, i) => {
+        const y = startY + i*(cardH+cardGap) + scrollY;
+        if(y < headerH || y > H) return;
+
+        // Card bg
+        const isNew = i===0 && scrollY > -(cardH*0.3);
+        ctx.fillStyle = isNew
+          ? (isDark?'rgba(201,168,76,0.06)':'rgba(201,168,76,0.08)')
+          : (isDark?'rgba(255,255,255,0.03)':'rgba(255,255,255,0.6)');
+        rrect(8, y, W-16, cardH-2, 6);
+        ctx.fill();
+
+        if(isNew){
+          ctx.strokeStyle = '#C9A84C';
+          ctx.lineWidth = 1;
+          rrect(8, y, W-16, cardH-2, 6);
+          ctx.stroke();
+        }
+
+        // Amount — prominent
+        ctx.font = 'bold 16px DM Sans,sans-serif';
+        ctx.fillStyle = '#E8C87A';
+        ctx.textAlign = 'left';
+        ctx.fillText(tx.amt, 16, y+20);
+
+        // Status badge
+        const sc = tx.status==='Confirmed'?'#52996E':tx.status==='Verified'?'#4A90D9':'#C9A84C';
+        const sl = t['ledger_'+tx.status.toLowerCase()]||tx.status;
+        ctx.font = 'bold 9px DM Sans,sans-serif';
+        ctx.fillStyle = sc;
+        ctx.textAlign = 'right';
+        ctx.fillText('● '+sl, W-16, y+20);
+
+        // Recipient
+        ctx.font = '500 11px DM Sans,sans-serif';
+        ctx.fillStyle = isDark?'rgba(255,255,255,0.75)':'rgba(28,69,50,0.85)';
+        ctx.textAlign = 'left';
+        ctx.fillText(truncate(tx.recipient, W-100, '500 11px DM Sans,sans-serif'), 16, y+38);
+
+        // From donor
+        ctx.font = '400 10px DM Sans,sans-serif';
+        ctx.fillStyle = isDark?'rgba(255,255,255,0.35)':'rgba(28,69,50,0.4)';
+        ctx.fillText(tx.donor, 16, y+54);
+
+        // Hash + time
+        ctx.font = '400 9px DM Mono,monospace';
+        ctx.fillStyle = isDark?'rgba(201,168,76,0.5)':'rgba(160,120,40,0.6)';
+        ctx.textAlign = 'right';
+        ctx.fillText(tx.hash+' · '+tx.time, W-16, y+54);
+      });
+
+    } else {
+      // ── DESKTOP LAYOUT ──
+      const colH = 68;
+
+      // Column definitions based on width
+      const cols = W > 700 ? [
+        {l:'TX HASH',    x:14,      w:W*0.16},
+        {l:'DONOR',      x:W*0.17,  w:W*0.17},
+        {l:'RECIPIENT',  x:W*0.35,  w:W*0.22},
+        {l:'AMOUNT',     x:W*0.58,  w:W*0.09},
+        {l:'STATUS',     x:W*0.68,  w:W*0.12},
+        {l:'TIME',       x:W*0.81,  w:W*0.10},
+      ] : [
+        {l:'HASH',       x:10,      w:W*0.22},
+        {l:'RECIPIENT',  x:W*0.24,  w:W*0.32},
+        {l:'AMT',        x:W*0.57,  w:W*0.12},
+        {l:'STATUS',     x:W*0.70,  w:W*0.16},
+        {l:'TIME',       x:W*0.87,  w:W*0.13},
+      ];
+
+      // Column headers
+      const colHeaderY = headerH + 20;
+      ctx.font = 'bold 9px DM Sans,sans-serif';
+      ctx.fillStyle = 'rgba(201,168,76,0.55)';
+      ctx.textAlign = 'left';
+      cols.forEach(col => ctx.fillText(col.l, col.x, colHeaderY));
+
+      // Divider
+      ctx.strokeStyle = isDark?'rgba(255,255,255,0.05)':'rgba(28,69,50,0.1)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, colHeaderY+8); ctx.lineTo(W, colHeaderY+8); ctx.stroke();
+
+      // Scroll
+      const rowStartY = colHeaderY + 16;
+      scrollY -= 0.25;
+      if(scrollY < -colH){ scrollY=0; txs.push(txs.shift()); }
+
+      txs.forEach((tx, i) => {
+        const y = rowStartY + i*colH + scrollY;
+        if(y < headerH+20 || y > H+10) return;
+
+        const isNew = i===0 && scrollY > -8;
+        ctx.fillStyle = isDark
+          ? `rgba(45,106,79,${isNew?0.08:0.03})`
+          : `rgba(28,69,50,${isNew?0.06:0.02})`;
+        ctx.fillRect(0, y-12, W, colH-2);
+
+        if(isNew){
+          ctx.fillStyle='rgba(201,168,76,0.04)';ctx.fillRect(0,y-12,W,colH-2);
+          ctx.fillStyle='#C9A84C';ctx.fillRect(0,y-12,2,colH-2);
+        }
+
+        const baseFont = '400 11px DM Mono,monospace';
+        const textFont = '400 11px DM Sans,sans-serif';
+
+        if(W > 700){
+          ctx.font=baseFont; ctx.fillStyle='#C9A84C'; ctx.textAlign='left';
+          ctx.fillText(truncate(tx.hash, cols[0].w-4, baseFont), cols[0].x, y+2);
+          ctx.font=textFont; ctx.fillStyle=isDark?'rgba(255,255,255,0.65)':'rgba(28,69,50,0.75)';
+          ctx.fillText(truncate(tx.donor, cols[1].w-4, textFont), cols[1].x, y+2);
+          ctx.fillStyle=isDark?'rgba(255,255,255,0.5)':'rgba(28,69,50,0.55)';
+          ctx.fillText(truncate(tx.recipient, cols[2].w-4, textFont), cols[2].x, y+2);
+          ctx.font='bold 12px DM Sans,sans-serif'; ctx.fillStyle='#E8C87A';
+          ctx.fillText(tx.amt, cols[3].x, y+2);
+        } else {
+          ctx.font=baseFont; ctx.fillStyle='#C9A84C'; ctx.textAlign='left';
+          ctx.fillText(truncate(tx.hash, cols[0].w-4, baseFont), cols[0].x, y+2);
+          ctx.font=textFont; ctx.fillStyle=isDark?'rgba(255,255,255,0.55)':'rgba(28,69,50,0.6)';
+          ctx.fillText(truncate(tx.recipient, cols[1].w-4, textFont), cols[1].x, y+2);
+          ctx.font='bold 11px DM Sans,sans-serif'; ctx.fillStyle='#E8C87A';
+          ctx.fillText(tx.amt, cols[2].x, y+2);
+        }
+
+        // Status badge
+        const sc=tx.status==='Confirmed'?'#52996E':tx.status==='Verified'?'#4A90D9':'#C9A84C';
+        const sl=t['ledger_'+tx.status.toLowerCase()]||tx.status;
+        const scol = W>700 ? cols[4] : cols[3];
+        ctx.fillStyle=sc+'20'; rrect(scol.x, y-8, 62, 18, 3); ctx.fill();
+        ctx.font='500 9px DM Sans,sans-serif'; ctx.fillStyle=sc; ctx.textAlign='center';
+        ctx.fillText(sl, scol.x+31, y+4); ctx.textAlign='left';
+
+        // Time
+        const tcol = W>700 ? cols[5] : cols[4];
+        ctx.font='400 10px DM Sans,sans-serif';
+        ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':'rgba(28,69,50,0.4)';
+        ctx.fillText(tx.time, tcol.x, y+2);
+
+        // Row divider
+        ctx.strokeStyle=isDark?'rgba(255,255,255,0.04)':'rgba(28,69,50,0.07)';
+        ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(0,y+colH-14); ctx.lineTo(W,y+colH-14); ctx.stroke();
+      });
+
+      // Bottom stats bar
+      const statsH = 42;
+      ctx.fillStyle = isDark?'#0D1F14':'rgba(28,69,50,0.07)';
+      ctx.fillRect(0, H-statsH, W, statsH);
+      const stats2=[
+        {l:t.ledger_total||'Total Distributed', v:'$2,847,293'},
+        {l:t.ledger_txs||'Transactions', v:'18,492'},
+        {l:t.ledger_helped||'Recipients', v:'9,247'},
+        {l:t.ledger_countries||'Countries', v:'43'},
+      ];
+      stats2.forEach((s,i)=>{
+        const x = 14 + i*(W/4);
+        ctx.font='bold 12px DM Sans,sans-serif'; ctx.fillStyle='#C9A84C'; ctx.textAlign='left';
+        ctx.fillText(s.v, x, H-24);
+        ctx.font='400 9px DM Sans,sans-serif';
+        ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':'rgba(28,69,50,0.4)';
+        ctx.fillText(s.l, x, H-10);
+      });
+    }
+
+    ledgerRAF = requestAnimationFrame(frame);
   }
+
   if(ledgerRAF) cancelAnimationFrame(ledgerRAF);
-  ledgerRAF=requestAnimationFrame(frame);
+  ledgerRAF = requestAnimationFrame(frame);
 }
 
 // ── NAV CTA ──
@@ -660,13 +905,6 @@ const savedTheme=localStorage.getItem('amn_theme')||'dark';
 const savedLang=localStorage.getItem('amn_lang')||'en';
 theme=savedTheme;
 document.documentElement.setAttribute('data-theme',savedTheme);
-if(savedTheme==='light'){
-  document.body.style.background='#F5F0E8';
-  document.body.style.color='#1C2E1F';
-} else {
-  document.body.style.background='#060E09';
-  document.body.style.color='#FFFFFF';
-}
 document.getElementById('themeBtn').textContent=savedTheme==='dark'?'🌙':'☀️';
 setLang(savedLang);
 setTimeout(startLedger, 100);
