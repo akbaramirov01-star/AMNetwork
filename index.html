@@ -429,6 +429,32 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   color: #0A1A11 !important;
 }
 
+/* ── Waitlist native form ── */
+.wl-form{text-align:left;margin-top:28px}
+.wl-field{margin-bottom:18px}
+.wl-field label{display:block;font-size:12px;font-weight:600;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
+.wl-field input,.wl-field select{width:100%;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box;appearance:none;-webkit-appearance:none}
+.wl-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C9A84C'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-color:var(--bg2);padding-right:38px;cursor:pointer}
+.wl-field select option{background:var(--bg2);color:var(--text)}
+.wl-field input:focus,.wl-field select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.15)}
+.wl-field input.err,.wl-field select.err{border-color:#EF4444;box-shadow:0 0 0 3px rgba(239,68,68,0.1)}
+.wl-field-err{font-size:11px;color:#EF4444;margin-top:5px;display:none}
+.wl-field-err.show{display:block}
+.wl-field input::placeholder{color:var(--text3)}
+.wl-btn{width:100%;padding:14px;background:var(--gold);border:none;border-radius:10px;color:#060E09;font-size:15px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;margin-top:4px}
+.wl-btn:hover:not(:disabled){background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 28px rgba(201,168,76,0.3)}
+.wl-btn:disabled{opacity:0.7;cursor:not-allowed;transform:none}
+.wl-btn .btn-spinner{display:none;width:18px;height:18px;border:2px solid rgba(6,14,9,0.3);border-top-color:#060E09;border-radius:50%;animation:spin 0.7s linear infinite;position:absolute;top:50%;left:50%;margin:-9px 0 0 -9px}
+.wl-btn.loading .btn-text{opacity:0}.wl-btn.loading .btn-spinner{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.wl-success{display:none;text-align:center;padding:32px 24px;animation:fadeUp 0.5s ease}
+.wl-success.show{display:block}
+.wl-success-icon{font-size:48px;margin-bottom:16px}
+.wl-success h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--text);margin-bottom:10px}
+.wl-success p{font-size:14px;color:var(--text2);line-height:1.7}
+.wl-err-banner{display:none;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:10px 14px;font-size:13px;color:#EF4444;margin-bottom:16px;text-align:center}
+.wl-err-banner.show{display:block}
+
 </style>
 </head>
 <body>
@@ -723,14 +749,67 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <h2 class="sec-title" data-t="wl_title">Be among the first. Shape the future.</h2>
     <p style="font-size:15px;color:var(--text2);line-height:1.7" data-t="wl_sub">Join the waitlist. We will reach out personally before launch.</p>
     
-    <div class="form-card">
-      <div style="font-size:44px;margin-bottom:14px"></div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:10px;color:var(--text)" data-t="wl_title">Join the Waitlist</h3>
-      <p style="font-size:13px;color:var(--text2);margin-bottom:28px;line-height:1.7" data-t="wl_sub">We will reach out personally before launch.</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgBfQT1Yiy1uaVL9AFXJcS8z7wxo3DDLu-3cS3dobEkNevHQ/viewform" target="_blank" style="display:inline-block;padding:14px 40px;background:var(--gold);border-radius:8px;color:#060E09;font-size:15px;font-weight:700;text-decoration:none;transition:all 0.2s;font-family:'DM Sans',sans-serif" onmouseover="this.style.background='var(--gold2)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--gold)';this.style.transform='translateY(0)'" data-t="submit">Reserve My Spot →</a>
-      <p style="font-size:11px;color:var(--text3);margin-top:14px" data-t="form_note">No spam. No data selling. Just launch updates.</p>
-      <p style="font-size:11px;color:var(--text3);margin-top:8px">Want to join the team? <a href="mailto:team@amnetwork.io" style="color:var(--gold);text-decoration:none">team@amnetwork.io</a></p>
-      <div style="margin-top:16px;font-family:'Noto Naskh Arabic',serif;font-size:18px;color:var(--gold);direction:rtl">جَزَاكَ اللَّهُ خَيْرًا</div>
+    <div class="form-card" id="wl-card">
+      <!-- Form view -->
+      <div id="wl-form-wrap">
+        <div style="font-size:40px;margin-bottom:12px">🌙</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;margin-bottom:8px;color:var(--text)">Join the Waitlist</h3>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:24px;line-height:1.7">We will reach out personally before launch.</p>
+
+        <div class="wl-err-banner" id="wl-err-banner">Something went wrong. Please try again or email <a href="mailto:contact@amnetwork.io" style="color:#EF4444">contact@amnetwork.io</a></div>
+
+        <form class="wl-form" id="wl-form" novalidate>
+          <input type="hidden" name="access_key" value="e8b4c2d1-7f3a-4e9b-b6c5-2a1d8f0e3c47">
+          <input type="hidden" name="subject" value="New AM Network Waitlist Signup">
+          <input type="hidden" name="from_name" value="AM Network Waitlist">
+
+          <div class="wl-field">
+            <label for="wl-name">Full Name</label>
+            <input type="text" id="wl-name" name="name" placeholder="Ahmed Al-Farisi" autocomplete="name">
+            <div class="wl-field-err" id="err-name">Please enter your name</div>
+          </div>
+
+          <div class="wl-field">
+            <label for="wl-email">Email Address</label>
+            <input type="email" id="wl-email" name="email" placeholder="you@example.com" autocomplete="email">
+            <div class="wl-field-err" id="err-email">Please enter a valid email</div>
+          </div>
+
+          <div class="wl-field">
+            <label for="wl-role">I am joining as</label>
+            <select id="wl-role" name="role">
+              <option value="" disabled selected>Select your role…</option>
+              <option value="donor">Donor / Zakah giver</option>
+              <option value="mosque">Mosque or Islamic Foundation</option>
+              <option value="ngo">NGO / Charity Partner</option>
+              <option value="investor">Investor</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="wl-field-err" id="err-role">Please select your role</div>
+          </div>
+
+          <div class="wl-field">
+            <label for="wl-country">Country</label>
+            <input type="text" id="wl-country" name="country" placeholder="Egypt, Malaysia, UK…" autocomplete="country-name">
+          </div>
+
+          <button type="submit" class="wl-btn" id="wl-btn">
+            <span class="btn-text" data-t="submit">Reserve My Spot →</span>
+            <span class="btn-spinner"></span>
+          </button>
+        </form>
+
+        <p style="font-size:11px;color:var(--text3);margin-top:14px;text-align:center" data-t="form_note">No spam. No data selling. Just launch updates.</p>
+        <p style="font-size:11px;color:var(--text3);margin-top:6px;text-align:center">Want to join the team? <a href="mailto:team@amnetwork.io" style="color:var(--gold);text-decoration:none">team@amnetwork.io</a></p>
+      </div>
+
+      <!-- Success view -->
+      <div class="wl-success" id="wl-success">
+        <div class="wl-success-icon">✅</div>
+        <h3>You're on the list!</h3>
+        <p>Thank you — we will reach out personally before launch.<br><br>
+        <span style="font-family:'Noto Naskh Arabic',serif;font-size:20px;color:var(--gold);display:block;margin-top:10px">جَزَاكَ اللَّهُ خَيْرًا</span></p>
+      </div>
     </div>
   </div>
 </div>
@@ -1152,6 +1231,72 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
   }
   requestAnimationFrame(frame);
+})();
+
+// ── Waitlist form ──
+(function(){
+  const form = document.getElementById('wl-form');
+  if (!form) return;
+
+  function setErr(inputId, errId, show) {
+    const inp = document.getElementById(inputId);
+    const err = document.getElementById(errId);
+    if (show) { inp.classList.add('err'); err.classList.add('show'); }
+    else { inp.classList.remove('err'); err.classList.remove('show'); }
+  }
+
+  function validate() {
+    let ok = true;
+    const name = document.getElementById('wl-name').value.trim();
+    const email = document.getElementById('wl-email').value.trim();
+    const role = document.getElementById('wl-role').value;
+    setErr('wl-name', 'err-name', !name);
+    if (!name) ok = false;
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    setErr('wl-email', 'err-email', !emailOk);
+    if (!emailOk) ok = false;
+    setErr('wl-role', 'err-role', !role);
+    if (!role) ok = false;
+    return ok;
+  }
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    document.getElementById('wl-err-banner').classList.remove('show');
+    if (!validate()) return;
+    const btn = document.getElementById('wl-btn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+    try {
+      const data = new FormData(form);
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: data
+      });
+      const json = await res.json();
+      if (json.success) {
+        document.getElementById('wl-form-wrap').style.display = 'none';
+        document.getElementById('wl-success').classList.add('show');
+        if (typeof gtag !== 'undefined') gtag('event', 'waitlist_signup', {event_category: 'engagement'});
+      } else {
+        throw new Error(json.message || 'Submit failed');
+      }
+    } catch(err) {
+      document.getElementById('wl-err-banner').classList.add('show');
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+  });
+
+  // Clear error on input
+  ['wl-name','wl-email','wl-role','wl-country'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', function() {
+      el.classList.remove('err');
+      const errEl = document.getElementById('err-' + id.replace('wl-',''));
+      if (errEl) errEl.classList.remove('show');
+    });
+  });
 })();
 </script>
 </body>
