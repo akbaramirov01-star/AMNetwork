@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AM Zakat.ai — AI Recipient Scoring Demo</title>
+<meta name="description" content="See how AM Network's AI scores Zakat recipients 0–100 using Islamic jurisprudence, family data, and regional poverty thresholds. Live demo with 10 real profiles.">
+<link rel="canonical" href="https://amnetwork.io/ai_scoring/">
+<style>
+  :root{
+    --green:#1a7a4a;--green-light:#22a060;--green-dark:#0f5230;
+    --gold:#c8972a;--gold-light:#e6b84a;
+    --bg:#0b1a12;--bg2:#112118;--bg3:#162d1e;
+    --card:#1a2e20;--card2:#1f3526;
+    --text:#e8f0ea;--muted:#8aab92;
+    --critical:#e05252;--high:#e07a2a;--medium:#d4b800;--low:#2aaa60;--ineligible:#666;
+    --radius:12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6}
+  a{color:var(--green-light);text-decoration:none}
+
+  /* ── Nav ── */
+  nav{background:var(--bg2);border-bottom:1px solid #1e3d28;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+  .nav-logo{font-weight:700;font-size:1.1rem;color:var(--gold-light);letter-spacing:.02em}
+  .nav-logo span{color:var(--text)}
+  .nav-back{font-size:.85rem;color:var(--muted)}
+  .nav-back:hover{color:var(--text)}
+
+  /* ── Hero ── */
+  .hero{padding:64px 24px 48px;text-align:center;max-width:780px;margin:0 auto}
+  .hero-tag{display:inline-block;background:rgba(200,151,42,.15);color:var(--gold-light);border:1px solid rgba(200,151,42,.3);border-radius:20px;padding:4px 16px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}
+  .hero h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:800;line-height:1.15;margin-bottom:16px}
+  .hero h1 span{color:var(--gold-light)}
+  .hero p{color:var(--muted);font-size:1.05rem;max-width:600px;margin:0 auto 32px}
+  .score-range{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+  .sr-item{background:var(--card);border:1px solid #2a4030;border-radius:8px;padding:8px 18px;font-size:.85rem;display:flex;align-items:center;gap:8px}
+  .sr-dot{width:10px;height:10px;border-radius:50%}
+
+  /* ── Stats bar ── */
+  .stats{background:var(--bg2);border-top:1px solid #1e3d28;border-bottom:1px solid #1e3d28;padding:20px 24px;display:flex;gap:32px;justify-content:center;flex-wrap:wrap;text-align:center}
+  .stat-n{font-size:1.6rem;font-weight:800;color:var(--gold-light)}
+  .stat-l{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+  /* ── Summary table ── */
+  .section{max-width:1100px;margin:0 auto;padding:48px 24px 0}
+  .section-title{font-size:1.1rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+  .section-title::after{content:'';flex:1;height:1px;background:#2a4030}
+
+  .summary-table{width:100%;border-collapse:collapse;font-size:.88rem}
+  .summary-table th{text-align:left;color:var(--muted);font-weight:600;padding:8px 12px;border-bottom:1px solid #2a4030;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+  .summary-table td{padding:10px 12px;border-bottom:1px solid #1e3d28;vertical-align:middle}
+  .summary-table tr:hover td{background:rgba(255,255,255,.03)}
+  .name-cell{font-weight:600}
+  .loc-cell{color:var(--muted);font-size:.82rem}
+  .score-cell{font-weight:800;font-size:1rem}
+  .bar-cell{width:120px}
+  .mini-bar{height:6px;background:#1e3d28;border-radius:3px;overflow:hidden}
+  .mini-bar-fill{height:100%;border-radius:3px}
+  .tier-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700;letter-spacing:.04em}
+  .tier-CRITICAL{background:rgba(224,82,82,.2);color:#e05252;border:1px solid rgba(224,82,82,.35)}
+  .tier-HIGH{background:rgba(224,122,42,.2);color:#e07a2a;border:1px solid rgba(224,122,42,.35)}
+  .tier-MEDIUM{background:rgba(212,184,0,.2);color:#d4b800;border:1px solid rgba(212,184,0,.35)}
+  .tier-LOW{background:rgba(42,170,96,.2);color:#2aaa60;border:1px solid rgba(42,170,96,.35)}
+  .tier-INELIGIBLE{background:rgba(102,102,102,.2);color:#999;border:1px solid rgba(102,102,102,.35)}
+  .conf-HIGH{color:#2aaa60}
+  .conf-MEDIUM{color:#d4b800}
+  .conf-LOW{color:#e07a2a}
+
+  /* ── Case cards ── */
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;padding:48px 24px 64px;max-width:1100px;margin:0 auto}
+  .card{background:var(--card);border:1px solid #2a4030;border-radius:var(--radius);overflow:hidden;transition:transform .15s,border-color .15s}
+  .card:hover{transform:translateY(-2px);border-color:#3a5a40}
+  .card-header{padding:18px 20px 14px;border-bottom:1px solid #2a4030}
+  .card-name{font-weight:700;font-size:1rem;margin-bottom:2px}
+  .card-loc{font-size:.8rem;color:var(--muted)}
+  .card-score-row{display:flex;align-items:center;gap:12px;margin-top:12px}
+  .big-score{font-size:2.2rem;font-weight:900;line-height:1}
+  .score-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .score-bar{flex:1;height:8px;background:#1e3d28;border-radius:4px;overflow:hidden}
+  .score-bar-fill{height:100%;border-radius:4px;transition:width .6s ease}
+  .card-body{padding:16px 20px}
+
+  .breakdown{margin-bottom:14px}
+  .bd-row{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+  .bd-row:last-child{border:none}
+  .bd-label{color:var(--muted)}
+  .bd-val{font-weight:600;font-size:.85rem}
+  .bd-bar{width:60px;height:4px;background:#1e3d28;border-radius:2px;overflow:hidden;margin-left:8px}
+  .bd-bar-fill{height:100%;background:var(--green-light);border-radius:2px}
+
+  .categories{margin-bottom:12px}
+  .cat-label{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+  .cat-item{font-size:.78rem;color:var(--green-light);padding:2px 0;display:flex;gap:6px}
+  .cat-item::before{content:'✔';color:var(--green-light);flex-shrink:0}
+
+  .support-types{margin-bottom:12px}
+  .sup-item{font-size:.78rem;color:var(--gold-light);padding:2px 0;display:flex;gap:6px}
+  .sup-item::before{content:'→';color:var(--gold);flex-shrink:0}
+
+  .flags-section{background:rgba(224,82,82,.07);border:1px solid rgba(224,82,82,.2);border-radius:8px;padding:10px 12px;margin-bottom:10px}
+  .flag-title{font-size:.72rem;font-weight:700;color:#e05252;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+  .flag-item{font-size:.75rem;color:#e08080;padding:2px 0}
+
+  .recommendation{background:var(--card2);border-radius:8px;padding:10px 14px;font-size:.82rem;font-weight:600;border-left:3px solid var(--green)}
+  .recommendation.CRITICAL{border-left-color:var(--critical)}
+  .recommendation.HIGH{border-left-color:var(--high)}
+  .recommendation.MEDIUM{border-left-color:var(--medium)}
+  .recommendation.LOW{border-left-color:var(--low)}
+  .recommendation.INELIGIBLE{border-left-color:var(--ineligible);color:var(--muted)}
+
+  .need-line{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-bottom:10px}
+  .need-line strong{color:var(--text)}
+
+  /* ── How it works ── */
+  .how-section{background:var(--bg2);border-top:1px solid #1e3d28;padding:64px 24px}
+  .how-inner{max-width:960px;margin:0 auto}
+  .how-title{font-size:1.6rem;font-weight:800;text-align:center;margin-bottom:8px}
+  .how-sub{color:var(--muted);text-align:center;margin-bottom:40px}
+  .how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+  .how-card{background:var(--card);border:1px solid #2a4030;border-radius:var(--radius);padding:24px 20px}
+  .how-num{font-size:2rem;font-weight:900;color:var(--green-light);margin-bottom:8px;line-height:1}
+  .how-h{font-weight:700;margin-bottom:6px}
+  .how-p{font-size:.85rem;color:var(--muted)}
+
+  /* ── Asnaf legend ── */
+  .asnaf-section{max-width:960px;margin:0 auto;padding:48px 24px}
+  .asnaf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .asnaf-card{background:var(--card);border:1px solid #2a4030;border-radius:8px;padding:14px 16px}
+  .asnaf-name{font-weight:700;color:var(--gold-light);font-size:.9rem;margin-bottom:2px}
+  .asnaf-desc{font-size:.8rem;color:var(--muted)}
+
+  /* ── CTA ── */
+  .cta-section{background:var(--green-dark);border-top:1px solid #2a5030;padding:64px 24px;text-align:center}
+  .cta-section h2{font-size:1.8rem;font-weight:800;margin-bottom:12px}
+  .cta-section p{color:var(--muted);margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto}
+  .btn{display:inline-block;background:var(--gold);color:#0b1a12;font-weight:700;padding:14px 32px;border-radius:8px;font-size:1rem;transition:background .2s}
+  .btn:hover{background:var(--gold-light);color:#0b1a12}
+
+  /* ── Footer ── */
+  footer{background:var(--bg);border-top:1px solid #1e3d28;padding:24px;text-align:center;color:var(--muted);font-size:.82rem}
+
+  @media(max-width:640px){
+    .cards-grid{grid-template-columns:1fr;padding:24px 16px 40px}
+    .hero{padding:40px 16px 32px}
+    .summary-table{font-size:.78rem}
+    .summary-table .bar-cell,.summary-table .loc-cell{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">AM<span> Network</span></div>
+  <a class="nav-back" href="https://amnetwork.io">← Back to site</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-tag">☪ AM Zakat.ai — Live Demo</div>
+  <h1>AI Scoring for<br><span>Zakat Recipients</span></h1>
+  <p>Every applicant scored 0–100 based on income, family structure, housing, health, debt and Islamic jurisprudence (8 Asnaf categories). 10 real-world profiles below.</p>
+  <div class="score-range">
+    <div class="sr-item"><div class="sr-dot" style="background:#e05252"></div> 80–100 CRITICAL</div>
+    <div class="sr-item"><div class="sr-dot" style="background:#e07a2a"></div> 65–79 HIGH</div>
+    <div class="sr-item"><div class="sr-dot" style="background:#d4b800"></div> 48–64 MEDIUM</div>
+    <div class="sr-item"><div class="sr-dot" style="background:#2aaa60"></div> 28–47 LOW</div>
+    <div class="sr-item"><div class="sr-dot" style="background:#555"></div> &lt;28 INELIGIBLE</div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats">
+  <div><div class="stat-n">100</div><div class="stat-l">Max Score</div></div>
+  <div><div class="stat-n">8</div><div class="stat-l">Asnaf Categories</div></div>
+  <div><div class="stat-n">15</div><div class="stat-l">Recipient Groups</div></div>
+  <div><div class="stat-n">55+</div><div class="stat-l">Countries</div></div>
+  <div><div class="stat-n">0</div><div class="stat-l">Human Bias</div></div>
+</div>
+
+<!-- Summary table -->
+<div class="section">
+  <div class="section-title">All 10 demo profiles</div>
+  <div style="overflow-x:auto">
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Applicant</th>
+        <th class="loc-cell">Location</th>
+        <th>Score</th>
+        <th class="bar-cell"></th>
+        <th>Tier</th>
+        <th>Confidence</th>
+        <th>Need / mo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="name-cell">Umm Khalid Al-Halabi</div></td>
+        <td class="loc-cell">Gaziantep, TR</td>
+        <td><span class="score-cell" style="color:#e05252">82.0</span></td>
+        <td class="bar-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:82%;background:#e05252"></div></div></td>
+        <td><span class="tier-badge tier-CRITICAL">CRITICAL</span></td>
+        <td><span class="conf-HIGH">✅ HIGH</span></td>
+        <td>$1,400</td>
+      </tr>
+      <tr>
+        <td><div class="name-cell">Hassan Abu Daoud</div></td>
+        <td class="loc-cell">Amman, JO</td>
+        <td><span class="score-cell" style="color:#e07a2a">68.0</span></td>
+        <td class="bar-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:68%;background:#e07a2a"></div></div></td>
+        <td><span class="tier-badge tier-HIGH">HIGH</span></td>
+        <td><span class="conf-HIGH">✅ HIGH</span></td>
+        <td>$1,030</td>
+      </tr>
+      <tr>
+        <td><div class="name-cell">Dawud Petersen</div></td>
+        <td class="loc-cell">Berlin, DE</td>
+        <td><span class="score-cell" style="color:#e07a2a">71.0</span></td>
+        <td class="bar-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:71%;background:#e07a2a"></div></div></td>
+        <td><span class="tier-badge tier-HIGH">HIGH</span></td>
+        <td><span class="conf-HIGH">✅ HIGH</span></td>
+        <td>$1,440</td>
+      </tr>
+      <tr>
+        <td><div class="name-cell">Fatima Z. <small style="color:var(--muted)">(protected)</small></div></td>
+        <td class="loc-cell">Kuala Lumpur, MY</td>
+        <td><span class="score-cell" style="color:#e07a2a">72.5</span></td>
+        <td class="bar-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:72.5%;background:#e07a2a"></div></div></td>
+        <td><span class="tier-badge tier-HIGH">HIGH</span></td>
+        <td><span class="conf-MEDIUM">🟡 MEDIUM</span></td>
+        <td>$280</td>
+      </tr>
+      <tr>
+        <td><div class="name-cell">Ibrahim Al-Mauritani</div></td>
+        <td class="loc-cell">Fes, MA</td>
+        <td><span class="score-cell" style="color:#2aaa60">43.0</span></td>
+        <td class="bar-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:43%;background:#2aaa60"></div></div></td>
+        <td><span class="tier-badge tier-LOW">LOW</span></td>
+        <td><span class="conf-HIGH">✅ HIGH</span></td>
+        <td>$74</td>
+      </tr>
+      <tr>
+        <td><div class="name-cell">Yusuf Nazarov</div></td>
+        <td class="loc-cell">Khatlon, TJ</td>
+        <td><span class="score-cell" style="color:#e07a2a">73.5</span></td>
+        <td class="bar-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:73.5%;background:#e07a2a"></div></div></td>
+        <td><span class="tier-badge tier-HIGH">HIGH</span></td>
+        <td><span class="conf-HIGH">✅ HIGH</span></td>
+        <td>$472</td>
+      </tr>
+      <tr>
+        <td><div class="name-cell">Aigerim Bekova</div></td>
+        <td class="loc-cell">Almaty, KZ</td>
+        <td><span class="score-cell" style="color:#e07a2a">78.0</span></td>
+        <td class="bar-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:78%;background:#e07a2a"></div></div></td>
+        <td><span class="tier-badge tier-HIGH">HIGH</span></td>
+        <td><span class="conf-HIGH">✅ HIGH</span></td>
+        <td>$800</td>
+      </tr>
+      <tr>
+        <td><div class="name-cell">Khadijah Bint Yusuf</div></td>
+        <td class="loc-cell">Kano, NG</td>
+        <td><span class="score-cell" style="color:#d4b800">57.0</span></td>
+        <td class="bar-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:57%;background:#d4b800"></div></div></td>
+        <td><span class="tier-badge tier-MEDIUM">MEDIUM</span></td>
+        <td><span class="conf-HIGH">✅ HIGH</span></td>
+        <td>$36</td>
+      </tr>
+      <tr>
+        <td><div class="name-cell">Siti Rahma</div></td>
+        <td class="loc-cell">Surabaya, ID</td>
+        <td><span class="score-cell" style="color:#2aaa60">43.7</span></td>
+        <td class="bar-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:43.7%;background:#2aaa60"></div></div></td>
+        <td><span class="tier-badge tier-LOW">LOW</span></td>
+        <td><span class="conf-MEDIUM">🟡 MEDIUM</span></td>
+        <td>$240</td>
+      </tr>
+      <tr>
+        <td><div class="name-cell">Unknown Applicant</div></td>
+        <td class="loc-cell">Dubai, AE</td>
+        <td><span class="score-cell" style="color:#666">0.0</span></td>
+        <td class="bar-cell"><div class="mini-bar"><div class="mini-bar-fill" style="width:0%;background:#555"></div></div></td>
+        <td><span class="tier-badge tier-INELIGIBLE">INELIGIBLE</span></td>
+        <td><span class="conf-LOW">⚠️ LOW</span></td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- Cards -->
+<div class="cards-grid">
+
+  <!-- 1. Umm Khalid -->
+  <div class="card">
+    <div class="card-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="card-name">Umm Khalid Al-Halabi</div>
+          <div class="card-loc">📍 Gaziantep, Turkey · Syrian refugee</div>
+        </div>
+        <span class="tier-badge tier-CRITICAL">CRITICAL</span>
+      </div>
+      <div class="card-score-row">
+        <div>
+          <div class="big-score" style="color:#e05252">82.0</div>
+          <div class="score-label">/ 100</div>
+        </div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:82%;background:#e05252"></div></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="need-line"><span>Est. monthly need</span><strong>$1,400 USD</strong></div>
+      <div class="breakdown">
+        <div class="bd-row"><span class="bd-label">Income & Per-Capita</span><span class="bd-val">20.0/20</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Assets & Nisab</span><span class="bd-val">10.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Family</span><span class="bd-val">12.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:80%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Housing</span><span class="bd-val">11.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:92%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Employment</span><span class="bd-val">10.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Health</span><span class="bd-val">1.5/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:10%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Asnaf Match</span><span class="bd-val">12.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Crisis</span><span class="bd-val">5.5/6</span><div class="bd-bar"><div class="bd-bar-fill" style="width:92%"></div></div></div>
+      </div>
+      <div class="categories">
+        <div class="cat-label">Asnaf categories</div>
+        <div class="cat-item">Al-Masakin — Destitute: zero income, no assets</div>
+        <div class="cat-item">Al-Fuqara — Large family (5+), sole breadwinner</div>
+        <div class="cat-item">Al-Masakin — Food-insecure household</div>
+        <div class="cat-item">Ibn Al-Sabil — Refugee / conflict-zone resident</div>
+      </div>
+      <div class="support-types">
+        <div class="cat-label">Recommended support</div>
+        <div class="sup-item">Monthly cash transfer (basic subsistence)</div>
+        <div class="sup-item">Emergency housing or rent assistance</div>
+        <div class="sup-item">Food vouchers / in-kind food assistance</div>
+      </div>
+      <div class="recommendation CRITICAL">Immediate distribution — life-critical need confirmed</div>
+    </div>
+  </div>
+
+  <!-- 2. Hassan -->
+  <div class="card">
+    <div class="card-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="card-name">Hassan Abu Daoud</div>
+          <div class="card-loc">📍 Amman refugee camp, Jordan</div>
+        </div>
+        <span class="tier-badge tier-HIGH">HIGH</span>
+      </div>
+      <div class="card-score-row">
+        <div>
+          <div class="big-score" style="color:#e07a2a">68.0</div>
+          <div class="score-label">/ 100</div>
+        </div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:68%;background:#e07a2a"></div></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="need-line"><span>Est. monthly need</span><strong>$1,030 USD</strong></div>
+      <div class="breakdown">
+        <div class="bd-row"><span class="bd-label">Income & Per-Capita</span><span class="bd-val">20.0/20</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Assets & Nisab</span><span class="bd-val">10.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Family</span><span class="bd-val">10.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:67%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Housing</span><span class="bd-val">5.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:42%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Employment</span><span class="bd-val">5.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:50%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Health</span><span class="bd-val">3.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:20%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Asnaf Match</span><span class="bd-val">11.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:92%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Crisis</span><span class="bd-val">4.0/6</span><div class="bd-bar"><div class="bd-bar-fill" style="width:67%"></div></div></div>
+      </div>
+      <div class="categories">
+        <div class="cat-label">Asnaf categories</div>
+        <div class="cat-item">Al-Masakin — Critical poverty, no assets</div>
+        <div class="cat-item">Al-Fuqara — Large family, sole breadwinner</div>
+        <div class="cat-item">Al-Gharimin — Crushing debt (&gt;2 years income)</div>
+        <div class="cat-item">Al-Masakin — Food-insecure household</div>
+      </div>
+      <div class="support-types">
+        <div class="cat-label">Recommended support</div>
+        <div class="sup-item">Monthly cash transfer</div>
+        <div class="sup-item">Halal debt relief fund</div>
+        <div class="sup-item">Healthcare for sick family members</div>
+      </div>
+      <div class="recommendation HIGH">Priority distribution within 48 hours</div>
+    </div>
+  </div>
+
+  <!-- 3. Dawud -->
+  <div class="card">
+    <div class="card-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="card-name">Dawud Petersen</div>
+          <div class="card-loc">📍 Berlin, Germany · New convert</div>
+        </div>
+        <span class="tier-badge tier-HIGH">HIGH</span>
+      </div>
+      <div class="card-score-row">
+        <div>
+          <div class="big-score" style="color:#e07a2a">71.0</div>
+          <div class="score-label">/ 100</div>
+        </div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:71%;background:#e07a2a"></div></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="need-line"><span>Est. monthly need</span><strong>$1,440 USD</strong></div>
+      <div class="breakdown">
+        <div class="bd-row"><span class="bd-label">Income & Per-Capita</span><span class="bd-val">20.0/20</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Assets & Nisab</span><span class="bd-val">7.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:70%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Family</span><span class="bd-val">5.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:33%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Housing</span><span class="bd-val">8.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:67%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Employment</span><span class="bd-val">9.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:90%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Health</span><span class="bd-val">8.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:53%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Asnaf Match</span><span class="bd-val">11.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:92%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Crisis</span><span class="bd-val">3.0/6</span><div class="bd-bar"><div class="bd-bar-fill" style="width:50%"></div></div></div>
+      </div>
+      <div class="categories">
+        <div class="cat-label">Asnaf categories</div>
+        <div class="cat-item">Al-Masakin — Zero income, no assets</div>
+        <div class="cat-item">Al-Fuqara — Single parent below poverty</div>
+        <div class="cat-item">Al-Muallafah — New Muslim convert ≤ 3 years</div>
+      </div>
+      <div class="support-types">
+        <div class="cat-label">Recommended support</div>
+        <div class="sup-item">Monthly cash transfer</div>
+        <div class="sup-item">Emergency rent assistance</div>
+        <div class="sup-item">Microenterprise / skills training</div>
+      </div>
+      <div class="recommendation HIGH">Priority distribution within 48 hours</div>
+    </div>
+  </div>
+
+  <!-- 4. Fatima -->
+  <div class="card">
+    <div class="card-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="card-name">Fatima Z. <small style="color:var(--muted);font-weight:400">(identity protected)</small></div>
+          <div class="card-loc">📍 Kuala Lumpur shelter, Malaysia</div>
+        </div>
+        <span class="tier-badge tier-HIGH">HIGH</span>
+      </div>
+      <div class="card-score-row">
+        <div>
+          <div class="big-score" style="color:#e07a2a">72.5</div>
+          <div class="score-label">/ 100</div>
+        </div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:72.5%;background:#e07a2a"></div></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="need-line"><span>Est. monthly need</span><strong>$280 USD</strong></div>
+      <div class="breakdown">
+        <div class="bd-row"><span class="bd-label">Income & Per-Capita</span><span class="bd-val">20.0/20</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Assets & Nisab</span><span class="bd-val">10.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Family</span><span class="bd-val">0.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:0%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Housing</span><span class="bd-val">10.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:83%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Employment</span><span class="bd-val">10.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Health</span><span class="bd-val">11.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:73%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Asnaf Match</span><span class="bd-val">12.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Crisis</span><span class="bd-val">4.5/6</span><div class="bd-bar"><div class="bd-bar-fill" style="width:75%"></div></div></div>
+      </div>
+      <div class="categories">
+        <div class="cat-label">Asnaf categories</div>
+        <div class="cat-item">Al-Riqab — Trafficking / forced labour survivor</div>
+        <div class="cat-item">Al-Masakin — Destitute, chronically ill</div>
+        <div class="cat-item">Al-Fuqara — Below poverty, no assets</div>
+      </div>
+      <div class="support-types">
+        <div class="cat-label">Recommended support</div>
+        <div class="sup-item">Medical aid / healthcare fund</div>
+        <div class="sup-item">Psychosocial support &amp; safe housing</div>
+        <div class="sup-item">Monthly cash transfer</div>
+      </div>
+      <div class="flags-section"><div class="flag-title">⚠ Flags</div><div class="flag-item">DOCS_PENDING — Documents not yet verified</div></div>
+      <div class="recommendation HIGH">Priority distribution within 48 hours</div>
+    </div>
+  </div>
+
+  <!-- 5. Ibrahim -->
+  <div class="card">
+    <div class="card-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="card-name">Ibrahim Al-Mauritani</div>
+          <div class="card-loc">📍 Fes, Morocco · Qarawiyyin student</div>
+        </div>
+        <span class="tier-badge tier-LOW">LOW</span>
+      </div>
+      <div class="card-score-row">
+        <div>
+          <div class="big-score" style="color:#2aaa60">43.0</div>
+          <div class="score-label">/ 100</div>
+        </div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:43%;background:#2aaa60"></div></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="need-line"><span>Est. monthly need</span><strong>$74 USD</strong></div>
+      <div class="breakdown">
+        <div class="bd-row"><span class="bd-label">Income & Per-Capita</span><span class="bd-val">14.0/20</span><div class="bd-bar"><div class="bd-bar-fill" style="width:70%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Assets & Nisab</span><span class="bd-val">10.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Family</span><span class="bd-val">0.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:0%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Housing</span><span class="bd-val">2.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:17%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Employment</span><span class="bd-val">8.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:80%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Health</span><span class="bd-val">0.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:0%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Asnaf Match</span><span class="bd-val">9.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:75%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Crisis</span><span class="bd-val">0.0/6</span><div class="bd-bar"><div class="bd-bar-fill" style="width:0%"></div></div></div>
+      </div>
+      <div class="categories">
+        <div class="cat-label">Asnaf categories</div>
+        <div class="cat-item">Fi Sabilillah — Full-time Islamic sciences student</div>
+        <div class="cat-item">Al-Masakin — Critical poverty, no assets</div>
+        <div class="cat-item">Al-Fuqara — Income below poverty line</div>
+      </div>
+      <div class="support-types">
+        <div class="cat-label">Recommended support</div>
+        <div class="sup-item">Islamic education stipend (tuition + living)</div>
+      </div>
+      <div class="recommendation LOW">Eligible for partial Sadaqah support</div>
+    </div>
+  </div>
+
+  <!-- 6. Yusuf -->
+  <div class="card">
+    <div class="card-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="card-name">Yusuf Nazarov</div>
+          <div class="card-loc">📍 Khatlon Province, Tajikistan</div>
+        </div>
+        <span class="tier-badge tier-HIGH">HIGH</span>
+      </div>
+      <div class="card-score-row">
+        <div>
+          <div class="big-score" style="color:#e07a2a">73.5</div>
+          <div class="score-label">/ 100</div>
+        </div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:73.5%;background:#e07a2a"></div></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="need-line"><span>Est. monthly need</span><strong>$472 USD</strong></div>
+      <div class="breakdown">
+        <div class="bd-row"><span class="bd-label">Income & Per-Capita</span><span class="bd-val">20.0/20</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Assets & Nisab</span><span class="bd-val">9.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:90%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Family</span><span class="bd-val">10.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:67%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Housing</span><span class="bd-val">5.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:42%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Employment</span><span class="bd-val">6.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:60%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Health</span><span class="bd-val">14.5/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:97%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Asnaf Match</span><span class="bd-val">9.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:75%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Crisis</span><span class="bd-val">0.0/6</span><div class="bd-bar"><div class="bd-bar-fill" style="width:0%"></div></div></div>
+      </div>
+      <div class="categories">
+        <div class="cat-label">Asnaf categories</div>
+        <div class="cat-item">Al-Fuqara — Large family, sole breadwinner</div>
+        <div class="cat-item">Al-Fuqara — Disabled, cannot sustain livelihood</div>
+        <div class="cat-item">Al-Gharimin — Heavy debt (&gt;1 year income)</div>
+        <div class="cat-item">Al-Masakin — Food-insecure household</div>
+      </div>
+      <div class="support-types">
+        <div class="cat-label">Recommended support</div>
+        <div class="sup-item">Monthly cash transfer</div>
+        <div class="sup-item">Riba debt liberation (urgent)</div>
+        <div class="sup-item">Medical aid / healthcare fund</div>
+        <div class="sup-item">Food vouchers</div>
+      </div>
+      <div class="recommendation HIGH">Priority distribution within 48 hours</div>
+    </div>
+  </div>
+
+  <!-- 7. Aigerim -->
+  <div class="card">
+    <div class="card-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="card-name">Aigerim Bekova</div>
+          <div class="card-loc">📍 Almaty, Kazakhstan · Post-earthquake</div>
+        </div>
+        <span class="tier-badge tier-HIGH">HIGH</span>
+      </div>
+      <div class="card-score-row">
+        <div>
+          <div class="big-score" style="color:#e07a2a">78.0</div>
+          <div class="score-label">/ 100</div>
+        </div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:78%;background:#e07a2a"></div></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="need-line"><span>Est. monthly need</span><strong>$800 USD</strong></div>
+      <div class="breakdown">
+        <div class="bd-row"><span class="bd-label">Income & Per-Capita</span><span class="bd-val">20.0/20</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Assets & Nisab</span><span class="bd-val">10.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Family</span><span class="bd-val">8.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:53%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Housing</span><span class="bd-val">12.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Employment</span><span class="bd-val">8.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:80%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Health</span><span class="bd-val">3.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:20%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Asnaf Match</span><span class="bd-val">11.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:92%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Crisis</span><span class="bd-val">6.0/6</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+      </div>
+      <div class="categories">
+        <div class="cat-label">Asnaf categories</div>
+        <div class="cat-item">Al-Masakin — Destitute, zero income</div>
+        <div class="cat-item">Al-Fuqara — Widow, single mother, below poverty</div>
+        <div class="cat-item">Ibn Al-Sabil — Disaster displaced (acute)</div>
+        <div class="cat-item">Al-Masakin — Food-insecure household</div>
+      </div>
+      <div class="support-types">
+        <div class="cat-label">Recommended support</div>
+        <div class="sup-item">Emergency housing or rent assistance</div>
+        <div class="sup-item">Monthly cash transfer</div>
+        <div class="sup-item">Food vouchers</div>
+      </div>
+      <div class="recommendation HIGH">Priority distribution within 48 hours</div>
+    </div>
+  </div>
+
+  <!-- 8. Khadijah -->
+  <div class="card">
+    <div class="card-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="card-name">Khadijah Bint Yusuf</div>
+          <div class="card-loc">📍 Kano, Nigeria · Elderly widow</div>
+        </div>
+        <span class="tier-badge tier-MEDIUM">MEDIUM</span>
+      </div>
+      <div class="card-score-row">
+        <div>
+          <div class="big-score" style="color:#d4b800">57.0</div>
+          <div class="score-label">/ 100</div>
+        </div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:57%;background:#d4b800"></div></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="need-line"><span>Est. monthly need</span><strong>$36 USD</strong></div>
+      <div class="breakdown">
+        <div class="bd-row"><span class="bd-label">Income & Per-Capita</span><span class="bd-val">16.0/20</span><div class="bd-bar"><div class="bd-bar-fill" style="width:80%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Assets & Nisab</span><span class="bd-val">10.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Family</span><span class="bd-val">2.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:13%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Housing</span><span class="bd-val">5.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:42%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Employment</span><span class="bd-val">5.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:50%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Health</span><span class="bd-val">11.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:73%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Asnaf Match</span><span class="bd-val">8.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:67%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Crisis</span><span class="bd-val">0.0/6</span><div class="bd-bar"><div class="bd-bar-fill" style="width:0%"></div></div></div>
+      </div>
+      <div class="categories">
+        <div class="cat-label">Asnaf categories</div>
+        <div class="cat-item">Al-Fuqara — Income below poverty line</div>
+        <div class="cat-item">Al-Masakin — Elderly forced to work for survival</div>
+        <div class="cat-item">Al-Masakin — Chronically ill, no healthcare access</div>
+        <div class="cat-item">Al-Masakin — Food-insecure household</div>
+      </div>
+      <div class="support-types">
+        <div class="cat-label">Recommended support</div>
+        <div class="sup-item">Medical aid / healthcare fund</div>
+        <div class="sup-item">Monthly cash transfer</div>
+        <div class="sup-item">Food vouchers</div>
+      </div>
+      <div class="recommendation MEDIUM">Standard queue — next distribution cycle</div>
+    </div>
+  </div>
+
+  <!-- 9. Siti -->
+  <div class="card">
+    <div class="card-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="card-name">Siti Rahma</div>
+          <div class="card-loc">📍 Surabaya, Indonesia · Student, single mother</div>
+        </div>
+        <span class="tier-badge tier-LOW">LOW</span>
+      </div>
+      <div class="card-score-row">
+        <div>
+          <div class="big-score" style="color:#2aaa60">43.7</div>
+          <div class="score-label">/ 100</div>
+        </div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:43.7%;background:#2aaa60"></div></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="need-line"><span>Est. monthly need</span><strong>$240 USD</strong></div>
+      <div class="breakdown">
+        <div class="bd-row"><span class="bd-label">Income & Per-Capita</span><span class="bd-val">15.7/20</span><div class="bd-bar"><div class="bd-bar-fill" style="width:78%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Assets & Nisab</span><span class="bd-val">7.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:70%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Family</span><span class="bd-val">5.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:33%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Housing</span><span class="bd-val">5.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:42%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Employment</span><span class="bd-val">4.0/10</span><div class="bd-bar"><div class="bd-bar-fill" style="width:40%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Health</span><span class="bd-val">3.0/15</span><div class="bd-bar"><div class="bd-bar-fill" style="width:20%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Asnaf Match</span><span class="bd-val">9.0/12</span><div class="bd-bar"><div class="bd-bar-fill" style="width:75%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Crisis</span><span class="bd-val">0.0/6</span><div class="bd-bar"><div class="bd-bar-fill" style="width:0%"></div></div></div>
+      </div>
+      <div class="categories">
+        <div class="cat-label">Asnaf categories</div>
+        <div class="cat-item">Al-Fuqara — Single mother below poverty</div>
+        <div class="cat-item">Al-Fuqara — Student from low-income family</div>
+      </div>
+      <div class="support-types">
+        <div class="cat-label">Recommended support</div>
+        <div class="sup-item">General education grant</div>
+      </div>
+      <div class="flags-section"><div class="flag-title">⚠ Flags</div><div class="flag-item">UNCONFIRMED — Oracle confirmation pending</div></div>
+      <div class="recommendation LOW">Eligible for partial Sadaqah support</div>
+    </div>
+  </div>
+
+  <!-- 10. Unknown / Fraud -->
+  <div class="card">
+    <div class="card-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="card-name">Unknown Applicant</div>
+          <div class="card-loc">📍 Dubai, UAE · Fraud attempt</div>
+        </div>
+        <span class="tier-badge tier-INELIGIBLE">INELIGIBLE</span>
+      </div>
+      <div class="card-score-row">
+        <div>
+          <div class="big-score" style="color:#666">0.0</div>
+          <div class="score-label">/ 100</div>
+        </div>
+        <div class="score-bar"><div class="score-bar-fill" style="width:0%;background:#555"></div></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="need-line"><span>Est. monthly need</span><strong>—</strong></div>
+      <div class="breakdown">
+        <div class="bd-row"><span class="bd-label">Raw Total</span><span class="bd-val">12.0/100</span><div class="bd-bar"><div class="bd-bar-fill" style="width:12%"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Fraud Penalty</span><span class="bd-val" style="color:#e05252">−90.0</span><div class="bd-bar"><div class="bd-bar-fill" style="width:100%;background:#e05252"></div></div></div>
+        <div class="bd-row"><span class="bd-label">Final Score</span><span class="bd-val" style="color:#666">0.0</span><div class="bd-bar"><div class="bd-bar-fill" style="width:0%"></div></div></div>
+      </div>
+      <div class="flags-section">
+        <div class="flag-title">⚠ 7 Fraud Flags Detected</div>
+        <div class="flag-item">INCOME_HIGH — Income &gt; 3× poverty line</div>
+        <div class="flag-item">ASSETS_ABOVE_NISAB — Assets exceed $5,100</div>
+        <div class="flag-item">STATUS_CONFLICT — Refugee + owned property</div>
+        <div class="flag-item">FREQUENT_APPS — 3+ applications / 6 months</div>
+        <div class="flag-item">INCOME_CONFLICT — Full-time, high income</div>
+        <div class="flag-item">UNCONFIRMED — No oracle confirmation</div>
+        <div class="flag-item">DOCS_PENDING — No documents verified</div>
+      </div>
+      <div class="recommendation INELIGIBLE">Does not meet Zakat criteria — Sadaqah referral only</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- How it works -->
+<div class="how-section">
+  <div class="how-inner">
+    <div class="how-title">How AM Zakat.ai Works</div>
+    <div class="how-sub">8 scoring components. Zero human bias.</div>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <div class="how-h">Income &amp; Need</div>
+        <div class="how-p">Per-capita income vs. regional poverty threshold. 55+ country-specific baselines.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <div class="how-h">Assets &amp; Nisab</div>
+        <div class="how-p">Automatic nisab check at $5,100 (85g gold). Asset depletion signals extreme distress.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <div class="how-h">Family Structure</div>
+        <div class="how-p">Dependents, minor children, elderly, widows, single parents, sole breadwinners.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">04</div>
+        <div class="how-h">Housing &amp; Shelter</div>
+        <div class="how-p">From homeless / refugee camp to stable owned home. 8 status levels.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">05</div>
+        <div class="how-h">Employment</div>
+        <div class="how-p">Unemployment duration, seasonal / informal / part-time work weighed against income.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">06</div>
+        <div class="how-h">Health &amp; Medical</div>
+        <div class="how-p">Disability, chronic illness without access, terminal illness, sick dependents.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">07</div>
+        <div class="how-h">Asnaf Match</div>
+        <div class="how-p">15 Islamic jurisprudence categories automatically identified per applicant.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">08</div>
+        <div class="how-h">Crisis &amp; Emergency</div>
+        <div class="how-p">Natural disaster, conflict zone, sudden job loss, domestic violence — automatic escalation.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Asnaf legend -->
+<div class="asnaf-section">
+  <div class="section-title" style="margin-bottom:20px">8 Asnaf — Islamic Jurisprudence</div>
+  <div class="asnaf-grid">
+    <div class="asnaf-card"><div class="asnaf-name">Al-Fuqara</div><div class="asnaf-desc">The poor — income below nisab / poverty line</div></div>
+    <div class="asnaf-card"><div class="asnaf-name">Al-Masakin</div><div class="asnaf-desc">The destitute — no income AND no assets</div></div>
+    <div class="asnaf-card"><div class="asnaf-name">Al-Gharimin</div><div class="asnaf-desc">Debt-burdened — cannot repay debts</div></div>
+    <div class="asnaf-card"><div class="asnaf-name">Al-Muallafah</div><div class="asnaf-desc">New Muslim converts in financial hardship</div></div>
+    <div class="asnaf-card"><div class="asnaf-name">Al-Riqab</div><div class="asnaf-desc">Modern captives — trafficking &amp; forced labour victims</div></div>
+    <div class="asnaf-card"><div class="asnaf-name">Ibn Al-Sabil</div><div class="asnaf-desc">Wayfarers — refugees, displaced, stranded</div></div>
+    <div class="asnaf-card"><div class="asnaf-name">Fi Sabilillah</div><div class="asnaf-desc">Students of Islamic knowledge &amp; daawa workers</div></div>
+    <div class="asnaf-card"><div class="asnaf-name">Al-Amil</div><div class="asnaf-desc">Zakat administrators (not recipients in this model)</div></div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Want full API access?</h2>
+  <p>AM Network is in pre-launch. Join the waitlist and be first to integrate the scoring engine into your mosque, NGO, or platform.</p>
+  <a class="btn" href="https://amnetwork.io/#waitlist">Join the Waitlist →</a>
+</div>
+
+<footer>
+  © 2026 AM Network · <a href="https://amnetwork.io">amnetwork.io</a> · contact@amnetwork.io<br>
+  <span style="margin-top:6px;display:block">AI scoring is a decision-support tool. Final Zakat distribution requires local oracle verification.</span>
+</footer>
+
+</body>
+</html>
