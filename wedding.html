@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Акбар &amp; Фараҳноз — 21.06.2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #FFF0F3;
+      --bg2:         #FDEEF4;
+      --accent:      #C9A96E;
+      --accent-dark: #A8844E;
+      --text:        #2d2428;
+      --text-muted:  #8a7078;
+      --card-bg:     rgba(255,255,255,0.80);
+      --card-border: rgba(201,169,110,0.30);
+      --hero-grad:   linear-gradient(180deg,#FFF0F3 0%,#FDEEF4 50%,#FDE8F0 100%);
+    }
+
+    body.night {
+      --bg:          #0d0d1a;
+      --bg2:         #13102a;
+      --accent:      #D4AF7A;
+      --accent-dark: #C9A96E;
+      --text:        #f5f0e8;
+      --text-muted:  #b8aac0;
+      --card-bg:     rgba(18,12,36,0.80);
+      --card-border: rgba(212,175,122,0.25);
+      --hero-grad:   linear-gradient(180deg,#0d0d1a 0%,#130d24 60%,#0a0a18 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.7s ease, color 0.5s ease;
+    }
+
+    /* ========== STARS ========== */
+    #stars-canvas {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    body.night #stars-canvas { opacity: 1; }
+
+    /* ========== THEME TOGGLE ========== */
+    #theme-toggle {
+      position: fixed;
+      top: 18px; right: 18px;
+      z-index: 600;
+      width: 46px; height: 46px;
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 19px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.2s ease;
+    }
+    #theme-toggle.visible { opacity: 1; pointer-events: all; }
+    #theme-toggle:hover { transform: scale(1.1) rotate(15deg); }
+
+    /* ========== ENVELOPE SCREEN ========== */
+    #envelope-screen {
+      position: fixed; inset: 0;
+      background: radial-gradient(ellipse at 40% 35%, #5c7057 0%, #3d5039 45%, #2a3827 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 1000;
+    }
+
+    #envelope-screen.exit {
+      animation: envExit 1.1s cubic-bezier(0.4,0,1,1) forwards;
+    }
+
+    @keyframes envExit {
+      0%   { transform: scale(1);    opacity: 1; }
+      55%  { transform: scale(1.06); opacity: 1; }
+      100% { transform: scale(1.1);  opacity: 0; }
+    }
+
+    /* Subtle bokeh in bg */
+    #envelope-screen::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle 120px at 20% 80%, rgba(201,169,110,0.07) 0%, transparent 70%),
+        radial-gradient(circle 80px  at 80% 20%, rgba(201,169,110,0.06) 0%, transparent 70%),
+        radial-gradient(circle 200px at 60% 60%, rgba(201,169,110,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── envelope wrap ── */
+    .env-wrap {
+      position: relative;
+      width: 260px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* envelope body */
+    .env-body {
+      width: 260px;
+      height: 340px;
+      background: linear-gradient(155deg, #506050 0%, #3f5040 60%, #374838 100%);
+      border-radius: 3px 3px 10px 10px;
+      position: relative;
+      box-shadow:
+        0 28px 70px rgba(0,0,0,0.55),
+        0 6px 18px rgba(0,0,0,0.30),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    /* bottom V-fold */
+    .env-body::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      border-left: 130px solid #2e3e2c;
+      border-right: 130px solid #2e3e2c;
+      border-top: 96px solid transparent;
+      border-radius: 0 0 10px 10px;
+    }
+
+    /* monogram area – sits between flap bottom and V-fold top */
+    .env-monogram {
+      position: absolute;
+      left: 50%; top: 64%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .env-monogram .initials {
+      font-family: 'Great Vibes', cursive;
+      font-size: 62px;
+      color: #C9A96E;
+      line-height: 1;
+      text-shadow:
+        0 0 20px rgba(201,169,110,0.5),
+        0 2px 8px rgba(0,0,0,0.4);
+      display: block;
+    }
+
+    .env-monogram .monogram-ring {
+      width: 52px; height: 52px;
+      border: 1.5px solid rgba(201,169,110,0.50);
+      border-radius: 50%;
+      margin: 6px auto 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: #C9A96E;
+    }
+
+    /* flap – triangle clip on a real div so rotateX works */
+    .env-flap {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 52%;
+      background: #2e3e2c;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center;
+      transform: perspective(520px) rotateX(0deg);
+      backface-visibility: hidden;
+      transition: transform 0.75s cubic-bezier(0.3, 0, 0.15, 1);
+      z-index: 4;
+    }
+
+    /* slight sheen on flap */
+    .env-flap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 60%);
+      clip-path: inherit;
+      pointer-events: none;
+    }
+
+    .env-wrap.open .env-flap {
+      transform: perspective(520px) rotateX(-170deg);
+    }
+
+    /* hint */
+    .env-hint {
+      margin-top: 30px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(201,169,110,0.65);
+      animation: hintPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes hintPulse {
+      0%, 100% { opacity: 0.45; }
+      50%       { opacity: 1; }
+    }
+
+    /* ========== INVITATION ========== */
+    #invitation {
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(28px);
+      pointer-events: none;
+      transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
+    }
+    #invitation.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      background: var(--hero-grad);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* soft rose vignette in day mode */
+    body:not(.night) .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(253,180,200,0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(253,200,220,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-sparkle {
+      font-size: 20px;
+      letter-spacing: 14px;
+      color: var(--accent);
+      opacity: 0.55;
+      margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(11px, 2.5vw, 13px);
+      letter-spacing: 4.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .hero-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(60px, 16vw, 100px);
+      color: var(--text);
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+
+    .hero-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(12px, 2.8vw, 15px);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 42px;
+    }
+
+    .hero-divider {
+      display: flex; align-items: center; gap: 14px;
+      color: var(--accent);
+      font-size: 18px;
+      opacity: 0.5;
+    }
+    .hero-divider::before,
+    .hero-divider::after {
+      content: '';
+      width: clamp(40px, 12vw, 88px); height: 1px;
+      background: currentColor;
+    }
+
+    /* scroll cue */
+    .scroll-cue {
+      position: absolute;
+      bottom: 28px; left: 50%;
+      transform: translateX(-50%);
+      color: var(--accent);
+      opacity: 0.4;
+      font-size: 22px;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ========== SECTION DIVIDER ========== */
+    .s-divider {
+      width: 180px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 0 auto;
+      opacity: 0.3;
+    }
+
+    /* ========== BASE SECTION ========== */
+    .section {
+      padding: 72px 24px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(11px, 2.5vw, 13px);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .section-label-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    /* ========== SCROLL REVEAL ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal.delay-1 { transition-delay: 0.15s; }
+    .reveal.delay-2 { transition-delay: 0.30s; }
+
+    /* ========== POEM ========== */
+    .poem-section { text-align: center; }
+
+    .orn-line {
+      display: flex; align-items: center; gap: 14px;
+      justify-content: center;
+      color: var(--accent); opacity: 0.5;
+      font-size: 20px; margin-bottom: 36px;
+    }
+    .orn-line::before, .orn-line::after {
+      content: ''; width: 50px; height: 1px; background: currentColor;
+    }
+
+    .poem-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: clamp(32px,6vw,52px) clamp(24px,5vw,48px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poem-card::before {
+      content: '\201C';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px; line-height: 1;
+      color: var(--accent); opacity: 0.10;
+      position: absolute; top: -8px; left: 14px;
+      pointer-events: none;
+    }
+
+    .poem-tj {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 4.5vw, 24px);
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.9;
+      margin-bottom: 22px;
+    }
+
+    .poem-sep {
+      width: 40px; height: 1px;
+      background: var(--accent);
+      opacity: 0.4;
+      margin: 0 auto 22px;
+    }
+
+    .poem-ru {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(14px, 3.2vw, 17px);
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+
+    .poem-attr {
+      margin-top: 28px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    /* ========== COUNTDOWN ========== */
+    .countdown-section { text-align: center; }
+
+    .cd-grid {
+      display: flex;
+      justify-content: center;
+      gap: clamp(10px, 2.5vw, 20px);
+      flex-wrap: wrap;
+    }
+
+    .cd-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: clamp(18px,3.5vw,28px) clamp(14px,3vw,24px);
+      min-width: clamp(64px,14vw,84px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .cd-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 9vw, 54px);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+      display: block;
+    }
+
+    .cd-lbl {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 7px;
+      line-height: 1.5;
+    }
+
+    /* ========== EVENTS ========== */
+    .events-section { text-align: center; }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 40px;
+    }
+
+    .event-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: clamp(26px,4vw,36px) clamp(20px,3.5vw,28px);
+      text-align: left;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .event-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 44px rgba(0,0,0,0.12);
+    }
+
+    .event-icon { font-size: 26px; margin-bottom: 14px; display: block; }
+
+    .event-name-tj {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(28px,6vw,34px);
+      color: var(--accent);
+      line-height: 1.1;
+      margin-bottom: 2px;
+    }
+
+    .event-name-ru {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    .event-row {
+      display: flex; align-items: flex-start;
+      gap: 10px; margin-bottom: 10px;
+    }
+    .event-row-icon { color: var(--accent); font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+    .event-row-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(15px, 3.2vw, 17px);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .event-row-text small {
+      display: block; font-size: 13px;
+      color: var(--text-muted); font-style: italic;
+    }
+
+    .event-note {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--card-border);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px; font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* ========== LOCATION ========== */
+    .location-section { text-align: center; }
+
+    .location-address {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 3.8vw, 20px);
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 14px 0 36px;
+    }
+
+    .map-btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 15px 34px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff;
+      border: none; border-radius: 50px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; letter-spacing: 0.5px;
+      text-decoration: none; cursor: pointer;
+      box-shadow: 0 4px 22px rgba(168,132,78,0.40);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .map-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(168,132,78,0.50);
+    }
+    .map-btn:active { transform: translateY(0); }
+
+    /* ========== FOOTER ========== */
+    footer {
+      text-align: center;
+      padding: 52px 24px 72px;
+    }
+
+    footer .footer-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(34px, 8vw, 44px);
+      color: var(--accent);
+      display: block; margin-bottom: 10px;
+    }
+
+    footer .footer-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px; letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    footer .footer-hearts {
+      font-size: 16px; letter-spacing: 8px;
+      color: var(--accent); opacity: 0.4;
+      margin-top: 18px; display: block;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 480px) {
+      .section { padding: 56px 16px; }
+      .poem-card { padding: 28px 20px; }
+      .event-card { padding: 24px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Stars canvas -->
+  <canvas id="stars-canvas"></canvas>
+
+  <!-- Theme toggle -->
+  <button id="theme-toggle" aria-label="Сменить тему">🌙</button>
+
+  <!-- ══════════════════════════════════════
+       ENVELOPE SCREEN
+  ══════════════════════════════════════ -->
+  <div id="envelope-screen">
+    <div class="env-wrap" id="env-wrap" onclick="openEnvelope()" role="button" aria-label="Открыть приглашение">
+      <div class="env-body">
+        <div class="env-flap" id="env-flap"></div>
+        <div class="env-monogram">
+          <span class="initials">А &amp; Ф</span>
+          <div class="monogram-ring">♥</div>
+        </div>
+      </div>
+    </div>
+    <p class="env-hint">Нажмите, чтобы открыть &nbsp;♥</p>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       INVITATION PAGE
+  ══════════════════════════════════════ -->
+  <div id="invitation">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-sparkle">✦ &nbsp; ✦ &nbsp; ✦</div>
+      <p class="hero-sub">Мо арӯсӣ мекунем &nbsp;·&nbsp; Мы женимся</p>
+      <h1 class="hero-names">Акбар &amp; Фараҳноз</h1>
+      <p class="hero-date">21 июня 2026 &nbsp;·&nbsp; 21 июни 2026</p>
+      <div class="hero-divider">❋</div>
+      <div class="scroll-cue">↓</div>
+    </section>
+
+    <div class="s-divider"></div>
+
+    <!-- POEM -->
+    <div class="section poem-section">
+      <div class="orn-line reveal">❧</div>
+      <div class="poem-card reveal delay-1">
+        <p class="poem-tj">
+          Ду дил — як паймон,<br>
+          Ду роҳ — як осмон.<br>
+          Рӯзи тӯй расид,<br>
+          Саодат — ҳамешагон.
+        </p>
+        <div class="poem-sep"></div>
+        <p class="poem-ru">
+          Два сердца — один обет,<br>
+          Два пути — одно небо.<br>
+          День свадьбы настал,<br>
+          Счастье — навсегда.
+        </p>
+        <p class="poem-attr">❧ &nbsp; Ба хотири ин рӯзи хос</p>
+      </div>
+    </div>
+
+    <div class="s-divider"></div>
+
+    <!-- COUNTDOWN -->
+    <div class="section countdown-section">
+      <p class="section-label reveal">То тӯй монда аст</p>
+      <p class="section-label-sub reveal delay-1">До торжества осталось</p>
+      <div class="cd-grid reveal delay-2">
+        <div class="cd-box">
+          <span class="cd-num" id="cd-days">—</span>
+          <span class="cd-lbl">Рӯз<br>Дней</span>
+        </div>
+        <div class="cd-box">
+          <span class="cd-num" id="cd-hours">—</span>
+          <span class="cd-lbl">Соат<br>Часов</span>
+        </div>
+        <div class="cd-box">
+          <span class="cd-num" id="cd-mins">—</span>
+          <span class="cd-lbl">Дақиқа<br>Минут</span>
+        </div>
+        <div class="cd-box">
+          <span class="cd-num" id="cd-secs">—</span>
+          <span class="cd-lbl">Сония<br>Секунд</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="s-divider"></div>
+
+    <!-- EVENTS -->
+    <div class="section events-section">
+      <p class="section-label reveal">Барнома &nbsp;·&nbsp; Программа</p>
+      <div class="events-grid">
+
+        <!-- Oshi Nahor -->
+        <div class="event-card reveal delay-1">
+          <span class="event-icon">☀️</span>
+          <p class="event-name-tj">Оши Наҳор</p>
+          <p class="event-name-ru">Утренний плов</p>
+          <div class="event-row">
+            <span class="event-row-icon">📅</span>
+            <div class="event-row-text">
+              21 июни 2026
+              <small>21 июня 2026</small>
+            </div>
+          </div>
+          <div class="event-row">
+            <span class="event-row-icon">🕗</span>
+            <div class="event-row-text">08:00 — 10:30</div>
+          </div>
+          <div class="event-row">
+            <span class="event-row-icon">📍</span>
+            <div class="event-row-text">Маркази Ош</div>
+          </div>
+          <p class="event-note">Қисми мардона &nbsp;·&nbsp; Мужская часть</p>
+        </div>
+
+        <!-- Tuy -->
+        <div class="event-card reveal delay-2">
+          <span class="event-icon">🌹</span>
+          <p class="event-name-tj">Тӯй</p>
+          <p class="event-name-ru">Свадьба</p>
+          <div class="event-row">
+            <span class="event-row-icon">📅</span>
+            <div class="event-row-text">
+              21 июни 2026
+              <small>21 июня 2026</small>
+            </div>
+          </div>
+          <div class="event-row">
+            <span class="event-row-icon">🕕</span>
+            <div class="event-row-text">18:00 — 21:00</div>
+          </div>
+          <div class="event-row">
+            <span class="event-row-icon">📍</span>
+            <div class="event-row-text">
+              ул. Раҳмон Набиева, д. 134
+              <small>Хавлӣ &nbsp;·&nbsp; Частный дом</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="s-divider"></div>
+
+    <!-- LOCATION -->
+    <div class="section location-section">
+      <p class="section-label reveal">Суроға &nbsp;·&nbsp; Адрес</p>
+      <p class="location-address reveal delay-1">
+        ул. Раҳмон Набиева, дом 134<br>
+        <span style="font-size:0.85em;opacity:0.75;">Душанбе, Тоҷикистон</span>
+      </p>
+      <a href="https://www.google.com/maps/search/%D0%A0%D0%B0%D1%85%D0%BC%D0%BE%D0%BD+%D0%9D%D0%B0%D0%B1%D0%B8%D0%B5%D0%B2%D0%B0+134+%D0%94%D1%83%D1%88%D0%B0%D0%BD%D0%B1%D0%B5"
+         target="_blank" rel="noopener" class="map-btn reveal delay-2">
+        📍 &nbsp;Дар харита кушоед &nbsp;·&nbsp; Открыть на карте
+      </a>
+    </div>
+
+    <div class="s-divider"></div>
+
+    <!-- FOOTER -->
+    <footer class="reveal">
+      <span class="footer-names">Акбар &amp; Фараҳноз</span>
+      <span class="footer-date">21 · 06 · 2026 &nbsp;·&nbsp; Душанбе</span>
+      <span class="footer-hearts">♥ &nbsp; ♥ &nbsp; ♥</span>
+    </footer>
+
+  </div><!-- /#invitation -->
+
+  <script>
+    /* ============================================================
+       STARS
+    ============================================================ */
+    const canvas = document.getElementById('stars-canvas');
+    const ctx    = canvas.getContext('2d');
+    let stars = [], raf;
+
+    function resizeCanvas() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function buildStars() {
+      stars = Array.from({ length: 200 }, () => ({
+        x:     Math.random() * canvas.width,
+        y:     Math.random() * canvas.height,
+        r:     Math.random() * 1.4 + 0.2,
+        phase: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.006 + 0.002
+      }));
+    }
+
+    let starsActive = false;
+
+    function drawFrame(t) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        const alpha = 0.35 + 0.65 * Math.abs(Math.sin(t * s.speed + s.phase));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,240,${alpha.toFixed(2)})`;
+        ctx.fill();
+      });
+      raf = requestAnimationFrame(drawFrame);
+    }
+
+    function startStars() {
+      if (starsActive) return;
+      starsActive = true;
+      drawFrame(0);
+    }
+
+    function stopStars() {
+      starsActive = false;
+      cancelAnimationFrame(raf);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    resizeCanvas();
+    buildStars();
+    window.addEventListener('resize', () => { resizeCanvas(); buildStars(); });
+
+    /* ============================================================
+       THEME TOGGLE
+    ============================================================ */
+    const themeBtn = document.getElementById('theme-toggle');
+    let isNight = false;
+
+    themeBtn.addEventListener('click', () => {
+      isNight = !isNight;
+      document.body.classList.toggle('night', isNight);
+      themeBtn.textContent = isNight ? '☀️' : '🌙';
+      isNight ? startStars() : stopStars();
+    });
+
+    /* ============================================================
+       ENVELOPE OPEN
+    ============================================================ */
+    let opened = false;
+
+    function openEnvelope() {
+      if (opened) return;
+      opened = true;
+
+      const wrap   = document.getElementById('env-wrap');
+      const screen = document.getElementById('envelope-screen');
+
+      wrap.classList.add('open');
+
+      setTimeout(() => {
+        screen.classList.add('exit');
+        setTimeout(() => {
+          screen.style.display = 'none';
+          revealInvitation();
+        }, 1050);
+      }, 720);
+    }
+
+    function revealInvitation() {
+      const inv = document.getElementById('invitation');
+      inv.classList.add('visible');
+      themeBtn.classList.add('visible');
+      startCountdown();
+      initReveal();
+    }
+
+    /* ============================================================
+       COUNTDOWN
+    ============================================================ */
+    const TARGET = new Date('2026-06-21T18:00:00');
+
+    function pad2(n) { return String(Math.max(0, n)).padStart(2, '0'); }
+
+    function startCountdown() {
+      function tick() {
+        const diff = TARGET - Date.now();
+        if (diff <= 0) {
+          ['days','hours','mins','secs'].forEach(id =>
+            (document.getElementById('cd-' + id).textContent = '00')
+          );
+          return;
+        }
+        document.getElementById('cd-days').textContent  = Math.floor(diff / 86400000);
+        document.getElementById('cd-hours').textContent = pad2(Math.floor((diff % 86400000) / 3600000));
+        document.getElementById('cd-mins').textContent  = pad2(Math.floor((diff % 3600000)  / 60000));
+        document.getElementById('cd-secs').textContent  = pad2(Math.floor((diff % 60000)    / 1000));
+      }
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    function initReveal() {
+      const els = document.querySelectorAll('.reveal');
+      const io  = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(el => io.observe(el));
+    }
+  </script>
+</body>
+</html>
