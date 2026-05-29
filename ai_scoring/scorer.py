@@ -1,16 +1,33 @@
 """
-AM Network — AI Recipient Scoring Engine v2
-Score: 0-100.  Higher = greater need = higher distribution priority.
+AM Network — AI Recipient Scoring Engine v2.1
+Score: 0–100.  Higher = greater need = higher distribution priority.
 
-Scoring framework aligned with 8 Asnaf (Islamic jurisprudence):
-  1. Al-Fuqara       — poor (income below nisab/poverty line)
+Islamic jurisprudence — 8 Asnaf categories:
+  1. Al-Fuqara       — poor (income below nisab / poverty line)
   2. Al-Masakin      — destitute (no income AND no assets)
   3. Al-Gharimin     — debt-burdened (cannot repay debts)
   4. Al-Muallafah    — new converts in financial hardship
   5. Al-Riqab        — captives / modern: trafficking / forced labour victims
-  6. Ibn Al-Sabil    — wayfarers: refugees, displaced, stranded
+  6. Ibn Al-Sabil    — wayfarers: refugees, displaced, stranded travellers
   7. Fi Sabilillah   — students of Islamic knowledge / daawa workers
   8. Al-Amil         — zakat administrators (not recipients in this model)
+
+AM Network recipient categories (mapped to Asnaf above):
+  A.  Widows and single mothers with dependents          → Al-Fuqara / Al-Masakin
+  B.  Orphans under 18 with no guardian income           → Al-Fuqara
+  C.  Elderly forced to work for survival                → Al-Masakin
+  D.  Disabled individuals unable to work                → Al-Fuqara / Al-Masakin
+  E.  Families below poverty threshold                   → Al-Fuqara
+  F.  Students from low-income backgrounds               → Fi Sabilillah / Al-Fuqara
+  G.  People trapped in riba-based or crushing debt      → Al-Gharimin
+  H.  Refugees and internally displaced persons          → Ibn Al-Sabil
+  I.  Chronically ill without healthcare access          → Al-Fuqara / Al-Masakin
+  J.  Large families with single breadwinner             → Al-Fuqara
+  K.  Food-insecure households                           → Al-Masakin (acute)
+  L.  New Muslim converts facing hardship                → Al-Muallafah
+  M.  Trafficking / forced-labour survivors              → Al-Riqab
+  N.  Conflict-zone / natural-disaster victims           → Ibn Al-Sabil (acute)
+  O.  Those invisible to traditional charitable systems  → Al-Masakin
 
 Score components (total = 100):
   Income & Per-Capita Need    max 20
@@ -52,39 +69,39 @@ class EmploymentStatus(str, Enum):
 
 
 class MedicalStatus(str, Enum):
-    NONE             = "none"
-    MINOR            = "minor_illness"
-    CHRONIC          = "chronic_illness"
+    NONE              = "none"
+    MINOR             = "minor_illness"
+    CHRONIC           = "chronic_illness"
     CHRONIC_NO_ACCESS = "chronic_no_healthcare_access"
-    DISABILITY       = "disability_prevents_work"
-    MENTAL_HEALTH    = "serious_mental_health_condition"
-    TERMINAL         = "terminal_illness"
+    DISABILITY        = "disability_prevents_work"
+    MENTAL_HEALTH     = "serious_mental_health_condition"
+    TERMINAL          = "terminal_illness"
 
 
 class CrisisType(str, Enum):
-    NONE                = "none"
-    NATURAL_DISASTER    = "natural_disaster"
-    CONFLICT_ZONE       = "conflict_or_war_zone"
-    BREADWINNER_LOSS    = "death_or_incapacity_of_breadwinner"
-    SUDDEN_JOB_LOSS     = "sudden_job_loss_under_3_months"
-    MEDICAL_EMERGENCY   = "acute_medical_emergency"
-    DOMESTIC_VIOLENCE   = "domestic_violence_or_forced_displacement"
-    ECONOMIC_SHOCK      = "sudden_economic_shock_hyperinflation_etc"
+    NONE              = "none"
+    NATURAL_DISASTER  = "natural_disaster"
+    CONFLICT_ZONE     = "conflict_or_war_zone"
+    BREADWINNER_LOSS  = "death_or_incapacity_of_breadwinner"
+    SUDDEN_JOB_LOSS   = "sudden_job_loss_under_3_months"
+    MEDICAL_EMERGENCY = "acute_medical_emergency"
+    DOMESTIC_VIOLENCE = "domestic_violence_or_forced_displacement"
+    ECONOMIC_SHOCK    = "sudden_economic_shock_hyperinflation_etc"
 
 
 class AssetLevel(str, Enum):
-    NONE       = "no_assets_no_savings"
-    MINIMAL    = "minimal_below_nisab"
-    MODERATE   = "moderate_near_nisab"
+    NONE        = "no_assets_no_savings"
+    MINIMAL     = "minimal_below_nisab"
+    MODERATE    = "moderate_near_nisab"
     ABOVE_NISAB = "above_nisab_threshold"
 
 
 # ── Constants ────────────────────────────────────────────────────────────────
 
-# Approximate nisab in USD (85g gold @ ~$60/g = ~$5 100, rounded)
+# Nisab in USD (85 g gold × ~$60/g ≈ $5 100)
 NISAB_USD = 5_100.0
 
-# Regional monthly poverty lines (USD per person)
+# Monthly poverty lines per person (USD) — regional approximations
 POVERTY_THRESHOLDS: dict[str, float] = {
     "default": 200,
     # Gulf / Middle East
@@ -123,62 +140,62 @@ def get_poverty_line(country: str) -> float:
 
 @dataclass
 class RecipientProfile:
-    # ── Identity ──────────────────────────
+    # Identity
     name: str
     country: str
-    region: str
+    region: str = ""
 
-    # ── Income ────────────────────────────
-    monthly_income_usd: float
-    monthly_expenses_usd: float = 0.0       # if known; used for deficit calculation
-    months_without_income: int = 0          # consecutive months with zero income
+    # Income
+    monthly_income_usd: float = 0.0
+    monthly_expenses_usd: float = 0.0
+    months_without_income: int = 0
 
-    # ── Debt (Al-Gharimin) ─────────────────
+    # Debt (Al-Gharimin)
     has_riba_debt: bool = False
     debt_amount_usd: float = 0.0
-    has_non_riba_debt: bool = False         # halal loans, medical bills, etc.
+    has_non_riba_debt: bool = False
     non_riba_debt_usd: float = 0.0
 
-    # ── Assets (Nisab check) ──────────────
+    # Assets (Nisab check)
     asset_level: AssetLevel = AssetLevel.NONE
-    sold_assets_to_survive: bool = False    # distress indicator
+    sold_assets_to_survive: bool = False
 
-    # ── Family ────────────────────────────
+    # Family
     family_size: int = 1
-    num_dependents: int = 0                 # total dependents
-    num_minor_children: int = 0             # children under 18
-    num_elderly_dependents: int = 0         # elderly in care
+    num_dependents: int = 0
+    num_minor_children: int = 0
+    num_elderly_dependents: int = 0
     is_single_parent: bool = False
     is_widow: bool = False
-    is_sole_breadwinner: bool = False       # only income earner for the household
+    is_sole_breadwinner: bool = False
 
-    # ── Vulnerability (Asnaf categories) ──
-    is_orphan_under_18: bool = False        # Al-Fuqara / Al-Masakin
-    is_refugee: bool = False                # Ibn Al-Sabil
-    is_internally_displaced: bool = False   # Ibn Al-Sabil (IDP)
-    is_new_convert: bool = False            # Al-Muallafah Qulubuhum (< 3 years)
-    is_trafficking_victim: bool = False     # Al-Riqab equivalent
-    is_student_deen: bool = False           # Fi Sabilillah (Islamic student, no income)
-    is_student_general: bool = False        # student from poor family
-    is_elderly_working: bool = False        # elderly forced to work for survival
-    is_daawa_worker: bool = False           # Fi Sabilillah: full-time daawa / charity worker
-    is_food_insecure: bool = False          # cannot afford adequate nutrition
+    # Vulnerability / Asnaf flags
+    is_orphan_under_18: bool = False
+    is_refugee: bool = False
+    is_internally_displaced: bool = False
+    is_new_convert: bool = False
+    is_trafficking_victim: bool = False
+    is_student_deen: bool = False
+    is_student_general: bool = False
+    is_elderly_working: bool = False
+    is_daawa_worker: bool = False
+    is_food_insecure: bool = False
 
-    # ── Medical ───────────────────────────
+    # Medical
     medical_status: MedicalStatus = MedicalStatus.NONE
-    num_sick_dependents: int = 0            # family members with serious illness
+    num_sick_dependents: int = 0
 
-    # ── Housing ───────────────────────────
+    # Housing
     housing_status: HousingStatus = HousingStatus.RENTING
 
-    # ── Employment ────────────────────────
+    # Employment
     employment_status: EmploymentStatus = EmploymentStatus.NONE
 
-    # ── Crisis ────────────────────────────
+    # Crisis
     crisis_type: CrisisType = CrisisType.NONE
     in_conflict_zone: bool = False
 
-    # ── Verification (anti-fraud) ─────────
+    # Verification (anti-fraud)
     previous_applications: int = 0
     months_since_last_application: Optional[int] = None
     documents_verified: bool = False
@@ -189,14 +206,14 @@ class RecipientProfile:
 
 @dataclass
 class ScoreBreakdown:
-    income_score: float = 0.0           # max 20
-    asset_score: float = 0.0            # max 10
-    family_score: float = 0.0           # max 15
-    housing_score: float = 0.0          # max 12
-    employment_score: float = 0.0       # max 10
-    health_score: float = 0.0           # max 15
-    asnaf_score: float = 0.0            # max 12
-    crisis_score: float = 0.0           # max  6
+    income_score: float = 0.0      # max 20
+    asset_score: float = 0.0       # max 10
+    family_score: float = 0.0      # max 15
+    housing_score: float = 0.0     # max 12
+    employment_score: float = 0.0  # max 10
+    health_score: float = 0.0      # max 15
+    asnaf_score: float = 0.0       # max 12
+    crisis_score: float = 0.0      # max  6
 
     total: float = 0.0
     asnaf_categories: list = field(default_factory=list)
@@ -205,22 +222,20 @@ class ScoreBreakdown:
     final_score: float = 0.0
     priority_tier: str = ""
     recommendation: str = ""
-    confidence_level: str = ""          # HIGH / MEDIUM / LOW
+    confidence_level: str = ""
     estimated_monthly_need_usd: float = 0.0
+    recommended_support_types: list = field(default_factory=list)
 
 
 # ── Scoring functions ─────────────────────────────────────────────────────────
 
 def score_income(profile: RecipientProfile) -> float:
-    """
-    Per-capita income vs regional poverty line. Deficit bonus.
-    Max 20 pts.
-    """
+    """Per-capita income vs regional poverty line. Max 20 pts."""
     poverty_line = get_poverty_line(profile.country)
     per_capita = profile.monthly_income_usd / max(profile.family_size, 1)
     ratio = per_capita / poverty_line if poverty_line > 0 else 0
 
-    if profile.months_without_income >= 3 or (profile.monthly_income_usd == 0 and profile.family_size > 0):
+    if profile.months_without_income >= 3 or (profile.monthly_income_usd == 0):
         base = 20.0
     elif ratio <= 0.10:
         base = 19.0
@@ -239,13 +254,11 @@ def score_income(profile: RecipientProfile) -> float:
     else:
         base = 0.0
 
-    # Deficit bonus: expenses exceed income
     if profile.monthly_expenses_usd > profile.monthly_income_usd > 0:
         deficit = profile.monthly_expenses_usd - profile.monthly_income_usd
         deficit_ratio = deficit / profile.monthly_expenses_usd
         base = min(20.0, base + deficit_ratio * 4)
 
-    # Food insecurity adds weight to income score
     if profile.is_food_insecure:
         base = min(20.0, base + 2.0)
 
@@ -253,61 +266,38 @@ def score_income(profile: RecipientProfile) -> float:
 
 
 def score_assets(profile: RecipientProfile) -> float:
-    """
-    Nisab check and asset depletion assessment.
-    If assets > nisab, person may not be eligible as Fuqara/Masakin
-    (though could still qualify as Gharimin or Ibn Al-Sabil).
-    Max 10 pts.
-    """
+    """Nisab check and asset depletion. Max 10 pts."""
     asset_scores = {
-        AssetLevel.NONE:        10.0,   # No assets — Al-Masakin (destitute)
-        AssetLevel.MINIMAL:      7.0,   # Below nisab — Al-Fuqara
-        AssetLevel.MODERATE:     3.0,   # Near nisab — borderline
-        AssetLevel.ABOVE_NISAB:  0.0,   # Above nisab — not eligible as Fuqara
+        AssetLevel.NONE:        10.0,
+        AssetLevel.MINIMAL:      7.0,
+        AssetLevel.MODERATE:     3.0,
+        AssetLevel.ABOVE_NISAB:  0.0,
     }
     score = asset_scores.get(profile.asset_level, 0.0)
-
-    # Sold assets to survive = extreme distress indicator
     if profile.sold_assets_to_survive:
         score = min(10.0, score + 2.0)
-
     return score
 
 
 def score_family(profile: RecipientProfile) -> float:
-    """
-    Family structure, dependents, breadwinner status.
-    Max 15 pts.
-    """
+    """Family structure, dependents, breadwinner status. Max 15 pts."""
     score = 0.0
 
-    # Dependents scoring (2 pts per dependent, max 8)
     score += min(profile.num_dependents * 2.0, 8.0)
-
-    # Additional for minor children specifically (1 pt each, max 3 extra)
     extra_minors = max(0, profile.num_minor_children - profile.num_dependents)
     score += min(extra_minors * 1.0, 3.0)
-
-    # Elderly dependents (additional 0.5 per, max 2)
     score += min(profile.num_elderly_dependents * 0.5, 2.0)
 
-    if profile.is_single_parent:
-        score += 3.0
-    if profile.is_widow:
-        score += 2.0
-    if profile.is_sole_breadwinner:
-        score += 2.0
-    if profile.is_orphan_under_18:
-        score += 2.0
+    if profile.is_single_parent:   score += 3.0
+    if profile.is_widow:           score += 2.0
+    if profile.is_sole_breadwinner: score += 2.0
+    if profile.is_orphan_under_18: score += 2.0
 
     return min(15.0, score)
 
 
 def score_housing(profile: RecipientProfile) -> float:
-    """
-    Housing stability and safety.
-    Max 12 pts.
-    """
+    """Housing stability and safety. Max 12 pts."""
     housing_scores = {
         HousingStatus.OWNED_STABLE:      0.0,
         HousingStatus.WITH_RELATIVES:    2.0,
@@ -322,10 +312,7 @@ def score_housing(profile: RecipientProfile) -> float:
 
 
 def score_employment(profile: RecipientProfile) -> float:
-    """
-    Employment status and duration of unemployment.
-    Max 10 pts.
-    """
+    """Employment status and unemployment duration. Max 10 pts."""
     employment_scores = {
         EmploymentStatus.FULL_TIME:     0.0,
         EmploymentStatus.FULL_TIME_LOW: 2.0,
@@ -336,7 +323,6 @@ def score_employment(profile: RecipientProfile) -> float:
     }
     score = employment_scores.get(profile.employment_status, 0.0)
 
-    # Prolonged unemployment bonus
     if profile.months_without_income >= 6:
         score = min(10.0, score + 2.0)
     elif profile.months_without_income >= 3:
@@ -346,91 +332,128 @@ def score_employment(profile: RecipientProfile) -> float:
 
 
 def score_health(profile: RecipientProfile) -> float:
-    """
-    Medical status, disability, dependents with illness.
-    Max 15 pts.
-    """
+    """Medical status, disability, sick dependents. Max 15 pts."""
     health_scores = {
-        MedicalStatus.NONE:              0.0,
-        MedicalStatus.MINOR:             3.0,
-        MedicalStatus.CHRONIC:           7.0,
-        MedicalStatus.MENTAL_HEALTH:     8.0,
-        MedicalStatus.CHRONIC_NO_ACCESS: 11.0,
-        MedicalStatus.DISABILITY:        13.0,
-        MedicalStatus.TERMINAL:          15.0,
+        MedicalStatus.NONE:               0.0,
+        MedicalStatus.MINOR:              3.0,
+        MedicalStatus.CHRONIC:            7.0,
+        MedicalStatus.MENTAL_HEALTH:      8.0,
+        MedicalStatus.CHRONIC_NO_ACCESS:  11.0,
+        MedicalStatus.DISABILITY:         13.0,
+        MedicalStatus.TERMINAL:           15.0,
     }
     score = health_scores.get(profile.medical_status, 0.0)
-
-    # Sick dependents add burden
     score += min(profile.num_sick_dependents * 1.5, 4.0)
-
     return min(15.0, score)
 
 
 def score_asnaf(profile: RecipientProfile) -> tuple[float, list[str]]:
     """
-    Islamic jurisprudence Asnaf category matching.
-    Returns (score, matched_categories).
-    Max 12 pts.
+    Match all relevant Asnaf categories and AM Network recipient groups.
+    Returns (score, matched_categories). Max 12 pts.
     """
     matched: list[str] = []
     score = 0.0
+    poverty_line = get_poverty_line(profile.country)
+    per_capita = profile.monthly_income_usd / max(profile.family_size, 1)
 
-    # Ibn Al-Sabil — wayfarers, refugees, displaced (highest priority)
+    # ── 1. Al-Masakin — destitute (no income + no assets) ──────────────────
+    if profile.monthly_income_usd == 0 and profile.asset_level in (AssetLevel.NONE, AssetLevel.MINIMAL):
+        matched.append("Al-Masakin — Destitute: zero income, no meaningful assets")
+        score = max(score, 11.0)
+    elif profile.asset_level == AssetLevel.NONE and per_capita < poverty_line * 0.25:
+        matched.append("Al-Masakin — Critical poverty with no assets")
+        score = max(score, 8.0)
+
+    # ── 2. Al-Fuqara — poor (income below poverty line) ────────────────────
+    if per_capita < poverty_line * 0.5:
+        if profile.is_sole_breadwinner and profile.family_size >= 5:
+            matched.append("Al-Fuqara — Large family (5+), sole breadwinner below poverty")
+            score = max(score, 9.0)
+        elif (profile.is_widow or profile.is_single_parent) and profile.num_dependents >= 1:
+            matched.append("Al-Fuqara — Widow / single mother below poverty line with dependents")
+            score = max(score, 9.0)
+        else:
+            matched.append("Al-Fuqara — Household income significantly below poverty line")
+            score = max(score, 6.0)
+
+    # Food insecurity — acute destitution marker
+    if profile.is_food_insecure and profile.asset_level in (AssetLevel.NONE, AssetLevel.MINIMAL):
+        matched.append("Al-Masakin — Food-insecure household (cannot afford adequate nutrition)")
+        score = max(score, 8.0)
+
+    # ── 3. Al-Gharimin — debt-burdened ─────────────────────────────────────
+    total_debt = profile.debt_amount_usd + profile.non_riba_debt_usd
+    monthly_income_safe = max(profile.monthly_income_usd, 1)
+    debt_months = total_debt / monthly_income_safe
+    if total_debt > 0:
+        if debt_months >= 24:
+            matched.append("Al-Gharimin — Crushing debt burden (> 2 years of income)")
+            score = max(score, 11.0)
+        elif debt_months >= 12:
+            matched.append("Al-Gharimin — Heavy debt burden (> 1 year of income)")
+            score = max(score, 8.0)
+        elif debt_months >= 6:
+            matched.append("Al-Gharimin — Significant debt (> 6 months of income)")
+            score = max(score, 5.0)
+        elif profile.has_riba_debt:
+            matched.append("Al-Gharimin — Riba-based debt (urgent liberation needed)")
+            score = max(score, 6.0)
+
+    # ── 4. Al-Muallafah — new Muslim converts ──────────────────────────────
+    if profile.is_new_convert:
+        matched.append("Al-Muallafah Qulubuhum — New Muslim convert (≤ 3 years), economic hardship")
+        score = max(score, 10.0)
+
+    # ── 5. Al-Riqab — trafficking / forced labour / modern captivity ────────
+    if profile.is_trafficking_victim:
+        matched.append("Al-Riqab — Human trafficking or forced labour survivor")
+        score = max(score, 12.0)
+
+    # ── 6. Ibn Al-Sabil — refugees / displaced / conflict victims ───────────
     if profile.is_refugee or profile.in_conflict_zone:
-        matched.append("Ibn Al-Sabil — Refugee / displaced person")
+        matched.append("Ibn Al-Sabil — Refugee or active conflict-zone resident")
         score = max(score, 12.0)
     elif profile.is_internally_displaced:
         matched.append("Ibn Al-Sabil — Internally displaced person (IDP)")
         score = max(score, 10.0)
 
-    # Al-Muallafah Qulubuhum — new converts in financial hardship
-    if profile.is_new_convert:
-        matched.append("Al-Muallafah — New Muslim convert (≤ 3 years)")
-        score = max(score, 10.0)
+    if profile.crisis_type in (CrisisType.NATURAL_DISASTER, CrisisType.CONFLICT_ZONE):
+        if not profile.is_refugee and not profile.in_conflict_zone:
+            matched.append("Ibn Al-Sabil — Disaster / conflict displaced (acute)")
+            score = max(score, 9.0)
 
-    # Al-Riqab — trafficking / forced labour / modern captivity
-    if profile.is_trafficking_victim:
-        matched.append("Al-Riqab — Trafficking or forced labour victim")
-        score = max(score, 12.0)
-
-    # Al-Gharimin — debt-burdened (cannot repay within reasonable time)
-    total_debt = profile.debt_amount_usd + profile.non_riba_debt_usd
-    monthly_income = max(profile.monthly_income_usd, 1)
-    debt_months = total_debt / monthly_income
-    if total_debt > 0:
-        if debt_months >= 24:
-            matched.append("Al-Gharimin — Crushing debt (> 2 years income)")
-            score = max(score, 11.0)
-        elif debt_months >= 12:
-            matched.append("Al-Gharimin — Heavy debt burden (> 1 year income)")
-            score = max(score, 8.0)
-        elif debt_months >= 6:
-            matched.append("Al-Gharimin — Significant debt (> 6 months income)")
-            score = max(score, 5.0)
-        elif profile.has_riba_debt:
-            matched.append("Al-Gharimin — Riba-based debt (urgent liberation)")
-            score = max(score, 6.0)
-
-    # Fi Sabilillah — students of Islamic knowledge / daawa workers
+    # ── 7. Fi Sabilillah — students of Islamic knowledge / daawa workers ────
     if profile.is_student_deen:
-        matched.append("Fi Sabilillah — Student of Islamic sciences (full-time)")
-        score = max(score, 8.0)
+        matched.append("Fi Sabilillah — Full-time student of Islamic sciences")
+        score = max(score, 9.0)
     elif profile.is_daawa_worker:
         matched.append("Fi Sabilillah — Full-time daawa / Islamic community worker")
         score = max(score, 7.0)
 
-    # Al-Fuqara / Al-Masakin subgroup: orphan household
+    # ── AM Network supplementary categories ─────────────────────────────────
+
+    # Orphan under 18 with no guardian income (Al-Fuqara)
     if profile.is_orphan_under_18:
         matched.append("Al-Fuqara — Orphan under 18, no guardian income")
         score = max(score, 10.0)
 
-    # Elderly forced to work (Al-Masakin subcategory)
+    # Elderly forced to work for survival (Al-Masakin subcategory)
     if profile.is_elderly_working:
-        matched.append("Al-Masakin — Elderly forced to work for survival")
+        matched.append("Al-Masakin — Elderly forced to work for basic survival")
         score = max(score, 7.0)
 
-    # General student in poverty (lower than deen student)
+    # Disabled, cannot work
+    if profile.medical_status == MedicalStatus.DISABILITY:
+        matched.append("Al-Fuqara — Disabled person unable to sustain livelihood")
+        score = max(score, 9.0)
+
+    # Chronically ill without healthcare access
+    if profile.medical_status in (MedicalStatus.CHRONIC_NO_ACCESS, MedicalStatus.TERMINAL):
+        matched.append("Al-Masakin — Chronically / terminally ill without healthcare access")
+        score = max(score, 8.0)
+
+    # General student from low-income family
     if profile.is_student_general and not profile.is_student_deen:
         matched.append("Al-Fuqara — Student from low-income family")
         score = max(score, 4.0)
@@ -439,10 +462,7 @@ def score_asnaf(profile: RecipientProfile) -> tuple[float, list[str]]:
 
 
 def score_crisis(profile: RecipientProfile) -> float:
-    """
-    Emergency and crisis situation scoring.
-    Max 6 pts.
-    """
+    """Emergency and crisis situation scoring. Max 6 pts."""
     crisis_scores = {
         CrisisType.NONE:              0.0,
         CrisisType.SUDDEN_JOB_LOSS:   3.0,
@@ -454,23 +474,17 @@ def score_crisis(profile: RecipientProfile) -> float:
         CrisisType.CONFLICT_ZONE:     6.0,
     }
     score = crisis_scores.get(profile.crisis_type, 0.0)
-
-    # Additional for active conflict zone
     if profile.in_conflict_zone and profile.crisis_type != CrisisType.CONFLICT_ZONE:
         score = min(6.0, score + 1.5)
-
     return score
 
 
 def detect_fraud_flags(profile: RecipientProfile) -> tuple[list, float]:
-    """
-    Anti-fraud checks. Returns (flags, penalty_points).
-    """
+    """Anti-fraud checks. Returns (flags, penalty_points)."""
     flags: list[str] = []
     penalty = 0.0
     poverty_line = get_poverty_line(profile.country)
 
-    # Income above 3x poverty line with no offsetting factors
     if profile.monthly_income_usd > poverty_line * 3:
         flags.append("INCOME_HIGH: Monthly income > 3× regional poverty line")
         penalty += 15.0
@@ -478,29 +492,24 @@ def detect_fraud_flags(profile: RecipientProfile) -> tuple[list, float]:
         flags.append("INCOME_ELEVATED: Monthly income > 2× regional poverty line — verify need")
         penalty += 8.0
 
-    # Assets above nisab — not eligible as Fuqara/Masakin
     if profile.asset_level == AssetLevel.ABOVE_NISAB:
         flags.append("ASSETS_ABOVE_NISAB: Reported assets exceed nisab threshold ($5,100)")
         penalty += 20.0
 
-    # Status conflict: refugee with stable owned home
     if profile.is_refugee and profile.housing_status == HousingStatus.OWNED_STABLE:
         flags.append("STATUS_CONFLICT: Refugee status + owned stable property")
         penalty += 20.0
 
-    # Frequent recent applications
     if profile.previous_applications >= 3:
         if profile.months_since_last_application is not None and profile.months_since_last_application < 6:
             flags.append("FREQUENT_APPS: 3+ applications within 6 months")
             penalty += 15.0
 
-    # Contradictory employment + income
     if (profile.employment_status == EmploymentStatus.FULL_TIME
             and profile.monthly_income_usd > poverty_line * 2):
         flags.append("INCOME_CONFLICT: Full-time employed with income above 2× poverty line")
         penalty += 10.0
 
-    # Missing verification
     if not profile.local_oracle_confirmed:
         flags.append("UNCONFIRMED: Awaiting local oracle (imam / social worker) confirmation")
         penalty += 5.0
@@ -511,10 +520,67 @@ def detect_fraud_flags(profile: RecipientProfile) -> tuple[list, float]:
     return flags, penalty
 
 
+def recommend_support_types(profile: RecipientProfile, tier: str) -> list[str]:
+    """Suggest appropriate Zakat distribution channels based on profile."""
+    types: list[str] = []
+    if tier == "INELIGIBLE":
+        return []
+
+    # Cash / basic needs
+    if profile.monthly_income_usd == 0 or profile.is_food_insecure:
+        types.append("Monthly cash transfer (basic subsistence)")
+
+    # Housing
+    if profile.housing_status in (HousingStatus.HOMELESS, HousingStatus.REFUGEE_CAMP,
+                                   HousingStatus.TEMPORARY_SHELTER, HousingStatus.RENTING_DEBT):
+        types.append("Emergency housing or rent assistance")
+
+    # Medical
+    if profile.medical_status in (MedicalStatus.CHRONIC_NO_ACCESS, MedicalStatus.DISABILITY,
+                                   MedicalStatus.TERMINAL):
+        types.append("Medical aid / healthcare fund")
+    if profile.num_sick_dependents >= 1:
+        types.append("Healthcare support for sick family members")
+
+    # Debt relief
+    total_debt = profile.debt_amount_usd + profile.non_riba_debt_usd
+    if total_debt > 0:
+        if profile.has_riba_debt:
+            types.append("Riba debt liberation (urgent — prevents accumulating haram interest)")
+        else:
+            types.append("Halal debt relief fund")
+
+    # Education
+    if profile.is_student_deen:
+        types.append("Islamic education stipend (tuition + living expenses)")
+    elif profile.is_student_general:
+        types.append("General education grant")
+
+    # Livelihood / enterprise
+    if profile.employment_status in (EmploymentStatus.NONE, EmploymentStatus.SEASONAL,
+                                      EmploymentStatus.INFORMAL):
+        if not (profile.medical_status == MedicalStatus.DISABILITY or
+                profile.is_refugee or profile.is_elderly_working):
+            types.append("Microenterprise / skills training support")
+
+    # Food vouchers
+    if profile.is_food_insecure:
+        types.append("Food vouchers / in-kind food assistance")
+
+    # Psychosocial
+    if profile.is_trafficking_victim or profile.crisis_type == CrisisType.DOMESTIC_VIOLENCE:
+        types.append("Psychosocial support & safe housing")
+
+    if not types:
+        types.append("Targeted Sadaqah / one-time emergency support")
+
+    return types
+
+
 def estimate_monthly_need(profile: RecipientProfile) -> float:
     """Estimate minimum monthly Zakat support needed (USD)."""
     poverty_line = get_poverty_line(profile.country)
-    target = poverty_line * profile.family_size * 0.8  # 80% of poverty basket
+    target = poverty_line * profile.family_size * 0.8
     gap = max(0.0, target - profile.monthly_income_usd)
     return round(gap, 2)
 
@@ -543,7 +609,7 @@ def get_priority_tier(score: float) -> tuple[str, str]:
 # ── Main scoring function ─────────────────────────────────────────────────────
 
 def score_recipient(profile: RecipientProfile) -> ScoreBreakdown:
-    """Score a recipient profile. Returns full ScoreBreakdown (0-100)."""
+    """Score a recipient profile. Returns full ScoreBreakdown (0–100)."""
     bd = ScoreBreakdown()
 
     bd.income_score     = score_income(profile)
@@ -566,6 +632,7 @@ def score_recipient(profile: RecipientProfile) -> ScoreBreakdown:
     bd.priority_tier, bd.recommendation = get_priority_tier(bd.final_score)
     bd.confidence_level = get_confidence_level(profile)
     bd.estimated_monthly_need_usd = estimate_monthly_need(profile)
+    bd.recommended_support_types = recommend_support_types(profile, bd.priority_tier)
 
     return bd
 
@@ -581,15 +648,15 @@ def format_report(profile: RecipientProfile, bd: ScoreBreakdown) -> str:
         "MEDIUM": "🟡", "LOW": "🟢", "INELIGIBLE": "⚪",
     }
     conf_icons = {"HIGH": "✅", "MEDIUM": "🟡", "LOW": "⚠️"}
-    tier_icon = tier_icons.get(bd.priority_tier, "⚪")
-    conf_icon = conf_icons.get(bd.confidence_level, "⚠️")
+    tier_icon  = tier_icons.get(bd.priority_tier, "⚪")
+    conf_icon  = conf_icons.get(bd.confidence_level, "⚠️")
 
     lines = [
         "=" * 64,
-        "  AM NETWORK — ZAKAT ELIGIBILITY REPORT v2",
+        "  AM NETWORK — ZAKAT ELIGIBILITY REPORT v2.1",
         "=" * 64,
         f"  Applicant  : {profile.name}",
-        f"  Location   : {profile.region}, {profile.country}",
+        f"  Location   : {profile.region}, {profile.country}" if profile.region else f"  Location   : {profile.country}",
         f"  Confidence : {conf_icon} {bd.confidence_level}",
         "",
         f"  SCORE : {bd.final_score:.1f} / 100   [{bar}]",
@@ -616,9 +683,15 @@ def format_report(profile: RecipientProfile, bd: ScoreBreakdown) -> str:
     lines.append("")
 
     if bd.asnaf_categories:
-        lines.append("── ☪  ASNAF CATEGORIES MATCHED ──────────────────────────")
+        lines.append("── ☪  ASNAF / RECIPIENT CATEGORIES MATCHED ─────────────")
         for cat in bd.asnaf_categories:
             lines.append(f"  ✔ {cat}")
+        lines.append("")
+
+    if bd.recommended_support_types:
+        lines.append("── 💰 RECOMMENDED SUPPORT TYPES ─────────────────────────")
+        for s in bd.recommended_support_types:
+            lines.append(f"  → {s}")
         lines.append("")
 
     if bd.fraud_flags:
