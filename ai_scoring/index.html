@@ -258,43 +258,7 @@ footer a{color:var(--gold);text-decoration:none}
       <div class="field">
         <label data-t="f_country">Country</label>
         <select id="f-country" onchange="liveUpdate()">
-          <option value="EG">🇪🇬 Egypt</option>
-          <option value="SA">🇸🇦 Saudi Arabia</option>
-          <option value="AE">🇦🇪 UAE</option>
-          <option value="JO">🇯🇴 Jordan</option>
-          <option value="SY">🇸🇾 Syria</option>
-          <option value="IQ">🇮🇶 Iraq</option>
-          <option value="YE">🇾🇪 Yemen</option>
-          <option value="PS">🇵🇸 Palestine</option>
-          <option value="LB">🇱🇧 Lebanon</option>
-          <option value="MA">🇲🇦 Morocco</option>
-          <option value="TN">🇹🇳 Tunisia</option>
-          <option value="DZ">🇩🇿 Algeria</option>
-          <option value="SD">🇸🇩 Sudan</option>
-          <option value="SO">🇸🇴 Somalia</option>
-          <option value="NG">🇳🇬 Nigeria</option>
-          <option value="GH">🇬🇭 Ghana</option>
-          <option value="SN">🇸🇳 Senegal</option>
-          <option value="ET">🇪🇹 Ethiopia</option>
-          <option value="PK">🇵🇰 Pakistan</option>
-          <option value="BD">🇧🇩 Bangladesh</option>
-          <option value="AF">🇦🇫 Afghanistan</option>
-          <option value="IN">🇮🇳 India</option>
-          <option value="ID">🇮🇩 Indonesia</option>
-          <option value="MY">🇲🇾 Malaysia</option>
-          <option value="TR">🇹🇷 Turkey</option>
-          <option value="TJ">🇹🇯 Tajikistan</option>
-          <option value="UZ">🇺🇿 Uzbekistan</option>
-          <option value="KZ">🇰🇿 Kazakhstan</option>
-          <option value="KG">🇰🇬 Kyrgyzstan</option>
-          <option value="AZ">🇦🇿 Azerbaijan</option>
-          <option value="RU">🇷🇺 Russia</option>
-          <option value="DE">🇩🇪 Germany</option>
-          <option value="FR">🇫🇷 France</option>
-          <option value="GB">🇬🇧 United Kingdom</option>
-          <option value="US">🇺🇸 United States</option>
-          <option value="CA">🇨🇦 Canada</option>
-          <option value="AU">🇦🇺 Australia</option>
+          <!-- populated by buildCountrySelect() -->
         </select>
       </div>
       <div class="field-row">
@@ -1349,6 +1313,7 @@ function setLang(l){
   localStorage.setItem('amLang',l);
   liveUpdate();
   renderExamples();
+  buildCountrySelect();
 }
 function toggleLangDrop(){
   const d=document.getElementById('langDrop');
@@ -1375,7 +1340,259 @@ function toggleTheme(){
 }
 
 // ── SCORER ──────────────────────────────────────────────────────────────────
-const POVERTY={default:200,AE:800,UAE:800,SA:600,QA:900,KW:700,BH:500,OM:450,JO:200,LB:150,IQ:120,SY:80,YE:60,PS:100,EG:120,MA:130,TN:160,DZ:140,LY:200,SD:70,SO:50,NG:70,GH:90,SN:80,ML:55,NE:50,TD:50,ET:55,KE:110,TZ:65,UG:60,MZ:55,PK:100,BD:80,AF:60,NP:70,IN:120,LK:130,ID:150,MY:350,PH:130,TH:200,MM:80,KH:90,VN:140,TJ:80,UZ:90,KG:100,KZ:250,TM:120,AZ:200,DE:900,FR:850,GB:1100,UK:1100,NL:900,BE:850,SE:950,NO:1100,IT:700,ES:650,TR:350,RU:300,US:1200,CA:1100,AU:1000};
+
+// ── COUNTRIES ────────────────────────────────────────────────────────────────
+function flag(code){return String.fromCodePoint(...[...code].map(c=>0x1F1E6+c.charCodeAt(0)-65));}
+
+const COUNTRIES=[
+  // ── Arab World ──────────────────────────────────────────────────────────────
+  {code:"SA",pt:600,names:{en:"Saudi Arabia",ar:"المملكة العربية السعودية",ru:"Саудовская Аравия",tj:"Арабистони Саудӣ",id:"Arab Saudi",tr:"Suudi Arabistan",zh:"沙特阿拉伯",ms:"Arab Saudi"}},
+  {code:"AE",pt:800,names:{en:"United Arab Emirates",ar:"الإمارات العربية المتحدة",ru:"ОАЭ",tj:"Аморатҳои Муттаҳидаи Араб",id:"Uni Emirat Arab",tr:"Birleşik Arap Emirlikleri",zh:"阿联酋",ms:"Emiriah Arab Bersatu"}},
+  {code:"QA",pt:900,names:{en:"Qatar",ar:"قطر",ru:"Катар",tj:"Қатар",id:"Qatar",tr:"Katar",zh:"卡塔尔",ms:"Qatar"}},
+  {code:"KW",pt:700,names:{en:"Kuwait",ar:"الكويت",ru:"Кувейт",tj:"Кувайт",id:"Kuwait",tr:"Kuveyt",zh:"科威特",ms:"Kuwait"}},
+  {code:"BH",pt:500,names:{en:"Bahrain",ar:"البحرين",ru:"Бахрейн",tj:"Баҳрайн",id:"Bahrain",tr:"Bahreyn",zh:"巴林",ms:"Bahrain"}},
+  {code:"OM",pt:450,names:{en:"Oman",ar:"عُمان",ru:"Оман",tj:"Умон",id:"Oman",tr:"Umman",zh:"阿曼",ms:"Oman"}},
+  {code:"JO",pt:200,names:{en:"Jordan",ar:"الأردن",ru:"Иордания",tj:"Урдун",id:"Yordania",tr:"Ürdün",zh:"约旦",ms:"Jordan"}},
+  {code:"LB",pt:150,names:{en:"Lebanon",ar:"لبنان",ru:"Ливан",tj:"Лубнон",id:"Lebanon",tr:"Lübnan",zh:"黎巴嫩",ms:"Lubnan"}},
+  {code:"SY",pt:80,names:{en:"Syria",ar:"سوريا",ru:"Сирия",tj:"Сурия",id:"Suriah",tr:"Suriye",zh:"叙利亚",ms:"Syria"}},
+  {code:"IQ",pt:120,names:{en:"Iraq",ar:"العراق",ru:"Ирак",tj:"Ироқ",id:"Irak",tr:"Irak",zh:"伊拉克",ms:"Iraq"}},
+  {code:"YE",pt:60,names:{en:"Yemen",ar:"اليمن",ru:"Йемен",tj:"Яман",id:"Yaman",tr:"Yemen",zh:"也门",ms:"Yaman"}},
+  {code:"PS",pt:100,names:{en:"Palestine",ar:"فلسطين",ru:"Палестина",tj:"Фаластин",id:"Palestina",tr:"Filistin",zh:"巴勒斯坦",ms:"Palestin"}},
+  {code:"EG",pt:120,names:{en:"Egypt",ar:"مصر",ru:"Египет",tj:"Миср",id:"Mesir",tr:"Mısır",zh:"埃及",ms:"Mesir"}},
+  {code:"MA",pt:130,names:{en:"Morocco",ar:"المغرب",ru:"Марокко",tj:"Марокаш",id:"Maroko",tr:"Fas",zh:"摩洛哥",ms:"Maghribi"}},
+  {code:"TN",pt:160,names:{en:"Tunisia",ar:"تونس",ru:"Тунис",tj:"Тунис",id:"Tunisia",tr:"Tunus",zh:"突尼斯",ms:"Tunisia"}},
+  {code:"DZ",pt:140,names:{en:"Algeria",ar:"الجزائر",ru:"Алжир",tj:"Алҷазоир",id:"Aljazair",tr:"Cezayir",zh:"阿尔及利亚",ms:"Algeria"}},
+  {code:"LY",pt:200,names:{en:"Libya",ar:"ليبيا",ru:"Ливия",tj:"Либия",id:"Libya",tr:"Libya",zh:"利比亚",ms:"Libya"}},
+  {code:"SD",pt:70,names:{en:"Sudan",ar:"السودان",ru:"Судан",tj:"Судон",id:"Sudan",tr:"Sudan",zh:"苏丹",ms:"Sudan"}},
+  {code:"MR",pt:80,names:{en:"Mauritania",ar:"موريتانيا",ru:"Мавритания",tj:"Мавритания",id:"Mauritania",tr:"Moritanya",zh:"毛里塔尼亚",ms:"Mauritania"}},
+  {code:"SO",pt:50,names:{en:"Somalia",ar:"الصومال",ru:"Сомали",tj:"Сомалӣ",id:"Somalia",tr:"Somali",zh:"索马里",ms:"Somalia"}},
+  {code:"DJ",pt:120,names:{en:"Djibouti",ar:"جيبوتي",ru:"Джибути",tj:"Ҷибутӣ",id:"Djibouti",tr:"Cibuti",zh:"吉布提",ms:"Djibouti"}},
+  {code:"KM",pt:100,names:{en:"Comoros",ar:"جزر القمر",ru:"Коморы",tj:"Ҷазираҳои Қамар",id:"Komoro",tr:"Komorlar",zh:"科摩罗",ms:"Komoro"}},
+  {code:"TD",pt:50,names:{en:"Chad",ar:"تشاد",ru:"Чад",tj:"Чад",id:"Chad",tr:"Çad",zh:"乍得",ms:"Chad"}},
+
+  // ── Sub-Saharan Africa ───────────────────────────────────────────────────────
+  {code:"NG",pt:70,names:{en:"Nigeria",ar:"نيجيريا",ru:"Нигерия",tj:"Нигерия",id:"Nigeria",tr:"Nijerya",zh:"尼日利亚",ms:"Nigeria"}},
+  {code:"GH",pt:90,names:{en:"Ghana",ar:"غانا",ru:"Гана",tj:"Гана",id:"Ghana",tr:"Gana",zh:"加纳",ms:"Ghana"}},
+  {code:"SN",pt:80,names:{en:"Senegal",ar:"السنغال",ru:"Сенегал",tj:"Сенегал",id:"Senegal",tr:"Senegal",zh:"塞内加尔",ms:"Senegal"}},
+  {code:"ET",pt:55,names:{en:"Ethiopia",ar:"إثيوبيا",ru:"Эфиопия",tj:"Эфиопия",id:"Ethiopia",tr:"Etiyopya",zh:"埃塞俄比亚",ms:"Ethiopia"}},
+  {code:"ML",pt:55,names:{en:"Mali",ar:"مالي",ru:"Мали",tj:"Малӣ",id:"Mali",tr:"Mali",zh:"马里",ms:"Mali"}},
+  {code:"BF",pt:65,names:{en:"Burkina Faso",ar:"بوركينا فاسو",ru:"Буркина-Фасо",tj:"Буркина-Фасо",id:"Burkina Faso",tr:"Burkina Faso",zh:"布基纳法索",ms:"Burkina Faso"}},
+  {code:"NE",pt:50,names:{en:"Niger",ar:"النيجر",ru:"Нигер",tj:"Нигер",id:"Niger",tr:"Nijer",zh:"尼日尔",ms:"Niger"}},
+  {code:"GN",pt:70,names:{en:"Guinea",ar:"غينيا",ru:"Гвинея",tj:"Гвинея",id:"Guinea",tr:"Gine",zh:"几内亚",ms:"Guinea"}},
+  {code:"SL",pt:60,names:{en:"Sierra Leone",ar:"سيراليون",ru:"Сьерра-Леоне",tj:"Сьерра-Леоне",id:"Sierra Leone",tr:"Sierra Leone",zh:"塞拉利昂",ms:"Sierra Leone"}},
+  {code:"GM",pt:70,names:{en:"Gambia",ar:"غامبيا",ru:"Гамбия",tj:"Гамбия",id:"Gambia",tr:"Gambiya",zh:"冈比亚",ms:"Gambia"}},
+  {code:"GW",pt:60,names:{en:"Guinea-Bissau",ar:"غينيا بيساو",ru:"Гвинея-Бисау",tj:"Гвинея-Бисау",id:"Guinea-Bissau",tr:"Gine-Bissau",zh:"几内亚比绍",ms:"Guinea-Bissau"}},
+  {code:"MZ",pt:55,names:{en:"Mozambique",ar:"موزمبيق",ru:"Мозамбик",tj:"Мозамбик",id:"Mozambik",tr:"Mozambik",zh:"莫桑比克",ms:"Mozambik"}},
+  {code:"TZ",pt:65,names:{en:"Tanzania",ar:"تنزانيا",ru:"Танзания",tj:"Танзания",id:"Tanzania",tr:"Tanzanya",zh:"坦桑尼亚",ms:"Tanzania"}},
+  {code:"KE",pt:110,names:{en:"Kenya",ar:"كينيا",ru:"Кения",tj:"Кения",id:"Kenya",tr:"Kenya",zh:"肯尼亚",ms:"Kenya"}},
+  {code:"UG",pt:60,names:{en:"Uganda",ar:"أوغندا",ru:"Уганда",tj:"Уганда",id:"Uganda",tr:"Uganda",zh:"乌干达",ms:"Uganda"}},
+  {code:"RW",pt:70,names:{en:"Rwanda",ar:"رواندا",ru:"Руанда",tj:"Руанда",id:"Rwanda",tr:"Ruanda",zh:"卢旺达",ms:"Rwanda"}},
+  {code:"BI",pt:50,names:{en:"Burundi",ar:"بوروندي",ru:"Бурунди",tj:"Бурундӣ",id:"Burundi",tr:"Burundi",zh:"布隆迪",ms:"Burundi"}},
+  {code:"MW",pt:55,names:{en:"Malawi",ar:"ملاوي",ru:"Малави",tj:"Малавӣ",id:"Malawi",tr:"Malavi",zh:"马拉维",ms:"Malawi"}},
+  {code:"ZM",pt:70,names:{en:"Zambia",ar:"زامبيا",ru:"Замбия",tj:"Замбия",id:"Zambia",tr:"Zambiya",zh:"赞比亚",ms:"Zambia"}},
+  {code:"ZW",pt:75,names:{en:"Zimbabwe",ar:"زيمبابوي",ru:"Зимбабве",tj:"Зимбабве",id:"Zimbabwe",tr:"Zimbabve",zh:"津巴布韦",ms:"Zimbabwe"}},
+  {code:"MG",pt:60,names:{en:"Madagascar",ar:"مدغشقر",ru:"Мадагаскар",tj:"Мадагаскар",id:"Madagaskar",tr:"Madagaskar",zh:"马达加斯加",ms:"Madagaskar"}},
+  {code:"CI",pt:90,names:{en:"Côte d'Ivoire",ar:"كوت ديفوار",ru:"Кот-д'Ивуар",tj:"Кот-д'Ивуар",id:"Pantai Gading",tr:"Fildişi Sahili",zh:"科特迪瓦",ms:"Pantai Gading"}},
+  {code:"CM",pt:80,names:{en:"Cameroon",ar:"الكاميرون",ru:"Камерун",tj:"Камерун",id:"Kamerun",tr:"Kamerun",zh:"喀麦隆",ms:"Kamerun"}},
+  {code:"GA",pt:150,names:{en:"Gabon",ar:"الغابون",ru:"Габон",tj:"Габон",id:"Gabon",tr:"Gabon",zh:"加蓬",ms:"Gabon"}},
+  {code:"CG",pt:90,names:{en:"Republic of the Congo",ar:"جمهورية الكونغو",ru:"Республика Конго",tj:"Ҷумҳурии Конго",id:"Republik Kongo",tr:"Kongo Cumhuriyeti",zh:"刚果共和国",ms:"Republik Congo"}},
+  {code:"CD",pt:55,names:{en:"DR Congo",ar:"الكونغو الديمقراطية",ru:"ДР Конго",tj:"Конгои Демократӣ",id:"Kongo RD",tr:"Kongo DR",zh:"刚果民主共和国",ms:"Congo DR"}},
+  {code:"CF",pt:50,names:{en:"Central African Republic",ar:"جمهورية أفريقيا الوسطى",ru:"ЦАР",tj:"Ҷумҳурии Африқои Марказӣ",id:"Republik Afrika Tengah",tr:"Orta Afrika Cumhuriyeti",zh:"中非共和国",ms:"Republik Afrika Tengah"}},
+  {code:"AO",pt:90,names:{en:"Angola",ar:"أنغولا",ru:"Ангола",tj:"Ангола",id:"Angola",tr:"Angola",zh:"安哥拉",ms:"Angola"}},
+  {code:"ZA",pt:200,names:{en:"South Africa",ar:"جنوب أفريقيا",ru:"ЮАР",tj:"Африқои Ҷанубӣ",id:"Afrika Selatan",tr:"Güney Afrika",zh:"南非",ms:"Afrika Selatan"}},
+  {code:"LS",pt:80,names:{en:"Lesotho",ar:"ليسوتو",ru:"Лесото",tj:"Лесото",id:"Lesotho",tr:"Lesoto",zh:"莱索托",ms:"Lesotho"}},
+  {code:"SZ",pt:90,names:{en:"Eswatini",ar:"إسواتيني",ru:"Эсватини",tj:"Эсватинӣ",id:"Eswatini",tr:"Esvatini",zh:"斯威士兰",ms:"Eswatini"}},
+  {code:"BW",pt:150,names:{en:"Botswana",ar:"بوتسوانا",ru:"Ботсвана",tj:"Ботсвана",id:"Botswana",tr:"Botsvana",zh:"博茨瓦纳",ms:"Botswana"}},
+  {code:"NA",pt:150,names:{en:"Namibia",ar:"ناميبيا",ru:"Намибия",tj:"Намибия",id:"Namibia",tr:"Namibya",zh:"纳米比亚",ms:"Namibia"}},
+  {code:"ER",pt:60,names:{en:"Eritrea",ar:"إريتريا",ru:"Эритрея",tj:"Эритрея",id:"Eritrea",tr:"Eritre",zh:"厄立特里亚",ms:"Eritrea"}},
+  {code:"SS",pt:55,names:{en:"South Sudan",ar:"جنوب السودان",ru:"Южный Судан",tj:"Судони Ҷанубӣ",id:"Sudan Selatan",tr:"Güney Sudan",zh:"南苏丹",ms:"Sudan Selatan"}},
+  {code:"TG",pt:70,names:{en:"Togo",ar:"توغو",ru:"Того",tj:"Того",id:"Togo",tr:"Togo",zh:"多哥",ms:"Togo"}},
+  {code:"BJ",pt:70,names:{en:"Benin",ar:"بنين",ru:"Бенин",tj:"Бенин",id:"Benin",tr:"Benin",zh:"贝宁",ms:"Benin"}},
+  {code:"LR",pt:65,names:{en:"Liberia",ar:"ليبيريا",ru:"Либерия",tj:"Либерия",id:"Liberia",tr:"Liberya",zh:"利比里亚",ms:"Liberia"}},
+  {code:"GQ",pt:150,names:{en:"Equatorial Guinea",ar:"غينيا الاستوائية",ru:"Экваториальная Гвинея",tj:"Гвинеяи Экватории",id:"Guinea Ekuatorial",tr:"Ekvator Ginesi",zh:"赤道几内亚",ms:"Guinea Khatulistiwa"}},
+  {code:"ST",pt:100,names:{en:"São Tomé and Príncipe",ar:"ساو تومي وبرينسيبي",ru:"Сан-Томе и Принсипи",tj:"Сан-Томе ва Принсипи",id:"São Tomé dan Príncipe",tr:"São Tomé ve Príncipe",zh:"圣多美和普林西比",ms:"São Tomé dan Príncipe"}},
+  {code:"CV",pt:150,names:{en:"Cape Verde",ar:"الرأس الأخضر",ru:"Кабо-Верде",tj:"Кабо-Верде",id:"Tanjung Verde",tr:"Yeşil Burun Adaları",zh:"佛得角",ms:"Cape Verde"}},
+  {code:"MU",pt:400,names:{en:"Mauritius",ar:"موريشيوس",ru:"Маврикий",tj:"Маврикий",id:"Mauritius",tr:"Mauritius",zh:"毛里求斯",ms:"Mauritius"}},
+  {code:"SC",pt:500,names:{en:"Seychelles",ar:"سيشل",ru:"Сейшелы",tj:"Сейшел",id:"Seychelles",tr:"Seyşeller",zh:"塞舌尔",ms:"Seychelles"}},
+
+  // ── South & Southeast Asia ───────────────────────────────────────────────────
+  {code:"PK",pt:100,names:{en:"Pakistan",ar:"باكستان",ru:"Пакистан",tj:"Покистон",id:"Pakistan",tr:"Pakistan",zh:"巴基斯坦",ms:"Pakistan"}},
+  {code:"BD",pt:80,names:{en:"Bangladesh",ar:"بنغلاديش",ru:"Бангладеш",tj:"Бангладеш",id:"Bangladesh",tr:"Bangladeş",zh:"孟加拉国",ms:"Bangladesh"}},
+  {code:"AF",pt:60,names:{en:"Afghanistan",ar:"أفغانستان",ru:"Афганистан",tj:"Афғонистон",id:"Afghanistan",tr:"Afganistan",zh:"阿富汗",ms:"Afghanistan"}},
+  {code:"IN",pt:120,names:{en:"India",ar:"الهند",ru:"Индия",tj:"Ҳиндустон",id:"India",tr:"Hindistan",zh:"印度",ms:"India"}},
+  {code:"ID",pt:150,names:{en:"Indonesia",ar:"إندونيسيا",ru:"Индонезия",tj:"Индонезия",id:"Indonesia",tr:"Endonezya",zh:"印度尼西亚",ms:"Indonesia"}},
+  {code:"MY",pt:350,names:{en:"Malaysia",ar:"ماليزيا",ru:"Малайзия",tj:"Малайзия",id:"Malaysia",tr:"Malezya",zh:"马来西亚",ms:"Malaysia"}},
+  {code:"PH",pt:130,names:{en:"Philippines",ar:"الفلبين",ru:"Филиппины",tj:"Филиппин",id:"Filipina",tr:"Filipinler",zh:"菲律宾",ms:"Filipina"}},
+  {code:"TH",pt:200,names:{en:"Thailand",ar:"تايلاند",ru:"Таиланд",tj:"Таиланд",id:"Thailand",tr:"Tayland",zh:"泰国",ms:"Thailand"}},
+  {code:"MM",pt:80,names:{en:"Myanmar",ar:"ميانمار",ru:"Мьянма",tj:"Мянма",id:"Myanmar",tr:"Myanmar",zh:"缅甸",ms:"Myanmar"}},
+  {code:"VN",pt:140,names:{en:"Vietnam",ar:"فيتنام",ru:"Вьетнам",tj:"Ветнам",id:"Vietnam",tr:"Vietnam",zh:"越南",ms:"Vietnam"}},
+  {code:"SG",pt:1200,names:{en:"Singapore",ar:"سنغافورة",ru:"Сингапур",tj:"Сингапур",id:"Singapura",tr:"Singapur",zh:"新加坡",ms:"Singapura"}},
+  {code:"BN",pt:600,names:{en:"Brunei",ar:"بروناي",ru:"Бруней",tj:"Бруней",id:"Brunei",tr:"Brunei",zh:"文莱",ms:"Brunei"}},
+  {code:"LK",pt:130,names:{en:"Sri Lanka",ar:"سريلانكا",ru:"Шри-Ланка",tj:"Шри-Ланка",id:"Sri Lanka",tr:"Sri Lanka",zh:"斯里兰卡",ms:"Sri Lanka"}},
+  {code:"NP",pt:70,names:{en:"Nepal",ar:"نيبال",ru:"Непал",tj:"Непал",id:"Nepal",tr:"Nepal",zh:"尼泊尔",ms:"Nepal"}},
+  {code:"BT",pt:100,names:{en:"Bhutan",ar:"بوتان",ru:"Бутан",tj:"Бутон",id:"Bhutan",tr:"Bhutan",zh:"不丹",ms:"Bhutan"}},
+  {code:"MV",pt:300,names:{en:"Maldives",ar:"جزر المالديف",ru:"Мальдивы",tj:"Малдив",id:"Maladewa",tr:"Maldivler",zh:"马尔代夫",ms:"Maldives"}},
+  {code:"KH",pt:90,names:{en:"Cambodia",ar:"كمبوديا",ru:"Камбоджа",tj:"Камбоҷа",id:"Kamboja",tr:"Kamboçya",zh:"柬埔寨",ms:"Kemboja"}},
+  {code:"LA",pt:90,names:{en:"Laos",ar:"لاوس",ru:"Лаос",tj:"Лаос",id:"Laos",tr:"Laos",zh:"老挝",ms:"Laos"}},
+  {code:"TL",pt:80,names:{en:"Timor-Leste",ar:"تيمور الشرقية",ru:"Восточный Тимор",tj:"Тимори Шарқӣ",id:"Timor-Leste",tr:"Doğu Timor",zh:"东帝汶",ms:"Timor-Leste"}},
+
+  // ── Central Asia & Caucasus ─────────────────────────────────────────────────
+  {code:"TJ",pt:80,names:{en:"Tajikistan",ar:"طاجيكستان",ru:"Таджикистан",tj:"Тоҷикистон",id:"Tajikistan",tr:"Tacikistan",zh:"塔吉克斯坦",ms:"Tajikistan"}},
+  {code:"UZ",pt:90,names:{en:"Uzbekistan",ar:"أوزبكستان",ru:"Узбекистан",tj:"Ӯзбекистон",id:"Uzbekistan",tr:"Özbekistan",zh:"乌兹别克斯坦",ms:"Uzbekistan"}},
+  {code:"KZ",pt:250,names:{en:"Kazakhstan",ar:"كازاخستان",ru:"Казахстан",tj:"Қазоқистон",id:"Kazakhstan",tr:"Kazakistan",zh:"哈萨克斯坦",ms:"Kazakhstan"}},
+  {code:"KG",pt:100,names:{en:"Kyrgyzstan",ar:"قيرغيزستان",ru:"Кыргызстан",tj:"Қирғизистон",id:"Kyrgyzstan",tr:"Kırgızistan",zh:"吉尔吉斯斯坦",ms:"Kyrgyzstan"}},
+  {code:"TM",pt:120,names:{en:"Turkmenistan",ar:"تركمانستان",ru:"Туркменистан",tj:"Туркманистон",id:"Turkmenistan",tr:"Türkmenistan",zh:"土库曼斯坦",ms:"Turkmenistan"}},
+  {code:"AZ",pt:200,names:{en:"Azerbaijan",ar:"أذربيجان",ru:"Азербайджан",tj:"Озарбойҷон",id:"Azerbaijan",tr:"Azerbaycan",zh:"阿塞拜疆",ms:"Azerbaijan"}},
+  {code:"GE",pt:200,names:{en:"Georgia",ar:"جورجيا",ru:"Грузия",tj:"Гурҷистон",id:"Georgia",tr:"Gürcistan",zh:"格鲁吉亚",ms:"Georgia"}},
+  {code:"AM",pt:200,names:{en:"Armenia",ar:"أرمينيا",ru:"Армения",tj:"Арманистон",id:"Armenia",tr:"Ermenistan",zh:"亚美尼亚",ms:"Armenia"}},
+
+  // ── Turkey & Balkans ─────────────────────────────────────────────────────────
+  {code:"TR",pt:350,names:{en:"Turkey",ar:"تركيا",ru:"Турция",tj:"Туркия",id:"Turki",tr:"Türkiye",zh:"土耳其",ms:"Turki"}},
+  {code:"AL",pt:200,names:{en:"Albania",ar:"ألبانيا",ru:"Албания",tj:"Албания",id:"Albania",tr:"Arnavutluk",zh:"阿尔巴尼亚",ms:"Albania"}},
+  {code:"BA",pt:250,names:{en:"Bosnia and Herzegovina",ar:"البوسنة والهرسك",ru:"Босния и Герцеговина",tj:"Босния ва Ҳерсеговина",id:"Bosnia dan Herzegovina",tr:"Bosna-Hersek",zh:"波斯尼亚和黑塞哥维那",ms:"Bosnia dan Herzegovina"}},
+  {code:"MK",pt:250,names:{en:"North Macedonia",ar:"مقدونيا الشمالية",ru:"Северная Македония",tj:"Македонияи Шимолӣ",id:"Makedonia Utara",tr:"Kuzey Makedonya",zh:"北马其顿",ms:"Macedonia Utara"}},
+  {code:"RS",pt:300,names:{en:"Serbia",ar:"صربيا",ru:"Сербия",tj:"Сербия",id:"Serbia",tr:"Sırbistan",zh:"塞尔维亚",ms:"Serbia"}},
+  {code:"ME",pt:300,names:{en:"Montenegro",ar:"الجبل الأسود",ru:"Черногория",tj:"Черногория",id:"Montenegro",tr:"Karadağ",zh:"黑山",ms:"Montenegro"}},
+  {code:"XK",pt:250,names:{en:"Kosovo",ar:"كوسوفو",ru:"Косово",tj:"Косово",id:"Kosovo",tr:"Kosova",zh:"科索沃",ms:"Kosovo"}},
+  {code:"BG",pt:350,names:{en:"Bulgaria",ar:"بلغاريا",ru:"Болгария",tj:"Булғория",id:"Bulgaria",tr:"Bulgaristan",zh:"保加利亚",ms:"Bulgaria"}},
+  {code:"HR",pt:450,names:{en:"Croatia",ar:"كرواتيا",ru:"Хорватия",tj:"Хорватия",id:"Kroasia",tr:"Hırvatistan",zh:"克罗地亚",ms:"Croatia"}},
+  {code:"SI",pt:550,names:{en:"Slovenia",ar:"سلوفينيا",ru:"Словения",tj:"Словения",id:"Slovenia",tr:"Slovenya",zh:"斯洛文尼亚",ms:"Slovenia"}},
+  {code:"SK",pt:500,names:{en:"Slovakia",ar:"سلوفاكيا",ru:"Словакия",tj:"Словакия",id:"Slowakia",tr:"Slovakya",zh:"斯洛伐克",ms:"Slovakia"}},
+  {code:"CZ",pt:550,names:{en:"Czech Republic",ar:"جمهورية التشيك",ru:"Чехия",tj:"Ҷумҳурии Чех",id:"Republik Ceko",tr:"Çek Cumhuriyeti",zh:"捷克共和国",ms:"Republik Czech"}},
+  {code:"HU",pt:450,names:{en:"Hungary",ar:"المجر",ru:"Венгрия",tj:"Венгрия",id:"Hungaria",tr:"Macaristan",zh:"匈牙利",ms:"Hungary"}},
+  {code:"RO",pt:350,names:{en:"Romania",ar:"رومانيا",ru:"Румыния",tj:"Руминия",id:"Rumania",tr:"Romanya",zh:"罗马尼亚",ms:"Romania"}},
+  {code:"PL",pt:400,names:{en:"Poland",ar:"بولندا",ru:"Польша",tj:"Лаҳистон",id:"Polandia",tr:"Polonya",zh:"波兰",ms:"Poland"}},
+  {code:"BY",pt:250,names:{en:"Belarus",ar:"بيلاروسيا",ru:"Беларусь",tj:"Беларус",id:"Belarusia",tr:"Beyaz Rusya",zh:"白俄罗斯",ms:"Belarus"}},
+  {code:"UA",pt:200,names:{en:"Ukraine",ar:"أوكرانيا",ru:"Украина",tj:"Украина",id:"Ukraina",tr:"Ukrayna",zh:"乌克兰",ms:"Ukraine"}},
+  {code:"MD",pt:200,names:{en:"Moldova",ar:"مولدوفا",ru:"Молдова",tj:"Молдова",id:"Moldova",tr:"Moldova",zh:"摩尔多瓦",ms:"Moldova"}},
+
+  // ── Russia & Eastern Europe ──────────────────────────────────────────────────
+  {code:"RU",pt:300,names:{en:"Russia",ar:"روسيا",ru:"Россия",tj:"Русия",id:"Rusia",tr:"Rusya",zh:"俄罗斯",ms:"Rusia"}},
+  {code:"EE",pt:600,names:{en:"Estonia",ar:"إستونيا",ru:"Эстония",tj:"Эстония",id:"Estonia",tr:"Estonya",zh:"爱沙尼亚",ms:"Estonia"}},
+  {code:"LV",pt:550,names:{en:"Latvia",ar:"لاتفيا",ru:"Латвия",tj:"Латвия",id:"Latvia",tr:"Letonya",zh:"拉脱维亚",ms:"Latvia"}},
+  {code:"LT",pt:550,names:{en:"Lithuania",ar:"ليتوانيا",ru:"Литва",tj:"Литва",id:"Lithuania",tr:"Litvanya",zh:"立陶宛",ms:"Lithuania"}},
+  {code:"FI",pt:900,names:{en:"Finland",ar:"فنلندا",ru:"Финляндия",tj:"Финляндия",id:"Finlandia",tr:"Finlandiya",zh:"芬兰",ms:"Finland"}},
+  {code:"SE",pt:950,names:{en:"Sweden",ar:"السويد",ru:"Швеция",tj:"Шветсия",id:"Swedia",tr:"İsveç",zh:"瑞典",ms:"Sweden"}},
+  {code:"NO",pt:1100,names:{en:"Norway",ar:"النرويج",ru:"Норвегия",tj:"Норвегия",id:"Norwegia",tr:"Norveç",zh:"挪威",ms:"Norway"}},
+  {code:"DK",pt:1000,names:{en:"Denmark",ar:"الدنمارك",ru:"Дания",tj:"Дания",id:"Denmark",tr:"Danimarka",zh:"丹麦",ms:"Denmark"}},
+
+  // ── Western Europe ───────────────────────────────────────────────────────────
+  {code:"DE",pt:900,names:{en:"Germany",ar:"ألمانيا",ru:"Германия",tj:"Олмон",id:"Jerman",tr:"Almanya",zh:"德国",ms:"Jerman"}},
+  {code:"FR",pt:850,names:{en:"France",ar:"فرنسا",ru:"Франция",tj:"Фаронса",id:"Prancis",tr:"Fransa",zh:"法国",ms:"Perancis"}},
+  {code:"GB",pt:1100,names:{en:"United Kingdom",ar:"المملكة المتحدة",ru:"Великобритания",tj:"Британияи Кабир",id:"Inggris",tr:"Birleşik Krallık",zh:"英国",ms:"United Kingdom"}},
+  {code:"NL",pt:900,names:{en:"Netherlands",ar:"هولندا",ru:"Нидерланды",tj:"Нидерланд",id:"Belanda",tr:"Hollanda",zh:"荷兰",ms:"Belanda"}},
+  {code:"BE",pt:850,names:{en:"Belgium",ar:"بلجيكا",ru:"Бельгия",tj:"Белгия",id:"Belgia",tr:"Belçika",zh:"比利时",ms:"Belgium"}},
+  {code:"AT",pt:800,names:{en:"Austria",ar:"النمسا",ru:"Австрия",tj:"Австрия",id:"Austria",tr:"Avusturya",zh:"奥地利",ms:"Austria"}},
+  {code:"CH",pt:1200,names:{en:"Switzerland",ar:"سويسرا",ru:"Швейцария",tj:"Швейтсария",id:"Swiss",tr:"İsviçre",zh:"瑞士",ms:"Switzerland"}},
+  {code:"ES",pt:650,names:{en:"Spain",ar:"إسبانيا",ru:"Испания",tj:"Испания",id:"Spanyol",tr:"İspanya",zh:"西班牙",ms:"Sepanyol"}},
+  {code:"PT",pt:600,names:{en:"Portugal",ar:"البرتغال",ru:"Португалия",tj:"Португалия",id:"Portugal",tr:"Portekiz",zh:"葡萄牙",ms:"Portugal"}},
+  {code:"IT",pt:700,names:{en:"Italy",ar:"إيطاليا",ru:"Италия",tj:"Италия",id:"Italia",tr:"İtalya",zh:"意大利",ms:"Itali"}},
+  {code:"GR",pt:550,names:{en:"Greece",ar:"اليونان",ru:"Греция",tj:"Юнон",id:"Yunani",tr:"Yunanistan",zh:"希腊",ms:"Greece"}},
+  {code:"IE",pt:900,names:{en:"Ireland",ar:"أيرلندا",ru:"Ирландия",tj:"Ирландия",id:"Irlandia",tr:"İrlanda",zh:"爱尔兰",ms:"Ireland"}},
+  {code:"LU",pt:1200,names:{en:"Luxembourg",ar:"لكسمبورغ",ru:"Люксембург",tj:"Люксембург",id:"Luksemburg",tr:"Lüksemburg",zh:"卢森堡",ms:"Luxembourg"}},
+  {code:"MT",pt:700,names:{en:"Malta",ar:"مالطا",ru:"Мальта",tj:"Малта",id:"Malta",tr:"Malta",zh:"马耳他",ms:"Malta"}},
+  {code:"CY",pt:650,names:{en:"Cyprus",ar:"قبرص",ru:"Кипр",tj:"Кипр",id:"Siprus",tr:"Kıbrıs",zh:"塞浦路斯",ms:"Cyprus"}},
+  {code:"IS",pt:1000,names:{en:"Iceland",ar:"آيسلندا",ru:"Исландия",tj:"Исландия",id:"Islandia",tr:"İzlanda",zh:"冰岛",ms:"Iceland"}},
+  {code:"LI",pt:1200,names:{en:"Liechtenstein",ar:"ليختنشتاين",ru:"Лихтенштейн",tj:"Лихтенштейн",id:"Liechtenstein",tr:"Lihtenştayn",zh:"列支敦士登",ms:"Liechtenstein"}},
+  {code:"MC",pt:1200,names:{en:"Monaco",ar:"موناكو",ru:"Монако",tj:"Монако",id:"Monako",tr:"Monako",zh:"摩纳哥",ms:"Monaco"}},
+  {code:"SM",pt:800,names:{en:"San Marino",ar:"سان مارينو",ru:"Сан-Марино",tj:"Сан-Марино",id:"San Marino",tr:"San Marino",zh:"圣马力诺",ms:"San Marino"}},
+  {code:"AD",pt:1000,names:{en:"Andorra",ar:"أندورا",ru:"Андорра",tj:"Андорра",id:"Andorra",tr:"Andorra",zh:"安道尔",ms:"Andorra"}},
+  {code:"VA",pt:1200,names:{en:"Vatican City",ar:"الفاتيكان",ru:"Ватикан",tj:"Ватикан",id:"Vatikan",tr:"Vatikan",zh:"梵蒂冈",ms:"Vatican"}},
+
+  // ── Americas ─────────────────────────────────────────────────────────────────
+  {code:"US",pt:1200,names:{en:"United States",ar:"الولايات المتحدة",ru:"США",tj:"Иёлоти Муттаҳида",id:"Amerika Serikat",tr:"Amerika Birleşik Devletleri",zh:"美国",ms:"Amerika Syarikat"}},
+  {code:"CA",pt:1100,names:{en:"Canada",ar:"كندا",ru:"Канада",tj:"Канада",id:"Kanada",tr:"Kanada",zh:"加拿大",ms:"Kanada"}},
+  {code:"MX",pt:250,names:{en:"Mexico",ar:"المكسيك",ru:"Мексика",tj:"Мексика",id:"Meksiko",tr:"Meksika",zh:"墨西哥",ms:"Mexico"}},
+  {code:"BR",pt:200,names:{en:"Brazil",ar:"البرازيل",ru:"Бразилия",tj:"Бразилия",id:"Brasil",tr:"Brezilya",zh:"巴西",ms:"Brazil"}},
+  {code:"AR",pt:200,names:{en:"Argentina",ar:"الأرجنتين",ru:"Аргентина",tj:"Аргентина",id:"Argentina",tr:"Arjantin",zh:"阿根廷",ms:"Argentina"}},
+  {code:"CO",pt:150,names:{en:"Colombia",ar:"كولومبيا",ru:"Колумбия",tj:"Колумбия",id:"Kolombia",tr:"Kolombiya",zh:"哥伦比亚",ms:"Colombia"}},
+  {code:"CL",pt:350,names:{en:"Chile",ar:"تشيلي",ru:"Чили",tj:"Чили",id:"Chili",tr:"Şili",zh:"智利",ms:"Chile"}},
+  {code:"PE",pt:150,names:{en:"Peru",ar:"بيرو",ru:"Перу",tj:"Перу",id:"Peru",tr:"Peru",zh:"秘鲁",ms:"Peru"}},
+  {code:"VE",pt:100,names:{en:"Venezuela",ar:"فنزويلا",ru:"Венесуэла",tj:"Венесуэла",id:"Venezuela",tr:"Venezuela",zh:"委内瑞拉",ms:"Venezuela"}},
+  {code:"EC",pt:150,names:{en:"Ecuador",ar:"الإكوادور",ru:"Эквадор",tj:"Эквадор",id:"Ekuador",tr:"Ekvador",zh:"厄瓜多尔",ms:"Ecuador"}},
+  {code:"BO",pt:120,names:{en:"Bolivia",ar:"بوليفيا",ru:"Боливия",tj:"Боливия",id:"Bolivia",tr:"Bolivya",zh:"玻利维亚",ms:"Bolivia"}},
+  {code:"PY",pt:150,names:{en:"Paraguay",ar:"باراغواي",ru:"Парагвай",tj:"Парагвай",id:"Paraguay",tr:"Paraguay",zh:"巴拉圭",ms:"Paraguay"}},
+  {code:"UY",pt:400,names:{en:"Uruguay",ar:"أوروغواي",ru:"Уругвай",tj:"Уругвай",id:"Uruguay",tr:"Uruguay",zh:"乌拉圭",ms:"Uruguay"}},
+  {code:"GY",pt:150,names:{en:"Guyana",ar:"غيانا",ru:"Гайана",tj:"Гайана",id:"Guyana",tr:"Guyana",zh:"圭亚那",ms:"Guyana"}},
+  {code:"SR",pt:150,names:{en:"Suriname",ar:"سورينام",ru:"Суринам",tj:"Суринам",id:"Suriname",tr:"Surinam",zh:"苏里南",ms:"Suriname"}},
+  {code:"TT",pt:400,names:{en:"Trinidad and Tobago",ar:"ترينيداد وتوباغو",ru:"Тринидад и Тобаго",tj:"Тринидад ва Тобаго",id:"Trinidad dan Tobago",tr:"Trinidad ve Tobago",zh:"特立尼达和多巴哥",ms:"Trinidad dan Tobago"}},
+  {code:"JM",pt:250,names:{en:"Jamaica",ar:"جامايكا",ru:"Ямайка",tj:"Ямайка",id:"Jamaika",tr:"Jamaika",zh:"牙买加",ms:"Jamaica"}},
+  {code:"HT",pt:80,names:{en:"Haiti",ar:"هايتي",ru:"Гаити",tj:"Гаити",id:"Haiti",tr:"Haiti",zh:"海地",ms:"Haiti"}},
+  {code:"DO",pt:200,names:{en:"Dominican Republic",ar:"جمهورية الدومينيكان",ru:"Доминиканская Республика",tj:"Ҷумҳурии Доминикан",id:"Republik Dominika",tr:"Dominik Cumhuriyeti",zh:"多米尼加共和国",ms:"Republik Dominican"}},
+  {code:"CU",pt:100,names:{en:"Cuba",ar:"كوبا",ru:"Куба",tj:"Куба",id:"Kuba",tr:"Küba",zh:"古巴",ms:"Cuba"}},
+  {code:"GT",pt:150,names:{en:"Guatemala",ar:"غواتيمالا",ru:"Гватемала",tj:"Гватемала",id:"Guatemala",tr:"Guatemala",zh:"危地马拉",ms:"Guatemala"}},
+  {code:"HN",pt:120,names:{en:"Honduras",ar:"هندوراس",ru:"Гондурас",tj:"Гондурас",id:"Honduras",tr:"Honduras",zh:"洪都拉斯",ms:"Honduras"}},
+  {code:"SV",pt:150,names:{en:"El Salvador",ar:"السلفادور",ru:"Сальвадор",tj:"Сальвадор",id:"El Salvador",tr:"El Salvador",zh:"萨尔瓦多",ms:"El Salvador"}},
+  {code:"NI",pt:100,names:{en:"Nicaragua",ar:"نيكاراغوا",ru:"Никарагуа",tj:"Никарагуа",id:"Nikaragua",tr:"Nikaragua",zh:"尼加拉瓜",ms:"Nicaragua"}},
+  {code:"CR",pt:300,names:{en:"Costa Rica",ar:"كوستاريكا",ru:"Коста-Рика",tj:"Коста-Рика",id:"Kosta Rika",tr:"Kosta Rika",zh:"哥斯达黎加",ms:"Costa Rica"}},
+  {code:"PA",pt:300,names:{en:"Panama",ar:"بنما",ru:"Панама",tj:"Панама",id:"Panama",tr:"Panama",zh:"巴拿马",ms:"Panama"}},
+  {code:"BB",pt:500,names:{en:"Barbados",ar:"بربادوس",ru:"Барбадос",tj:"Барбадос",id:"Barbados",tr:"Barbados",zh:"巴巴多斯",ms:"Barbados"}},
+  {code:"LC",pt:300,names:{en:"Saint Lucia",ar:"سانت لوسيا",ru:"Сент-Люсия",tj:"Сент-Люсия",id:"Saint Lucia",tr:"Saint Lucia",zh:"圣卢西亚",ms:"Saint Lucia"}},
+  {code:"VC",pt:250,names:{en:"Saint Vincent and the Grenadines",ar:"سانت فنسنت وجزر غرينادين",ru:"Сент-Винсент и Гренадины",tj:"Сент-Винсент ва Гренадина",id:"Saint Vincent dan Grenadines",tr:"Saint Vincent ve Grenadinler",zh:"圣文森特和格林纳丁斯",ms:"Saint Vincent dan Grenadines"}},
+  {code:"GD",pt:300,names:{en:"Grenada",ar:"غرينادا",ru:"Гренада",tj:"Гренада",id:"Grenada",tr:"Grenada",zh:"格林纳达",ms:"Grenada"}},
+  {code:"AG",pt:400,names:{en:"Antigua and Barbuda",ar:"أنتيغوا وباربودا",ru:"Антигуа и Барбуда",tj:"Антигуа ва Барбуда",id:"Antigua dan Barbuda",tr:"Antigua ve Barbuda",zh:"安提瓜和巴布达",ms:"Antigua dan Barbuda"}},
+  {code:"KN",pt:400,names:{en:"Saint Kitts and Nevis",ar:"سانت كيتس ونيفيس",ru:"Сент-Китс и Невис",tj:"Сент-Китс ва Невис",id:"Saint Kitts dan Nevis",tr:"Saint Kitts ve Nevis",zh:"圣基茨和尼维斯",ms:"Saint Kitts dan Nevis"}},
+  {code:"DM",pt:300,names:{en:"Dominica",ar:"دومينيكا",ru:"Доминика",tj:"Доминика",id:"Dominika",tr:"Dominika",zh:"多米尼克",ms:"Dominica"}},
+  {code:"BS",pt:500,names:{en:"The Bahamas",ar:"جزر البهاما",ru:"Багамские острова",tj:"Баҳама",id:"Bahama",tr:"Bahamalar",zh:"巴哈马",ms:"Bahamas"}},
+  {code:"BZ",pt:200,names:{en:"Belize",ar:"بليز",ru:"Белиз",tj:"Белиз",id:"Belize",tr:"Belize",zh:"伯利兹",ms:"Belize"}},
+
+  // ── East Asia & Pacific ──────────────────────────────────────────────────────
+  {code:"CN",pt:300,names:{en:"China",ar:"الصين",ru:"Китай",tj:"Чин",id:"Tiongkok",tr:"Çin",zh:"中国",ms:"China"}},
+  {code:"JP",pt:800,names:{en:"Japan",ar:"اليابان",ru:"Япония",tj:"Япония",id:"Jepang",tr:"Japonya",zh:"日本",ms:"Jepun"}},
+  {code:"KR",pt:700,names:{en:"South Korea",ar:"كوريا الجنوبية",ru:"Южная Корея",tj:"Кореяи Ҷанубӣ",id:"Korea Selatan",tr:"Güney Kore",zh:"韩国",ms:"Korea Selatan"}},
+  {code:"KP",pt:60,names:{en:"North Korea",ar:"كوريا الشمالية",ru:"Северная Корея",tj:"Кореяи Шимолӣ",id:"Korea Utara",tr:"Kuzey Kore",zh:"朝鲜",ms:"Korea Utara"}},
+  {code:"MN",pt:150,names:{en:"Mongolia",ar:"منغوليا",ru:"Монголия",tj:"Муғулистон",id:"Mongolia",tr:"Moğolistan",zh:"蒙古",ms:"Mongolia"}},
+  {code:"AU",pt:1000,names:{en:"Australia",ar:"أستراليا",ru:"Австралия",tj:"Австралия",id:"Australia",tr:"Avustralya",zh:"澳大利亚",ms:"Australia"}},
+  {code:"NZ",pt:900,names:{en:"New Zealand",ar:"نيوزيلندا",ru:"Новая Зеландия",tj:"Зеландияи Нав",id:"Selandia Baru",tr:"Yeni Zelanda",zh:"新西兰",ms:"New Zealand"}},
+  {code:"FJ",pt:200,names:{en:"Fiji",ar:"فيجي",ru:"Фиджи",tj:"Фиҷи",id:"Fiji",tr:"Fiji",zh:"斐济",ms:"Fiji"}},
+  {code:"PG",pt:120,names:{en:"Papua New Guinea",ar:"بابوا غينيا الجديدة",ru:"Папуа — Новая Гвинея",tj:"Папуа Гвинеяи Нав",id:"Papua Nugini",tr:"Papua Yeni Gine",zh:"巴布亚新几内亚",ms:"Papua New Guinea"}},
+  {code:"WS",pt:150,names:{en:"Samoa",ar:"ساموا",ru:"Самоа",tj:"Самоа",id:"Samoa",tr:"Samoa",zh:"萨摩亚",ms:"Samoa"}},
+  {code:"TO",pt:150,names:{en:"Tonga",ar:"تونغا",ru:"Тонга",tj:"Тонга",id:"Tonga",tr:"Tonga",zh:"汤加",ms:"Tonga"}},
+  {code:"VU",pt:120,names:{en:"Vanuatu",ar:"فانواتو",ru:"Вануату",tj:"Вануату",id:"Vanuatu",tr:"Vanuatu",zh:"瓦努阿图",ms:"Vanuatu"}},
+  {code:"SB",pt:120,names:{en:"Solomon Islands",ar:"جزر سليمان",ru:"Соломоновы острова",tj:"Ҷазираҳои Соломон",id:"Kepulauan Solomon",tr:"Solomon Adaları",zh:"所罗门群岛",ms:"Kepulauan Solomon"}},
+  {code:"KI",pt:100,names:{en:"Kiribati",ar:"كيريباتي",ru:"Кирибати",tj:"Кирибатӣ",id:"Kiribati",tr:"Kiribati",zh:"基里巴斯",ms:"Kiribati"}},
+  {code:"FM",pt:150,names:{en:"Micronesia",ar:"ميكرونيزيا",ru:"Микронезия",tj:"Микронезия",id:"Mikronesia",tr:"Mikronezya",zh:"密克罗尼西亚",ms:"Micronesia"}},
+  {code:"PW",pt:250,names:{en:"Palau",ar:"بالاو",ru:"Палау",tj:"Палау",id:"Palau",tr:"Palau",zh:"帕劳",ms:"Palau"}},
+  {code:"MH",pt:150,names:{en:"Marshall Islands",ar:"جزر مارشال",ru:"Маршалловы острова",tj:"Ҷазираҳои Маршал",id:"Kepulauan Marshall",tr:"Marshall Adaları",zh:"马绍尔群岛",ms:"Kepulauan Marshall"}},
+  {code:"NR",pt:200,names:{en:"Nauru",ar:"ناورو",ru:"Науру",tj:"Науру",id:"Nauru",tr:"Nauru",zh:"瑙鲁",ms:"Nauru"}},
+  {code:"TV",pt:150,names:{en:"Tuvalu",ar:"توفالو",ru:"Тувалу",tj:"Тувалу",id:"Tuvalu",tr:"Tuvalu",zh:"图瓦卢",ms:"Tuvalu"}},
+];
+
+const GROUPS_ORDER=[
+  {label:'Arab World',codes:['SA','AE','QA','KW','BH','OM','JO','LB','SY','IQ','YE','PS','EG','MA','TN','DZ','LY','SD','MR','SO','DJ','KM','TD']},
+  {label:'Sub-Saharan Africa',codes:['NG','GH','SN','ET','ML','BF','NE','GN','SL','GM','GW','MZ','TZ','KE','UG','RW','BI','MW','ZM','ZW','MG','CI','CM','GA','CG','CD','CF','AO','ZA','LS','SZ','BW','NA','ER','SS','TG','BJ','LR','GQ','ST','CV','MU','SC']},
+  {label:'South & SE Asia',codes:['PK','BD','AF','IN','ID','MY','PH','TH','MM','VN','SG','BN','LK','NP','BT','MV','KH','LA','TL']},
+  {label:'Central Asia & Caucasus',codes:['TJ','UZ','KZ','KG','TM','AZ','GE','AM']},
+  {label:'Turkey & Balkans',codes:['TR','AL','BA','MK','RS','ME','XK','BG','HR','SI','SK','CZ','HU','RO','PL','BY','UA','MD']},
+  {label:'Russia & Eastern Europe',codes:['RU','EE','LV','LT','FI','SE','NO','DK']},
+  {label:'Western Europe',codes:['DE','FR','GB','NL','BE','AT','CH','ES','PT','IT','GR','IE','LU','MT','CY','IS','LI','MC','SM','AD','VA']},
+  {label:'Americas',codes:['US','CA','MX','BR','AR','CO','CL','PE','VE','EC','BO','PY','UY','GY','SR','TT','JM','HT','DO','CU','GT','HN','SV','NI','CR','PA','BB','LC','VC','GD','AG','KN','DM','BS','BZ']},
+  {label:'East Asia & Pacific',codes:['CN','JP','KR','KP','MN','AU','NZ','FJ','PG','WS','TO','VU','SB','KI','FM','PW','MH','NR','TV']},
+];
+
+function buildCountrySelect(){
+  const sel=document.getElementById('f-country');
+  const prev=sel.value;
+  const lang=currentLang||'en';
+  const idx=Object.fromEntries(COUNTRIES.map(c=>[c.code,c]));
+  sel.innerHTML='';
+  GROUPS_ORDER.forEach(g=>{
+    const og=document.createElement('optgroup');
+    og.label=g.label;
+    g.codes.forEach(code=>{
+      const c=idx[code];if(!c)return;
+      const opt=document.createElement('option');
+      opt.value=code;
+      opt.textContent=flag(code)+' '+(c.names[lang]||c.names.en);
+      og.appendChild(opt);
+    });
+    sel.appendChild(og);
+  });
+  if(prev&&[...sel.options].some(o=>o.value===prev)){sel.value=prev;}
+  else{sel.value='EG';}
+}
+
+const POVERTY={default:200,AE:800,UAE:800,SA:600,QA:900,KW:700,BH:500,OM:450,JO:200,LB:150,IQ:120,SY:80,YE:60,PS:100,EG:120,MA:130,TN:160,DZ:140,LY:200,SD:70,SO:50,NG:70,GH:90,SN:80,ML:55,NE:50,TD:50,ET:55,KE:110,TZ:65,UG:60,MZ:55,PK:100,BD:80,AF:60,NP:70,IN:120,LK:130,ID:150,MY:350,PH:130,TH:200,MM:80,KH:90,VN:140,TJ:80,UZ:90,KG:100,KZ:250,TM:120,AZ:200,DE:900,FR:850,GB:1100,UK:1100,NL:900,BE:850,SE:950,NO:1100,IT:700,ES:650,TR:350,RU:300,US:1200,CA:1100,AU:1000,MR:80,DJ:120,KM:100,BF:65,GN:70,SL:60,GM:70,GW:60,RW:70,BI:50,MW:55,ZM:70,ZW:75,MG:60,CI:90,CM:80,GA:150,CG:90,CD:55,CF:50,AO:90,ZA:200,LS:80,SZ:90,BW:150,NA:150,ER:60,SS:55,TG:70,BJ:70,LR:65,GQ:150,ST:100,CV:150,MU:400,SC:500,SG:1200,BN:600,BT:100,MV:300,LA:90,TL:80,GE:200,AM:200,AL:200,BA:250,MK:250,RS:300,ME:300,XK:250,BG:350,HR:450,SI:550,SK:500,CZ:550,HU:450,RO:350,PL:400,BY:250,UA:200,MD:200,EE:600,LV:550,LT:550,FI:900,DK:1000,AT:800,CH:1200,PT:600,GR:550,IE:900,LU:1200,MT:700,CY:650,IS:1000,LI:1200,MC:1200,SM:800,AD:1000,VA:1200,MX:250,BR:200,AR:200,CO:150,CL:350,PE:150,VE:100,EC:150,BO:120,PY:150,UY:400,GY:150,SR:150,TT:400,JM:250,HT:80,DO:200,CU:100,GT:150,HN:120,SV:150,NI:100,CR:300,PA:300,BB:500,LC:300,VC:250,GD:300,AG:400,KN:400,DM:300,BS:500,BZ:200,CN:300,JP:800,KR:700,KP:60,MN:150,NZ:900,FJ:200,PG:120,WS:150,TO:150,VU:120,SB:120,KI:100,FM:150,PW:250,MH:150,NR:200,TV:150};
 function pl(c){return POVERTY[c.toUpperCase()]||POVERTY.default;}
 function sInc(p){const pv=pl(p.country),pc=p.income/Math.max(p.fam,1),r=pv>0?pc/pv:0;let b=0;if(p.noInc>=3||p.income===0)b=20;else if(r<=.10)b=19;else if(r<=.20)b=17;else if(r<=.35)b=14;else if(r<=.50)b=10;else if(r<=.75)b=6;else if(r<=1)b=2;else if(r<=1.5)b=.5;if(p.expenses>p.income&&p.income>0){const dr=(p.expenses-p.income)/p.expenses;b=Math.min(20,b+dr*4);}if(p.foodIns)b=Math.min(20,b+2);return Math.min(20,b);}
 function sAst(p){const s={none:10,minimal:7,moderate:3,above_nisab:0}[p.asset]||0;return Math.min(10,s+(p.soldAst?2:0));}
@@ -1644,6 +1861,7 @@ function renderExamples(){
   document.getElementById('langName').textContent=lm[1];
   setLang(savedLang);
   renderExamples();
+  buildCountrySelect();
   liveUpdate();
 })();
 </script>
