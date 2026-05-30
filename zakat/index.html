@@ -277,8 +277,8 @@ footer a{color:var(--gold);text-decoration:none}
     <div class="field">
       <label data-t="cash_lbl">Cash &amp; Bank Savings</label>
       <div class="input-row">
-        <input type="number" id="cash" min="0" step="0.01" placeholder="0" data-t-placeholder="amount_ph">
-        <span class="unit">USD</span>
+        <input type="number" id="cash" min="0" step="0.01" placeholder="0" data-t="amount_ph">
+        <span class="unit" data-t="amount_unit">USD</span>
       </div>
     </div>
 
@@ -304,8 +304,8 @@ footer a{color:var(--gold);text-decoration:none}
     <div class="field">
       <label data-t="inventory_lbl">Business Inventory</label>
       <div class="input-row">
-        <input type="number" id="inventory" min="0" step="0.01" placeholder="0" data-t-placeholder="amount_ph">
-        <span class="unit">USD</span>
+        <input type="number" id="inventory" min="0" step="0.01" placeholder="0" data-t="amount_ph">
+        <span class="unit" data-t="amount_unit">USD</span>
       </div>
       <div class="field-hint" data-t="inventory_hint">Market value of goods held for trade</div>
     </div>
@@ -313,8 +313,8 @@ footer a{color:var(--gold);text-decoration:none}
     <div class="field">
       <label data-t="investments_lbl">Investments &amp; Stocks</label>
       <div class="input-row">
-        <input type="number" id="investments" min="0" step="0.01" placeholder="0" data-t-placeholder="amount_ph">
-        <span class="unit">USD</span>
+        <input type="number" id="investments" min="0" step="0.01" placeholder="0" data-t="amount_ph">
+        <span class="unit" data-t="amount_unit">USD</span>
       </div>
       <div class="field-hint" data-t="investments_hint">Current market value of shares, funds, or other investments</div>
     </div>
@@ -322,8 +322,8 @@ footer a{color:var(--gold);text-decoration:none}
     <div class="field">
       <label data-t="receivables_lbl">Money Owed to You (Receivables)</label>
       <div class="input-row">
-        <input type="number" id="receivables" min="0" step="0.01" placeholder="0" data-t-placeholder="amount_ph">
-        <span class="unit">USD</span>
+        <input type="number" id="receivables" min="0" step="0.01" placeholder="0" data-t="amount_ph">
+        <span class="unit" data-t="amount_unit">USD</span>
       </div>
       <div class="field-hint" data-t="receivables_hint">Debts others owe you that you expect to be repaid</div>
     </div>
@@ -344,8 +344,8 @@ footer a{color:var(--gold);text-decoration:none}
     <div class="field">
       <label data-t="debts_lbl">Outstanding Debts You Owe</label>
       <div class="input-row">
-        <input type="number" id="debts" min="0" step="0.01" placeholder="0" data-t-placeholder="amount_ph">
-        <span class="unit">USD</span>
+        <input type="number" id="debts" min="0" step="0.01" placeholder="0" data-t="amount_ph">
+        <span class="unit" data-t="amount_unit">USD</span>
       </div>
       <div class="field-hint" data-t="debts_hint">Loans, credit card balances, or other debts due within the year</div>
     </div>
@@ -353,8 +353,8 @@ footer a{color:var(--gold);text-decoration:none}
     <div class="field">
       <label data-t="expenses_lbl">Monthly Living Expenses (×1)</label>
       <div class="input-row">
-        <input type="number" id="expenses" min="0" step="0.01" placeholder="0" data-t-placeholder="amount_ph">
-        <span class="unit">USD</span>
+        <input type="number" id="expenses" min="0" step="0.01" placeholder="0" data-t="amount_ph">
+        <span class="unit" data-t="amount_unit">USD</span>
       </div>
       <div class="field-hint" data-t="expenses_hint">One month of essential living costs (rent, food, utilities)</div>
     </div>
@@ -376,16 +376,16 @@ footer a{color:var(--gold);text-decoration:none}
       <div class="field">
         <label data-t="rain_lbl">Rain-watered Crops Value</label>
         <div class="input-row">
-          <input type="number" id="rainCrops" min="0" step="0.01" placeholder="0" data-t-placeholder="amount_ph">
-          <span class="unit">USD</span>
+          <input type="number" id="rainCrops" min="0" step="0.01" placeholder="0" data-t="amount_ph">
+          <span class="unit" data-t="amount_unit">USD</span>
         </div>
         <div class="field-hint" data-t="rain_hint">Rate: 10% ('ushr)</div>
       </div>
       <div class="field">
         <label data-t="irrig_lbl">Irrigated Crops Value</label>
         <div class="input-row">
-          <input type="number" id="irrigCrops" min="0" step="0.01" placeholder="0" data-t-placeholder="amount_ph">
-          <span class="unit">USD</span>
+          <input type="number" id="irrigCrops" min="0" step="0.01" placeholder="0" data-t="amount_ph">
+          <span class="unit" data-t="amount_unit">USD</span>
         </div>
         <div class="field-hint" data-t="irrig_hint">Rate: 5% (half 'ushr)</div>
       </div>
@@ -599,7 +599,11 @@ const translations = {
     verdict_sub_no: "Your net assets are below the nisab threshold. Zakat is not obligatory this year.",
     agri_zakat_text: "Rain-watered crops Zakat: {rain} | Irrigated crops Zakat: {irrig} | Total Agricultural Zakat: {total}",
     livestock_text: "You have declared livestock. Livestock Zakat follows specific scholarly tables. Please consult a qualified scholar to determine the exact amount.",
-    amount_unit: "USD"
+    amount_unit: "USD",
+    nisab_gold_short: "gold",
+    nisab_silver_short: "silver",
+    nisab_gold_fmt: "85g gold ≈ $",
+    nisab_silver_fmt: "595g silver ≈ $"
   },
   ar: {
     nav_back: "← الموقع الرئيسي",
@@ -687,7 +691,11 @@ const translations = {
     verdict_sub_no: "أصولك الصافية أقل من حد النصاب. الزكاة غير واجبة هذا العام.",
     agri_zakat_text: "زكاة المحاصيل المطرية: {rain} | زكاة المحاصيل المروية: {irrig} | إجمالي زكاة الزراعة: {total}",
     livestock_text: "لديك مواشٍ مُعلنة. تتبع زكاة المواشي جداول علمية خاصة. يرجى استشارة عالم مؤهل لتحديد المبلغ الدقيق.",
-    amount_unit: "دولار"
+    amount_unit: "دولار",
+    nisab_gold_short: "ذهب",
+    nisab_silver_short: "فضة",
+    nisab_gold_fmt: "85 جرام ذهب ≈ $",
+    nisab_silver_fmt: "595 جرام فضة ≈ $"
   },
   ru: {
     nav_back: "← На главную",
@@ -775,7 +783,11 @@ const translations = {
     verdict_sub_no: "Ваши чистые активы ниже порога нисаба. Закят в этом году не обязателен.",
     agri_zakat_text: "Закят с дождевых культур: {rain} | Закят с поливных: {irrig} | Итого закят с урожая: {total}",
     livestock_text: "Вы указали скот. Закят со скота рассчитывается по специальным таблицам. Обратитесь к учёному для точного определения суммы.",
-    amount_unit: "USD"
+    amount_unit: "USD",
+    nisab_gold_short: "золото",
+    nisab_silver_short: "серебро",
+    nisab_gold_fmt: "85 г золота ≈ $",
+    nisab_silver_fmt: "595 г серебра ≈ $"
   },
   tj: {
     nav_back: "← Сайти асосӣ",
@@ -863,7 +875,11 @@ const translations = {
     verdict_sub_no: "Дороиҳои холиси шумо аз ҳадди нисоб кам аст. Закот вoҷиб нест.",
     agri_zakat_text: "Закоти зироатҳои борон: {rain} | Закоти зироатҳои обёришуда: {irrig} | Ҷамъи закоти зироат: {total}",
     livestock_text: "Шумо чорво эълон кардед. Закоти чорво тибқи ҷадвалҳои олимон ҳисоб мешавад. Барои маблағи дақиқ ба олим муроҷиат кунед.",
-    amount_unit: "USD"
+    amount_unit: "USD",
+    nisab_gold_short: "тилло",
+    nisab_silver_short: "нуқра",
+    nisab_gold_fmt: "85 г тилло ≈ $",
+    nisab_silver_fmt: "595 г нуқра ≈ $"
   },
   id: {
     nav_back: "← Situs Utama",
@@ -951,7 +967,11 @@ const translations = {
     verdict_sub_no: "Aset bersih Anda di bawah batas nisab. Zakat belum wajib tahun ini.",
     agri_zakat_text: "Zakat tanaman tadah hujan: {rain} | Zakat tanaman irigasi: {irrig} | Total Zakat Pertanian: {total}",
     livestock_text: "Anda memiliki ternak yang dideklarasikan. Zakat ternak mengikuti tabel khusus para ulama. Konsultasikan kepada ulama untuk menentukan jumlah yang tepat.",
-    amount_unit: "USD"
+    amount_unit: "USD",
+    nisab_gold_short: "emas",
+    nisab_silver_short: "perak",
+    nisab_gold_fmt: "85g emas ≈ $",
+    nisab_silver_fmt: "595g perak ≈ $"
   },
   tr: {
     nav_back: "← Ana Sayfa",
@@ -1039,7 +1059,11 @@ const translations = {
     verdict_sub_no: "Net varlıklarınız nisap eşiğinin altında. Bu yıl zekât zorunlu değil.",
     agri_zakat_text: "Yağmur sulanan ürün zekâtı: {rain} | Suni sulanan ürün zekâtı: {irrig} | Toplam Tarım Zekâtı: {total}",
     livestock_text: "Hayvan bildirdiniz. Hayvan zekâtı özel âlim tablolarına göre hesaplanır. Kesin miktarı belirlemek için âlime danışın.",
-    amount_unit: "USD"
+    amount_unit: "USD",
+    nisab_gold_short: "altın",
+    nisab_silver_short: "gümüş",
+    nisab_gold_fmt: "85g altın ≈ $",
+    nisab_silver_fmt: "595g gümüş ≈ $"
   },
   zh: {
     nav_back: "← 主页",
@@ -1127,7 +1151,11 @@ const translations = {
     verdict_sub_no: "您的净资产低于尼沙布门槛。今年无需缴纳天课。",
     agri_zakat_text: "雨水灌溉天课: {rain} | 人工灌溉天课: {irrig} | 农业天课总计: {total}",
     livestock_text: "您申报了牲畜。牲畜天课按照特定学者表格计算。请咨询学者确定确切金额。",
-    amount_unit: "美元"
+    amount_unit: "美元",
+    nisab_gold_short: "黄金",
+    nisab_silver_short: "白银",
+    nisab_gold_fmt: "85克黄金 ≈ $",
+    nisab_silver_fmt: "595克白银 ≈ $"
   },
   ms: {
     nav_back: "← Laman Utama",
@@ -1215,7 +1243,11 @@ const translations = {
     verdict_sub_no: "Aset bersih anda di bawah had nisab. Zakat tidak wajib tahun ini.",
     agri_zakat_text: "Zakat tanaman tadah hujan: {rain} | Zakat tanaman beririgasi: {irrig} | Jumlah Zakat Pertanian: {total}",
     livestock_text: "Anda telah mengisytiharkan ternakan. Zakat ternakan mengikuti jadual ulama yang khusus. Rujuk ulama untuk menentukan jumlah yang tepat.",
-    amount_unit: "USD"
+    amount_unit: "USD",
+    nisab_gold_short: "emas",
+    nisab_silver_short: "perak",
+    nisab_gold_fmt: "85g emas ≈ $",
+    nisab_silver_fmt: "595g perak ≈ $"
   }
 };
 
