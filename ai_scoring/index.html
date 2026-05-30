@@ -1348,6 +1348,7 @@ function setLang(l){
   });
   localStorage.setItem('amLang',l);
   liveUpdate();
+  renderExamples();
 }
 function toggleLangDrop(){
   const d=document.getElementById('langDrop');
@@ -1569,31 +1570,64 @@ function restartCalc(){
 
 // ── EXAMPLES ─────────────────────────────────────────────────────────────────
 const EXAMPLES=[
-  {name:"Umm Khalid Al-Halabi",loc:"Gaziantep, TR",score:82,tier:"CRITICAL",cats:["Al-Masakin — Destitute: zero income, no assets","Al-Fuqara — Large family (5+), sole breadwinner","Ibn Al-Sabil — Refugee / conflict-zone resident","Al-Masakin — Food-insecure household"]},
-  {name:"Hassan Abu Daoud",loc:"Amman, JO",score:68,tier:"HIGH",cats:["Al-Gharimin — Crushing debt (>2 years income)","Al-Fuqara — Large family, sole breadwinner","Al-Masakin — Food-insecure household"]},
-  {name:"Dawud Petersen",loc:"Berlin, DE",score:71,tier:"HIGH",cats:["Al-Muallafah — New Muslim convert (≤3 years)","Al-Masakin — Destitute, zero income","Al-Fuqara — Single parent below poverty"]},
-  {name:"Fatima Z.",loc:"Kuala Lumpur, MY",score:72.5,tier:"HIGH",cats:["Al-Riqab — Trafficking / forced labour survivor","Al-Masakin — Chronically ill, no healthcare"]},
-  {name:"Ibrahim Al-Mauritani",loc:"Fes, MA",score:43,tier:"LOW",cats:["Fi Sabilillah — Full-time Islamic sciences student","Al-Fuqara — Below poverty line"]},
-  {name:"Yusuf Nazarov",loc:"Khatlon, TJ",score:73.5,tier:"HIGH",cats:["Al-Fuqara — Disabled, sole breadwinner","Al-Gharimin — Heavy debt burden","Al-Masakin — Food-insecure household"]},
-  {name:"Aigerim Bekova",loc:"Almaty, KZ",score:78,tier:"HIGH",cats:["Al-Masakin — Destitute, zero income","Al-Fuqara — Widow, sole breadwinner","Ibn Al-Sabil — Disaster displaced"]},
-  {name:"Khadijah Bint Yusuf",loc:"Kano, NG",score:57,tier:"MEDIUM",cats:["Al-Masakin — Elderly forced to work","Al-Masakin — Chronically ill, no healthcare"]},
-  {name:"Siti Rahma",loc:"Surabaya, ID",score:43.7,tier:"LOW",cats:["Al-Fuqara — Single mother below poverty","Al-Fuqara — Student from low-income family"]},
-  {name:"Unknown Applicant",loc:"Dubai, AE",score:0,tier:"INELIGIBLE",cats:["⚠ 7 fraud flags detected — penalty: −90 pts"]}
+  // 1. Turkish widow — Turkish name, Istanbul
+  {name:"Fatma Yılmaz",loc:"Istanbul, TR",score:82,tier:"CRITICAL",
+   cats:{en:["Al-Masakin — Destitute: zero income, no assets","Al-Fuqara — Widow, 4 children, sole provider","Al-Masakin — Food-insecure household"],ru:["Аль-Масакин — Нищета: нет дохода","Аль-Фукара — Вдова, 4 ребёнка, кормилец","Ибн Ас-Сабиль — Незащищённое жильё"],ar:["المساكين — معدمة: بلا دخل","الفقراء — أرملة، 4 أطفال، عائل","المساكين — أسرة تعاني من انعدام الأمن الغذائي"],tj:["Ал-Масокин — Фақир: даромад надорад","Ал-Фукаро — Бева, 4 фарзанд","Ал-Масокин — Оилаи гуруснагӣ"],id:["Al-Masakin — Miskin: tanpa penghasilan","Al-Fuqara — Janda, 4 anak, tulang punggung","Al-Masakin — Rumah tangga rawan pangan"],tr:["Mesakin — Yoksul: gelir yok","Fukara — Dul, 4 çocuk, tek geçimlik","Mesakin — Gıda güvensizliği olan hane"],zh:["贫困者—赤贫：无收入","贫困者—寡妇，4个孩子，唯一供养者","贫困者—食物不安全家庭"],ms:["Al-Masakin — Miskin: tiada pendapatan","Al-Fuqara — Balu, 4 anak, pencari nafkah","Al-Masakin — Isi rumah tidak selamat makanan"]}},
+  // 2. Jordanian with debt — Arabic name, Amman
+  {name:"Ahmad Al-Khalidi",loc:"Amman, JO",score:68,tier:"HIGH",
+   cats:{en:["Al-Gharimin — Crushing debt (>2 years income)","Al-Fuqara — Large family, sole breadwinner","Al-Masakin — Food-insecure household"],ru:["Аль-Гаримин — Долговой кризис (>2 лет дохода)","Аль-Фукара — Большая семья, кормилец","Аль-Масакин — Нехватка продовольствия"],ar:["الغارمين — ديون ثقيلة (أكثر من سنتي دخل)","الفقراء — أسرة كبيرة، عائل وحيد","المساكين — أسرة غير آمنة غذائياً"],tj:["Ал-Ғоримин — Қарзи вазнин","Ал-Фукаро — Оилаи бузург, танҳо нон овар","Ал-Масокин — Норасоии хӯрок"],id:["Al-Gharimin — Lilitan hutang berat","Al-Fuqara — Keluarga besar, tulang punggung","Al-Masakin — Rawan pangan"],tr:["Garimun — Bunaltıcı borç yükü","Fukara — Kalabalık aile, tek geçimlik","Mesakin — Gıda güvensizliği"],zh:["负债者—沉重债务（超2年收入）","贫困者—大家庭，唯一供养者","贫困者—食物不安全家庭"],ms:["Al-Gharimin — Beban hutang teruk","Al-Fuqara — Keluarga besar, pencari nafkah tunggal","Al-Masakin — Rawan makanan"]}},
+  // 3. German convert — Western name, Berlin
+  {name:"Dawud Petersen",loc:"Berlin, DE",score:71,tier:"HIGH",
+   cats:{en:["Al-Muallafah — New Muslim convert (≤3 years)","Al-Masakin — Destitute, zero income","Al-Fuqara — Single parent below poverty line"],ru:["Аль-Муаллафа — Новообращённый мусульманин (≤3 года)","Аль-Масакин — Без дохода","Аль-Фукара — Одинокий родитель ниже черты бедности"],ar:["المؤلفة — مسلم جديد (3 سنوات فأقل)","المساكين — معدم، بلا دخل","الفقراء — والد/والدة منفردة تحت خط الفقر"],tj:["Ал-Муаллафа — Мусулмони нав (≤3 сол)","Ал-Масокин — Бе даромад","Ал-Фукаро — Падар/модари танҳо"],id:["Al-Muallafah — Mualaf baru (≤3 tahun)","Al-Masakin — Miskin, tanpa penghasilan","Al-Fuqara — Orang tua tunggal di bawah garis kemiskinan"],tr:["Müellefe — Yeni Müslüman (≤3 yıl)","Mesakin — Yoksul, gelir yok","Fukara — Yoksulluk sınırı altında tek ebeveyn"],zh:["穆阿利法—新穆斯林（≤3年）","贫困者—赤贫，无收入","贫困者—贫困线以下单亲"],ms:["Al-Muallafah — Mualaf baru (≤3 tahun)","Al-Masakin — Miskin, tiada pendapatan","Al-Fuqara — Ibu/bapa tunggal di bawah garis kemiskinan"]}},
+  // 4. Malaysian trafficking survivor — Malay name
+  {name:"Nurul Ain Binti Rashid",loc:"Kuala Lumpur, MY",score:72.5,tier:"HIGH",
+   cats:{en:["Al-Riqab — Trafficking / forced labour survivor","Al-Masakin — Chronically ill, no healthcare access"],ru:["Аль-Рикаб — Жертва торговли людьми","Аль-Масакин — Хронически больной без доступа к медпомощи"],ar:["الرقاب — ناجية من الاتجار بالبشر","المساكين — مريضة مزمنة بلا رعاية صحية"],tj:["Ал-Риқоб — Жабрдидаи қочоқии одамон","Ал-Масокин — Бемори музмин бе тандурустӣ"],id:["Al-Riqab — Korban perdagangan manusia","Al-Masakin — Penyakit kronis, tanpa akses kesehatan"],tr:["Rikab — İnsan ticareti mağduru","Mesakin — Kronik hasta, sağlık erişimi yok"],zh:["勒格布—人口贩卖幸存者","贫困者—慢性病，无医疗保障"],ms:["Al-Riqab — Mangsa pemerdagangan orang","Al-Masakin — Penyakit kronik, tiada akses penjagaan kesihatan"]}},
+  // 5. Moroccan student — Moroccan name, Fes
+  {name:"Youssef Benali",loc:"Fes, MA",score:43,tier:"LOW",
+   cats:{en:["Fi Sabilillah — Full-time Islamic sciences student","Al-Fuqara — Below national poverty line"],ru:["Фи Сабилиллах — Студент исламских наук","Аль-Фукара — Ниже черты бедности"],ar:["في سبيل الله — طالب علوم إسلامية","الفقراء — تحت خط الفقر الوطني"],tj:["Фи Сабилиллоҳ — Донишҷӯи улуми исломӣ","Ал-Фукаро — Зери хати камбизоатӣ"],id:["Fi Sabilillah — Mahasiswa ilmu Islam penuh waktu","Al-Fuqara — Di bawah garis kemiskinan"],tr:["Fi Sebilillah — Tam zamanlı İslam ilimler öğrencisi","Fukara — Ulusal yoksulluk sınırı altında"],zh:["主道者—全职伊斯兰学生","贫困者—低于国家贫困线"],ms:["Fi Sabilillah — Pelajar sains Islam sepenuh masa","Al-Fuqara — Di bawah garis kemiskinan"]}},
+  // 6. Tajik disabled — Tajik name, Khatlon
+  {name:"Yusuf Nazarov",loc:"Khatlon, TJ",score:73.5,tier:"HIGH",
+   cats:{en:["Al-Fuqara — Disabled, sole breadwinner","Al-Gharimin — Heavy debt burden","Al-Masakin — Food-insecure household"],ru:["Аль-Фукара — Инвалид, кормилец семьи","Аль-Гаримин — Тяжёлое долговое бремя","Аль-Масакин — Нехватка продовольствия"],ar:["الفقراء — معاق، عائل الأسرة","الغارمين — عبء ديون ثقيل","المساكين — أسرة غير آمنة غذائياً"],tj:["Ал-Фукаро — Маъюб, нон овари оила","Ал-Ғоримин — Бори қарзи вазнин","Ал-Масокин — Норасоии хӯрок"],id:["Al-Fuqara — Difabel, tulang punggung keluarga","Al-Gharimin — Beban hutang berat","Al-Masakin — Rawan pangan"],tr:["Fukara — Engelli, ailenin geçim kaynağı","Garimun — Ağır borç yükü","Mesakin — Gıda güvensizliği"],zh:["贫困者—残疾，家庭唯一供养者","负债者—沉重债务","贫困者—食物不安全"],ms:["Al-Fuqara — Orang kurang upaya, pencari nafkah","Al-Gharimin — Beban hutang berat","Al-Masakin — Rawan makanan"]}},
+  // 7. Kazakh widow — Kazakh name, Almaty
+  {name:"Aigerim Bekova",loc:"Almaty, KZ",score:78,tier:"HIGH",
+   cats:{en:["Al-Masakin — Destitute, zero income","Al-Fuqara — Widow, sole breadwinner","Ibn Al-Sabil — Disaster displaced"],ru:["Аль-Масакин — Без дохода","Аль-Фукара — Вдова, кормилец","Ибн Ас-Сабиль — Перемещена из-за катастрофы"],ar:["المساكين — معدمة، بلا دخل","الفقراء — أرملة، عائلة","ابن السبيل — نازحة بسبب كارثة"],tj:["Ал-Масокин — Бе даромад","Ал-Фукаро — Бева, нон овар","Ибн Ас-Сабил — Ҷойивазкарда"],id:["Al-Masakin — Miskin, tanpa penghasilan","Al-Fuqara — Janda, tulang punggung","Ibn Al-Sabil — Pengungsi bencana"],tr:["Mesakin — Yoksul, gelir yok","Fukara — Dul, geçim kaynağı","İbnus-Sebil — Afet mağduru"],zh:["贫困者—赤贫，无收入","贫困者—寡妇，供养者","旅途者—灾难流离失所"],ms:["Al-Masakin — Miskin, tiada pendapatan","Al-Fuqara — Balu, pencari nafkah","Ibn Al-Sabil — Terpindah akibat bencana"]}},
+  // 8. Nigerian elderly — Hausa name, Kano
+  {name:"Hajiya Rabi Musa",loc:"Kano, NG",score:57,tier:"MEDIUM",
+   cats:{en:["Al-Masakin — Elderly forced to work for survival","Al-Masakin — Chronically ill, no healthcare access"],ru:["Аль-Масакин — Пожилой вынужден работать","Аль-Масакин — Хронически больной без медпомощи"],ar:["المساكين — مسن مضطر للعمل من أجل البقاء","المساكين — مريض مزمن بلا رعاية صحية"],tj:["Ал-Масокин — Пир маҷбур ба кор","Ал-Масокин — Бемори музмин бе тандурустӣ"],id:["Al-Masakin — Lansia terpaksa bekerja","Al-Masakin — Penyakit kronis, tanpa layanan kesehatan"],tr:["Mesakin — Geçimini sağlamak için çalışmak zorunda kalan yaşlı","Mesakin — Kronik hasta, sağlık erişimi yok"],zh:["贫困者—老人被迫工作谋生","贫困者—慢性病，无医疗保障"],ms:["Al-Masakin — Warga emas terpaksa bekerja","Al-Masakin — Penyakit kronik, tiada akses penjagaan"]}},
+  // 9. Indonesian single mother — Javanese name
+  {name:"Siti Aminah",loc:"Surabaya, ID",score:43.7,tier:"LOW",
+   cats:{en:["Al-Fuqara — Single mother below poverty line","Al-Fuqara — Student from low-income family"],ru:["Аль-Фукара — Мать-одиночка ниже черты бедности","Аль-Фукара — Студент из малообеспеченной семьи"],ar:["الفقراء — أم عزباء تحت خط الفقر","الفقراء — طالب من أسرة محدودة الدخل"],tj:["Ал-Фукаро — Модари танҳо зери хати камбизоатӣ","Ал-Фукаро — Донишҷӯ аз оилаи камдаромад"],id:["Al-Fuqara — Ibu tunggal di bawah garis kemiskinan","Al-Fuqara — Pelajar dari keluarga kurang mampu"],tr:["Fukara — Yoksulluk sınırı altında tek anne","Fukara — Düşük gelirli aileden öğrenci"],zh:["贫困者—贫困线以下单身母亲","贫困者—低收入家庭学生"],ms:["Al-Fuqara — Ibu tunggal di bawah garis kemiskinan","Al-Fuqara — Pelajar dari keluarga berpendapatan rendah"]}},
+  // 10. Fraud detection example
+  {name:"Anonymous",loc:"Dubai, AE",score:0,tier:"INELIGIBLE",
+   cats:{en:["⚠ 7 fraud flags detected — penalty: −90 pts"],ru:["⚠ Обнаружено 7 признаков мошенничества — штраф: −90 баллов"],ar:["⚠ تم رصد 7 مؤشرات احتيال — عقوبة: −90 نقطة"],tj:["⚠ 7 аломати фиреб ошкор шуд — ҷарима: −90 хол"],id:["⚠ 7 tanda penipuan terdeteksi — penalti: −90 poin"],tr:["⚠ 7 dolandırıcılık işareti — ceza: −90 puan"],zh:["⚠ 发现7个欺诈标志 — 罚分：−90分"],ms:["⚠ 7 tanda penipuan dikesan — penalti: −90 mata"]}}
 ];
 function renderExamples(){
   const colors={CRITICAL:'#e05252',HIGH:'#e07a2a',MEDIUM:'#d4b800',LOW:'#28aa5a',INELIGIBLE:'#666'};
+  const tierLabels={
+    en:{CRITICAL:'CRITICAL',HIGH:'HIGH',MEDIUM:'MEDIUM',LOW:'LOW',INELIGIBLE:'INELIGIBLE'},
+    ru:{CRITICAL:'КРИТИЧНО',HIGH:'ВЫСОКИЙ',MEDIUM:'СРЕДНИЙ',LOW:'НИЗКИЙ',INELIGIBLE:'НЕ ПОДХОДИТ'},
+    ar:{CRITICAL:'حرج',HIGH:'مرتفع',MEDIUM:'متوسط',LOW:'منخفض',INELIGIBLE:'غير مؤهل'},
+    tj:{CRITICAL:'ФАВРӢ',HIGH:'БАЛАНД',MEDIUM:'МИЁНА',LOW:'ПАСТ',INELIGIBLE:'НОГУЗИР'},
+    id:{CRITICAL:'KRITIS',HIGH:'TINGGI',MEDIUM:'SEDANG',LOW:'RENDAH',INELIGIBLE:'TIDAK MEMENUHI'},
+    tr:{CRITICAL:'KRİTİK',HIGH:'YÜKSEK',MEDIUM:'ORTA',LOW:'DÜŞÜK',INELIGIBLE:'UYGUN DEĞİL'},
+    zh:{CRITICAL:'紧急',HIGH:'高',MEDIUM:'中',LOW:'低',INELIGIBLE:'不符合资格'},
+    ms:{CRITICAL:'KRITIKAL',HIGH:'TINGGI',MEDIUM:'SEDERHANA',LOW:'RENDAH',INELIGIBLE:'TIDAK LAYAK'}
+  };
   const g=document.getElementById('examples-grid');
+  const lang=currentLang||'en';
+  const tl=tierLabels[lang]||tierLabels.en;
   g.innerHTML=EXAMPLES.map(ex=>{
     const c=colors[ex.tier]||'#888';
+    const cats=(ex.cats[lang]||ex.cats.en||[]);
     return '<div class="ex-card">'+
       '<div class="ex-name">'+ex.name+'</div>'+
       '<div class="ex-loc">📍 '+ex.loc+'</div>'+
       '<div class="ex-score-row">'+
         '<div class="ex-score-num" style="color:'+c+'">'+ex.score+'</div>'+
         '<div class="ex-bar"><div class="ex-bar-fill" style="width:'+ex.score+'%;background:'+c+'"></div></div>'+
-        '<span class="tier-badge tier-'+ex.tier+'" style="font-size:.7rem">'+ex.tier+'</span>'+
+        '<span class="tier-badge tier-'+ex.tier+'" style="font-size:.7rem">'+tl[ex.tier]+'</span>'+
       '</div>'+
-      '<div class="ex-cats">'+ex.cats.map(c=>'<div class="ex-cat">'+c+'</div>').join('')+'</div>'+
+      '<div class="ex-cats">'+cats.map(cat=>'<div class="ex-cat">'+cat+'</div>').join('')+'</div>'+
     '</div>';
   }).join('');
 }
