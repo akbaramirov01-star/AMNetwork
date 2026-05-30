@@ -162,7 +162,7 @@ main{padding-top:64px;min-height:100vh}
 
     <div class="field">
       <label data-t="s1_name">Full name (or initials)</label>
-      <input type="text" id="a-name" placeholder="Ahmad K. / Anonymous" data-t-ph="s1_name_ph">
+      <input type="text" id="a-name" placeholder="Ahmad K. / Anonymous" data-t="s1_name_ph">
     </div>
     <div class="field-row">
       <div class="field">
@@ -191,12 +191,12 @@ main{padding-top:64px;min-height:100vh}
       </div>
       <div class="field">
         <label data-t="s1_city">City / Region</label>
-        <input type="text" id="a-city" data-t-ph="s1_city_ph" placeholder="e.g. Cairo">
+        <input type="text" id="a-city" data-t="s1_city_ph" placeholder="e.g. Cairo">
       </div>
     </div>
     <div class="field">
       <label data-t="s1_email">Email (for notifications, optional)</label>
-      <input type="email" id="a-email" placeholder="your@email.com">
+      <input type="email" id="a-email" placeholder="your@email.com" data-t="s1_email_ph">
     </div>
     <div class="note-box" data-t="s1_privacy">🔒 Your email is used only to notify you about your application status. It is never shared.</div>
     <div class="step-footer">
@@ -327,7 +327,7 @@ main{padding-top:64px;min-height:100vh}
     <div id="mosque-detail" style="display:none">
       <div class="field">
         <label data-t="s4_mosque_name">Mosque name & city (optional)</label>
-        <input type="text" id="a-mosque" placeholder="Al-Rahman Mosque, Cairo">
+        <input type="text" id="a-mosque" placeholder="Al-Rahman Mosque, Cairo" data-t="s4_mosque_ph">
       </div>
     </div>
     <div class="field">
@@ -405,7 +405,7 @@ en:{
   ap_badge:"Confidential · AI-Verified · Oracle-Approved",
   s1_title:"Basic Information",s1_sub:"You may remain anonymous — only your city and situation category will be visible to donors.",
   s1_name:"Full name (or initials)",s1_name_ph:"Ahmad K. / Anonymous",s1_country:"Country",s1_city:"City / Region",s1_city_ph:"e.g. Cairo",
-  s1_email:"Email (for notifications, optional)",s1_privacy:"🔒 Your email is used only to notify you about your application status. It is never shared.",
+  s1_email:"Email (for notifications, optional)",s1_email_ph:"your@email.com",s1_privacy:"🔒 Your email is used only to notify you about your application status. It is never shared.",
   step_of_5:"Step 1 of 5",step_2_of_5:"Step 2 of 5",step_3_of_5:"Step 3 of 5",step_4_of_5:"Step 4 of 5",step_5_of_5:"Step 5 of 5",
   btn_next:"Next →",btn_back:"← Back",
   s2_title:"Family Situation",s2_sub:"Help us understand your household composition and financial position.",
@@ -426,7 +426,7 @@ en:{
   need_food:"Monthly food / groceries",need_medical:"Medical treatment / medicine",need_rent:"Rent / shelter",
   need_edu:"Children's education",need_debt:"Debt repayment",need_livelihood:"Livelihood / business startup",need_emergency:"Emergency one-time support",
   s4_mosque:"Do you have a local mosque or imam who knows your situation?",
-  s4_mosque_name:"Mosque name & city (optional)",
+  s4_mosque_name:"Mosque name & city (optional)",s4_mosque_ph:"Al-Rahman Mosque, Cairo",
   s4_verify_consent:"Do you give permission for AM Network to contact a local representative for verification?",
   s4_no_consent:"No — prefer digital verification only",
   s5_title:"Privacy & Submit",s5_sub:"Almost done. Review your privacy preferences and submit your application.",
@@ -445,7 +445,7 @@ ar:{
   ap_badge:"سري · مُتحقق بالذكاء الاصطناعي · مُعتمد من Oracle",
   s1_title:"المعلومات الأساسية",s1_sub:"يمكنك البقاء مجهول الهوية — يظهر للمتبرعين فقط مدينتك وفئة وضعك.",
   s1_name:"الاسم الكامل (أو الأحرف الأولى)",s1_name_ph:"أحمد ك. / مجهول",s1_country:"الدولة",s1_city:"المدينة / المنطقة",s1_city_ph:"مثل: القاهرة",
-  s1_email:"البريد الإلكتروني (للإشعارات، اختياري)",s1_privacy:"🔒 يُستخدم بريدك الإلكتروني فقط لإخطارك بحالة طلبك. لن يُشارك أبداً.",
+  s1_email:"البريد الإلكتروني (للإشعارات، اختياري)",s1_email_ph:"بريدك@مثال.com",s1_privacy:"🔒 يُستخدم بريدك الإلكتروني فقط لإخطارك بحالة طلبك. لن يُشارك أبداً.",
   step_of_5:"الخطوة 1 من 5",step_2_of_5:"الخطوة 2 من 5",step_3_of_5:"الخطوة 3 من 5",step_4_of_5:"الخطوة 4 من 5",step_5_of_5:"الخطوة 5 من 5",
   btn_next:"التالي ←",btn_back:"→ رجوع",
   s2_title:"الوضع الأسري",s2_sub:"ساعدنا في فهم تركيبة أسرتك ووضعك المالي.",
@@ -466,7 +466,7 @@ ar:{
   need_food:"طعام / بقالة شهرية",need_medical:"علاج طبي / دواء",need_rent:"إيجار / مأوى",
   need_edu:"تعليم الأطفال",need_debt:"سداد الديون",need_livelihood:"مصدر رزق / بدء مشروع",need_emergency:"دعم طارئ لمرة واحدة",
   s4_mosque:"هل لديك مسجد أو إمام محلي يعرف وضعك؟",
-  s4_mosque_name:"اسم المسجد والمدينة (اختياري)",
+  s4_mosque_name:"اسم المسجد والمدينة (اختياري)",s4_mosque_ph:"مسجد الرحمن، القاهرة",
   s4_verify_consent:"هل تأذن لـ AM Network بالتواصل مع ممثل محلي للتحقق؟",
   s4_no_consent:"لا — أفضل التحقق الرقمي فقط",
   s5_title:"الخصوصية والإرسال",s5_sub:"اقتربنا من النهاية. راجع تفضيلات الخصوصية وأرسل طلبك.",
@@ -485,7 +485,7 @@ ru:{
   ap_badge:"Конфиденциально · AI-верификация · Oracle-одобрение",
   s1_title:"Основная информация",s1_sub:"Вы можете остаться анонимным — донорам будут видны только ваш город и категория ситуации.",
   s1_name:"Полное имя (или инициалы)",s1_name_ph:"Ахмад К. / Анонимно",s1_country:"Страна",s1_city:"Город / Регион",s1_city_ph:"например, Москва",
-  s1_email:"Email (для уведомлений, необязательно)",s1_privacy:"🔒 Email используется только для уведомления о статусе заявки. Никому не передаётся.",
+  s1_email:"Email (для уведомлений, необязательно)",s1_email_ph:"ваш@email.com",s1_privacy:"🔒 Email используется только для уведомления о статусе заявки. Никому не передаётся.",
   step_of_5:"Шаг 1 из 5",step_2_of_5:"Шаг 2 из 5",step_3_of_5:"Шаг 3 из 5",step_4_of_5:"Шаг 4 из 5",step_5_of_5:"Шаг 5 из 5",
   btn_next:"Далее →",btn_back:"← Назад",
   s2_title:"Семейное положение",s2_sub:"Расскажите о составе вашей семьи и финансовом положении.",
@@ -506,7 +506,7 @@ ru:{
   need_food:"Ежемесячное питание / продукты",need_medical:"Лечение / лекарства",need_rent:"Аренда / жильё",
   need_edu:"Образование детей",need_debt:"Погашение долгов",need_livelihood:"Средства к существованию / стартап",need_emergency:"Разовая экстренная помощь",
   s4_mosque:"Есть ли у вас местная мечеть или имам, знающий вашу ситуацию?",
-  s4_mosque_name:"Название мечети и город (необязательно)",
+  s4_mosque_name:"Название мечети и город (необязательно)",s4_mosque_ph:"Мечеть Ар-Рахман, Москва",
   s4_verify_consent:"Вы разрешаете AM Network связаться с местным представителем для верификации?",
   s4_no_consent:"Нет — только цифровая верификация",
   s5_title:"Конфиденциальность и отправка",s5_sub:"Почти готово. Проверьте настройки конфиденциальности и отправьте заявку.",
@@ -525,7 +525,7 @@ tj:{
   ap_badge:"Махфӣ · Тасдиқи AI · Тасдиқи Oracle",
   s1_title:"Маълумоти асосӣ",s1_sub:"Шумо метавонед ношинос бимонед — ба хайрхоҳон танҳо шаҳр ва категорияи вазъияти шумо намоиш дода мешавад.",
   s1_name:"Номи пурра (ё ҳарфҳои аввал)",s1_name_ph:"Аҳмад К. / Ношинос",s1_country:"Кишвар",s1_city:"Шаҳр / Минтақа",s1_city_ph:"масалан, Душанбе",
-  s1_email:"Email (барои огоҳиҳо, ихтиёрӣ)",s1_privacy:"🔒 Email-и шумо танҳо барои огоҳ кардан аз вазъияти дархост истифода мешавад.",
+  s1_email:"Email (барои огоҳиҳо, ихтиёрӣ)",s1_email_ph:"email-и@шумо.com",s1_privacy:"🔒 Email-и шумо танҳо барои огоҳ кардан аз вазъияти дархост истифода мешавад.",
   step_of_5:"Қадами 1 аз 5",step_2_of_5:"Қадами 2 аз 5",step_3_of_5:"Қадами 3 аз 5",step_4_of_5:"Қадами 4 аз 5",step_5_of_5:"Қадами 5 аз 5",
   btn_next:"Баъдӣ →",btn_back:"← Бозгашт",
   s2_title:"Вазъияти оилавӣ",s2_sub:"Ба мо дар фаҳмиши таркиби хонаводаи шумо кӯмак кунед.",
@@ -546,7 +546,7 @@ tj:{
   need_food:"Хӯроки моҳона",need_medical:"Муолиҷа / дору",need_rent:"Иҷора / паноҳгоҳ",
   need_edu:"Маълумоти кӯдакон",need_debt:"Пардохти қарзҳо",need_livelihood:"Касб / оғози тиҷорат",need_emergency:"Ёрии фаврии яквақта",
   s4_mosque:"Оё масҷиди маҳаллӣ ё имоме дорид, ки вазъияти шуморо медонад?",
-  s4_mosque_name:"Номи масҷид ва шаҳр (ихтиёрӣ)",
+  s4_mosque_name:"Номи масҷид ва шаҳр (ихтиёрӣ)",s4_mosque_ph:"Масҷиди Ар-Раҳмон, Душанбе",
   s4_verify_consent:"Оё ба AM Network иҷозат медиҳед бо намояндаи маҳаллӣ тамос гирад?",
   s4_no_consent:"Не — танҳо тасдиқи рақамӣ",
   s5_title:"Махфият ва фиристодан",s5_sub:"Қариб тайёр аст. Танзимоти махфиятро тафтиш кунед.",
@@ -564,7 +564,7 @@ id:{
   ap_badge:"Rahasia · Diverifikasi AI · Disetujui Oracle",
   s1_title:"Informasi Dasar",s1_sub:"Anda boleh tetap anonim — hanya kota dan kategori situasi Anda yang terlihat oleh donatur.",
   s1_name:"Nama lengkap (atau inisial)",s1_name_ph:"Ahmad K. / Anonim",s1_country:"Negara",s1_city:"Kota / Wilayah",s1_city_ph:"mis. Jakarta",
-  s1_email:"Email (untuk notifikasi, opsional)",s1_privacy:"🔒 Email hanya digunakan untuk memberitahu status pengajuan. Tidak pernah dibagikan.",
+  s1_email:"Email (untuk notifikasi, opsional)",s1_email_ph:"email@anda.com",s1_privacy:"🔒 Email hanya digunakan untuk memberitahu status pengajuan. Tidak pernah dibagikan.",
   step_of_5:"Langkah 1 dari 5",step_2_of_5:"Langkah 2 dari 5",step_3_of_5:"Langkah 3 dari 5",step_4_of_5:"Langkah 4 dari 5",step_5_of_5:"Langkah 5 dari 5",
   btn_next:"Lanjut →",btn_back:"← Kembali",
   s2_title:"Situasi Keluarga",s2_sub:"Bantu kami memahami komposisi rumah tangga dan posisi keuangan Anda.",
@@ -585,7 +585,7 @@ id:{
   need_food:"Makanan / belanja bulanan",need_medical:"Perawatan medis / obat",need_rent:"Sewa / tempat tinggal",
   need_edu:"Pendidikan anak",need_debt:"Pelunasan hutang",need_livelihood:"Mata pencaharian / usaha",need_emergency:"Bantuan darurat sekali",
   s4_mosque:"Apakah ada masjid atau imam lokal yang mengenal situasi Anda?",
-  s4_mosque_name:"Nama masjid & kota (opsional)",
+  s4_mosque_name:"Nama masjid & kota (opsional)",s4_mosque_ph:"Masjid Al-Rahman, Jakarta",
   s4_verify_consent:"Apakah Anda mengizinkan AM Network menghubungi perwakilan lokal untuk verifikasi?",
   s4_no_consent:"Tidak — hanya verifikasi digital",
   s5_title:"Privasi & Kirim",s5_sub:"Hampir selesai. Tinjau preferensi privasi dan kirimkan pengajuan.",
@@ -603,7 +603,7 @@ tr:{
   ap_badge:"Gizli · Yapay Zeka Doğrulamalı · Oracle Onaylı",
   s1_title:"Temel Bilgiler",s1_sub:"Anonim kalabilirsiniz — bağışçılara yalnızca şehriniz ve durum kategoriniz görünür.",
   s1_name:"Ad soyad (veya baş harfler)",s1_name_ph:"Ahmad K. / Anonim",s1_country:"Ülke",s1_city:"Şehir / Bölge",s1_city_ph:"örn. İstanbul",
-  s1_email:"E-posta (bildirimler için, isteğe bağlı)",s1_privacy:"🔒 E-postanız yalnızca başvuru durumu bildirimi için kullanılır. Asla paylaşılmaz.",
+  s1_email:"E-posta (bildirimler için, isteğe bağlı)",s1_email_ph:"eposta@adresiniz.com",s1_privacy:"🔒 E-postanız yalnızca başvuru durumu bildirimi için kullanılır. Asla paylaşılmaz.",
   step_of_5:"Adım 1 / 5",step_2_of_5:"Adım 2 / 5",step_3_of_5:"Adım 3 / 5",step_4_of_5:"Adım 4 / 5",step_5_of_5:"Adım 5 / 5",
   btn_next:"İleri →",btn_back:"← Geri",
   s2_title:"Aile Durumu",s2_sub:"Hane yapınızı ve mali durumunuzu anlamamıza yardımcı olun.",
@@ -624,7 +624,7 @@ tr:{
   need_food:"Aylık yiyecek / market",need_medical:"Tıbbi tedavi / ilaç",need_rent:"Kira / barınak",
   need_edu:"Çocuk eğitimi",need_debt:"Borç ödeme",need_livelihood:"Geçim kaynağı / iş kurma",need_emergency:"Acil tek seferlik destek",
   s4_mosque:"Durumunuzu bilen yerel bir cami veya imam var mı?",
-  s4_mosque_name:"Cami adı ve şehri (isteğe bağlı)",
+  s4_mosque_name:"Cami adı ve şehri (isteğe bağlı)",s4_mosque_ph:"Rahman Camii, İstanbul",
   s4_verify_consent:"AM Network'ün doğrulama için yerel temsilciyle iletişime geçmesine izin veriyor musunuz?",
   s4_no_consent:"Hayır — yalnızca dijital doğrulama",
   s5_title:"Gizlilik ve Gönder",s5_sub:"Neredeyse bitti. Gizlilik tercihlerinizi inceleyin ve başvuruyu gönderin.",
@@ -642,7 +642,7 @@ zh:{
   ap_badge:"保密 · AI验证 · Oracle批准",
   s1_title:"基本信息",s1_sub:"您可以保持匿名——捐赠者只能看到您的城市和情况类别。",
   s1_name:"全名（或首字母）",s1_name_ph:"Ahmad K. / 匿名",s1_country:"国家",s1_city:"城市/地区",s1_city_ph:"例如：北京",
-  s1_email:"电子邮件（用于通知，可选）",s1_privacy:"🔒 您的电子邮件仅用于通知申请状态，绝不会被分享。",
+  s1_email:"电子邮件（用于通知，可选）",s1_email_ph:"您的@邮箱.com",s1_privacy:"🔒 您的电子邮件仅用于通知申请状态，绝不会被分享。",
   step_of_5:"第1步，共5步",step_2_of_5:"第2步，共5步",step_3_of_5:"第3步，共5步",step_4_of_5:"第4步，共5步",step_5_of_5:"第5步，共5步",
   btn_next:"下一步 →",btn_back:"← 返回",
   s2_title:"家庭情况",s2_sub:"帮助我们了解您的家庭组成和财务状况。",
@@ -663,7 +663,7 @@ zh:{
   need_food:"每月食物/杂货",need_medical:"医疗/药品",need_rent:"租金/住所",
   need_edu:"子女教育",need_debt:"债务偿还",need_livelihood:"谋生/创业",need_emergency:"紧急一次性支持",
   s4_mosque:"您是否有了解您情况的当地清真寺或伊玛目？",
-  s4_mosque_name:"清真寺名称和城市（可选）",
+  s4_mosque_name:"清真寺名称和城市（可选）",s4_mosque_ph:"仁慈清真寺，开罗",
   s4_verify_consent:"您是否允许AM Network联系当地代表进行核实？",
   s4_no_consent:"否——仅数字验证",
   s5_title:"隐私与提交",s5_sub:"快完成了。检查隐私设置并提交申请。",
@@ -681,7 +681,7 @@ ms:{
   ap_badge:"Sulit · Disahkan AI · Diluluskan Oracle",
   s1_title:"Maklumat Asas",s1_sub:"Anda boleh kekal anonim — hanya bandar dan kategori situasi anda yang kelihatan kepada penderma.",
   s1_name:"Nama penuh (atau inisial)",s1_name_ph:"Ahmad K. / Anonim",s1_country:"Negara",s1_city:"Bandar / Wilayah",s1_city_ph:"cth. Kuala Lumpur",
-  s1_email:"E-mel (untuk pemberitahuan, pilihan)",s1_privacy:"🔒 E-mel anda hanya digunakan untuk memberitahu status permohonan. Tidak pernah dikongsi.",
+  s1_email:"E-mel (untuk pemberitahuan, pilihan)",s1_email_ph:"emel@anda.com",s1_privacy:"🔒 E-mel anda hanya digunakan untuk memberitahu status permohonan. Tidak pernah dikongsi.",
   step_of_5:"Langkah 1 dari 5",step_2_of_5:"Langkah 2 dari 5",step_3_of_5:"Langkah 3 dari 5",step_4_of_5:"Langkah 4 dari 5",step_5_of_5:"Langkah 5 dari 5",
   btn_next:"Seterusnya →",btn_back:"← Kembali",
   s2_title:"Situasi Keluarga",s2_sub:"Bantu kami memahami komposisi isi rumah dan kedudukan kewangan anda.",
@@ -702,7 +702,7 @@ ms:{
   need_food:"Makanan bulanan",need_medical:"Rawatan perubatan / ubat",need_rent:"Sewa / tempat tinggal",
   need_edu:"Pendidikan anak",need_debt:"Pembayaran hutang",need_livelihood:"Sara hidup / mulakan perniagaan",need_emergency:"Sokongan kecemasan sekali",
   s4_mosque:"Adakah anda mempunyai masjid atau imam tempatan yang tahu situasi anda?",
-  s4_mosque_name:"Nama masjid & bandar (pilihan)",
+  s4_mosque_name:"Nama masjid & bandar (pilihan)",s4_mosque_ph:"Masjid Al-Rahman, Kuala Lumpur",
   s4_verify_consent:"Adakah anda memberi kebenaran kepada AM Network menghubungi wakil tempatan untuk pengesahan?",
   s4_no_consent:"Tidak — lebih suka pengesahan digital sahaja",
   s5_title:"Privasi & Hantar",s5_sub:"Hampir selesai. Semak pilihan privasi dan hantar permohonan.",

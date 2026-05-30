@@ -1317,15 +1317,15 @@ function updateNisabLabel() {
 
   // Update nisab desc texts
   document.querySelector('#nisab-gold-lbl [data-t="nisab_gold_desc"]').textContent =
-    '85g gold ≈ $' + goldNisab.toLocaleString('en-US', {maximumFractionDigits:0});
+    t('nisab_gold_fmt') + goldNisab.toLocaleString('en-US', {maximumFractionDigits:0});
   document.querySelector('#nisab-silver-lbl [data-t="nisab_silver_desc"]').textContent =
-    '595g silver ≈ $' + silverNisab.toLocaleString('en-US', {maximumFractionDigits:0});
+    t('nisab_silver_fmt') + silverNisab.toLocaleString('en-US', {maximumFractionDigits:0});
 
   // Update nisab display row
   const nisabVal = useGold ? goldNisab : silverNisab;
   const nisabLabel = useGold ? t('nisab_gold_label') : t('nisab_silver_label');
   document.getElementById('nisabValue').textContent =
-    '$' + nisabVal.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' (' + (useGold ? 'gold' : 'silver') + ')';
+    '$' + nisabVal.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' (' + (useGold ? t('nisab_gold_short') : t('nisab_silver_short')) + ')';
 
   // Toggle selected class on radio opts
   document.getElementById('nisab-gold-lbl').classList.toggle('selected', useGold);
@@ -1411,7 +1411,7 @@ function calculateZakat() {
 
   // ——— NISAB USED ———
   document.getElementById('nisabUsedVal').textContent =
-    fmtUSD(nisabThreshold) + ' (' + (useGold ? '85g gold' : '595g silver') + ')';
+    fmtUSD(nisabThreshold) + ' (' + (useGold ? '85g ' + t('nisab_gold_short') : '595g ' + t('nisab_silver_short')) + ')';
 
   // ——— BREAKDOWN TABLE ———
   const rows = [
