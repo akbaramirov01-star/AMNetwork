@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Руководство основателя — AM Network</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"DM Sans",sans-serif;background:#FAFAF8;color:#1a1a18;line-height:1.7;font-size:15px}
+@media print{body{background:white}.no-print{display:none}section{page-break-inside:avoid}}
+
+.cover{background:linear-gradient(135deg,#060E09 0%,#0F2016 100%);color:white;padding:80px 5vw;text-align:center;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.cover-logo{width:80px;height:80px;border-radius:50%;border:2px solid #C9A84C;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:700;color:#C9A84C}
+.cover h1{font-family:"Cormorant Garamond",serif;font-size:clamp(32px,5vw,56px);font-weight:700;line-height:1.1;margin-bottom:16px}
+.cover h1 span{color:#C9A84C}
+.cover-sub{font-size:16px;color:rgba(255,255,255,0.6);max-width:500px;margin:0 auto 40px}
+.cover-meta{font-size:13px;color:rgba(255,255,255,0.4);letter-spacing:.08em;text-transform:uppercase}
+.cover-date{font-size:13px;color:#C9A84C;margin-top:8px}
+
+.toc{background:white;padding:60px 5vw;max-width:800px;margin:0 auto}
+.toc h2{font-family:"Cormorant Garamond",serif;font-size:28px;margin-bottom:24px;color:#1a1a18}
+.toc ol{padding-left:20px}
+.toc li{padding:8px 0;border-bottom:1px solid #f0ede6;font-size:15px}
+.toc li a{color:#0F2016;text-decoration:none}
+.toc li a:hover{color:#C9A84C}
+.toc li span{float:right;color:#999;font-size:13px}
+
+.doc{max-width:800px;margin:0 auto;padding:0 5vw}
+
+section{padding:60px 0;border-bottom:2px solid #f0ede6}
+section:last-child{border-bottom:none}
+
+.section-num{font-size:11px;color:#C9A84C;text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:8px}
+h2.section-title{font-family:"Cormorant Garamond",serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:#060E09;margin-bottom:8px;line-height:1.2}
+.section-intro{font-size:15px;color:#555;line-height:1.8;margin-bottom:32px;padding-left:16px;border-left:3px solid #C9A84C}
+
+h3{font-size:18px;font-weight:700;color:#060E09;margin:32px 0 12px}
+h4{font-size:15px;font-weight:700;color:#0F2016;margin:20px 0 8px}
+p{margin-bottom:14px;color:#333}
+
+.card{background:white;border:1px solid #e8e4dc;border-radius:12px;padding:24px;margin-bottom:16px}
+.card-gold{border-left:4px solid #C9A84C}
+.card-green{border-left:4px solid #10B981}
+.card-red{border-left:4px solid #EF4444}
+.card-blue{border-left:4px solid #3B82F6}
+
+.term{display:grid;grid-template-columns:180px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid #f0ede6;align-items:start}
+.term:last-child{border-bottom:none}
+.term-word{font-weight:700;color:#060E09;font-size:14px}
+.term-word code{font-family:monospace;font-size:13px;background:#f5f3ee;padding:2px 6px;border-radius:4px;color:#0F2016}
+.term-def{color:#555;font-size:14px;line-height:1.6}
+
+.analogy{background:#F0EDE6;border-radius:10px;padding:16px 20px;margin:12px 0;font-size:14px;color:#444}
+.analogy::before{content:"💡 Аналогия: ";font-weight:700;color:#C9A84C}
+
+.flag{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:8px;margin:8px 0;font-size:14px}
+.flag-green{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
+.flag-red{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+.flag-green::before{content:"✅";flex-shrink:0}
+.flag-red::before{content:"🚩";flex-shrink:0}
+
+.question-block{background:white;border:1px solid #e8e4dc;border-radius:12px;padding:24px;margin-bottom:20px}
+.q-num{display:inline-block;background:#C9A84C;color:#060E09;font-weight:700;font-size:12px;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+.q-text{font-size:16px;font-weight:600;color:#060E09;margin-bottom:12px;line-height:1.4}
+.q-good{background:#f0fdf4;border-radius:8px;padding:12px 16px;margin-bottom:8px;font-size:14px;color:#166534}
+.q-good::before{content:"Хороший ответ: ";font-weight:700}
+.q-bad{background:#fef2f2;border-radius:8px;padding:12px 16px;font-size:14px;color:#991b1b}
+.q-bad::before{content:"Плохой ответ: ";font-weight:700}
+
+.task-box{background:#060E09;color:white;border-radius:16px;padding:32px;margin:20px 0}
+.task-box h3{color:#C9A84C;margin-top:0}
+.task-box p{color:rgba(255,255,255,0.7)}
+.task-box ul{padding-left:20px}
+.task-box li{color:rgba(255,255,255,0.7);padding:4px 0;font-size:14px}
+.task-box code{background:rgba(201,168,76,0.15);color:#C9A84C;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px}
+
+.criteria{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+@media(max-width:600px){.criteria{grid-template-columns:1fr}}
+.crit{background:white;border:1px solid #e8e4dc;border-radius:10px;padding:16px}
+.crit-score{font-size:20px;font-weight:700;color:#C9A84C;margin-bottom:4px}
+.crit-name{font-size:13px;font-weight:700;color:#060E09;margin-bottom:4px}
+.crit-desc{font-size:13px;color:#666}
+
+.agreement{background:white;border:2px solid #060E09;border-radius:16px;padding:40px;margin:20px 0;font-family:"DM Sans",sans-serif}
+.agreement-title{text-align:center;margin-bottom:32px}
+.agreement-title h3{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:700;margin-bottom:8px}
+.agreement-title p{font-size:13px;color:#666}
+.clause{margin-bottom:24px}
+.clause-num{font-size:13px;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.clause p{font-size:14px;color:#333;line-height:1.8}
+.clause ul{padding-left:20px;margin-top:8px}
+.clause li{font-size:14px;color:#333;padding:3px 0}
+.sig-block{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;padding-top:24px;border-top:1px solid #e8e4dc}
+@media(max-width:500px){.sig-block{grid-template-columns:1fr}}
+.sig-line{border-bottom:1px solid #333;margin-bottom:8px;height:40px}
+.sig-label{font-size:12px;color:#666}
+.warning{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:16px 20px;font-size:13px;color:#92400e;margin:20px 0}
+.warning::before{content:"⚠️  ";font-weight:700}
+
+.where-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+@media(max-width:600px){.where-grid{grid-template-columns:1fr}}
+.where-card{background:white;border:1px solid #e8e4dc;border-radius:10px;padding:18px}
+.where-card h4{margin:0 0 6px;font-size:14px;color:#060E09}
+.where-card p{font-size:13px;color:#666;margin:0}
+
+.checklist{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;background:white;border:1px solid #e8e4dc;border-radius:8px;font-size:14px}
+.check-item input{margin-top:2px;flex-shrink:0;accent-color:#C9A84C;width:16px;height:16px}
+
+.no-print{text-align:center;padding:30px;background:#f5f3ee;font-size:14px;color:#666}
+.no-print button{background:#C9A84C;color:#060E09;border:none;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin-left:12px}
+
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+th{background:#060E09;color:white;padding:10px 14px;text-align:left;font-weight:600}
+td{padding:10px 14px;border-bottom:1px solid #f0ede6;color:#333}
+tr:nth-child(even) td{background:#fafaf8}
+</style>
+</head>
+<body>
+
+<div class="no-print">
+  📄 Это твой личный справочник основателя AM Network. &nbsp;
+  <button onclick="window.print()">🖨 Сохранить как PDF</button>
+</div>
+
+<!-- ОБЛОЖКА -->
+<div class="cover">
+  <div class="cover-logo">AM</div>
+  <h1>Справочник<br><span>Основателя</span></h1>
+  <p class="cover-sub">Всё что нужно знать для поиска CTO, проверки кандидатов и защиты проекта</p>
+  <p class="cover-meta">AM Network · Конфиденциально</p>
+  <p class="cover-date">Июнь 2026</p>
+</div>
+
+<!-- ОГЛАВЛЕНИЕ -->
+<div class="toc">
+  <h2>Содержание</h2>
+  <ol>
+    <li><a href="#tech">Технический ликбез — что такое блокчейн, смарт-контракт, Solidity</a><span>Раздел 1</span></li>
+    <li><a href="#terms">Словарь терминов — что говорит разработчик и что это значит</a><span>Раздел 2</span></li>
+    <li><a href="#where">Где и как искать CTO</a><span>Раздел 3</span></li>
+    <li><a href="#interview">Вопросы для собеседования с ответами</a><span>Раздел 4</span></li>
+    <li><a href="#test">Тестовое задание для кандидата</a><span>Раздел 5</span></li>
+    <li><a href="#protect">Как защититься от мошенника</a><span>Раздел 6</span></li>
+    <li><a href="#agreement">Шаблон Co-founder Agreement</a><span>Раздел 7</span></li>
+    <li><a href="#checklist">Чеклист: первые 30 дней с CTO</a><span>Раздел 8</span></li>
+  </ol>
+</div>
+
+<div class="doc">
+
+<!-- РАЗДЕЛ 1 -->
+<section id="tech">
+  <div class="section-num">Раздел 1</div>
+  <h2 class="section-title">Технический ликбез</h2>
+  <p class="section-intro">Ты не обязан уметь писать код. Но ты обязан понимать что строишь — иначе тебя легко обмануть или продать воздух. Этот раздел даст тебе достаточно знаний чтобы говорить уверенно.</p>
+
+  <h3>Блокчейн — что это на самом деле</h3>
+  <p>Блокчейн — это публичная база данных, которую невозможно изменить задним числом. Каждая запись (транзакция) добавляется в "цепочку блоков" и видна всем в мире навсегда.</p>
+
+  <div class="analogy">Представь журнал бухгалтера, который хранится одновременно на миллионах компьютеров по всему миру. Если кто-то попытается исправить запись — все остальные компьютеры сразу заметят несоответствие. Подделать невозможно.</div>
+
+  <p>Для AM Network это значит: каждый закятный перевод записывается в блокчейн — и любой человек в мире может открыть браузер и проверить что деньги реально дошли до получателя. Навсегда. Без посредников.</p>
+
+  <h3>Base Blockchain — почему именно он</h3>
+  <p>Base — это блокчейн компании Coinbase (одна из крупнейших крипто-бирж мира). Он построен поверх Ethereum, но:</p>
+  <ul style="padding-left:20px;margin:12px 0">
+    <li style="padding:4px 0">💸 <strong>Транзакции дешевле</strong> — комиссия cents, не dollars</li>
+    <li style="padding:4px 0">⚡ <strong>Быстрее</strong> — 2 секунды вместо 15</li>
+    <li style="padding:4px 0">🔒 <strong>Безопасность Ethereum</strong> — самого надёжного блокчейна</li>
+    <li style="padding:4px 0">🏦 <strong>Доверие Coinbase</strong> — регулируемая американская компания</li>
+  </ul>
+
+  <div class="analogy">Ethereum — это как федеральная трасса. Base — как новая скоростная дорога, построенная рядом, которая ведёт туда же, но быстрее и дешевле.</div>
+
+  <h3>Смарт-контракт — сердце продукта</h3>
+  <p>Смарт-контракт — это программа, которая живёт прямо в блокчейне и автоматически выполняет правила без участия людей.</p>
+
+  <div class="analogy">Торговый автомат: ты кладёшь деньги, выбираешь товар — автомат сам выдаёт покупку. Никакой кассир не нужен. Смарт-контракт работает так же — "если поступили деньги И получатель верифицирован — перевести ему сумму".</div>
+
+  <div class="card card-gold">
+    <h4>Как смарт-контракт работает в AM Network:</h4>
+    <p>1. Донор отправляет закят в смарт-контракт<br>
+    2. Контракт проверяет: есть ли верифицированный получатель?<br>
+    3. Если да — автоматически переводит деньги получателю<br>
+    4. Каждый шаг записывается в блокчейн навсегда<br>
+    5. Ujrah (1–2.5%) автоматически удерживается контрактом</p>
+  </div>
+
+  <h3>Solidity — язык смарт-контрактов</h3>
+  <p>Solidity — это язык программирования, специально созданный для написания смарт-контрактов на Ethereum и Base. Именно его должен знать твой CTO.</p>
+
+  <div class="analogy">Ты строишь дом — тебе нужен архитектор который знает строительные нормы именно для этой страны. Solidity — это "строительные нормы" для блокчейна Base.</div>
+
+  <p>Важные факты о Solidity:</p>
+  <ul style="padding-left:20px;margin:12px 0">
+    <li style="padding:4px 0">Создан специально для финансовых операций в блокчейне</li>
+    <li style="padding:4px 0">Код смарт-контракта открытый — его может проверить любой аудитор</li>
+    <li style="padding:4px 0">После деплоя (запуска) изменить код нельзя — поэтому нужен аудит</li>
+    <li style="padding:4px 0">Ошибка в коде может стоить реальных денег — безопасность критична</li>
+  </ul>
+
+  <h3>Web3 — что это такое</h3>
+  <p>Web3 — это общее название для интернета нового поколения, где пользователи владеют своими данными и деньгами напрямую, без банков и корпораций.</p>
+
+  <table>
+    <tr><th>Web1 (1990-е)</th><th>Web2 (2000-е)</th><th>Web3 (сейчас)</th></tr>
+    <tr><td>Читай сайты</td><td>Создавай контент</td><td>Владей данными и деньгами</td></tr>
+    <tr><td>Нет аккаунтов</td><td>Facebook, Google</td><td>Кошелёк = твой аккаунт</td></tr>
+    <tr><td>Статичные страницы</td><td>Платформы владеют тобой</td><td>Ты владеешь собой</td></tr>
+  </table>
+
+  <h3>Криптокошелёк</h3>
+  <p>Кошелёк в Web3 — это не программа. Это пара ключей: <strong>публичный адрес</strong> (как номер банковского счёта, можно давать всем) и <strong>приватный ключ</strong> (как PIN-код, знать только тебе).</p>
+  <div class="card card-red">
+    <h4>⛔ Золотое правило</h4>
+    <p>Кто владеет приватным ключом — тот владеет деньгами. Никогда не давай приватный ключ никому. Даже CTO. Для совместного управления используется multisig.</p>
+  </div>
+
+  <h3>Multisig — твоя главная защита</h3>
+  <p>Multisig (multi-signature) кошелёк требует несколько подписей для перевода денег. Например, 2 из 3 — нужны подписи как минимум двух из трёх владельцев.</p>
+  <div class="analogy">Банковский сейф с двумя замками. Ключ от первого — у тебя. Ключ от второго — у CTO. Открыть можно только вместе. Если CTO окажется мошенником — он не сможет взять деньги без тебя.</div>
+</section>
+
+<!-- РАЗДЕЛ 2 -->
+<section id="terms">
+  <div class="section-num">Раздел 2</div>
+  <h2 class="section-title">Словарь терминов</h2>
+  <p class="section-intro">Разработчик будет говорить этими словами. Ты должен понимать о чём речь — не как программист, а как основатель который знает свой продукт.</p>
+
+  <div class="term"><div class="term-word"><code>Deploy</code><br>Деплой</div><div class="term-def">Запуск смарт-контракта в блокчейн. После деплоя контракт живёт в блокчейне вечно. Как открытие бизнеса — после регистрации уже не отыграть назад без специальных механизмов.</div></div>
+
+  <div class="term"><div class="term-word"><code>Testnet</code><br>Тестнет</div><div class="term-def">Тестовая версия блокчейна с ненастоящими деньгами. Разработчик сначала всё тестирует здесь — это бесплатно и безопасно. Только после тестнета идут на mainnet.</div></div>
+
+  <div class="term"><div class="term-word"><code>Mainnet</code><br>Мейннет</div><div class="term-def">Настоящий блокчейн с реальными деньгами. Запуск на mainnet — это официальный запуск продукта. Ошибки здесь стоят реальных денег.</div></div>
+
+  <div class="term"><div class="term-word"><code>Gas fee</code><br>Комиссия</div><div class="term-def">Плата за выполнение операции в блокчейне. На Base — доли цента. На Ethereum — могут быть $10-50. Именно поэтому мы выбрали Base.</div></div>
+
+  <div class="term"><div class="term-word"><code>Audit</code><br>Аудит</div><div class="term-def">Независимая проверка кода смарт-контракта на уязвимости. Делается специализированными компаниями (Certik, Halborn, OpenZeppelin). Обязателен перед mainnet. Стоит $20-40K.</div></div>
+
+  <div class="term"><div class="term-word"><code>Oracle</code><br>Оракул</div><div class="term-def">Механизм который связывает блокчейн с реальным миром. В AM Network — это имамы и NGO которые подтверждают что получатель реально существует. Без оракула смарт-контракт не знает что происходит за пределами блокчейна.</div></div>
+
+  <div class="term"><div class="term-word"><code>Token</code><br>Токен</div><div class="term-def">Цифровой актив в блокчейне. Бывает fungible (взаимозаменяемый, как деньги) и NFT (уникальный, как сертификат). Мы не выпускаем спекулятивный токен — это ключевой элемент шариатского соответствия.</div></div>
+
+  <div class="term"><div class="term-word"><code>USDC / USDT</code><br>Стейблкоин</div><div class="term-def">Криптовалюта привязанная к доллару 1:1. 1 USDC = $1 всегда. Идеальна для благотворительности — цена не скачет. AM Network будет работать именно на стейблкоинах.</div></div>
+
+  <div class="term"><div class="term-word"><code>LayerZero</code></div><div class="term-def">Протокол который позволяет переводить активы между разными блокчейнами. Если донор хочет отправить USDC с Ethereum, а система работает на Base — LayerZero делает этот мост автоматически.</div></div>
+
+  <div class="term"><div class="term-word"><code>Open source</code></div><div class="term-def">Открытый код — любой может его прочитать и проверить. Это стандарт для Web3. Доноры могут убедиться что код делает именно то что обещано. Не открытый код в блокчейне — красный флаг.</div></div>
+
+  <div class="term"><div class="term-word"><code>Vesting</code><br>Вестинг</div><div class="term-def">График получения акций/долей. "4 года вестинг, 1 год cliff" значит: первый год CTO не получает ничего, после года — 25%, потом ежемесячно ещё по кусочку. Защита от того чтобы CTO взял долю и ушёл.</div></div>
+
+  <div class="term"><div class="term-word"><code>Equity</code><br>Эквити</div><div class="term-def">Доля в компании. Когда говоришь "предлагаю 20% equity" — это значит CTO получит 20% акций компании. При продаже компании за $10M он получит $2M.</div></div>
+</section>
+
+<!-- РАЗДЕЛ 3 -->
+<section id="where">
+  <div class="section-num">Раздел 3</div>
+  <h2 class="section-title">Где и как искать CTO</h2>
+  <p class="section-intro">Конкретные платформы, группы и подходы — не общие советы, а то что реально работает для поиска Web3 разработчика.</p>
+
+  <h3>Платформы</h3>
+  <div class="where-grid">
+    <div class="where-card">
+      <h4>LinkedIn</h4>
+      <p>Поиск: "Solidity developer" + фильтр страна. Лучшие страны: Pakistan, Malaysia, Turkey, Indonesia</p>
+    </div>
+    <div class="where-card">
+      <h4>Wellfound (AngelList)</h4>
+      <p>wellfound.com — специально для co-founder поиска. Создай профиль стартапа, укажи "seeking CTO"</p>
+    </div>
+    <div class="where-card">
+      <h4>GitHub</h4>
+      <p>Ищи по тегам: <code>zakat</code>, <code>islamic-finance</code>, <code>halal-defi</code>. Кто уже писал похожее — лучший кандидат</p>
+    </div>
+    <div class="where-card">
+      <h4>Telegram</h4>
+      <p>Каналы: @web3_pakistan, @solidity_devs, Islamic Finance Tech groups, CIS Blockchain communities</p>
+    </div>
+    <div class="where-card">
+      <h4>Twitter/X</h4>
+      <p>Хэштеги: #IslamicFintech #Web3Muslim #SolidityDev #BaseBlockchain</p>
+    </div>
+    <div class="where-card">
+      <h4>Личная сеть</h4>
+      <p>Посольства, мусульманские общины, Islamic finance конференции — дипломатические связи это твоё преимущество</p>
+    </div>
+  </div>
+
+  <h3>Лучшие страны для поиска</h3>
+  <table>
+    <tr><th>Страна</th><th>Почему подходит</th><th>Где искать</th></tr>
+    <tr><td><strong>Пакистан</strong></td><td>Много сильных Solidity разработчиков, мусульмане, цена ниже западной</td><td>LinkedIn, @web3_pakistan Telegram</td></tr>
+    <tr><td><strong>Малайзия</strong></td><td>Исламские финансы — родная тема, сильное образование</td><td>LinkedIn, Malaysian Blockchain Association</td></tr>
+    <tr><td><strong>Индонезия</strong></td><td>Крупнейшая мусульманская страна, растущий Web3</td><td>LinkedIn, Indonesia Blockchain Developer</td></tr>
+    <tr><td><strong>Турция</strong></td><td>Технически сильные, мусульмане, активный крипто рынок</td><td>LinkedIn, Turkish Web3 communities</td></tr>
+    <tr><td><strong>Казахстан / Узбекистан</strong></td><td>Культурно близко, русскоязычные, есть специалисты</td><td>LinkedIn, CIS Solidity чаты</td></tr>
+    <tr><td><strong>Египет</strong></td><td>Арабский мир, понимают исламские финансы</td><td>LinkedIn, Arab Blockchain Council</td></tr>
+  </table>
+
+  <h3>Первое сообщение кандидату</h3>
+  <div class="card card-gold">
+    <p><em>Hi [Name],</em></p>
+    <p><em>I came across your work on [GitHub project / LinkedIn] and I'm building something I think will resonate with you.</em></p>
+    <p><em>AM Network is the first blockchain-verified Zakat platform for 1.8 billion Muslims. $600B in annual Zakat flows today with zero transparency — we're changing that with Base blockchain + AI recipient scoring.</em></p>
+    <p><em>I'm looking for a technical co-founder who believes technology can serve humanity. Not just a developer — a partner.</em></p>
+    <p><em>Worth a 20-minute conversation? amnetwork.io</em></p>
+    <p><em>Akbar</em></p>
+  </div>
+</section>
+
+<!-- РАЗДЕЛ 4 -->
+<section id="interview">
+  <div class="section-num">Раздел 4</div>
+  <h2 class="section-title">Вопросы для собеседования</h2>
+  <p class="section-intro">Ты не технический человек — и это нормально. Эти вопросы помогут тебе понять кто перед тобой без знания кода. Слушай не только ЧТО говорит, но КАК.</p>
+
+  <div class="question-block">
+    <span class="q-num">Вопрос 1</span>
+    <div class="q-text">Покажи мне последний смарт-контракт который ты написал. Расскажи что он делает.</div>
+    <div class="q-good">Открывает GitHub, показывает реальный код, объясняет логику понятными словами, упоминает как тестировал.</div>
+    <div class="q-bad">Говорит что есть проекты но не может показать. Или показывает что-то с чужого GitHub.</div>
+  </div>
+
+  <div class="question-block">
+    <span class="q-num">Вопрос 2</span>
+    <div class="q-text">Как ты защитишь смарт-контракт от взлома? Что такое reentrancy attack?</div>
+    <div class="q-good">Знает что reentrancy — это когда злоумышленник вызывает контракт рекурсивно до обновления баланса (именно так взломали DAO в 2016 на $60M). Упоминает паттерн checks-effects-interactions, OpenZeppelin ReentrancyGuard.</div>
+    <div class="q-bad">Говорит "я просто напишу аккуратно". Не знает что такое reentrancy.</div>
+  </div>
+
+  <div class="question-block">
+    <span class="q-num">Вопрос 3</span>
+    <div class="q-text">Как бы ты организовал multisig кошелёк для AM Network чтобы я как основатель тоже контролировал деньги?</div>
+    <div class="q-good">Предлагает Gnosis Safe, объясняет схему 2-of-3 или 3-of-5, говорит что ключи должны быть у разных людей, упоминает hardware wallet для безопасности.</div>
+    <div class="q-bad">Говорит что сам будет управлять кошельком. Или не знает что такое Gnosis Safe.</div>
+  </div>
+
+  <div class="question-block">
+    <span class="q-num">Вопрос 4</span>
+    <div class="q-text">Сколько времени займёт написать MVP смарт-контракта — приём закята и распределение получателям?</div>
+    <div class="q-good">Говорит 4-8 недель на базовый MVP с тестами, потом аудит. Разбивает на этапы. Упоминает что нужен testnet перед mainnet.</div>
+    <div class="q-bad">Говорит "неделю-две" — это нереально для безопасного финансового контракта. Или говорит "год" — overengineering.</div>
+  </div>
+
+  <div class="question-block">
+    <span class="q-num">Вопрос 5</span>
+    <div class="q-text">Что тебя привлекает в AM Network? Почему ты хочешь работать именно над этим?</div>
+    <div class="q-good">Говорит о миссии, о проблеме прозрачности, о 1.8 млрд мусульман, о том что это может изменить жизни реальных людей. Задаёт вопросы о шариатском соответствии.</div>
+    <div class="q-bad">Говорит только о технологии или только о деньгах. Не проявляет интереса к исламской составляющей.</div>
+  </div>
+
+  <div class="question-block">
+    <span class="q-num">Вопрос 6</span>
+    <div class="q-text">Как ты относишься к тому что весь код будет open source и будет проходить независимый аудит?</div>
+    <div class="q-good">"Конечно, это стандарт для Web3 и единственный правильный путь для финансового продукта. Я рад аудиту."</div>
+    <div class="q-bad">Сопротивляется открытому коду, говорит что "это раскроет секреты". В Web3 закрытый код для финансового продукта — красный флаг.</div>
+  </div>
+
+  <h3>Красные и зелёные флаги</h3>
+  <div class="flag flag-red">Просит деньги или токены до подписания договора</div>
+  <div class="flag flag-red">Не может показать ни одного реального проекта в GitHub</div>
+  <div class="flag flag-red">Обещает сделать всё за 1-2 недели</div>
+  <div class="flag flag-red">Хочет единоличный контроль над кошельками с деньгами</div>
+  <div class="flag flag-red">Говорит что аудит не нужен — "доверяй мне"</div>
+  <div class="flag flag-green">Сам предлагает начать с тестового задания</div>
+  <div class="flag flag-green">Задаёт вопросы о шариатской модели и правовой структуре</div>
+  <div class="flag flag-green">Говорит о безопасности раньше чем ты спросил</div>
+  <div class="flag flag-green">Предлагает multisig и прозрачную структуру управления</div>
+  <div class="flag flag-green">Показывает реальные аудированные проекты</div>
+</section>
+
+<!-- РАЗДЕЛ 5 -->
+<section id="test">
+  <div class="section-num">Раздел 5</div>
+  <h2 class="section-title">Тестовое задание</h2>
+  <p class="section-intro">Дай это задание финальным 2-3 кандидатам. Срок: 5-7 дней. Задание показывает реальный уровень — не слова, а код.</p>
+
+  <div class="task-box">
+    <h3>🧪 Тестовое задание: AM Network Zakat Contract MVP</h3>
+    <p style="margin-bottom:20px">Напиши базовый смарт-контракт на Solidity для платформы Zakat. Задание проверяет твои знания Solidity, понимание безопасности и умение работать самостоятельно.</p>
+
+    <h4 style="color:white;margin-bottom:8px">Что нужно реализовать:</h4>
+    <ul>
+      <li>Функция <code>depositZakat()</code> — принимает USDC от донора</li>
+      <li>Функция <code>addRecipient(address, uint8 score)</code> — добавляет верифицированного получателя с AI-скором (0-100). Только owner может вызывать.</li>
+      <li>Функция <code>distributeZakat(address recipient)</code> — отправляет равную долю пула верифицированному получателю</li>
+      <li>Функция <code>collectUjrah()</code> — снимает 2% комиссию платформы (ujrah). Только owner.</li>
+      <li>Event логи для всех операций — чтобы блокчейн показывал историю</li>
+      <li>Защита от reentrancy attack</li>
+    </ul>
+
+    <h4 style="color:white;margin:16px 0 8px">Требования:</h4>
+    <ul>
+      <li>Solidity ^0.8.0, деплой на Base Sepolia testnet (бесплатный тестнет)</li>
+      <li>Тесты через Hardhat или Foundry (минимум 5 тестов)</li>
+      <li>README на английском: как запустить, как протестировать</li>
+      <li>Код в публичном GitHub репозитории</li>
+      <li>Адрес задеплоенного контракта на Base Sepolia</li>
+    </ul>
+
+    <h4 style="color:white;margin:16px 0 8px">Бонус (по желанию):</h4>
+    <ul>
+      <li>Интеграция с USDC контрактом Base testnet</li>
+      <li>Multisig через Gnosis Safe</li>
+      <li>Простой фронтенд для взаимодействия с контрактом</li>
+    </ul>
+  </div>
+
+  <h3>Как оценивать результат</h3>
+  <div class="criteria">
+    <div class="crit"><div class="crit-score">30%</div><div class="crit-name">Безопасность</div><div class="crit-desc">Защита от reentrancy, правильный access control, нет уязвимостей</div></div>
+    <div class="crit"><div class="crit-score">25%</div><div class="crit-name">Качество кода</div><div class="crit-desc">Читаемый, с комментариями, без лишнего кода</div></div>
+    <div class="crit"><div class="crit-score">25%</div><div class="crit-name">Тесты</div><div class="crit-desc">Покрывают основные сценарии, запускаются без ошибок</div></div>
+    <div class="crit"><div class="crit-score">20%</div><div class="crit-name">Документация</div><div class="crit-desc">Ясный README, видно что человек думает о конечном пользователе</div></div>
+  </div>
+
+  <div class="warning">Если кандидат сдаёт задание за 1 день — уточни. Либо очень опытный, либо использовал чужой код. Попроси объяснить любую функцию вживую.</div>
+</section>
+
+<!-- РАЗДЕЛ 6 -->
+<section id="protect">
+  <div class="section-num">Раздел 6</div>
+  <h2 class="section-title">Как защититься от мошенника</h2>
+  <p class="section-intro">Технический партнёр будет иметь доступ к коду и потенциально к кошелькам. Эти меры защищают тебя юридически и технически.</p>
+
+  <h3>Юридическая защита</h3>
+  <div class="card card-green">
+    <h4>✅ До того как он напишет первую строку кода:</h4>
+    <ul style="padding-left:20px;margin-top:8px">
+      <li style="padding:4px 0"><strong>Co-founder Agreement</strong> — подписывают оба, нотариально заверить</li>
+      <li style="padding:4px 0"><strong>IP Assignment Agreement</strong> — весь код принадлежит компании AM Network, не ему лично</li>
+      <li style="padding:4px 0"><strong>NDA (Non-Disclosure Agreement)</strong> — нельзя рассказывать о проекте конкурентам</li>
+      <li style="padding:4px 0"><strong>Вестинг 4 года, cliff 1 год</strong> — акции он получает только если остаётся в проекте</li>
+    </ul>
+  </div>
+
+  <h3>Техническая защита</h3>
+  <div class="card card-blue">
+    <h4>🔐 Структура доступа:</h4>
+    <ul style="padding-left:20px;margin-top:8px">
+      <li style="padding:4px 0"><strong>Multisig 2-of-3</strong> — кошелёк с 3 владельцами: ты, CTO, доверенное третье лицо (юрист / инвестор). Перевод только при 2 согласиях.</li>
+      <li style="padding:4px 0"><strong>GitHub — ты owner репозитория</strong>, CTO — contributor. Ты видишь каждое изменение кода.</li>
+      <li style="padding:4px 0"><strong>Аудит перед mainnet</strong> — независимая компания проверяет код до запуска с реальными деньгами. Обязательно.</li>
+      <li style="padding:4px 0"><strong>Timelock</strong> — задержка в 48 часов перед выполнением критических операций. Даёт время заметить проблему.</li>
+    </ul>
+  </div>
+
+  <h3>Проверка кандидата</h3>
+  <ul style="padding-left:20px">
+    <li style="padding:6px 0">Попроси <strong>3 рекомендации</strong> от предыдущих работодателей или клиентов</li>
+    <li style="padding:6px 0">Проверь его <strong>GitHub историю</strong> — реальные коммиты за последние месяцы?</li>
+    <li style="padding:6px 0">Поищи имя в Google — есть ли жалобы, суды, негативные упоминания</li>
+    <li style="padding:6px 0">Первые 2-4 недели — <strong>платное тестовое</strong> ($500-1000) прежде чем давать equity</li>
+    <li style="padding:6px 0">Никогда не давай приватные ключи до того как юридические документы подписаны</li>
+  </ul>
+</section>
+
+<!-- РАЗДЕЛ 7 -->
+<section id="agreement">
+  <div class="section-num">Раздел 7</div>
+  <h2 class="section-title">Шаблон Co-founder Agreement</h2>
+  <p class="section-intro">Это базовый шаблон. Перед подписанием обязательно покажи юристу в стране регистрации компании. ADGM (Abu Dhabi) и Labuan (Malaysia) имеют свои стандартные формы.</p>
+
+  <div class="warning">Это шаблон для понимания структуры — не юридический документ. Для реальной сделки нужен лицензированный юрист.</div>
+
+  <div class="agreement">
+    <div class="agreement-title">
+      <h3>CO-FOUNDER AGREEMENT</h3>
+      <p>AM Network · [Дата] · Конфиденциально</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-num">Статья 1 — Стороны</div>
+      <p><strong>Основатель:</strong> Акбар Амирзода («Основатель»), гражданин Республики Таджикистан</p>
+      <p><strong>Технический Сооснователь:</strong> [Имя Фамилия] («CTO»), гражданин [Страна]</p>
+      <p>Вместе именуемые «Стороны», заключили настоящее Соглашение о совместном создании AM Network («Компания»).</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-num">Статья 2 — Доли и Вестинг</div>
+      <p>Стороны договорились о следующем распределении долей:</p>
+      <ul>
+        <li>Основатель (Акбар Амирзода): <strong>[___]%</strong></li>
+        <li>Технический Сооснователь (CTO): <strong>[___]%</strong></li>
+        <li>Опционный пул (для будущей команды): <strong>[___]%</strong></li>
+      </ul>
+      <p style="margin-top:12px"><strong>График вестинга CTO:</strong> 4 года, cliff 1 год. Значит: через 12 месяцев с даты подписания CTO получает 25% своей доли. После — ежемесячно по 1/48 оставшейся доли. При выходе до окончания вестинга — невестированные акции возвращаются в компанию.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-num">Статья 3 — Роли и Обязанности</div>
+      <p><strong>Основатель (CEO):</strong> Стратегия, инвестиции, партнёрства, продукт, маркетинг, шариатское соответствие.</p>
+      <p><strong>CTO:</strong> Техническая архитектура, смарт-контракты (Solidity), AI/ML скоринг, безопасность, найм технической команды.</p>
+      <p>CTO обязуется посвящать работе над Компанией не менее [___] часов в неделю и уведомлять Основателя о любых конфликтах интересов.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-num">Статья 4 — Права Интеллектуальной Собственности</div>
+      <p>Всё программное обеспечение, смарт-контракты, алгоритмы, дизайны и иные разработки, созданные CTO в рамках деятельности Компании, являются исключительной собственностью Компании AM Network.</p>
+      <p>CTO не вправе использовать данные разработки в других проектах без письменного согласия Основателя.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-num">Статья 5 — Конфиденциальность (NDA)</div>
+      <p>CTO обязуется в течение действия настоящего Соглашения и <strong>3 лет после его прекращения</strong> не раскрывать третьим лицам:</p>
+      <ul>
+        <li>Исходный код, алгоритмы, техническую документацию</li>
+        <li>Базы данных пользователей и получателей</li>
+        <li>Финансовые показатели и условия инвесторских сделок</li>
+        <li>Стратегические планы развития продукта</li>
+      </ul>
+    </div>
+
+    <div class="clause">
+      <div class="clause-num">Статья 6 — Управление Кошельками и Финансами</div>
+      <p>Все смарт-контракты Компании используют структуру <strong>multisig (минимум 2 из 3 подписей)</strong> для операций с пользовательскими средствами.</p>
+      <p>CTO не имеет права в одностороннем порядке совершать транзакции с кошельков Компании на сумму свыше $[___] без согласия Основателя.</p>
+      <p>Приватные ключи хранятся раздельно. Ни одна из Сторон не хранит все ключи единолично.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-num">Статья 7 — Аудит и Безопасность</div>
+      <p>Любой смарт-контракт, работающий с реальными средствами пользователей, <strong>обязан пройти независимый аудит безопасности</strong> до деплоя на mainnet.</p>
+      <p>Выбор аудиторской компании согласовывается обеими Сторонами. Расходы на аудит несёт Компания.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-num">Статья 8 — Выход из Проекта</div>
+      <p><strong>Добровольный выход:</strong> CTO уведомляет за 60 дней. Невестированные акции возвращаются. Вестированные — остаются.</p>
+      <p><strong>Принудительный выход (Good Leaver):</strong> По состоянию здоровья или иным уважительным причинам — условия обсуждаются.</p>
+      <p><strong>Принудительный выход (Bad Leaver):</strong> При нарушении настоящего Соглашения (мошенничество, нарушение NDA, конкурентная деятельность) — все акции могут быть выкуплены по номинальной стоимости.</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-num">Статья 9 — Разрешение Споров</div>
+      <p>Стороны обязуются прежде всего разрешать споры переговорами в течение 30 дней. При невозможности — через арбитраж [ADGM Arbitration Centre / ICC] по законодательству [ОАЭ / Малайзия].</p>
+    </div>
+
+    <div class="clause">
+      <div class="clause-num">Статья 10 — Прочие Условия</div>
+      <p>Настоящее Соглашение вступает в силу с момента подписания обеими Сторонами. Изменения вносятся только в письменной форме с подписями обеих Сторон. Если какое-либо положение признаётся недействительным — остальные положения сохраняют силу.</p>
+    </div>
+
+    <div class="sig-block">
+      <div>
+        <div class="sig-line"></div>
+        <div class="sig-label"><strong>Акбар Амирзода</strong> — Основатель, CEO<br>Дата: _______________</div>
+      </div>
+      <div>
+        <div class="sig-line"></div>
+        <div class="sig-label"><strong>[Имя CTO]</strong> — Технический Сооснователь, CTO<br>Дата: _______________</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- РАЗДЕЛ 8 -->
+<section id="checklist">
+  <div class="section-num">Раздел 8</div>
+  <h2 class="section-title">Чеклист: первые 30 дней с CTO</h2>
+  <p class="section-intro">После того как нашёл кандидата — вот конкретные шаги чтобы правильно начать работу.</p>
+
+  <h3>Неделя 1 — Юридика и доступы</h3>
+  <div class="checklist">
+    <label class="check-item"><input type="checkbox"> Подписан Co-founder Agreement (оба экземпляра, желательно нотариально)</label>
+    <label class="check-item"><input type="checkbox"> Подписан IP Assignment Agreement</label>
+    <label class="check-item"><input type="checkbox"> CTO добавлен как contributor в GitHub репозиторий (не owner)</label>
+    <label class="check-item"><input type="checkbox"> Создан Gnosis Safe multisig кошелёк (testnet) — 2 из 3 подписей</label>
+    <label class="check-item"><input type="checkbox"> Установлен общий канал коммуникации (Telegram / Discord)</label>
+  </div>
+
+  <h3>Неделя 2-3 — Первая техническая задача</h3>
+  <div class="checklist">
+    <label class="check-item"><input type="checkbox"> CTO деплоит простой смарт-контракт на Base Sepolia testnet</label>
+    <label class="check-item"><input type="checkbox"> Ты смотришь транзакцию в BaseScan — видишь что контракт реально работает</label>
+    <label class="check-item"><input type="checkbox"> Обсуждена техническая архитектура всего продукта</label>
+    <label class="check-item"><input type="checkbox"> Составлен технический roadmap с датами</label>
+  </div>
+
+  <h3>Неделя 4 — Проверка</h3>
+  <div class="checklist">
+    <label class="check-item"><input type="checkbox"> CTO выполнил первый milestone в срок?</label>
+    <label class="check-item"><input type="checkbox"> Общение комфортное — говорит понятно, не скрывает проблемы?</label>
+    <label class="check-item"><input type="checkbox"> Код в GitHub обновляется регулярно?</label>
+    <label class="check-item"><input type="checkbox"> Ты понимаешь что именно он строит — он объясняет?</label>
+  </div>
+
+  <div class="card card-gold" style="margin-top:32px">
+    <h4>💬 Главное правило работы с CTO</h4>
+    <p>Требуй еженедельный 30-минутный отчёт: что сделано, что планируется, какие проблемы. Разработчик который не может объяснить свою работу простыми словами — либо не работает, либо скрывает проблемы.</p>
+  </div>
+</section>
+
+</div><!-- /doc -->
+
+<div style="background:#060E09;color:rgba(255,255,255,0.4);text-align:center;padding:40px;font-size:13px;margin-top:60px">
+  <p style="color:#C9A84C;font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:8px">AM Network</p>
+  <p>Конфиденциальный документ для внутреннего использования · amnetwork.io · contact@amnetwork.io</p>
+  <p style="margin-top:8px">Июнь 2026 · Версия 1.0</p>
+</div>
+
+<div class="no-print" style="margin-top:0">
+  Нажми кнопку чтобы сохранить как PDF (Chrome: Файл → Печать → Сохранить как PDF)
+  <button onclick="window.print()">🖨 Сохранить как PDF</button>
+</div>
+
+</body>
+</html>
