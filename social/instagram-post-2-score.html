@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Instagram Post 2 — AI Score Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1080px;height:1080px;overflow:hidden;background:#0A1A11}
+  .card{width:1080px;height:1080px;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+
+  /* Left panel — dark */
+  .left{background:linear-gradient(160deg,#0A1A11,#0F2117);display:flex;flex-direction:column;justify-content:center;padding:80px 60px 80px 80px;position:relative;border-right:1px solid rgba(201,168,76,0.12)}
+  .left::before{content:'';position:absolute;top:0;right:0;width:1px;height:100%;background:linear-gradient(to bottom,transparent,rgba(201,168,76,0.3),transparent)}
+
+  /* Right panel — UI mockup */
+  .right{background:#0F2117;display:flex;flex-direction:column;justify-content:center;padding:60px 60px 60px 48px;position:relative}
+  .right::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,0.03),transparent);pointer-events:none}
+
+  /* Logo */
+  .logo{display:flex;align-items:center;gap:10px;margin-bottom:60px}
+  .logo-dot{width:8px;height:8px;border-radius:50%;background:#C9A84C}
+  .logo-text{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:.12em;text-transform:uppercase}
+
+  /* Headline */
+  .tag{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:#C9A84C;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .tag::before{content:'';display:inline-block;width:24px;height:1px;background:#C9A84C}
+  h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:20px}
+  h1 span{color:#C9A84C}
+  .sub{font-family:'DM Sans',sans-serif;font-size:18px;color:rgba(255,255,255,0.45);line-height:1.65;max-width:400px;margin-bottom:44px}
+
+  /* Handle */
+  .handle{font-family:'DM Sans',sans-serif;font-size:15px;color:rgba(255,255,255,0.3);letter-spacing:.06em}
+
+  /* UI card mockup */
+  .ui-card{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:32px;margin-bottom:20px}
+  .ui-label{font-family:'DM Sans',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+
+  /* Score */
+  .score-row{display:flex;align-items:flex-end;gap:16px;margin-bottom:20px}
+  .score-num{font-family:'Cormorant Garamond',serif;font-size:96px;font-weight:700;color:#C9A84C;line-height:1}
+  .score-meta{display:flex;flex-direction:column;gap:6px;padding-bottom:8px}
+  .score-max{font-family:'DM Sans',sans-serif;font-size:16px;color:rgba(255,255,255,0.3)}
+  .tier-badge{display:inline-block;padding:5px 14px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;background:rgba(224,82,82,0.15);color:#e05252;border:1px solid rgba(224,82,82,0.3)}
+
+  /* Progress bar */
+  .bar-track{height:8px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden;margin-bottom:24px}
+  .bar-fill{height:100%;width:82%;background:linear-gradient(90deg,#C9A84C,#E8C87A);border-radius:4px}
+
+  /* Breakdown rows */
+  .bd-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+  .bd-row:last-child{border:none}
+  .bd-label{font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,0.5);flex:1}
+  .bd-val{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;color:#C9A84C;min-width:44px;text-align:right}
+  .bd-bar{width:60px;height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden}
+  .bd-bar-fill{height:100%;background:#C9A84C;border-radius:2px}
+
+  /* Recommendation */
+  .rec{background:rgba(224,82,82,0.08);border:1px solid rgba(224,82,82,0.2);border-radius:10px;padding:14px 18px}
+  .rec-text{font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,255,255,0.7);line-height:1.5}
+  .rec-text strong{color:#e05252}
+
+  /* Applicant info */
+  .applicant{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+  .av{width:44px;height:44px;border-radius:12px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);display:flex;align-items:center;justify-content:center}
+  .av-icon{font-size:20px}
+  .av-info{display:flex;flex-direction:column;gap:2px}
+  .av-name{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,0.75)}
+  .av-detail{font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,0.3)}
+
+  /* Background glow */
+  .right-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;background:radial-gradient(circle,rgba(201,168,76,0.05),transparent 70%);pointer-events:none}
+</style>
+</head>
+<body>
+<div class="card">
+
+  <!-- LEFT PANEL -->
+  <div class="left">
+    <div class="logo">
+      <div class="logo-dot"></div>
+      <div class="logo-text">AM Network</div>
+    </div>
+
+    <div class="tag">AM Zakat.ai</div>
+    <h1>AI Score<br><span>0–100</span><br>in 30 sec</h1>
+    <div class="sub">Answer 3 questions.<br>Get your Zakat eligibility score<br>based on Islamic jurisprudence<br>and 55+ regional poverty lines.</div>
+    <div class="handle">@amnet_io · amnetwork.io</div>
+  </div>
+
+  <!-- RIGHT PANEL — UI mockup -->
+  <div class="right">
+    <div class="right-glow"></div>
+
+    <div class="ui-card">
+      <div class="applicant">
+        <div class="av">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.8)" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="av-info">
+          <div class="av-name">Applicant #1042 · Turkey</div>
+          <div class="av-detail">Refugee · Family of 5 · 0 income</div>
+        </div>
+      </div>
+
+      <div class="ui-label">Eligibility Score</div>
+      <div class="score-row">
+        <div class="score-num">82</div>
+        <div class="score-meta">
+          <div class="score-max">/ 100</div>
+          <div class="tier-badge">CRITICAL</div>
+        </div>
+      </div>
+      <div class="bar-track"><div class="bar-fill"></div></div>
+
+      <div class="bd-row"><div class="bd-label">Income &amp; Poverty</div><div class="bd-val">20/20</div><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+      <div class="bd-row"><div class="bd-label">Family &amp; Dependents</div><div class="bd-val">12/15</div><div class="bd-bar"><div class="bd-bar-fill" style="width:80%"></div></div></div>
+      <div class="bd-row"><div class="bd-label">Housing &amp; Shelter</div><div class="bd-val">11/12</div><div class="bd-bar"><div class="bd-bar-fill" style="width:92%"></div></div></div>
+      <div class="bd-row"><div class="bd-label">Asnaf Category Match</div><div class="bd-val">12/12</div><div class="bd-bar"><div class="bd-bar-fill" style="width:100%"></div></div></div>
+    </div>
+
+    <div class="rec">
+      <div class="rec-text"><strong>Immediate distribution</strong> — Ibn Al-Sabil + Al-Masakin · Est. need: $1,400/mo</div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;align-items:center;gap:8px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.5)" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(255,255,255,0.25)">Oracle confirmed · Blockchain verified · Free &amp; anonymous</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
