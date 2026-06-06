@@ -347,16 +347,7 @@ footer a{color:var(--gold);text-decoration:none}
         <input type="number" id="debts" min="0" step="0.01" placeholder="0" data-t="amount_ph">
         <span class="unit" data-t="amount_unit">USD</span>
       </div>
-      <div class="field-hint" data-t="debts_hint">Loans, credit card balances, or other debts due within the year</div>
-    </div>
-
-    <div class="field">
-      <label data-t="expenses_lbl">Monthly Living Expenses (×1)</label>
-      <div class="input-row">
-        <input type="number" id="expenses" min="0" step="0.01" placeholder="0" data-t="amount_ph">
-        <span class="unit" data-t="amount_unit">USD</span>
-      </div>
-      <div class="field-hint" data-t="expenses_hint">One month of essential living costs (rent, food, utilities)</div>
+      <div class="field-hint" data-t="debts_hint">Only debts currently due and payable — NOT future living expenses</div>
     </div>
   </div>
 
@@ -551,9 +542,9 @@ const translations = {
     deductions_title: "Deductions",
     deductions_sub: "Liabilities subtracted from zakatable assets",
     debts_lbl: "Outstanding Debts You Owe",
-    debts_hint: "Loans, credit card balances, or other debts due within the year",
-    expenses_lbl: "Monthly Living Expenses (×1)",
-    expenses_hint: "One month of essential living costs (rent, food, utilities)",
+    debts_hint: "Only debts currently due and payable (loans, credit cards due now — NOT future living expenses)",
+    
+    
     agri_title: "Agricultural Produce",
     agri_sub: "Calculated separately — no hawl (lunar year) required",
     rain_lbl: "Rain-watered Crops Value",
@@ -582,7 +573,7 @@ const translations = {
     row_receivables: "Receivables",
     row_gross: "Gross Zakatable Assets",
     row_debts: "— Outstanding Debts",
-    row_expenses: "— Monthly Expenses",
+    
     row_net: "Net Zakatable Assets",
     row_zakat: "Zakat Due (2.5%)",
     amount_ph: "0.00",
@@ -643,9 +634,9 @@ const translations = {
     deductions_title: "الاستقطاعات",
     deductions_sub: "الالتزامات المخصومة من الأصول الخاضعة للزكاة",
     debts_lbl: "الديون المستحقة عليك",
-    debts_hint: "القروض وأرصدة بطاقات الائتمان أو الديون الأخرى المستحقة خلال العام",
-    expenses_lbl: "نفقات المعيشة الشهرية (×1)",
-    expenses_hint: "تكاليف المعيشة الأساسية لمدة شهر (إيجار، طعام، مرافق)",
+    debts_hint: "الديون المستحقة الآن فقط (قروض أو بطاقات ائتمان واجبة السداد الآن — وليس نفقات المعيشة المستقبلية)",
+    
+    
     agri_title: "المحاصيل الزراعية",
     agri_sub: "تحسب بشكل منفصل — لا يُشترط الحول",
     rain_lbl: "قيمة المحاصيل المروية بالمطر",
@@ -674,7 +665,7 @@ const translations = {
     row_receivables: "المستحقات",
     row_gross: "إجمالي الأصول الخاضعة للزكاة",
     row_debts: "— الديون المستحقة",
-    row_expenses: "— نفقات شهرية",
+    
     row_net: "صافي الأصول الخاضعة للزكاة",
     row_zakat: "الزكاة المستحقة (2.5%)",
     amount_ph: "0.00",
@@ -735,9 +726,9 @@ const translations = {
     deductions_title: "Вычеты",
     deductions_sub: "Обязательства, вычитаемые из подлежащих обложению активов",
     debts_lbl: "Ваши долги",
-    debts_hint: "Займы, задолженность по кредитным картам и другие долги, подлежащие погашению в течение года",
-    expenses_lbl: "Ежемесячные расходы на жизнь (×1)",
-    expenses_hint: "Основные расходы за один месяц (аренда, питание, коммунальные услуги)",
+    debts_hint: "Только долги, подлежащие уплате сейчас (кредиты, кредитные карты — НЕ будущие расходы на жизнь)",
+    
+    
     agri_title: "Сельскохозяйственная продукция",
     agri_sub: "Рассчитывается отдельно — хаул не требуется",
     rain_lbl: "Стоимость дождевых культур",
@@ -766,7 +757,7 @@ const translations = {
     row_receivables: "Дебиторская задолженность",
     row_gross: "Валовые активы, подлежащие закяту",
     row_debts: "— Долги",
-    row_expenses: "— Ежемесячные расходы",
+    
     row_net: "Чистые активы, подлежащие закяту",
     row_zakat: "Закят к уплате (2,5%)",
     amount_ph: "0.00",
@@ -827,9 +818,9 @@ const translations = {
     deductions_title: "Тарҳҳо",
     deductions_sub: "Уҳдадориҳое ки аз дороиҳои зокатшаванда тарҳ мешаванд",
     debts_lbl: "Қарзҳои шумо",
-    debts_hint: "Қарзҳо ва ӯҳдадориҳои дигар, ки дар давоми сол бояд пардохт шаванд",
-    expenses_lbl: "Хароҷоти моҳонаи зиндагӣ (×1)",
-    expenses_hint: "Харҷи асосии як моҳ (иҷора, хӯрок, коммуналӣ)",
+    debts_hint: "Танҳо қарзҳое ки ҳозир бояд пардохт шаванд (кредитҳо, карти кредитӣ — на харҷоти маишии оянда)",
+    
+    
     agri_title: "Маҳсулоти кишоварзӣ",
     agri_sub: "Ҷудогона ҳисоб мешавад — ҳавл лозим нест",
     rain_lbl: "Арзиши зироатҳои боронӣ",
@@ -858,7 +849,7 @@ const translations = {
     row_receivables: "Дебиторӣ",
     row_gross: "Маҷмӯи дороиҳои зокатшаванда",
     row_debts: "— Қарзҳо",
-    row_expenses: "— Хароҷоти моҳона",
+    
     row_net: "Холис дороиҳои зокатшаванда",
     row_zakat: "Закот (2.5%)",
     amount_ph: "0.00",
@@ -919,9 +910,9 @@ const translations = {
     deductions_title: "Pengurangan",
     deductions_sub: "Kewajiban yang dikurangi dari aset yang wajib dizakati",
     debts_lbl: "Utang yang Anda Miliki",
-    debts_hint: "Pinjaman, saldo kartu kredit, atau utang lain yang jatuh tempo dalam setahun",
-    expenses_lbl: "Biaya Hidup Bulanan (×1)",
-    expenses_hint: "Biaya hidup pokok satu bulan (sewa, makanan, utilitas)",
+    debts_hint: "Hanya utang yang jatuh tempo sekarang (pinjaman, kartu kredit yang harus dibayar — BUKAN pengeluaran hidup mendatang)",
+    
+    
     agri_title: "Hasil Pertanian",
     agri_sub: "Dihitung terpisah — tidak memerlukan haul",
     rain_lbl: "Nilai Tanaman Tadah Hujan",
@@ -950,7 +941,7 @@ const translations = {
     row_receivables: "Piutang",
     row_gross: "Total Aset Wajib Zakat",
     row_debts: "— Utang yang Dimiliki",
-    row_expenses: "— Biaya Bulanan",
+    
     row_net: "Aset Bersih Wajib Zakat",
     row_zakat: "Zakat yang Harus Dibayar (2,5%)",
     amount_ph: "0.00",
@@ -1011,9 +1002,9 @@ const translations = {
     deductions_title: "Kesintiler",
     deductions_sub: "Zekâta tabi varlıklardan düşülen yükümlülükler",
     debts_lbl: "Ödenmemiş Borçlarınız",
-    debts_hint: "Yıl içinde vadesi gelen krediler, kredi kartı borçları veya diğer borçlar",
-    expenses_lbl: "Aylık Geçim Masrafları (×1)",
-    expenses_hint: "Bir aylık temel geçim masrafları (kira, yiyecek, faturalar)",
+    debts_hint: "Yalnızca şu an ödenecek borçlar (vadesi gelen krediler, kredi kartları — gelecekteki yaşam giderleri değil)",
+    
+    
     agri_title: "Tarım Ürünleri",
     agri_sub: "Ayrı hesaplanır — havl gerekmez",
     rain_lbl: "Yağmur Sulanan Ürün Değeri",
@@ -1042,7 +1033,7 @@ const translations = {
     row_receivables: "Alacaklar",
     row_gross: "Toplam Zekâta Tabi Varlıklar",
     row_debts: "— Borçlar",
-    row_expenses: "— Aylık Masraflar",
+    
     row_net: "Net Zekâta Tabi Varlıklar",
     row_zakat: "Ödenecek Zekât (%2,5)",
     amount_ph: "0.00",
@@ -1103,9 +1094,9 @@ const translations = {
     deductions_title: "扣除项",
     deductions_sub: "从须缴天课的资产中扣除的负债",
     debts_lbl: "您的未偿债务",
-    debts_hint: "一年内到期的贷款、信用卡余额或其他债务",
-    expenses_lbl: "月生活费（×1）",
-    expenses_hint: "一个月的基本生活费用（租金、食物、水电）",
+    debts_hint: "仅限当前到期应付的债务（贷款、信用卡——不包括未来生活费用）",
+    
+    
     agri_title: "农产品",
     agri_sub: "单独计算 — 无需哈武勒（太阴年）",
     rain_lbl: "雨水灌溉的庄稼价值",
@@ -1134,7 +1125,7 @@ const translations = {
     row_receivables: "应收款",
     row_gross: "须缴天课资产总额",
     row_debts: "— 未偿债务",
-    row_expenses: "— 月生活费",
+    
     row_net: "须缴天课净资产",
     row_zakat: "应缴天课（2.5%）",
     amount_ph: "0.00",
@@ -1195,9 +1186,9 @@ const translations = {
     deductions_title: "Potongan",
     deductions_sub: "Liabiliti yang ditolak daripada aset yang dikenakan zakat",
     debts_lbl: "Hutang Tertunggak Anda",
-    debts_hint: "Pinjaman, baki kad kredit, atau hutang lain yang perlu dibayar dalam setahun",
-    expenses_lbl: "Perbelanjaan Hidup Bulanan (×1)",
-    expenses_hint: "Kos sara hidup asas satu bulan (sewa, makanan, utiliti)",
+    debts_hint: "Hanya hutang yang perlu dibayar sekarang (pinjaman, kad kredit yang perlu dijelaskan — BUKAN perbelanjaan hidup masa depan)",
+    
+    
     agri_title: "Hasil Pertanian",
     agri_sub: "Dikira berasingan — haul tidak diperlukan",
     rain_lbl: "Nilai Tanaman Tadah Hujan",
@@ -1226,7 +1217,7 @@ const translations = {
     row_receivables: "Hutang Boleh Terima",
     row_gross: "Jumlah Aset Wajib Zakat",
     row_debts: "— Hutang Tertunggak",
-    row_expenses: "— Perbelanjaan Bulanan",
+    
     row_net: "Aset Bersih Wajib Zakat",
     row_zakat: "Zakat yang Perlu Dibayar (2.5%)",
     amount_ph: "0.00",
@@ -1367,8 +1358,7 @@ function calculateZakat() {
 
   // Deductions
   const debts = parseVal('debts');
-  const expenses = parseVal('expenses');
-  const totalDeductions = debts + expenses;
+  const totalDeductions = debts;
 
   // Net zakatable
   const netZakatable = Math.max(0, gross - totalDeductions);
@@ -1437,9 +1427,7 @@ function calculateZakat() {
   if (debts > 0) {
     tableHTML += '<tr class="deduct-row"><td>' + t('row_debts') + '</td><td>− ' + fmtUSD(debts) + '</td></tr>';
   }
-  if (expenses > 0) {
-    tableHTML += '<tr class="deduct-row"><td>' + t('row_expenses') + '</td><td>− ' + fmtUSD(expenses) + '</td></tr>';
-  }
+
 
   // Net total
   tableHTML += '<tr class="total-row"><td>' + t('row_net') + '</td><td>' + fmtUSD(netZakatable) + '</td></tr>';
