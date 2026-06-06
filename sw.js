@@ -1,4 +1,4 @@
-const CACHE = 'am-network-v1';
+const CACHE = 'am-network-v2';
 const PRECACHE = [
   '/',
   '/index.html',
@@ -24,11 +24,31 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+
+  const req = e.request;
+  const isHTML = req.mode === 'navigate' ||
+    (req.headers.get('accept') || '').includes('text/html');
+
+  // Network-first for HTML pages so new deploys are always picked up.
+  if (isHTML) {
+    e.respondWith(
+      fetch(req).then(res => {
+        if (res.ok && req.url.startsWith(self.location.origin)) {
+          const copy = res.clone();
+          caches.open(CACHE).then(c => c.put(req, copy));
+        }
+        return res;
+      }).catch(() => caches.match(req).then(c => c || caches.match('/index.html')))
+    );
+    return;
+  }
+
+  // Cache-first for static assets (hashed filenames are immutable).
   e.respondWith(
-    caches.match(e.request).then(cached => {
-      const net = fetch(e.request).then(res => {
-        if (res.ok && e.request.url.startsWith(self.location.origin)) {
-          caches.open(CACHE).then(c => c.put(e.request, res.clone()));
+    caches.match(req).then(cached => {
+      const net = fetch(req).then(res => {
+        if (res.ok && req.url.startsWith(self.location.origin)) {
+          caches.open(CACHE).then(c => c.put(req, res.clone()));
         }
         return res;
       });
