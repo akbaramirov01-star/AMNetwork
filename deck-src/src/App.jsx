@@ -26,9 +26,9 @@ const T = {
     closing:'Join us in making mercy transparent.',
     coverSub:'Blockchain-verified Zakat & Sadaqah · Sharia-Compliant · AI-Powered',
     confidential:'Confidential — For Investors Only',
-    s1title:'The $600 Billion Question',
-    s1body:'Every year, $600 billion in Zakat is collected through informal networks — no receipts, no verification, no trust layer. We are building the infrastructure the Ummah has needed for 1,400 years.',
-    muslims:'Muslims globally', annZakat:'Annual Zakat', transparent:'Fully transparent today',
+    s1title:'The $600 Billion Opportunity',
+    s1body:'The World Bank & IsDB estimate the annual Zakat obligation at $600B — yet less than $25B reaches verified recipients through formal channels. Zero receipts. Zero accountability. We are building the infrastructure the Ummah has needed for 1,400 years.',
+    muslims:'Muslims globally', annZakat:'Potential Zakat/yr', transparent:'Formally tracked today',
     s2title:'The trillion-dollar blind spot', s2pct:'of annual Zakat is verifiably transparent today',
     noVerif:'No Verification', noVerifBody:'Recipients cannot prove need. Donors cannot verify impact. Trust breaks down.',
     noAcc:'No Accountability', noAccBody:'Funds flow through informal networks. Fraud and inefficiency are systemic.',
@@ -51,8 +51,8 @@ const T = {
     ai:'AI Scoring 0–100', aiBody:'Every recipient scored by our model. 11 categories, local oracle verification.',
     chain:'Base Blockchain', chainBody:'Immutable records. Smart contracts release funds only on verified confirmation.',
     oracle:'Local Oracle Network', oracleBody:'Mosque imams + AM volunteers + NGOs confirm physical presence.',
-    s7title:'A $4 trillion market growing +12% a year',
-    ifMarket:'Islamic Finance Market', zakatPool:'Annual Zakat Pool', fintech:'Islamic Fintech 2030', fintechCagr:'Fintech CAGR',
+    s7title:'A $6 trillion market growing +12% a year',
+    ifMarket:'Islamic Finance Market', zakatPool:'Potential Zakat/yr', fintech:'Islamic Fintech 2029', fintechCagr:'IF CAGR',
     s8title:'Sharia-compliant revenue. No speculation.',
     sends:'Sends Zakat or Sadaqah', verifies:'Verifies · Routes · Records', receivesInstant:'Verified. Receives instantly.',
     ujrahLabel:'Ujrah (service fee) on each transaction — the only revenue stream. Zero riba. Zero speculative token.',
@@ -86,9 +86,9 @@ const T = {
     closing:'Присоединитесь: сделаем милосердие прозрачным.',
     coverSub:'Закят и Садака на блокчейне · Шариатская совместимость · На базе ИИ',
     confidential:'Конфиденциально — только для инвесторов',
-    s1title:'Вопрос на $600 миллиардов',
-    s1body:'Каждый год $600 млрд закята собирается через неформальные сети — без квитанций, без верификации, без доверия. Мы строим инфраструктуру, которая нужна Умме уже 1 400 лет.',
-    muslims:'Мусульман в мире', annZakat:'Закят в год', transparent:'Прозрачности сегодня',
+    s1title:'Возможность на $600 миллиардов',
+    s1body:'Всемирный банк и IsDB оценивают годовое обязательство закята в $600 млрд — однако менее $25 млрд доходит до верифицированных получателей. Ни квитанций, ни подотчётности. Мы строим инфраструктуру, которая нужна Умме уже 1 400 лет.',
+    muslims:'Мусульман в мире', annZakat:'Потенциал закята/год', transparent:'Формально отслеживается',
     s2title:'Слепое пятно на триллион долларов', s2pct:'ежегодного закята верифицировано прозрачно сегодня',
     noVerif:'Нет верификации', noVerifBody:'Получатели не могут доказать нужду. Доноры не могут проверить результат.',
     noAcc:'Нет подотчётности', noAccBody:'Средства идут через неформальные сети. Мошенничество носит системный характер.',
@@ -111,8 +111,8 @@ const T = {
     ai:'ИИ-скоринг 0–100', aiBody:'Каждый получатель оценивается нашей моделью. 11 категорий, оракульная верификация.',
     chain:'Блокчейн Base', chainBody:'Неизменяемые записи. Смарт-контракты высвобождают средства при верификации.',
     oracle:'Локальная сеть оракулов', oracleBody:'Имамы + волонтёры AM + НКО подтверждают физическое присутствие.',
-    s7title:'Рынок $4 трлн, растущий на +12% в год',
-    ifMarket:'Исламский финансовый рынок', zakatPool:'Годовой пул закята', fintech:'Исламский финтех 2030', fintechCagr:'CAGR финтеха',
+    s7title:'Рынок $6 трлн, растущий на +12% в год',
+    ifMarket:'Исламский финансовый рынок', zakatPool:'Потенциал закята/год', fintech:'Исламский финтех 2029', fintechCagr:'CAGR',
     s8title:'Доход по шариату. Без спекуляций.',
     sends:'Отправляет закят или садаку', verifies:'Верифицирует · Маршрутизирует · Записывает', receivesInstant:'Верифицирован. Получает мгновенно.',
     ujrahLabel:'Уджра (сервисный сбор) с каждой транзакции — единственный источник дохода. Ноль риба.',
@@ -271,7 +271,7 @@ function MarketChart() {
       ))}
       <line x1="40" y1="10" x2="40" y2="155" stroke="rgba(255,255,255,.06)" strokeWidth="1"/>
       <line x1="40" y1="155" x2="560" y2="155" stroke="rgba(255,255,255,.06)" strokeWidth="1"/>
-      {[["$2T",155],["$3T",105],["$4T",55],["$5T",10]].map(([l,y])=>(
+      {[["$3T",155],["$5T",105],["$7T",55],["$9T",10]].map(([l,y])=>(
         <text key={l} x="32" y={y+4} textAnchor="end" fill="#8A9B8E" fontSize="10" fontFamily="sans-serif">{l}</text>
       ))}
       {[["2022",75],["2024",183],["2026",308],["2028",430],["2030",530]].map(([l,x])=>(
@@ -286,7 +286,7 @@ function MarketChart() {
         <motion.circle key={i} cx={x} cy={y} r={r} fill={c} initial={{scale:0}} animate={{scale:1}} transition={{delay:.8+i*.4,...spring}}/>
       ))}
       <motion.text x="535" y="8" textAnchor="middle" fill="#E8C547" fontSize="12" fontWeight="700" fontFamily="sans-serif"
-        initial={{opacity:0}} animate={{opacity:1}} transition={{delay:2}}>$5.7T</motion.text>
+        initial={{opacity:0}} animate={{opacity:1}} transition={{delay:2}}>$9.3T</motion.text>
       <motion.rect x="328" y="72" width="95" height="26" rx="13" fill="rgba(184,149,42,.18)" stroke="rgba(184,149,42,.4)" strokeWidth="1"
         initial={{opacity:0,scale:.8}} animate={{opacity:1,scale:1}} transition={{delay:2.2,...spring}}/>
       <motion.text x="375" y="89" textAnchor="middle" fill="#E8C547" fontSize="12" fontWeight="700" fontFamily="sans-serif"
@@ -370,7 +370,7 @@ function S1({t}) {
         <motion.div variants={itemAnim}><H2c c={t.s1title}/></motion.div>
         <motion.div variants={itemAnim}><Subc c={t.s1body}/></motion.div>
         <motion.div variants={staggerWrap()} style={{display:'flex',gap:38,flexWrap:'wrap',justifyContent:'center'}}>
-          <Stat n="1.8B" l={t.muslims}/><Stat n="$600B" l={t.annZakat}/><Stat n="0%" l={t.transparent}/>
+          <Stat n="~2B" l={t.muslims}/><Stat n="$600B" l={t.annZakat}/><Stat n="0%" l={t.transparent}/>
         </motion.div>
       </motion.div>
     </Scene>
@@ -525,7 +525,7 @@ function S7({t}) {
         <motion.div variants={itemAnim}><H2c c={t.s7title}/></motion.div>
         <motion.div variants={itemAnim} style={{width:'100%',maxWidth:560}}><MarketChart/></motion.div>
         <motion.div variants={staggerWrap()} style={{display:'flex',gap:30,flexWrap:'wrap',justifyContent:'center',marginTop:13}}>
-          <Stat n="$4T" l={t.ifMarket}/><Stat n="$600B" l={t.zakatPool}/><Stat n="$57B" l={t.fintech}/><Stat n="+21%" l={t.fintechCagr}/>
+          <Stat n="$6T" l={t.ifMarket}/><Stat n="$600B" l={t.zakatPool}/><Stat n="$341B" l={t.fintech}/><Stat n="+12%" l={t.fintechCagr}/>
         </motion.div>
       </motion.div>
     </Scene>
