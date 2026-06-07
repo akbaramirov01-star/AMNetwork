@@ -1,0 +1,36 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --gold: #B8952A;
+  --gold2: #E8C547;
+  --gold3: #F5E070;
+  --green: #1B4D2E;
+  --green2: #2A7A4B;
+  --green3: #3CB46A;
+  --bg: #060A08;
+  --bg2: #0D1810;
+  --card: #0F1A11;
+  --text: #F4EFE1;
+  --dim: #8A9B8E;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+button { cursor: pointer; border: none; background: none; color: inherit; font: inherit; }
+a { color: inherit; text-decoration: none; }
