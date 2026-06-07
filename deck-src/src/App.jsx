@@ -21,7 +21,7 @@ const itemAnim = {
 const T = {
   en: {
     langBtn:'RU', opp:'The Opportunity', prob:'The Problem', serve:'Who We Serve', stakes:'The Stakes',
-    beyond:'Beyond Zakat', solution:'The Solution', market:'Market Opportunity', biz:'Business Model',
+    sharia:'Sharia Architecture', solution:'The Solution', market:'Market Opportunity', biz:'Business Model',
     traction:'Traction', roadmap:'Roadmap', team:'The Team', ask:'The Ask',
     closing:'Join us in making mercy transparent.',
     coverSub:'Blockchain-verified Zakat & Sadaqah · Sharia-Compliant · AI-Powered',
@@ -40,8 +40,12 @@ const T = {
     sv1t:'Hunger & Malnutrition', sv1b:'Families in the Ummah go hungry while billions in Zakat reach the wrong hands.',
     sv2t:'Homelessness', sv2b:'A verified recipient gets shelter support in 72 hours — on-chain, transparent, traceable.',
     sv3t:'Medical Crisis', sv3b:'AI scoring prioritises the chronically ill. Funds release the moment verification is confirmed.',
-    s5title:'The Sadaqah Shield',
-    s5body:'Voluntary charity that protects against catastrophe — illness, disaster, sudden loss. AM Network makes Sadaqah a continuous, automated safety net.',
+    s5title:'Built on Fiqh, Not Just Compliant',
+    s5sub:'Revenue via ujrah only — a service fee explicitly permitted in classical Islamic jurisprudence. Zero riba. Zero gharar. Formal fatwa before mainnet launch.',
+    noRiba:'Zero Riba',
+    noToken:'No Speculative Token',
+    noMiddlemen:'No Intermediaries',
+    ujrahTiers:'Ujrah Tiers',
     s6title:'How AM Network works', donor:'Donor', recipient:'Recipient',
     fn1sub:'Anywhere in the world', fn2sub:'AI · Blockchain · Oracle', fn3sub:'Verified need',
     ai:'AI Scoring 0–100', aiBody:'Every recipient scored by our model. 11 categories, local oracle verification.',
@@ -58,10 +62,10 @@ const T = {
     tr2:'IsDB Innovation applied (Islamic Development Bank, $80B AUM)',
     tr3:'Flat6Labs applied (leading MENA accelerator, 700+ startups)',
     tr4:'Hub71+ Digital Assets applied (Abu Dhabi, deadline Aug 2026)',
-    tr5:'Live website · AI scoring prototype · Full whitepaper v1', tr6:'Beta launch target',
+    tr5:'Live website · AI scoring LIVE · Smart contracts (Foundry) · Whitepaper v1', tr6:'Beta launch target',
     s10title:'From concept to Ummah infrastructure',
-    ph0:'COMPLETED', rd0t:'Foundation', rd0b:'Website · AI scoring · Whitepaper · Accelerator applications · Scholar outreach',
-    ph1:'SEED ROUND', rd1t:'Technical & Legal', rd1b:'CTO hire · Smart contracts · Sharia fatwa · Legal registration · Security audit',
+    ph0:'COMPLETED', rd0t:'Foundation', rd0b:'Website · AI scoring LIVE · Smart contracts (Foundry tested) · Whitepaper · Accelerator applications · Scholar outreach',
+    ph1:'SEED — NOW', rd1t:'Technical & Legal', rd1b:'CTO hire · Sharia fatwa · Legal registration · Security audit',
     ph2:'BETA', rd2t:'Private Beta', rd2b:'10 verified recipients · 50 donors · Oracle network in 3 cities · Full audit trail',
     ph3:'SERIES A', rd3t:'Scale', rd3b:'10,000+ recipients · 20 countries · AM Academy · LayerZero · $1M+ AUM',
     ph4:'VISION', rd4t:'Global Standard', rd4b:'The Zakat infrastructure layer for the entire Ummah.',
@@ -77,7 +81,7 @@ const T = {
   },
   ru: {
     langBtn:'EN', opp:'Возможность', prob:'Проблема', serve:'Кому мы служим', stakes:'На кону',
-    beyond:'За пределами закята', solution:'Решение', market:'Рыночная возможность', biz:'Бизнес-модель',
+    sharia:'Шариатская архитектура', solution:'Решение', market:'Рыночная возможность', biz:'Бизнес-модель',
     traction:'Прогресс', roadmap:'Дорожная карта', team:'Команда', ask:'Предложение',
     closing:'Присоединитесь: сделаем милосердие прозрачным.',
     coverSub:'Закят и Садака на блокчейне · Шариатская совместимость · На базе ИИ',
@@ -96,8 +100,12 @@ const T = {
     sv1t:'Голод и недоедание', sv1b:'Семьи в Умме ложатся спать голодными, пока миллиарды закята уходят не туда.',
     sv2t:'Бездомность', sv2b:'Верифицированная семья получает помощь с жильём в течение 72 часов — в блокчейне.',
     sv3t:'Медицинский кризис', sv3b:'ИИ-скоринг приоритизирует хронически больных. Средства высвобождаются при верификации.',
-    s5title:'Щит Садаки',
-    s5body:'Добровольная садака защищает от катастрофы — болезни, бедствия, потери. AM Network делает садаку непрерывной автоматизированной сетью безопасности.',
+    s5title:'Построено на фикхе, а не просто совместимо',
+    s5sub:'Доход только через уджру — сервисный сбор, прямо разрешённый классическим исламским правом. Ноль риба. Ноль гарар. Официальная фетва до запуска mainnet.',
+    noRiba:'Ноль риба',
+    noToken:'Нет спекулятивного токена',
+    noMiddlemen:'Нет посредников',
+    ujrahTiers:'Ставки уджры',
     s6title:'Как работает AM Network', donor:'Донор', recipient:'Получатель',
     fn1sub:'Из любой точки мира', fn2sub:'ИИ · Блокчейн · Оракул', fn3sub:'Подтверждённая нужда',
     ai:'ИИ-скоринг 0–100', aiBody:'Каждый получатель оценивается нашей моделью. 11 категорий, оракульная верификация.',
@@ -112,10 +120,10 @@ const T = {
     s9title:'Импульс ещё до единой строки mainnet-кода',
     tr1:'Обращение к Муфтию Фаразу Адаму (Amana Advisors)', tr2:'Заявка в IsDB Innovation ($80 млрд)',
     tr3:'Заявка в Flat6Labs (700+ стартапов)', tr4:'Заявка в Hub71+ Digital Assets (Абу-Даби)',
-    tr5:'Работающий сайт · Прототип ИИ-скоринга · Whitepaper v1', tr6:'Цель запуска бета-версии',
+    tr5:'Сайт · ИИ-скоринг LIVE · Смарт-контракты (Foundry) · Whitepaper v1', tr6:'Цель запуска бета-версии',
     s10title:'От концепции до инфраструктуры Уммы',
-    ph0:'ЗАВЕРШЕНО', rd0t:'Основание', rd0b:'Сайт · ИИ-скоринг · Whitepaper · Заявки в акселераторы · Обращение к учёным',
-    ph1:'РАУНД SEED', rd1t:'Техника и юриспруденция', rd1b:'Найм CTO · Смарт-контракты · Фетва · Регистрация · Аудит',
+    ph0:'ЗАВЕРШЕНО', rd0t:'Основание', rd0b:'Сайт · ИИ-скоринг LIVE · Смарт-контракты (Foundry) · Whitepaper · Акселераторы · Учёные',
+    ph1:'SEED — СЕЙЧАС', rd1t:'Техника и юриспруденция', rd1b:'Найм CTO · Шариатская фетва · Юридическая регистрация · Аудит безопасности',
     ph2:'БЕТА', rd2t:'Запуск приватной беты', rd2b:'10 получателей · 50 доноров · Оракульная сеть · Аудиторская цепочка',
     ph3:'СЕРИЯ А', rd3t:'Масштаб', rd3b:'10 000+ получателей · 20 стран · AM Academy · LayerZero · $1M+ AUM',
     ph4:'VISION', rd4t:'Глобальный стандарт', rd4b:'Инфраструктурный слой закята для всей Уммы.',
@@ -163,7 +171,7 @@ function Particles() {
 
 // ── Shared UI ──
 const Tag = ({c}) => <div style={{fontSize:11,fontWeight:700,letterSpacing:3,textTransform:'uppercase',color:'var(--gold)',marginBottom:14}}>{c}</div>
-const H1c = ({c}) => <div style={{fontSize:'clamp(2.6rem,6vw,5rem)',fontWeight:900,lineHeight:1.02,letterSpacing:-2,marginBottom:16,background:'linear-gradient(135deg,#F5E070,#B8952A,#3CB46A)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',textAlign:'center'}}>{c}</div>
+const H1c = ({c}) => <div style={{fontSize:'clamp(2.6rem,6vw,5rem)',fontWeight:700,lineHeight:1.02,letterSpacing:-1,marginBottom:16,background:'linear-gradient(135deg,#F5E070,#B8952A,#3CB46A)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text',textAlign:'center',fontFamily:"'Cormorant Garamond', serif"}}>{c}</div>
 const H2c = ({c}) => <div style={{fontSize:'clamp(1.4rem,2.8vw,2.1rem)',fontWeight:800,lineHeight:1.15,marginBottom:14,color:'var(--text)',textAlign:'center'}}>{c}</div>
 const Subc = ({c}) => <div style={{fontSize:'clamp(.9rem,1.6vw,1.1rem)',color:'var(--dim)',maxWidth:650,textAlign:'center',lineHeight:1.65,marginBottom:22}}>{c}</div>
 
@@ -458,13 +466,47 @@ function S4({t}) {
 }
 
 function S5({t}) {
+  const tiers = [
+    {range:'< $1,000', pct:'2.5%', note:'max $25', col:'#B8952A'},
+    {range:'$1,000 – $10,000', pct:'1.5%', note:'max $150', col:'#E8C547'},
+    {range:'≥ $10,000', pct:'1.0%', note:'2.5% hardcap', col:'#3CB46A'},
+  ]
+  const nevers = [
+    {icon:Icons.lock, label:t.noRiba},
+    {icon:Icons.hexagon, label:t.noToken},
+    {icon:Icons.users, label:t.noMiddlemen},
+  ]
   return (
     <Scene>
-      <motion.div variants={staggerWrap(.05)} initial="initial" animate="animate" style={{display:'flex',flexDirection:'column',alignItems:'center',width:'100%'}}>
-        <motion.div variants={itemAnim}><Tag c={t.beyond}/></motion.div>
+      <motion.div variants={staggerWrap(.05)} initial="initial" animate="animate"
+        style={{display:'flex',flexDirection:'column',alignItems:'center',width:'100%'}}>
+        <motion.div variants={itemAnim}><Tag c={t.sharia}/></motion.div>
         <motion.div variants={itemAnim}><H2c c={t.s5title}/></motion.div>
-        <motion.div variants={itemAnim}><Subc c={t.s5body}/></motion.div>
-        <motion.div variants={itemAnim}><Shield/></motion.div>
+        <motion.div variants={itemAnim}><Subc c={t.s5sub}/></motion.div>
+        <motion.div variants={staggerWrap(.15)} style={{display:'flex',gap:14,flexWrap:'wrap',justifyContent:'center',maxWidth:720,width:'100%',marginBottom:22}}>
+          {tiers.map((tier,i)=>(
+            <motion.div key={i} variants={itemAnim}
+              whileHover={{y:-5,borderColor:tier.col+'66',transition:{duration:.15}}}
+              style={{background:'rgba(15,26,17,.75)',backdropFilter:'blur(12px)',border:`1px solid ${tier.col}28`,borderRadius:18,padding:'22px 18px',flex:1,minWidth:168,maxWidth:218,textAlign:'center',position:'relative',overflow:'hidden'}}>
+              <div style={{position:'absolute',top:0,left:0,right:0,height:3,background:tier.col,borderRadius:'2px 2px 0 0'}}/>
+              <div style={{fontSize:'2.3rem',fontWeight:900,color:tier.col,lineHeight:1,marginBottom:6}}>{tier.pct}</div>
+              <div style={{fontSize:'.82rem',color:'var(--text)',fontWeight:600,marginBottom:4}}>{tier.range}</div>
+              <div style={{fontSize:'.72rem',color:'var(--dim)'}}>{t.ujrahTiers} · {tier.note}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+        <motion.div variants={staggerWrap(.1)} style={{display:'flex',gap:10,flexWrap:'wrap',justifyContent:'center'}}>
+          {nevers.map((n,i)=>{
+            const Ic=n.icon
+            return(
+              <motion.div key={i} variants={itemAnim}
+                style={{display:'flex',alignItems:'center',gap:7,background:'rgba(60,180,106,.09)',border:'1px solid rgba(60,180,106,.22)',borderRadius:40,padding:'7px 17px'}}>
+                <Ic stroke="#3CB46A" size={15}/>
+                <span style={{fontSize:'.8rem',color:'#3CB46A',fontWeight:700}}>{n.label}</span>
+              </motion.div>
+            )
+          })}
+        </motion.div>
       </motion.div>
     </Scene>
   )
@@ -534,6 +576,11 @@ function S8({t}) {
         <motion.div variants={itemAnim} style={{background:'linear-gradient(135deg,rgba(184,149,42,.12),rgba(184,149,42,.04))',border:'1px solid rgba(184,149,42,.35)',borderRadius:20,padding:'15px 30px',textAlign:'center',maxWidth:560,width:'100%'}}>
           <div style={{fontSize:'2.1rem',fontWeight:900,color:'var(--gold)'}}>1–2.5%</div>
           <div style={{fontSize:'.83rem',color:'var(--dim)',marginTop:3}}>{t.ujrahLabel}</div>
+          <div style={{display:'flex',gap:8,justifyContent:'center',marginTop:14,flexWrap:'wrap'}}>
+            {[['< $1K','2.5%','#B8952A'],['$1K–$10K','1.5%','#E8C547'],['≥ $10K','1.0%','#3CB46A']].map(([r,p,col])=>(
+              <div key={r} style={{background:`${col}18`,border:`1px solid ${col}44`,borderRadius:20,padding:'4px 12px',fontSize:'.73rem',fontWeight:700,color:col}}>{r} → {p}</div>
+            ))}
+          </div>
         </motion.div>
       </motion.div>
     </Scene>

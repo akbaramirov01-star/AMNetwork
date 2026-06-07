@@ -11,7 +11,7 @@ const SCENE_TINT = [
   '#241218', // 2 problem (subtle warm)
   '#122433', // 3 who
   '#241c10', // 4 stakes
-  '#13301e', // 5 shield
+  '#13301e', // 5 sharia
   '#11222e', // 6 solution
   '#241c10', // 7 market
   '#12281c', // 8 business
@@ -32,6 +32,26 @@ export function ProBackground({ scene }) {
         animate={{ background: `radial-gradient(ellipse 120% 80% at 50% -10%, ${tint} 0%, #070b09 60%)` }}
         transition={{ duration: 1.0, ease: [0.4, 0, 0.2, 1] }}
       />
+      {/* Islamic geometric star pattern — cover slide only */}
+      {scene === 0 && (
+        <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:2,delay:0.3}}
+          style={{position:'absolute',inset:0,pointerEvents:'none',overflow:'hidden'}}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style={{opacity:0.45}}>
+            <defs>
+              <pattern id="islamicDeckStar" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+                <path d="M40,7 L44,29 L63,20 L51,36 L70,44 L48,45 L52,66 L39,53 L26,66 L30,45 L8,44 L27,36 L15,20 L34,29 Z"
+                  fill="none" stroke="rgba(184,149,42,0.09)" strokeWidth="0.8"/>
+                <circle cx="40" cy="40" r="4.5" fill="none" stroke="rgba(184,149,42,0.04)" strokeWidth="0.5"/>
+                <circle cx="0" cy="0" r="1.5" fill="rgba(184,149,42,0.04)"/>
+                <circle cx="80" cy="0" r="1.5" fill="rgba(184,149,42,0.04)"/>
+                <circle cx="0" cy="80" r="1.5" fill="rgba(184,149,42,0.04)"/>
+                <circle cx="80" cy="80" r="1.5" fill="rgba(184,149,42,0.04)"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#islamicDeckStar)"/>
+          </svg>
+        </motion.div>
+      )}
       {/* faint static grid for depth */}
       <div style={{
         position: 'absolute', inset: 0, opacity: 0.035,
