@@ -4,7 +4,7 @@
 
 ## What We Are Building
 
-**AM Network** — the first blockchain-verified Zakat and Sadaqah platform for 1.8 billion Muslims.
+**AM Network** — the first blockchain-verified Zakat and Sadaqah platform for ~2 billion Muslims.
 
 - **Website:** amnetwork.io (live, GitHub Pages)
 - **Founder:** Akbar Amirzoda — economist, diplomat (Plekhanov University Moscow)
@@ -24,12 +24,14 @@
 - **AI:** Recipient scoring model 0–100
 - **Website:** Single index.html (vanilla JS + CSS, no framework), GitHub Pages
 
-## Key Numbers
+## Key Numbers (verified sources)
 
-- $600B annual Zakat (0% transparent today)
-- 1.8B Muslims globally
-- $4T Islamic Finance market (+12% CAGR)
-- $57B Islamic Fintech by 2030
+- **$600B** — annual Zakat *obligation/potential* (World Bank + IRTI/IsDB, 2016). Actually distributed formally: <$25B
+- **~2B** Muslims globally (Pew Research / Carnegie 2024)
+- **$6T** Islamic Finance market (LSEG/ICD Report 2025: $5.98T in 2024), +12% CAGR
+- **$341B** Islamic Fintech by 2029 (GIFT Report 2025/26, Qatar Financial Centre), +11.5% CAGR
+
+⚠️ When writing about $600B: always say "potential/obligation", never "collected". The collected amount is <$25B.
 
 ## Socials
 
@@ -125,4 +127,4 @@ Read CLAUDE.md — I am Akbar, founder of AM Network.
 Continue where we left off. Next task: [describe current task]
 ```
 
-*Last updated: May 2026*
+*Last updated: June 2026*
