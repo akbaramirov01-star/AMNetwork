@@ -1,71 +1,194 @@
 import { motion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 
 /* ════════════════════════════════════════════════
-   CLEAN PROFESSIONAL BACKGROUND
-   Gamma/Canva-style: calm, static, tasteful.
-   One soft brand glow + faint grid. No movement noise.
+   CONSTELLATION PARTICLE NETWORK
+   Canvas: 80 particles + connecting lines within 150px
 ════════════════════════════════════════════════ */
-const SCENE_TINT = [
-  '#13301e', // 0 cover
-  '#13301e', // 1
-  '#241218', // 2 problem (subtle warm)
-  '#122433', // 3 who
-  '#241c10', // 4 stakes
-  '#13301e', // 5 sharia
-  '#11222e', // 6 solution
-  '#241c10', // 7 market
-  '#12281c', // 8 business
-  '#1f1c0e', // 9 traction
-  '#141a2e', // 10 roadmap
-  '#1a1a14', // 11 team
-  '#241c10', // 12 ask
-  '#13301e', // 13 closing
+export function ConstellationBg() {
+  const ref = useRef(null)
+  useEffect(() => {
+    const cvs = ref.current, ctx = cvs.getContext('2d')
+    let W, H, pts = [], raf
+    const resize = () => { W = cvs.width = innerWidth; H = cvs.height = innerHeight }
+    resize()
+    window.addEventListener('resize', resize)
+    for (let i = 0; i < 88; i++) pts.push({
+      x: Math.random() * 1600, y: Math.random() * 900,
+      vx: (Math.random() - .5) * .22, vy: (Math.random() - .5) * .15,
+      r: .5 + Math.random() * 1.4,
+      a: .15 + Math.random() * .55,
+      col: Math.random() > .45 ? '201,168,76' : (Math.random() > .5 ? '13,200,120' : '80,160,240')
+    })
+    const MAX = 155
+    const tick = () => {
+      ctx.clearRect(0, 0, W, H)
+      pts.forEach(p => {
+        p.x += p.vx; p.y += p.vy
+        if (p.x < -20) p.x = W + 20; if (p.x > W + 20) p.x = -20
+        if (p.y < -20) p.y = H + 20; if (p.y > H + 20) p.y = -20
+      })
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y
+          const d = Math.sqrt(dx * dx + dy * dy)
+          if (d < MAX) {
+            const a = (1 - d / MAX) * .09
+            ctx.beginPath()
+            ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y)
+            ctx.strokeStyle = `rgba(201,168,76,${a})`
+            ctx.lineWidth = .5; ctx.stroke()
+          }
+        }
+      }
+      pts.forEach(p => {
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(${p.col},${p.a})`; ctx.fill()
+      })
+      raf = requestAnimationFrame(tick)
+    }
+    tick()
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize) }
+  }, [])
+  return <canvas ref={ref} style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 1 }} />
+}
+
+/* ════════════════════════════════════════════════
+   HOLOGRAPHIC ISLAMIC STAR — cover slide only
+   Slowly rotating 8-pointed star with layered glow
+════════════════════════════════════════════════ */
+export function HolographicStar() {
+  return (
+    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 520, height: 520, pointerEvents: 'none', zIndex: 2 }}>
+      {/* outer bloom */}
+      <div style={{ position: 'absolute', inset: -80, borderRadius: '50%', background: 'radial-gradient(circle, rgba(201,168,76,.18) 0%, rgba(201,168,76,.06) 40%, transparent 70%)', filter: 'blur(30px)' }} />
+      {/* mid glow */}
+      <div style={{ position: 'absolute', inset: 40, borderRadius: '50%', background: 'radial-gradient(circle, rgba(201,168,76,.22) 0%, transparent 65%)', filter: 'blur(18px)' }} />
+      {/* outer dashed orbit — counter-rotating */}
+      <motion.div animate={{ rotate: -360 }} transition={{ duration: 80, repeat: Infinity, ease: 'linear' }}
+        style={{ position: 'absolute', inset: -50 }}>
+        <svg viewBox="0 0 620 620" width="620" height="620" style={{ opacity: .22 }}>
+          <circle cx="310" cy="310" r="300" fill="none" stroke="rgba(201,168,76,.6)" strokeWidth=".6" strokeDasharray="5 10" />
+          {Array.from({ length: 16 }).map((_, i) => {
+            const a = (i * 22.5) * Math.PI / 180
+            return <circle key={i} cx={310 + 300 * Math.cos(a)} cy={310 + 300 * Math.sin(a)} r="2.2" fill="rgba(201,168,76,.7)" />
+          })}
+        </svg>
+      </motion.div>
+      {/* inner orbit */}
+      <motion.div animate={{ rotate: 360 }} transition={{ duration: 55, repeat: Infinity, ease: 'linear' }}
+        style={{ position: 'absolute', inset: 60 }}>
+        <svg viewBox="0 0 400 400" width="400" height="400" style={{ opacity: .3 }}>
+          <circle cx="200" cy="200" r="190" fill="none" stroke="rgba(201,168,76,.4)" strokeWidth=".5" strokeDasharray="3 14" />
+          {Array.from({ length: 8 }).map((_, i) => {
+            const a = (i * 45) * Math.PI / 180
+            return <circle key={i} cx={200 + 190 * Math.cos(a)} cy={200 + 190 * Math.sin(a)} r="2.5" fill="rgba(245,224,112,.9)" />
+          })}
+        </svg>
+      </motion.div>
+      {/* main 8-pointed Islamic star — slow rotation */}
+      <motion.div
+        initial={{ opacity: 0, scale: .7 }}
+        animate={{ opacity: 1, scale: 1, rotate: 360 }}
+        transition={{ opacity: { duration: 1.8 }, scale: { duration: 1.8, ease: [.16, 1, .3, 1] }, rotate: { duration: 120, repeat: Infinity, ease: 'linear' } }}
+        style={{ position: 'absolute', inset: 0 }}
+      >
+        <svg viewBox="0 0 520 520" width="520" height="520">
+          <defs>
+            <radialGradient id="sg" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#F5E070" stopOpacity=".95" />
+              <stop offset="35%" stopColor="#C9A84C" stopOpacity=".75" />
+              <stop offset="100%" stopColor="#C9A84C" stopOpacity=".05" />
+            </radialGradient>
+            <filter id="gl">
+              <feGaussianBlur stdDeviation="3.5" result="b" />
+              <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+            <filter id="gl2">
+              <feGaussianBlur stdDeviation="7" result="b" />
+              <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+          </defs>
+          {/* outer 8-pointed star */}
+          <path d="M260,50 L274,186 L375,118 L307,225 L440,250 L307,275 L375,382 L274,314 L260,450 L246,314 L145,382 L213,275 L80,250 L213,225 L145,118 L246,186 Z"
+            fill="none" stroke="url(#sg)" strokeWidth="1.6" filter="url(#gl)" opacity=".85" />
+          {/* inner star */}
+          <path d="M260,120 L270,200 L340,165 L305,235 L385,250 L305,265 L340,335 L270,300 L260,380 L250,300 L180,335 L215,265 L135,250 L215,235 L180,165 L250,200 Z"
+            fill="none" stroke="rgba(201,168,76,.35)" strokeWidth="1" opacity=".5" />
+          {/* rings */}
+          <circle cx="260" cy="250" r="95" fill="none" stroke="rgba(201,168,76,.25)" strokeWidth=".8" />
+          <circle cx="260" cy="250" r="62" fill="none" stroke="rgba(201,168,76,.4)" strokeWidth=".8" />
+          <circle cx="260" cy="250" r="28" fill="none" stroke="rgba(201,168,76,.5)" strokeWidth=".8" />
+          {/* center glow */}
+          <circle cx="260" cy="250" r="14" fill="rgba(201,168,76,.7)" filter="url(#gl2)" />
+          <circle cx="260" cy="250" r="6" fill="#F5E070" filter="url(#gl)" />
+          {/* 8 outer node dots */}
+          {Array.from({ length: 8 }).map((_, i) => {
+            const a = (i * 45 - 22.5) * Math.PI / 180
+            return <circle key={i} cx={260 + 175 * Math.cos(a)} cy={250 + 175 * Math.sin(a)} r="4" fill="#F5E070" filter="url(#gl)" />
+          })}
+        </svg>
+      </motion.div>
+    </div>
+  )
+}
+
+/* ════════════════════════════════════════════════
+   DEEP SPACE BACKGROUND — scene-tinted nebula
+════════════════════════════════════════════════ */
+const SCENE_COLOR = [
+  ['rgba(201,168,76,.22)', 'rgba(13,138,80,.08)'],   // 0 cover
+  ['rgba(201,168,76,.14)', 'rgba(13,138,80,.06)'],   // 1 opportunity
+  ['rgba(180,50,50,.16)', 'rgba(100,20,20,.08)'],    // 2 problem
+  ['rgba(30,90,180,.15)', 'rgba(20,60,140,.07)'],    // 3 who
+  ['rgba(180,90,20,.16)', 'rgba(120,50,10,.08)'],    // 4 stakes
+  ['rgba(13,138,80,.18)', 'rgba(201,168,76,.06)'],   // 5 sharia
+  ['rgba(30,100,200,.16)', 'rgba(13,138,80,.06)'],   // 6 solution
+  ['rgba(180,100,20,.14)', 'rgba(201,168,76,.06)'],  // 7 market
+  ['rgba(13,138,80,.14)', 'rgba(201,168,76,.06)'],   // 8 business
+  ['rgba(201,168,76,.16)', 'rgba(13,138,80,.06)'],   // 9 traction
+  ['rgba(30,80,200,.16)', 'rgba(13,138,80,.06)'],    // 10 roadmap
+  ['rgba(80,30,160,.16)', 'rgba(30,60,160,.06)'],    // 11 team
+  ['rgba(201,168,76,.18)', 'rgba(13,138,80,.07)'],   // 12 ask
+  ['rgba(13,138,80,.18)', 'rgba(201,168,76,.08)'],   // 13 closing
 ]
 
 export function ProBackground({ scene }) {
-  const tint = SCENE_TINT[scene] || SCENE_TINT[0]
+  const [c1, c2] = SCENE_COLOR[scene] || SCENE_COLOR[0]
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 0, overflow: 'hidden', background: '#070b09' }}>
-      {/* soft top glow, tinted per scene — slow, calm crossfade */}
-      <motion.div
-        style={{ position: 'absolute', inset: 0 }}
-        animate={{ background: `radial-gradient(ellipse 120% 80% at 50% -10%, ${tint} 0%, #070b09 60%)` }}
-        transition={{ duration: 1.0, ease: [0.4, 0, 0.2, 1] }}
-      />
-      {/* Islamic geometric star pattern — cover slide only */}
+    <div style={{ position: 'fixed', inset: 0, zIndex: 0, overflow: 'hidden', background: '#020810' }}>
+      {/* scene nebula — slow crossfade */}
+      <motion.div key={scene} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.1 }}
+        style={{ position: 'absolute', inset: 0 }}>
+        <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse 110% 80% at 50% -5%, ${c1} 0%, transparent 65%)` }} />
+        <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse 70% 70% at 15% 85%, ${c2} 0%, transparent 60%)` }} />
+      </motion.div>
+      {/* Islamic geometric tiling — cover only */}
       {scene === 0 && (
-        <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:2,delay:0.3}}
-          style={{position:'absolute',inset:0,pointerEvents:'none',overflow:'hidden'}}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style={{opacity:0.45}}>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2.2, delay: .4 }}
+          style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style={{ opacity: .25 }}>
             <defs>
-              <pattern id="islamicDeckStar" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
-                <path d="M40,7 L44,29 L63,20 L51,36 L70,44 L48,45 L52,66 L39,53 L26,66 L30,45 L8,44 L27,36 L15,20 L34,29 Z"
-                  fill="none" stroke="rgba(184,149,42,0.09)" strokeWidth="0.8"/>
-                <circle cx="40" cy="40" r="4.5" fill="none" stroke="rgba(184,149,42,0.04)" strokeWidth="0.5"/>
-                <circle cx="0" cy="0" r="1.5" fill="rgba(184,149,42,0.04)"/>
-                <circle cx="80" cy="0" r="1.5" fill="rgba(184,149,42,0.04)"/>
-                <circle cx="0" cy="80" r="1.5" fill="rgba(184,149,42,0.04)"/>
-                <circle cx="80" cy="80" r="1.5" fill="rgba(184,149,42,0.04)"/>
+              <pattern id="islamicDeck" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                <path d="M50,9 L55,36 L79,25 L64,45 L88,55 L61,57 L65,82 L49,66 L33,82 L37,57 L10,55 L34,45 L19,25 L43,36 Z"
+                  fill="none" stroke="rgba(201,168,76,.13)" strokeWidth=".8" />
+                <circle cx="50" cy="50" r="5.5" fill="none" stroke="rgba(201,168,76,.07)" strokeWidth=".6" />
               </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#islamicDeckStar)"/>
+            <rect width="100%" height="100%" fill="url(#islamicDeck)" />
           </svg>
         </motion.div>
       )}
-      {/* faint static grid for depth */}
+      {/* subtle grid */}
       <div style={{
-        position: 'absolute', inset: 0, opacity: 0.035,
-        backgroundImage:
-          'linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)',
-        backgroundSize: '64px 64px',
-        maskImage: 'radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 80%)',
-        WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 80%)',
+        position: 'absolute', inset: 0, opacity: .025,
+        backgroundImage: 'linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px)',
+        backgroundSize: '80px 80px',
+        maskImage: 'radial-gradient(ellipse 90% 70% at 50% 40%,#000 30%,transparent 80%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 90% 70% at 50% 40%,#000 30%,transparent 80%)',
       }} />
       {/* bottom vignette */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(to top, rgba(7,11,9,.9), transparent 35%)',
-      }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(2,8,16,.92),transparent 38%)' }} />
     </div>
   )
 }
@@ -73,7 +196,7 @@ export function ProBackground({ scene }) {
 /* ════════════════════════════════════════════════
    SVG ICON SET (clean, consistent — Lucide-style)
 ════════════════════════════════════════════════ */
-const I = (paths, vb = '0 0 24 24') => ({ stroke = '#B8952A', size = 24 }) => (
+const I = (paths, vb = '0 0 24 24') => ({ stroke = '#C9A84C', size = 24 }) => (
   <svg viewBox={vb} width={size} height={size} fill="none" stroke={stroke}
     strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">{paths}</svg>
 )
