@@ -3,17 +3,18 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 :root {
-  --gold: #B8952A;
+  --gold: #C9A84C;
   --gold2: #E8C547;
   --gold3: #F5E070;
-  --green: #1B4D2E;
-  --green2: #2A7A4B;
-  --green3: #3CB46A;
-  --bg: #060A08;
-  --bg2: #0D1810;
-  --card: #0F1A11;
-  --text: #F4EFE1;
-  --dim: #8A9B8E;
+  --green: #0D8A50;
+  --green2: #12B468;
+  --green3: #1FD47E;
+  --teal: #00C6A8;
+  --bg: #020810;
+  --bg2: #040C18;
+  --card: #050B18;
+  --text: #F0ECDE;
+  --dim: #6080A0;
 }
 
 html, body {

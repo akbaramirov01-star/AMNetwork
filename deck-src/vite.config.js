@@ -3,9 +3,17 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/deck/',
+  base: './',
   build: {
     outDir: '../deck',
-    emptyOutDir: true,
+    emptyOutDir: false,
+    rollupOptions: {
+      output: {
+        format: 'iife',
+        inlineDynamicImports: true,
+        entryFileNames: 'assets/deck.js',
+        assetFileNames: 'assets/deck.[ext]',
+      },
+    },
   },
 })
