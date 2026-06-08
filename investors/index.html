@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Investors — AM Network</title>
+<meta name="description" content="AM Network investment opportunity. Blockchain-verified Zakat platform for ~2 billion Muslims. Seed round open 2026.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="theme-color" content="#0A1A11">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+[data-theme="dark"]{
+  --bg1:#0A1A11;--bg2:#0F2117;--bg3:#1C4532;
+  --gold:#C9A84C;--gold2:#E8C87A;--gold3:rgba(201,168,76,0.12);
+  --text:#FFFFFF;--text2:rgba(255,255,255,0.60);--text3:rgba(255,255,255,0.38);
+  --border:rgba(255,255,255,0.09);--card:rgba(255,255,255,0.04);
+  --nav-bg:rgba(10,26,17,0.92);
+}
+[data-theme="light"]{
+  --bg1:#F5F0E8;--bg2:#EDE8DE;--bg3:#DDD0BB;
+  --gold:#C9A84C;--gold2:#E8C87A;--gold3:rgba(201,168,76,0.12);
+  --text:#1C2E1F;--text2:rgba(28,46,31,0.68);--text3:rgba(28,46,31,0.42);
+  --border:rgba(28,69,50,0.12);--card:rgba(255,255,255,0.80);
+  --nav-bg:rgba(245,240,232,0.95);
+}
+html{scroll-behavior:smooth;background:var(--bg1)}
+body{font-family:'DM Sans',sans-serif;background:var(--bg1);color:var(--text);overflow-x:hidden;line-height:1.6;transition:background-color .35s,color .35s}
+[lang="ar"]{font-family:'Noto Naskh Arabic',sans-serif;direction:rtl}
+[lang="zh"]{font-family:'Noto Serif TC',system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:2px}
+
+.topline{position:fixed;top:0;left:0;right:0;z-index:200;height:3px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent)}
+
+nav{position:fixed;top:3px;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:var(--nav-bg);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border);transition:background-color .35s}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{height:52px;width:auto;filter:drop-shadow(0 2px 8px rgba(201,168,76,0.2))}
+.nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--text)}
+.nav-logo-text .am{color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.theme-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .2s;flex-shrink:0}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.nav-back{padding:7px 16px;border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all .2s;white-space:nowrap}
+.nav-back:hover{border-color:var(--gold);color:var(--gold)}
+.nav-cta-link{padding:8px 20px;background:var(--gold);border:none;border-radius:6px;color:#060E09;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap}
+.nav-cta-link:hover{background:var(--gold2);transform:translateY(-1px)}
+
+.lang-wrap{position:relative}
+.lang-btn{display:flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--card);color:var(--text2);font-size:13px;cursor:pointer;transition:border-color .2s;font-family:'DM Sans',sans-serif}
+.lang-btn:hover{border-color:var(--gold);color:var(--text)}
+.lang-btn img{width:16px;height:12px;object-fit:cover;border-radius:2px}
+.lang-drop{position:absolute;top:calc(100% + 8px);right:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;min-width:160px;overflow:hidden;z-index:999;display:none;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.lang-drop.open{display:block}
+.lang-opt{display:flex;align-items:center;gap:8px;padding:9px 14px;font-size:13px;cursor:pointer;transition:background .15s;color:var(--text2)}
+.lang-opt:hover{background:var(--gold3);color:var(--text)}
+.lang-opt img{width:18px;height:13px;object-fit:cover;border-radius:2px}
+
+.wrap{max-width:900px;margin:0 auto;padding:0 5vw}
+section{padding:72px 0}
+hr.div{border:none;height:1px;background:linear-gradient(to right,transparent,var(--border),transparent)}
+
+.hero{padding:130px 0 72px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at center,black 15%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border:1px solid rgba(201,168,76,.3);border-radius:999px;background:var(--gold3);font-size:11px;font-weight:500;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .7s ease both}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2.5s ease infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,68px);font-weight:700;line-height:1.08;margin-bottom:20px;animation:fadeUp .7s .1s ease both}
+.hero h1 .gold{background:linear-gradient(135deg,var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:16px;color:var(--text2);max-width:560px;margin:0 auto 40px;line-height:1.75;animation:fadeUp .7s .15s ease both}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeUp .7s .2s ease both}
+.btn-p{padding:13px 30px;background:var(--gold);border:none;border-radius:8px;color:#060E09;font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-p:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 12px 36px rgba(201,168,76,.25)}
+.btn-s{padding:13px 30px;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--text2);font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-s:hover{border-color:rgba(201,168,76,.4);color:var(--gold)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin:48px 0;animation:fadeUp .7s .25s ease both}
+.stat-cell{background:var(--card);padding:28px 20px;text-align:center}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--gold);line-height:1}
+.stat-lbl{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-top:6px}
+@media(max-width:600px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.eyebrow::before{content:'';width:22px;height:1.5px;background:var(--gold);flex-shrink:0}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4.5vw,44px);font-weight:700;line-height:1.1;margin-bottom:12px}
+.sec-body{font-size:15px;color:var(--text2);max-width:580px;line-height:1.8;margin-bottom:40px}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:640px){.two-col{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px}
+.card-accent{border-color:rgba(201,168,76,.25)}
+.card h3{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;margin-bottom:14px}
+.card ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.card ul li{display:flex;gap:10px;font-size:14px;color:var(--text2);line-height:1.6}
+.card ul li::before{content:"→";color:var(--gold);flex-shrink:0;margin-top:1px}
+
+.traction-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:640px){.traction-grid{grid-template-columns:1fr}}
+.t-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:border-color .2s,transform .2s}
+.t-card:hover{transform:translateY(-3px)}
+.t-card.done{border-color:rgba(16,185,129,.25)}.t-card.done .t-status{color:#10B981}
+.t-card.progress{border-color:rgba(201,168,76,.25)}.t-card.progress .t-status{color:var(--gold)}
+.t-status{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px}
+.t-card h4{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.t-card p{font-size:13px;color:var(--text3);line-height:1.6}
+
+.market-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:600px){.market-grid{grid-template-columns:1fr}}
+.m-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px;text-align:center;transition:border-color .2s,transform .2s}
+.m-card:hover{border-color:rgba(201,168,76,.3);transform:translateY(-3px)}
+.m-num{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:700;color:var(--gold);line-height:1}
+.m-lbl{font-size:13px;color:var(--text2);margin-top:8px;line-height:1.4}
+.m-note{font-size:11px;color:var(--gold);margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+
+.bm-row{display:flex;flex-direction:column;gap:14px}
+.bm-item{display:flex;align-items:flex-start;gap:18px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:border-color .2s}
+.bm-item:hover{border-color:rgba(201,168,76,.2)}
+.bm-icon{width:44px;height:44px;border-radius:12px;background:var(--gold3);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
+.bm-text h4{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--text)}
+.bm-text p{font-size:13px;color:var(--text2);line-height:1.7}
+
+.funds-bar{display:flex;flex-direction:column;gap:13px;margin-bottom:28px}
+.fund-row{display:flex;align-items:center;gap:14px}
+.fund-label{font-size:13px;color:var(--text);flex:0 0 200px}
+@media(max-width:500px){.fund-label{flex:0 0 130px;font-size:12px}}
+.fund-track{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.fund-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+.fund-amount{font-size:13px;color:var(--gold);font-weight:600;width:52px;text-align:right;flex-shrink:0}
+.fund-note{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 24px;text-align:center;font-size:13px;color:var(--text2)}
+
+.team-card{background:var(--card);border:1px solid rgba(201,168,76,.2);border-radius:18px;padding:32px;display:flex;gap:24px;align-items:flex-start}
+@media(max-width:580px){.team-card{flex-direction:column}}
+.team-avatar{width:72px;height:72px;border-radius:50%;border:2px solid var(--gold);background:var(--bg3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.team-info h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;margin-bottom:4px}
+.team-role{font-size:13px;color:var(--gold);margin-bottom:12px;font-weight:500}
+.team-info p{font-size:14px;color:var(--text2);line-height:1.75}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{background:var(--gold3);border:1px solid rgba(201,168,76,.2);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--gold)}
+.cto-box{background:var(--card);border:1px solid rgba(201,168,76,.15);border-radius:14px;padding:24px;margin-top:16px;text-align:center}
+
+.contact-box{background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid rgba(201,168,76,.25);border-radius:20px;padding:48px;text-align:center;position:relative;overflow:hidden}
+.contact-box::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.contact-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.contact-link{display:flex;align-items:center;gap:8px;padding:12px 22px;border:1px solid var(--border);border-radius:10px;font-size:14px;color:var(--text2);transition:all .2s;background:var(--card)}
+.contact-link:hover{border-color:var(--gold);color:var(--gold)}
+
+footer{padding:32px 0;border-top:1px solid var(--border);text-align:center}
+footer p{font-size:13px;color:var(--text3);line-height:1.7}
+footer a{color:var(--gold)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){nav{padding:0 4vw}.hero{padding:110px 0 56px}.contact-box{padding:32px 20px}}
+</style>
+</head>
+<body>
+
+<div class="topline"></div>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="data:image/webp;base64,UklGRh6WAABXRUJQVlA4WAoAAAAQAAAA3wEAJgEAQUxQSDk7AAABDMltJEmSFEb9tc6sruzsPb4RMQGdtw66n/nQbealq+a9i+aka+asSxwad8zxKxzjivcPc8V88QI/1U/NN33/qRNd+OCntnWb/VRjrpvjbsixfskdOaNbj+jeA7rZG91tw4zR/T7sv9TiSbGz2KmkYsdimYoiyH6xL2z4RLGRosdFUpEIKqhMmiU2Ko+DJ4ppN1Wwy0ypmpmJTG+GpUhN2UVKqTaKEhERlUg2qjCLKqVCISi80dq27Gm2banc7u7u7i7IuOru7u6l1FuKOzXcpUap09wNod70Iri7B6K4xI9929blR2DcybHvx/k7IibAG7V/itzG//d6vd/VI1mWDJLZceJYdkxJ7LApzHSY4zAsBXzWcRg3G2ZmZuajMDMzs0EbcCZrlma668F0V1fLOZ9P+dFGxAT44/9ftZVs275jjLk2COyNlAImYnceeIgtJ4p1KGIH6mG3ooci2IFgCzY2ooLd3YF0d9cO2J1rjvH7ff+Yc629OThOX/hfREwA/p9qYAE4oFNP4NxHv57ww7CPmX18Ts0PE15dPN+/Kl8+fPioy84H0AbIOEQWf6M6YyNEwC5t8fSHg199c+THpFSvrWT+vnYtOWfU+y/2u+gIYAcgcpE1zvztYZyxANABA/+Y/vPb61lfzXyDUs3ckUPGTDZx1Rvjh967P9KtclmGtQDQu/PZn7320Rw2MPfaHyupPuTvgZzy63rvGUhmOe3jjz87u8Oh7QGoLKOwDkDbPkU3jFxUTJJKkr++OubWPQ8oQu8Dbx724LC8Kz54+IBtjvnXHUM/4A8f1nomV89+rv+eGzUAamTZAx2A/Xvc9M1CklSS2RdHDtjr6H7HH3/j85OWLfu5js1e9/OM3897+OGrJxXh+tvffe/9RpJsWnTVSZuOAqC6TIGqQLeL7/ixpIEUkg2z772g38ABV0xnvtpM8qxYvHTUyDvPO+HU/q99VUbaBd+euP6+owAqlxVQAAw9/caZTUxdPe7KXS695LIlTHrvfRARUTZbRYIXCUwunPXmI0d8es7w18a3W2urs17ZYSoA5bIAY4EOp5zzXQvgbruqKwf1G3IQIITgIodyNwG0bHl34svTxs6oPQjhYPmtp3QCrA19xgLtj7h5BYm7EJ/uOAagLBO5llsAWr6e/8rA6TdOXQ30y6+5oRvAsOeAtvuOLFlPFXF6WRBRyg1o3jnouU/7Dx9Asrz85cP3AMFwZ7D9M8+SpDC3ibjNgOYvT4x7cOb5X3s2rHtj6hCEeoPNWj0/Zj2VqvyfKoOwdf6Q6x959tMK8tMZUxsbIOFNANf7QZLC/8UG1E/4c9y5I4dNth13Td9QwcBGoqDnK+PrfFD+j3YjOenb0efd/VC77bjzhlYIGNAIrP7GBzE3Ts8JaFBy5oPDXjn21HabtO2GHgjmxqHTzR/XgikGkWd3WD5lyHMrZzVR+8WAoshtGrNA96cXNSCiFPtbPT8ghyXTHnh99VY49XfAmU1gEbY6/7lFpIhSOnzpPpQjcHHggQErR8+o4Zq3+sNYhi5i9/uqshRG6qy87M+/cssTOFSPmDOzx7OBqx/vCDBoqaLPt3Opyo15ytUB5QqM5kW3v/LleR+w/rlTe8MELAIb/UIqN2YFXhreEpQvBIvu/vKzE69VTjy3ARKsDDac8mmjCDduZYf6VWE5A6Pu/oFfPXzRTP5x57YI1UTdJT/Z/4HG8keWYnnDybpnxz49akrZ/jSp3jBAnXHWmee80I4SgPFxeRaUNwicHPPLn337PitmPolNUWVlP/s9cpIYeGwYlj8EWy7tPf2ZJazav8gxMIn8zKiNh12k0VV901Isf5Cx5/PTHhv8KBtPhWFQIjDqGAl1Fj15EkWAcfSdH649c1RdwzkAA5KgeeoPCQmhk3teaw6KAIeffj3mVApPmgANRoLe077ESGrgtkWEGFDgH8Nv//D9P+31a0ADEdE87VNrpNXZccEKLAYYWPnJ0SOu/8jOWAkShGiajvjEVklt4K3fO5IpCgr5wbnn3/2evWkyNACdcVbZzN0Y6TW74gmyOFDG2JuKx8+pe7kXbPDhGT92ywYCCRYtQ9Z0Kg4IrDh/9GN1tX/0A0OPll3YiZNk05q+oEgwKoYOuYx8qGuJYceg97stRqKNqotaUCQ4a+9/5vXZ8RcAQ45g0judKFVk7Re+GiwWhPUnnvXZHJ7WCxJuBBtc0ymRbGf3n+/FY6Hn75c+3Xf1l4fXg6GG0vNbK1Lu7B2x1xULPX859Ouz7Ke3dROGGjNiViVtBF57mBANvfyw13s3WzsVJsyc/aNPbcNJfMbQQYRocBY/ccejfO904zbFnF32N+UYqZd9cuXq4NFgzPr8jp84a0/Y8HJm2W8sRKRfLOpjpmgIvLn9MWtr9mxlGFrkzL97Cy8CMt5+ViEeAr/ofy9Lv8loaInKLqaDYgz8/iRCPArlN536bzZuDw0rBhfObVdBuBp+bWnm0aCsHfrQD3LfIDCkkH0X4hSlMfYCYhZWDH5/Nk/tJwwoglVrMxUGgcVDWhQPAz++Z2jtm+MYUJw5YRqiOGVtvbZh8RCY9NxsjmlnzKYTfM6MInVqnmnA45Ed/2x8dc3/tXabSqzZujSoUAiM6dMcFA2iYf5TXH0w7KYR4zp9TKFY5dnw2YR4cFv18nfy8x7GbhrBFrWiBYM4OWojHg+0rn+qnENMtEmkddv3KCxcs8rnml3xiHVD3+bUnrABxEb/YeD/w8ao++TxYPyw/5L4/v2sBA/b+vDfw/9Lyrj87cziQeSgV7joOGjwOOtHh3qgkI3VTxMUj1H+0l5t/GkydPzEL3yBFRMZk28jZjH+cVrOgQQOKRtnRlFb67XbTfE4+35qQ/hmLDVw/PNhvLCcXffV4tHgnYOHcGhrSNAQfECguANjLmo1RRNY+Ms1PrO3MGToqE14gRF0ywBCNASuu4Tfp0IChpqDO4wid1Z8WIWica/78VXzb2oUBgvFlLmi2J3Gl05KsRDo94Z9ZmMEDDuAVnBkjL+yxRSL6PLD6vyr7Z3ZZIEvtPBwf1d4LIz1rJH8bFuzqcLaM8pEhSfbcWc1FouyYoXoS4VuE0WEJ+gpfmflY/syRZL08dPGmk0TLjNFQwlA4IEBdESjSpaN2MxuknA4h8JSUEavQVg0XLI8/NkNJkREeF3jvwS4bbtlhzwS4ZTpYeH5iAKEse0mU/4a4Gwf7IokGZqeb28ZHqzdh38dM0ZO6rRYVIN/Aw7hMYMR6v8yKLT+80osElJkQh+rwcHZEz7X8JcBY8kNHZliYfB3twkPFgeL6l8HjPELiTeENyAMDRHOCZ5/JQOzPm3xWERmnlwvocG5D/nXQtb6v/OwSFTXvWQQGInN66l/KTC+O7deFgc9Ry4vEhYiXB5i/sU0vnwRFAfjpp0RBYYzh1ByEHhlUUck8iMzIgkKRFkNXnIQmDeGEAUWHkFYUJzTbio9TJ/+IKAonCvHUEKC4d1kJNRNaSDwSq/jrig0c00yIAhXfANLhjg0HjwN7rv7rsJjMF6dZhAWa/B0qOXFxw5hSUBMXRAHtvgeaFDQ7QlBHBr99l5CEhCxuj2+SRgODLazQErF6HPqCUnAPBIq8UkwIaE/ielkwN9vwpIQrcffXQQJCZcnBox1vzSGrMDMvnEoGQ6smYYlhsDGvpWE4qJi22ACAialh0D9zeNRccXxX5uUocCiV50rORh7z58mU1HZzgdWh4QCh5NoJNhpH/swpjRI+Uvs2JBwmCYJwaybwJMQY2JXDwn3Mk0o2MgXDxBScKwhd7H9uEUYDt78swJRfkEjHp3x+GttlrvP+oaEZ/+8cLb+0+tksTnV/zAXy5dN7OqQYMAX/sTI+L5vJVlkOJUDVspzlowOCHj6zwxj7/Mzscgw3rziMJ6v6uSGUEBp/jjxhOGEGydgkcmyH7xqlitbPasfGQYU69qYpLuYsBhTVMjDw6vwXFm7IiQUTEj+5JDrmUpQVASWXHBAnqt4hXAw0f7ZIfHoXzdkioqM8bcRlKdkVEBDMORjLC6F1j+5EM+R51PIbDpDYstQyWPCqP7rT7DcaKgYvkkNAosWELmx5F8aUX7KHkC0SQ3juykHsqgwDj/aYspJ0Kk3bmrDWNTvqCsmMl3+EZ4Tz08Hwm1iw1j5ymI8Jtne35wpy4fIgsGINrVh7GgnbmfY1WT58PzsArhNBkqE1HM40RuTnyfk5KOBmw7+i0SAeg5FRwi/NZuQhzj+bhpMKPj71iSInYfwnkug882DJzLlwFq7EiQMlJ1V9jWWANPHM1vx9GGMG0+Wi2RoQPgmCYiT/Y6g9EnNvz5flofqiqGJwMLzaz2kj+bnF5ML2xoQvopE/v9BbKkQpePDfclgsDyS7nSY+SGePvM8JHYIBMFgWBRi3xo8D24nbthGptTlM0nGMyCsu5TUfdsNiGxuM6gUsOMQELZIYsCZVos2C+GHnunACy9JFgxnQNjaxqHV3yPNQ25zLmzFiq5iH15ZGAqEa81zRYBYQMs684cexXJm1alJkp+HU0IBBG9jMZjeWqLSEhirJnyL5UikOLHjEBD4bhyidTS1RTCOXbiQztw4nSmqvrVqQDA4kBADzuvLqC2CkW1eBsqH89VqPDlVO62kCAg7R7N9OqVlEFQMNJQLvq0lwZWOR2FCwjYhDqSJWXchY/Ll7ajnlO2uxtNjyTv/BMMBwG14FOYf/RDvJgjMeqAF6yGJtq2IBFfs4zAhATWRQMuj7d2HUTflJOoRwVJwkjT7uqCgGEqIw3h2G95tGE0TVqAeMA43mZwUu320QRgQDG4li8PZ85pb9+EcuHiTTN3lNE5pQqRY/st9EARE1v1GvTwKyAZl6gGcjupaUPcE5t97EpFk17d7KQOCcORv1BOJs7YK7wEE68sD8mFUvNuCk+jQuTE0IIAo+4QQh1QzQqEnUMasK0+qmk9UlINIdGBaZBAUS7hA4o0D+bIG1BNgLFhmlGYo2P+VYyLR0v6rDcMCUVRO3Tigo7qnMI4+9Q1DXoLO1TjJlh/ZzkhoaFu70Rizd6JiCNQcs4AhD+d4OYh0B8ZAEBgjN5Z+I3GtnEsoCKfijfkMOcTxybUy0q1w8r5IgwPOlo0Fb3mlXUXhXFcyi6qJwLHJTYiEO3U3NSA0GrSvo24sVFYoLgplGH0JVcE5PqUJJ2le/aeU0IBM9Jb6jQRlI+iCKnzovEAZC8c04qRNm84gg0OEMykbizN9p40LIwNHj2oSVc834qQ98PmZGh6M6ZSlbiSi7tVcYOyZ2v71hyDSLuHP3a0iPEb2MQ0bCeKbdpQDMmqGVhBE6jjLGgRIiz2oG4tr6cdYHhAZIvXqS++wmRBhXLtJGiJBYdRhVx4QIvmiq3eBDRGI8BB9LEb1NvJRiJp9e3NrgoS1WxWrIoGOueYlQgjvdrEGYdLhc1osFmbVSCWCvFzoNlmY43N4/uBwFV4SSFh9prHYVCl4hiFBzZ+1jjxeGiTxCwOFwUJlv4aUjxkBSxZgJYDi9mOMIFzqiIUUCp+ZJc8byr6WSoHKiyMRNPAAPZXlE1DujLer8eIzewMUAZPSviwIhS8td88bNFZihSfeGy0SMmBwL2Oqln+F5c6Yf5DCt46ToAiadEUTJDDw/TexvLmqyrGCU1i3JU3YgMNhDGRoGrTflDOkpaZiE7XP9xCEzo67fkXPmDGPkOWO7ftRsdVOPhEmeGS2uNEH0ppn7JNyhvztTgo98L42BuEzav07A8X+V5XlDTagQot/3xkSQCwOXB+UjJEfEnLHPoo8hMPgEEKj1qMZwDr7bUc5k39bKxWWNLzdxZkQYkzh6atVOEv/53BQvpz1W/DCinkhIgTSwv4MYEybieULZ38jKijh28hgE6nFgC9wCFyxBc+XdKKNgpb6ud2d2VRCDj52KZWic/docs9VgUsyZyMIgqli0gsayMARcyiNVMrnQxFQWbfT0/RkzMeGkJVCsbzUpAwpEHT/UwI1HHqiGi99lLNWgSKsOlziqRT23bkWL3XEz3wcgsAauRe+Xi9k4PNz2qTSRkPVVTAIrc72+2GSBBLsnVs6TSVOxRZOggsc+j6/nALGjHfJVML4pneOhkWALeGwJz61DoEvbsVUslTtT+tBEWRLOPPc+QjZ0b+6FVeJEtu3DhBBoBWc/+AxA9H6189hKkm08vbBEIYaxYS3PsDBaX92AqZSJLbnNygRcFsq6jIHp63PzbhKjyxfHwVFwBU8NOIoDs7hO6daplJBpwn8DBAEXS375d3LMXBan5mNe0kg55Sq4cXdaBB4f6xs8LoKAjgHnxsNXgIIjqIEBxZBEXrJbuc+8aStgtPw/MwlWOEFVj0+S8UmndUnIYLwS+LpV9usQDDtkq0UfWB88sNUJh320sGRIgSLkdOff14Gcir77+yQF5lx2gFj6KnW3l8HIgxT8MirICCwaPZ88MJS4J0DX6UnOedeoSIUU7Dtiu/oKtWOHrAFLyiHt05qoqr3Ew9SEOGYwG+t33JMDuL4jb1qwQtI0HD+0Fi9kjVXNZIIydSyPz3kAhB8/NbEIxSvZJX93glUDZUTzmgNIizzzLIXj7dWm4OMhpFDDpmpUBS8fdbVS5GKcsw+ABGcBc33vWSrTP/6fxaAqzgcrjxxQj2DVu2if68DgxBtgCt+sEolNcv+Qz+pBxWEO42DBn1Cqop98UBCEKZpcPA3U2ImhS2jRs1vQFYAEqy4+PiVFBX6y0dBBcFaZZU5i35SFdLhs5dfqwFPnQQ7nr5+NilKlr8HkgjYRNs3vi2LKcSFVy6aV4UsaQ4H3jvnmsN4FfpJ5xSpIGwLMFou/50UuFj50qS3DKREyUXTq/80rgFMA0tG7Y9N4KYAZ33x+69NuMAJW/vdOKUDpAS5QfbCf774HQQXOfPsjrAmfAEZdBn91U9bwIVgz8cfTK3rBFdiLIMDWyu31IO7oOTPYwGLTeMGaJ7209xyUkmH5vF/P3rzCUCeDBnkwif3fnISbVJNbNJ+XaNAiFBOA+x544jRS6mCDOomzpw7paEdkCdADjD+pAOGTyM1Tqwt27+3gIqgrmhz1PTxC4Q4Muj4buikumkbAMyjUgNUP3je+S/VkEHU2vIHl20OEKHdAv1OG/3dt4AjB6uqGPzUzOXrM8A8Egkk2r948xX/WxGTPig597O/rVICifBuLNDj0fcHVAlcGLDzy9FDX351+pI2wBzlSz1J1td88PU3t51cA/QhkOtn/nNEPaAI887AHThx7EtftYMJB9i2b8aoBweVf9cCBiYpFxYIZKj6duiLo/6n/BhgQQJZPvWObbsDgnBvLfr+xew3Jq09BjJ3d6Bj26jfenHCvGpOHcwEkhZwBw8uHKD6xdfev/3gJcsBFALk/Pcf6VYICMK+LSv7tT99+E96f74HMHd3Ac1UzHl2wl9eOmvboaMAEqQoJV8LIAfIeGf4A/0f+mVsA5PmDmj+uD4oBCwR+oUAsNkm1330yXySEkRF6MnSZcMG39pwxb9veey5CrJ0IZu/aAr51ZDJJ0x4+aZjn3puDUlR8Z5k1ZJHrx4EECSWBZJGgPbD+l503zezSYYQlIHJGv4ybuTQay6cPu/Oyz79eWnD448+9mj6I4NvHvHiiOFDhr/+TFVltZJkCMErWV0y9cHdAYiCWHaoighH7Hb5scM+WElSxHvRmKk+zsZ/fP7dB2/P+v72O4ek3nH7tMWvLmZtbQPTfTYOgSR/f2zM3ntZGEMsezQAuhx32E5HffgbU8V7Cd4zT8mXJANJ8V6Cl0CSv3157/htkTT4m9IawAJut/1P+uCT4iqmeq+xD957L8xbfFCvqkyfMe6e544CYJ0xFn9jGgvjLIAuJ5494tK3Ppxf3cg8Nc6XuWMWfzP+5GsvAwDnHP4eNTZjth9yIPY4f9D5+972cunjz9VWVtbVMm+pra1d/2JFTW2/3rcWAEDkIoO/Uw0AB3To4NB1G6DDfvt26thn6O1D028ful+Hjh2K0L5DBwBwLnL425VGIArAAMbAKHwqAIghluGSAAUgQGrkKiQJkvif///n//9lULVLyTIYAsICKNY5myfBYoyxeRsRhj8xvab/A125H1jIfykBsNab+Qtnkv/HEAy92dq9Bis9UQYdvuD+kVMnT01/9/1L94H6M6bjg1Mmv5f+7ntv7nL764PIXCaCqKLW0AuByEUZG0W1wgyaKHImMtbBIIoiZ0lQWCtGMhgZEyn9W2tcFGkN84pKDhNlJA+NMRAVA1DIfGQUWSQlMiR9WeccCabbKFXoy7koY4wxMMYYa8QYZmlkaEABJTKmCMH4a5d0VmeNgPhC/z3eZTMPhSnAtfmK+c85oFnyAQaA6dW3bwTPm7XCBrawyElkS1oXFiydBgCiCAAkhxrUdujcuXNbpCq9REhV5NZI6SO3Q55MoQIQkIhQdIQdX4yryaID+gn91B7/W+yDhPSOattUUV8Wew+vlpAZV+LvD+8PQU6W9p3+4z1XXzL7yhNO+vyYZmG+qO9zM+/se9UtO50x48gZR04f10NqqP3/fsrpR2x+Rbvd+qMQZ1x67rF7NzUCA5p6NPVonHDwIAgAou8/d95zxnZNPZr8FhX22rbwX5cduZMIwKbGJufB264BcXGFN9wyFnQhmvfZ8WCsvM3Y3QCs09gAZyXQ0vfcM4Y+M+TuId9cN/3Q/i0AhPksug7od0Qfg6bGpqamosLtBpw2YED/PcY3AYAyjxQcdviNgwoLi1qhsLCocM/2rbsc1h2sAbafsQN2RzQEdROn77wXC1A5emac2GTxvlBfVPQb0yjMmVSX7A7jy6DtJAozY/v1BIDIqZhi03/98SdrXweYQ7HWzKySZBPT76ACwpEfLhz/bmM1K7LFr1e+MmEZ52bL/3nm8uvKf5T/mJt8e8kUCBDhFHvHS9aW/yj7rarU+kqusHYlNj75xdy5Zcffy0/MntkozDDoPFz4RKQugo3fu+/7M9/6z2sLTz+r7dfynM2hGQpgy9Ne+PFrsmzFyhWN1pa/fPmR7fsDmseYq0dzad28j68r/14ulysql74z7p1x7zxZLV9/+n5DAHUT7vjuEvLXyqqlz1ZWVlTOn/mJrRwwgIRw6B1f28fPndN2waunf2Pt7e3nQX1Z7DzLK5XLz90e9AQ47PQafQ56nreWiB+DLftOyUM2/+6GkiC36okLplZ6LyQlXvyKdcYNanaaUd2kPqbEseef17QxACB6+s+epGfOwLw9H+/hLCgN71asjZUbVBnLbmh7Tymbu3Lucg7OHLW2MfvGFIqDwcWsY55NPDKXQ+b68WQTKcqkj8km8oe9toQx+Sk+mjfH+v7h2+sNQBdK+xLWMP9F/z2rjoCx3ZcwZk5Ray+E+MLmbcYxkMo/tzX+4LBDuWoOkZl70fhx2GMKlTmd91eBwGt0/ON1gapKki8jygGi+80hkErhzC/PbI8UEFPGBq9UVa8+CEVVg/cqohriX3tZC7JHu+2skrpBKcpd4XD60nUUzRlYPGJrCDIjDFsVZN5VUAeypd+HFNGgPhsax52MdOtw43XT60NM8SoJr6pCkbDss+MBlxfRusHZ1qp4TfUh672Pg6qPGcpe2K0RdACjPq+OnaJBxauqxtX337U1Ug2K7mqMYwk+xJ7VL+8QwbfDv8bXkaSGssth/Bm3/Zo86O1u8EPTdfCSPET9jS2gF3G43HumBl9yIDQHBNuMbRCSwkUWeSq6r1NluoQQRCT4EEgqs7wJGUDr2mzVUpWkeq/MU70PQUkhmbCZgrZPFjOn6KJe20GQabHz9w2q9rlWYVbtts8topDKhiOR0wIXVzAwZ/0ff6wnqUxf8d5psPkAiKJr2oMyVUlShBSSgbTz/toddKjt9Ea1KJPa+OZogCkwwAwKyRCWfXwQCrRm23coJCkc3krpzWJ/KvNIbtpY1U+7r4IwZ2AeFJ6N2/K3Jk1RrXrxAEgOFODS1V5JL5eY1iYXSrhbfI68fSMpWtINBohwru20Qgb1bFEvzAWgaGytaErMOwCL7AiXShO1+tt0qAutvXeRCjX8eCScS3HY7bdSUSopobx6weirr7lo/LpySkIY84OjWzsnCga1U1KUE6sm1c+vKxemaqX6zl/r3VyEC7KBSfVrByFSpEc4sDYoVcnnAFF/xhy+VNJ0bgcpYp/5kodW2zeFF2OvLvVKyfUWjS9EmdfikEJlfclGMDkyZsg6r1T6zY1BnsacPFMkIfzt8huuPXC/AUPefnzos6N+/lG5EsmIF9lOy/Xhl0tmV419u4qaFvjqi2//9F3ZnPUrazWXwyFr8ngQBXB05jF6avz7041CB1jMZSA9RyGDVIcdn1AqSXpOuq5HOxgDbHP1OgYmNVTwQpRcQPT9NMuk6AeHbJvZYf/eDy5aoYnk3J2gLohw8rKgKVJ8ChXpBh1eLVNVsvJ+WAv/1u7zFpXpVTcPIv3t/2Cc0AQryUErinhQnENPZbo4OYTiK4O7lgRJoSo/7CXi5tCfgZTs6I42L0Xv+qCJmLcg764XskHPggO07ilbXTz7uYE7brFLd+By+hTV+m4AsMXuO58iid0SsJitISXU3tbO5QOUUJgcDXGg2fILFSprtnc2xWKrYauDkJR43StnALAw1gFd36QmSMqne0LdWmeUpgQ+1w8RAHTs/1HQlDh5tZXi1r80jZ7XwKQZ12EKlcLK0b3gsCENoq9UNMX75+qkgANGpqTHyQcbwngoueuCJyenAa3wFuFCCnP7+MR6ESeDVpVUcv2juyIvgysZM+1u19o556IoilyENsvZdCkiED1/s/Hsk5DaOjojF2uLogwMAFzma1V3TInspUxRVn3VBSbLouevKZ3JuYgc1JxaFUhf9xQcktbs/fkaCkkVPh4hsgZJ64C3fENa4NqhEBf2f7BB017qazPW2QjmK4YU22kvQuQ2gJ6psQ5BlJbBSeVelese3g0ZbEhjup+fZU7V8jN6Cb3t/VBKbUoSLzmO9NDjnuUMumQg/VQa5s+iizBP7fz8GgO6dWhINB1VZJDfJXnciQzyzOCCiR+dmpD6F23yrMlE1lgb4Zx8OsAYY6yNcMpq4SFwSLYdX6kkGThpc5NHhDPLg5I2XnJTb6UDPmKg8Oeu1iaMwVRSSQqLxxYiQp7ORYPjNA2Vr41WcZDubzGkje6LCAAyGDRRNCWOZ6i6nZdDtXEnSIri/8ZXiYYVb56BDDYMdn5LAksaEwz6NOgLzhzOwMBRq6gkA8fDNYvs9rEGctX91DQW0oNJTaFywZDCyOTVcVVQ0l7XSHYJw4O/tTtAgRKOi+02UNQa7OHSC0St6JC4+uUOkhKZa+kTGq+7KhNlmaKPqjShWrwjbA7h1mtFVWu+EKRKwQ1rvDCx8AWFwJkSPTo3KEmq1t4AlwdWPG89mwOHXxhSlHM7GzpY9CwVTTD4U+ESkek3V8mYE8fWK4q1bU9cw8AFU1VIKn86pDu8oTcDhXPeZCApOq0NTHMkurY8CBc+ch8lR2shZcJ8Rfguory2va+MKrajX56rW0qw6nuvj4MAxtxnK5MgGXv6gOG1tnIdohqLA5c3JqhNP2bANEXfRVSSFFl2Q2uXQ3EqhRrW3i9ao+hdn1WSjJMv1oQip2JUOyVBbSw/BjaPYSeXNc9kHl6smhAu2MzCfS4lodq0PyyADAbME6Ww+nAQxQq2GhEL6x8ZxQS9fRLq71AGqq68ab0oSeHd+1ibg7ihToSzPvxPHoOK2PXBWipX+jRq8Kcj47Ld0FKqtxcigqvi+EavLZJqAEBK537yGBSpgnHlOMknHJF8uR+1BpEZ3BASgT90MZJGu9cclQRVZ7aHSTP4XD2FMzcHU+qfKNGUSvIUIuQ25sHSoAkKP844k4O9nvGSdkOWte+XSwqVB0GczMIcrC+CAQpw3fJYKeGb3jAomEXH/8QsF6HbSgpJsV8NRzHCha3GaCCpMm9XNMcMf4Re/AunPE9NUW4OLUhXTK1No+foLSEO3V6uSlyRq18L0VCEyDS9wTSD3ZOKzQdi/GgQqRncMD8ISfXVN2c0TfBOtWiK6OKTEaUIWyeIMsgkCAAIpkynMsVeQpNPMaqSafQrzoHL1fJqnOPyTTMiXEHPpPpVDyBywoJcde1gYNG7nkLRyoMQoWBii/eyynhG13PH05NkvLhtAFjM9H8+FTOhdadsaegk5uA54uW9jpkz6HOsX0SPUiGVtZQ01Zovz4DJsK1/Z2DzDK5mzJbIqXA02MN6AQFBusWuqkxIw8sRU0T2mkilJOjr77E5MHqlUHTKP4wCoJYuqJQUtb8tT8kHjd4tFU3jOybKgf77VjEp+tzWDtdqWuBvR0L8SFMvWIujqyXQc8bWcChaeMBMCSJnZ7o/Wisp9s3juhU0Z8eDvtZAUjm/hxEnoyfYmOuujTpfw5BCDob4244kRb+fSJ+Sui1MGtorld5emeuSFiEGHdIMZoEsDiLItgUTGEhSdfkxqjWKkyuCMmfjgn0gNSoz1qoq6zIgAMVWc4RJlV9vh8AHLlsXmB7/tL2xKRD0Y7q3u2Q4zGFIUWVn0AtjDkNrdCvRwMDKXoiwoYkVni3XIF8OBgbNVCFpK9WLIIXoMuzzAZWkyPwbInXCPp8lcXi5I46tDszZWoiSDByXmcrcMT/vCUnr+kkt1duLcl3aIho9a4dBHFwNdvflXIBHGaeEmuchACj95taq6PS6hMqSa6wBIOxnqZSmbwpsTYSTZnpJUDqOoxdKlw8oKcKyw+Fy6MA4R8dOGda9uk40Icx2bc68PIYabH5Hsahn5UGIsMGN7jM51sCT97FR22MaNVG1L2xmCuFabHdblSpJ5YQdIQ5at0Nn1cd94Hb5hpJjWCFM+QkdpjblYLBtPSApW35RRw32xQYtznDUe+X9oZ727gIOZ1WnUFgxkgII1vIkWesTDFyAWsV280XFT9oPDgCl+arOwNSweGOoDxi81+RTVOrmFFlTQwx8sTEl8PrNMhy+agokKWHlUBPBfXUeD2Lrr1ZQA6sORIQNblA0fBmDrHgQzuLUXxhIMvAxRC2X6Lo3CnHgr+qnaHq/H5lhcf3vjONv92bUtJ+13HTaI4k+J85WTZGw9IYimETn2Vmltzep8XaXa+2cc9YAV8yZeaonxbFNYYMZV/CMSIKefY0DHO5bHYTr6pjqvvTPYYHIPbtSJDQ9s5lD0hb8GiRFeOPaEC80l01mSJB+Wk/YGmjdKwwJkT9OTLPo+g0lkdi5gyBODo/Qp3he9UvbgcA342HQBWynLxkCX9ohApy5pEo05ZOjYfxxwaBOZqvh2S6Yz+jmkIlGMOjCu5shI1+MPUenohvWSEIahbOHdclYGGz1fAXV20sR5bgkj9uQc8vrGNuxEE8H1wTdUIgwfFmQRNDH4WBspzKq6opL5tMBQvasiWDQdUJQxnobMgmHPtMY0nTWMNKL4p8Upmv1NjkinM44EfjmsSkm0/quFaqJjj9OgMLZYixDQiXedTIdco78HSJ0QYerqr2KfwgOsBgyQ4WkSsULRZb+lgxtDxxaLAfE+h0HgikWp07ULO9cvokcc2eSp5MRGezPIClU5T1AYnRl4opcV+fwfLH3Eb179+596KD3lzfJt2M8RbiMMTeYw/FUJlWyOxtrcWiVqtZ92eUJhi7OOhgY7LREhGR32EQG92vM1MB3IPC1LBfZNY+Lc43s61pHzlr8oy4oSVuxF6+idANWURJk9ld35Af7ltWhCxrT9fb64PlC/wiAsfuMCgkqJ/VwBSy+fXOYXlcGF2A83Cgpxu391BoJ9ee1QKTxHGv5gmIgc2uIb+noLLqPqWoJxXGNQROsmsn06STDj6t4EvSqEd1gxnSpoqZoRT/YCOeVisZ8vPPRVBdp6YHGZTCoxAcpfaeVQ9q9zCH6TT/S02EfaVrg1z2sybgwTfTHY5EseOL9NVQKF9vHu4PIOy9NODULyJvm/j6kC1j3+jKq5yAkYPFMiWhCq7aGFGPRfSMOiLkH9AEBRLjpE8a6fK9GgeL+LocIZ45rkBSqhtMRYbu7Slumb0MOMkgIIQipni/VKbwS25bohkOEoepTQuVYRKbN9SSlaV9sOa5TXezEWXCm4/tZ1bD+EkQJYwo/btBcXzV7ErNztWqK54cXw+XRsOKKPU86cdBLrywlVcnsf29bFQa5F6TlfVdfka4wIhuEsx9shdTMNlczkKTn6D1VfEzKcu6gIQQA67ivrgQAttX9FSLyW38IhO92PbTCLdkmyVE15kSYra8ra5kj6vJIVQZSNW6leFH0aQzccA77URJUZvcwruMaFWkY2z6D18kA1Dyzm8MFq4KqH7+lNSnoPmQVNSXwLQj8OnzNkOOTc/O4OIeWvPvo2IkTWM1Asnblj6dFEHgTzqtQF2Xt18KwKItDPqV4/+9WUVqEU+M4QZHrYHxslIUIfY666Lr4fBBQc8jKELjw/waDELzRRTQvU1D0LKkJKmXRESh8UpTNM7iCMdNVRCSQqmRoGwU/gp5lohvOmm1LVBP0TU8Bd5Z5FQ5Egd2jEQGIx8Kcs96r108QIcd9q/N425/5KY8vzs/jnLTcSiVL58x580RQ4E9ZoZzSeXdnSEHGtBpZL6IrHmqNdON6jGRI4c8bUnIZPOBi7tvUcYpq/M4aKqD5xzQGmdETAgif6TiNimFeMOjwXSnTVZvmdtr8l7qWuSSP9FUkqXrbQNKLwSnBc8PBYZCGhIZVD6NHNZX+5+7G2nYrmiXA5JvWGBaEgTeaXIXnV+TSzxu84cccjP1IZFIEQ4W5G4VCJeW3Dy8DDLzmIOPJe+UAXv34AkQFuZ0/oghn3BZlXM6C0WUSIOvcGcZDmwNZNLBGlSSzHIjIuM3HMObqZ7oYA8DdNxc/BcOL6DkxzgsEdvm0qglSqfyLcYdRdxycoaxbsnTJwjvPfbdjUWdSeXccxNPN5IOHM4Wen+PfGrMS32YMFKeUS4K+9nf/8oTk9sdGYZopmEZhquhXwymezA+5RE6EyxgjmlBOXEetZVI5a/A2BSzIKn9mng8g2iAOg9cH0arxyHuf9zCAwHlriuR71AEGA0pEEkHGbplxOGCGCGfsBwcYu+1EOoA4OoQFbN+oiVMyINr3MhvSxPb1f9+cnvDhEjgAPWX9az+1i//t74Z8kN1WiiQo/Oe+DdSq3QcK5Z6TNSV0PPFwjbn/ZxsI0jO4l3EOXjAJ6gm/5iI7wqZEuIhxgqHx0nMuLvZKkkK+hKgQefiXfUsrqYnga3oj2gDG7nUnhRLm2969e/8z9dCDh81qRIDCL4cjyve0C2x0rmeqZJ8E9n+csdTe18kaACbad5kEOCvrlf62IxPHZEGx+leiKRT1azJ6QrVhV1hAAJRu+mHJvgPJpQmCuypFSYpOuHaRqNpnh5CA4iWGhPknrzXJvTyKLndoDtWHNvJEW/Q+Ja3urV3yuDCHZ3/ge6Yw6JwLoYWo/Z+w1xIJCQrH7g7nz+GmeSKqk0qmkhw7ctTI1GFVOIDZx1cQyaHYy8mYghUqKfzp0FZXLwvC5cfBIVnwn8k4EPigVYrIKlmxN6lmQNBQ4iUF0bUHGPN+FCCpgnvsv/ovZcYcuyyFzC4upsj8a6Co6ZdG2Fd7DONNCBxuWCCSwmA39yRmy0dUU7Tusa2t8XB65LrMqJEENcRDIAWQMdjiUaarlDy5G8QXbZvHqKSSDCEom63K7PVh8nBcyvEZXb+ipsiqIfv93CS6/rE9jE2xnWed5pNNKP56To0Tt7hAcdxUagryHrsDmRQop8+2YyBLFVD0m5eENr5fr8r3N00Rs9eXsZJ0dh5Egb/QZFns1hSYI9nMk8FVDEwN/A8ieBiADPp4aoqu3dT4MAvzGIVW7q4/GoUklbWr9oN6Upw3WQNTVVVFRL2oiLl3oRofMEzFzeDglGNS4HDjuqAkGTj0tGUU8ghESM2cP/00n25VRI+lgazae4wLFCe/2yApp+yOgxzuzCUcurBzxNJm7d01ogmuq6c2fjyMAgAGY6pFmSoytoADbLtnspLDPuxJzQsrRFMYdoDNdVFekcV7S1WZrCvvAM2HeTksuxAZs9PweipJqvAjQ3oqGLFelHUr15eVkgxMjZln1T43Bm6U/sfEcWLbewtrjP3n/QwJ0fnzGFj8eS9j0wpunXaayr9A/e30aSPZaY9H5IIMjqlV2SB/96FY64e2AULI0hTh+IWaSGqo+hsEtZE5d0GawNnQjXDM4NG6rOZo8yS4c5FIQmte7mZNrnObYduUiKSofYNRHoPtilW7yDt7wTrsNGo9lSSDzJjaVKIP0UNfpBeZdO8RfR9fW1zMiuK12deqWLrim+UbzIEk+e36URAXwdoXddrEthukwOGetSJMna6qdTvDIsf1uRbuwgJ2u6smcUoOFOCBrEjLKdZbUE1ygbrjjhEByFIEtJqUlRSlyrRJ1BQAv2hIAOHY3TAuDkcVU1IYf7Ap1QO16xoKSaovewgR0o3eTJ8PnD2XIYWddgeYHBZ7V0gKGYOQgUPHp+t9gqJvrY3IC/ZeTGHNfQfVdW8plUp79C2VxjXt/9d99z22/5P1SpLKtf3g8tvvscRvyKBufKlNE8R/3NlHkHV8WuBHdQp/O/6YTZycByVeMt8WcXLWs3mZbhuYpcgW3FobUkjhFBGkRxjEOE1l3rF0opZebVBNaFg/HC0h2KdBmIztd8spM1yrj5tBxSf0KaKfXQOXn8Hmy1USyvrOIGB03GymK9fcAtc8wdpXMpDcAR5bnzOZISHr9io0xumAJ2KKfX4SNAXEQTMT74J7PHNfRFk66qMUksMh/nZ5sq5lyB6HfWi1pYhWaygtoQ7W7LX6Mki+s/5rIly8TDTNczhMhnU9vw4hre7HNnAXTJjiU6jZZV2daZ6J3lgrmtJ+ExSZkX2OcV4QbtFATTCET6NMfhHOomdaXZsaRDisoj6FQumDqFkR/lHtlf6zvYyAJA1JoTHGZMy2L4gyGY/bF87BmO5XBY3tqcsZZuimL2aIOZftA+Mw0qFvEbsOr02cmgtE4wll0RbDqpYBUIALypccRMl15mzR/w6L3Wc2MlXChAOgGQaZzxsloWHtg1A3mu7vUVKo7AvXLMWYGipJSvXpnsIMgy6k5geD00tDCsPCY+HycjiqIaTQh4EwABCVrhWvCQZZfQmiZpA9r60T0Yldi5DfYueLVqmSVC0+3loHi/0fjBnboxEhU3B91U7hNmsbGDgMc9gvor/d7qlJHJ0PggHtDC2kOLnJs2UcthrD1V3IHIpDa8J/CSJzR71P42K4Rm74KlGSojM6QdygOKY6q2mNXx5hXTNE1/q8WBMSvjwUimwX3anSDLrM8CApyq+OgnMBMI+SEnM4ohpB+xKmq5a/fwyiHMCvqsppO8Lmg8MO65ig53A4p/0+94ztcXRgNONZrIt4eLSIQ/2/38uRPa6Z9LbTx41kxd6umgvKLeu1hQyuYpyLDmQGuy5uqHwTRK6j6/PoWZDDsfNUSGpYPtSog0XnRSHB2u8LwRwQXFEhkmDQZ+Cck9Dc9RGFqY/XK11wSLNg0fMXlQS9vpCJ6GRyqDbuCKmBYs/nS6lMbzoK6lZ30O8qWjasnTEejG13e6UqSeGnhRm67E1NwAGCqUdM4FazKwxcJ3yUo+KU4fC3NUkmdkEDmAuCo9+slBa6xOc6AQ1RFEUUowC2XkFOv30z5DW4iDHTFrUUZNCmipqy6iC4wBa+GoSk58M2Qu6Me1M1hXHxfwyUGYxgDv2poiRFJg7tBiLbmG0eKtfmIMKT1BQ2lb4GdcKaHKxrD6bAYrsFMdMDG/vQOCgm/WRF+PEusPBq/jGKniSVH2wNcdg/5ShxQfc7GxCYJg4xzCJap7yTo/KM1gJ2pSZ+8YIIB9NLy5z0oYa00xuQ3dJ8+rfVwfsRRvOd8KdISmXeoTCFIONekpikcBVAF2eOmRmEqg1bwuaz2Pb56lgTZBhxCGBUhBoB3fdLbHrVbW0ocMHWn9cxxy4ZsJhdHRKq8QdHUx2seZ4+4flxf5g0RDh3daOmMHBtEzRLem3yjhVpumg720IWn8YhIbqiWwOZZqJtlqnG9nQYB+Har2eG+55hqnBt2ObtHBWnDveWMXfVBGVify15gcWtZIvYm7KeqcmSWWedeebZpz/8t2Ov+vjthSQ9B8LkMhdOSour301jVEyEfzGQIktvsRm4GlNYRaWwrMiYfLDYtZikktR6Vq/XAgAC9D708/cWx5YMMuWWThC4WtOB1Bzbu+w2i4EkVZvmAeKAZ3PoJ2c7wJl/l3pNEZ26fz9oislgxzcooivawKFlte6g72MlSQ2f1itSTQbbNSmVS05o60wOSN3QElXP53ciHazddWoZNaX68iFqxItphadWilC1uqOLWoKKy96M43wO46tUU/K3wEAGfgjJIQav14smGPNmtDKFUPUNG8impb3g3LTx1SSoXz/cZOBTsOpd5SVUklRy3L037LH/Zpc8+yZTk4rtOLYRgpzdVlNyXGpyQHDa11ZJUrl4rEFkEyayrderJuj1CVOXBcF7tppC5dzVu8FaCwCHvLmOqvrNUYCzPmiw9k1WEsJ5fy/1FAAETh9Lperix3dHnmL2/CMECX2gcIxwRAXTVStjAdCDAiesp5Ai8+4EnMkHRjzh67gjh7Xo870XpqvGSVMIIEyMg+YA9iptZM7qmf0ALQIGB85WCU33OQf3CMdYr1J9OaIWgQLHdlQzqJKqUj2di8b9Sg0iqrT2zZ2EhKt1ha1eXJwjcCIy1qQwwlXlWJn+UYSkBfBwTUjTuq8VyiwZed9CTaGSE09zgMXOh0wmSdEJT/2zJ1qSwMR/XJTGwPeOO7A3SWw3+NGSWIJm+fmTlxdZkwZp/Xrs+UJ/SweHQ8bOV01hsE+uPXllMBfRfvA7c5jU4g+u2xstqlxvns1hEF2Q9T5IInhhsz3vbgYxfPfxjL2QFBVfMebs9ihUMOJ7kbDoP8g0gxz8uGr2ie6wLQNlw9aflZOUwNyeFJLZn17bFkLkPOWjd2LJ4asuQm7Rga9TEiE0Vg4/rAeMgel93rhyVVJDyMaTDhkPR8VW32UlheL52dDteyC69zN6ktT6eU+/ceFuZB6yYb/L2n9MqEJVied9e94OiLj9kz+UMzVm9smdYDOY2eodH16CQ7YxmfdnUimipIRq+wsXnNGfzCE84GOS2Yb6+nrRFWULx3ck80ExeV5H9XIHa076fJUnyaDBk/R5hyDa6E+EcSH7z7OrmXft3C/vayH9URtvyAaG/WCbAYPzS+P4NmTQ0gTa9J5VnSWDqgTx3isDQ7zsySGAwNmYbm/8QjKQ6kVInf3D+F1ga2Bw6Io6DRqoJNfenrHmwKlTSQbvlclg7VXLmQzU4TjGlAQDhaUVV/VbWp9lLVMD+SxKeQSr/ZbYvDcSk0u44osvm6bqBM5by8PhMuDaDGfFYGuzrNlyIXPGTP99f5EcimdZp/zi4UcffqSWVWRZf4gHGEx4zl7vEOFDkj9/PGEVSf7+YTFb8Kz8IpxuLau+/GAJydXxqre+JmlHUfxBsOZi3zAWEZorWKuGay6CazFAgc2O+2LBBOYZs5hTTusMFbhbsx/Jb75jMZMLS0nK88ikQHHiEpKcwI9+J3kqcAPJ2i9JsvKH37/8jtbaWweRaTQDbmfumbUk693OV/TtefNBPZNHXfTk1pA8xNDxQ0+Z1Nrz4H/1PO7gk68Zdun2rcOB5r0eu3ngBQOueejKp2+84/bWBtmRuW358K1NHkDBHr2P7Llzz5MG9hl+1sUXTVjxgita65FXMOre03vuuMvuu+++R889Bj+x+NGMwKvBBiesC8mA7XzF06MuRbuBt/S9/unz9xoycuTTuad+9f3UA0Y+0A50oQzc5fqTrhnYc/99e/TscnIHHPjA5SMfbiYLUK5Mrtze2hYY09CwaDvYDQBYwHW65NX6hjoum9lYW//j2CFXtAOI3AbXj3ri4pOuv7bH/z19Vv9Bg5956r3GixClAXanQ6/odceVj+x54aiRvbax6HPYyFH3DXxi5KgTjkGPgRc+fvlWJw0H4bpDz7N27Nlzpx0uv+7e62/rtbNB19bYFqkF+N+YaW9g4O4KkNolAwAGXbCwG3wL8rYBYNHSbbDBMwBgUCzrri19t4MxzQJL+5Vc18phwxoLAN236nbMbVdt363bdgBgDTwaNL8b/ksNUuvhTIvmAgBWUDggvloAADD1AJ0BKuABJwE+PRyMRCIhoRQKtSwgA8Sm7utwgBiCXxD4/kP9b/Uu04zj5H+6/kd7vla/uP9i/Yv919y/64dvPR//V9IXyL9Y/5/+C/N/58f5f/oew79bf9v3Bf1T/YPrH/vB6gv2v/Y73fv+j/wv9H7nf7F/yvyq+QL+ff7n/5e2X/4fYq/dv2CP2k9NP93f/Z8mv9X/5H7j/935Fv2U/9/+49wD/yeoB/3fUA7Gv+n/hl+qPlR/d/xm/Z31x/Hfnn7z/dv8r/oP7z/7f9D8jeYf0v+v/63kh+1v4/+6/ud/jv3k+638//wf8Z43/KD/N/M/4BfyD+Z/4/+9/uN/f/3d+vf6T/o9y/u3+k/8v+p9gX2b+mf57+8fu//f/3S9uj+n9Df07/Bf87+/fk39gP8m/oX+c/Nv+9//r6q/1P+28cr7h/vv1++AH+Rf0f/Gf4X9sv8z///+3+MP8z/z/87/pf/f/ovaz+Z/4T/j/5L/P//P/Qf//8Bf4//PP87/bP8n/3f8d////h91n/F/P/6C/t3/0/ch/UD/Xfmx+/5j9Rso2UaQXveYiXWXmey3/+l9TT/tkPlMrxetb7bv/CUXJHBzqFQbUgNIbAdO73a0yNV9Rso2UbKNi+wxUiTdHr8D/0/opYcp/7YHaYXckCqB5qeVfT+F/raUHKi6HjbLYgCbdzlgWIttIweUu0yNV9Rso2UAEeBXuU3ejgcjAI5N177okaOTkBG4aWYAWWNMtw2KG7eZc9dy+cDtur7c5Eh3d2lbqMjn7KVI1I4wtwDg9m4ByECO5HcjuR3CgUvqCKL8asO8uZZmrgciloKzUOFCfllvCWRNWRNE21gzRHi+CuzKa45cxXkAHgWNYSDsRhem3vN2UtwdQzyveTXs+1ak9JdrTI1X1GyjZP7b9xRKhF5KvN9C+QCxy3rlNtdQeVXlD8EthEkNTWVqlnLq0JXRecGtRvOoY9gws5TOqMl/3u7EKsiZRso2UbKNk/haUDUqhEv3VA4L+lKJS6yMkBhXg/9nNLzy9IjQ+/i/FlxGwwSxlEy5KvD3Aa8eMUXVBr4NbM0Ckar6jZRsoLDxZw3o2OrlOgQFsOGZbsGcVmPjHnCPV0WbGIENDxepJvJtMoPDP3Vlwo9EI44rPpEG2rq2zAxdb6MQf7cqikarkCIXu16pNIGfwRWibd+7X821o8+71i8SfjUiLdgOASwsuzElJv5SY3Wc9CXIG8xx2KA8rlkmmDMGfPRWj2xbGPvA2hf8rw5BYxDfjmmo2UbKM2xC33v0Ka3KRM8D5W3hAYDXgHt92gpjSpCmPHfoTYju8rsK+0zu+9iib+jAKg0i3vIED4w+xO6JGbJOMQ+o2UbKNlGx11bSR2+CpgFqML5ZpOLFknevC23cHfRWLd5Br5gOwM2OqZZGGcdYazhAXMBBy7Oi9Y/icuEn/vSK8JuTHfOu5HcjuR3KKZQpJnOZP4BjWcmoQZ4wMEDp3xlDOjN2WAu7uOO8zdwjL9dvCDPUn5XzMLD+gUp0Wy2mK/MfXK7cZVFI1X1GyjZQjhLSflL64idRFOZTOhbcBJClFlhFajAdCHDMNXZ49nu4At2qMHmI3UL9mmo2UbKNlGyjY7JQO0/SrZg0U2dJU1j+WbeJdkB/qnPl9iTXuT6XcgeFy+f/TJsdFYDDZSlTGqXaZGq+o2UbKNlDFYehkeIG6WXqFGtIuXliZtPLBllUM7hO2+euqaV1zD3KopGq+o2UbKNlGyjblSSXU6jZRso2UZlYz3zitIAGEWU9lYSFqpGCscAl7VJfKmEPuzFe7zagsdauVWmy7/lJUKf6VwsAuSwCuzFAFkCvsHnP4QQsg1/UZ5D2EYbvlhVX2SrNOVlpgstgPItjCZe4MOXQKMJyCOQcHfxRIiRbu26OGaXmtsSM9MsS3YKHRRO/Szxd655GtrXS1NP2kAOfX2umSujQeXkupldUnh4K61txuQTmvh9Y71EQR0mwAedcdw/g6S3go77RSoofzLzvKQjym5ptY0oRnGtfIgKrqVRnQeq773zrWI+zPyhOWH58c0nVT8EV31TlR9RZbsWerzQbUPKd7GDq948Oa4YAHej8B+RfZeV401pUOyr8SPnt+y+Nvs9OQ9kK1FstPyWhAid44URHRnC84jWin2JlIvXBIEB3umorgIjXAKcbRId/FSVsSiyTmda7dlIwisrJj0aIXrLTJOb1whpWQdicy1pw9Gv93hsinXIoCcql9AuT1A1tEWk8CrmlXlqC4Unu3F/TktMbbBhtEr9WJdvawoDeyRXfWvOBkiqQUvew+Kxh81sSQpsU2CM5ZiS5PuOt8WP/mwE3v+fGXVwjDIHIHl1t+EuVXoAhrJTgLvsDT5ADXZWXIl+BR2v4bvWWcFBZy5AVhSYoIMyuBz/fWxjyx10xjFCILbPyyzpi5/3ijveyxjNVWxNQziijJV2WYwyxbBX2m0K5E+WXoQdH7IxMIKZ7KTBGk7j47q79RWAYzpaXnKgEuH3WTxbGNTxh+1O1ULs6p4HdnWUqDiPcrkO50RFi9VrEFAGhWtnt+6bZMi8cJ2ULnPYJS8x/9lIs+XmBV7hm5i44hnSJ1250jyh5Lu8QBAhpK7EAAP7/wWyCB/JPsmtry2mXOH0A0cA/F2BO7ECvcDhGW2KMFAtpSOIiYAlViPwwQrUJO6OIwIo3LF+P98azJPcDOsET+2M7OEenQrBTLcYzAYWJp602Kze2Rqi/74dez7DViXd4P2Hj+W8Z5zq2laTXPg3fIi1Bhngin0goPQ2H3Ymyglx+BdtLn8wcRO2XfLCErOyTQjPJeNQrLwkF9+xuWujqAYh38wMFX8HOwGQlRxau4X9dWi1TN9SiJ3B5rQ8QySTbiat+geo9xRb1NurVWaf88fn+VERkL/DM5oPkVu58rhWDOl2vfb2Q+aDI+RFxGDqxy1TBNAsccblfnwoXB4vwuHsJXi26zJVUdBPCW96nqOKZtnxGEtCAnG2s5cRmRRjukkzcRur5v4lVjAG67964EJG4nZVKiwHRQog5Phy7tWZSl9Q+PnpGFlcc3I/jSk01g2ZmWGFVYnJmg1KCdUYX8qJyWekjAZ0H0isCwogYzvdQ79XccyA+ODC2gJ71k4+qL62WlH288hNgvY+Z9clBA/36pb4NFx8Fv91u+gscUCzkzE5DmWtysTcI3L2rgmask1mgECdVkBlg0tcY/LcVU6J0s2eCCNbsyNVHuLAPoRYTzS3eLH+23Pg069610avUrSvMSL/EYfaQ8pUDa86kg5+WbzdtIxUaN4ddOo8yEmCcZcuvAOaU/pXtQ7hFd50XV0R8mdyFddAoXjRXDJ9n3P0La43C9DlZrNfyquGJaeF9P1fabeXkj8PzlFVQsJwvomGiLxpuJzFQw9rUQZRaGce1YqyWoMivl5aH5d994mr8dxn7+6mXt8EPwm6SN6cEGaAxcwqwT+W0yD0rtTJot3CmP2DUs/epC3eRnyCT7dbckm8R+ywAxHoVAtiQOR1aYM2k0C4u0m2WMdf5xMSXMfFVdXNcu6fIClw2yaIbDaO39NzjtwjDgU3vanzIay4jeO6rdO2JYRmaQm51mNaEdv3kQwzMER2UncwWgzKplhw61ov5XNkIduxk2bZiN6gUhEAfOKMbs11Md07eeVpD+4iCl5ZhrSNqKjfdvM/2q4brCxHfIIeCERIwlDHxBf+6/QzQ//BQgACQ+oQy36ET/sExp9E3JdyNqRodKzDyDnf9KQ1+MK1/VKKGfiDbaXKi9e8bP61euIdbavjaoiL8E9UkjLZfr9cxL/XFdhm8d3qPH2RQy1grLmiKrPR2YytqviEXjGMuTiALvirtBxpWz8AWOhwxkIVF5aHYiTYSZVgvvPqxdcSJ9tVakoLMoLOA+MhtzyY4xbcrPkoK+ArWhKPTF06AzhbHxvsQHjnPxCYMKRVsiF7fkB00A/bzh+0HwGsL3m0ojjH8a4p8qTTjH7mkhZCcb+yoRs1b+DhLCYZ+zQznlfdpsljsGzR9/sMhF95mpiWFtVTHraX8HoD2nyZMLW6RO0ls9PUaf7eY1+oqwKCoGbiBXSQl+OY3gfbfdQPkvGW2UYuJNT9J6Nyhkd5VldeHFwrd0IcBnxsriwy92KMaY5Gd1lRKKszaG+bDNumXe1poCJ+WKaViP8LvWEauwU7BFoud1fnsBhb/nDqKItS/ZBSOq2x+XIG1EYiyZpt/FCELYxSQBdRk8F+HH4uwlvuCBm4lgMbUCUE0qNxdKotQtSfXYYBIRkyZDk46M4LNl6v2DipmneCNHiZEIvODQF34pEeamMKckhZvRtwi8SaCi/YrAsp0AfWRehj1IXTszF/DqCHeq2VHuBSrB7ynGWrVSrs/iPcbEdw37/zf8TJWjEYxouf/XR6pVIvl3h2u1b96t7VBmt9B7+odczC4SNp66IPkwSGuwl8o04wgskILQm0hs5F7iaA0wJi+qcwcdSNqZeD8gpUVcnB+FzX6CrNhQnRlWk8No9dUNYX6Svso+5DyRSEfT4Qt4N1JbYLKGSKgu+UOAcpNpit/+ntnrzKhtURKxbgk3AmDHZLBZaV2uf7KcmixWLtvfKaPx/K0L1sooQNY3YjWtIRlzRDw/uCccVvMnO8KK1/2i0pxks17HMaQo+TwKhS/saYK+iAhtrfOjzltfMRYIfRRJhCQ/YWuSxAn/p87FX6+DKjZkIETSm5s9HkGdrSiHYEGYx4x4Zrautv4EdQ5h1rAXOsbYot/J6ol4n3HNIX7SVfytbJ2YRRc/WIwldw8FJDOBVz9HsVQe3r/biHJwuNHWz9TaVOJsxmkAVH0Ar3DuGT4HNn2nnS6H4sjTmIp4JNu5tSeQiP/6az0FQegAPC3xQRIER7iHdVMMZayuqaUd30GbttVZVlh/iKmdRAaCnX/KBihozFC81JH3wFLlwRo+GFwoG7HGDLTJ/eVezEOAjSoHf4PYsW2sfurJYUdPou8DhKeQPT3u07EXmMpzjcI64ZjH3RndPJbPRCugUucFysaHZlp6PokzLC6xU70SuVOzsUIsbEAe/B8JBbupAMQW+0puQCPtCyV7tEDHOq1uqi6TnnkO2LQWB9ToLId3m/lfN9YbX4RO8Tl2GO4KiOgH/skjtOoZ1sePKadvAA1mEMIzu/SIhAlL+RWLP0hwvvcIMaWuE9h6tuPYt5mc32tSg3wI2fgY52qgrknB/EcEvxM1BZ+V4AezjZ6izaFrFXnkzrVLjIGYxDzukzW9oyxAyvOVrX3SF1ofyPeTB8GZj15NL7UkEjChR8RcoBGsVt4JBsm9IERyJvgDs/K++KYkoYLDesiCgJO22ps/z6gSleU50L4nA8+eLLHFTolDF1xxTg6SdhZVhgspNdAqQU/IK3pLCvtYf92RB9jVPPsgzZnN0mcpcyfcs4gsLlJyhnE1TVggVyJcn9OOG67zQ7eiKLB69XJ1dQxjlTk+XEEHrTD2vdLx2GomTXEapTqXLRNcLFhSFfczL91W69niPG45bIhgQ2F76pGBPrJ+JokjwUNv2Dk/SMf19Z9Q4SG74GslYsOUInLPVfKtnwUzCnZdDnBQIpV1oG0PWASQNaTLzqXXiDKx95XeSXW7/w9fgft0ZVjNG9AX2s2zy70WIg4JmBUnqTbnuXdkxnF5TwAu6hW+8fIanRqxFej+Zvs/vDLDHt2KV4IpqCBoZZJezSvMijvhleUIqdVFwrSAIplHDgQYDbZVKHM6esDUWVC8e/InuH68irW90LMmZYcoxMiQiZygMroZAZFp66PC7BpR1A+t6VlF0p7oQXfnslx+5lP3htcTY74ZxO29TXznPSyszuPFLTZeumTQN43XvCVzv6p8xF2PbvjIH+O7zQAAoPqElbxRqApPmRVwJ62MqFk/HciGvbjs+rz21z2PojK52GtYPRIC0BQfezQyK8RuP6UsE1wzr+Tfc1T56kSHWoVkCsRXHUaaFwxxzhshGxOdmCFJn+Zz9bscGPUFDNjAoQzB2nZsQTUCli6D7gNU77OdmP8N+8rxjQu502wg4rFOZPgzFGKxRUdJKRcyz6FuWKHGqJKDuHYWZudp+PdQOpVT2qS/8jiyADuWg2GVBQVLCXS7Axg1uwxTlcGrWIGhzDWVQaUTqJoDBL6vxv3og77gWlwe2I0opQdRoBMsvCchFB/34BDsoftUcvc//yzh87Pp6NRMsqqTpGLKAAKMsRo7suzgVix73bR7sDQXE03dnOuK3vP6CJGyci/SaLNl083/XIsSKvNN57ZNukjCie9sAxaNYpcSAh8eqmC03hM30emzBx2F3tZumlptVK0SPvCf8ACVgCT1VgIZ6wjmsqKzFPLxYsDej/ktERQ7o3FRnW0q3u/4YijxmsKxDPaQVSFCb4RnI8RUWdqV+w/PLxQTFD6gWuXTnYiNbpZHnLzXDdjmFKvA5WUgm+aIIVFypZwi6Ilqr50hcKzy/LfiNIxpR5/RtewKfms2RSLYhH9ixQSz0BmLNZsaaHv6wWdztaJgIiGeMLHrfKUIrWg/GiOk9TOMKkn5Dbu1KF7c1LhgqddUr2Op7fK5Y6DojU65QkMhLi3WY4wW8aioArYnAVfOgjnnPjTMUUSCYleGQU8DeZMdwrWZDkqrOFUwikjO3giWsV69ky+eTAp93dQjCCbMd4iTlf0QPwbJzH+fU8KmpMhL/1S9SEtq15yEodXq1hbQ8hfUdQlsU/IPivzCOb+qOgIqxLfpofJmGP1SmM4jMpcBdwtqcw/wN5LBqXeqm9n4EFIAiXuXzxg/LSa1B0eeD/2M2r0a3Y9cv4I8Opg/dIqqZ1ZE4h0jNI7j7ZiSMVvi7mbl35ArZ1yC3nbSbb1p+G4bCayPU8swopNyx//FDb3VZdIQNd/0/FOpPCfl2benqmgwKcl3g+2MLiXEl/N7RW+PG7h3+0MsJnlYQomSlp59/yJSeLOlhf97PcMN03MDAath3ZWpAMOdv0qFSZVYI4o8aUaG38Y4nQM+mfdppXo7czCX+h+84VHqnA/ZivuFMsTA1EVKVzGJVqbGNJ/5KQ1XfMKHnIZ2puwj3j12/LbWtmhK1H760sFOcn472gBxeO7HmIFz2Vo+rUzh9DX9C++c4zkc7zWEk+QoRzl63P3d4MqztoFnVbR73O1xECkTFMa1vLmO72FR1wJ4Pu3cclzoWawBsoclreYWz7eCCH1DigXAsmDwzerW1VGLmWfMc13l2YQTb6xMGKd33ku97Nox2ow5jRh3nwnVzwc8IAo+btFub/sjpN3pyH/CoAG12YPyiQwGvc3puDqaFpBcA/37pX488Wvx9R1tk0R+ARsAj28eUUU3oIjET8/F1HyN+p0Wq66s/iAHCsG8txbolqicVtE31XMdvBUp6yGKHxAvs5LxPwQrlS9RfpzY+JQdf+kcOOJDZAEEtPZI6jZxXTbzNM6LgKYT0tLuiZeZ5eZ+vQtt+/Wt3hxtHNXcII37GEXGjzf/MecZ1Jx9TPy+OMR5jdOh01NwyMQDvhJOQudMv62YVQZSpntNQihv/gvuk7KCBm+z9jfrYVH5qKWVteaBjpfdtok+4vn7xod8B/2aVdKC57KwXVIiNQRvKOOJkVHjt9r3hnQemdW8afhfKpISJgghK1vT6Z/LuSnyYjINIM7/yy3jBGJCS6gKgIpInLzjRmkOKMejSW9hOnGib2tfyH36+V3LMT3t+H6R0s1Hdvbq3DGXyJGk92M7X+2DHaVkVxyDoyBIz0ElTcagoVWrjNaCWYkr1GMLUjgaE5oUpCdaAnOFNp5/Xp+10AcWTnYlg3h+C4L46f7dFOmbVdZgZ91MHVSIX6llnFEY4CnazQCYI/tdUVrAQCxqZnKSBFIecryum7LLFkdgOcJVaMy+QvL9xTYKAKq7kXPzrXw4Yr9+2s7piTSsG9m1EnPn8uQaht5iUWRDx3z7G7+dRiedtGrkth3qDNHmjDr0sG0NVVjfbcPy15CoQSKFtyAu33zyE39QxReRA3w9W6Aqn7GatgwRTQEcErtQj9jxYrWQPUGHvyxxMHgGW9uxLOpa182eGxtKaNfN8EQAha2Wpup4lfI8LIfW4PKK3Zq4UFFgbY1IivfBr9Te6AGQhv98P/lZKT0oMgrWfWmN/NWYnluiDofaFSYdAJKsnNfsnNd7nzBBQ8qHj5FcDLjOkmy+stpK5WT0Tz16UztNyqgBdp2Fa5IlhoTNqwGF6KoPsZHI4aFOfsIS+Xcvl11NB68eipeWtZN2ENzpKyFID+vPcmaDDaVEFsCUW87v7oE35EYu/yILLJM77F9I6SOYcNqc5DrzJ/Vx9ZWXuxzHi2R7KU/Vxy1IAZRkRgCwetI1qQ2sFMYsOGV5sjrLLdw9HAObBe/1gjoCAlaBCY/9dGaDOedeD7UuOGmLPt4NDTaq8L4XH6PUMfHVdc1EENj8kcrouqE2jQVjhhjjF76JD5Xu6CjviAVD8Hemy93p3SjVVpS/HY1hm4kjFkMyFGUQwDGqR845b7pbuho3YV9vLjubAB79n7aWn1r1A1nHwEHW2qsTtmL7CqwLA/sVZZ5wVZCxvFaKtHeqWmWrr4pw+thbzrkppnBzMDnsuU03OfC5LNC4QlqN/rNNrSo0VOeHRyn/JE+H0v1wCcAHXE7T+l1DS8Pcgz6lXEt8Za6rdWEqr9t+bRX0kHqWytoJm5p0sKHRF+17DAVzOIb0oPFGvcF9vu7uUe5NT0D9M3q2vWCB3BWJdACK0Wpkdi2Rv27obPXlLfOqRHJIpuPEKEpYa8pWRMKPw3GSNUrPqqqGxfJmXnTfkpI9l6LQ+ydTnps9jNCAW1OjexJtAci6wLXtGayvFFx8W2F8s/cJPjIzaOx4XEfq2qpM0WmzmE+0ZmNKDkVlpLSvYVSkgOYCj8YjLV3WAuOX33784COnEMrzLdRCcRDCxVbYIsPxBlbNc/OyyCkqg6jXD9tnXKBAAGAj9wXMsmDSV8vmnT7S2Fwiknjo8QpPf51EaWbgyTicAlQm3SRkvB/bZfq8Y2HYbX3eMiHV8Rt7WoqaastYwLLtTY0+d8mHbIl0CFUZVD8AAJkLmSMSt1vDEQesFDWEHQJukeLQE1pgy0FoOUvHfoWOgfpeXkMraFw1VcwKoCNmKblfeF2/Dlhb+0LwcEFJznM566RxGKtOUF2/7eyTPCrWvHoEOZgKsnwoudtRo1Vka75gRqMxIRuI7qJuJ+d+ZA08/5NSj2td2XQ7/SCfACbf3BjAQl4iC2fYgYKVJWaEzWfUoFDyXGLizf+u8AeN5gbHJyZjR3a+BGWR3p81M2hN0lM3Iyq0/d9uSiIivwZ4pA7vQvY26VlirL3OS4taV9fxZyGlOnxP1NPn7wBwzDQCpyKfMFGCnFSvDrJbM0HT1TYPc/4wNfixzhGfREdM9xJBS69vxbaJvj2zmaaZNKRBSNItpI1R+7QB4WWggp0YNCL7U0WYUbs+D2VjHb2ySNV6QotDG2uVzno0+bU4T8dWIjV14YEgx5Cd5tMtuaEnNi+j7+kqbvayHJV29HVe3+4LJNh7IkP2OaclqrU2eTxNIKCuT/2FArgbgq3q3nMuYtGOM52rQGoLZCLebG5bQdxJqDYOO+3tacRnO+p33gPiEYQlllAnEhXKmwQESmGOGcnZgx5j44AA5GFxLxpzMLL/h94ypQ8H2k/3SLqYrCyuumf+iGtcKbeBbhL1bwBriYXi0n0tkEn4XuEnK+yAN/gOdsIxtEhYSdDpQgbM00XyhyQ3gpxAXZGBd8sYlVBvXQdwkvgWXXM8J4y0BwihFC6RfVnjP1zIcWL0purJZinHu+cgsSbDa/fUzcSqbSbljBCIU3Qp4bXjT0t10i8O+NcUYZgjQGTAB2qmTK3M6aa8SmfmdLy6fRH9xKSnhgPYpHwnOymHkIKYoe7W6J29r62LA01TVfj9AKJpbrym2JBLEfWDmH3OoQdqUX6X8WRZ2sJr3NLanVSc/FD11dTaWN+ZGHHToCaAefzAnW98cnIMg2wqglrag0W3uQ9ZddpHh0oIsNEXTmkmreYSZdMmq9/jqU7NSoExJH14xJh7P5rxcceE8Vv/Bg06gqMVlptukbWHvBBCwTmE12IoUwnsmmVpmom/+zpXDCEhxZhvGDijtgGA2oqfoGo124sD+6WFVnXOr/sUSxRggYOxOmcN18wg/j/8KbQIXPo2EdqFSCFTk90o0DRptRXZzZzFZlUTbj/cR+8/0kBr0+KO8NhZbFcwDtOdnrq4Xgt9R/tx6Nh4l+G0EjwZaNWdfc6TMkwTRCH1QwJuow5rshKh2YFO/jYbKZpalwMckCMbjVjVkkoC0Ap0aBQEwjW/ggInxvT6J1xvzfApOVoAATDnNsBPJS1vmKuD7NDokws8znAYRKr9TuGi0zHjwLJVYDiB+wP6ZqWnK9tQSFCjRW/nFPicVVIvwI+uYnDQzWVLjAOVoTbLOTxzzYE+BPf8MiHWQUNaffYMXZaExICIv2Jr1R/82cCJ3E4DFvtJN0/t2qPLmHALhMxs+xwVHOsS1m5X7H+2EAU8PQlwmTcRVp3ce/dldf95uxS0Cgb0qD25jQHqsOY3nd6hVzsOKu5pWnZ4gikwfL2bmdNG8/4kqnTYgXocXZ136iy5umRWVNgrCwt2ET3LNugKh1HRI4ZNLePPocfRc19k0PQ5DPY4h4MA14VgOG7k4rTWM0KID2xuK/Qp8p3chj4gboYhMc2nkgIDgEokn+IaueomgKLz/G+7IefFy/AJlybKZh+k17M2osp+Z/5NQtBGdvqppU6cAFbProFC72wMGMrcHtZe8UclQJ9qI6VzkG73dhrbNPQL9WMVHrHBeLeBJtdG9tpO7YtNDYeT+dnnZAm7bFyCjBWPj83YO2c7KP4k6WUO0WK3+ORq0ysZJQUq28UTNSbQAg4z4v+5cAdcbj9LqwNrIXhrbLsAI8qNEmS2GQy0iGg+19TeBbtV/rNoWXIQxim29fStv/AMxFaOi9xqwQmq+s/3fPNe/dlEa8CapU9D1aNWsEnyrU+HGEpqsdMGOdKAPjGHANGXlFY7e3cNhn+hLK3X1AqytH5EcEzkNRbQOC++K67r8smuWOi7UBbIfKuvhbczrXk4mwZLx4zFri0obp+B4qP54NKrUHcJpJOvYkg40t03MCPVDmJyQFuc9yNRPXD+ySG3UyLU7Wq3IaaLt0HoAM+Y5/wzAqLywCOOqEY2Ggb8JwnLcA7XTVvdaMmgUZCg66755R2F2ckD5ts4ODYexcl5d9h2x/cbAUQfJ8yXRFvou/6hjFFgmMIxQGOqMt8HwOGTaOio3ZHtkYlHyppUikXIl1ZSbt+XGZSIK50W2lXoSX6drDDcuq3kpnhOjt09hUj/6uo2VLLle7/VWNYZVHATSdCBnQI4PqPDsReudsVbn/K0im1atbSrrXU6G6Kqqj60mL0hHjopgoL5ixD+YqvDmhSwu5tgfFZx8b57A2DqD8xAe8dJlf6+HYgLdLd3FOMJMQ4fUePh6cWnXRtorPGvTj8wsl1LN3vFxLGcDPj0/FdrP/kofDBziZKfEZx5eiSIH4LN7VTYSDQxg/6OxZBnua3s0Za0TRfhytEpbFhYD8aj6qmbH9UhK92GXDg1xFz2tEI3v0lC3bN25Le6amFuuMoL5AJjcBFn3pV8rLxGvHD1BwJBmTT8r6TugZQm4Xn9ERjDHSKXtWL9WlTSkhk1YAsw7aisDPGP28zEMAA1Dxj3je/c10GNVy4/VQGwOS7zmRq8NE6Neqy1feokpX7BEkZS2VoaQuCZrzkZZvZzfiYpGSIKVj4nVnI7LVohjhrDFes7cqxYe4J7P2GfhHshkMU9PHolaln4PmTPdtd53A/JnrnQDFT0Xfg+wucw3zi3u+5EvqOzi+V/8X/a5Ik3H7h4m0+lIbljH3cDO+j/aKoGa0WBSL6FG7po8XFzLQ+ZoMD2WWtg9iAruo6flnpETdZK0tJ6g6byS+nr4QukL93BcgbwZHECSPS2R/Yq0HiwuAzDZwTmmn6LDwBuD0naom+DJ/xA5bn/AxOV9nXVadRGUyNVQgIiY2+frntAx2wqREPiF1AJnOrkJJbOgWkbIiisyLATcLFDgG3ZqlEI+wq3oSTRS0MfqUQxQA8ZGmI2HHyXWhLWWSZAvBrcmKB8ipASsou6JPMLthfhP4i/CBJc9rsY/i30JP4BtFSt+UUYHVCqjBFukhcu+YSiIz1ci5uzSoMoqO9oEBzqbB39OTBXuyA0MnZMPCoX88zQQ2NGrZFnPlTatqGm5/JSirW4r3eBQM76O0M4MI7gs5hh9+TqIY5JkbWI5RMrDrsnkoOjLlx7fOZGeAaGWic2f9JgdgwkgbuvkNbGSLZ3QciBFMUk5YOF9I+E75C3fTeD6IY908GhTmhYs/2pi1bO8s+l60/cSepnGXpzcCNlfAX4ffb2mEBHjVItcTldH1Lmnni3AwS0n9wLj11/T+w1phXMG3M446IurRrTLTnZLYUEEPQqHgeNbRImyUD+47Dc3c5bkpcjOYLu0H6Hq1NStp0d27VO6qK0G88uXByaJ2qVDtQImHq8yu1x7PNJp2Ko0l63dfNmuJ9cj3TpHIIMlXQ/Ot7MK/C3MXULnLfArfqP0DuqhZt+WJg71sTViOXhU0kBTlT41lt61JXIPf+fVmiSvOsNrLxfgdpaqNWgmY9mT45vXvuKkx+Fw1e+4RAFc44coi0rSe45gt490lHEyOwBX6x6RaqABCv9WR0VOTd9tzHbs06AvnQzt4jp2esCMZbSNL+XR9vW9bxQxvjglUkHarWrkSEwz3W1vuBN0wSW+k/1LkRECpkuuwzsby8VJbMoN5aZeCoAAEY1sebPnwerhlhGbpSoeKt9WHTOQF+1Gp09DHLI8GAM+gA8y+y0LTegE5rUOq3JGuswZZ+86a5eD7kOy8cKLq13OERZfsMzqgm0GpuzQ6dIw0abGTDC3YNQQF0Hp0WvIWRJhy7oMhn49bhqeXOBUzPdluvkjJ06cV6TllruMreBVyE1A8EPqB2DZt3rWt4ShJC6D4AAQPsEQ35MizX3XsS0X8FtFDTHHcyUM4Xmk46UIg8/6p8yXMUFisrlZlyhcxcE5D37JQ4DzVt8R+1D7t5b6pmGbouCGIyBtF92sFZxI3m1zDRchHQ+kwNizBLuOcr/mqGHOIw7CTQ6i90UICtRL2uS1Vgk4+VexoTJSth68XcHJjlpp+mAiG4BJZKPZ+AaFluUL7s9Hdy7HcljXPTAo0CesBPMySEunmj4r69BAPKGxv08XPn/CC0huEd/biAsQhdsEQvKEIXHX5GqepoMk2qssgc3cfvnRGbC8Qu4Y1WjLLlEq0RT77fvJA92koI8vKUOAkU32NiESv98W8gL4f8FEDfJJq47dgiCgnvsPWKxy7HlHaQKGM7LGez5/WOeCvmIzgw3Vqm1IcfFuaPb8CYXf6jDOOJdNDaUQadKcM/awmGMvBRfXzv44YwsdGGpSFxsOmAHUdkpR8VBq0SdiA3uEgD4IsRNw2pFA0Q3KIfWpH8V5QRBa/kqGFdMEsWv/UgAAqI97cOliWAc21YbIqLlGZjU/2xA8gMkZPLltEUXlFXChZhEDxxA8DRS91rwEKAtfdpp/Q50gE5khlELDNcHq1WYZcXYq1OxUX/8rChJPbEDldZJWNxjunGfyRkRmlLBeG5XqZUE6Qg1mLjUF0cqgyMq0u4UAcKAYUv/752wyfjfvIVldTglfP/aphLMDJvNtrvQnXjh4y1BBU2yvgBaFm4XD7AV4g2mWsx9LZcIASnGqEMitiYi6XCxOUhNx7gkQ/SVj206dbV1I4CtuXBN4kKKSIR2Q9TCBHHDp5kOCDf7o8czwDFvqtDyojdX54/Dllhuh3GIs35r73w6rcB8W7ZirNNw6DPpAl4KEYPK9mf7t8oF+TwQX9tQ5zv0zLMOYjdNEgmnQYzGeLxAjPCGedf+OAAITgQ9zu7POKQsYjjbY5sc880DTB0iZxKc5lbj1wXGFune5Z0VIwLhtZiOVNUV3PqcC8W+LzLqC1r/obfAHYQy+i1S32Sy5jXezX9BptCXRwaSY3u+/41Tk0fdPZZ5s4GYjaXm9CDyW4kAJ8RDlFI21vaZlE3bGIm7A7Uxa9C7Z1+AH0R/355Bypfg8z4FKADUQfptfcdJA4z6QAA3I6BLb6Q3TLg/nUFsdFOWSeY5M7gAJYYAWXkJ3XLv0bhB/PngQBsy7xHCPrTIJ3bq61he8g5qhji++Vvt8Va0DmSL6l7e94g5B14Uw3vSNw7jB8U/VwCKjG4UD4U+kx1nCnSOA8Yx2P79Ge4kDrw1mDYbNKFjrawkuxaCF9gLqALROI8rDaBVkBGx4LYHJ5QBcWLf6Q5K9QsTcq2L8VT9zDI6mYfyJGd2byMTl7nAGNEkHP5pWGewkOITGVfjeeixcjMkKzcif7hCxx6eMKiTgPolKXfENqnVtYXlm3x7RHzFJyYZGVvzYXGnMsaxj1SG20k0zvGbCqmkcdI4tQUItQC5e9JHcMl+JmUhStlVitN8axqfHjeGXEuOhi+9IFNBtt33vt302yypN2qPScdNrtrZ1OVhWqXLNPdiLjC5TyP21RYiJitRC1TvK56N8Qr0yJVqeaLdmBSHtH6xh+aGns7J6Mkmca3G61k0fWk0b48iEtBUTcHDoXu9sI2LslrFYjgYCXl2HH0vRwS3zCG/0aVgb/4d5mLxO8T6tu6GRhP4FXQEaU82uzm1oPCiKpbMrRCt9NBPjG+KZxRO6V/iSVAl3OjtIVtUvVLKY8RgHca42YS7ebxHxqQN8XJymhyMhO6doWLY/bIZctKTlrkjWsLKFTVd9p+EtZ8A2pPFty4A9PTWakAUlrq8bc7U8Bp1Jft4rhexbGrJqIBz1f4sJGWmJ7eGPPV2HsVJX/YQxP5zPB3tVadarmO5aOUM+4TvVzes2Jgwam5h7c7YLpn8TRBLlThphhK8LM/ZWQ1HZwy/cFpbFdk9AiMtI+wyxE0DhIYC3zISD/8B+YnxC1qOw9KxJOaNiyTcGrbHpeySS3a3VfkraRdBd2HO6esFGEvaU3SRsd+zLhj6lG5pnD3mz5JjL/0lsFYZEOHQCWEM8qnRogruainh+Sqk6ZJ2UPn23OKs03jteDmwgHANeAqzoAhFwELCR88o6b42tsTtTc2UY4bLUdA5HSkFZtxsTb0DQVpx7iI9jevvK+mNccGjHWPMnl1/FNCAvmei6wQNjXeJ6o4Pxnyp3VgaYzc1WMygdIkJ46OMBvgD7NtNimEWYKZ4wGDtD8J20PT6xMrrFkyUgZ1ipY+TbnUvizGHTkZnfG/2PP4k6ewTH8vhecZCpCgY54ti/FDGu8GOpUKFOgnrYCrKDWrRzofCJMTYRtbQw1itm5uwwQilo6deai2DMjzJF/1GyOTG2MHk2X7oElTpfzAm4AkZZkTjXJjmW/F2Bun2vJkrv2sg3HnF7OemEwwy7aB8Q84BQODbw0jfRUAp54Rk0129gc5FYctXJP328L9CsaitJU9zj5ixkdt4rVg87NxNuxaCnGaXlUMGL1cv1sBe6vRdNustM1ydxQRSQ2O8QIEJy4OxA7AuZefWrphpp49qUTpR6xad8XWIk52THBEnEnILBNHxvW6E75+6K/AgIiOBe0IR4r0rGd90GlVbr9j9rgjeb7tLCb0GCzw+6OiPdpSHjBEEPVneBZ6ETcRW0/byn82HMo3UzgggepDmmK7DaoU2avFT7mPAqUhHHFJ4H1APo4Jg7SpJtpZy2CxGAHQcAF2NY/wx0J6MEJtJnnq8nuC86T+2tIqkDvZ7gspBF4pOz32skoahkUFJRUY6x0FU03JTrLfFFHYPNoRIgMO9Mg5rPnaUMvgCUVEqyMf/KxbICFWAJpuDxBKqpgzLrdevIwl2qTcNt1XM+8gFMV5R8ZgvN8LgPzD1MHYqBZcEKO1rdttJOjxPGsqomm71VdX6FMgVQYAACPyO4s2Ja9Vz2loktCHw43Fx4h0uFutpulp/HZz98rEBCRZ8FADIpNTq/MDGtKz2I4VweIZD90kSGFKkTP1det7mpTzhluLBaanYnLDz5eUAfTYX3p0gHzMIV97XXD8ZG0UZSR9pbROWFYv9nY1GE4DFQ3x+CLpJkyYB+dqFOGMJw9stqMm2XNr8WNffqvwFjOCf2xs6G8H16VZ77p1XTR5x5e2y7KRxXi13ey7clBKp0w2+J+bmE07YvU/QA4dprns2/Ed65FQQasWOJ3wO2Wg7DSNU92ANl8g5+n2z1Ht2rdUaYLUbHHwxYwZsboJeafdLPX9PUXuLbPfFVIh2hpzlh0rfX0+jviixT/RwNrV22l4elGANi83qtHEX5QGeBp2FYhOJYgd+evrNOxGj8jXOrz9vYpAFaN7P7Aq9loZYLQ4kftyQN3As6B6tTg2ulSDRjjRiKLCCMlSuM1xuXVyFyI9LKUYmAjmv4H6TjXhiSlei/fBEif7SDFDZlcmcSsG/wX2czTDR1H09NvBWTgggEZS5tyWFTTUvami9xGpOUOdqWEIiRHL3dK0ByYfDaweNUrXdMHLxxnBWPaSEgtMxNrE6ePit38CFELDNnmH3HJ/66Mj8PHr128wPY/RrNzAAFDoQ5VZBlmT+YK8TzZHDuE0czu0CW7jmi2FnbQLY6n+JfxvQdiWODoFBMYXNka0rkiwoy2NcEfU/n1M8DataaER8isUjlXnUp5ANpKpOp2BlHHWM7UCMOKwPElk6okAVJ5+1e3NAKlZnh+DQB+GQ0VlYaXtTU0Rh7J5zytTN6S7VP5R0w+d5wdBTpBQL7tAG3QJ0O9EphzjmjrvgSW5x1u9ebfZQKcow11kL69Dmm9NAYUgPBSHEYcUeEGOPqqKrsSVJ4yLx6FA8hKn8mNgjRlBDdSNVLe9jg4jwtnhSBLn4aprNujpiRIKQ/WZSBrpzBByeR1rnaXgakqzqWcRlLLC3jpG7xubfvp2+P/Et9FfhhnwPsr1DN2DJsWRr7pEPevEUu8rBuFWUGNt7HzfBJaoQ+Wo3Z2+0UnKOAAAAC4fBveFYORRo0+hWipCAp1VtsiZoEE6VpEkV11iWYLBjY/sBiu3sDi/6DML0R8l7n40ReA6dXyFahmElxawdJxEXvW+/gwYngGDKUl8A3pGMaDXwlz4ANg3TyNIiPxEky8ZmNs/5q93CvAWRlOC4c6Lh0z32PKIkqeFKX1oYWVmjzKSG8WM3VxG3cgbIwM8M+JPkzIy5D9UPe5V3O2XTzf1tbkMXNbHvbt3I1bsW2NU+ZWu/8Bz413XF/RPHxrzB/IebqYAF2afUN5CBUwqrQIieiXZF7e9cUi+awcRSlY1pZsF21Fwluc8k4d8I1TYa9yzf+NboyWXZaJc83uB/1fHUcp25EVSzdVMGs5aSqfqMzl4Sz4GqO3bTCvrK071jH9A9Q3owBCE0dwqI0INmSVs3c3prC9vvGPX57Qx5xIUDG9+G8AQNOAfSzr0remzTXauliF3SL/jht1nQuLPbYyUUoP9CNqkeWrYH37szyS9OiViH8dFTu+XDvKHR+vSdR+NdOowzu6k3QXe3uj1hD4yyM2CsryIrTp0dNhaFL1pMPLsxnYVlel2EXLddkq+4TxiTHzmV2SdnmRI7YeFDUIKO0iEf5P9zzeKXC+yXMGADwXZAl8EuGFZoUx4KvKu+9gNUs85JXQCcRBh+dHtOosdmSMbKfAuunu4hT1jXICvF3I0VgMIRwRW1yR+n0gxhQouUa6xrHeM8//p84AAAAAAAAAADW9pr+Wfx8vDk002pP5OQZVdsr94tTMI5t4s0mwoVAye9NFJU/I58JsW3SusA/GHNHGMElrRMgWcE1LxVY8Jm/nu7E/4g5OwpdnRE/9ZZspEGh45vKaqyI0I5omsFz7eBUHtjUrTXCR6nTtPA7w6D4FV29zAsFtNaRayTZzvNX4nbTDNbvYT9ZHsIlvhix3OObR7sLkGrkIZXuaz53hiftX7Y820RoqoG0wSSOMbc6K1KcegGkgKOC1euBQB/WUfky/9zfoJyI1u7PVEJ4tD3Rd46eEKrinoNM8aS3NN6LUzEyq3Q9O5FyXEGKT/Bdz8YMvRNR06M0p4AayIN3CPX5X7nITrZy9v4cGAy1c5FR8tH6tgV8FjPeW0f091gE4W1LnFFMaM7t94c27PYK3nsrVdZQTIYKbGFwzbEswWze5ksgyRLqUe2laE3bXL0ArpnblFIo1vOPt1sKlFueRYBQWdkvwrhUq6bPDZqW/Bx4LAIuwmnj/t0/0otBPOe6FL88lZx0tA15b0y4YAU2hI/bLBLy2yuxfr1GNi/CKDAYZqCGgYbwENfq5jJ+gsNasQ9bRemaSvKD/xCntB2S5zKA+YZ67FZpqOD13Po1EZ30Q39e9Xcto+3E6/T+A+BN/lEVwk5NOBq3q64P7rN3AocA5JmxM9e8whbix8Lkkj6mY4XhhxYEOJ+ZLCXUubP/b+yiKvMw63MzYqjzzEqhiYM+hLntXNB6x4a8k8AAFE5fr30H68RlSWjUkz8wfTHVhy/8bNxJjDqnx/ebLiULIwCjVdju8Ob41rb0w20PZkaPYQ/7p3MXcme8/rVX+JQEToy6NIgilwpRMjIVMRdZ7As7gnhUGgw+aZpyDn/ZQDdGm2O69g2BF/m9tu+SeQU93OegKHaJOZWJW/39p8K96bCFHz8uwjEyBDuNvZa6OjeeJ3QIxetbSqz05NwBS3KoAdQtRhoNIPzOWD4SC8SEXOto5rPfPYKZp4Vizy8wMSqfBzvRdVlaOzaN90due7SlEe55UxO0rTNMMX/HGqFiyMAo1XYves4So9JXI5Rl5wHsH8+5kvtg+VYLzZc5Anv+cTjXgZklv6nA23t9yFOpWl3sS4IP6h2mNugXxnS8Lnu+aTJWtETJXQZD3/TIGY9oiqxGSf348AcaZKiLAkecrSOYhjP8W0XxTO+WkHDx+9tRdyAM+Gz4I3IDP+11NQDsV9rqXhIFq3Ljk5INRvj7lH4gdUr9arVxIrAGcqTQeZX3an8bPoCgYH+LL5b8PdUFZ+NMFbxb2KaJnaNB0r79ZH2M/YPco/QtSVlMXtzuQmMci2NlR8gKoYFKjCcVndcy7H8IHqp626CO2m/UCJ8uDT9u19BB/ZzH+U8HK7Y2ZXnKVD6RJ+oidBgM2JWCVzvBzXyOQqcCJtaMoNlRlklLb2xR0Q7NaP5ztFkc4iBBDES6KBaUyLSgcBGLL6CxsvOkF1AgiVneFjgDkpHDJNV9I9FPWi3EdYNRBXtHJHri3pwH6KuGczFdo1nNLCGQdm4hUUc2mGzETznBEdJmj+uOcw0WUwgQfsTRJtpRj8kgQgnkn0ajtK5v+6uYyb683pxEB0xGCu9aL1ocbvtXC4GvFLSEyUC2eDzTGFazk+iiPGBk8qKaBZ0bU7rLkVAeqmqCaMdDS+jt9ygLIu66yhHLQYMCGuwihs60y80IPC0TOV1HW/pHHy+GsCE79qRrAi9SvwdHKIcPQZ6NhWVPPjTO4SjPECBl2rBiOrNRK3pkXSyD98mkDPTP6QfvNnXRQuwQ8RZKciFRhjYg9HGLOFEttL4UIRi1Wj2lIq27nnD/uB+MENnR4vSt4HV7JEg8x1wXB0xbFM38/IshCsOwzRS1bp7fpK6rKq+fxvrLBJwjo12UDBZFamYzFHVXvBytll2DWlc+VrDQm7LuJajn0DsL5V1G6hgHK2BsOA6VbKJPUBwM4IvNgfylrbWlJ4kHjpU4nlZAmw+ZPuKXwrt35y+E0waB8ItgG/8DB1WMDac/Utw34GtIJ9dHRAO+pXknRmhDU46aO+UsuChDNHPhF7HjHlith1GkDouOETIdmN3mdoo9MCM47fyZQXnwTn+mqzlF/tz5QMmVlQZcRZlJnFUl4PW3xAgTvIKRbw1iJksqmOYzKbmpydhcgOyTuT8kUIvQQ1w7Cf3O7cZR7BogOLTDhRxzIDgM9z7o0nvi10HUU5RWvgiDIGJwr+UxbOL0lwEN0ZA1JIjR2Gw+Vv9QUX9xE1J0bb+kz/MWWK0/m0YSGJbS/SP94r1zoC9JvrtWHtXhDG3lLUHdBaNBPSfhACqlGJ1FJ/aoBU2ssIH8w0byXaReGH/r2ccDMQzVDVekCBxLp+3U8sX7NJGOzL0J5LLabx2hPZOE/wcTryP9DEKiXLXHT6i04uHfAbfojguZyUkNlqlz55Ov+kKDyUNHJLlx9cs0tWiJkr/zJs2Osa7Ph0PHKG1H9+ELMbg/UyPM5G5L9viJp578edx0EqbUlLp3kv8g6s5Q4a6grtBpSiEADzjrrTZ7cBh43zVIk5xP27w52zjPw0PsxvpX9SgFkY/aFpMTziWNYcdaJiFt0Psk2j2KYr95MX1dQ0ax/pNunultnr2rz+8NC/uC6SleM+J5oKejy95AWrY+edjSaUY4mPOY25DMiBRnamhHDu+vnwud7fba+qO5u1GwKUfgZIJu4CHrum95kLh41uayuYpkhQqye5Zj8L1NlbSuPjTcA47J+A79lP6DYjMxwVXqCK3v1XqGXQtMhWUcg0Q/PDq4fgFh3Zkc9ZOPtJQ0li0VqSiyqCITRlqCN5534qsedADM/wp9zgO834Aazw+idz+eAFWsdPX6y6EiF2Midpl6b5eC8JYy65UFSyUikpfuaGmtX9hgW5phjBuwiYRoTloHAEo5gH6Ovtf7wIyWLQ1WwBPZSynOJmYA87UFvCPZuQNy1jCV1/a1g/sjcZZGVtFEQwiDDxD/S8of7YYMfb1aNZ5KWWOTQb9WmGi++XmLA2Gr2/FcG88EjN5HY4iCCffUukWH3l9EUh0OMQ7eKDsSzoEw+7GerJe6UT1ZyD/oR6BrdU48ARj5fuDqEynsGbKYUFBb/uhFHtr4dyRe1uXfz8YdAw73aqBLl5cpejQHWjued+diIyXD11M2Y4hBBid2/3LcjVtb57inRhJJcg+NkGtxFYQC1vIYnj2y7PHsczNFC8gUIrCy3yG4ZuGuWehruqSDU9wPQp9eWoOXzIJ66FVyubf6gVDNc89Vj8vDA5z136b6Yzjs2rOgr5PaCmZpoaZX6k/3Um9leajYD0Wos2szCIs7/E/7aykcTdbd1WWNNcFPhFOI4Js8iu3QH8A3Bb1I7kw24kdTMN7nn80Jb7wowd6qNu40o/BLXgXwVGSzWWPRwwldsqTQuz13vvV90lE3tqMOf1MQRYXgZs8Jqt+u0GgVlUa7aE3vV7GtwCvyErBYKD1oiD6L/44Xr+QTpU6UlMsNWXM14ev+xV56flmrH+tjGXiH3yF+v40GfCzLO4tk4GNG+AY+wtEA/KvB9JB27uabm2SILamHPqFoY9X32b1+4fXO5BBnQJdIK+PMVpDg3OGvaCJHN+rcn9djtdvrdM4LUlMdvZS2uzmJCuzRLsgcyWUuS5UxChrQflcRH3vuS0zmO86iqX4vh3fLtXvh3GxLSmuYqJ1zST4O65CRmxlFoPxznJyzFFAueB56j/C12n50SYvE3Rrm/uZNoN11hffs0ForJPiuloMMVV80iY+pnXR1ZfxmSAfpsPPFc8NwUcaWIh+6G+4SF9SUAmHtcSx+BVfoS6lspF4rd6L/4+WwftjQIjCBnRFdXdILcWIE9ZacZ3AVIdY8vetzMFwX/bpgtx4EQAYHicEe7v2aC1LAEP0gwSK42jwt3Kab2enWBkD752jVnncujoiaYpN+MS4zNnmkanfINsGimb3qJcqzwre8zz06wiZUceyp/MJkZ/6MM1oQNnJY1Y9GZfrF9cQqnMMlOvuHVX2tM5xlen/lXqNyD3AjW7iT2r+88/ftZPu/EFhWRhGIc8cfO7t6FTJrxhI7FUwIC5dNub2QLuIX/GnjHSHP4VnQL+A3lYIpHgHswJyLxLtNSCkbLZoY2VC9R/vkIybU4fSFiPk50LigaU0Vx4AINy+4vGUzMT/sXdeahRJ4htDh0Ls6dsEM1zK8HMJ9Oor1IX7ZPOaYxc6TuAMXXX+kN4g8DWvQ0fsAk6uImLaD1WlSSWDaNqyrgFtxLSIVGr7VvxLwWYSvQXr9qureibkDinFoCw2VY9n7wY+tfmxWHbNJAr/WsqSRwSfoubexhR6n6SxRVshpwTnKeRWO4//WantI62887I9/onvL73lHwiSDAK4y3h9v9fJq6/4M8YJkoTSbPuKPXF1xW32IVCUp36eoRwGPd3ATqoDD8s6ijtjDDotMuQCxjtzv20lX5ZgisBy2ITwLBHp0wZQ2dmaI5qEgWUiib6JI4ghlDJsCjsi7YUkyeRMZR5hy54LZHyMfz6HfQ7nYRxULU4T7Z9dnsEK5Gzy01Z1URjH/597//+1ESvAwIiFGVui30TDRPt+WxVvb6YShzlcYCj8R+4vHyWapHzOXin5cZJVygNRJZW7wZ7jyt2sScZGMNh3tj4vA39zVSLpGt9+Xhss2YbY7GYtELDYHYHVfKZDN2P+U+au7wgTejiP5EOYFIUACsPOYw1STJCMk9E/zVFH2ocIqfFWtpWao/d6YGBMevmNeui7bqUmTuvYeGPeafUKh4UpEOequ9v4U+9ctbuNwHrichnIt9GYQj1cX8CVZVDAx3jwSW0YrIIRfMOVnK6j5hPhGWnhyD7/9zrcqdEdgII3lYEU0VRbw5cRQOjnORsB0h2D0pVZ3BVYhtFHBBch1TaA8GCoAvrPPN+3JAVp1yKjns/tL5QQVtceVUMyQESX16CLYJV285sndu4ldZeM04YvJaJk6OzqVpgUinf99iYtvKsAPIjOncKSLRd46TjPnKkNO/FQxia2FlARGLh1ajdwwxOJkJkKuGtoyNunTJoo5K+R3Hc6uJUmQSADIXQPCGGxUyrORW0fwRq0LJaUcSIi+gPSLuDQa7EjvsBFLOdhfik/ZYrEfBFgv1FNmcNPD+kW2K2PNodS6lwlmsF9L/DEhTQzKeNgSpxcECFIePPjCv9SQLxZ/Hcv0SBT8oKcbgiG937Se5C9UmW1dgwf7zRRZ+D74uBw9drfPYIFJ1VhSXPBdFC18/oA8Yzl7bnTBNJU1kHmBIcn92BpkPWrdf8xwZ6EuD+tCwLvbthP9MN6841ePd3fFPSjxJRDwfE8NsNRWafm6yi+jrib1HvGNyElZt8sc/kv6XFMAJBRlNPOyzZ2H4kZQzkxtliGdogN0KM8OfPcr1/foMjvB/XstFpfTnyFOZp3sPjtkq4OZOxudg5avkvGwACR97m0o1pvsIRR/QrsHQ16zy9MYam+QjZUXbWYX5lIZdBgjtDICKHmqvba4y3WyTHDFGLyOAXC7cTMrKL5zvyKmgIdKarjqwZ9z+l/hV0XLeIYhcrhSp35pSKNv16MtND0NLQcoOGZMDxW4bepuzKUKZPVNRLh8s8Zvie7jg2CREZEY8DgM7gLxaraq1Xqy8PlhiK4tnBzw/LnKuW7JxpApW9Rgx8Xtu01/HUV1X8BT9hz4xcMD/U6sHe1NU41Yyem1i68gyOyLuXGMDEt2nWwBisHtZ8OgcbHR/y1cZB//sx876J12EW6AsUWmKT8/Ow3NqUjLxsQaEv87mhBl1+qt9TSmwuxr8e9BVgvCJLZeWu693MDaUybI7nlgGzpayXIjc++PABjf1bWaet2u1sVdNJ8yFw0mmmZuFt8+j0b6IS6P78aUWLcE5tz6/kWJxQaPax6eo3G1lE8rxmw+DhGeOH1goVX4naZLZLg9xyYfL28nB/Y4Bez526hr7+JS/ODevNRGx0STMkCT6as4MrRnJehS7kuvugi5xUSne9P2W1sVhznTuqwQnDoDNl57RSGVXobkrZ7f7vL44uu6lqmyMBAc93vnRE/AAj9b43JTsRw4ptHaYiThxI+PyYX2lqhic/cxe3wPXOVzhS5uML4Vcy3FgAmZPZLwKKSiNLO+Lx9h4V8LwrhP1k3xfcFGUDDuG/zEwkue28fmUReR1kyNSwTf/B3WQumN/6gwzluG/pf+jHS3aTEW5aXVgXTBByjTF35no6jvhyifzqcnVdMcGTNC1fBC4lLVwRDRbPCiLtpLGxXLZh3hKxxsiCg6HPS5rLQ9qACMhoF0FV7k8/cj5UCkWehUNf6iYhK+CGnBH4hmyCISwMZIma3sPJZ01rIkzYBwDC8DbaqjFWO92Am08GtHAtYjEYaC7x3nk3UwtXHBBX87oj6UxXPBD+PY54gBrUrmOUIXJt8p8+adwNBxxFT+LxYS9UOwtzCmETwsDrJgDGaLnljNxP9ZQzznRiW/aSH5IU7O+OepEZQb1hnjs5t6v6bcnIIGIxcmSlgub7chY2aBJJq93lfxyDiAjQnDgDrAkUFco7tj1Qrc30EzH/jS6BOeSiZsS60E3U/tSdTdSCLkxxvjOT3Opy02vqvalv5jxgx4nOgJgqCVX/3Py3hAZRGFsPRs8meov071EE38KoB3BY39A6Krgd5H1sHq9h3gcl0Qw4o/Y5U4LsVQ2J0uM94ANNusbVRgxp8QOGEPQqToQgka1HA8vmZzYwoaEFwHJm5hpF/3+rDHxS4NqngcbHHkww2yiCuyfDAUhGGIKWxDWmexpVAaJ1QwBmYes9E+3Iop911fW/bhduGHvUEv0L8CD2OZMyngNGWEm5BK5TKG5Iv8nB7Fxf5XykxQM37WSxDf33s05drKhI6zIGO+0HWzEylUr9fhsey30udigweJBgvJRQj2xc/FS945z6prZsqX2B00oUMr50ck0NaAwCu2H6D8dZ0ymHtYbk8odw/tQezJVqxl3t7U5bSTx/46lgzHaqU73XuDtIRO9YLUHcr2+7HKC0ExouJ5fsJ2L+AUt4DnqEz+YSZidQLNuFLYbBo3rQ1+H91fjZ3oguWhuLMlBHzleNnrLWAeZgV127q1vHwJu8z5tiRKtz2vW2+rt+MFlT9vyACa5HFYqWTexS/bx2gFquSC4Id2w211kpSRltIvUnoaBsHZN11c5FfQw2qlXacIC94Xcx+gWIjbG/4hDLgkSVgVTxLfOgy5exqouhdtqHDkgZVTPxf/k9V2K/16hk2Y2IFLtkro+nRO7qi9HpIKlWJw458N0ArYGqY5eAf3Mcdb6URgTI1geu8dKluGpvL37BX2yJNqL4mg6a/rZMnIQoeE0YbDNL1UeGlFSLahE+z5PL0HLQRxT8FgbVVIRtPVokNyVjtTP5HhcoTbZFzacqGMRPwNutdlsaWC0sRqGkkF8pktHUdfW2+eLfOqvOuXUSSEoOc8JzoKXaXhN2L8pgBFB6T2DyKAs5VOy/jgV7zGF2XG6a2Su3tCyDMRd2TqDE6hS04ryew9WRwXW4sITJWmaqbgylT5Yndl/iNY/09c5QJ7CVNaMxK8ErUT5hQ61Mv33iZ5QOC/4Z3DWuZCkiS+A2TocOsyc0EGUkf1wes0blNR8YAm+n24jyPDxc2tOG48HstK7oX7dcXVdhA5iKAlwUg8layRh3DTpmF9dAoJ+k8bC72s+8xXW9PKY+/90fiSepyPwlhVVPFIk8shYZjp90yDXOlorWHR6qsTg3O3DCaa8marclLhIZ6XCdkYJDkMNYdF4Y8xcuNzualS6yvy5vKziHRYiAe3gJ4WBmyQ3BBphsvTiY7UV04UZdc4Oq0vfrIOoHB53m4swU7LT1HUZSKDe5Xcm44yIvqXQvrDBZPFf9WUKhDcmbyc0Jrs281EWphDXFUqZUWNpZAILOv25L4VDLRAbUnl9USHNSXdEYFWqcHf9cS3qA3UZrYdGYULChJmARgK5l/m++qIGnDlYh2r2LzVmwwVE4pot/d3m0GC84UY+iew7s7xGsC56LL2hrsI2yl5gbcffWEG7orneVetWHjWD1HMxlOr03oneDNio2VP2E7FdY29Yh6gRu5Ki6cxjYHDkVQwzmpTaK5w9CexanNP2aQkd5+tmEu7Ah35WwXgnE9X97E/S5yPrTIbXPuPF5BCXUdhh2NLum0eaOaAYKmD86Cn84sf3Sg7LSCTneygvvqSiZqPArvII/XNlNohYyS2U9zQM8nb8w1ghCksQXtyoXN3f5OwLaTviOcALWP2iHztnz/Hm/OUdMNPFYphZDSxR36WY0atFF//iUPgu47hE+KK87Ia7xUXCTrUKHLEIKad15/Y3GDrkItXo/V1Hczk7V1vDzT+YUJCHP+x1Z04K7LGhpyEdne7wr30NcVQgstEukFFY1xUQH0A3sPnRFHXl7E7/4PGYMv+YmUTbySi7QnzbEZPqyBW5BB8BIEqrjVjdCtf9RQwTva0jnfZdO8HzatjljwiXF33Pw7dV1We9DWg3ztjLrYwFKIuUXoMCD/zUdmHnT7l5y0IyKpqqtN4sDs774kZ6D7y9Wo8tT3VVhqN9IPIE9sAnx8K4aTBs7jNfd6l9/1Ps5SmjLbfzToq0yZClAzG2DphmtUkfUEPz9NcfMOynsN7Ogj/lkfPp/7DNBd/3fGz5XVp9/TmYC8dE5WUNpeUUXUx66wZ7WXUBhdXBoxp0iC+4rvO590bvDQbmuqFDFXObsdqJazjIxh0auhB6oJV97wX2W00d5SdqED22WMcE3V8DDUKaOFP2CsqkZ9Qg77oQyspiPdvSt2EedvOCd4aBRYDMCYpHIVaAp1mj0BfaDCRyyk+9gIWCqiJzpXDzSmrvLz2GlsO1a08L10kexDSPlh3lw0zGlmS2pvrOphXwtHZTlgng0s5m0U0Fd+nQFAAPZjdfyfzx9ffzYgi4gMMxaZpxHpOCXxsksAUJj2pp3ygyUmXqaAbWk7Afk07Bqbv4orjHcoIEe3sDiOTkvZJFgQ1RuW03hs9tuQ77wTNwnSuQ6Dhu3flRW2zUk8iTXGozpqAd1yFg6c3NYl+w1OhQr53Zbe2yDAs/5ugevvQwa8vlEGik2lrAuVK321/9bW0+YhMygrgHJtwp/ZW6CkzxK7cY6qdnQAA8tBHPnorHUdXyOxcmlxgGZd5dFMaC9WPnLDnGKGyLrS0LkjZRg27uZcaQg6DKkCNjU7/o+I4oTHzBqmdDdDpd1nV7hp+VM8KNMEqvaP3SJbNAeyfLOC6OmyoI+J4bE9QvTOAPoxLM4fmHA1nvV0HOHQPMOrAlByChaZHLZ9JqdMoh3if+731zLAXk1iqY0dew2QOp31bmPBTVMxYD6PnkzeAbMsueilIcYI+GDxN6byrJDfFRA+kBsM6ZdgH+1hJzbHrHNUhPae5jntnPfJ7Ekq1eVvpUiGNo4Nh2z/QYq1u/QLjJukib67YnkLNmIN2xPSWPQpEnSg6S91GjJmMNZkxwm/xBcxpm8pdyoezA+ue9Uqi6hZBsR+gm17gSvgfMy01eoTqGghGtJ+DEnd9Y64EHt6yYJcSSalOfqf8PnOzSFTbdMz3RQE5CzFJvfHRWf6FYSZPXlQHo/NGIvj8Fd8vJNpeacysDvr5cRMVO0OX/tZ9Q4oUKuLl0DxlOxabwHuy0rpIUtrJKSbB2z2dFPjJGz5HG177klDICABLTs/dGrLKON3wd8ZrntZzPl7GJRifJQ5WN8CryObuPBoCWn8KdoeNYvgWD/Xsx4WheU525t0uFoJmn67LWk4gLe5fKLW+fwyK3quZdmRJqpruloOh1gIBJFuS4baINTXsYd76QwLsnC4Xm8XAIZyzMH68USuMah9aCQFYac1lPGTmOZq59DyRCJQeq4/SdUr/HrIWqRvQdCulvZMn0MUCAdmK3QEWqzTbSwbNTRK7MTax4at/tP8CaUVKso5zkzsrsjjzTwDw05ZvMikR27aj/F0kZpvsFGsiCuHhCh4TFBM32yrYrmvTdF3FRnmkz5nf5mTpHad+tnAhN1vthsJI6+4uOMIMDeleTRtokF9CwndHNCQiyNYhJ3JUUcdcuu7o3LiAcaWWj4auHDbR2TfxNLYgjInNwdt/cIKpi2TPIIGlU8GPnMvBM5lo6lyQVsaaRHwG1UNO0TKzt8AdbjaPeSmHeVx7rWPNDtZ23xWxKAcnYFsWCHVym8Ffp+C5bV1LlxySU6R4l33Nk+3S5H5X+TSpm3JMnevm5Cx+eX1pwWCRWdgBibHfRmlYSI5UA158dpCnIDapmVyKG7jBf6kw4gvCnu1S1JqBL0dTnJ1bcDkPGg7QVtHF2+RAjdzz29eCHzmTiZUxxw/VyvRD+NnmfScRsFziz9zPhQQXLeqWkjrEaGRMcOTHqMrlnczqdPHpvGjQmgw86SHAdeujp0BuYOwuOnqXGP7B8w0IREfk/z9/uMr8zIli+qrsIw9/aHDXoG5buuAimnfCxw8ykvXYAbabqkE+8TMTnQLn0fLPvv3+hXGZmliWqIwpx1/8NLGTn+5E8W5SbdyRFZgLCaKhCYmQye5om3rtCGQsFbTDrXlyhvNAuP1BZlwG1x4UX1TyYofRzvNDgIxjvqZcgvwtRjCHCVHYencZ7/BP0b79uAe2l/bJbXSlxZn4lowbjLGqbffPocc9JYF5W04N1vDIOx4OeIAXZJuFH7GPBkCYMBQPbff4Mi4Y/D8u7f0/sH57rOFoUPrej4EXjbZWQoZTM2PC4sFAwF5bzmaNKr+Dg4Rb8VggDaIAmuAPy64UGtnDOr6DN5U4y+/clqSWSJab1eQSzPgn6uUgCZD9biPL9oXzHHO3rA115ZDTB3T2pRJ9p471PxuvUCWnamA6qfmdrLXZexx8Dcn9ugMzhtHRrIqX0jnfAAAiQDqIWLB8LfTllmt5nfCw67cJ25EV08NGzj3jEWijl/XubXZqBjmBBCUB87HJkPKOLAe+/rFaDAq0qlrYai6XfLq0LdM5AtZ4Xag18w8kNODWLWQK5DQ0iAuV9uFtpmL9iekLJxqSqylbAP+qtyYPi3fCKhcf1yiDRGLDSrc473+4kv6emR6MDMalzNYIT7eUjn0JwPJsTbdb611wQyAtrUTZtnbh/NKAAo8bPxrcjHGUIV3Ri4h0rpbvue4vIftfk40SoABa7H1HYE/QpG7z3vKryqBtts/97EEAF0Yda5G2sFoR614ue7kY9zZVE/GYFiUuf6pKY8jndyTbfxonKN34WCQDqe0FdGCqol0dqPZI24DnAXfIBHfpfZXc7tiPQw4NqOnrC38zikC85vJpc6u+wzQDz8Xd/brRkgtcYMbhKe9hMtwxfhX8reY8M1iZZQG3n+NpRoFtcyU3oblx6dcUDwbrSX3ZKYAR3AKEOjGLquSJP/tIxvwj8ecPqlqiOA1xOcL+IGe74z7KmyvlU8Zt43+6Gmt+NoF2sW8aaPP6pCNBgELV8yiNe5DYQGfPTbz7LVbQIobz9ZYdF3HuWNbb4VOFEXHng+sNU0JqWpMGOZBJPpDPqabH1Hjt5/eGbIZZlGmAmxRas/WM04tA1vJ3bDiiuFA4W9aPjdt+x+QA1gQ2axUuOUv14yDBR2g2HJF+pfLyIqQzR5H1O+CdGueKOvy41dOGPuA9GGPcIh/UJPV3XbnLQiNuusQrbn0MKLKupOEXVVjQAYyu9lvT0iH835umIE8cUr4p6e3yzd6jnVYTTx1XxQkXTI/e5jXKticu1z3smThHkjoOmM3aoKfmdLTrsrTvMxarDBSoyDINhHFC6TTo9qJQX2j8tRaOr5lrjexqDL1KISRO4no9f5+VJIB/0rpe14OmMAch0aKcWtW+rJa/qv0hm5MeWCqYe45yr266NHH0ma4Y0/6K6nu+qnLf5qmWqOs6X3S1r6tAkd4Pc3yeBeT3dkUFNGiGp87VdW8hcG7M48NsdcLVN8XVrTz2zyQ1cTKD9IeB/PNTx3ZoUg/yBGVqJIZ3iNyftd4oUQo4napkAq2CmYJV3YmzsoJf6ARiRs2v51+gm8vuhyjnKsVWFIFv0fbEXIEObot2IB6JD/dPNOGfzPD0jOEH54iwWYdxkUs9Q92Y4AaxpPTDgESrgphRHsIWj9EQKHb3z3EuTEr91P2uqb8RPBRT2+0Msm3YjafO97CuNypRxtFCiGZv5G5flwWY/ShUk1GOgbcwfV72hcAhAedjrhUVIEJXBMGJn/73DC1J+WKXag6hg2TkO5gRUiujDhFiiDZUGAYqKOmeIotT2rWqQueSd3zWY5lWxp2qUCzyc3JI0E+Hoi6u4NYVWigAmlhRH+VdybFbcXfnHgWkNxNSNez5QBgJ2yMx9EQ/ND6S2fYpFGyOjlO+OOYKwXwcpVo1ChZuFOnOu6o9dotq1yoKdxjjlJ3auZ+Lf3rzy2v8uxDJq2m25GPtQU/+dHbuz87JC9qkIkw2zl9weV79FVkn+u0nJOOwwKEa7T9wwFJoGRyWHi6L+g0E+cojYfYsSXkp4mDTaVb8ZyEEpt4BZEK80PjYlaL/jNrf7Y7Lrm/m+xdUfGUqz5Kgafy5t41eP6YpePL8NoY2guBLMzcNXszYDtvh/rLwKLmMlcDSmPniJzWHVUKHXET4CgkFybvKlo5VmjD8ujT6B2dlnTsYo05yDHF2xS5hKZGhnYnDP5xq/8QeWaDcHtICV/Knjw4VyhGBtYZj831mqgsFq+IlbZfFiIMOZRtT/dpDwDKXsew5cVjf7kF5E+sY0SvkY3eJv4jmiv0/l1x0Y4adBfYsWdpUpJfcMUEgwGWl73r2gp1O92n9Xn6uwKmvmkSJqtehZarP3Icp8qGraCCOgayAX4qEDfHPKXqyxhPkM62CAevF9n4ONg+0LU98CDrpZyQI72vwSA+knRBtokyxCRVhGsvDuX9ONXS3Kf6nmSrJXp3b6V0Ypg5fql8oeKMU9rHT62cZgFF66UIBG2r2Ev/T5WBJb/1hS0KbMKUfSNV4URO9/1GwsPAND94gIDzLMESu+zyce62meIAyDF1BbcPMs+Joo7Cu5BClqH28JtnK50YixCc87f3aEYLsmwoqTUWdI8Hmr2EvNf8osCu9DIctmL777sqHm27nCzfhn5LxTJFlF2PR36HI2tBYFEwjx3HmHZthgxyTzB7MAAAAA=" alt="AM Network">
+  </a>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+    <div class="lang-wrap" id="langWrap">
+      <button class="lang-btn" id="langBtn" onclick="toggleLangDrop()">
+        <img id="langFlag" src="https://flagcdn.com/w20/gb.png" alt="">
+        <span id="langName">English</span>
+        <svg width="10" height="6" viewBox="0 0 10 6"><path d="M0 0l5 6 5-6z" fill="#C9A84C"/></svg>
+      </button>
+      <div class="lang-drop" id="langDrop">
+        <div class="lang-opt" onclick="selectLang('en','gb','English')"><img src="https://flagcdn.com/w20/gb.png" alt=""> English</div>
+        <div class="lang-opt" onclick="selectLang('ar','sa','العربية')"><img src="https://flagcdn.com/w20/sa.png" alt=""> العربية</div>
+        <div class="lang-opt" onclick="selectLang('ru','ru','Русский')"><img src="https://flagcdn.com/w20/ru.png" alt=""> Русский</div>
+        <div class="lang-opt" onclick="selectLang('tj','tj','Тоҷикӣ')"><img src="https://flagcdn.com/w20/tj.png" alt=""> Тоҷикӣ</div>
+        <div class="lang-opt" onclick="selectLang('id','id','Indonesia')"><img src="https://flagcdn.com/w20/id.png" alt=""> Indonesia</div>
+        <div class="lang-opt" onclick="selectLang('tr','tr','Türkçe')"><img src="https://flagcdn.com/w20/tr.png" alt=""> Türkçe</div>
+        <div class="lang-opt" onclick="selectLang('zh','cn','中文')"><img src="https://flagcdn.com/w20/cn.png" alt=""> 中文</div>
+        <div class="lang-opt" onclick="selectLang('ms','my','Melayu')"><img src="https://flagcdn.com/w20/my.png" alt=""> Melayu</div>
+      </div>
+    </div>
+    <a class="nav-back" href="/" data-t="inv_nav_back">← Main site</a>
+    <a class="nav-cta-link" href="mailto:contact@amnetwork.io" data-t="inv_nav_cta">Request Deck</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-badge"><span class="hero-dot"></span><span data-t="inv_badge">Seed Round Open · 2026</span></div>
+    <h1><span data-t="inv_h1a">The Future of</span><br><span class="gold" data-t="inv_h1b">Islamic Finance</span><br><span data-t="inv_h1c">Starts Here.</span></h1>
+    <p class="hero-sub" data-t="inv_sub">AM Network is the first blockchain-verified Zakat and Sadaqah platform for ~2 billion Muslims. We are raising a seed round to build the infrastructure the Ummah deserves.</p>
+    <div class="hero-actions">
+      <a class="btn-p" href="mailto:contact@amnetwork.io" data-t="inv_cta1">Request Investment Deck</a>
+      <a class="btn-s" href="/" data-t="inv_cta2">Visit Main Site</a>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell"><div class="stat-num">$600B</div><div class="stat-lbl" data-t="inv_s1">Potential Zakat/yr (est.)</div></div>
+      <div class="stat-cell"><div class="stat-num">0%</div><div class="stat-lbl" data-t="inv_s2">Currently on-chain</div></div>
+      <div class="stat-cell"><div class="stat-num">~2B</div><div class="stat-lbl" data-t="inv_s3">Muslims worldwide</div></div>
+      <div class="stat-cell"><div class="stat-num">$6T</div><div class="stat-lbl" data-t="inv_s4">Islamic Finance assets</div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<section><div class="wrap">
+  <div class="reveal">
+    <div class="eyebrow" data-t="inv_prob_ey">Problem &amp; Solution</div>
+    <h2 class="sec-title" data-t="inv_prob_h">$600 billion. Zero transparency.</h2>
+    <p class="sec-body" data-t="inv_prob_sub">Every year, Muslims around the world pay Zakat — a religious obligation. But there is no reliable way to verify where that money goes.</p>
+  </div>
+  <div class="two-col">
+    <div class="card reveal">
+      <h3 data-t="inv_prob_card_h">The Problem</h3>
+      <ul>
+        <li data-t="inv_prob_1">No global Zakat tracking infrastructure</li>
+        <li data-t="inv_prob_2">Millions of eligible recipients are invisible to the system</li>
+        <li data-t="inv_prob_3">Donors cannot verify where funds go</li>
+        <li data-t="inv_prob_4">Fraud, misallocation, and middlemen absorb funds</li>
+        <li data-t="inv_prob_5">No Sharia-certified on-chain solution exists</li>
+      </ul>
+    </div>
+    <div class="card card-accent reveal">
+      <h3 data-t="inv_sol_card_h">Our Solution</h3>
+      <ul>
+        <li data-t="inv_sol_1">Every transaction recorded permanently on Base blockchain</li>
+        <li data-t="inv_sol_2">AI scoring of recipients (0–100) across 11 categories</li>
+        <li data-t="inv_sol_3">Local oracle network: imams + NGOs verify eligibility</li>
+        <li data-t="inv_sol_4">Sharia-compliant ujrah model — no riba, no speculation</li>
+        <li data-t="inv_sol_5">8 languages, global from day one</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<hr class="div">
+
+<section><div class="wrap">
+  <div class="reveal">
+    <div class="eyebrow" data-t="inv_trac_ey">Traction</div>
+    <h2 class="sec-title" data-t="inv_trac_h">Built in public. Moving fast.</h2>
+    <p class="sec-body" data-t="inv_trac_sub">Pre-revenue, pre-mainnet — but the foundation is already in place.</p>
+  </div>
+  <div class="traction-grid">
+    <div class="t-card done reveal"><div class="t-status" data-t="inv_done">✓ Complete</div><h4 data-t="inv_t1_h">Website &amp; Waitlist</h4><p data-t="inv_t1_p">Live at amnetwork.io · 8 languages · Zakat calculator · Recipient application</p></div>
+    <div class="t-card done reveal"><div class="t-status" data-t="inv_done">✓ Complete</div><h4 data-t="inv_t2_h">Whitepaper v1</h4><p data-t="inv_t2_p">Technical and business model documentation published</p></div>
+    <div class="t-card done reveal"><div class="t-status" data-t="inv_submitted">✓ Submitted</div><h4 data-t="inv_t3_h">Accelerators</h4><p data-t="inv_t3_p">Hub71+ Digital Assets (Abu Dhabi) · Flat6Labs · IsDB Innovation</p></div>
+    <div class="t-card done reveal"><div class="t-status" data-t="inv_contacted">✓ Contacted</div><h4 data-t="inv_t4_h">Sharia Advisory</h4><p data-t="inv_t4_p">Mufti Faraz Adam (Amanah Advisors) — formal process initiated</p></div>
+    <div class="t-card progress reveal"><div class="t-status" data-t="inv_inprog">⟳ In Progress</div><h4 data-t="inv_t5_h">AI Scoring MVP</h4><p data-t="inv_t5_p">Algorithmic pre-scoring live · ML model in development</p></div>
+    <div class="t-card progress reveal"><div class="t-status" data-t="inv_inprog">⟳ In Progress</div><h4 data-t="inv_t6_h">Technical Co-Founder</h4><p data-t="inv_t6_p">Active search · Solidity + AI/ML · Equity-based partnership</p></div>
+  </div>
+</div></section>
+
+<hr class="div">
+
+<section><div class="wrap">
+  <div class="reveal">
+    <div class="eyebrow" data-t="inv_mkt_ey">Market Size</div>
+    <h2 class="sec-title" data-t="inv_mkt_h">A generational market opportunity</h2>
+    <p class="sec-body" data-t="inv_mkt_sub">Islamic finance is one of the fastest-growing segments in global financial services — and Zakat infrastructure does not yet exist at scale.</p>
+  </div>
+  <div class="market-grid">
+    <div class="m-card reveal"><div class="m-num">$600B</div><div class="m-lbl" data-t="inv_m1_l">Potential Zakat/yr (est.)</div><div class="m-note" data-t="inv_m1_n">0% currently on-chain</div></div>
+    <div class="m-card reveal"><div class="m-num">$341B</div><div class="m-lbl" data-t="inv_m2_l">Islamic Fintech market by 2029</div><div class="m-note" data-t="inv_m2_n">+11.5% CAGR</div></div>
+    <div class="m-card reveal"><div class="m-num">$6T</div><div class="m-lbl" data-t="inv_m3_l">Total Islamic Finance assets</div><div class="m-note" data-t="inv_m3_n">+12% CAGR</div></div>
+    <div class="m-card reveal"><div class="m-num">3%</div><div class="m-lbl" data-t="inv_m4_l">Market share needed</div><div class="m-note" data-t="inv_m4_n">= $1B+ valuation</div></div>
+  </div>
+</div></section>
+
+<hr class="div">
+
+<section><div class="wrap">
+  <div class="reveal">
+    <div class="eyebrow" data-t="inv_bm_ey">Business Model</div>
+    <h2 class="sec-title" data-t="inv_bm_h">Sharia-compliant revenue. Simple.</h2>
+    <p class="sec-body" data-t="inv_bm_sub">Ujrah model only — a service fee for verified infrastructure. No riba, no speculative token, no gharar.</p>
+  </div>
+  <div class="bm-row">
+    <div class="bm-item reveal"><div class="bm-icon">⚡</div><div class="bm-text"><h4 data-t="inv_bm1_h">Transaction Ujrah — 1–2.5%</h4><p data-t="inv_bm1_p">A service fee on every verified Zakat and Sadaqah transaction. At $1B annual volume: $10–25M ARR.</p></div></div>
+    <div class="bm-item reveal"><div class="bm-icon">🎓</div><div class="bm-text"><h4 data-t="inv_bm2_h">AM Academy — Subscription</h4><p data-t="inv_bm2_p">Sharia-compliant financial literacy. NFT certificates. AI tutor. B2C and B2B corporate Zakat compliance programs.</p></div></div>
+    <div class="bm-item reveal"><div class="bm-icon">🏛</div><div class="bm-text"><h4 data-t="inv_bm3_h">Institutional API — B2B</h4><p data-t="inv_bm3_p">Islamic banks and corporations integrate AM Network infrastructure via API. Per-transaction pricing.</p></div></div>
+  </div>
+</div></section>
+
+<hr class="div">
+
+<section><div class="wrap">
+  <div class="reveal">
+    <div class="eyebrow" data-t="inv_fund_ey">Funding</div>
+    <h2 class="sec-title" data-t="inv_fund_h">Seed Round · $300,000</h2>
+    <p class="sec-body" data-t="inv_fund_sub">Target: $150K–$500K. Ideal: $300K. 18-month runway to mainnet launch and first 1,000 verified users.</p>
+  </div>
+  <div class="funds-bar reveal">
+    <div class="fund-row"><div class="fund-label" data-t="inv_f1">Technical Development</div><div class="fund-track"><div class="fund-fill" style="width:40%"></div></div><div class="fund-amount">$120K</div></div>
+    <div class="fund-row"><div class="fund-label" data-t="inv_f2">Marketing</div><div class="fund-track"><div class="fund-fill" style="width:17%"></div></div><div class="fund-amount">$50K</div></div>
+    <div class="fund-row"><div class="fund-label" data-t="inv_f3">Operations (12 mo)</div><div class="fund-track"><div class="fund-fill" style="width:13%"></div></div><div class="fund-amount">$40K</div></div>
+    <div class="fund-row"><div class="fund-label" data-t="inv_f4">Security Audit</div><div class="fund-track"><div class="fund-fill" style="width:13%"></div></div><div class="fund-amount">$40K</div></div>
+    <div class="fund-row"><div class="fund-label" data-t="inv_f5">Sharia Certification</div><div class="fund-track"><div class="fund-fill" style="width:10%"></div></div><div class="fund-amount">$30K</div></div>
+    <div class="fund-row"><div class="fund-label" data-t="inv_f6">Legal Registration</div><div class="fund-track"><div class="fund-fill" style="width:7%"></div></div><div class="fund-amount">$20K</div></div>
+  </div>
+  <div class="fund-note reveal" data-t="inv_fund_note">Preferred structure: SAFE note or convertible equity · UAE ADGM or Malaysia Labuan · Sharia-compliant terms available</div>
+</div></section>
+
+<hr class="div">
+
+<section><div class="wrap">
+  <div class="reveal">
+    <div class="eyebrow" data-t="inv_team_ey">Team</div>
+    <h2 class="sec-title" data-t="inv_team_h">Founded by a diplomat. Built for the Ummah.</h2>
+    <p class="sec-body" data-t="inv_team_sub">AM Network is led by Akbar Amirzoda — economist, diplomat, and practicing Muslim. His background gives AM Network unique access to government relationships and the MENA+CIS corridor.</p>
+  </div>
+  <div class="team-card reveal">
+    <div class="team-avatar"><svg width="36" height="36" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="15" r="8" fill="#C9A84C" opacity=".35"/><ellipse cx="20" cy="34" rx="14" ry="9" fill="#C9A84C" opacity=".2"/></svg></div>
+    <div class="team-info">
+      <h3>Akbar Amirzoda</h3>
+      <div class="team-role" data-t="inv_ceo_role">Founder &amp; CEO</div>
+      <p data-t="inv_ceo_bio">Economist and diplomat (Plekhanov University, Moscow). Extensive experience in government institutions and international relations across the CIS region. Deep personal connection to the Islamic finance mission — building AM Network as a service to the Ummah.</p>
+      <div class="tags">
+        <span class="tag" data-t="tag_econ">Economist</span>
+        <span class="tag" data-t="tag_dipl">Diplomat</span>
+        <span class="tag">Islamic Finance</span>
+        <span class="tag">CIS / MENA</span>
+        <span class="tag" data-t="tag_founder">Founder</span>
+      </div>
+    </div>
+  </div>
+  <div class="cto-box reveal">
+    <p style="font-size:14px;color:var(--text2);margin-bottom:16px" data-t="inv_cto_p">We are actively seeking a <strong>Technical Co-Founder / CTO</strong> — Solidity + Web3 + AI/ML. Equity-based partnership.</p>
+    <a href="https://www.linkedin.com/company/amnetwork-io" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border:1px solid rgba(201,168,76,.3);border-radius:8px;font-size:13px;color:var(--gold);background:var(--gold3);transition:all .2s" onmouseover="this.style.background='rgba(201,168,76,.15)'" onmouseout="this.style.background='var(--gold3)'" data-t="inv_cto_link">View Open Position on LinkedIn →</a>
+  </div>
+</div></section>
+
+<hr class="div">
+
+<section><div class="wrap">
+  <div class="contact-box reveal">
+    <div class="eyebrow" style="justify-content:center;margin-bottom:20px" data-t="inv_contact_ey">Get in Touch</div>
+    <h2 class="sec-title" data-t="inv_contact_h">Ready to build the future<br>of Islamic Finance together?</h2>
+    <p class="sec-body" style="margin:0 auto 32px;max-width:520px" data-t="inv_contact_sub">We are open to strategic investors, institutional partners, and Sharia advisory board members. Deck and financials available on request.</p>
+    <div class="contact-links">
+      <a href="mailto:contact@amnetwork.io" class="contact-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>contact@amnetwork.io</a>
+      <a href="https://www.linkedin.com/company/amnetwork-io" target="_blank" class="contact-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
+      <a href="/" class="contact-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>amnetwork.io</a>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>© 2026 AM Network · <a href="mailto:contact@amnetwork.io">contact@amnetwork.io</a> · <a href="/">amnetwork.io</a></p>
+  <p style="margin-top:8px;font-size:12px" data-t="inv_footer_note">This page is intended for accredited investors and institutional partners only. Not a public offering.</p>
+</div></footer>
+
+<script>
+const T={
+en:{
+  inv_nav_back:"← Main site",inv_nav_cta:"Request Deck",
+  inv_badge:"Seed Round Open · 2026",
+  inv_h1a:"The Future of",inv_h1b:"Islamic Finance",inv_h1c:"Starts Here.",
+  inv_sub:"AM Network is the first blockchain-verified Zakat and Sadaqah platform for ~2 billion Muslims. We are raising a seed round to build the infrastructure the Ummah deserves.",
+  inv_cta1:"Request Investment Deck",inv_cta2:"Visit Main Site",
+  inv_s1:"Potential Zakat/yr (est.)",inv_s2:"Currently on-chain",inv_s3:"Muslims worldwide",inv_s4:"Islamic Finance assets",
+  inv_prob_ey:"Problem & Solution",inv_prob_h:"$600 billion. Zero transparency.",
+  inv_prob_sub:"Every year, Muslims around the world pay Zakat — a religious obligation. But there is no reliable way to verify where that money goes.",
+  inv_prob_card_h:"The Problem",inv_sol_card_h:"Our Solution",
+  inv_prob_1:"No global Zakat tracking infrastructure",inv_prob_2:"Millions of eligible recipients are invisible to the system",inv_prob_3:"Donors cannot verify where funds go",inv_prob_4:"Fraud, misallocation, and middlemen absorb funds",inv_prob_5:"No Sharia-certified on-chain solution exists",
+  inv_sol_1:"Every transaction recorded permanently on Base blockchain",inv_sol_2:"AI scoring of recipients (0–100) across 11 categories",inv_sol_3:"Local oracle network: imams + NGOs verify eligibility",inv_sol_4:"Sharia-compliant ujrah model — no riba, no speculation",inv_sol_5:"8 languages, global from day one",
+  inv_trac_ey:"Traction",inv_trac_h:"Built in public. Moving fast.",inv_trac_sub:"Pre-revenue, pre-mainnet — but the foundation is already in place.",
+  inv_done:"✓ Complete",inv_submitted:"✓ Submitted",inv_contacted:"✓ Contacted",inv_inprog:"⟳ In Progress",
+  inv_t1_h:"Website & Waitlist",inv_t1_p:"Live at amnetwork.io · 8 languages · Zakat calculator · Recipient application",
+  inv_t2_h:"Whitepaper v1",inv_t2_p:"Technical and business model documentation published",
+  inv_t3_h:"Accelerators",inv_t3_p:"Hub71+ Digital Assets (Abu Dhabi) · Flat6Labs · IsDB Innovation",
+  inv_t4_h:"Sharia Advisory",inv_t4_p:"Mufti Faraz Adam (Amanah Advisors) — formal process initiated",
+  inv_t5_h:"AI Scoring MVP",inv_t5_p:"Algorithmic pre-scoring live · ML model in development",
+  inv_t6_h:"Technical Co-Founder",inv_t6_p:"Active search · Solidity + AI/ML · Equity-based partnership",
+  inv_mkt_ey:"Market Size",inv_mkt_h:"A generational market opportunity",
+  inv_mkt_sub:"Islamic finance is one of the fastest-growing segments in global financial services — and Zakat infrastructure does not yet exist at scale.",
+  inv_m1_l:"Potential Zakat/yr (est.)",inv_m1_n:"0% currently on-chain",inv_m2_n:"+11.5% CAGR",inv_m3_n:"+12% CAGR",inv_m2_l:"Islamic Fintech market by 2029",inv_m3_l:"Total Islamic Finance assets",inv_m4_l:"Market share needed",inv_m4_n:"= $1B+ valuation",
+  inv_bm_ey:"Business Model",inv_bm_h:"Sharia-compliant revenue. Simple.",
+  inv_bm_sub:"Ujrah model only — a service fee for verified infrastructure. No riba, no speculative token, no gharar.",
+  inv_bm1_h:"Transaction Ujrah — 1–2.5%",inv_bm1_p:"A service fee on every verified Zakat and Sadaqah transaction. At $1B annual volume: $10–25M ARR.",
+  inv_bm2_h:"AM Academy — Subscription",inv_bm2_p:"Sharia-compliant financial literacy. NFT certificates. AI tutor. B2C and B2B corporate Zakat compliance programs.",
+  inv_bm3_h:"Institutional API — B2B",inv_bm3_p:"Islamic banks and corporations integrate AM Network infrastructure via API. Per-transaction pricing.",
+  inv_fund_ey:"Funding",inv_fund_h:"Seed Round · $300,000",
+  inv_fund_sub:"Target: $150K–$500K. Ideal: $300K. 18-month runway to mainnet launch and first 1,000 verified users.",
+  inv_f1:"Technical Development",inv_f2:"Marketing",inv_f3:"Operations (12 mo)",inv_f4:"Security Audit",inv_f5:"Sharia Certification",inv_f6:"Legal Registration",
+  inv_fund_note:"Preferred structure: SAFE note or convertible equity · UAE ADGM or Malaysia Labuan · Sharia-compliant terms available",
+  inv_team_ey:"Team",inv_team_h:"Founded by a diplomat. Built for the Ummah.",
+  inv_team_sub:"AM Network is led by Akbar Amirzoda — economist, diplomat, and practicing Muslim. His background gives AM Network unique access to government relationships and the MENA+CIS corridor.",
+  inv_ceo_role:"Founder & CEO",
+  inv_ceo_bio:"Economist and diplomat (Plekhanov University, Moscow). Extensive experience in government institutions and international relations across the CIS region. Deep personal connection to the Islamic finance mission.",
+  tag_econ:"Economist",tag_dipl:"Diplomat",tag_founder:"Founder",
+  inv_cto_p:"We are actively seeking a <strong>Technical Co-Founder / CTO</strong> — Solidity + Web3 + AI/ML. Equity-based partnership.",
+  inv_cto_link:"View Open Position on LinkedIn →",
+  inv_contact_ey:"Get in Touch",inv_contact_h:"Ready to build the future<br>of Islamic Finance together?",
+  inv_contact_sub:"We are open to strategic investors, institutional partners, and Sharia advisory board members. Deck and financials available on request.",
+  inv_footer_note:"This page is intended for accredited investors and institutional partners only. Not a public offering."
+},
+ar:{
+  inv_nav_back:"← الصفحة الرئيسية",inv_nav_cta:"طلب العرض",
+  inv_badge:"جولة التأسيس مفتوحة · 2026",
+  inv_h1a:"مستقبل",inv_h1b:"التمويل الإسلامي",inv_h1c:"يبدأ هنا.",
+  inv_sub:"AM Network هي أول منصة زكاة وصدقة موثقة بالبلوك تشين لـ ~2 مليار مسلم. نسعى لجمع تمويل تأسيسي لبناء البنية التحتية التي تستحقها الأمة.",
+  inv_cta1:"طلب عرض الاستثمار",inv_cta2:"زيارة الموقع الرئيسي",
+  inv_s1:"إمكانات الزكاة السنوية (تقدير)",inv_s2:"على البلوك تشين حالياً",inv_s3:"مسلم حول العالم",inv_s4:"أصول التمويل الإسلامي",
+  inv_prob_ey:"المشكلة والحل",inv_prob_h:"600 مليار دولار. صفر شفافية.",
+  inv_prob_sub:"كل عام، يدفع المسلمون حول العالم الزكاة — فريضة دينية. لكن لا توجد طريقة موثوقة للتحقق من أين تذهب هذه الأموال.",
+  inv_prob_card_h:"المشكلة",inv_sol_card_h:"حلنا",
+  inv_prob_1:"لا توجد بنية تحتية عالمية لتتبع الزكاة",inv_prob_2:"ملايين المستحقين غير مرئيين للنظام",inv_prob_3:"لا يستطيع المتبرعون التحقق من وجهة أموالهم",inv_prob_4:"الاحتيال والتوزيع الخاطئ والوسطاء يستنزفون الأموال",inv_prob_5:"لا يوجد حل موثق شرعاً على البلوك تشين",
+  inv_sol_1:"كل معاملة مسجلة بشكل دائم على بلوك تشين Base",inv_sol_2:"تقييم بالذكاء الاصطناعي للمستفيدين (0–100) عبر 11 فئة",inv_sol_3:"شبكة أوراكل محلية: أئمة + منظمات غير حكومية للتحقق",inv_sol_4:"نموذج أجرة شرعي — لا ربا، لا مضاربة",inv_sol_5:"8 لغات، عالمي منذ اليوم الأول",
+  inv_trac_ey:"الإنجازات",inv_trac_h:"نبني علنياً. نتحرك بسرعة.",inv_trac_sub:"قبل الإيرادات، قبل الشبكة الرئيسية — لكن الأساس موضوع بالفعل.",
+  inv_done:"✓ مكتمل",inv_submitted:"✓ مقدم",inv_contacted:"✓ تواصلنا",inv_inprog:"⟳ جارٍ",
+  inv_t1_h:"الموقع وقائمة الانتظار",inv_t1_p:"مباشر على amnetwork.io · 8 لغات · حاسبة الزكاة · طلب المستفيد",
+  inv_t2_h:"الورقة البيضاء v1",inv_t2_p:"توثيق تقني وتجاري منشور",
+  inv_t3_h:"مسرّعات الأعمال",inv_t3_p:"Hub71+ (أبوظبي) · Flat6Labs · البنك الإسلامي للتنمية",
+  inv_t4_h:"الاستشارة الشرعية",inv_t4_p:"المفتي فراز آدم (مستشارو أمانة) — بدأت العملية الرسمية",
+  inv_t5_h:"نموذج التقييم الأولي",inv_t5_p:"التقييم المبدئي حي · نموذج التعلم الآلي قيد التطوير",
+  inv_t6_h:"المؤسس التقني المشارك",inv_t6_p:"بحث نشط · Solidity + AI/ML · شراكة قائمة على الأسهم",
+  inv_mkt_ey:"حجم السوق",inv_mkt_h:"فرصة سوقية عبر الأجيال",
+  inv_mkt_sub:"التمويل الإسلامي هو أحد أسرع القطاعات نمواً في الخدمات المالية — والبنية التحتية للزكاة لم تتشكل بعد على نطاق واسع.",
+  inv_m1_l:"إمكانات الزكاة السنوية (تقدير)",inv_m1_n:"0% على البلوك تشين",inv_m2_n:"+11.5% نمو سنوي",inv_m3_n:"+12% نمو سنوي",inv_m2_l:"سوق الفينتك الإسلامي بحلول 2030",inv_m3_l:"إجمالي أصول التمويل الإسلامي",inv_m4_l:"الحصة السوقية المطلوبة",inv_m4_n:"= تقييم مليار دولار+",
+  inv_bm_ey:"نموذج العمل",inv_bm_h:"إيرادات متوافقة شرعاً. بسيطة.",
+  inv_bm_sub:"نموذج الأجرة فقط — رسوم خدمة على البنية التحتية الموثقة. لا ربا، لا رمز مضاربة، لا غرر.",
+  inv_bm1_h:"أجرة المعاملات — 1–2.5%",inv_bm1_p:"رسوم خدمة على كل معاملة زكاة وصدقة موثقة. عند حجم مليار سنوياً: 10–25 مليون ARR.",
+  inv_bm2_h:"أكاديمية AM — الاشتراك",inv_bm2_p:"ثقافة مالية إسلامية. شهادات NFT. مدرس AI. برامج B2B للامتثال الزكوي للشركات.",
+  inv_bm3_h:"API المؤسسي — B2B",inv_bm3_p:"البنوك الإسلامية والشركات تدمج بنية AM Network عبر API. تسعير لكل معاملة.",
+  inv_fund_ey:"التمويل",inv_fund_h:"الجولة التأسيسية · 300,000$",
+  inv_fund_sub:"الهدف: 150K–500K. المثالي: 300K. مدرج 18 شهراً حتى إطلاق الشبكة الرئيسية وأول 1000 مستخدم موثق.",
+  inv_f1:"التطوير التقني",inv_f2:"التسويق",inv_f3:"العمليات (12 شهراً)",inv_f4:"التدقيق الأمني",inv_f5:"الاعتماد الشرعي",inv_f6:"التسجيل القانوني",
+  inv_fund_note:"الهيكل المفضل: سند SAFE أو أسهم قابلة للتحويل · ADGM الإماراتية أو لابوان الماليزية · شروط متوافقة مع الشريعة متاحة",
+  inv_team_ey:"الفريق",inv_team_h:"أسسه دبلوماسي. بني للأمة.",
+  inv_team_sub:"يقود AM Network أكبر أميرزودا — خبير اقتصادي، دبلوماسي، ومسلم متدين. خلفيته تمنح AM Network وصولاً فريداً إلى العلاقات الحكومية وممر MENA+CIS.",
+  inv_ceo_role:"المؤسس والرئيس التنفيذي",
+  inv_ceo_bio:"خبير اقتصادي ودبلوماسي (جامعة بليخانوف، موسكو). خبرة واسعة في المؤسسات الحكومية والعلاقات الدولية في منطقة رابطة الدول المستقلة.",
+  tag_econ:"خبير اقتصادي",tag_dipl:"دبلوماسي",tag_founder:"مؤسس",
+  inv_cto_p:"نبحث بنشاط عن <strong>مؤسس تقني مشارك / مدير تقني</strong> — Solidity + Web3 + AI/ML. شراكة قائمة على الأسهم.",
+  inv_cto_link:"عرض الوظيفة المفتوحة على LinkedIn →",
+  inv_contact_ey:"تواصل معنا",inv_contact_h:"مستعد لبناء مستقبل<br>التمويل الإسلامي معاً؟",
+  inv_contact_sub:"نرحب بالمستثمرين الاستراتيجيين والشركاء المؤسسيين وأعضاء مجلس الاستشارة الشرعية. العرض والبيانات المالية متاحة عند الطلب.",
+  inv_footer_note:"هذه الصفحة مخصصة للمستثمرين المعتمدين والشركاء المؤسسيين فقط. ليست عرضاً عاماً."
+},
+ru:{
+  inv_nav_back:"← На главную",inv_nav_cta:"Запросить презентацию",
+  inv_badge:"Посевной раунд открыт · 2026",
+  inv_h1a:"Будущее",inv_h1b:"исламских финансов",inv_h1c:"начинается здесь.",
+  inv_sub:"AM Network — первая блокчейн-верифицированная платформа Закята и Садакы для ~2 млрд мусульман. Мы привлекаем посевные инвестиции для создания инфраструктуры, которой заслуживает Умма.",
+  inv_cta1:"Запросить инвестиционную презентацию",inv_cta2:"Перейти на главный сайт",
+  inv_s1:"Потенциал закята/год (оценка)",inv_s2:"Сейчас в блокчейне",inv_s3:"Мусульман в мире",inv_s4:"Активы исламских финансов",
+  inv_prob_ey:"Проблема и решение",inv_prob_h:"600 миллиардов. Ноль прозрачности.",
+  inv_prob_sub:"Каждый год мусульмане по всему миру платят закят — религиозную обязанность. Но нет надёжного способа проверить, куда идут эти деньги.",
+  inv_prob_card_h:"Проблема",inv_sol_card_h:"Наше решение",
+  inv_prob_1:"Нет глобальной инфраструктуры отслеживания закята",inv_prob_2:"Миллионы получателей невидимы для системы",inv_prob_3:"Жертвователи не могут проверить куда идут средства",inv_prob_4:"Мошенничество, неправильное распределение и посредники поглощают средства",inv_prob_5:"Нет шариатски сертифицированного решения в блокчейне",
+  inv_sol_1:"Каждая транзакция навсегда записана в блокчейне Base",inv_sol_2:"ИИ-оценка получателей (0–100) по 11 категориям",inv_sol_3:"Локальная сеть оракулов: имамы + НКО проверяют право на получение",inv_sol_4:"Шариатски-совместимая модель уджра — без риба, без спекуляций",inv_sol_5:"8 языков, глобальный охват с первого дня",
+  inv_trac_ey:"Прогресс",inv_trac_h:"Строим публично. Движемся быстро.",inv_trac_sub:"До выручки, до основной сети — но фундамент уже заложен.",
+  inv_done:"✓ Готово",inv_submitted:"✓ Подана заявка",inv_contacted:"✓ Связались",inv_inprog:"⟳ В процессе",
+  inv_t1_h:"Сайт и список ожидания",inv_t1_p:"Работает на amnetwork.io · 8 языков · Калькулятор закята · Заявка получателя",
+  inv_t2_h:"Белая книга v1",inv_t2_p:"Техническая и бизнес-документация опубликована",
+  inv_t3_h:"Акселераторы",inv_t3_p:"Hub71+ Digital Assets (Абу-Даби) · Flat6Labs · IsDB Innovation",
+  inv_t4_h:"Шариатский совет",inv_t4_p:"Муфтий Фараз Адам (Amanah Advisors) — официальный процесс начат",
+  inv_t5_h:"MVP ИИ-оценки",inv_t5_p:"Алгоритмическая пре-оценка работает · ML-модель в разработке",
+  inv_t6_h:"Технический сооснователь",inv_t6_p:"Активный поиск · Solidity + AI/ML · Партнёрство на основе доли",
+  inv_mkt_ey:"Размер рынка",inv_mkt_h:"Рыночная возможность поколения",
+  inv_mkt_sub:"Исламские финансы — один из самых быстрорастущих сегментов в мировых финансовых услугах — а инфраструктура закята пока не создана в масштабе.",
+  inv_m1_l:"Потенциал закята/год (оценка)",inv_m1_n:"0% сейчас в блокчейне",inv_m2_n:"+11.5% в год",inv_m3_n:"+12% в год",inv_m2_l:"Рынок исламского финтека к 2029",inv_m3_l:"Активы исламских финансов",inv_m4_l:"Необходимая доля рынка",inv_m4_n:"= оценка $1 млрд+",
+  inv_bm_ey:"Бизнес-модель",inv_bm_h:"Шариатски-совместимый доход. Просто.",
+  inv_bm_sub:"Только модель уджра — сервисная комиссия за верифицированную инфраструктуру. Без риба, без спекулятивного токена, без гарара.",
+  inv_bm1_h:"Комиссия уджра — 1–2,5%",inv_bm1_p:"Сервисная комиссия с каждой верифицированной транзакции закята и садакы. При объёме $1 млрд в год: $10–25 млн ARR.",
+  inv_bm2_h:"AM Academy — Подписка",inv_bm2_p:"Исламская финансовая грамотность. NFT-сертификаты. ИИ-наставник. B2B-программы соответствия корпоративному закяту.",
+  inv_bm3_h:"Институциональный API — B2B",inv_bm3_p:"Исламские банки и корпорации интегрируют инфраструктуру AM Network через API. Ценообразование за транзакцию.",
+  inv_fund_ey:"Финансирование",inv_fund_h:"Посевной раунд · $300 000",
+  inv_fund_sub:"Цель: $150K–$500K. Идеально: $300K. 18 месяцев до запуска основной сети и первых 1000 верифицированных пользователей.",
+  inv_f1:"Техническая разработка",inv_f2:"Маркетинг",inv_f3:"Операции (12 мес.)",inv_f4:"Аудит безопасности",inv_f5:"Шариатская сертификация",inv_f6:"Юридическая регистрация",
+  inv_fund_note:"Предпочтительная структура: SAFE-нота или конвертируемый капитал · ADGM ОАЭ или Labuan Малайзия · Шариатски-совместимые условия доступны",
+  inv_team_ey:"Команда",inv_team_h:"Основан дипломатом. Создан для Уммы.",
+  inv_team_sub:"AM Network возглавляет Акбар Амирзода — экономист, дипломат и практикующий мусульманин. Его опыт даёт AM Network уникальный доступ к государственным связям и коридору MENA+CIS.",
+  inv_ceo_role:"Основатель и генеральный директор",
+  inv_ceo_bio:"Экономист и дипломат (Российский экономический университет им. Плеханова, Москва). Обширный опыт в государственных институтах и международных отношениях в регионе СНГ.",
+  tag_econ:"Экономист",tag_dipl:"Дипломат",tag_founder:"Основатель",
+  inv_cto_p:"Мы активно ищем <strong>технического сооснователя / CTO</strong> — Solidity + Web3 + AI/ML. Партнёрство на основе доли в компании.",
+  inv_cto_link:"Открытая позиция на LinkedIn →",
+  inv_contact_ey:"Связаться с нами",inv_contact_h:"Готовы вместе строить будущее<br>исламских финансов?",
+  inv_contact_sub:"Мы открыты для стратегических инвесторов, институциональных партнёров и членов шариатского консультативного совета. Презентация и финансовые показатели — по запросу.",
+  inv_footer_note:"Эта страница предназначена только для аккредитованных инвесторов и институциональных партнёров. Не является публичным предложением."
+},
+tj:{
+  inv_nav_back:"← Ба саҳифаи асосӣ",inv_nav_cta:"Дархости презентатсия",
+  inv_badge:"Даври сармоягузории тухмӣ кушода · 2026",
+  inv_h1a:"Ояндаи",inv_h1b:"молияи исломӣ",inv_h1c:"аз ин ҷо оғоз меёбад.",
+  inv_sub:"AM Network аввалин платформаи закот ва садақа бо тасдиқи блокчейн барои ~2 миллиард мусулмон аст. Мо сармояи тухмӣ ҷалб мекунем, то инфрасохтореро бунёд кунем, ки Умма сазовори он аст.",
+  inv_cta1:"Дархости презентатсияи сармоягузорӣ",inv_cta2:"Ба сайти асосӣ гузаред",
+  inv_s1:"Потенсиали закоти солона",inv_s2:"Айни замон дар блокчейн",inv_s3:"Мусулмонон дар ҷаҳон",inv_s4:"Дороиҳои молияи исломӣ",
+  inv_prob_ey:"Мушкилот ва Ҳалли он",inv_prob_h:"600 миллиард доллар. Сифр шаффофият.",
+  inv_prob_sub:"Ҳар сол мусулмонони саросари ҷаҳон закот — фарзи диниро адо мекунанд. Аммо роҳи боэътимоде нест, ки маълум кунад ин маблағ ба куҷо меравад.",
+  inv_prob_card_h:"Мушкилот",inv_sol_card_h:"Ҳалли мо",
+  inv_prob_1:"Инфрасохтори ҷаҳонии назорати закот вуҷуд надорад",inv_prob_2:"Миллионҳо гирандагони сазовор барои система ноаён мемонанд",inv_prob_3:"Хайрхоҳон тафтиш карда наметавонанд, ки маблағ ба куҷо меравад",inv_prob_4:"Қаллобӣ, тақсимоти нодуруст ва миёнаравҳо маблағро фурӯ мебаранд",inv_prob_5:"Ягон ҳалли дар блокчейн будаи аз ҷониби шариат тасдиқшуда вуҷуд надорад",
+  inv_sol_1:"Ҳар муомила ба таври доимӣ дар блокчейни Base сабт мегардад",inv_sol_2:"Баҳогузории гирандагон бо зеҳни сунъӣ (0–100) аз рӯи 11 категория",inv_sol_3:"Шабакаи маҳаллии тасдиқкунандагон: имомон ва созмонҳои ғайридавлатӣ кафолат медиҳанд",inv_sol_4:"Модели уҷраи мутобиқи шариат — бе рибо ва бе тахмин",inv_sol_5:"8 забон, аз рӯзи аввал дар саросари ҷаҳон",
+  inv_trac_ey:"Дастовардҳо",inv_trac_h:"Ошкоро бунёд мекунем. Бо суръат пеш меравем.",inv_trac_sub:"Ҳанӯз даромад нест ва шабакаи асосӣ оғоз наёфтааст — аммо пойдевор аллакай гузошта шудааст.",
+  inv_done:"✓ Иҷрошуда",inv_submitted:"✓ Пешниҳодшуда",inv_contacted:"✓ Тамос гирифта шуд",inv_inprog:"⟳ Дар ҷараён",
+  inv_t1_h:"Сайт ва рӯйхати интизорӣ",inv_t1_p:"Дар amnetwork.io фаъол · 8 забон · Ҳисобкунаки закот · Аризаи гирандагон",
+  inv_t2_h:"Ҳуҷҷати техникӣ (Whitepaper) v1",inv_t2_p:"Ҳуҷҷатҳои техникӣ ва модели тиҷоратӣ нашр шуданд",
+  inv_t3_h:"Барномаҳои шитобдиҳӣ",inv_t3_p:"Hub71+ Digital Assets (Абу-Дабӣ) · Flat6Labs · IsDB Innovation",
+  inv_t4_h:"Шӯрои шариатӣ",inv_t4_p:"Муфтӣ Фараз Адам (Amanah Advisors) — раванди расмӣ оғоз шуд",
+  inv_t5_h:"Намунаи аввалияи баҳогузории зеҳни сунъӣ",inv_t5_p:"Баҳогузории алгоритмии пешакӣ фаъол · Модели ML дар коркард",
+  inv_t6_h:"Ҳаммуассиси техникӣ",inv_t6_p:"Ҷустуҷӯи фаъол · Solidity + AI/ML · Шарикӣ дар асоси саҳмия",
+  inv_mkt_ey:"Андозаи бозор",inv_mkt_h:"Имконияти бозории насл",
+  inv_mkt_sub:"Молияи исломӣ яке аз бахшҳои босуръаттарини хизматрасониҳои молии ҷаҳон аст — ва инфрасохтори закот ҳоло дар миқёси калон вуҷуд надорад.",
+  inv_m1_l:"Потенсиали закоти солона",inv_m1_n:"Айни замон 0% дар блокчейн",inv_m2_n:"+11.5% дар сол",inv_m3_n:"+12% дар сол",inv_m2_l:"Бозори финтехи исломӣ то соли 2029",inv_m3_l:"Ҳаҷми умумии дороиҳои молияи исломӣ",inv_m4_l:"Ҳиссаи зарурӣ дар бозор",inv_m4_n:"= баҳогузории $1 млрд+",
+  inv_bm_ey:"Модели тиҷоратӣ",inv_bm_h:"Даромади мутобиқи шариат. Содда.",
+  inv_bm_sub:"Танҳо модели уҷра — ҳаққи хидмат барои инфрасохтори тасдиқшуда. Бе рибо, бе токени спекулятивӣ ва бе ғарар.",
+  inv_bm1_h:"Уҷраи муомилот — 1–2,5%",inv_bm1_p:"Ҳаққи хидмат аз ҳар муомилаи тасдиқшудаи закот ва садақа. Ҳангоми ҳаҷми $1 млрд дар сол: $10–25 млн даромади солона.",
+  inv_bm2_h:"AM Academy — Обуна",inv_bm2_p:"Саводнокии молии исломӣ. Сертификатҳои NFT. Устоди зеҳни сунъӣ. Барномаҳои B2B барои закоти корпоративӣ.",
+  inv_bm3_h:"API-и муассисавӣ — B2B",inv_bm3_p:"Бонкҳо ва ширкатҳои исломӣ инфрасохтори AM Network-ро тавассути API ҳамгиро мекунанд. Нархгузорӣ барои ҳар муомила.",
+  inv_fund_ey:"Маблағгузорӣ",inv_fund_h:"Даври тухмӣ · $300,000",
+  inv_fund_sub:"Ҳадаф: $150K–$500K. Беҳтарин: $300K. 18 моҳ то оғози шабакаи асосӣ ва аввалин 1000 корбари тасдиқшуда.",
+  inv_f1:"Таҳияи техникӣ",inv_f2:"Маркетинг",inv_f3:"Фаъолият (12 моҳ)",inv_f4:"Аудити амният",inv_f5:"Сертификатсияи шариатӣ",inv_f6:"Бақайдгирии ҳуқуқӣ",
+  inv_fund_note:"Сохтори афзалиятнок: санади SAFE ё саҳмияи табдилшаванда · ADGM-и АМА ё Labuan-и Малайзия · Шартҳои мутобиқи шариат дастрасанд",
+  inv_team_ey:"Даста",inv_team_h:"Аз ҷониби дипломат таъсис ёфтааст. Барои Умма бунёд шудааст.",
+  inv_team_sub:"Сарварии AM Network-ро Акбар Амирзода — иқтисоддон, дипломат ва мусулмони амалкунанда бар ӯҳда дорад. Таҷрибаи ӯ ба AM Network дастрасии нодир ба робитаҳои давлатӣ ва долони MENA+CIS медиҳад.",
+  inv_ceo_role:"Муассис ва Директори генералӣ",
+  inv_ceo_bio:"Иқтисоддон ва дипломат (Донишгоҳи иқтисодии ба номи Плеханов, Маскав). Таҷрибаи васеъ дар муассисаҳои давлатӣ ва робитаҳои байналмилалӣ дар минтақаи ИДМ. Робитаи амиқи шахсӣ бо рисолати молияи исломӣ.",
+  tag_econ:"Иқтисоддон",tag_dipl:"Дипломат",tag_founder:"Муассис",
+  inv_cto_p:"Мо фаъолона <strong>ҳаммуассиси техникӣ / CTO</strong> меҷӯем — Solidity + Web3 + AI/ML. Шарикӣ дар асоси саҳмия дар ширкат.",
+  inv_cto_link:"Ҷойи кории кушодро дар LinkedIn бинед →",
+  inv_contact_ey:"Бо мо дар тамос шавед",inv_contact_h:"Барои якҷоя сохтани ояндаи<br>молияи исломӣ омодаед?",
+  inv_contact_sub:"Мо ба сармоягузорони стратегӣ, шарикони муассисавӣ ва аъзои шӯрои машваратии шариатӣ кушодаем. Презентатсия ва ҳисоботи молиявӣ бо дархост дастрасанд.",
+  inv_footer_note:"Ин саҳифа танҳо барои сармоягузорони аккредитатсияшуда ва шарикони муассисавӣ пешбинӣ шудааст. Ин пешниҳоди оммавӣ нест."
+},
+id:{
+  inv_nav_back:"← Halaman Utama",inv_nav_cta:"Minta Deck",
+  inv_badge:"Putaran Seed Terbuka · 2026",
+  inv_h1a:"Masa Depan",inv_h1b:"Keuangan Islam",inv_h1c:"Dimulai di Sini.",
+  inv_sub:"AM Network adalah platform Zakat dan Sedekah terverifikasi blockchain pertama untuk ~2 miliar Muslim. Kami sedang menggalang putaran seed untuk membangun infrastruktur yang layak bagi Umat.",
+  inv_cta1:"Minta Deck Investasi",inv_cta2:"Kunjungi Situs Utama",
+  inv_s1:"Zakat Tahunan Global",inv_s2:"Saat ini di blockchain",inv_s3:"Muslim di seluruh dunia",inv_s4:"Aset Keuangan Islam",
+  inv_prob_ey:"Masalah & Solusi",inv_prob_h:"$600 miliar. Nol transparansi.",
+  inv_prob_sub:"Setiap tahun, umat Muslim di seluruh dunia membayar Zakat — kewajiban agama. Namun tidak ada cara yang dapat diandalkan untuk memverifikasi ke mana uang itu pergi.",
+  inv_prob_card_h:"Masalah",inv_sol_card_h:"Solusi Kami",
+  inv_prob_1:"Tidak ada infrastruktur pelacakan Zakat global",inv_prob_2:"Jutaan penerima yang berhak tidak terlihat oleh sistem",inv_prob_3:"Donatur tidak dapat memverifikasi ke mana dana mereka pergi",inv_prob_4:"Penipuan, salokasi, dan perantara menyerap dana",inv_prob_5:"Tidak ada solusi on-chain yang bersertifikat Syariah",
+  inv_sol_1:"Setiap transaksi dicatat secara permanen di blockchain Base",inv_sol_2:"Penilaian AI penerima (0–100) di 11 kategori",inv_sol_3:"Jaringan oracle lokal: imam + LSM memverifikasi kelayakan",inv_sol_4:"Model ujrah sesuai Syariah — tanpa riba, tanpa spekulasi",inv_sol_5:"8 bahasa, global sejak hari pertama",
+  inv_trac_ey:"Pencapaian",inv_trac_h:"Dibangun secara publik. Bergerak cepat.",inv_trac_sub:"Sebelum pendapatan, sebelum mainnet — tetapi fondasi sudah ada.",
+  inv_done:"✓ Selesai",inv_submitted:"✓ Diajukan",inv_contacted:"✓ Dihubungi",inv_inprog:"⟳ Dalam Proses",
+  inv_t1_h:"Website & Daftar Tunggu",inv_t1_p:"Aktif di amnetwork.io · 8 bahasa · Kalkulator Zakat · Aplikasi penerima",
+  inv_t2_h:"Whitepaper v1",inv_t2_p:"Dokumentasi teknis dan model bisnis dipublikasikan",
+  inv_t3_h:"Akselerator",inv_t3_p:"Hub71+ Digital Assets (Abu Dhabi) · Flat6Labs · IsDB Innovation",
+  inv_t4_h:"Penasehat Syariah",inv_t4_p:"Mufti Faraz Adam (Amanah Advisors) — proses formal dimulai",
+  inv_t5_h:"MVP Penilaian AI",inv_t5_p:"Pra-penilaian algoritmik aktif · Model ML dalam pengembangan",
+  inv_t6_h:"Co-Founder Teknis",inv_t6_p:"Pencarian aktif · Solidity + AI/ML · Kemitraan berbasis ekuitas",
+  inv_mkt_ey:"Ukuran Pasar",inv_mkt_h:"Peluang pasar generasional",
+  inv_mkt_sub:"Keuangan Islam adalah salah satu segmen layanan keuangan global yang paling cepat berkembang — dan infrastruktur Zakat belum ada dalam skala besar.",
+  inv_m1_l:"Potensi Zakat/tahun (est.)",inv_m1_n:"0% saat ini on-chain",inv_m2_n:"+11.5% per tahun",inv_m3_n:"+12% per tahun",inv_m2_l:"Pasar fintech Islam pada 2029",inv_m3_l:"Total aset keuangan Islam",inv_m4_l:"Pangsa pasar yang dibutuhkan",inv_m4_n:"= valuasi $1 miliar+",
+  inv_bm_ey:"Model Bisnis",inv_bm_h:"Pendapatan sesuai Syariah. Sederhana.",
+  inv_bm_sub:"Hanya model ujrah — biaya layanan untuk infrastruktur terverifikasi. Tanpa riba, tanpa token spekulatif, tanpa gharar.",
+  inv_bm1_h:"Ujrah Transaksi — 1–2,5%",inv_bm1_p:"Biaya layanan pada setiap transaksi Zakat dan Sedekah yang terverifikasi. Pada volume $1B tahunan: ARR $10–25M.",
+  inv_bm2_h:"AM Academy — Langganan",inv_bm2_p:"Literasi keuangan Islam. Sertifikat NFT. Tutor AI. Program kepatuhan Zakat korporat B2B.",
+  inv_bm3_h:"API Institusional — B2B",inv_bm3_p:"Bank Islam dan korporasi mengintegrasikan infrastruktur AM Network melalui API. Penetapan harga per transaksi.",
+  inv_fund_ey:"Pendanaan",inv_fund_h:"Putaran Seed · $300.000",
+  inv_fund_sub:"Target: $150K–$500K. Ideal: $300K. Runway 18 bulan untuk peluncuran mainnet dan 1.000 pengguna terverifikasi pertama.",
+  inv_f1:"Pengembangan Teknis",inv_f2:"Pemasaran",inv_f3:"Operasional (12 bln)",inv_f4:"Audit Keamanan",inv_f5:"Sertifikasi Syariah",inv_f6:"Pendaftaran Legal",
+  inv_fund_note:"Struktur yang disukai: SAFE note atau ekuitas konvertibel · UAE ADGM atau Malaysia Labuan · Ketentuan sesuai Syariah tersedia",
+  inv_team_ey:"Tim",inv_team_h:"Didirikan oleh diplomat. Dibangun untuk Umat.",
+  inv_team_sub:"AM Network dipimpin oleh Akbar Amirzoda — ekonom, diplomat, dan Muslim yang taat. Latar belakangnya memberi AM Network akses unik ke hubungan pemerintah dan koridor MENA+CIS.",
+  inv_ceo_role:"Pendiri & CEO",
+  inv_ceo_bio:"Ekonom dan diplomat (Universitas Plekhanov, Moskow). Pengalaman luas di lembaga pemerintah dan hubungan internasional di kawasan CIS.",
+  tag_econ:"Ekonom",tag_dipl:"Diplomat",tag_founder:"Pendiri",
+  inv_cto_p:"Kami aktif mencari <strong>Co-Founder Teknis / CTO</strong> — Solidity + Web3 + AI/ML. Kemitraan berbasis ekuitas.",
+  inv_cto_link:"Lihat Posisi Terbuka di LinkedIn →",
+  inv_contact_ey:"Hubungi Kami",inv_contact_h:"Siap membangun masa depan<br>Keuangan Islam bersama?",
+  inv_contact_sub:"Kami terbuka untuk investor strategis, mitra institusional, dan anggota dewan penasehat Syariah. Deck dan laporan keuangan tersedia atas permintaan.",
+  inv_footer_note:"Halaman ini ditujukan untuk investor terakreditasi dan mitra institusional saja. Bukan penawaran umum."
+},
+tr:{
+  inv_nav_back:"← Ana Sayfa",inv_nav_cta:"Sunum İste",
+  inv_badge:"Tohum Turu Açık · 2026",
+  inv_h1a:"İslami Finansın",inv_h1b:"Geleceği",inv_h1c:"Burada Başlıyor.",
+  inv_sub:"AM Network, ~2 milyar Müslüman için blok zinciri doğrulamalı ilk Zekât ve Sadaka platformudur. Ümmet'in hak ettiği altyapıyı inşa etmek için tohum yatırımı arıyoruz.",
+  inv_cta1:"Yatırım Sunumu İste",inv_cta2:"Ana Siteyi Ziyaret Et",
+  inv_s1:"Potansiyel Zekât/yıl (tahmin)",inv_s2:"Şu an zincir üzerinde",inv_s3:"Dünya genelinde Müslüman",inv_s4:"İslami Finans varlıkları",
+  inv_prob_ey:"Sorun & Çözüm",inv_prob_h:"600 milyar dolar. Sıfır şeffaflık.",
+  inv_prob_sub:"Her yıl, dünya genelindeki Müslümanlar dini bir yükümlülük olan Zekât'ı ödüyor. Ancak bu paranın nereye gittiğini doğrulamanın güvenilir bir yolu yok.",
+  inv_prob_card_h:"Sorun",inv_sol_card_h:"Çözümümüz",
+  inv_prob_1:"Küresel Zekât takip altyapısı yok",inv_prob_2:"Milyonlarca uygun alıcı sisteme görünmez",inv_prob_3:"Bağışçılar fonların nereye gittiğini doğrulayamıyor",inv_prob_4:"Dolandırıcılık, yanlış tahsis ve aracılar fonları eriyor",inv_prob_5:"Zincir üzerinde Şeriat onaylı çözüm bulunmuyor",
+  inv_sol_1:"Her işlem Base blok zincirinde kalıcı olarak kaydedilir",inv_sol_2:"11 kategoride alıcıların AI puanlaması (0–100)",inv_sol_3:"Yerel oracle ağı: imamlar + STK'lar uygunluğu doğrular",inv_sol_4:"Şeriat uyumlu ücret modeli — riba yok, spekülasyon yok",inv_sol_5:"8 dil, ilk günden itibaren küresel",
+  inv_trac_ey:"İlerleme",inv_trac_h:"Halka açık inşa ediyoruz. Hızlı hareket ediyoruz.",inv_trac_sub:"Gelir öncesi, mainnet öncesi — ancak temel zaten yerinde.",
+  inv_done:"✓ Tamamlandı",inv_submitted:"✓ Başvuruldu",inv_contacted:"✓ İletişime Geçildi",inv_inprog:"⟳ Devam Ediyor",
+  inv_t1_h:"Web Sitesi & Bekleme Listesi",inv_t1_p:"amnetwork.io'da yayında · 8 dil · Zekât hesaplayıcı · Alıcı başvurusu",
+  inv_t2_h:"Teknik Rapor v1",inv_t2_p:"Teknik ve iş modeli belgeleri yayınlandı",
+  inv_t3_h:"Hızlandırıcılar",inv_t3_p:"Hub71+ Digital Assets (Abu Dabi) · Flat6Labs · IsDB Innovation",
+  inv_t4_h:"Şeriat Danışmanlığı",inv_t4_p:"Müftü Faraz Adem (Amanah Advisors) — resmi süreç başlatıldı",
+  inv_t5_h:"AI Puanlama MVP",inv_t5_p:"Algoritmik ön puanlama canlı · ML modeli geliştirilmekte",
+  inv_t6_h:"Teknik Kurucu Ortak",inv_t6_p:"Aktif arama · Solidity + AI/ML · Hisse bazlı ortaklık",
+  inv_mkt_ey:"Pazar Büyüklüğü",inv_mkt_h:"Nesiller boyu pazar fırsatı",
+  inv_mkt_sub:"İslami finans, küresel finansal hizmetlerin en hızlı büyüyen segmentlerinden biridir — ve Zekât altyapısı henüz ölçekte mevcut değil.",
+  inv_m1_l:"Potansiyel Zekât/yıl (tahmin)",inv_m1_n:"Şu an %0 zincir üzerinde",inv_m2_n:"+11.5% yıllık büyüme",inv_m3_n:"+12% yıllık büyüme",inv_m2_l:"2030'a kadar İslami fintek pazarı",inv_m3_l:"Toplam İslami Finans varlıkları",inv_m4_l:"Gerekli pazar payı",inv_m4_n:"= 1 Milyar$+ değerleme",
+  inv_bm_ey:"İş Modeli",inv_bm_h:"Şeriat uyumlu gelir. Basit.",
+  inv_bm_sub:"Yalnızca ücret modeli — doğrulanmış altyapı için hizmet ücreti. Riba yok, spekülatif token yok, garar yok.",
+  inv_bm1_h:"İşlem Ücreti — %1–2,5",inv_bm1_p:"Her doğrulanmış Zekât ve Sadaka işleminde hizmet ücreti. Yıllık 1 milyar dolar hacimde: 10–25 milyon dolar ARR.",
+  inv_bm2_h:"AM Akademi — Abonelik",inv_bm2_p:"Şeriat uyumlu finans okuryazarlığı. NFT sertifikaları. AI öğretmen. B2B kurumsal Zekât uyum programları.",
+  inv_bm3_h:"Kurumsal API — B2B",inv_bm3_p:"İslami bankalar ve şirketler, AM Network altyapısını API aracılığıyla entegre eder.",
+  inv_fund_ey:"Finansman",inv_fund_h:"Tohum Turu · 300.000$",
+  inv_fund_sub:"Hedef: 150K–500K$. İdeal: 300K$. Mainnet lansmanı ve ilk 1.000 doğrulanmış kullanıcıya 18 aylık yol haritası.",
+  inv_f1:"Teknik Geliştirme",inv_f2:"Pazarlama",inv_f3:"Operasyonlar (12 ay)",inv_f4:"Güvenlik Denetimi",inv_f5:"Şeriat Sertifikasyonu",inv_f6:"Yasal Kayıt",
+  inv_fund_note:"Tercih edilen yapı: SAFE notu veya dönüştürülebilir hisse · UAE ADGM veya Malezya Labuan · Şeriat uyumlu şartlar mevcut",
+  inv_team_ey:"Ekip",inv_team_h:"Bir diplomat tarafından kuruldu. Ümmet için inşa edildi.",
+  inv_team_sub:"AM Network, Akbar Amirzoda tarafından yönetilmektedir — ekonomist, diplomat ve pratik Müslüman.",
+  inv_ceo_role:"Kurucu & CEO",
+  inv_ceo_bio:"Ekonomist ve diplomat (Plehanov Üniversitesi, Moskova). BDT bölgesinde devlet kurumlarında ve uluslararası ilişkilerde kapsamlı deneyim.",
+  tag_econ:"Ekonomist",tag_dipl:"Diplomat",tag_founder:"Kurucu",
+  inv_cto_p:"Aktif olarak <strong>Teknik Kurucu Ortak / CTO</strong> arıyoruz — Solidity + Web3 + AI/ML. Hisse bazlı ortaklık.",
+  inv_cto_link:"LinkedIn'de Açık Pozisyonu Gör →",
+  inv_contact_ey:"İletişime Geçin",inv_contact_h:"İslami Finansın geleceğini<br>birlikte inşa etmeye hazır mısınız?",
+  inv_contact_sub:"Stratejik yatırımcılara, kurumsal ortaklara ve Şeriat danışma kurulu üyelerine açığız. Sunum ve finansallar talep üzerine sunulmaktadır.",
+  inv_footer_note:"Bu sayfa yalnızca akredite yatırımcılar ve kurumsal ortaklar içindir. Halka arz değildir."
+},
+zh:{
+  inv_nav_back:"← 返回主页",inv_nav_cta:"索取项目书",
+  inv_badge:"种子轮开放 · 2026",
+  inv_h1a:"伊斯兰金融的",inv_h1b:"未来",inv_h1c:"从这里开始。",
+  inv_sub:"AM Network 是面向全球18亿穆斯林的首个区块链验证天课与慈善平台。我们正在募集种子轮融资，为乌玛建设应有的基础设施。",
+  inv_cta1:"索取投资材料",inv_cta2:"访问主网站",
+  inv_s1:"全球年度天课总额",inv_s2:"当前链上比例",inv_s3:"全球穆斯林人口",inv_s4:"伊斯兰金融资产",
+  inv_prob_ey:"问题与解决方案",inv_prob_h:"6000亿美元。零透明度。",
+  inv_prob_sub:"每年，全球穆斯林缴纳天课——这是宗教义务。但没有可靠方式验证这些资金的去向。",
+  inv_prob_card_h:"问题",inv_sol_card_h:"我们的解决方案",
+  inv_prob_1:"缺乏全球天课追踪基础设施",inv_prob_2:"数百万符合条件的受益人对系统不可见",inv_prob_3:"捐助者无法验证资金去向",inv_prob_4:"欺诈、错误分配和中间商侵蚀资金",inv_prob_5:"不存在经伊斯兰法认证的链上解决方案",
+  inv_sol_1:"每笔交易永久记录在Base区块链上",inv_sol_2:"AI对受益人进行评分（0–100），覆盖11个类别",inv_sol_3:"本地预言机网络：伊玛目+NGO验证资格",inv_sol_4:"符合伊斯兰法的服务费模式——无利息、无投机",inv_sol_5:"8种语言，从第一天起即为全球化",
+  inv_trac_ey:"进展",inv_trac_h:"公开建设。快速推进。",inv_trac_sub:"收入前、主网前——但基础已经到位。",
+  inv_done:"✓ 完成",inv_submitted:"✓ 已提交",inv_contacted:"✓ 已联系",inv_inprog:"⟳ 进行中",
+  inv_t1_h:"网站与等待名单",inv_t1_p:"运行于 amnetwork.io · 8种语言 · 天课计算器 · 受益人申请",
+  inv_t2_h:"白皮书 v1",inv_t2_p:"技术和商业模式文档已发布",
+  inv_t3_h:"加速器",inv_t3_p:"Hub71+ Digital Assets（阿布扎比）· Flat6Labs · IsDB Innovation",
+  inv_t4_h:"伊斯兰法咨询",inv_t4_p:"穆夫提·法拉兹·亚当（Amanah Advisors）——正式流程已启动",
+  inv_t5_h:"AI评分MVP",inv_t5_p:"算法预评分上线 · ML模型开发中",
+  inv_t6_h:"技术联合创始人",inv_t6_p:"积极招募 · Solidity + AI/ML · 股权合作",
+  inv_mkt_ey:"市场规模",inv_mkt_h:"跨代际的市场机遇",
+  inv_mkt_sub:"伊斯兰金融是全球金融服务中增长最快的领域之一——而天课基础设施目前尚未大规模建立。",
+  inv_m1_l:"年度天课潜力（估计）",inv_m1_n:"当前0%在链上",inv_m2_n:"+11.5% 年增长",inv_m3_n:"+12% 年增长",inv_m2_l:"2029年伊斯兰金融科技市场",inv_m3_l:"伊斯兰金融总资产",inv_m4_l:"所需市场份额",inv_m4_n:"= 10亿美元+估值",
+  inv_bm_ey:"商业模式",inv_bm_h:"符合伊斯兰法的收入。简单。",
+  inv_bm_sub:"仅服务费模式——已验证基础设施的服务收费。无利息、无投机代币、无不确定性。",
+  inv_bm1_h:"交易服务费 — 1–2.5%",inv_bm1_p:"每笔已验证天课和慈善交易收取服务费。年交易量10亿时：ARR 1000–2500万美元。",
+  inv_bm2_h:"AM学院 — 订阅",inv_bm2_p:"符合伊斯兰法的金融素养。NFT证书。AI辅导。企业天课合规B2B项目。",
+  inv_bm3_h:"机构API — B2B",inv_bm3_p:"伊斯兰银行和企业通过API集成AM Network基础设施。按交易计费。",
+  inv_fund_ey:"融资",inv_fund_h:"种子轮 · 30万美元",
+  inv_fund_sub:"目标：15–50万美元。理想：30万美元。18个月路线图，直至主网上线及首批1000名验证用户。",
+  inv_f1:"技术开发",inv_f2:"市场营销",inv_f3:"运营（12个月）",inv_f4:"安全审计",inv_f5:"伊斯兰法认证",inv_f6:"法律注册",
+  inv_fund_note:"优选结构：SAFE票据或可转换股权 · 阿联酋ADGM或马来西亚纳闽 · 可提供符合伊斯兰法的条款",
+  inv_team_ey:"团队",inv_team_h:"由外交官创立。为乌玛而建。",
+  inv_team_sub:"AM Network由Akbar Amirzoda领导——经济学家、外交官、虔诚穆斯林。",
+  inv_ceo_role:"创始人兼首席执行官",
+  inv_ceo_bio:"经济学家和外交官（莫斯科普列汉诺夫经济大学）。在独联体地区政府机构和国际关系领域拥有丰富经验。",
+  tag_econ:"经济学家",tag_dipl:"外交官",tag_founder:"创始人",
+  inv_cto_p:"我们正在积极寻找<strong>技术联合创始人/CTO</strong> — Solidity + Web3 + AI/ML。股权合作。",
+  inv_cto_link:"在LinkedIn查看职位 →",
+  inv_contact_ey:"联系我们",inv_contact_h:"准备好共同构建<br>伊斯兰金融的未来了吗？",
+  inv_contact_sub:"我们向战略投资者、机构合作伙伴和伊斯兰法咨询委员会成员开放。项目材料和财务数据可按需提供。",
+  inv_footer_note:"本页面仅供合格投资者和机构合作伙伴参阅。非公开募集。"
+},
+ms:{
+  inv_nav_back:"← Laman Utama",inv_nav_cta:"Minta Pembentangan",
+  inv_badge:"Pusingan Benih Terbuka · 2026",
+  inv_h1a:"Masa Depan",inv_h1b:"Kewangan Islam",inv_h1c:"Bermula Di Sini.",
+  inv_sub:"AM Network ialah platform Zakat dan Sedekah pertama yang disahkan blockchain untuk ~2 bilion umat Islam. Kami sedang mengumpul pusingan benih untuk membina infrastruktur yang layak bagi Ummah.",
+  inv_cta1:"Minta Pembentangan Pelaburan",inv_cta2:"Lawati Laman Utama",
+  inv_s1:"Potensi Zakat/tahun (est.)",inv_s2:"Kini di blockchain",inv_s3:"Umat Islam di seluruh dunia",inv_s4:"Aset Kewangan Islam",
+  inv_prob_ey:"Masalah & Penyelesaian",inv_prob_h:"$600 bilion. Sifar ketelusan.",
+  inv_prob_sub:"Setiap tahun, umat Islam di seluruh dunia membayar Zakat — kewajipan agama. Namun tiada cara yang boleh dipercayai untuk mengesahkan ke mana wang itu pergi.",
+  inv_prob_card_h:"Masalah",inv_sol_card_h:"Penyelesaian Kami",
+  inv_prob_1:"Tiada infrastruktur penjejakan Zakat global",inv_prob_2:"Berjuta penerima yang layak tidak kelihatan kepada sistem",inv_prob_3:"Penderma tidak dapat mengesahkan ke mana dana pergi",inv_prob_4:"Penipuan, peruntukan salah dan orang tengah menyerap dana",inv_prob_5:"Tiada penyelesaian on-chain yang diperakui Syariah",
+  inv_sol_1:"Setiap transaksi direkod secara kekal di blockchain Base",inv_sol_2:"Pemarkahan AI penerima (0–100) merentasi 11 kategori",inv_sol_3:"Rangkaian oracle tempatan: imam + NGO mengesahkan kelayakan",inv_sol_4:"Model ujrah patuh Syariah — tiada riba, tiada spekulasi",inv_sol_5:"8 bahasa, global dari hari pertama",
+  inv_trac_ey:"Pencapaian",inv_trac_h:"Dibina secara awam. Bergerak pantas.",inv_trac_sub:"Pra-hasil, pra-mainnet — tetapi asas sudah ada.",
+  inv_done:"✓ Selesai",inv_submitted:"✓ Diserahkan",inv_contacted:"✓ Dihubungi",inv_inprog:"⟳ Dalam Proses",
+  inv_t1_h:"Laman Web & Senarai Tunggu",inv_t1_p:"Aktif di amnetwork.io · 8 bahasa · Kalkulator Zakat · Permohonan penerima",
+  inv_t2_h:"Kertas Putih v1",inv_t2_p:"Dokumentasi teknikal dan model perniagaan diterbitkan",
+  inv_t3_h:"Pemecut",inv_t3_p:"Hub71+ Digital Assets (Abu Dhabi) · Flat6Labs · IsDB Innovation",
+  inv_t4_h:"Penasihat Syariah",inv_t4_p:"Mufti Faraz Adam (Amanah Advisors) — proses formal dimulakan",
+  inv_t5_h:"MVP Pemarkahan AI",inv_t5_p:"Pra-pemarkahan algoritma aktif · Model ML dalam pembangunan",
+  inv_t6_h:"Pengasas Bersama Teknikal",inv_t6_p:"Pencarian aktif · Solidity + AI/ML · Perkongsian berasaskan ekuiti",
+  inv_mkt_ey:"Saiz Pasaran",inv_mkt_h:"Peluang pasaran generasi",
+  inv_mkt_sub:"Kewangan Islam adalah salah satu segmen perkhidmatan kewangan global yang paling pesat berkembang — dan infrastruktur Zakat belum wujud dalam skala besar.",
+  inv_m1_l:"Potensi Zakat/tahun (est.)",inv_m1_n:"0% kini on-chain",inv_m2_n:"+11.5% setahun",inv_m3_n:"+12% setahun",inv_m2_l:"Pasaran fintech Islam menjelang 2030",inv_m3_l:"Jumlah aset Kewangan Islam",inv_m4_l:"Bahagian pasaran yang diperlukan",inv_m4_n:"= penilaian $1B+",
+  inv_bm_ey:"Model Perniagaan",inv_bm_h:"Hasil patuh Syariah. Mudah.",
+  inv_bm_sub:"Model ujrah sahaja — yuran perkhidmatan untuk infrastruktur yang disahkan. Tiada riba, tiada token spekulatif, tiada gharar.",
+  inv_bm1_h:"Ujrah Transaksi — 1–2.5%",inv_bm1_p:"Yuran perkhidmatan pada setiap transaksi Zakat dan Sedekah yang disahkan. Pada volum $1B tahunan: ARR $10–25M.",
+  inv_bm2_h:"AM Academy — Langganan",inv_bm2_p:"Literasi kewangan Islam. Sijil NFT. Tutor AI. Program pematuhan Zakat korporat B2B.",
+  inv_bm3_h:"API Institusi — B2B",inv_bm3_p:"Bank Islam dan syarikat mengintegrasikan infrastruktur AM Network melalui API. Harga per transaksi.",
+  inv_fund_ey:"Pembiayaan",inv_fund_h:"Pusingan Benih · $300,000",
+  inv_fund_sub:"Sasaran: $150K–$500K. Ideal: $300K. 18 bulan landasan untuk pelancaran mainnet dan 1,000 pengguna pertama yang disahkan.",
+  inv_f1:"Pembangunan Teknikal",inv_f2:"Pemasaran",inv_f3:"Operasi (12 bln)",inv_f4:"Audit Keselamatan",inv_f5:"Pensijilan Syariah",inv_f6:"Pendaftaran Undang-undang",
+  inv_fund_note:"Struktur pilihan: nota SAFE atau ekuiti boleh tukar · UAE ADGM atau Malaysia Labuan · Terma patuh Syariah tersedia",
+  inv_team_ey:"Pasukan",inv_team_h:"Diasaskan oleh diplomat. Dibina untuk Ummah.",
+  inv_team_sub:"AM Network dipimpin oleh Akbar Amirzoda — ahli ekonomi, diplomat, dan Muslim yang taat.",
+  inv_ceo_role:"Pengasas & CEO",
+  inv_ceo_bio:"Ahli ekonomi dan diplomat (Universiti Plekhanov, Moscow). Pengalaman luas dalam institusi kerajaan dan hubungan antarabangsa di rantau CIS.",
+  tag_econ:"Ahli Ekonomi",tag_dipl:"Diplomat",tag_founder:"Pengasas",
+  inv_cto_p:"Kami sedang aktif mencari <strong>Pengasas Bersama Teknikal / CTO</strong> — Solidity + Web3 + AI/ML. Perkongsian berasaskan ekuiti.",
+  inv_cto_link:"Lihat Jawatan Terbuka di LinkedIn →",
+  inv_contact_ey:"Hubungi Kami",inv_contact_h:"Bersedia membina masa depan<br>Kewangan Islam bersama?",
+  inv_contact_sub:"Kami terbuka kepada pelabur strategik, rakan kongsi institusi, dan ahli lembaga penasihat Syariah. Dek dan kewangan tersedia atas permintaan.",
+  inv_footer_note:"Halaman ini ditujukan untuk pelabur bertauliah dan rakan kongsi institusi sahaja. Bukan tawaran awam."
+}
+};
+
+const LANG_FLAGS={en:'gb',ar:'sa',ru:'ru',tj:'tj',id:'id',tr:'tr',zh:'cn',ms:'my'};
+const LANG_NAMES={en:'English',ar:'العربية',ru:'Русский',tj:'Тоҷикӣ',id:'Indonesia',tr:'Türkçe',zh:'中文',ms:'Melayu'};
+
+function toggleLangDrop(){document.getElementById('langDrop').classList.toggle('open')}
+document.addEventListener('click',function(e){
+  const w=document.getElementById('langWrap');
+  if(w&&!w.contains(e.target)) document.getElementById('langDrop').classList.remove('open');
+});
+function selectLang(l,flag,name){
+  document.getElementById('langFlag').src='https://flagcdn.com/w20/'+flag+'.png';
+  document.getElementById('langName').textContent=name;
+  document.getElementById('langDrop').classList.remove('open');
+  setLang(l);
+}
+function setLang(l){
+  const t=T[l]||T.en;
+  const isRTL=l==='ar';
+  document.documentElement.setAttribute('dir',isRTL?'rtl':'ltr');
+  document.documentElement.setAttribute('lang',l);
+  document.documentElement.setAttribute('data-lang',l);
+  document.querySelectorAll('[data-t]').forEach(el=>{
+    const k=el.dataset.t;
+    if(t[k]!==undefined) el.innerHTML=t[k];
+  });
+  localStorage.setItem('amn_lang',l);
+}
+
+let theme=localStorage.getItem('amn_theme')||'dark';
+document.documentElement.setAttribute('data-theme',theme);
+document.getElementById('themeBtn').textContent=theme==='dark'?'🌙':'☀️';
+document.getElementById('themeBtn').addEventListener('click',function(){
+  theme=theme==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',theme);
+  this.textContent=theme==='dark'?'🌙':'☀️';
+  localStorage.setItem('amn_theme',theme);
+});
+
+const saved=localStorage.getItem('amn_lang')||'en';
+const fl=document.getElementById('langFlag');
+const nl=document.getElementById('langName');
+if(fl) fl.src='https://flagcdn.com/w20/'+(LANG_FLAGS[saved]||'gb')+'.png';
+if(nl) nl.textContent=LANG_NAMES[saved]||'English';
+setLang(saved);
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

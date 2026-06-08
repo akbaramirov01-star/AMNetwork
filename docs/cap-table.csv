@@ -1,0 +1,29 @@
+AM Network — Cap Table (template),,,,,,
+"All numbers are illustrative. Edit shares to match your real plan.",,,,,,
+,,,,,,
+STAGE 1 — FOUNDING,,,,,,
+Holder,Role,Shares,Ownership %,Vesting,Cliff,Notes
+Akbar Amirzoda,Founder / CEO,8000000,80.0%,4 years,1 year,Founder shares
+Finance Lead (friend),Co-founder / Finance,1000000,10.0%,4 years,1 year,Part-time -> full-time
+Web3 Engineer,Co-founder / CTO,1000000,10.0%,4 years,1 year,Builds & owns contracts
+TOTAL,,10000000,100.0%,,,
+,,,,,,
+STAGE 2 — AFTER SEED ROUND (raise $300k for 20%),,,,,,
+"Mechanism: company ISSUES new shares to investors. Everyone existing is diluted x0.8.",,,,,,
+Holder,Role,Shares,Ownership %,,,Notes
+Akbar Amirzoda,Founder / CEO,8000000,64.0%,,,Was 80% -> diluted to 64%
+Finance Lead,Finance,1000000,8.0%,,,Was 10% -> 8%
+Web3 Engineer,CTO,1000000,8.0%,,,Was 10% -> 8%
+Seed Investors,Investor,2500000,20.0%,,,New shares issued
+TOTAL,,12500000,100.0%,,,Post-money valuation $1.5M
+,,,,,,
+KEY CONCEPTS,,,,,,
+Term,Meaning,,,,,
+Cap table,"Spreadsheet of who owns what % of the company",,,,,
+Vesting,"Equity earned over time (here 4 yrs) so people who leave early don't keep it all",,,,,
+Cliff,"No equity until this date (1 yr). Leave before = get nothing",,,,,
+Dilution,"Your % shrinks when new shares are issued to investors (value can still grow)",,,,,
+Pre-money,"Company value BEFORE investor money goes in",,,,,
+Post-money,"Pre-money + the investment. $1.2M pre + $300k = $1.5M post",,,,,
+ESOP,"Employee stock option pool (10-15%) reserved for future hires",,,,,
+SAFE,"Simple Agreement for Future Equity - common early fundraising instrument",,,,,
