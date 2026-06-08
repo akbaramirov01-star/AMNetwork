@@ -1,58 +1,61 @@
-const CACHE = 'am-network-v2';
-const PRECACHE = [
+const CACHE = 'amnetwork-v2';
+const STATIC = [
   '/',
   '/index.html',
+  '/manifest.json',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/zakat/',
+  '/zakat/index.html',
   '/ai_scoring/',
   '/ai_scoring/index.html',
-  '/og-image.jpg',
-  'https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap'
+  '/investors/',
+  '/investors/index.html',
+  '/apply/',
+  '/apply/index.html',
 ];
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(PRECACHE)).then(() => self.skipWaiting())
+    caches.open(CACHE).then(c => c.addAll(STATIC)).then(() => self.skipWaiting())
   );
 });
 
 self.addEventListener('activate', e => {
   e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
-    ).then(() => self.clients.claim())
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
 
-  const req = e.request;
-  const isHTML = req.mode === 'navigate' ||
-    (req.headers.get('accept') || '').includes('text/html');
-
-  // Network-first for HTML pages so new deploys are always picked up.
-  if (isHTML) {
+  // Network-first для HTML-страниц — всегда свежий контент
+  if (e.request.mode === 'navigate') {
     e.respondWith(
-      fetch(req).then(res => {
-        if (res.ok && req.url.startsWith(self.location.origin)) {
-          const copy = res.clone();
-          caches.open(CACHE).then(c => c.put(req, copy));
-        }
-        return res;
-      }).catch(() => caches.match(req).then(c => c || caches.match('/index.html')))
+      fetch(e.request)
+        .then(r => {
+          const copy = r.clone();
+          caches.open(CACHE).then(c => c.put(e.request, copy));
+          return r;
+        })
+        .catch(() => caches.match(e.request).then(c => c || caches.match('/')))
     );
     return;
   }
 
-  // Cache-first for static assets (hashed filenames are immutable).
+  // Cache-first для статики (иконки, шрифты, картинки)
   e.respondWith(
-    caches.match(req).then(cached => {
-      const net = fetch(req).then(res => {
-        if (res.ok && req.url.startsWith(self.location.origin)) {
-          caches.open(CACHE).then(c => c.put(req, res.clone()));
+    caches.match(e.request).then(cached => {
+      if (cached) return cached;
+      return fetch(e.request).then(r => {
+        if (r && r.status === 200 && r.type !== 'opaque') {
+          caches.open(CACHE).then(c => c.put(e.request, r.clone()));
         }
-        return res;
+        return r;
       });
-      return cached || net;
     })
   );
 });
