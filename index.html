@@ -1940,7 +1940,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         lang:document.documentElement.getAttribute('data-lang')||'en',
         date:new Date().toLocaleString('ru-RU')
       }),
-      headers:{'Content-Type':'application/json'}
+      headers:{'Content-Type':'text/plain;charset=utf-8'}
     }).catch(()=>{});
 
     try {

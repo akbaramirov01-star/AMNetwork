@@ -22,25 +22,25 @@ var TEAM_EMAIL = 'contact@amnetwork.io';
 // ====================
 
 function doPost(e) {
+  var data = {};
+  try { data = parseBody_(e); } catch (_) {}
+
+  // Each step is isolated: a failure in one must NOT block the others.
+  // Emails go FIRST so a sheet problem can never stop them.
+
+  // 1) Email the applicant (only if they gave a valid email)
   try {
-    var data = parseBody_(e);
-
-    // 1) Save to sheet
-    appendRow_(data);
-
-    // 2) Email the applicant (only if they gave an email)
     var email = (data.email || '').trim();
-    if (email && /\S+@\S+\.\S+/.test(email)) {
-      sendApplicantEmail_(email, data);
-    }
+    if (email && /\S+@\S+\.\S+/.test(email)) sendApplicantEmail_(email, data);
+  } catch (e1) {}
 
-    // 3) Notify the team
-    sendTeamEmail_(data);
+  // 2) Notify the team
+  try { sendTeamEmail_(data); } catch (e2) {}
 
-    return json_({ status: 'ok', ref: data.ref || '' });
-  } catch (err) {
-    return json_({ status: 'error', message: String(err) });
-  }
+  // 3) Save to sheet (optional — never blocks email)
+  try { appendRow_(data); } catch (e3) {}
+
+  return json_({ status: 'ok', ref: data.ref || '' });
 }
 
 function parseBody_(e) {
