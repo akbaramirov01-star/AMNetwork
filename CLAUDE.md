@@ -22,7 +22,7 @@
 - **Blockchain:** Base (primary), Solana (backup), LayerZero cross-chain
 - **Revenue:** 1–2.5% ujrah on transactions — NO speculative token
 - **AI:** Recipient scoring model 0–100
-- **Website:** Single index.html (vanilla JS + CSS, no framework), GitHub Pages
+- **Website:** Multi-page (vanilla JS + CSS, no framework), GitHub Pages
 
 ## Key Numbers (verified sources)
 
@@ -67,13 +67,15 @@ Verified local representatives who confirm recipient physical presence:
 - AM Network volunteers
 - Representatives of partner charitable organizations
 
-## Outreach — Completed
+## Outreach — Completed (awaiting responses)
 
 - ✅ Mufti Faraz Adam — amanahadvisors.com form sent
 - ✅ IsDB — innovation@isdb.org email sent
 - ✅ Flat6Labs — info@flat6labs.com email sent
 - ✅ Hub71+ Digital Assets — application submitted (deadline Aug 2, 2026)
 - ✅ LinkedIn CTO post published
+
+⚠️ None of the above have confirmed partnership yet. Do NOT show them as partners on the site.
 
 ## Seed Funding
 
@@ -86,33 +88,54 @@ Verified local representatives who confirm recipient physical presence:
   - Marketing: $50,000
   - Operations 12 months: $40,000
 
+## What Is BUILT (as of June 2026)
+
+### Live pages on amnetwork.io
+- `/` — Main site (8 languages, dark/light mode, all sections complete)
+- `/ai_scoring/` — AI Scoring quiz (6 steps, score 0–100, client-side)
+- `/zakat/` — Zakat Calculator (assets, nisab, 159 countries)
+- `/apply/` — Application form (5 steps, Google Sheets integration, live)
+- `/investors/` — Investor pitch page (noindex)
+
+### Integrations working
+- **Waitlist → Google Sheets:** `AKfycbwuptTPU4ObtwesM86tvR2wObS5sXiIkKMvpZFZr_ReV_wD8nXIkTFdnT_C_2snrHFv/exec`
+- **Apply form → Google Sheets:** `AKfycby5Fcwtu6h1nFHGr9cXG9WmYj_Cx2TDvU8P3BR7UVLGYJKZ02znbI7h8eE-lqOfYghnLw/exec`
+- **Email delivery:** web3forms.com (both forms)
+- **Analytics:** Google Analytics GA4 (G-G4GSRVJB5M)
+- **PWA:** manifest.json + sw.js, installable on mobile
+- **SEO:** og-image.jpg (1200×630), sitemap.xml, JSON-LD schema
+- **Google Search Console:** verified, pages indexed ✅
+
+### Code prototypes (not deployed)
+- `/contracts/` — Solidity smart contracts (AMZakatPool.sol), audit-ready, NOT on mainnet
+- `/ai_scoring/scorer.py` + `ml_model.py` — Python scoring engine, full ML model, NOT exposed as API
+
+### Assets
+- All PWA icons (144/152/180/192/512px) — beige background, clean circular edges ✅
+- Favicons (16/32px + .ico + apple-touch-icon) — coin logo only ✅
+- og-image.jpg ✅
+
 ## Next Priority Tasks
 
-- [ ] **AI Scoring Prototype** — Python model, score recipients 0–100
+- [ ] **Founder photo** — replace SVG placeholder in Team section (photo coming ~2 weeks, after wedding photoshoot)
+- [ ] **Email notifications for Apply form** — auto-email applicant with reference number (Apps Script code ready, needs deployment)
 - [ ] **Technical Co-Founder / CTO** — Solidity + Web3 + AI/ML, equity-based
 - [ ] **Sharia Advisory Board** — formal fatwa process
 - [ ] **Legal Registration** — UAE ADGM or Malaysia Labuan (~$1,500–5,000)
-- [ ] **Google Search Console** — verify amnetwork.io
 
 ## Website — Section IDs
 
 - `#top` Hero · `#how` How it works · `#products` Products
 - `#use-case` Real Impact · `#trust` Trust · `#market` Market
-- `#roadmap` Roadmap · `#partners` Partners · `#faq` FAQ
+- `#roadmap` Roadmap · `#partners` Ecosystem · `#faq` FAQ
 - `#team` Team · `#countdown` Countdown · `#waitlist` Waitlist
-
-## Website — Pending Improvements
-
-- [ ] og-image.jpg (1200×630px) for social sharing previews
-- [ ] Replace Google Forms with native waitlist form
-- [ ] Add founder photo (currently SVG placeholder)
-- [ ] Verify amnetwork.io in Google Search Console
+- `#community` Join Community (social cards)
 
 ## GitHub
 
 - **Repo:** akbaramirov01-star/AMNetwork
 - **Main branch:** main (live site)
-- **Working branch:** main ← работаем напрямую, без PR
+- **Working branch:** main — работаем напрямую, без PR
 - **GA ID:** G-G4GSRVJB5M
 
 ## Founder Quote
