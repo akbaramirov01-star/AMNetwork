@@ -933,7 +933,7 @@ async function submitApp(){
   data.append('ref',ref);
 
   // Google Sheets webhook (replace PASTE_YOUR_SCRIPT_URL_HERE with your Apps Script URL)
-  const SHEETS_URL='PASTE_YOUR_SCRIPT_URL_HERE';
+  const SHEETS_URL='https://script.google.com/macros/s/AKfycby5Fcwtu6h1nFHGr9cXG9WmYj_Cx2TDvU8P3BR7UVLGYJKZ02znbI7h8eE-lqOfYghnLw/exec';
   if(SHEETS_URL!=='PASTE_YOUR_SCRIPT_URL_HERE'){
     try{
       const scoreEl=document.getElementById('live-score');
