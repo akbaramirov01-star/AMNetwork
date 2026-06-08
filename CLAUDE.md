@@ -112,8 +112,7 @@ Verified local representatives who confirm recipient physical presence:
 
 - **Repo:** akbaramirov01-star/AMNetwork
 - **Main branch:** main (live site)
-- **Working branch:** claude/website-review-feedback-Od5gA
-- **Open PR:** #2 "Fix critical bugs, SEO, accessibility & performance" — needs merge to go live
+- **Working branch:** main ← работаем напрямую, без PR
 - **GA ID:** G-G4GSRVJB5M
 
 ## Founder Quote
