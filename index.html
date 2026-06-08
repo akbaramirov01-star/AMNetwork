@@ -27,8 +27,8 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#0A1A11">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+<meta name="theme-color" content="#C9A84C">
 
 <!-- PWA / SEO -->
 <meta name="description" content="The first blockchain-verified Zakat and Sadaqah platform for 1.8 billion Muslims. AI-verified recipients. No middlemen. Sharia-certified.">
@@ -43,7 +43,7 @@
   "@type": "Organization",
   "name": "AM Network",
   "url": "https://amnetwork.io",
-  "logo": "https://amnetwork.io/apple-touch-icon.png",
+  "logo": "https://amnetwork.io/icons/icon-192.png",
   "description": "The first blockchain-verified Zakat and Sadaqah platform for 1.8 billion Muslims. AI-verified recipients. No middlemen. Sharia-certified.",
   "founder": {
     "@type": "Person",
@@ -475,6 +475,31 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 /* ── PROGRESS TRACKER ── */
 .prog-track{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;margin-top:32px}
 .prog-bar.animated{width:var(--target-width,0%)!important}
+
+/* ── SOCIAL / COMMUNITY ── */
+.community-section{position:relative;z-index:1;padding:80px 5vw;border-top:1px solid var(--border)}
+.social-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:880px;margin:40px auto 0}
+.soc-card{border-radius:16px;overflow:hidden;border:1px solid rgba(201,168,76,.18);transition:transform .25s ease,box-shadow .25s ease;cursor:pointer}
+.soc-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.soc-card-head{padding:18px 20px;display:flex;align-items:center;gap:12px}
+.soc-card-head svg{flex-shrink:0}
+.soc-handle{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;color:#fff;line-height:1.2}
+.soc-network{font-size:11px;opacity:.75;color:#fff;font-family:'DM Sans',sans-serif}
+.soc-card-body{padding:18px 20px 20px;background:rgba(5,11,24,.85)}
+.soc-preview{font-size:13px;color:var(--text2);line-height:1.65;margin:0 0 16px;font-family:'DM Sans',sans-serif;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.soc-meta{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.soc-followers{font-size:12px;color:var(--text3);font-family:'DM Sans',sans-serif}
+.soc-follow-btn{display:inline-block;padding:7px 18px;border-radius:8px;font-size:12px;font-weight:700;font-family:'DM Sans',sans-serif;text-decoration:none;color:#060E09;background:var(--gold);transition:background .2s,transform .15s}
+.soc-follow-btn:hover{background:var(--gold2);transform:scale(1.04)}
+@media(max-width:640px){.social-grid{grid-template-columns:1fr}}
+
+/* ── PWA INSTALL BANNER ── */
+#pwa-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;display:none;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;background:rgba(5,11,24,.96);border-top:1px solid rgba(201,168,76,.35);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+#pwa-banner p{margin:0;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text2);flex:1}
+#pwa-banner strong{color:var(--gold)}
+#pwa-install-btn{padding:9px 20px;border-radius:8px;background:var(--gold);color:#060E09;font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;border:none;cursor:pointer;flex-shrink:0;transition:background .2s}
+#pwa-install-btn:hover{background:var(--gold2)}
+#pwa-banner-close{background:none;border:none;color:var(--text3);font-size:20px;cursor:pointer;padding:0 4px;line-height:1;flex-shrink:0}
 
 </style>
 </head>
@@ -1094,6 +1119,95 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
       </div>
     </div>
 
+<!-- JOIN OUR COMMUNITY -->
+<section class="community-section" id="community">
+  <div style="max-width:880px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:8px">
+      <div class="eyebrow" style="justify-content:center">Оставайтесь на связи</div>
+      <h2 class="sec-title" style="margin-top:10px">Присоединяйтесь к сообществу</h2>
+      <p style="font-size:15px;color:var(--text2);line-height:1.7;max-width:500px;margin:0 auto">
+        Следите за новостями платформы, отчётами о прозрачности закята и анонсами запуска.
+      </p>
+    </div>
+
+    <div class="social-grid">
+
+      <!-- Instagram -->
+      <div class="soc-card" onclick="window.open('https://instagram.com/amnet_io','_blank')">
+        <div class="soc-card-head" style="background:linear-gradient(135deg,#F58529 0%,#DD2A7B 50%,#515BD4 100%)">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <div>
+            <div class="soc-handle">@amnet_io</div>
+            <div class="soc-network">Instagram</div>
+          </div>
+        </div>
+        <div class="soc-card-body">
+          <p class="soc-preview">Закят обязателен для каждого мусульманина. Но куда уходят деньги? AM Network делает каждое пожертвование прозрачным — блокчейн + ИИ-верификация получателей.</p>
+          <div class="soc-meta">
+            <span class="soc-followers">Следите за нами</span>
+            <a href="https://instagram.com/amnet_io" target="_blank" rel="noopener" class="soc-follow-btn" onclick="event.stopPropagation()">Подписаться</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Telegram -->
+      <div class="soc-card" onclick="window.open('https://t.me/amnetwork_global','_blank')">
+        <div class="soc-card-head" style="background:linear-gradient(135deg,#2AABEE,#1a8bc7)">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          <div>
+            <div class="soc-handle">@amnetwork_global</div>
+            <div class="soc-network">Telegram</div>
+          </div>
+        </div>
+        <div class="soc-card-body">
+          <p class="soc-preview">Главный канал AM Network. Обновления платформы, новости исламских финансов, анонсы партнёрств и эксклюзивный доступ для ранних участников.</p>
+          <div class="soc-meta">
+            <span class="soc-followers">Вступайте сейчас</span>
+            <a href="https://t.me/amnetwork_global" target="_blank" rel="noopener" class="soc-follow-btn" onclick="event.stopPropagation()">Вступить</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Twitter / X -->
+      <div class="soc-card" onclick="window.open('https://x.com/amnet_io','_blank')">
+        <div class="soc-card-head" style="background:linear-gradient(135deg,#1a1a1a,#2d2d2d)">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          <div>
+            <div class="soc-handle">@amnet_io</div>
+            <div class="soc-network">X (Twitter)</div>
+          </div>
+        </div>
+        <div class="soc-card-body">
+          <p class="soc-preview">$600B в год — потенциал закята. Собирается менее 4%. AM Network решает эту проблему: блокчейн-верификация + ИИ-скоринг получателей. Следите за прогрессом.</p>
+          <div class="soc-meta">
+            <span class="soc-followers">Следите за нами</span>
+            <a href="https://x.com/amnet_io" target="_blank" rel="noopener" class="soc-follow-btn" onclick="event.stopPropagation()">Подписаться</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- LinkedIn -->
+      <div class="soc-card" onclick="window.open('https://linkedin.com/company/amnetwork-io','_blank')">
+        <div class="soc-card-head" style="background:linear-gradient(135deg,#0077B5,#004f80)">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <div>
+            <div class="soc-handle">AM Network</div>
+            <div class="soc-network">LinkedIn</div>
+          </div>
+        </div>
+        <div class="soc-card-body">
+          <p class="soc-preview">Строим инфраструктуру для прозрачной исламской экономики. Если вы инвестор, технический партнёр или член шариатского совета — свяжитесь с нами.</p>
+          <div class="soc-meta">
+            <span class="soc-followers">Для инвесторов и партнёров</span>
+            <a href="https://linkedin.com/company/amnetwork-io" target="_blank" rel="noopener" class="soc-follow-btn" onclick="event.stopPropagation()">Подписаться</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -1642,6 +1756,47 @@ function calcZakat(){
     });
   },{threshold:0.1});
   bars.forEach(function(b){obs.observe(b);});
+})();
+</script>
+
+<!-- PWA INSTALL BANNER -->
+<div id="pwa-banner" role="complementary" aria-label="Установить приложение">
+  <p><strong>AM Network</strong> — добавьте на главный экран для быстрого доступа</p>
+  <button id="pwa-install-btn" aria-label="Установить">Добавить</button>
+  <button id="pwa-banner-close" aria-label="Закрыть">&times;</button>
+</div>
+
+<script>
+// ── PWA INSTALL PROMPT ───────────────────────────────────────────────────────
+(function(){
+  var deferredPrompt = null;
+  var banner = document.getElementById('pwa-banner');
+  var installBtn = document.getElementById('pwa-install-btn');
+  var closeBtn = document.getElementById('pwa-banner-close');
+
+  window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    banner.style.display = 'flex';
+  });
+
+  installBtn.addEventListener('click', function() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function(choice) {
+      deferredPrompt = null;
+      banner.style.display = 'none';
+    });
+  });
+
+  closeBtn.addEventListener('click', function() {
+    banner.style.display = 'none';
+    try { sessionStorage.setItem('pwa-dismissed','1'); } catch(e) {}
+  });
+
+  window.addEventListener('appinstalled', function() {
+    banner.style.display = 'none';
+  });
 })();
 </script>
 </body>
