@@ -502,7 +502,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 
 /* ── COMMUNITY SECTION ── */
 .comm-section{padding:80px 5vw;text-align:center;background:var(--bg1)}
-.comm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:820px;margin:40px auto 0;text-align:left}
+.comm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:min(1080px,92vw);margin:40px auto 0;text-align:left}
 @media(max-width:640px){.comm-grid{grid-template-columns:1fr}}
 .soc-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:transform 0.25s,box-shadow 0.25s;cursor:pointer;display:flex;flex-direction:column}
 .soc-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.3)}
@@ -1749,24 +1749,33 @@ document.addEventListener('DOMContentLoaded',()=>{
     } else {
       const rowH=58,colHY=headerH+18;
       const cols=[
-        {l:(t.lc_hash||'TX HASH'),x:12,w:W2*0.17},{l:(t.lc_donor||'DONOR'),x:W2*0.19,w:W2*0.17},
-        {l:(t.lc_recipient||'RECIPIENT'),x:W2*0.37,w:W2*0.22},{l:(t.lc_amount||'AMOUNT'),x:W2*0.60,w:W2*0.10},
-        {l:(t.lc_status||'STATUS'),x:W2*0.71,w:W2*0.13},{l:(t.lc_time||'TIME'),x:W2*0.85,w:W2*0.13}
+        {l:(t.lc_hash||'TX HASH'),x:12,w:W2*0.17},
+        {l:(t.lc_donor||'DONOR'),x:W2*0.19,w:W2*0.17},
+        {l:(t.lc_recipient||'RECIPIENT'),x:W2*0.37,w:W2*0.22},
+        {l:(t.lc_amount||'AMOUNT'),x:W2*0.60,w:W2*0.10},
+        {l:(t.lc_status||'STATUS'),x:W2*0.71,w:W2*0.13},
+        {l:(t.lc_time||'TIME'),x:W2*0.85,w:W2*0.13}
       ];
-      ctx.font='bold 9px DM Sans,sans-serif';ctx.fillStyle='rgba(201,168,76,0.55)';ctx.textAlign='left';
-      cols.forEach(col=>ctx.fillText(col.l,col.x,colHY));
-      ctx.strokeStyle=isDark?'rgba(255,255,255,0.05)':'rgba(28,69,50,0.1)';ctx.lineWidth=1;
-      ctx.beginPath();ctx.moveTo(0,colHY+8);ctx.lineTo(W2,colHY+8);ctx.stroke();
-
-      const startY=colHY+14;
-      scrollY-=0.03;
+      // Speed: 0.35/frame — smooth, readable
+      scrollY-=0.35;
       if(scrollY<-rowH){scrollY=0;txs.push(txs.shift());}
-      // Clip rows between header and stats bar
-      ctx.save();
-      ctx.beginPath();ctx.rect(0,headerH,W2,H2-headerH-38);ctx.clip();
+
+      // Rows zone: between header divider and stats bar
+      const rowsTop=colHY+10;
+      const statsH=38;
+      const rowsBottom=H2-statsH;
+      const fadeZone=28;
+
+      // Draw rows with fade at boundaries
       txs.forEach((tx,i)=>{
+        const startY=rowsTop+16;
         const y=startY+i*rowH+scrollY;
-        if(y<headerH+10||y>H2+10) return;
+        if(y<rowsTop-rowH||y>rowsBottom+rowH) return;
+        const distTop=y-rowsTop;
+        const distBottom=rowsBottom-y;
+        const alpha=Math.min(1,Math.max(0,distTop/fadeZone),Math.max(0,distBottom/fadeZone));
+        if(alpha<=0) return;
+        ctx.globalAlpha=alpha;
         const isNew=i===0&&scrollY>-8;
         ctx.fillStyle=isDark?`rgba(45,106,79,${isNew?0.08:0.03})`:`rgba(28,69,50,${isNew?0.06:0.02})`;
         ctx.fillRect(0,y-12,W2,rowH-2);
@@ -1779,18 +1788,32 @@ document.addEventListener('DOMContentLoaded',()=>{
         ctx.font='bold 12px DM Sans,sans-serif';ctx.fillStyle='#E8C87A';ctx.fillText(tx.amt,cols[3].x,y+2);
         const sc=tx.status==='Confirmed'?'#52996E':tx.status==='Verified'?'#4A90D9':'#C9A84C';
         const sl=t['ledger_'+tx.status.toLowerCase()]||tx.status;
-        ctx.fillStyle=sc+'20';rrect(cols[4].x,y-8,64,18,3);ctx.fill();
+        ctx.fillStyle=sc+'20';rrect(cols[4].x,y-4,64,16,3);ctx.fill();
         ctx.font='500 9px DM Sans,sans-serif';ctx.fillStyle=sc;ctx.textAlign='center';
-        ctx.fillText(sl,cols[4].x+32,y+4);ctx.textAlign='left';
+        ctx.fillText(sl,cols[4].x+32,y+6);ctx.textAlign='left';
         ctx.font='400 10px DM Sans,sans-serif';ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':'rgba(28,69,50,0.4)';
         ctx.fillText(tx.time,cols[5].x,y+2);
         ctx.strokeStyle=isDark?'rgba(255,255,255,0.04)':'rgba(28,69,50,0.07)';
         ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,y+rowH-14);ctx.lineTo(W2,y+rowH-14);ctx.stroke();
+        ctx.globalAlpha=1;
       });
 
-      ctx.restore();
-      // Bottom stats bar
-      const statsH=38;
+      // Redraw header ON TOP so rows never bleed through
+      ctx.fillStyle=isDark?'#0F2117':'rgba(245,240,232,0.98)';
+      ctx.fillRect(0,0,W2,rowsTop);
+      ctx.fillStyle=isDark?'#1C4532':'rgba(28,69,50,0.08)';
+      ctx.fillRect(0,0,W2,headerH);
+      ctx.font='bold 11px DM Sans,sans-serif';ctx.fillStyle='#C9A84C';ctx.textAlign='left';
+      ctx.fillText(t.ledger_title||'AM ZAKAT.AI · LIVE BLOCKCHAIN LEDGER',12,20);
+      ctx.font='400 9px DM Mono,monospace';ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':'rgba(28,69,50,0.4)';
+      ctx.fillText('Base Network · Block #'+(18450000+Math.floor(performance.now()/3000)),12,36);
+      ctx.fillStyle=isDark?'rgba(28,69,50,0.25)':'rgba(28,69,50,0.04)';
+      ctx.fillRect(0,headerH,W2,rowsTop-headerH);
+      ctx.font='bold 9px DM Sans,sans-serif';ctx.fillStyle='rgba(201,168,76,0.55)';ctx.textAlign='left';
+      cols.forEach(col=>ctx.fillText(col.l,col.x,colHY));
+      ctx.strokeStyle=isDark?'rgba(255,255,255,0.05)':'rgba(28,69,50,0.1)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(0,colHY+8);ctx.lineTo(W2,colHY+8);ctx.stroke();
+      // Stats bar
       ctx.fillStyle=isDark?'#1C4532':'rgba(28,69,50,0.06)';ctx.fillRect(0,H2-statsH,W2,statsH);
       [{l:t.ledger_total||'Total Distributed',v:'$2,847,293'},
        {l:t.ledger_txs||'Transactions',v:'18,492'},
@@ -1800,7 +1823,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         const x=14+i*(W2/4);
         ctx.font='bold 12px DM Sans,sans-serif';ctx.fillStyle='#C9A84C';ctx.textAlign='left';ctx.fillText(s.v,x,H2-22);
         ctx.font='400 9px DM Sans,sans-serif';ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':'rgba(28,69,50,0.4)';ctx.fillText(s.l,x,H2-9);
-      });
+      })
     }
   }
   requestAnimationFrame(frame);
