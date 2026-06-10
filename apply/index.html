@@ -18,7 +18,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0A1A11">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.web3forms.com https://*.hcaptcha.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-src https://*.hcaptcha.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.hcaptcha.com; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
@@ -399,6 +399,8 @@ main{padding-top:64px;min-height:100vh}
 
     <form id="apply-form" style="display:none"></form>
 
+    <div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" data-theme="dark" style="margin-bottom:16px"></div>
+
     <button class="btn-submit" onclick="submitApp()" data-t="s5_submit">Submit Application — بِسْمِ اللَّهِ</button>
 
     <div class="step-footer" style="border-top:none;padding-top:8px">
@@ -460,6 +462,7 @@ en:{
   s5_note:"After submission, our local oracle network will review your case within 7–14 days. If approved, you will appear in the verified recipients list and may receive Zakat or Sadaqah from donors.",
   s5_agree:"I confirm that the information I provided is truthful to the best of my knowledge. I understand that false information will disqualify my application.",
   s5_privacy:"Your application is transmitted securely via Web3Forms and delivered to the AM Network team by email. We never sell your data and share it only with local verifiers with your consent. You may request deletion at any time: contact@amnetwork.io",
+  s5_captcha:"Please complete the captcha verification.",
   s5_submit:"Submit Application — بِسْمِ اللَّهِ",
   ty_title:"BaarakAllahu feek",ty_sub:"May Allah bless you for your trust. Your application has been received. Our local oracle network will review your case within 7–14 days.",
   ty_ref:"Save this reference number",ty_back:"← Return to AM Network",
@@ -501,6 +504,7 @@ ar:{
   s5_note:"بعد الإرسال، ستراجع شبكة Oracle المحلية حالتك خلال 7–14 يوماً. عند القبول ستظهر في قائمة المستحقين الموثقين.",
   s5_agree:"أؤكد أن المعلومات التي قدمتها صحيحة بحسب علمي. أفهم أن المعلومات الكاذبة ستُلغي طلبي.",
   s5_privacy:"يُرسل طلبك بأمان عبر Web3Forms ويصل إلى فريق AM Network بالبريد الإلكتروني. لا نبيع بياناتك أبداً ولا نشاركها إلا مع الموثّقين المحليين بموافقتك. يمكنك طلب حذف بياناتك في أي وقت: contact@amnetwork.io",
+  s5_captcha:"يرجى إكمال التحقق (كابتشا).",
   s5_submit:"إرسال الطلب — بِسْمِ اللَّهِ",
   ty_title:"بارك الله فيك",ty_sub:"جزاك الله خيراً على ثقتك. تم استلام طلبك. ستراجع شبكة Oracle المحلية حالتك خلال 7–14 يوماً.",
   ty_ref:"احتفظ برقم المرجع",ty_back:"← العودة إلى AM Network",
@@ -542,6 +546,7 @@ ru:{
   s5_note:"После отправки местная сеть Oracle рассмотрит вашу заявку в течение 7–14 дней. При одобрении вы появитесь в списке верифицированных получателей.",
   s5_agree:"Подтверждаю, что предоставленная информация достоверна. Понимаю, что ложные сведения приведут к отказу.",
   s5_privacy:"Ваша заявка передаётся через сервис Web3Forms и доставляется команде AM Network по email. Мы никогда не продаём ваши данные и делимся ими только с местными верификаторами с вашего согласия. Вы можете запросить удаление данных в любой момент: contact@amnetwork.io",
+  s5_captcha:"Пожалуйста, пройдите проверку «я не робот».",
   s5_submit:"Отправить заявку — بِسْمِ اللَّهِ",
   ty_title:"БаракАллаху фик",ty_sub:"Да благословит вас Аллах за доверие. Ваша заявка получена. Местная сеть Oracle рассмотрит её в течение 7–14 дней.",
   ty_ref:"Сохраните этот номер заявки",ty_back:"← Вернуться на AM Network",
@@ -583,6 +588,7 @@ tj:{
   s5_note:"Пас аз фиристодан, шабакаи маҳаллии Oracle дархости шуморо дар давоми 7–14 рӯз баррасӣ мекунад.",
   s5_agree:"Тасдиқ мекунам, ки маълумоти пешкаштшуда дуруст аст. Дарк мекунам, ки маълумоти дурӯғ дархостро бекор мекунад.",
   s5_privacy:"Аризаи шумо тавассути Web3Forms интиқол ёфта, ба дастаи AM Network бо email мерасад. Мо ҳеҷ гоҳ маълумоти шуморо намефурӯшем ва танҳо бо розигии шумо бо тасдиқкунандагони маҳаллӣ мубодила мекунем. Ҳазфи маълумотро дархост кардан мумкин аст: contact@amnetwork.io",
+  s5_captcha:"Лутфан, санҷиши «ман робот нестам»-ро гузаред.",
   s5_submit:"Дархост фиристодан — بِسْمِ اللَّهِ",
   ty_title:"Бороакаллоҳу фик",ty_sub:"Аллоҳ шуморо барораки эътимодатон муборак бод. Дархости шумо қабул шуд.",
   ty_ref:"Ин рақами маълумотномаро нигоҳ доред",ty_back:"← Бозгашт ба AM Network",
@@ -623,6 +629,7 @@ id:{
   s5_note:"Setelah pengiriman, jaringan oracle lokal akan meninjau kasus Anda dalam 7–14 hari.",
   s5_agree:"Saya menyatakan bahwa informasi yang diberikan benar sejauh pengetahuan saya.",
   s5_privacy:"Aplikasi Anda dikirim melalui Web3Forms dan diterima tim AM Network melalui email. Kami tidak pernah menjual data Anda dan hanya membagikannya kepada verifikator lokal dengan persetujuan Anda. Anda dapat meminta penghapusan data kapan saja: contact@amnetwork.io",
+  s5_captcha:"Mohon selesaikan verifikasi captcha.",
   s5_submit:"Kirim Pengajuan — بِسْمِ اللَّهِ",
   ty_title:"BaarakAllahu feek",ty_sub:"Semoga Allah memberkahi Anda atas kepercayaan Anda. Pengajuan Anda telah diterima.",
   ty_ref:"Simpan nomor referensi ini",ty_back:"← Kembali ke AM Network",
@@ -663,6 +670,7 @@ tr:{
   s5_note:"Gönderimden sonra yerel oracle ağı, başvurunuzu 7–14 gün içinde inceleyecektir.",
   s5_agree:"Verilen bilgilerin doğru olduğunu beyan ediyorum.",
   s5_privacy:"Başvurunuz Web3Forms üzerinden iletilir ve AM Network ekibine e-posta ile ulaşır. Verilerinizi asla satmayız ve yalnızca onayınızla yerel doğrulayıcılarla paylaşırız. İstediğiniz zaman verilerinizin silinmesini talep edebilirsiniz: contact@amnetwork.io",
+  s5_captcha:"Lütfen captcha doğrulamasını tamamlayın.",
   s5_submit:"Başvuruyu Gönder — بِسْمِ اللَّهِ",
   ty_title:"BaarakAllahu feek",ty_sub:"Güveniniz için Allah sizi mükâfatlandırsın. Başvurunuz alındı.",
   ty_ref:"Bu referans numarasını kaydedin",ty_back:"← AM Network'e Dön",
@@ -703,6 +711,7 @@ zh:{
   s5_note:"提交后，当地oracle网络将在7-14天内审查您的案例。",
   s5_agree:"我确认所提供的信息在我所知范围内是真实的。",
   s5_privacy:"您的申请通过 Web3Forms 安全传输，并以电子邮件送达 AM Network 团队。我们绝不出售您的数据，仅在您同意的情况下与当地核证人共享。您可随时请求删除数据：contact@amnetwork.io",
+  s5_captcha:"请完成人机验证。",
   s5_submit:"提交申请 — بِسْمِ اللَّهِ",
   ty_title:"愿真主赐福于您",ty_sub:"感谢您的信任，愿真主赐福于您。您的申请已收到。当地oracle网络将在7-14天内审查您的案例。",
   ty_ref:"保存此参考编号",ty_back:"← 返回 AM Network",
@@ -743,6 +752,7 @@ ms:{
   s5_note:"Selepas penghantaran, rangkaian oracle tempatan akan menyemak kes anda dalam 7–14 hari.",
   s5_agree:"Saya mengesahkan bahawa maklumat yang diberikan adalah benar mengikut pengetahuan saya.",
   s5_privacy:"Permohonan anda dihantar melalui Web3Forms dan diterima oleh pasukan AM Network melalui e-mel. Kami tidak akan menjual data anda dan hanya berkongsi dengan pengesah tempatan dengan persetujuan anda. Anda boleh meminta pemadaman data pada bila-bila masa: contact@amnetwork.io",
+  s5_captcha:"Sila lengkapkan pengesahan captcha.",
   s5_submit:"Hantar Permohonan — بِسْمِ اللَّهِ",
   ty_title:"BaarakAllahu feek",ty_sub:"Semoga Allah memberkati anda atas kepercayaan anda. Permohonan anda telah diterima.",
   ty_ref:"Simpan nombor rujukan ini",ty_back:"← Kembali ke AM Network",
@@ -838,6 +848,9 @@ async function submitApp(){
   const hp=document.getElementById('a-website');
   if(hp&&hp.value){btn.textContent=t('s5_submit');btn.disabled=false;return;}
 
+  const cap=document.querySelector('textarea[name="h-captcha-response"]');
+  if(cap&&!cap.value){alert(t('s5_captcha')||'Please complete the captcha verification.');btn.textContent=t('s5_submit');btn.disabled=false;return;}
+
   const ref='AM-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).substr(2,4).toUpperCase();
 
   const data=new FormData();
@@ -859,6 +872,7 @@ async function submitApp(){
   data.append('needs',[...document.querySelectorAll('input[name="need"]:checked')].map(c=>c.value).join(', '));
   data.append('mosque',document.getElementById('a-mosque')?.value||'none');
   data.append('lang',currentLang);
+  if(cap&&cap.value)data.append('h-captcha-response',cap.value);
   
   try{
     const res=await fetch('https://api.web3forms.com/submit',{method:'POST',body:data});
@@ -887,5 +901,6 @@ document.addEventListener('click',e=>{if(!e.target.closest('.lang-wrap'))documen
   setLang(l);
 })();
 </script>
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 </body>
 </html>

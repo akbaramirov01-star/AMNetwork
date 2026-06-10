@@ -22,7 +22,7 @@
 <meta name="twitter:description" content="Blockchain-verified Zakat and Sadaqah for ~2 billion Muslims.">
 <!-- Google Analytics -->
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://api.worldbank.org; base-uri 'self'; form-action 'self' https://api.web3forms.com; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.web3forms.com https://*.hcaptcha.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://api.worldbank.org; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-src https://*.hcaptcha.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.hcaptcha.com; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
@@ -1259,6 +1259,8 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
             <input type="text" id="wl-country" name="country" placeholder="Egypt, Malaysia, UK…" autocomplete="country-name" data-t-ph="wl_country_ph">
           </div>
 
+          <div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" data-theme="dark" style="margin-bottom:14px"></div>
+
           <button type="submit" class="wl-btn" id="wl-btn">
             <span class="btn-text" data-t="submit">Reserve My Spot →</span>
             <span class="btn-spinner"></span>
@@ -1874,6 +1876,13 @@ document.addEventListener('DOMContentLoaded',()=>{
     e.preventDefault();
     document.getElementById('wl-err-banner').classList.remove('show');
     if (!validate()) return;
+    const cap = document.querySelector('#wl-form textarea[name="h-captcha-response"]');
+    if (cap && !cap.value) {
+      const banner = document.getElementById('wl-err-banner');
+      banner.textContent = 'Please complete the captcha verification.';
+      banner.classList.add('show');
+      return;
+    }
     const btn = document.getElementById('wl-btn');
     btn.classList.add('loading');
     btn.disabled = true;
@@ -2180,5 +2189,6 @@ function calcZakat(){
   });
 })();
 </script>
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 </body>
 </html>
