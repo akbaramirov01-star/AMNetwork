@@ -1,7 +1,8 @@
-const CACHE = 'amnetwork-v2';
+const CACHE = 'amnetwork-v3';
 const STATIC = [
   '/',
   '/index.html',
+  '/logo.webp',
   '/manifest.json',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
