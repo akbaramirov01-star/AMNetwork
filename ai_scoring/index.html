@@ -203,6 +203,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 /* FOOTER */
 footer{background:var(--bg2);border-top:1px solid var(--border);padding:24px 5vw;text-align:center;color:var(--text3);font-size:.82rem}
 footer a{color:var(--gold);text-decoration:none}
+
+/* ── CUSTOM COUNTRY SELECT ── */
+.csel{position:relative;user-select:none}
+.csel-btn{display:flex;align-items:center;gap:9px;padding:11px 14px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:8px;cursor:pointer;min-height:44px;transition:.2s}
+.csel-btn:hover{border-color:var(--gold)}
+.csel.open .csel-btn{border-color:var(--gold);background:rgba(201,168,76,.05)}
+.csel-flag{width:20px;height:14px;border-radius:2px;object-fit:cover;flex-shrink:0}
+.csel-name{flex:1;font-size:.95rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.csel-arr{color:var(--text2);transition:transform .2s;flex-shrink:0}
+.csel.open .csel-arr{transform:rotate(180deg)}
+.csel-drop{position:absolute;top:calc(100% + 5px);left:0;right:0;background:var(--card);border:1px solid var(--input-border);border-radius:10px;z-index:300;display:none;box-shadow:0 8px 32px rgba(0,0,0,.35)}
+.csel.open .csel-drop{display:block}
+.csel-search{width:100%;padding:10px 14px;border:none;border-bottom:1px solid var(--input-border);background:transparent;color:var(--text);font-size:.9rem;outline:none;box-sizing:border-box;border-radius:10px 10px 0 0}
+.csel-search::placeholder{color:var(--text3)}
+.csel-list{max-height:260px;overflow-y:auto}
+.csel-grp{padding:6px 12px 2px;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;position:sticky;top:0;background:var(--card)}
+.csel-opt{display:flex;align-items:center;gap:9px;padding:8px 12px;cursor:pointer;font-size:.88rem;color:var(--text2);transition:background .15s}
+.csel-opt:hover{background:rgba(201,168,76,.08);color:var(--text)}
+.csel-opt.sel{background:rgba(201,168,76,.12);color:var(--gold)}
+.csel-opt img{width:20px;height:14px;border-radius:2px;object-fit:cover;flex-shrink:0}
 </style>
 </head><body>
 <nav>
@@ -280,9 +300,18 @@ footer a{color:var(--gold);text-decoration:none}
       <div class="step-sub" data-t="s1_sub">Basic financial situation</div>
       <div class="field">
         <label data-t="f_country">Country</label>
-        <select id="f-country" onchange="liveUpdate()">
-          <!-- populated by buildCountrySelect() -->
-        </select>
+        <div class="csel" id="csel-country">
+          <div class="csel-btn" onclick="cselToggle()">
+            <img class="csel-flag" id="csel-flag" src="https://flagcdn.com/w20/eg.png" alt="EG" onerror="this.style.display='none'">
+            <span class="csel-name" id="csel-name">Egypt</span>
+            <svg class="csel-arr" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+          </div>
+          <div class="csel-drop" id="csel-drop">
+            <input class="csel-search" id="csel-search" type="text" placeholder="Search country…" oninput="cselFilter(this.value)" onclick="event.stopPropagation()">
+            <div class="csel-list" id="csel-list"></div>
+          </div>
+          <input type="hidden" id="f-country" value="EG">
+        </div>
       </div>
       <div class="field-row">
         <div class="field">
@@ -1356,6 +1385,8 @@ function selectLang(l,flag,name){
 document.addEventListener('click',e=>{
   const w=document.getElementById('langDropWrap');
   if(w&&!w.contains(e.target))document.getElementById('langDrop').style.display='none';
+  const cs=document.getElementById('csel-country');
+  if(cs&&!cs.contains(e.target))cs.classList.remove('open');
 });
 
 // ── THEME ────────────────────────────────────────────────────────────────────
@@ -1598,27 +1629,70 @@ const GROUPS_ORDER=[
   {label:'East Asia & Pacific',codes:['CN','JP','KR','KP','MN','AU','NZ','FJ','PG','WS','TO','VU','SB','KI','FM','PW','MH','NR','TV']},
 ];
 
+let _cselData=[];
+
 function buildCountrySelect(){
-  const sel=document.getElementById('f-country');
-  const prev=sel.value;
   const lang=currentLang||'en';
+  const prev=document.getElementById('f-country').value||'EG';
   const idx=Object.fromEntries(COUNTRIES.map(c=>[c.code,c]));
-  sel.innerHTML='';
+  _cselData=[];
   GROUPS_ORDER.forEach(g=>{
-    const og=document.createElement('optgroup');
-    og.label=tx(g.label);
+    const glabel=tx(g.label);
     g.codes.forEach(code=>{
       const c=idx[code];if(!c)return;
-      const opt=document.createElement('option');
-      opt.value=code;
-      opt.textContent=flag(code)+' '+(c.names[lang]||c.names.en);
-      og.appendChild(opt);
+      _cselData.push({code,name:c.names[lang]||c.names.en,group:glabel});
     });
-    sel.appendChild(og);
   });
-  if(prev&&[...sel.options].some(o=>o.value===prev)){sel.value=prev;}
-  else{sel.value='EG';}
+  cselRender('');
+  cselPick(prev,false);
 }
+
+function cselRender(q){
+  const filter=q.toLowerCase();
+  const cur=document.getElementById('f-country').value;
+  const list=document.getElementById('csel-list');
+  let html='',grp='';
+  _cselData.forEach(({code,name,group})=>{
+    if(filter&&!name.toLowerCase().includes(filter)&&!code.toLowerCase().includes(filter))return;
+    if(!filter&&group!==grp){html+=`<div class="csel-grp">${group}</div>`;grp=group;}
+    const sel=code===cur?' sel':'';
+    html+=`<div class="csel-opt${sel}" data-code="${code}" onclick="cselPick('${code}',true)"><img src="https://flagcdn.com/w20/${code.toLowerCase()}.png" alt="${code}" onerror="this.style.display='none'"><span>${name}</span></div>`;
+  });
+  list.innerHTML=html||'<div style="padding:12px;text-align:center;font-size:.85rem;color:var(--text3)">—</div>';
+  const selEl=list.querySelector('.sel');
+  if(selEl)selEl.scrollIntoView({block:'nearest'});
+}
+
+function cselPick(code,close){
+  const item=_cselData.find(d=>d.code===code);
+  if(!item)return;
+  document.getElementById('f-country').value=code;
+  const flagEl=document.getElementById('csel-flag');
+  flagEl.src='https://flagcdn.com/w20/'+code.toLowerCase()+'.png';
+  flagEl.style.display='';
+  document.getElementById('csel-name').textContent=item.name;
+  document.querySelectorAll('#csel-list .csel-opt').forEach(el=>el.classList.toggle('sel',el.dataset.code===code));
+  if(close){
+    document.getElementById('csel-country').classList.remove('open');
+    document.getElementById('csel-search').value='';
+  }
+  liveUpdate();
+}
+
+function cselToggle(){
+  const el=document.getElementById('csel-country');
+  const opening=!el.classList.contains('open');
+  el.classList.toggle('open');
+  if(opening){
+    const s=document.getElementById('csel-search');
+    s.value='';
+    cselRender('');
+    setTimeout(()=>s.focus(),50);
+    setTimeout(()=>{const sel=document.querySelector('#csel-list .sel');if(sel)sel.scrollIntoView({block:'nearest'});},60);
+  }
+}
+
+function cselFilter(q){cselRender(q);}
 
 const POVERTY={default:200,AE:800,UAE:800,SA:600,QA:900,KW:700,BH:500,OM:450,JO:200,LB:150,IQ:120,SY:80,YE:60,PS:100,EG:120,MA:130,TN:160,DZ:140,LY:200,SD:70,SO:50,NG:70,GH:90,SN:80,ML:55,NE:50,TD:50,ET:55,KE:110,TZ:65,UG:60,MZ:55,PK:100,BD:80,AF:60,NP:70,IN:120,LK:130,ID:150,MY:350,PH:130,TH:200,MM:80,KH:90,VN:140,TJ:80,UZ:90,KG:100,KZ:250,TM:120,AZ:200,DE:900,FR:850,GB:1100,UK:1100,NL:900,BE:850,SE:950,NO:1100,IT:700,ES:650,TR:350,RU:300,US:1200,CA:1100,AU:1000,MR:80,DJ:120,KM:100,BF:65,GN:70,SL:60,GM:70,GW:60,RW:70,BI:50,MW:55,ZM:70,ZW:75,MG:60,CI:90,CM:80,GA:150,CG:90,CD:55,CF:50,AO:90,ZA:200,LS:80,SZ:90,BW:150,NA:150,ER:60,SS:55,TG:70,BJ:70,LR:65,GQ:150,ST:100,CV:150,MU:400,SC:500,SG:1200,BN:600,BT:100,MV:300,LA:90,TL:80,GE:200,AM:200,AL:200,BA:250,MK:250,RS:300,ME:300,XK:250,BG:350,HR:450,SI:550,SK:500,CZ:550,HU:450,RO:350,PL:400,BY:250,UA:200,MD:200,EE:600,LV:550,LT:550,FI:900,DK:1000,AT:800,CH:1200,PT:600,GR:550,IE:900,LU:1200,MT:700,CY:650,IS:1000,LI:1200,MC:1200,SM:800,AD:1000,VA:1200,MX:250,BR:200,AR:200,CO:150,CL:350,PE:150,VE:100,EC:150,BO:120,PY:150,UY:400,GY:150,SR:150,TT:400,JM:250,HT:80,DO:200,CU:100,GT:150,HN:120,SV:150,NI:100,CR:300,PA:300,BB:500,LC:300,VC:250,GD:300,AG:400,KN:400,DM:300,BS:500,BZ:200,CN:300,JP:800,KR:700,KP:60,MN:150,NZ:900,FJ:200,PG:120,WS:150,TO:150,VU:120,SB:120,KI:100,FM:150,PW:250,MH:150,NR:200,TV:150};
 function pl(c){return POVERTY[c.toUpperCase()]||POVERTY.default;}
