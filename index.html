@@ -1904,7 +1904,10 @@ document.addEventListener('DOMContentLoaded',()=>{
         throw new Error(json.message || 'Submit failed');
       }
     } catch(err) {
-      document.getElementById('wl-err-banner').classList.add('show');
+      const banner = document.getElementById('wl-err-banner');
+      const detail = err && err.message && err.message !== 'Submit failed' ? ' (' + err.message + ')' : '';
+      banner.innerHTML = 'Something went wrong' + detail + '. Please try again or email <a href="mailto:contact@amnetwork.io" style="color:#EF4444">contact@amnetwork.io</a>';
+      banner.classList.add('show');
       btn.classList.remove('loading');
       btn.disabled = false;
     }
