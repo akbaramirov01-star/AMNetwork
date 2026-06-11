@@ -1770,12 +1770,13 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     scrollY-=0.22;
 
+    const bg2=isDark?'#0F2117':'#EDE8DE';
     if(isMobile){
       const cardH=68,gap=4,startY=headerH+4;
       if(scrollY<-(cardH+gap)){scrollY=0;txs.push(txs.shift());}
       txs.forEach((tx,i)=>{
         const y=startY+i*(cardH+gap)+scrollY;
-        if(y<headerH||y>H2) return;
+        if(y<headerH-2||y>H2+2) return;
         const isNew=i===0&&scrollY>-(cardH*0.3);
         ctx.fillStyle=isNew?(isDark?'rgba(201,168,76,0.07)':'rgba(201,168,76,0.09)'):(isDark?'rgba(255,255,255,0.03)':'rgba(255,255,255,0.7)');
         rrect(6,y,W2-12,cardH-2,6);ctx.fill();
@@ -1792,6 +1793,14 @@ document.addEventListener('DOMContentLoaded',()=>{
         ctx.font='400 9px DM Mono,monospace';ctx.fillStyle=isDark?'rgba(201,168,76,0.5)':'rgba(160,120,40,0.6)';ctx.textAlign='right';
         ctx.fillText(tx.hash+' · '+tx.time,W2-14,y+54);
       });
+      // Fade top edge (rows dissolve into header)
+      const ftM=ctx.createLinearGradient(0,headerH,0,headerH+36);
+      ftM.addColorStop(0,bg2);ftM.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=ftM;ctx.fillRect(0,headerH,W2,36);
+      // Fade bottom edge
+      const fbM=ctx.createLinearGradient(0,H2-40,0,H2);
+      fbM.addColorStop(0,'rgba(0,0,0,0)');fbM.addColorStop(1,bg2);
+      ctx.fillStyle=fbM;ctx.fillRect(0,H2-40,W2,40);
     } else {
       const rowH=58,colHY=headerH+18;
       const cols=[
@@ -1831,8 +1840,17 @@ document.addEventListener('DOMContentLoaded',()=>{
         ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,y+rowH-14);ctx.lineTo(W2,y+rowH-14);ctx.stroke();
       });
 
-      // Bottom stats bar
+      // Fade top edge (rows dissolve under header)
+      const ft=ctx.createLinearGradient(0,headerH,0,headerH+48);
+      ft.addColorStop(0,bg2);ft.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=ft;ctx.fillRect(0,headerH,W2,48);
+      // Fade bottom edge (rows dissolve into stats bar)
       const statsH=38;
+      const fb=ctx.createLinearGradient(0,H2-statsH-44,0,H2-statsH);
+      fb.addColorStop(0,'rgba(0,0,0,0)');fb.addColorStop(1,bg2);
+      ctx.fillStyle=fb;ctx.fillRect(0,H2-statsH-44,W2,44);
+
+      // Bottom stats bar
       ctx.fillStyle=isDark?'#1C4532':'rgba(28,69,50,0.06)';ctx.fillRect(0,H2-statsH,W2,statsH);
       [{l:t.ledger_total||'Total Distributed',v:'$2,847,293'},
        {l:t.ledger_txs||'Transactions',v:'18,492'},
@@ -1895,7 +1913,9 @@ document.addEventListener('DOMContentLoaded',()=>{
         method: 'POST',
         body: data
       });
-      const json = await res.json();
+      const raw = await res.text();
+      let json;
+      try { json = JSON.parse(raw); } catch(_) { throw new Error(raw.slice(0,120)); }
       if (json.success) {
         document.getElementById('wl-form-wrap').style.display = 'none';
         document.getElementById('wl-success').classList.add('show');
@@ -1905,8 +1925,8 @@ document.addEventListener('DOMContentLoaded',()=>{
       }
     } catch(err) {
       const banner = document.getElementById('wl-err-banner');
-      const detail = err && err.message && err.message !== 'Submit failed' ? ' (' + err.message + ')' : '';
-      banner.innerHTML = 'Something went wrong' + detail + '. Please try again or email <a href="mailto:contact@amnetwork.io" style="color:#EF4444">contact@amnetwork.io</a>';
+      const msg = (err && err.message) ? err.message : 'Unknown error';
+      banner.innerHTML = 'Error: <b>' + msg + '</b>. Email us at <a href="mailto:contact@amnetwork.io" style="color:#EF4444">contact@amnetwork.io</a>';
       banner.classList.add('show');
       btn.classList.remove('loading');
       btn.disabled = false;
