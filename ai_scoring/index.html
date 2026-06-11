@@ -1623,7 +1623,7 @@ const GROUPS_ORDER=[
   {label:'South & SE Asia',codes:['PK','BD','AF','IN','ID','MY','PH','TH','MM','VN','SG','BN','LK','NP','BT','MV','KH','LA','TL']},
   {label:'Central Asia & Caucasus',codes:['TJ','UZ','KZ','KG','TM','AZ','GE','AM']},
   {label:'Turkey & Balkans',codes:['TR','AL','BA','MK','RS','ME','XK','BG','HR','SI','SK','CZ','HU','RO','PL','BY','UA','MD']},
-  {label:'Russia & Eastern Europe',codes:['RU','EE','LV','LT','FI','SE','NO','DK']},
+  {label:'Russia & E. Europe',codes:['RU','EE','LV','LT','FI','SE','NO','DK']},
   {label:'Western Europe',codes:['DE','FR','GB','NL','BE','AT','CH','ES','PT','IT','GR','IE','LU','MT','CY','IS']},
   {label:'Americas',codes:['US','CA','MX','BR','AR','CO','CL','PE','VE','EC','BO','PY','UY','GY','SR','TT','JM','HT','DO','CU','GT','HN','SV','NI','CR','PA','BB','LC','VC','GD','AG','KN','DM','BS','BZ']},
   {label:'East Asia & Pacific',codes:['CN','JP','KR','KP','MN','AU','NZ','FJ','PG','WS','TO','VU','SB','KI','FM','PW','MH','NR','TV']},
@@ -1634,6 +1634,9 @@ let _cselData=[];
 function buildCountrySelect(){
   const lang=currentLang||'en';
   const prev=document.getElementById('f-country').value||'EG';
+  const searchPh={en:'Search country…',ar:'ابحث عن دولة…',ru:'Поиск страны…',tj:'Ҷустуҷӯи кишвар…',id:'Cari negara…',tr:'Ülke ara…',zh:'搜索国家…',ms:'Cari negara…'};
+  const si=document.getElementById('csel-search');
+  if(si)si.placeholder=searchPh[lang]||searchPh.en;
   const idx=Object.fromEntries(COUNTRIES.map(c=>[c.code,c]));
   _cselData=[];
   GROUPS_ORDER.forEach(g=>{
