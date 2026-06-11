@@ -1,82 +1,81 @@
-# Письмо/Заявка: DIFC FinTech Hive Dubai
+# Письмо/Заявка: DIFC FinTech Hive (Дубай)
 
 **Сайт:** innovationhub.difc.ae/accelerators
 **Email:** fintechhive@difc.ae
-**Когда:** Июль 2026 (следить за открытием)
-**Equity:** НУЛЬ — лучший акселератор по этому параметру
+**Когда:** 17 июня 2026 (первичное письмо) + подача формы в июле
+**Equity:** НУЛЬ — самый дружелюбный акселератор
+**Язык письма:** Английский (Дубай, международный)
 
 ---
 
-## Email для первичного контакта
+> **ПЕРЕВОД** (что написано в письме):
+> «Хочу подать заявку в FinTech Hive от AM Network — блокчейн-платформы Закята
+> (исламский финтех, нулевое riba, Base blockchain, AI-скоринг).
+> Просим сообщить дату открытия следующего набора и условия участия.»
+
+---
+
+## Первичное письмо-запрос (скопируй и отправь)
 
 ```
 Subject: Application Inquiry — AM Network (Islamic Fintech, Blockchain Zakat)
 
 Dear FinTech Hive Team,
 
-I am writing to express strong interest in the DIFC FinTech Hive accelerator program 
-on behalf of AM Network (amnetwork.io).
+I am writing to express strong interest in the DIFC FinTech Hive accelerator on 
+behalf of AM Network (amnetwork.io).
 
-About AM Network:
-AM Network is a blockchain-verified Zakat and Sadaqah platform — the first to combine 
-AI recipient scoring with Base blockchain smart contracts for transparent Islamic 
-charitable giving.
+AM Network is a blockchain-verified Zakat platform combining AI recipient scoring 
+(0-100) with Base blockchain smart contracts to enable 100% transparent, 
+Sharia-compliant charitable giving for 2 billion Muslims globally.
 
-Why AM Network is ideal for FinTech Hive:
-• Focus: Islamic FinTech — directly aligned with FinTech Hive's program pillars
-• Market: $600B annual Zakat obligation, 2 billion potential users
-• Tech: Base blockchain + Solidity smart contracts + AI scoring
-• Model: Ujrah (Sharia-certified service fee) — no riba, no speculative token
-• Stage: Live website (8 languages), AI scoring quiz, application form with Google Sheets
+Why AM Network fits FinTech Hive perfectly:
+• Category: Islamic FinTech — directly aligned with your program pillars
+• Market: $600B annual Zakat obligation, $341B Islamic fintech by 2029
+• Technology: Base blockchain + Solidity smart contracts + AI scoring
+• Compliance: Ujrah model (no riba, no speculative token)
+• Stage: Live website in 8 languages, AI scoring, Zakat calculator, application form
 
-What we seek from FinTech Hive:
-• Mentorship from DIFC's banking partners on Islamic finance compliance
-• DFSA regulatory guidance for Zakat platform licensing
-• Investor introductions (MENA Islamic finance funds)
-• Access to Islamic finance institution partnerships
+We are particularly interested in:
+• Mentorship from DFSA and Islamic finance experts
+• Regulatory guidance for Zakat platform compliance in UAE
+• Investor access to MENA Islamic finance funds
 
-Could you share the application timeline for the next FinTech Hive cohort?
+Could you advise on the next cohort application timeline?
 
-Thank you for your consideration.
-
-Sincerely,
+Thank you,
 Akbar Amirzoda
 Founder, AM Network
-contact@amnetwork.io
-amnetwork.io
+contact@amnetwork.io | amnetwork.io
 ```
 
 ---
 
-## При открытии формы — ключевые поля
+## Ключевые поля при заполнении онлайн-формы
 
-**Company Description:**
+**Описание компании (Company Description):**
 ```
-AM Network is the first blockchain-verified Zakat platform using AI recipient scoring 
-(0-100 score based on 15 criteria), Base blockchain smart contracts, and a local oracle 
-network (mosque imams + NGO partners) to ensure 100% transparent Zakat distribution 
-to verified Muslim recipients globally. Revenue model: Ujrah (1-2.5% service fee) — 
-fully Sharia-compliant.
+AM Network — первая блокчейн-платформа верификации Закята с AI-скорингом получателей
+(0–100 по 15 критериям), смарт-контрактами на Base blockchain и оракульной сетью
+(имамы мечетей + НКО-партнёры). Модель: уджра 1–2.5% — строгое соответствие шариату.
 ```
 
-**Problem Being Solved:**
+**Решаемая проблема (Problem):**
 ```
-$600B annual Zakat obligation, but <$25B formally distributed. Root causes:
-1. Zero transparency (donors can't verify recipients)
-2. No audit trail (charity black boxes)
-3. Manual verification (too slow for 2 billion potential users)
+$600 млрд потенциал Закята в год, реально распределяется <$25 млрд.
+Причины: нет прозрачности, нет верификации получателей, нет блокчейн-следа.
 ```
 
-**Target Market:**
+**Что ищем от FinTech Hive:**
 ```
-2 billion Muslims globally. $341B Islamic Fintech market growing at 11.5% CAGR.
-Primary: Muslim donors in UAE, Malaysia, UK, USA, Indonesia, Saudi Arabia.
-Secondary: Zakat recipients in OIC member countries.
+Менторство по DFSA-регулированию, доступ к исламским финансовым партнёрам ОАЭ,
+поддержка в получении UAE fintech лицензии.
 ```
 
-**Revenue Model:**
-```
-Ujrah (Islamic service fee): 1–2.5% on each transaction.
-Example: $100 Zakat donation → $1-2.50 platform fee → $97.50–99 to recipient.
-No subscription, no speculative token, no riba.
-```
+---
+
+## После отправки
+
+- Ждать **2–4 недели** (они обрабатывают заявки циклами)
+- Если нет ответа через 14 дней → напиши снова: тема "Follow-up: Application Inquiry"
+- Или позвони напрямую в DIFC Innovation Hub: +971 4 362 2222

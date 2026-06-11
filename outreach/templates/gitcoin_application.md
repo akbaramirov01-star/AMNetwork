@@ -1,90 +1,109 @@
-# Заявка: Gitcoin Grants GG25
+# Заявка: Gitcoin Grants (GG25)
 
 **Сайт:** grants.gitcoin.co → "Create Project"
-**Тип:** Онлайн форма + Ethereum wallet
-**Когда:** 16 июня 2026 (rolling quarterly)
-**Нужно:** MetaMask кошелёк (бесплатно создать на metamask.io)
+**Когда:** 16 июня 2026 (принимают ежеквартально — rolling)
+**Сумма:** $1,000–$50,000 за раунд (зависит от числа доноров)
+**Equity:** НУЛЬ — полностью безвозвратный грант
+**Нужно:** MetaMask кошелёк — создай бесплатно на metamask.io
 
 ---
 
-## Как создать проект в Gitcoin
-
-1. Зайди на grants.gitcoin.co
-2. "Create Profile" или "Create Project"
-3. Подключи MetaMask (Ethereum mainnet)
-4. Заполни форму
+> **КАК РАБОТАЕТ GITCOIN:**
+> Это «квадратичное финансирование» — чем больше УНИКАЛЬНЫХ людей пожертвует
+> (даже по $1), тем больше тебе добавит общий фонд (matching pool).
+> 100 человек по $1 = лучше, чем 1 человек на $100.
+> После регистрации — расскажи своим подписчикам в Telegram и Twitter.
 
 ---
 
-## Поля для заполнения
+## Шаг 1: Создай кошелёк MetaMask
 
-### Project Name:
+1. Зайди на metamask.io → Install MetaMask
+2. Создай новый кошелёк → сохрани seed phrase (12 слов) в надёжном месте
+3. Скопируй свой Ethereum адрес (начинается с 0x...)
+
+## Шаг 2: Зарегистрируй проект на Gitcoin
+
+1. grants.gitcoin.co → "Sign In" → подключи MetaMask
+2. "Create Project" → заполни форму (ответы ниже)
+
+---
+
+## Готовые ответы для формы
+
+### Project Name (Название):
 ```
 AM Network — Blockchain Zakat for 2 Billion Muslims
 ```
 
-### Description (markdown поддерживается):
+### Project Description (Описание — поддерживает markdown):
 ```
-## The Problem
+## Проблема
 
-Less than $25 billion of the $600 billion annual Zakat obligation reaches recipients 
-formally. Two billion Muslims want to give, but have no way to verify recipients are 
-legitimate, or that their donation actually arrived.
+$600 миллиардов в год — потенциал Закята. Реально распределяется менее $25 млрд.
+2 миллиарда мусульман хотят жертвовать, но не имеют возможности убедиться, 
+что получатель настоящий, а деньги дошли.
 
-## Our Solution
+## Наше решение
 
-AM Network is a blockchain-verified Zakat platform combining:
-- **AI Scoring** (0–100): Each recipient evaluated across 15 eligibility criteria
-- **Base Blockchain**: Every transaction recorded immutably on-chain
-- **Oracle Network**: Local mosque imams + NGO partners verify recipients physically
-- **Sharia-compliant model**: Ujrah (service fee) only — no riba, no speculative token
+AM Network — блокчейн-платформа верификации Закята:
+- **AI-скоринг** (0–100): каждый получатель оценивается по 15 критериям
+- **Base blockchain**: каждая транзакция записана в блокчейне навсегда
+- **Оракульная сеть**: имамы мечетей + НКО-партнёры верифицируют получателей
+- **Шариа-совместимо**: модель уджра (сервисная комиссия) — ноль riba, ноль спекулятивных токенов
 
-## Why This Is Public Good
+## Почему это Public Good
 
-This is financial inclusion for 2 billion people who are actively excluded from:
-- Traditional banking (interest-based = haram)
-- Conventional charity platforms (no Sharia compliance guarantee)
-- DeFi (speculative, gambling-adjacent = haram)
+Это финансовая инклюзивность для 2 миллиардов людей, исключённых из:
+- Традиционного банкинга (проценты = харам)
+- Обычных благотворительных платформ (нет гарантии соответствия шариату)
+- DeFi (спекулятивно = харам)
 
-AM Network creates the missing Sharia-compliant Web3 financial infrastructure for 
-the global Muslim community.
+AM Network создаёт недостающую Web3-инфраструктуру для глобальной мусульманской общины.
 
-## Progress
+## Прогресс
 
-✅ Live website: amnetwork.io (8 languages)
-✅ AI scoring quiz (6 steps, client-side)
-✅ Application form with Google Sheets integration
-✅ Zakat Calculator (159 countries, real nisab data)
-✅ Smart contract prototype (Solidity, Base testnet)
+✅ Живой сайт: amnetwork.io (8 языков)
+✅ AI-квиз для скоринга (6 шагов)
+✅ Калькулятор Закята (159 стран)
+✅ Форма заявки с Google Sheets
+✅ Прототип смарт-контракта (Solidity, Base)
 
-## Funding Use
+## На что пойдут средства
 
-Gitcoin funding will be used for:
-1. Smart contract security audit ($15K)
-2. AI scoring API deployment ($8K)
-3. Sharia advisory certification ($7K)
-4. First pilot partnership (1 mosque + 50 recipients) ($5K)
+1. Аудит безопасности смарт-контракта ($15K)
+2. Деплой AI-скоринг API ($8K)
+3. Шариа-сертификация ($7K)
+4. Первый пилот: 1 мечеть + 50 получателей ($5K)
 ```
 
-### Category:
-Выбери: **Public Goods** или **Financial Inclusion** или **DeSoc (Decentralized Society)**
+### Category (Категория):
+Выбери: **Public Goods** или **Financial Inclusion**
 
 ### Website: https://amnetwork.io
-
 ### GitHub: https://github.com/akbaramirov01-star/AMNetwork
-
 ### Twitter/X: @amnet_io
-
-### Wallet: [Твой Ethereum адрес]
 
 ---
 
-## Как получить больше голосов (квадратичное финансирование)
+## Шаг 3: Продвижение (важно для квадратичного финансирования!)
 
-После создания проекта нужно собирать **уникальных доноров** (пусть даже по $1):
-1. Опубликуй в своём Twitter @amnet_io
-2. Поделись в Telegram @amnetwork_global
-3. Попроси Muslim web3 communities (t.me/IslamicFintech) поддержать проект
-4. Чем больше уников — тем больше матчинг от Gitcoin matching pool
+После создания проекта — сразу:
 
-**Правило:** 100 доноров по $1 = лучше чем 1 донор на $100 (квадратичная формула)
+1. **Telegram @amnetwork_global** — опубликуй пост:
+```
+🌟 AM Network теперь на Gitcoin Grants!
+
+Поддержи нашу блокчейн-платформу Закята — даже $1 от тебя увеличивает наш грант из общего фонда.
+
+👉 [ссылка на твой проект на Gitcoin]
+
+JazakAllahu khayran каждому кто поддержит!
+#ZakatOnChain #Web3 #IslamicFintech
+```
+
+2. **Twitter @amnet_io** — похожий пост на английском
+
+3. **LinkedIn** — попроси знакомых пожертвовать $1–5
+
+**Цель:** 100+ уникальных доноров = максимальный matching из общего фонда.

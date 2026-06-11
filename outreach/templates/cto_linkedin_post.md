@@ -1,106 +1,152 @@
-# LinkedIn пост — Поиск CTO
+# Посты для поиска CTO
 
-**Опубликовать:** 12 июня 2026 вечером (20:00)
-**Платформа:** LinkedIn (личный профиль Акбара)
-
----
-
-## Пост на английском (основной)
-
-```
-🔍 Seeking CTO Co-Founder — AM Network (Islamic Fintech, Blockchain, AI)
-
-Assalamu Alaikum / Hello,
-
-I'm building AM Network — the first blockchain-verified Zakat platform for 2 billion Muslims.
-
-The Problem:
-$600B annual Zakat obligation. Less than $25B formally distributed.
-Zero transparency. Zero recipient verification. Zero blockchain.
-
-Our Solution:
-AI recipient scoring (0-100) + Base blockchain smart contracts + oracle network
-(mosque imams + NGO partners) = 100% transparent, Sharia-compliant Zakat
-
-What's already built:
-✅ Live website in 8 languages (amnetwork.io)
-✅ AI scoring quiz (6-step, client-side)
-✅ Zakat calculator (159 countries)
-✅ Smart contract prototype (Solidity)
-✅ Apply form + Google Sheets integration
-✅ Hub71+ Digital Assets application submitted
-
-What we need from a CTO Co-Founder:
-→ Smart contract deployment + audit (Base/EVM)
-→ Python ML API for real AI scoring
-→ Technical leadership for seed/Series A
-
-The Offer:
-• 10–20% equity (co-founder, not employee)
-• Remote work (we're distributed globally)
-• Real mission: serve 2 billion Muslims
-• Massive market: $341B Islamic Fintech by 2029
-
-Looking for:
-• Solidity developer with deployed contracts
-• Interest in Islamic finance / social impact
-• Wants to build something meaningful for the Ummah
-
-DM me or email: contact@amnetwork.io
-
-#CTO #CoFounder #IslamicFintech #Web3 #Blockchain #Zakat #Startup #Solidity
-```
+**Когда публиковать:** 12 июня 2026 (вечер, 20:00)
+**Где публиковать:** LinkedIn (личный профиль) + Telegram каналы
 
 ---
 
-## Пост на русском (для российских/СНГ-разработчиков)
+## Пост 1 — LinkedIn на РУССКОМ (для СНГ-разработчиков)
 
 ```
-🔍 Ищу технического со-основателя/CTO — AM Network
+🔍 Ищу технического соучредителя / CTO — AM Network (Исламский финтех, Блокчейн)
 
-Ассаламу алейкум и привет,
+Ассаламу алейкум и привет!
 
 Строю AM Network — первую блокчейн-платформу верификации Закята для 2 миллиардов мусульман.
 
-Проблема:
-$600 млрд потенциал Закята в год. Реально распределяется <$25 млрд.
-Нет прозрачности. Нет верификации получателей. Нет блокчейна.
+ПРОБЛЕМА:
+Потенциал Закята — $600 млрд в год. Реально распределяется <$25 млрд.
+Ноль прозрачности. Ноль верификации получателей. Ноль блокчейна.
 
-Решение:
-AI-скоринг получателей (0-100) + смарт-контракты на Base + оракульная сеть 
-(имамы мечетей + НКО) = 100% прозрачный исламский благотворительный фонд.
+РЕШЕНИЕ:
+AI-скоринг получателей (0-100 баллов) + смарт-контракты Base blockchain + 
+оракульная сеть (имамы мечетей + НКО) = 100% прозрачный исламский благотворительный фонд.
 
-Что уже сделано:
-✅ Живой сайт на 8 языках (amnetwork.io)
-✅ AI-квиз для скоринга
-✅ Прототип смарт-контракта (Solidity)
-✅ Форма заявки + Google Sheets
+ЧТО УЖЕ ЕСТЬ:
+✅ Живой сайт на 8 языках — amnetwork.io
+✅ AI-квиз для скоринга (6 шагов, клиентская сторона)
+✅ Прототип смарт-контракта (Solidity / Base)
+✅ Форма заявки + Google Sheets интеграция
 ✅ Калькулятор Закята (159 стран)
+✅ Заявка в Hub71+ Digital Assets (Abu Dhabi) подана
 
-Что ищу в CTO:
-→ Опыт в Solidity/EVM
-→ Знание Python + ML желательно
-→ Готовность к equity-based партнёрству (не зарплата)
-→ Интерес к исламским финансам / social impact
+ЧТО ИЩУ В CTO-СОУЧРЕДИТЕЛЕ:
+→ Опыт в Solidity / EVM смарт-контрактах
+→ Python + ML (для AI scoring API)
+→ Node.js или FastAPI бэкенд
+→ Готовность к equity-based партнёрству (не зарплата — доля в компании)
+→ Интерес к исламским финансам или социальному impact
 
-Предлагаю:
-• 10–20% доля (со-основатель)
-• Удалённая работа
+ПРЕДЛАГАЮ:
+• 10–20% доли в компании (co-founder, не наёмный сотрудник)
+• Удалённая работа (мы distributed globally)
 • Реальная миссия для Уммы
-• Рынок: $341 млрд исламского финтех к 2029
+• Огромный рынок: $341 млрд исламского финтех к 2029
+• Подал заявку в Hub71 (Abu Dhabi) и другие акселераторы
 
-Пишите в личку или: contact@amnetwork.io
+Пишите в личку или на contact@amnetwork.io
 
-#CTO #CoFounder #IslamicFintech #Blockchain #Solidity #Стартап #Web3
+#CTO #CoFounder #IslamicFintech #Web3 #Blockchain #Solidity #Стартап #Закят
 ```
 
 ---
 
-## Группы LinkedIn для публикации
+## Пост 2 — LinkedIn на АНГЛИЙСКОМ (для международной аудитории)
 
-После основного поста — поделись в этих группах:
-1. "Islamic Finance Professionals" (~50K членов)
-2. "Web3 & Blockchain Innovators"
-3. "Muslim Entrepreneurs Network"
-4. "Fintech MENA"
-5. "Gulf Entrepreneurs"
+```
+🔍 Seeking Technical Co-Founder / CTO — AM Network (Islamic Fintech)
+
+We are building the first blockchain-verified Zakat platform for 2 billion Muslims.
+
+The Market:
+• $600B annual Zakat obligation, <$25B formally distributed
+• $341B Islamic Fintech market by 2029 (11.5% CAGR)
+• 2 billion potential users
+
+What's built:
+✅ Live in 8 languages: amnetwork.io
+✅ AI scoring quiz | Zakat calculator | Apply form
+✅ Solidity smart contract prototype on Base
+✅ Hub71+ Digital Assets application submitted
+
+Looking for CTO Co-Founder:
+• Solidity / EVM experience
+• Python ML for AI scoring API deployment
+• Equity partnership (10-20%), not employment
+• Passion for social impact + Islamic finance
+
+DM me or email: contact@amnetwork.io
+
+#CTO #CoFounder #Web3 #IslamicFintech #Blockchain #Zakat #Solidity
+```
+
+---
+
+## Пост 3 — Telegram (для Web3 русскоязычных каналов)
+
+```
+Ищу CTO-соучредителя для исламского финтех-стартапа 🌙
+
+AM Network — блокчейн-платформа Закята для 2 млрд мусульман.
+Рынок: $600 млрд/год потенциал Закята, $341 млрд исламского финтех к 2029.
+
+Что нужно:
+- Solidity / Base blockchain
+- Python ML API
+- 10-20% equity (не зарплата, соучредитель)
+- Удалённая работа
+
+Что есть уже:
+✅ Живой сайт amnetwork.io (8 языков)
+✅ Прототип смарт-контракта
+✅ Заявка в Hub71 Abu Dhabi подана
+✅ MVP готов
+
+Писать: @[твой telegram] или contact@amnetwork.io
+```
+
+---
+
+## Куда разместить посты
+
+### LinkedIn группы (поделись после основного поста):
+1. **Islamic Finance Professionals** — поиск: "Islamic Finance Professionals" в группах
+2. **Web3 & Blockchain Innovators**
+3. **Muslim Entrepreneurs Network**
+4. **Fintech MENA**
+5. **Gulf Entrepreneurs**
+
+### Telegram каналы (отправь Пост 3):
+| Канал | Описание |
+|-------|---------|
+| @web3ru | Русскоязычный Web3 — 50,000+ участников |
+| @solidity_ru | Разработчики Solidity на русском |
+| @defi_ru | DeFi разработчики |
+| @blockchain_ru | Общий blockchain чат |
+| @cryptojobs_ru | Крипто-вакансии на русском |
+| @IslamicFintech | Исламский финтех (международный) |
+| @web3_jobs | Web3 вакансии (английский) |
+
+---
+
+## Персональное сообщение разработчику (LinkedIn DM)
+
+> Используй когда нашёл конкретного разработчика на LinkedIn или GitHub
+
+```
+Ассаламу алейкум / Привет [Имя],
+
+Увидел твой профиль — опыт с [Solidity/Web3/исламскими финансами] очень интересен.
+
+Строю AM Network — блокчейн-платформу верификации Закята для 2 миллиардов мусульман 
+(amnetwork.io). Сайт работает на 8 языках, прототип смарт-контракта готов.
+
+Ищу технического соучредителя/CTO — equity-based, не зарплата.
+
+Есть 20 минут для короткого созвона? Думаю, это может быть что-то очень значимое для Уммы.
+
+С уважением,
+Акбар Амирзода
+Основатель, AM Network
+contact@amnetwork.io
+```

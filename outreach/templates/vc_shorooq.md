@@ -1,83 +1,90 @@
-# Питч: Shorooq Partners (VC, Abu Dhabi)
+# Питч: Shorooq Partners (Венчурный капитал, Абу-Даби)
 
-**Сайт:** shorooq.com → "Submit Your Pitch"
-**Email:** pitch@shorooq.com (или через форму на сайте)
+**Сайт:** shorooq.com → "Submit Your Pitch" или форма обратной связи
+**Email:** pitch@shorooq.com
 **Когда:** 18 июня 2026
-**Стадия:** Seed | **Equity:** 15–25% за $250K–$2M
+**Что дают:** $250K–$2M | **Equity:** 15–25%
+**Язык письма:** Английский (фирма работает на английском)
 
 ---
 
-## Краткий pitch email
+> **ПЕРЕВОД** (что написано в письме):
+> «Представляю AM Network — первую блокчейн-платформу верификации Закята. Рынок: $600 млрд в год.
+> Есть работающий сайт на 8 языках, прототип смарт-контракта, форма заявок.
+> Ищем $300,000 посевных инвестиций. Прошу рассмотреть вложение.»
+
+---
+
+## Письмо-питч (скопируй и отправь)
 
 ```
-Subject: Seed Pitch — AM Network | Blockchain Zakat | $600B Market
+Subject: Seed Round — AM Network | Blockchain Zakat | $600B Untapped Market
 
 Dear Shorooq Partners Team,
 
-I'm Akbar Amirzoda, founder of AM Network (amnetwork.io) — the first blockchain-verified 
-Zakat and Sadaqah platform.
+I'm Akbar Amirzoda, founder of AM Network (amnetwork.io) — the first 
+blockchain-verified Zakat and Sadaqah platform for 2 billion Muslims.
 
-THE PROBLEM
-$600B Zakat obligation/year. <$25B formally distributed. 2 billion Muslims.
+━━━ THE PROBLEM ━━━
+$600B annual Zakat obligation. Less than $25B formally distributed.
 Zero blockchain transparency. Zero AI-powered recipient verification.
+2 billion Muslims have no Sharia-compliant digital giving platform.
 
-OUR SOLUTION
-AM Network = AI scoring (0-100) + Base blockchain + oracle network (mosque imams)
-→ 100% transparent Zakat with Sharia-certified Ujrah model (1-2.5% fee)
+━━━ OUR SOLUTION ━━━
+AI scoring (0–100) + Base blockchain + local oracle network (mosque imams + NGOs)
+= 100% transparent Zakat with Sharia-certified Ujrah model (1–2.5% fee)
 
-TRACTION
+━━━ TRACTION ━━━
 ✓ Live website in 8 languages — amnetwork.io
-✓ 5 pages: main, AI scoring, Zakat calculator, apply form, investor page
-✓ Smart contract prototype (Solidity) ready for audit
-✓ Waitlist + apply form operational
-✓ Hub71+ Digital Assets application submitted
+✓ AI scoring quiz, Zakat calculator (159 countries), apply form
+✓ Smart contract prototype (Solidity/Base) ready for audit
+✓ Hub71+ Digital Assets application submitted (deadline Aug 2, 2026)
 
-MARKET
-• $600B annual Zakat potential (World Bank + IRTI, 2016)
-• $341B Islamic Fintech by 2029, 11.5% CAGR (GIFT Report 2025)
-• $6T Islamic Finance market (LSEG, 2024)
-• 2B Muslims globally
+━━━ MARKET ━━━
+• $600B annual Zakat obligation (World Bank + IRTI 2016)
+• $341B Islamic Fintech by 2029, 11.5% CAGR (GIFT Report 2025, Qatar FC)
+• $6T Islamic Finance total (LSEG 2024)
+• 2B Muslims globally (Pew Research 2024)
 
-THE ASK
-$300,000 seed to fund: CTO hire, Sharia certification, smart contract audit, 
-legal registration (UAE/Malaysia), first pilot (500 recipients, 3 countries)
+━━━ THE ASK ━━━
+$300,000 seed — for: CTO hire, Sharia certification, smart contract audit, 
+legal entity (UAE/Malaysia), first pilot (500 recipients, 3 countries)
 
-WHY NOW
+━━━ WHY NOW ━━━
 Islamic millennials are the fastest-growing demographic in global fintech.
-Base blockchain + AI finally make this technically feasible.
+Base blockchain + AI finally make this technically and economically viable.
 No competitor has built a Sharia-compliant, AI-scored, blockchain-verified Zakat platform.
 
-Pitch deck: [приложи deck/AM-Network-Deck.html или экспортируй в PDF]
+Deck: [ссылка или "available on request"]
 Website: amnetwork.io
 
 Akbar Amirzoda
+Founder, AM Network
 contact@amnetwork.io
 ```
 
 ---
 
-## Что приложить к питчу
+## Что обязательно приложить
 
-1. **Pitch deck** — экспортируй deck/AM-Network-Deck.html как PDF или прямо ссылку
-2. **One-pager** (создай 1-страничный PDF с: проблема, решение, рынок, команда, ask)
-3. **Ссылку на сайт** amnetwork.io
-4. **Финансовую модель** (хотя бы простую: unit economics — $X Zakat → $Y revenue)
+1. **Pitch Deck** — deck/AM-Network-Deck.html (экспортируй в PDF или дай ссылку)
+2. **One-pager** — 1 страница PDF: проблема + решение + рынок + команда + ask
+3. **Ссылка на сайт** amnetwork.io
 
----
+## Частые вопросы от VC — готовые ответы
 
-## Ключевые вопросы от VC и ответы на них
+**«Как вы зарабатываете?»**
+→ Уджра 1–2.5% с каждой транзакции. На $1 млрд обработанного Закята = $10–25 млн выручки.
 
-**"Как ты монетизируешь?"**
-→ Ujrah (Islamic service fee) 1-2.5% on each transaction. На $1B обработанного Zakat = $10-25M выручки.
+**«Кто конкуренты?»**
+→ LaunchGood (краудфандинг, без блокчейна), Give.Asia (не Sharia), Zakat.org (нет AI).
+Прямых конкурентов с blockchain + AI + Sharia cert нет.
 
-**"Кто конкуренты?"**
-→ LaunchGood (краудфандинг, не Zakat), Give.Asia (не blockchain), Zakat.org (нет AI). Мы первые с blockchain + AI + Sharia cert.
+**«Где техническая команда?»**
+→ Ищем CTO (equity-based). MVP и смарт-контракт прототип готовы, нужен технический соучредитель.
 
-**"Где у тебя команда?"**
-→ Активно ищу CTO (equity-based). У меня есть все техники/код/MVP, нужен технический со-основатель.
+**«Есть ли шариа-сертификация?»**
+→ Ведём переговоры с Shariyah Review Bureau, ISRA Consulting, Amanie Advisors. Сертификация — первый приоритет seed-финансирования.
 
-**"Есть ли Sharia Advisory?"**
-→ Ведём переговоры с несколькими ведущими советниками. Сертификация — первое использование seed funding.
-
-**"Почему ты?"**
-→ Economist background, Tajik origin (Central Asia — крупнейший Zakat рынок), говорю на 8 языках, глубокая связь с Уммой.
+**«Почему вы?»**
+→ Экономическое образование, таджикское происхождение (ЦА — крупнейший рынок Закята), 8 языков, связи с мусульманскими сообществами Центральной Азии и MENA.

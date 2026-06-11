@@ -1,10 +1,18 @@
 # Письмо: Shariyah Review Bureau (Бахрейн)
 
 **Кому:** info@shariyah.net
-**Тема:** Sharia Advisory Inquiry — Blockchain Zakat Platform (AM Network)
-**Когда отправить:** 12 июня 2026
+**Тема письма:** Sharia Advisory Inquiry — Blockchain Zakat Platform (AM Network)
+**Когда отправить:** 12 июня 2026 (утро)
+**Язык:** Английский (рабочий язык фирмы, Бахрейн)
 
 ---
+
+> **ПЕРЕВОД** (что написано в письме):
+> «Я основатель AM Network — блокчейн-платформы верификации Закята. Нам нужна шариа-экспертиза нашей бизнес-модели уджра, методологии AI-скоринга получателей и структуры смарт-контрактов. Просим назначить первичный звонок.»
+
+---
+
+## Письмо (скопируй и отправь)
 
 ```
 Subject: Sharia Advisory Inquiry — Blockchain-Verified Zakat Platform
@@ -43,4 +51,14 @@ contact@amnetwork.io
 
 ---
 
-**После отправки:** Если нет ответа через 7 дней — позвони +973 17 244 496 и спроси о "Advisory Services for Fintech Startups"
+## После отправки
+
+- Нет ответа через **7 дней** → позвони: **+973 17 244 496** (спроси "Advisory Services for Fintech Startups")
+- Нет ответа через **14 дней** → напиши повторно, тема: "Follow-up: Sharia Advisory for Islamic Fintech Startup"
+
+## Что они предложат в ответ
+
+- Бесплатный первичный звонок (30 мин)
+- NDA + engagement letter
+- Предложение на Sharia review (цена: $3,000–15,000)
+- Процесс занимает 2–4 недели → получаешь Sharia Certificate
