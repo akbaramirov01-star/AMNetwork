@@ -1886,7 +1886,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 
       ctx.restore();
       // Tiny fade at clip edges (10px — rows cleanly slide under header/stats)
-      const statsH=38;
       const ft=ctx.createLinearGradient(0,headerH,0,headerH+10);
       ft.addColorStop(0,bg2);ft.addColorStop(1,'rgba(0,0,0,0)');
       ctx.fillStyle=ft;ctx.fillRect(0,headerH,W2,10);
