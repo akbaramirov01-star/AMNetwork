@@ -1,8 +1,9 @@
 # Письмо: Shariyah Review Bureau (Бахрейн)
 
-**Кому:** info@shariyah.net
+**Кому:** hashim@shariyah.com (ИСПРАВЛЕНО — правильный домен .com, не .net; info@shariyah.net не принимает почту, письмо отклонено дважды)
+**Альтернативные контакты:** m.alkooheji@shariyah.com, saleh@shariyah.com
 **Тема письма:** Sharia Advisory Inquiry — Blockchain Zakat Platform (AM Network)
-**Когда отправить:** 12 июня 2026 (утро)
+**Когда отправить:** 29 июня 2026
 **Язык:** Английский (рабочий язык фирмы, Бахрейн)
 
 ---
