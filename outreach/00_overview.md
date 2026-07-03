@@ -59,9 +59,9 @@
 - [x] IsDB (innovation@isdb.org)
 - [x] Mufti Faraz Adam (форма amanahadvisors.com)
 - [x] Shariyah Review Bureau — info@shariyah.net (29 июня, через Gmail)
+- [x] ISRA Consulting — israconsulting@inceif.edu.my (29 июня, через Gmail)
 
 ### ⬜ Следующие действия
-- [ ] ISRA Consulting — israconsulting@inceif.edu.my
 - [ ] Amanie Advisors — admin@amanieadvisors.com
 - [ ] XRPL Grants — xrplgrants.org (форма)
 - [ ] Gitcoin GG25 — grants.gitcoin.co (создать проект)
