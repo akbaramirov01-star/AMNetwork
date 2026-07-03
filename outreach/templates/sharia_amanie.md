@@ -1,9 +1,10 @@
 # Письмо: Amanie Advisors (Малайзия/Дубай/Лондон)
 
-**Кому:** admin@amanieadvisors.com
-**Или через форму:** amanieadvisors.com/contact
+**Кому:** info@amanieadvisors.com (ИСПРАВЛЕНО — admin@ не существует, письмо отклонено)
+**Альтернативные контакты:** edige@amanieadvisors.com (Дубай), amran@amanieadvisors.com (Малайзия)
+**Или через форму:** amanieadvisors.com/contact-us
 **Тема письма:** Shariah Advisory — Pre-Seed Blockchain Zakat Startup
-**Когда отправить:** 13 июня 2026 (после ISRA)
+**Когда отправить:** 29 июня 2026
 **Язык:** Английский
 
 ---
@@ -18,6 +19,7 @@
 ## Письмо (скопируй и отправь)
 
 ```
+To: info@amanieadvisors.com
 Subject: Shariah Advisory Inquiry — AM Network (Blockchain Zakat Platform)
 
 Assalamu Alaikum wa Rahmatullahi wa Barakatuh,
