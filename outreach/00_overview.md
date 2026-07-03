@@ -58,9 +58,9 @@
 - [x] Flat6Labs (info@flat6labs.com)
 - [x] IsDB (innovation@isdb.org)
 - [x] Mufti Faraz Adam (форма amanahadvisors.com)
+- [x] Shariyah Review Bureau — info@shariyah.net (29 июня, через Gmail)
 
-### ⬜ Следующие действия (с 12 июня)
-- [ ] Shariyah Review Bureau — info@shariyah.net
+### ⬜ Следующие действия
 - [ ] ISRA Consulting — israconsulting@inceif.edu.my
 - [ ] Amanie Advisors — admin@amanieadvisors.com
 - [ ] XRPL Grants — xrplgrants.org (форма)
