@@ -62,14 +62,17 @@
 - [x] ISRA Consulting — israconsulting@inceif.edu.my (29 июня, через Gmail)
 - [x] Amanie Advisors — info@amanieadvisors.com (29 июня, исправленный адрес)
 - [x] XRPL Grants — info@xrplgrants.org (29 июня, email вместо формы)
+- [x] DIFC FinTech Hive — fintechhive@difc.ae (10 июля)
+- [x] LinkedIn пост о поиске CTO (RU + EN, с картинками) (10 июля)
+- [x] Shorooq Partners — LinkedIn (10 июля, email pitch@shorooq.com не работал)
+- [x] IsDB Institute — info@isdbinstitute.org (10 июля)
+
+### ⏸ Отложено до Берлина
+- [ ] Telegram посты (CTO поиск) — сделаем в Германии
+- [ ] Algorand Foundation — не приоритет сейчас (email мёртвый, форма акселератора community.algorand.co при необходимости)
 
 ### ⬜ Следующие действия
 - [ ] Gitcoin GG25 — grants.gitcoin.co (создать проект)
-- [ ] DIFC FinTech Hive — fintechhive@difc.ae
-- [ ] Shorooq Partners — pitch@shorooq.com
-- [ ] Algorand Foundation — grants@algorand.foundation
-- [ ] LinkedIn пост о поиске CTO
-- [ ] IsDB Institute — info@isdbinstitute.org
 - [ ] Qatar FinTech Hub — письмо-запрос на Wave 9
 - [ ] CoFoundersLab.com — профиль для поиска CTO
 - [ ] web3.career — вакансия CTO-cofounder
