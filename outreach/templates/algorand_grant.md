@@ -1,8 +1,9 @@
 # Грант: Algorand Foundation
 
-**Email:** grants@algorand.foundation
-**Сайт:** community.algorand.org/grants
-**Когда:** 19 июня 2026 (rolling — принимают всегда)
+**Email:** haichao@algorand.foundation (ИСПРАВЛЕНО — grants@algorand.foundation больше не существует, Algorand ребрендировался в algorand.co)
+**Альтернатива:** заявка через algorand.co/2025-accelerator-application (акселератор, до $50,000)
+**Сайт:** algorand.co
+**Когда:** 10 июля 2026 (rolling — принимают всегда)
 **Сумма к запросу:** $15,000–$30,000
 **Equity:** НУЛЬ — безвозвратный грант
 **Язык:** Английский
