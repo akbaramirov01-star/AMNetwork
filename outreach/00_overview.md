@@ -60,10 +60,10 @@
 - [x] Mufti Faraz Adam (форма amanahadvisors.com)
 - [x] Shariyah Review Bureau — info@shariyah.net (29 июня, через Gmail)
 - [x] ISRA Consulting — israconsulting@inceif.edu.my (29 июня, через Gmail)
+- [x] Amanie Advisors — info@amanieadvisors.com (29 июня, исправленный адрес)
+- [x] XRPL Grants — info@xrplgrants.org (29 июня, email вместо формы)
 
 ### ⬜ Следующие действия
-- [ ] Amanie Advisors — admin@amanieadvisors.com
-- [ ] XRPL Grants — xrplgrants.org (форма)
 - [ ] Gitcoin GG25 — grants.gitcoin.co (создать проект)
 - [ ] DIFC FinTech Hive — fintechhive@difc.ae
 - [ ] Shorooq Partners — pitch@shorooq.com
