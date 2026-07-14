@@ -18,7 +18,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0A1A11">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
@@ -29,7 +29,7 @@ if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{ana
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4GSRVJB5M"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important}}
 [data-theme="dark"]{
@@ -46,18 +46,26 @@ if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{ana
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+[lang="ar"]{font-family:'Noto Naskh Arabic',sans-serif}
 body{font-family:'DM Sans',sans-serif;background:var(--bg1);color:var(--text);line-height:1.7;transition:background-color .3s,color .3s}
 .wrap{max-width:760px;margin:0 auto;padding:0 5vw 100px}
-nav{display:flex;align-items:center;justify-content:space-between;padding:22px 5vw;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg1);z-index:10;backdrop-filter:blur(20px)}
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 5vw;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg1);z-index:10;backdrop-filter:blur(20px)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
 .nav-logo img{height:38px}
 .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700}
 .nav-logo-text .am{color:var(--gold)}
-.nav-right{display:flex;align-items:center;gap:14px}
-.back-link{font-size:13px;color:var(--text2);text-decoration:none;border:1px solid var(--border);padding:8px 16px;border-radius:7px;transition:all .2s}
+.nav-right{display:flex;align-items:center;gap:10px}
+.back-link{font-size:13px;color:var(--text2);text-decoration:none;border:1px solid var(--border);padding:8px 16px;border-radius:7px;transition:all .2s;white-space:nowrap}
 .back-link:hover{border-color:var(--gold);color:var(--gold)}
-.theme-btn{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:15px}
+.theme-btn{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:15px;flex-shrink:0}
 .theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.lang-wrap{position:relative}
+.lang-sel{display:flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--border);border-radius:7px;background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.lang-sel:hover{border-color:var(--gold);color:var(--gold)}
+.lang-drop{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;min-width:150px;z-index:200;display:none;overflow:hidden}
+[dir="rtl"] .lang-drop{right:auto;left:0}
+.lang-item{display:flex;align-items:center;gap:8px;padding:9px 14px;cursor:pointer;font-size:13px;color:var(--text2)}
+.lang-item:hover{background:var(--card)}
 header.page-head{padding:56px 0 32px}
 .eyebrow{font-size:12px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:14px}
 h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,46px);font-weight:700;margin-bottom:12px}
@@ -68,9 +76,11 @@ h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;margin-
 h3{font-size:15px;font-weight:700;margin:18px 0 8px}
 p{color:var(--text2);font-size:15px;margin-bottom:12px}
 ul{margin:10px 0 10px 20px;color:var(--text2);font-size:15px}
+[dir="rtl"] ul{margin:10px 20px 10px 0}
 li{margin-bottom:8px}
 a.inline{color:var(--gold);text-decoration:underline}
 .callout{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:8px;padding:16px 18px;margin:16px 0;font-size:14px;color:var(--text2)}
+[dir="rtl"] .callout{border-left:none;border-right:3px solid var(--gold)}
 footer.foot{border-top:1px solid var(--border);padding:32px 5vw;text-align:center;font-size:12.5px;color:var(--text3)}
 footer.foot a{color:var(--gold);text-decoration:none}
 </style>
@@ -83,76 +93,125 @@ footer.foot a{color:var(--gold);text-decoration:none}
     <span class="nav-logo-text"><span class="am">AM</span> Network</span>
   </a>
   <div class="nav-right">
+    <div class="lang-wrap">
+      <button class="lang-sel" onclick="toggleLangDrop()" aria-label="Select language">
+        <img id="langFlag" src="https://flagcdn.com/w20/gb.png" width="18" height="13" style="border-radius:2px" alt="">
+        <span id="langName">English</span>
+      </button>
+      <div class="lang-drop" id="langDrop">
+        <div class="lang-item" onclick="selectLang('en','gb','English')"><img src="https://flagcdn.com/w20/gb.png" width="18" height="13" style="border-radius:2px" alt=""> English</div>
+        <div class="lang-item" onclick="selectLang('ru','ru','Русский')"><img src="https://flagcdn.com/w20/ru.png" width="18" height="13" style="border-radius:2px" alt=""> Русский</div>
+        <div class="lang-item" onclick="selectLang('ar','sa','العربية')"><img src="https://flagcdn.com/w20/sa.png" width="18" height="13" style="border-radius:2px" alt=""> العربية</div>
+        <div class="lang-item" onclick="selectLang('de','de','Deutsch')"><img src="https://flagcdn.com/w20/de.png" width="18" height="13" style="border-radius:2px" alt=""> Deutsch</div>
+      </div>
+    </div>
     <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
-    <a class="back-link" href="/">← Main site</a>
+    <a class="back-link" href="/" data-t="nav_back">← Main site</a>
   </div>
 </nav>
 
 <div class="wrap">
   <header class="page-head">
-    <div class="eyebrow">Legal</div>
-    <h1>Terms of Service</h1>
-    <div class="updated">Last updated: July 14, 2026</div>
-    <p class="lead">Please read these terms before using amnetwork.io, the Zakat calculator, the AI scoring quiz, or the application form. By using this site, you agree to them.</p>
+    <div class="eyebrow" data-t="eyebrow">Legal</div>
+    <h1 data-t="h1">Terms of Service</h1>
+    <div class="updated" data-t="updated">Last updated: July 14, 2026</div>
+    <p class="lead" data-t="lead">Please read these terms before using amnetwork.io, the Zakat calculator, the AI scoring quiz, or the application form. By using this site, you agree to them.</p>
   </header>
 
   <section>
-    <h2>1. What AM Network is today</h2>
-    <div class="callout">AM Network is <strong>pre-launch</strong>. No live smart contracts are handling real donor funds yet, no mainnet deployment exists, and no Zakat/Sadaqah transactions are currently processed through this website. This site is a waitlist, an informational hub, and an application intake for our upcoming pilot.</div>
-    <p>We built this site to: (a) let donors and recipients register interest before launch, (b) provide a free Zakat calculator and AI eligibility scoring quiz, and (c) collect early applications from people seeking assistance so we can begin manual, human-verified pilot distributions.</p>
+    <h2 data-t="h2_1">1. What AM Network is today</h2>
+    <div class="callout" data-t="s1_callout">AM Network is pre-launch. No live smart contracts are handling real donor funds yet, no mainnet deployment exists, and no Zakat/Sadaqah transactions are currently processed through this website. This site is a waitlist, an informational hub, and an application intake for our upcoming pilot.</div>
+    <p data-t="s1_p">We built this site to: (a) let donors and recipients register interest before launch, (b) provide a free Zakat calculator and AI eligibility scoring quiz, and (c) collect early applications from people seeking assistance so we can begin manual, human-verified pilot distributions.</p>
   </section>
 
   <section>
-    <h2>2. No financial or investment guarantees</h2>
-    <p>Nothing on this site is financial, legal, or investment advice. AM Network does not issue any cryptocurrency token, does not offer any investment product to the public, and makes no promise of financial return to anyone. References to a future seed funding round are addressed only to accredited/institutional investors we contact directly, not to the general public.</p>
+    <h2 data-t="h2_2">2. No financial or investment guarantees</h2>
+    <p data-t="s2_p">Nothing on this site is financial, legal, or investment advice. AM Network does not issue any cryptocurrency token, does not offer any investment product to the public, and makes no promise of financial return to anyone. References to a future seed funding round are addressed only to accredited/institutional investors we contact directly, not to the general public.</p>
   </section>
 
   <section>
-    <h2>3. The Zakat calculator</h2>
-    <p>The calculator provides an estimate based on the nisab thresholds and asset categories you enter. It is a convenience tool, not a fatwa. For definitive rulings on your personal Zakat obligation, consult a qualified Islamic scholar.</p>
+    <h2 data-t="h2_3">3. The Zakat calculator</h2>
+    <p data-t="s3_p">The calculator provides an estimate based on the nisab thresholds and asset categories you enter. It is a convenience tool, not a fatwa. For definitive rulings on your personal Zakat obligation, consult a qualified Islamic scholar.</p>
   </section>
 
   <section>
-    <h2>4. The AI scoring quiz &amp; application form</h2>
-    <p>The AI scoring quiz gives an indicative score based on the information you provide — it runs in your browser and is not a guarantee of assistance. Submitting the application form does not guarantee you will receive Zakat/Sadaqah funds. During our current pilot phase, every application is intended to be reviewed and confirmed by a human verifier (a local oracle — mosque imam, AM Network volunteer, or partner NGO representative) before any distribution decision is made.</p>
-    <p>You confirm that the information you submit is accurate to the best of your knowledge. Knowingly submitting false information to obtain assistance you are not entitled to may disqualify your application and, in future phases of the platform, may be flagged by our fraud-detection systems.</p>
+    <h2 data-t="h2_4">4. The AI scoring quiz &amp; application form</h2>
+    <p data-t="s4_p1">The AI scoring quiz gives an indicative score based on the information you provide — it runs in your browser and is not a guarantee of assistance. Submitting the application form does not guarantee you will receive Zakat/Sadaqah funds. During our current pilot phase, every application is intended to be reviewed and confirmed by a human verifier (a local oracle — mosque imam, AM Network volunteer, or partner NGO representative) before any distribution decision is made.</p>
+    <p data-t="s4_p2">You confirm that the information you submit is accurate to the best of your knowledge. Knowingly submitting false information to obtain assistance you are not entitled to may disqualify your application and, in future phases of the platform, may be flagged by our fraud-detection systems.</p>
   </section>
 
   <section>
-    <h2>5. Sharia compliance status</h2>
-    <p>AM Network's business model (ujrah/service-fee based, no interest, no speculative token) is designed with Sharia principles in mind, and we are in active discussions with Sharia advisory firms. However, as of the date above, <strong>AM Network has not yet received formal Sharia certification or a fatwa</strong> for its full operating model. We will update this page and the site prominently once a certification is obtained.</p>
+    <h2 data-t="h2_5">5. Sharia compliance status</h2>
+    <p><span data-t="s5_pa">AM Network's business model (ujrah/service-fee based, no interest, no speculative token) is designed with Sharia principles in mind, and we are in active discussions with Sharia advisory firms. However, as of the date above, </span><strong data-t="s5_pb">AM Network has not yet received formal Sharia certification or a fatwa</strong><span data-t="s5_pc"> for its full operating model. We will update this page and the site prominently once a certification is obtained.</span></p>
   </section>
 
   <section>
-    <h2>6. Acceptable use</h2>
+    <h2 data-t="h2_6">6. Acceptable use</h2>
     <ul>
-      <li>Don't submit fraudulent applications or impersonate someone else</li>
-      <li>Don't attempt to scrape, reverse-engineer, or abuse the AI scoring system to game results</li>
-      <li>Don't use the site for any unlawful purpose</li>
+      <li data-t="s6_li1">Don't submit fraudulent applications or impersonate someone else</li>
+      <li data-t="s6_li2">Don't attempt to scrape, reverse-engineer, or abuse the AI scoring system to game results</li>
+      <li data-t="s6_li3">Don't use the site for any unlawful purpose</li>
     </ul>
   </section>
 
   <section>
-    <h2>7. No warranty</h2>
-    <p>This site and its tools are provided "as is," during an active pre-launch/pilot development phase. We do not guarantee uninterrupted availability, complete accuracy of calculators or scoring, or that any particular application will be reviewed within a specific timeframe.</p>
+    <h2 data-t="h2_7">7. No warranty</h2>
+    <p data-t="s7_p">This site and its tools are provided "as is," during an active pre-launch/pilot development phase. We do not guarantee uninterrupted availability, complete accuracy of calculators or scoring, or that any particular application will be reviewed within a specific timeframe.</p>
   </section>
 
   <section>
-    <h2>8. Changes</h2>
-    <p>We may update these terms as the platform evolves from pilot to mainnet. Continued use of the site after changes means you accept the updated terms.</p>
+    <h2 data-t="h2_8">8. Changes</h2>
+    <p data-t="s8_p">We may update these terms as the platform evolves from pilot to mainnet. Continued use of the site after changes means you accept the updated terms.</p>
   </section>
 
   <section>
-    <h2>9. Contact</h2>
-    <p>Questions about these terms: <a class="inline" href="mailto:contact@amnetwork.io">contact@amnetwork.io</a></p>
+    <h2 data-t="h2_9">9. Contact</h2>
+    <p id="s9_p1">Questions about these terms: <a class="inline" href="mailto:contact@amnetwork.io">contact@amnetwork.io</a></p>
   </section>
 </div>
 
 <footer class="foot">
-  © 2026 AM Network · <a href="/privacy/">Privacy Policy</a> · <a href="mailto:contact@amnetwork.io">contact@amnetwork.io</a>
+  © 2026 AM Network · <a href="/privacy/" data-t="footer_privacy">Privacy Policy</a> · <a href="mailto:contact@amnetwork.io">contact@amnetwork.io</a>
 </footer>
 
 <script>
+// <!--AMNET_TERMS_DATA_START-->
+const T = {"en": {"nav_back": "← Main site", "eyebrow": "Legal", "h1": "Terms of Service", "updated": "Last updated: July 14, 2026", "lead": "Please read these terms before using amnetwork.io, the Zakat calculator, the AI scoring quiz, or the application form. By using this site, you agree to them.", "h2_1": "1. What AM Network is today", "s1_callout": "AM Network is pre-launch. No live smart contracts are handling real donor funds yet, no mainnet deployment exists, and no Zakat/Sadaqah transactions are currently processed through this website. This site is a waitlist, an informational hub, and an application intake for our upcoming pilot.", "s1_p": "We built this site to: (a) let donors and recipients register interest before launch, (b) provide a free Zakat calculator and AI eligibility scoring quiz, and (c) collect early applications from people seeking assistance so we can begin manual, human-verified pilot distributions.", "h2_2": "2. No financial or investment guarantees", "s2_p": "Nothing on this site is financial, legal, or investment advice. AM Network does not issue any cryptocurrency token, does not offer any investment product to the public, and makes no promise of financial return to anyone. References to a future seed funding round are addressed only to accredited/institutional investors we contact directly, not to the general public.", "h2_3": "3. The Zakat calculator", "s3_p": "The calculator provides an estimate based on the nisab thresholds and asset categories you enter. It is a convenience tool, not a fatwa. For definitive rulings on your personal Zakat obligation, consult a qualified Islamic scholar.", "h2_4": "4. The AI scoring quiz & application form", "s4_p1": "The AI scoring quiz gives an indicative score based on the information you provide — it runs in your browser and is not a guarantee of assistance. Submitting the application form does not guarantee you will receive Zakat/Sadaqah funds. During our current pilot phase, every application is intended to be reviewed and confirmed by a human verifier (a local oracle — mosque imam, AM Network volunteer, or partner NGO representative) before any distribution decision is made.", "s4_p2": "You confirm that the information you submit is accurate to the best of your knowledge. Knowingly submitting false information to obtain assistance you are not entitled to may disqualify your application and, in future phases of the platform, may be flagged by our fraud-detection systems.", "h2_5": "5. Sharia compliance status", "s5_pa": "AM Network's business model (ujrah/service-fee based, no interest, no speculative token) is designed with Sharia principles in mind, and we are in active discussions with Sharia advisory firms. However, as of the date above, ", "s5_pb": "AM Network has not yet received formal Sharia certification or a fatwa", "s5_pc": " for its full operating model. We will update this page and the site prominently once a certification is obtained.", "h2_6": "6. Acceptable use", "s6_li1": "Don't submit fraudulent applications or impersonate someone else", "s6_li2": "Don't attempt to scrape, reverse-engineer, or abuse the AI scoring system to game results", "s6_li3": "Don't use the site for any unlawful purpose", "h2_7": "7. No warranty", "s7_p": "This site and its tools are provided “as is,” during an active pre-launch/pilot development phase. We do not guarantee uninterrupted availability, complete accuracy of calculators or scoring, or that any particular application will be reviewed within a specific timeframe.", "h2_8": "8. Changes", "s8_p": "We may update these terms as the platform evolves from pilot to mainnet. Continued use of the site after changes means you accept the updated terms.", "h2_9": "9. Contact", "s9_p1": "Questions about these terms: {email}", "footer_privacy": "Privacy Policy"}, "ru": {"nav_back": "← На главную", "eyebrow": "Юридическое", "h1": "Условия использования", "updated": "Обновлено: 14 июля 2026", "lead": "Пожалуйста, прочитайте эти условия перед использованием amnetwork.io, калькулятора закята, AI-квиза скоринга или формы заявки. Используя этот сайт, вы соглашаетесь с ними.", "h2_1": "1. Чем AM Network является сегодня", "s1_callout": "AM Network находится на стадии pre-launch. Ни один смарт-контракт пока не обрабатывает реальные средства доноров, mainnet ещё не развёрнут, и через этот сайт в настоящий момент не проходят транзакции закята/садаки. Этот сайт — вайтлист, информационный центр и приём заявок для предстоящего пилота.", "s1_p": "Мы создали этот сайт, чтобы: (a) дать донорам и получателям зарегистрировать интерес до запуска, (b) предоставить бесплатный калькулятор закята и AI-квиз оценки права на помощь, и (c) собрать первые заявки от нуждающихся, чтобы начать ручное, верифицированное человеком пилотное распределение.", "h2_2": "2. Никаких финансовых или инвестиционных гарантий", "s2_p": "Ничто на этом сайте не является финансовой, юридической или инвестиционной консультацией. AM Network не выпускает никакой криптовалютный токен, не предлагает никакой инвестиционный продукт публично и не даёт никому обещаний финансовой доходности. Упоминания будущего посевного раунда адресованы только аккредитованным/институциональным инвесторам, с которыми мы связываемся напрямую, а не широкой публике.", "h2_3": "3. Калькулятор закята", "s3_p": "Калькулятор даёт оценку на основе порогов нисаба и категорий активов, которые вы вводите. Это удобный инструмент, а не фетва. За окончательным решением по вашему личному обязательству закята обратитесь к квалифицированному исламскому учёному.", "h2_4": "4. AI-квиз скоринга и форма заявки", "s4_p1": "AI-квиз скоринга даёт ориентировочную оценку на основе предоставленной вами информации — он работает в вашем браузере и не является гарантией помощи. Отправка формы заявки не гарантирует получение средств закята/садаки. На текущей пилотной стадии каждая заявка должна быть рассмотрена и подтверждена человеком-верификатором (локальным оракулом — имамом мечети, волонтёром AM Network или представителем партнёрской НКО) прежде чем будет принято решение о распределении.", "s4_p2": "Вы подтверждаете, что предоставленная вами информация точна, насколько вам известно. Сознательное предоставление ложной информации для получения помощи, на которую вы не имеете права, может привести к дисквалификации вашей заявки, а на будущих этапах платформы — быть отмечено нашими системами обнаружения мошенничества.", "h2_5": "5. Статус шариатского соответствия", "s5_pa": "Бизнес-модель AM Network (на основе уджра/сервисного сбора, без процента, без спекулятивного токена) разработана с учётом принципов шариата, и мы ведём активные переговоры с шариатскими консультационными фирмами. Однако на дату выше ", "s5_pb": "AM Network ещё не получила формальную шариатскую сертификацию или фетву", "s5_pc": " для своей полной операционной модели. Мы заметно обновим эту страницу и сайт, как только сертификация будет получена.", "h2_6": "6. Допустимое использование", "s6_li1": "Не подавайте мошеннические заявки и не выдавайте себя за другого человека", "s6_li2": "Не пытайтесь сканировать, реверс-инжинирить или злоупотреблять системой AI-скоринга для манипуляции результатами", "s6_li3": "Не используйте сайт для какой-либо незаконной цели", "h2_7": "7. Отсутствие гарантий", "s7_p": "Этот сайт и его инструменты предоставляются «как есть» в период активной разработки на стадии pre-launch/пилота. Мы не гарантируем бесперебойную доступность, полную точность калькуляторов или скоринга, а также рассмотрение конкретной заявки в определённые сроки.", "h2_8": "8. Изменения", "s8_p": "Мы можем обновлять эти условия по мере развития платформы от пилота к mainnet. Продолжение использования сайта после изменений означает ваше согласие с обновлёнными условиями.", "h2_9": "9. Контакты", "s9_p1": "Вопросы об этих условиях: {email}", "footer_privacy": "Политика конфиденциальности"}, "ar": {"nav_back": "← الموقع الرئيسي", "eyebrow": "قانوني", "h1": "شروط الخدمة", "updated": "آخر تحديث: 14 يوليو 2026", "lead": "يرجى قراءة هذه الشروط قبل استخدام amnetwork.io، حاسبة الزكاة، اختبار التقييم بالذكاء الاصطناعي، أو نموذج الطلب. باستخدامك هذا الموقع، فإنك توافق عليها.", "h2_1": "1. ما هي AM Network اليوم", "s1_callout": "AM Network في مرحلة ما قبل الإطلاق. لا توجد عقود ذكية فعّالة تعالج أموال المتبرعين الحقيقية بعد، ولا يوجد نشر على الشبكة الرئيسية، ولا تتم معالجة أي معاملات زكاة/صدقة عبر هذا الموقع حالياً. هذا الموقع عبارة عن قائمة انتظار، ومركز معلومات، واستقبال طلبات لتجربتنا القادمة.", "s1_p": "أنشأنا هذا الموقع من أجل: (أ) تمكين المتبرعين والمستفيدين من تسجيل اهتمامهم قبل الإطلاق، (ب) توفير حاسبة زكاة مجانية واختبار تقييم أهلية بالذكاء الاصطناعي، (ج) جمع الطلبات المبكرة من طالبي المساعدة لبدء توزيعات تجريبية موثقة بشرياً.", "h2_2": "2. لا ضمانات مالية أو استثمارية", "s2_p": "لا شيء في هذا الموقع يُعد استشارة مالية أو قانونية أو استثمارية. لا تصدر AM Network أي عملة رقمية، ولا تقدّم أي منتج استثماري للعامة، ولا تعد أحداً بعائد مالي. الإشارات إلى جولة تمويل أولية مستقبلية موجّهة فقط للمستثمرين المعتمدين/المؤسسيين الذين نتواصل معهم مباشرة، وليس للجمهور العام.", "h2_3": "3. حاسبة الزكاة", "s3_p": "توفر الحاسبة تقديراً بناءً على حدود النصاب وفئات الأصول التي تدخلها. إنها أداة مساعدة، وليست فتوى. للحصول على حكم قاطع بشأن التزام زكاتك الشخصي، استشر عالماً إسلامياً مؤهلاً.", "h2_4": "4. اختبار التقييم بالذكاء الاصطناعي ونموذج الطلب", "s4_p1": "يعطي اختبار التقييم بالذكاء الاصطناعي نتيجة إرشادية بناءً على المعلومات التي تقدمها — يعمل داخل متصفحك وليس ضماناً للمساعدة. إرسال نموذج الطلب لا يضمن حصولك على أموال الزكاة/الصدقة. خلال مرحلة التجربة الحالية، من المفترض أن تتم مراجعة كل طلب وتأكيده من قبل محقق بشري (وسيط محلي — إمام مسجد، متطوع AM Network، أو ممثل منظمة غير حكومية شريكة) قبل اتخاذ أي قرار توزيع.", "s4_p2": "أنت تؤكد أن المعلومات التي تقدمها دقيقة على حد علمك. تقديم معلومات كاذبة عن علم للحصول على مساعدة لا تستحقها قد يؤدي إلى استبعاد طلبك، وفي مراحل مستقبلية من المنصة قد يُرصد من قبل أنظمة كشف الاحتيال لدينا.", "h2_5": "5. حالة الامتثال الشرعي", "s5_pa": "صُمم نموذج أعمال AM Network (القائم على الأجرة/رسوم الخدمة، دون ربا، دون عملة مضاربة) مع مراعاة مبادئ الشريعة، ونحن في مناقشات نشطة مع شركات استشارية شرعية. لكن حتى تاريخ اليوم أعلاه، ", "s5_pb": "لم تحصل AM Network بعد على اعتماد شرعي رسمي أو فتوى", "s5_pc": " لنموذج تشغيلها الكامل. سنقوم بتحديث هذه الصفحة والموقع بشكل بارز فور الحصول على الاعتماد.", "h2_6": "6. الاستخدام المقبول", "s6_li1": "لا تقدّم طلبات احتيالية ولا تنتحل شخصية شخص آخر", "s6_li2": "لا تحاول استخراج البيانات، أو الهندسة العكسية، أو إساءة استخدام نظام التقييم بالذكاء الاصطناعي للتلاعب بالنتائج", "s6_li3": "لا تستخدم الموقع لأي غرض غير قانوني", "h2_7": "7. لا ضمان", "s7_p": "يُقدَّم هذا الموقع وأدواته «كما هي»، خلال مرحلة تطوير نشطة لما قبل الإطلاق/التجربة. لا نضمن التوفر المستمر، أو الدقة الكاملة للحاسبات أو التقييم، أو مراجعة أي طلب معين خلال إطار زمني محدد.", "h2_8": "8. التغييرات", "s8_p": "قد نحدّث هذه الشروط مع تطور المنصة من التجربة إلى الشبكة الرئيسية. استمرار استخدام الموقع بعد التغييرات يعني موافقتك على الشروط المحدّثة.", "h2_9": "9. التواصل", "s9_p1": "أسئلة حول هذه الشروط: {email}", "footer_privacy": "سياسة الخصوصية"}, "de": {"nav_back": "← Zur Hauptseite", "eyebrow": "Rechtliches", "h1": "Nutzungsbedingungen", "updated": "Zuletzt aktualisiert: 14. Juli 2026", "lead": "Bitte lesen Sie diese Bedingungen, bevor Sie amnetwork.io, den Zakat-Rechner, den KI-Bewertungs-Quiz oder das Antragsformular nutzen. Durch die Nutzung dieser Website stimmen Sie ihnen zu.", "h2_1": "1. Was AM Network heute ist", "s1_callout": "AM Network befindet sich in der Pre-Launch-Phase. Es gibt noch keine aktiven Smart Contracts, die echte Spendergelder verarbeiten, keine Mainnet-Bereitstellung, und derzeit werden über diese Website keine Zakat-/Sadaqah-Transaktionen abgewickelt. Diese Website ist eine Warteliste, ein Informationszentrum und eine Antragsannahme für unsere bevorstehende Pilotphase.", "s1_p": "Wir haben diese Website erstellt, um: (a) Spendern und Empfängern zu ermöglichen, vor dem Start Interesse zu registrieren, (b) einen kostenlosen Zakat-Rechner und KI-Anspruchsberechtigungs-Quiz bereitzustellen, und (c) frühe Anträge von Hilfesuchenden zu sammeln, damit wir mit manuellen, menschlich verifizierten Pilotverteilungen beginnen können.", "h2_2": "2. Keine finanziellen oder Anlagegarantien", "s2_p": "Nichts auf dieser Website stellt eine Finanz-, Rechts- oder Anlageberatung dar. AM Network gibt keinerlei Kryptowährungs-Token aus, bietet der Öffentlichkeit kein Anlageprodukt an und macht niemandem ein Versprechen auf finanzielle Rendite. Hinweise auf eine zukünftige Seed-Finanzierungsrunde richten sich ausschließlich an akkreditierte/institutionelle Investoren, die wir direkt kontaktieren, nicht an die breite Öffentlichkeit.", "h2_3": "3. Der Zakat-Rechner", "s3_p": "Der Rechner liefert eine Schätzung basierend auf den Nisab-Schwellenwerten und Vermögenskategorien, die Sie eingeben. Er ist ein Komfort-Tool, keine Fatwa. Für verbindliche Entscheidungen zu Ihrer persönlichen Zakat-Pflicht konsultieren Sie bitte einen qualifizierten islamischen Gelehrten.", "h2_4": "4. Der KI-Bewertungs-Quiz & das Antragsformular", "s4_p1": "Der KI-Bewertungs-Quiz liefert eine indikative Punktzahl basierend auf den von Ihnen bereitgestellten Informationen — er läuft in Ihrem Browser und ist keine Zusage von Unterstützung. Das Absenden des Antragsformulars garantiert nicht, dass Sie Zakat-/Sadaqah-Mittel erhalten. Während unserer aktuellen Pilotphase soll jeder Antrag von einem menschlichen Prüfer (einem lokalen Oracle — Moscheeimam, AM Network-Freiwilligem oder Vertreter einer Partner-NGO) geprüft und bestätigt werden, bevor eine Verteilungsentscheidung getroffen wird.", "s4_p2": "Sie bestätigen, dass die von Ihnen übermittelten Informationen nach bestem Wissen korrekt sind. Die wissentliche Angabe falscher Informationen, um Unterstützung zu erhalten, auf die Sie keinen Anspruch haben, kann zur Disqualifikation Ihres Antrags führen und in zukünftigen Phasen der Plattform von unseren Betrugserkennungssystemen markiert werden.", "h2_5": "5. Status der Scharia-Konformität", "s5_pa": "Das Geschäftsmodell von AM Network (basierend auf Ujrah/Servicegebühr, ohne Zinsen, ohne spekulativen Token) wurde unter Berücksichtigung der Scharia-Prinzipien konzipiert, und wir befinden uns in aktiven Gesprächen mit Scharia-Beratungsunternehmen. Zum oben genannten Datum hat ", "s5_pb": "AM Network jedoch noch keine formelle Scharia-Zertifizierung oder Fatwa", "s5_pc": " für sein vollständiges Betriebsmodell erhalten. Wir werden diese Seite und die Website deutlich aktualisieren, sobald eine Zertifizierung vorliegt.", "h2_6": "6. Zulässige Nutzung", "s6_li1": "Reichen Sie keine betrügerischen Anträge ein und geben Sie sich nicht als jemand anderes aus", "s6_li2": "Versuchen Sie nicht, das KI-Bewertungssystem zu scrapen, zurückzuentwickeln oder zu missbrauchen, um Ergebnisse zu manipulieren", "s6_li3": "Nutzen Sie die Website nicht für rechtswidrige Zwecke", "h2_7": "7. Keine Gewährleistung", "s7_p": "Diese Website und ihre Tools werden „wie besehen“ während einer aktiven Pre-Launch-/Pilot-Entwicklungsphase bereitgestellt. Wir garantieren weder unterbrechungsfreie Verfügbarkeit noch vollständige Genauigkeit von Rechnern oder Bewertungen, noch dass ein bestimmter Antrag innerhalb eines bestimmten Zeitrahmens geprüft wird.", "h2_8": "8. Änderungen", "s8_p": "Wir können diese Bedingungen aktualisieren, während sich die Plattform von der Pilotphase zum Mainnet weiterentwickelt. Die fortgesetzte Nutzung der Website nach Änderungen bedeutet, dass Sie die aktualisierten Bedingungen akzeptieren.", "h2_9": "9. Kontakt", "s9_p1": "Fragen zu diesen Bedingungen: {email}", "footer_privacy": "Datenschutzerklärung"}};
+// <!--AMNET_TERMS_DATA_END-->
+
+function tx(l, key){ const t = T[l] || T.en; return (t && t[key] !== undefined) ? t[key] : (T.en[key] || ''); }
+
+function setLang(l){
+  document.querySelectorAll('[data-t]').forEach(el=>{
+    const k = el.getAttribute('data-t');
+    const v = tx(l, k);
+    if(v) el.textContent = v;
+  });
+  const emailLink = '<a class="inline" href="mailto:contact@amnetwork.io">contact@amnetwork.io</a>';
+  const s9 = document.getElementById('s9_p1');
+  if(s9) s9.innerHTML = tx(l,'s9_p1').replace('{email}', emailLink);
+  document.documentElement.setAttribute('lang', l);
+  document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+  localStorage.setItem('amn_lang', l);
+}
+
+function toggleLangDrop(){
+  const d = document.getElementById('langDrop');
+  d.style.display = d.style.display === 'block' ? 'none' : 'block';
+}
+function selectLang(l, flag, name){
+  document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + flag + '.png';
+  document.getElementById('langName').textContent = name;
+  document.getElementById('langDrop').style.display = 'none';
+  setLang(l);
+}
+document.addEventListener('click', function(e){
+  const wrap = document.querySelector('.lang-wrap');
+  if(wrap && !wrap.contains(e.target)){
+    document.getElementById('langDrop').style.display = 'none';
+  }
+});
+
 function toggleTheme(){
   const th = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', th);
@@ -160,11 +219,17 @@ function toggleTheme(){
   localStorage.setItem('amn_theme', th);
 }
 (function(){
-  const saved = localStorage.getItem('amn_theme');
-  if(saved){
-    document.documentElement.setAttribute('data-theme', saved);
-    document.querySelector('.theme-btn').textContent = saved === 'dark' ? '🌙' : '☀️';
+  const savedTheme = localStorage.getItem('amn_theme');
+  if(savedTheme){
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.querySelector('.theme-btn').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
   }
+  const lm = {en:['gb','English'],ru:['ru','Русский'],ar:['sa','العربية'],de:['de','Deutsch']};
+  const savedLang = localStorage.getItem('amn_lang') || 'en';
+  const lv = lm[savedLang] || lm.en;
+  document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + lv[0] + '.png';
+  document.getElementById('langName').textContent = lv[1];
+  setLang(savedLang);
 })();
 </script>
 
