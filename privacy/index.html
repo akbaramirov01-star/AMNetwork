@@ -18,7 +18,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0A1A11">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
@@ -29,7 +29,7 @@ if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{ana
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4GSRVJB5M"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important}}
 [data-theme="dark"]{
@@ -46,18 +46,26 @@ if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{ana
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+[lang="ar"]{font-family:'Noto Naskh Arabic',sans-serif}
 body{font-family:'DM Sans',sans-serif;background:var(--bg1);color:var(--text);line-height:1.7;transition:background-color .3s,color .3s}
 .wrap{max-width:760px;margin:0 auto;padding:0 5vw 100px}
-nav{display:flex;align-items:center;justify-content:space-between;padding:22px 5vw;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg1);z-index:10;backdrop-filter:blur(20px)}
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 5vw;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg1);z-index:10;backdrop-filter:blur(20px)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
 .nav-logo img{height:38px}
 .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700}
 .nav-logo-text .am{color:var(--gold)}
-.nav-right{display:flex;align-items:center;gap:14px}
-.back-link{font-size:13px;color:var(--text2);text-decoration:none;border:1px solid var(--border);padding:8px 16px;border-radius:7px;transition:all .2s}
+.nav-right{display:flex;align-items:center;gap:10px}
+.back-link{font-size:13px;color:var(--text2);text-decoration:none;border:1px solid var(--border);padding:8px 16px;border-radius:7px;transition:all .2s;white-space:nowrap}
 .back-link:hover{border-color:var(--gold);color:var(--gold)}
-.theme-btn{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:15px}
+.theme-btn{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:15px;flex-shrink:0}
 .theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.lang-wrap{position:relative}
+.lang-sel{display:flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--border);border-radius:7px;background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.lang-sel:hover{border-color:var(--gold);color:var(--gold)}
+.lang-drop{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;min-width:150px;z-index:200;display:none;overflow:hidden}
+[dir="rtl"] .lang-drop{right:auto;left:0}
+.lang-item{display:flex;align-items:center;gap:8px;padding:9px 14px;cursor:pointer;font-size:13px;color:var(--text2)}
+.lang-item:hover{background:var(--card)}
 header.page-head{padding:56px 0 32px}
 .eyebrow{font-size:12px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:14px}
 h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,46px);font-weight:700;margin-bottom:12px}
@@ -68,12 +76,15 @@ h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;margin-
 h3{font-size:15px;font-weight:700;margin:18px 0 8px}
 p{color:var(--text2);font-size:15px;margin-bottom:12px}
 ul{margin:10px 0 10px 20px;color:var(--text2);font-size:15px}
+[dir="rtl"] ul{margin:10px 20px 10px 0}
 li{margin-bottom:8px}
 table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
 th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text2)}
+[dir="rtl"] th,[dir="rtl"] td{text-align:right}
 th{color:var(--text);font-weight:600;background:var(--card)}
 a.inline{color:var(--gold);text-decoration:underline}
 .callout{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:8px;padding:16px 18px;margin:16px 0;font-size:14px;color:var(--text2)}
+[dir="rtl"] .callout{border-left:none;border-right:3px solid var(--gold)}
 footer.foot{border-top:1px solid var(--border);padding:32px 5vw;text-align:center;font-size:12.5px;color:var(--text3)}
 footer.foot a{color:var(--gold);text-decoration:none}
 </style>
@@ -86,111 +97,162 @@ footer.foot a{color:var(--gold);text-decoration:none}
     <span class="nav-logo-text"><span class="am">AM</span> Network</span>
   </a>
   <div class="nav-right">
+    <div class="lang-wrap">
+      <button class="lang-sel" onclick="toggleLangDrop()" aria-label="Select language">
+        <img id="langFlag" src="https://flagcdn.com/w20/gb.png" width="18" height="13" style="border-radius:2px" alt="">
+        <span id="langName">English</span>
+      </button>
+      <div class="lang-drop" id="langDrop">
+        <div class="lang-item" onclick="selectLang('en','gb','English')"><img src="https://flagcdn.com/w20/gb.png" width="18" height="13" style="border-radius:2px" alt=""> English</div>
+        <div class="lang-item" onclick="selectLang('ru','ru','Русский')"><img src="https://flagcdn.com/w20/ru.png" width="18" height="13" style="border-radius:2px" alt=""> Русский</div>
+        <div class="lang-item" onclick="selectLang('ar','sa','العربية')"><img src="https://flagcdn.com/w20/sa.png" width="18" height="13" style="border-radius:2px" alt=""> العربية</div>
+        <div class="lang-item" onclick="selectLang('de','de','Deutsch')"><img src="https://flagcdn.com/w20/de.png" width="18" height="13" style="border-radius:2px" alt=""> Deutsch</div>
+      </div>
+    </div>
     <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
-    <a class="back-link" href="/">← Main site</a>
+    <a class="back-link" href="/" data-t="nav_back">← Main site</a>
   </div>
 </nav>
 
 <div class="wrap">
   <header class="page-head">
-    <div class="eyebrow">Legal</div>
-    <h1>Privacy Policy</h1>
-    <div class="updated">Last updated: July 14, 2026</div>
-    <p class="lead">AM Network ("we", "us") operates amnetwork.io and its related pages: the Zakat calculator, the AI scoring quiz, and the recipient application form. This page explains what data we collect, why, and how it is handled — in plain language, not legal filler.</p>
+    <div class="eyebrow" data-t="eyebrow">Legal</div>
+    <h1 data-t="h1">Privacy Policy</h1>
+    <div class="updated" data-t="updated">Last updated: July 14, 2026</div>
+    <p class="lead" data-t="lead">AM Network ("we", "us") operates amnetwork.io and its related pages: the Zakat calculator, the AI scoring quiz, and the recipient application form. This page explains what data we collect, why, and how it is handled — in plain language, not legal filler.</p>
   </header>
 
   <section>
-    <h2>1. Who we are</h2>
-    <p>AM Network is a pre-launch project building a blockchain-verified Zakat and Sadaqah platform. We are not yet a registered company and are not yet processing real donations or transferring funds. Contact: <a class="inline" href="mailto:contact@amnetwork.io">contact@amnetwork.io</a>.</p>
+    <h2 data-t="h2_1">1. Who we are</h2>
+    <p><span data-t="s1_p">AM Network is a pre-launch project building a blockchain-verified Zakat and Sadaqah platform. We are not yet a registered company and are not yet processing real donations or transferring funds. Contact: </span><a class="inline" href="mailto:contact@amnetwork.io">contact@amnetwork.io</a>.</p>
   </section>
 
   <section>
-    <h2>2. What we collect</h2>
-    <h3>Waitlist form</h3>
-    <p>Email address (and name, if you provide it) so we can notify you before launch.</p>
+    <h2 data-t="h2_2">2. What we collect</h2>
+    <h3 data-t="h3_1">Waitlist form</h3>
+    <p data-t="s2_p1">Email address (and name, if you provide it) so we can notify you before launch.</p>
 
-    <h3>Recipient application form</h3>
-    <p>If you apply for Zakat/Sadaqah assistance, we collect information needed to assess eligibility, including:</p>
+    <h3 data-t="h3_2">Recipient application form</h3>
+    <p data-t="s2_p2">If you apply for Zakat/Sadaqah assistance, we collect information needed to assess eligibility, including:</p>
     <ul>
-      <li>Country, city, and contact details</li>
-      <li>Household and family composition (dependents, minors, elderly)</li>
-      <li>Income, expenses, assets, and debt situation</li>
-      <li>Housing status and employment status</li>
-      <li>Health and medical circumstances, where relevant to eligibility</li>
-      <li>Any crisis or emergency situation you describe</li>
+      <li data-t="s2_li1">Country, city, and contact details</li>
+      <li data-t="s2_li2">Household and family composition (dependents, minors, elderly)</li>
+      <li data-t="s2_li3">Income, expenses, assets, and debt situation</li>
+      <li data-t="s2_li4">Housing status and employment status</li>
+      <li data-t="s2_li5">Health and medical circumstances, where relevant to eligibility</li>
+      <li data-t="s2_li6">Any crisis or emergency situation you describe</li>
     </ul>
-    <div class="callout">Some of this is sensitive personal data (health, financial hardship). We only collect it because it is necessary to assess Zakat eligibility under Islamic jurisprudence categories, and we ask for your explicit consent in the form before submission.</div>
-    <p>You choose your privacy level when applying: <strong>fully anonymous</strong> (only city and category visible to donors) or <strong>show first name and city</strong>. Your full application details are never shown publicly regardless of which option you choose.</p>
+    <div class="callout" data-t="s2_callout">Some of this is sensitive personal data (health, financial hardship). We only collect it because it is necessary to assess Zakat eligibility under Islamic jurisprudence categories, and we ask for your explicit consent in the form before submission.</div>
+    <p><span data-t="s2_p3a">You choose your privacy level when applying: </span><strong data-t="s2_p3b">fully anonymous</strong><span data-t="s2_p3c"> (only city and category visible to donors) or </span><strong data-t="s2_p3d">show first name and city</strong><span data-t="s2_p3e">. Your full application details are never shown publicly regardless of which option you choose.</span></p>
 
-    <h3>AI scoring quiz &amp; Zakat calculator</h3>
-    <p>These run entirely in your browser. Answers are used to calculate a score or a Zakat amount on your device and are not sent to our servers unless you separately submit the application form.</p>
+    <h3 data-t="h3_3">AI scoring quiz &amp; Zakat calculator</h3>
+    <p data-t="s2_p4">These run entirely in your browser. Answers are used to calculate a score or a Zakat amount on your device and are not sent to our servers unless you separately submit the application form.</p>
 
-    <h3>Automatically collected data</h3>
-    <p>If you accept cookies via the banner, we use Google Analytics (GA4) to understand site traffic (pages viewed, approximate location, device type). Analytics is <strong>off by default</strong> and only activates after you click "Accept."</p>
+    <h3 data-t="h3_4">Automatically collected data</h3>
+    <p><span data-t="s2_p5a">If you accept cookies via the banner, we use Google Analytics (GA4) to understand site traffic (pages viewed, approximate location, device type). Analytics is </span><strong data-t="s2_p5b">off by default</strong><span data-t="s2_p5c"> and only activates after you click "Accept."</span></p>
   </section>
 
   <section>
-    <h2>3. How we use your data</h2>
+    <h2 data-t="h2_3">3. How we use your data</h2>
     <ul>
-      <li>To assess and score Zakat/Sadaqah applications</li>
-      <li>To contact you about your application or the waitlist</li>
-      <li>To improve our AI scoring methodology, using aggregated and anonymized patterns</li>
-      <li>To measure and improve the website (only with analytics consent)</li>
+      <li data-t="s3_li1">To assess and score Zakat/Sadaqah applications</li>
+      <li data-t="s3_li2">To contact you about your application or the waitlist</li>
+      <li data-t="s3_li3">To improve our AI scoring methodology, using aggregated and anonymized patterns</li>
+      <li data-t="s3_li4">To measure and improve the website (only with analytics consent)</li>
     </ul>
-    <p>We do <strong>not</strong> sell your personal data. We do not use your data for advertising or share it with data brokers.</p>
+    <p><span data-t="s3_pa">We do </span><strong data-t="s3_pb">not</strong><span data-t="s3_pc"> sell your personal data. We do not use your data for advertising or share it with data brokers.</span></p>
   </section>
 
   <section>
-    <h2>4. Where your data is stored</h2>
-    <p>We currently rely on third-party services to operate the site. This is normal for an early-stage project, and we want to be transparent about exactly who processes your data:</p>
+    <h2 data-t="h2_4">4. Where your data is stored</h2>
+    <p data-t="s4_p1">We currently rely on third-party services to operate the site. This is normal for an early-stage project, and we want to be transparent about exactly who processes your data:</p>
     <table>
-      <tr><th>Service</th><th>Purpose</th><th>Data involved</th></tr>
-      <tr><td>Web3Forms</td><td>Secure form delivery / spam filtering</td><td>Form submissions (waitlist, application)</td></tr>
-      <tr><td>Google Sheets (via Google Apps Script)</td><td>Storing submitted applications and waitlist entries</td><td>All form field data</td></tr>
-      <tr><td>hCaptcha</td><td>Bot protection on the application form</td><td>Captcha interaction signals</td></tr>
-      <tr><td>Google Analytics (GA4)</td><td>Aggregate traffic analytics</td><td>Usage data, only after cookie consent</td></tr>
+      <tr><th data-t="th1">Service</th><th data-t="th2">Purpose</th><th data-t="th3">Data involved</th></tr>
+      <tr><td>Web3Forms</td><td data-t="tr1_2">Secure form delivery / spam filtering</td><td data-t="tr1_3">Form submissions (waitlist, application)</td></tr>
+      <tr><td data-t="tr2_1">Google Sheets (via Google Apps Script)</td><td data-t="tr2_2">Storing submitted applications and waitlist entries</td><td data-t="tr2_3">All form field data</td></tr>
+      <tr><td>hCaptcha</td><td data-t="tr3_2">Bot protection on the application form</td><td data-t="tr3_3">Captcha interaction signals</td></tr>
+      <tr><td>Google Analytics (GA4)</td><td data-t="tr4_2">Aggregate traffic analytics</td><td data-t="tr4_3">Usage data, only after cookie consent</td></tr>
     </table>
-    <p>These providers may process data outside your country of residence. We select providers with their own privacy and security commitments, but as a pre-launch project we do not yet have a formal Data Processing Agreement in place with each of them — this is on our roadmap as we approach our pilot phase.</p>
+    <p data-t="s4_p2">These providers may process data outside your country of residence. We select providers with their own privacy and security commitments, but as a pre-launch project we do not yet have a formal Data Processing Agreement in place with each of them — this is on our roadmap as we approach our pilot phase.</p>
   </section>
 
   <section>
-    <h2>5. Your rights</h2>
-    <p>Regardless of where you are located, you can ask us at any time to:</p>
+    <h2 data-t="h2_5">5. Your rights</h2>
+    <p data-t="s5_p1">Regardless of where you are located, you can ask us at any time to:</p>
     <ul>
-      <li>Show you what data we hold about you</li>
-      <li>Correct inaccurate data</li>
-      <li>Delete your application or waitlist entry</li>
-      <li>Withdraw consent for analytics (via the cookie banner, or by clearing your browser storage)</li>
+      <li data-t="s5_li1">Show you what data we hold about you</li>
+      <li data-t="s5_li2">Correct inaccurate data</li>
+      <li data-t="s5_li3">Delete your application or waitlist entry</li>
+      <li data-t="s5_li4">Withdraw consent for analytics (via the cookie banner, or by clearing your browser storage)</li>
     </ul>
-    <p>If you are in the European Economic Area, these rights are protected under the GDPR. Email <a class="inline" href="mailto:contact@amnetwork.io">contact@amnetwork.io</a> with your request — we aim to respond within 30 days.</p>
+    <p id="s5_p2">If you are in the European Economic Area, these rights are protected under the GDPR. Email <a class="inline" href="mailto:contact@amnetwork.io">contact@amnetwork.io</a> with your request — we aim to respond within 30 days.</p>
   </section>
 
   <section>
-    <h2>6. Data retention</h2>
-    <p>We keep application data for as long as needed to run our pilot and eligibility verification process, and no longer than 24 months unless you ask us to delete it sooner or a longer period is needed to comply with a legal or Sharia-audit obligation.</p>
+    <h2 data-t="h2_6">6. Data retention</h2>
+    <p data-t="s6_p1">We keep application data for as long as needed to run our pilot and eligibility verification process, and no longer than 24 months unless you ask us to delete it sooner or a longer period is needed to comply with a legal or Sharia-audit obligation.</p>
   </section>
 
   <section>
-    <h2>7. Children</h2>
-    <p>AM Network is not directed at children. If you apply on behalf of a minor (for example, an orphan under guardianship), only the guardian's contact information should be submitted, not the minor's directly.</p>
+    <h2 data-t="h2_7">7. Children</h2>
+    <p data-t="s7_p1">AM Network is not directed at children. If you apply on behalf of a minor (for example, an orphan under guardianship), only the guardian's contact information should be submitted, not the minor's directly.</p>
   </section>
 
   <section>
-    <h2>8. Changes to this policy</h2>
-    <p>As we move from pre-launch to pilot and then to mainnet, this policy will be updated — particularly once we deploy the AI scoring API and oracle verification network. We'll update the "Last updated" date above whenever we make a material change.</p>
+    <h2 data-t="h2_8">8. Changes to this policy</h2>
+    <p data-t="s8_p1">As we move from pre-launch to pilot and then to mainnet, this policy will be updated — particularly once we deploy the AI scoring API and oracle verification network. We'll update the "Last updated" date above whenever we make a material change.</p>
   </section>
 
   <section>
-    <h2>9. Contact</h2>
-    <p>Questions about this policy or your data: <a class="inline" href="mailto:contact@amnetwork.io">contact@amnetwork.io</a></p>
+    <h2 data-t="h2_9">9. Contact</h2>
+    <p id="s9_p1">Questions about this policy or your data: <a class="inline" href="mailto:contact@amnetwork.io">contact@amnetwork.io</a></p>
   </section>
 </div>
 
 <footer class="foot">
-  © 2026 AM Network · <a href="/terms/">Terms of Service</a> · <a href="mailto:contact@amnetwork.io">contact@amnetwork.io</a>
+  © 2026 AM Network · <a href="/terms/" data-t="footer_terms">Terms of Service</a> · <a href="mailto:contact@amnetwork.io">contact@amnetwork.io</a>
 </footer>
 
 <script>
+// <!--AMNET_PRIVACY_DATA_START-->
+const T = {"en": {"nav_back": "← Main site", "eyebrow": "Legal", "h1": "Privacy Policy", "updated": "Last updated: July 14, 2026", "lead": "AM Network (“we”, “us”) operates amnetwork.io and its related pages: the Zakat calculator, the AI scoring quiz, and the recipient application form. This page explains what data we collect, why, and how it is handled — in plain language, not legal filler.", "h2_1": "1. Who we are", "s1_p": "AM Network is a pre-launch project building a blockchain-verified Zakat and Sadaqah platform. We are not yet a registered company and are not yet processing real donations or transferring funds. Contact: ", "h2_2": "2. What we collect", "h3_1": "Waitlist form", "s2_p1": "Email address (and name, if you provide it) so we can notify you before launch.", "h3_2": "Recipient application form", "s2_p2": "If you apply for Zakat/Sadaqah assistance, we collect information needed to assess eligibility, including:", "s2_li1": "Country, city, and contact details", "s2_li2": "Household and family composition (dependents, minors, elderly)", "s2_li3": "Income, expenses, assets, and debt situation", "s2_li4": "Housing status and employment status", "s2_li5": "Health and medical circumstances, where relevant to eligibility", "s2_li6": "Any crisis or emergency situation you describe", "s2_callout": "Some of this is sensitive personal data (health, financial hardship). We only collect it because it is necessary to assess Zakat eligibility under Islamic jurisprudence categories, and we ask for your explicit consent in the form before submission.", "s2_p3a": "You choose your privacy level when applying: ", "s2_p3b": "fully anonymous", "s2_p3c": " (only city and category visible to donors) or ", "s2_p3d": "show first name and city", "s2_p3e": ". Your full application details are never shown publicly regardless of which option you choose.", "h3_3": "AI scoring quiz & Zakat calculator", "s2_p4": "These run entirely in your browser. Answers are used to calculate a score or a Zakat amount on your device and are not sent to our servers unless you separately submit the application form.", "h3_4": "Automatically collected data", "s2_p5a": "If you accept cookies via the banner, we use Google Analytics (GA4) to understand site traffic (pages viewed, approximate location, device type). Analytics is ", "s2_p5b": "off by default", "s2_p5c": " and only activates after you click “Accept.”", "h2_3": "3. How we use your data", "s3_li1": "To assess and score Zakat/Sadaqah applications", "s3_li2": "To contact you about your application or the waitlist", "s3_li3": "To improve our AI scoring methodology, using aggregated and anonymized patterns", "s3_li4": "To measure and improve the website (only with analytics consent)", "s3_pa": "We do ", "s3_pb": "not", "s3_pc": " sell your personal data. We do not use your data for advertising or share it with data brokers.", "h2_4": "4. Where your data is stored", "s4_p1": "We currently rely on third-party services to operate the site. This is normal for an early-stage project, and we want to be transparent about exactly who processes your data:", "th1": "Service", "th2": "Purpose", "th3": "Data involved", "tr1_2": "Secure form delivery / spam filtering", "tr1_3": "Form submissions (waitlist, application)", "tr2_1": "Google Sheets (via Google Apps Script)", "tr2_2": "Storing submitted applications and waitlist entries", "tr2_3": "All form field data", "tr3_2": "Bot protection on the application form", "tr3_3": "Captcha interaction signals", "tr4_2": "Aggregate traffic analytics", "tr4_3": "Usage data, only after cookie consent", "s4_p2": "These providers may process data outside your country of residence. We select providers with their own privacy and security commitments, but as a pre-launch project we do not yet have a formal Data Processing Agreement in place with each of them — this is on our roadmap as we approach our pilot phase.", "h2_5": "5. Your rights", "s5_p1": "Regardless of where you are located, you can ask us at any time to:", "s5_li1": "Show you what data we hold about you", "s5_li2": "Correct inaccurate data", "s5_li3": "Delete your application or waitlist entry", "s5_li4": "Withdraw consent for analytics (via the cookie banner, or by clearing your browser storage)", "s5_p2": "If you are in the European Economic Area, these rights are protected under the GDPR. Email {email} with your request — we aim to respond within 30 days.", "h2_6": "6. Data retention", "s6_p1": "We keep application data for as long as needed to run our pilot and eligibility verification process, and no longer than 24 months unless you ask us to delete it sooner or a longer period is needed to comply with a legal or Sharia-audit obligation.", "h2_7": "7. Children", "s7_p1": "AM Network is not directed at children. If you apply on behalf of a minor (for example, an orphan under guardianship), only the guardian's contact information should be submitted, not the minor's directly.", "h2_8": "8. Changes to this policy", "s8_p1": "As we move from pre-launch to pilot and then to mainnet, this policy will be updated — particularly once we deploy the AI scoring API and oracle verification network. We'll update the “Last updated” date above whenever we make a material change.", "h2_9": "9. Contact", "s9_p1": "Questions about this policy or your data: {email}", "footer_terms": "Terms of Service"}, "ru": {"nav_back": "← На главную", "eyebrow": "Юридическое", "h1": "Политика конфиденциальности", "updated": "Обновлено: 14 июля 2026", "lead": "AM Network («мы») управляет сайтом amnetwork.io и связанными страницами: калькулятором закята, AI-квизом скоринга и формой заявки для получателей. Эта страница объясняет, какие данные мы собираем, зачем и как с ними обращаемся — простым языком, без юридической воды.", "h2_1": "1. Кто мы", "s1_p": "AM Network — проект на стадии pre-launch, создающий блокчейн-платформу верификации закята и садаки. Мы ещё не зарегистрированы как компания и пока не обрабатываем реальные пожертвования и не переводим средства. Контакт: ", "h2_2": "2. Что мы собираем", "h3_1": "Форма вайтлиста", "s2_p1": "Email-адрес (и имя, если вы его укажете), чтобы уведомить вас перед запуском.", "h3_2": "Форма заявки получателя", "s2_p2": "Если вы подаёте заявку на помощь по закяту/садаке, мы собираем информацию, необходимую для оценки права на помощь, включая:", "s2_li1": "Страну, город и контактные данные", "s2_li2": "Состав домохозяйства и семьи (иждивенцы, несовершеннолетние, пожилые)", "s2_li3": "Доход, расходы, активы и долговую ситуацию", "s2_li4": "Статус жилья и занятости", "s2_li5": "Состояние здоровья и медицинские обстоятельства, если это влияет на право на помощь", "s2_li6": "Любую кризисную или чрезвычайную ситуацию, которую вы опишете", "s2_callout": "Часть этих данных — чувствительные персональные данные (здоровье, финансовые трудности). Мы собираем их только потому, что это необходимо для оценки права на закят согласно категориям исламского права, и запрашиваем ваше явное согласие в форме перед отправкой.", "s2_p3a": "Вы сами выбираете уровень приватности при подаче заявки: ", "s2_p3b": "полностью анонимно", "s2_p3c": " (донорам видны только город и категория) или ", "s2_p3d": "показать имя и город", "s2_p3e": ". Полные детали заявки никогда не публикуются, независимо от выбранного варианта.", "h3_3": "AI-квиз скоринга и калькулятор закята", "s2_p4": "Эти инструменты работают полностью в вашем браузере. Ответы используются для расчёта скора или суммы закята на вашем устройстве и не отправляются на наши серверы, если вы отдельно не отправите форму заявки.", "h3_4": "Автоматически собираемые данные", "s2_p5a": "Если вы принимаете cookies через баннер, мы используем Google Analytics (GA4), чтобы понимать трафик сайта (просмотренные страницы, примерное местоположение, тип устройства). Аналитика ", "s2_p5b": "отключена по умолчанию", "s2_p5c": " и включается только после нажатия «Принять».", "h2_3": "3. Как мы используем ваши данные", "s3_li1": "Для оценки и скоринга заявок на закят/садаку", "s3_li2": "Чтобы связаться с вами по поводу заявки или вайтлиста", "s3_li3": "Для улучшения методологии AI-скоринга — на основе агрегированных, обезличенных паттернов", "s3_li4": "Для измерения и улучшения сайта (только при согласии на аналитику)", "s3_pa": "Мы ", "s3_pb": "не", "s3_pc": " продаём ваши персональные данные. Мы не используем их для рекламы и не передаём брокерам данных.", "h2_4": "4. Где хранятся ваши данные", "s4_p1": "Сейчас мы полагаемся на сторонние сервисы для работы сайта. Это нормально для проекта на ранней стадии, и мы хотим быть прозрачны о том, кто именно обрабатывает ваши данные:", "th1": "Сервис", "th2": "Назначение", "th3": "Задействованные данные", "tr1_2": "Безопасная доставка форм / фильтрация спама", "tr1_3": "Отправленные формы (вайтлист, заявка)", "tr2_1": "Google Sheets (через Google Apps Script)", "tr2_2": "Хранение отправленных заявок и записей вайтлиста", "tr2_3": "Все данные полей формы", "tr3_2": "Защита от ботов в форме заявки", "tr3_3": "Сигналы взаимодействия с капчей", "tr4_2": "Агрегированная аналитика трафика", "tr4_3": "Данные использования, только после согласия на cookies", "s4_p2": "Эти провайдеры могут обрабатывать данные за пределами страны вашего проживания. Мы выбираем провайдеров с собственными обязательствами по приватности и безопасности, но как проект на стадии pre-launch мы пока не заключили формальные соглашения об обработке данных (DPA) с каждым из них — это в наших планах по мере приближения к пилотной фазе.", "h2_5": "5. Ваши права", "s5_p1": "Независимо от того, где вы находитесь, вы можете в любой момент попросить нас:", "s5_li1": "Показать, какие данные о вас мы храним", "s5_li2": "Исправить неточные данные", "s5_li3": "Удалить вашу заявку или запись из вайтлиста", "s5_li4": "Отозвать согласие на аналитику (через баннер cookies или очистив хранилище браузера)", "s5_p2": "Если вы находитесь в Европейской экономической зоне, эти права защищены GDPR. Отправьте запрос на {email} — мы стремимся ответить в течение 30 дней.", "h2_6": "6. Срок хранения данных", "s6_p1": "Мы храним данные заявок столько, сколько нужно для проведения пилота и процесса верификации права на помощь, но не дольше 24 месяцев — если вы не попросите удалить их раньше или более долгий срок не потребуется для соблюдения юридических обязательств или шариатского аудита.", "h2_7": "7. Дети", "s7_p1": "AM Network не ориентирован на детей. Если вы подаёте заявку от имени несовершеннолетнего (например, сироты под опекой), должны быть указаны контактные данные опекуна, а не самого несовершеннолетнего.", "h2_8": "8. Изменения в политике", "s8_p1": "По мере перехода от pre-launch к пилоту, а затем к mainnet, эта политика будет обновляться — особенно после запуска API AI-скоринга и сети верификации оракулов. Мы будем обновлять дату «Обновлено» выше при каждом существенном изменении.", "h2_9": "9. Контакты", "s9_p1": "Вопросы об этой политике или ваших данных: {email}", "footer_terms": "Условия использования"}, "ar": {"nav_back": "← الموقع الرئيسي", "eyebrow": "قانوني", "h1": "سياسة الخصوصية", "updated": "آخر تحديث: 14 يوليو 2026", "lead": "تدير AM Network (“نحن”) موقع amnetwork.io وصفحاته المرتبطة: حاسبة الزكاة، اختبار التقييم بالذكاء الاصطناعي، ونموذج طلب المستفيدين. توضح هذه الصفحة البيانات التي نجمعها، ولماذا، وكيف يتم التعامل معها — بلغة واضحة، دون حشو قانوني.", "h2_1": "1. من نحن", "s1_p": "AM Network مشروع في مرحلة ما قبل الإطلاق يبني منصة زكاة وصدقة موثقة بالبلوكشين. لسنا بعد شركة مسجّلة ولا نعالج تبرعات حقيقية أو نحوّل أموالاً. للتواصل: ", "h2_2": "2. ما الذي نجمعه", "h3_1": "نموذج قائمة الانتظار", "s2_p1": "عنوان البريد الإلكتروني (والاسم إن قدّمته) لإخطارك قبل الإطلاق.", "h3_2": "نموذج طلب المستفيد", "s2_p2": "إذا تقدّمت بطلب للحصول على مساعدة الزكاة/الصدقة، نجمع المعلومات اللازمة لتقييم الأهلية، بما في ذلك:", "s2_li1": "الدولة والمدينة وبيانات التواصل", "s2_li2": "تكوين الأسرة (المعالون، القُصّر، كبار السن)", "s2_li3": "الدخل والمصروفات والأصول ووضع الديون", "s2_li4": "حالة السكن والعمل", "s2_li5": "الحالة الصحية والظروف الطبية، عند صلتها بالأهلية", "s2_li6": "أي وضع أزمة أو طارئ تصفه", "s2_callout": "بعض هذه البيانات حساسة (الصحة، الضائقة المالية). نجمعها فقط لأنها ضرورية لتقييم استحقاق الزكاة وفق فئات الفقه الإسلامي، ونطلب موافقتك الصريحة في النموذج قبل الإرسال.", "s2_p3a": "تختار مستوى الخصوصية عند التقديم: ", "s2_p3b": "مجهول تماماً", "s2_p3c": " (يظهر للمتبرعين المدينة والفئة فقط) أو ", "s2_p3d": "إظهار الاسم الأول والمدينة", "s2_p3e": ". تفاصيل طلبك الكاملة لا تُعرض علناً أبداً أياً كان الخيار.", "h3_3": "اختبار التقييم بالذكاء الاصطناعي وحاسبة الزكاة", "s2_p4": "تعمل هذه الأدوات بالكامل داخل متصفحك. تُستخدم الإجابات لحساب نتيجة أو مبلغ الزكاة على جهازك ولا تُرسل إلى خوادمنا إلا إذا أرسلت نموذج الطلب بشكل منفصل.", "h3_4": "البيانات المجمّعة تلقائياً", "s2_p5a": "إذا قبلت ملفات تعريف الارتباط عبر الشريط، نستخدم Google Analytics (GA4) لفهم حركة الموقع (الصفحات المشاهدة، الموقع التقريبي، نوع الجهاز). التحليلات ", "s2_p5b": "معطّلة افتراضياً", "s2_p5c": " ولا تُفعَّل إلا بعد نقرك على «قبول».", "h2_3": "3. كيف نستخدم بياناتك", "s3_li1": "لتقييم وتقدير طلبات الزكاة/الصدقة", "s3_li2": "للتواصل معك بخصوص طلبك أو قائمة الانتظار", "s3_li3": "لتحسين منهجية التقييم بالذكاء الاصطناعي، باستخدام أنماط مجمّعة ومجهولة الهوية", "s3_li4": "لقياس الموقع وتحسينه (فقط بموافقة على التحليلات)", "s3_pa": "نحن ", "s3_pb": "لا", "s3_pc": " نبيع بياناتك الشخصية. لا نستخدم بياناتك للإعلانات ولا نشاركها مع سماسرة البيانات.", "h2_4": "4. أين تُخزَّن بياناتك", "s4_p1": "نعتمد حالياً على خدمات جهات خارجية لتشغيل الموقع. هذا أمر طبيعي لمشروع في مرحلة مبكرة، ونريد أن نكون شفافين بشأن من يعالج بياناتك بالضبط:", "th1": "الخدمة", "th2": "الغرض", "th3": "البيانات المعنية", "tr1_2": "تسليم النماذج بأمان / تصفية البريد المزعج", "tr1_3": "النماذج المرسلة (قائمة الانتظار، الطلب)", "tr2_1": "Google Sheets (عبر Google Apps Script)", "tr2_2": "تخزين الطلبات المرسلة وسجلات قائمة الانتظار", "tr2_3": "جميع بيانات حقول النموذج", "tr3_2": "الحماية من الروبوتات في نموذج الطلب", "tr3_3": "إشارات التفاعل مع الكابتشا", "tr4_2": "تحليلات حركة مرور مجمّعة", "tr4_3": "بيانات الاستخدام، فقط بعد موافقة الكوكيز", "s4_p2": "قد تعالج هذه الجهات البيانات خارج بلد إقامتك. نختار مزودين لديهم التزامات خصوصية وأمان خاصة بهم، لكن كمشروع في مرحلة ما قبل الإطلاق، لم نبرم بعد اتفاقية معالجة بيانات رسمية (DPA) مع كل منهم — وهذا ضمن خطتنا مع اقترابنا من مرحلة التجربة.", "h2_5": "5. حقوقك", "s5_p1": "بغض النظر عن مكان تواجدك، يمكنك أن تطلب منا في أي وقت:", "s5_li1": "إظهار البيانات التي نحتفظ بها عنك", "s5_li2": "تصحيح البيانات غير الدقيقة", "s5_li3": "حذف طلبك أو سجل قائمة الانتظار", "s5_li4": "سحب الموافقة على التحليلات (عبر شريط الكوكيز، أو بمسح تخزين متصفحك)", "s5_p2": "إذا كنت في المنطقة الاقتصادية الأوروبية، فهذه الحقوق محمية بموجب GDPR. راسلنا على {email} بطلبك — نهدف للرد خلال 30 يوماً.", "h2_6": "6. مدة الاحتفاظ بالبيانات", "s6_p1": "نحتفظ ببيانات الطلبات طوال المدة اللازمة لتشغيل تجربتنا وعملية التحقق من الأهلية، ولمدة لا تتجاوز 24 شهراً ما لم تطلب حذفها مبكراً أو تستدعِ الحاجة مدة أطول للامتثال لالتزام قانوني أو تدقيق شرعي.", "h2_7": "7. الأطفال", "s7_p1": "لا تستهدف AM Network الأطفال. إذا تقدمت بطلب نيابة عن قاصر (مثل يتيم تحت الوصاية)، يجب تقديم بيانات تواصل الوصي فقط، وليس بيانات القاصر مباشرة.", "h2_8": "8. التغييرات على هذه السياسة", "s8_p1": "مع انتقالنا من مرحلة ما قبل الإطلاق إلى التجربة ثم إلى الشبكة الرئيسية، سيتم تحديث هذه السياسة — خصوصاً بعد نشر واجهة برمجة التقييم بالذكاء الاصطناعي وشبكة التحقق بالوسطاء. سنحدّث تاريخ «آخر تحديث» أعلاه عند أي تغيير جوهري.", "h2_9": "9. التواصل", "s9_p1": "أسئلة حول هذه السياسة أو بياناتك: {email}", "footer_terms": "شروط الخدمة"}, "de": {"nav_back": "← Zur Hauptseite", "eyebrow": "Rechtliches", "h1": "Datenschutzerklärung", "updated": "Zuletzt aktualisiert: 14. Juli 2026", "lead": "AM Network („wir“) betreibt amnetwork.io und die zugehörigen Seiten: den Zakat-Rechner, den KI-Bewertungs-Quiz und das Antragsformular für Empfänger. Diese Seite erklärt, welche Daten wir erheben, warum, und wie wir damit umgehen — in klarer Sprache, ohne juristisches Füllmaterial.", "h2_1": "1. Wer wir sind", "s1_p": "AM Network ist ein Projekt in der Pre-Launch-Phase, das eine blockchain-verifizierte Zakat- und Sadaqah-Plattform aufbaut. Wir sind noch kein eingetragenes Unternehmen und verarbeiten noch keine echten Spenden oder Geldtransfers. Kontakt: ", "h2_2": "2. Was wir erheben", "h3_1": "Warteliste-Formular", "s2_p1": "E-Mail-Adresse (und Name, falls angegeben), damit wir Sie vor dem Start benachrichtigen können.", "h3_2": "Antragsformular für Empfänger", "s2_p2": "Wenn Sie Zakat-/Sadaqah-Unterstützung beantragen, erheben wir die für die Bedürftigkeitsprüfung nötigen Informationen, darunter:", "s2_li1": "Land, Stadt und Kontaktdaten", "s2_li2": "Haushalts- und Familienzusammensetzung (Angehörige, Minderjährige, Ältere)", "s2_li3": "Einkommen, Ausgaben, Vermögen und Schuldensituation", "s2_li4": "Wohn- und Beschäftigungsstatus", "s2_li5": "Gesundheitliche und medizinische Umstände, sofern für die Anspruchsberechtigung relevant", "s2_li6": "Jede von Ihnen beschriebene Krisen- oder Notsituation", "s2_callout": "Ein Teil davon sind sensible personenbezogene Daten (Gesundheit, finanzielle Notlage). Wir erheben sie nur, weil sie zur Prüfung der Zakat-Berechtigung nach islamrechtlichen Kategorien notwendig sind, und holen dafür im Formular vor dem Absenden Ihre ausdrückliche Einwilligung ein.", "s2_p3a": "Sie wählen bei der Antragstellung Ihre Datenschutzstufe: ", "s2_p3b": "vollständig anonym", "s2_p3c": " (Spendern sind nur Stadt und Kategorie sichtbar) oder ", "s2_p3d": "Vorname und Stadt anzeigen", "s2_p3e": ". Ihre vollständigen Antragsdaten werden unabhängig von der gewählten Option niemals öffentlich angezeigt.", "h3_3": "KI-Bewertungs-Quiz & Zakat-Rechner", "s2_p4": "Diese laufen vollständig in Ihrem Browser. Antworten werden zur Berechnung einer Punktzahl oder eines Zakat-Betrags auf Ihrem Gerät verwendet und nicht an unsere Server gesendet, es sei denn, Sie reichen separat das Antragsformular ein.", "h3_4": "Automatisch erhobene Daten", "s2_p5a": "Wenn Sie Cookies über den Banner akzeptieren, verwenden wir Google Analytics (GA4), um den Website-Traffic zu verstehen (aufgerufene Seiten, ungefährer Standort, Gerätetyp). Analytics ist ", "s2_p5b": "standardmäßig deaktiviert", "s2_p5c": " und wird erst nach Klick auf „Akzeptieren“ aktiviert.", "h2_3": "3. Wie wir Ihre Daten verwenden", "s3_li1": "Zur Bewertung und Bepunktung von Zakat-/Sadaqah-Anträgen", "s3_li2": "Um Sie bezüglich Ihres Antrags oder der Warteliste zu kontaktieren", "s3_li3": "Zur Verbesserung unserer KI-Bewertungsmethodik anhand aggregierter, anonymisierter Muster", "s3_li4": "Um die Website zu messen und zu verbessern (nur mit Analytics-Einwilligung)", "s3_pa": "Wir verkaufen Ihre personenbezogenen Daten ", "s3_pb": "nicht", "s3_pc": ". Wir nutzen Ihre Daten nicht für Werbung und geben sie nicht an Datenhändler weiter.", "h2_4": "4. Wo Ihre Daten gespeichert werden", "s4_p1": "Derzeit verlassen wir uns auf Drittanbieter-Dienste für den Betrieb der Website. Das ist für ein Projekt in einer frühen Phase üblich, und wir möchten transparent darlegen, wer genau Ihre Daten verarbeitet:", "th1": "Dienst", "th2": "Zweck", "th3": "Betroffene Daten", "tr1_2": "Sichere Formularzustellung / Spam-Filterung", "tr1_3": "Formularübermittlungen (Warteliste, Antrag)", "tr2_1": "Google Sheets (über Google Apps Script)", "tr2_2": "Speicherung eingereichter Anträge und Wartelisteneinträge", "tr2_3": "Alle Formularfelddaten", "tr3_2": "Bot-Schutz im Antragsformular", "tr3_3": "Captcha-Interaktionssignale", "tr4_2": "Aggregierte Traffic-Analyse", "tr4_3": "Nutzungsdaten, nur nach Cookie-Einwilligung", "s4_p2": "Diese Anbieter können Daten außerhalb Ihres Wohnsitzlandes verarbeiten. Wir wählen Anbieter mit eigenen Datenschutz- und Sicherheitsverpflichtungen aus, haben aber als Pre-Launch-Projekt noch keine formelle Auftragsverarbeitungsvereinbarung (DPA) mit jedem von ihnen geschlossen — dies ist für die Annäherung an unsere Pilotphase vorgesehen.", "h2_5": "5. Ihre Rechte", "s5_p1": "Unabhängig von Ihrem Standort können Sie uns jederzeit bitten:", "s5_li1": "Ihnen zu zeigen, welche Daten wir über Sie speichern", "s5_li2": "Unrichtige Daten zu korrigieren", "s5_li3": "Ihren Antrag oder Wartelisteneintrag zu löschen", "s5_li4": "Die Einwilligung für Analytics zu widerrufen (über den Cookie-Banner oder durch Löschen Ihres Browser-Speichers)", "s5_p2": "Wenn Sie sich im Europäischen Wirtschaftsraum befinden, sind diese Rechte durch die DSGVO geschützt. Senden Sie Ihre Anfrage an {email} — wir bemühen uns, innerhalb von 30 Tagen zu antworten.", "h2_6": "6. Speicherdauer", "s6_p1": "Wir bewahren Antragsdaten so lange auf, wie es für unseren Pilotbetrieb und die Prüfung der Anspruchsberechtigung erforderlich ist, höchstens jedoch 24 Monate — es sei denn, Sie bitten um frühere Löschung oder eine längere Frist ist zur Erfüllung einer rechtlichen oder Sharia-Prüfungspflicht erforderlich.", "h2_7": "7. Kinder", "s7_p1": "AM Network richtet sich nicht an Kinder. Wenn Sie im Namen eines Minderjährigen (z. B. eines Waisenkindes unter Vormundschaft) einen Antrag stellen, sollten nur die Kontaktdaten des Vormunds angegeben werden, nicht die des Minderjährigen selbst.", "h2_8": "8. Änderungen dieser Richtlinie", "s8_p1": "Auf dem Weg von der Pre-Launch-Phase über die Pilotphase bis zum Mainnet wird diese Richtlinie aktualisiert — insbesondere sobald wir die KI-Bewertungs-API und das Oracle-Verifizierungsnetzwerk einführen. Wir aktualisieren das Datum „Zuletzt aktualisiert“ oben bei jeder wesentlichen Änderung.", "h2_9": "9. Kontakt", "s9_p1": "Fragen zu dieser Richtlinie oder Ihren Daten: {email}", "footer_terms": "Nutzungsbedingungen"}};
+// <!--AMNET_PRIVACY_DATA_END-->
+
+function tx(l, key){ const t = T[l] || T.en; return (t && t[key] !== undefined) ? t[key] : (T.en[key] || ''); }
+
+function setLang(l){
+  document.querySelectorAll('[data-t]').forEach(el=>{
+    const k = el.getAttribute('data-t');
+    const v = tx(l, k);
+    if(v) el.textContent = v;
+  });
+  const emailLink = '<a class="inline" href="mailto:contact@amnetwork.io">contact@amnetwork.io</a>';
+  const s5 = document.getElementById('s5_p2');
+  if(s5) s5.innerHTML = tx(l,'s5_p2').replace('{email}', emailLink);
+  const s9 = document.getElementById('s9_p1');
+  if(s9) s9.innerHTML = tx(l,'s9_p1').replace('{email}', emailLink);
+  document.documentElement.setAttribute('lang', l);
+  document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+  localStorage.setItem('amn_lang', l);
+}
+
+function toggleLangDrop(){
+  const d = document.getElementById('langDrop');
+  d.style.display = d.style.display === 'block' ? 'none' : 'block';
+}
+function selectLang(l, flag, name){
+  document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + flag + '.png';
+  document.getElementById('langName').textContent = name;
+  document.getElementById('langDrop').style.display = 'none';
+  setLang(l);
+}
+document.addEventListener('click', function(e){
+  const wrap = document.querySelector('.lang-wrap');
+  if(wrap && !wrap.contains(e.target)){
+    document.getElementById('langDrop').style.display = 'none';
+  }
+});
+
 function toggleTheme(){
   const th = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', th);
@@ -198,11 +260,17 @@ function toggleTheme(){
   localStorage.setItem('amn_theme', th);
 }
 (function(){
-  const saved = localStorage.getItem('amn_theme');
-  if(saved){
-    document.documentElement.setAttribute('data-theme', saved);
-    document.querySelector('.theme-btn').textContent = saved === 'dark' ? '🌙' : '☀️';
+  const savedTheme = localStorage.getItem('amn_theme');
+  if(savedTheme){
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.querySelector('.theme-btn').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
   }
+  const lm = {en:['gb','English'],ru:['ru','Русский'],ar:['sa','العربية'],de:['de','Deutsch']};
+  const savedLang = localStorage.getItem('amn_lang') || 'en';
+  const lv = lm[savedLang] || lm.en;
+  document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + lv[0] + '.png';
+  document.getElementById('langName').textContent = lv[1];
+  setLang(savedLang);
 })();
 </script>
 
