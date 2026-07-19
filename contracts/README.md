@@ -2,6 +2,24 @@
 
 Prototype Solidity contracts for the blockchain-verified Zakat & Sadaqah platform.
 
+## Verify it yourself
+
+```bash
+npm install
+npm test
+```
+
+This compiles `AMZakatPool.sol` against real OpenZeppelin v5 contracts and runs
+a full end-to-end flow — register recipient → donor donates → tiered ujrah fee
+computed and routed to treasury → non-oracle release attempt correctly
+reverts → oracle releases full Zakat principal to the recipient → pause/unpause
+kill-switch — against the actual compiled bytecode on a local EVM (Hardhat
+Network). 9/9 checks pass. `AMZakatPoolGeneral.sol` is compiled by the same
+suite but not yet covered by the flow test.
+
+This is **not** a mainnet deployment — see "Before mainnet" below for what
+still has to happen first.
+
 ## `AMZakatPool.sol`
 
 The core escrow + distribution contract.

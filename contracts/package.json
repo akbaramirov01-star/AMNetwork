@@ -1,0 +1,16 @@
+{
+  "name": "amnetwork-contracts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AM Network smart contracts — compile + local end-to-end flow verification",
+  "scripts": {
+    "compile": "node scripts/compile.js",
+    "test": "node scripts/run-flow-test.js"
+  },
+  "devDependencies": {
+    "@openzeppelin/contracts": "^5.4.0",
+    "ethers": "^6.13.0",
+    "hardhat": "^2.22.0",
+    "solc": "^0.8.24"
+  }
+}
