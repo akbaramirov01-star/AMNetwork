@@ -2,6 +2,6 @@ FROM python:3.11-slim
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY scorer.py api.py ./
+COPY scorer.py api.py assistant.py ./
 EXPOSE 8000
 CMD ["python", "api.py"]
