@@ -1072,7 +1072,7 @@ function getTier(sc){if(sc>=80)return['CRITICAL','rec_CRITICAL'];if(sc>=65)retur
 // Set this once the API is deployed (see ai_scoring/API_README.md). Left
 // empty, the quiz silently uses the local JS estimate below — same logic,
 // kept in sync by hand, but not the authoritative model.
-const AI_API_BASE = '';
+const AI_API_BASE = 'https://amnetwork.onrender.com';
 
 const ASSET_API_MAP = {none:'no_assets_no_savings',minimal:'minimal_below_nisab',moderate:'moderate_near_nisab',above_nisab:'above_nisab_threshold'};
 
