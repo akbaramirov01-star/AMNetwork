@@ -15,6 +15,7 @@ from scorer import (
     RecipientProfile, HousingStatus, EmploymentStatus,
     MedicalStatus, CrisisType, AssetLevel, score_recipient,
 )
+from assistant import get_reply
 
 app = Flask(__name__)
 CORS(app)  # the site is static (GitHub Pages) and calls this from a different origin
@@ -79,6 +80,37 @@ def score():
             "fraud_penalty": breakdown.fraud_penalty,
         },
     })
+
+
+MAX_MESSAGE_LEN = 2000
+MAX_HISTORY_ITEMS = 20
+
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    payload = request.get_json(force=True, silent=True) or {}
+    message = (payload.get("message") or "").strip()
+    if not message:
+        return jsonify({"error": "missing required field: message"}), 400
+    if len(message) > MAX_MESSAGE_LEN:
+        return jsonify({"error": f"message too long (max {MAX_MESSAGE_LEN} chars)"}), 400
+
+    history = payload.get("history") or []
+    if not isinstance(history, list):
+        return jsonify({"error": "history must be a list"}), 400
+    history = history[-MAX_HISTORY_ITEMS:]
+    for item in history:
+        if not isinstance(item, dict) or item.get("role") not in ("user", "assistant") or "content" not in item:
+            return jsonify({"error": "invalid history item: expected {role, content}"}), 400
+
+    try:
+        reply = get_reply(message, history)
+    except RuntimeError:
+        return jsonify({"error": "assistant not configured yet"}), 503
+    except Exception:
+        return jsonify({"error": "assistant temporarily unavailable"}), 502
+
+    return jsonify({"reply": reply})
 
 
 if __name__ == "__main__":
