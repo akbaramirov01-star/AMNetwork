@@ -1068,6 +1068,67 @@ function sCrs(p){const s={none:0,sudden_job_loss_under_3_months:3,sudden_economi
 function sFlags(p){const flags=[],pv=pl(p.country);let pen=0;if(p.income>pv*3){flags.push('INCOME_HIGH: Monthly income > 3× regional poverty line');pen+=15;}else if(p.income>pv*2){flags.push('INCOME_ELEVATED: Monthly income > 2× poverty line — verify need');pen+=8;}if(p.asset==='above_nisab'){flags.push('ASSETS_ABOVE_NISAB: Assets exceed nisab ($5,100)');pen+=20;}if(p.refugee&&p.housing==='owned_stable'){flags.push('STATUS_CONFLICT: Refugee + owned stable property');pen+=20;}if(p.prevApps>=3&&p.monthsSince!==null&&p.monthsSince<6){flags.push('FREQUENT_APPS: 3+ applications within 6 months');pen+=15;}if(p.employ==='full_time'&&p.income>pv*2){flags.push('INCOME_CONFLICT: Full-time + income > 2× poverty line');pen+=10;}if(!p.oracle){flags.push('UNCONFIRMED: Oracle confirmation pending');pen+=5;}if(!p.docs){flags.push('DOCS_PENDING: Documents not yet verified');pen+=5;}return [flags,pen];}
 function sNeed(p){return Math.max(0,Math.round(pl(p.country)*p.fam*.8-p.income));}
 function getTier(sc){if(sc>=80)return['CRITICAL','rec_CRITICAL'];if(sc>=65)return['HIGH','rec_HIGH'];if(sc>=48)return['MEDIUM','rec_MEDIUM'];if(sc>=28)return['LOW','rec_LOW'];return['INELIGIBLE','rec_INELIGIBLE'];}
+// ── Real AI scoring backend (ai_scoring/api.py) ─────────────────────────────
+// Set this once the API is deployed (see ai_scoring/API_README.md). Left
+// empty, the quiz silently uses the local JS estimate below — same logic,
+// kept in sync by hand, but not the authoritative model.
+const AI_API_BASE = '';
+
+const ASSET_API_MAP = {none:'no_assets_no_savings',minimal:'minimal_below_nisab',moderate:'moderate_near_nisab',above_nisab:'above_nisab_threshold'};
+
+function profileToApiPayload(p){
+  return {
+    country:p.country, family_size:p.fam,
+    monthly_income_usd:p.income, monthly_expenses_usd:p.expenses,
+    months_without_income:p.noInc,
+    asset_level:ASSET_API_MAP[p.asset]||'no_assets_no_savings',
+    sold_assets_to_survive:p.soldAst,
+    has_riba_debt:p.ribaDebt, debt_amount_usd:p.ribaAmt,
+    has_non_riba_debt:p.otherDebt, non_riba_debt_usd:p.otherAmt,
+    num_dependents:p.deps, num_minor_children:p.minors, num_elderly_dependents:p.eldDeps,
+    is_widow:p.widow, is_single_parent:p.singleP, is_sole_breadwinner:p.soleBW,
+    is_food_insecure:p.foodIns, is_orphan_under_18:p.orphan,
+    is_refugee:p.refugee, is_internally_displaced:p.idp,
+    is_new_convert:p.convert, is_trafficking_victim:p.trafficking,
+    is_student_deen:p.studDeen, is_student_general:p.studGen,
+    is_elderly_working:p.eldWork, is_daawa_worker:p.daawa,
+    medical_status:p.medical, num_sick_dependents:p.sickDeps,
+    housing_status:p.housing, employment_status:p.employ,
+    crisis_type:p.crisis, in_conflict_zone:p.conflictZ,
+    previous_applications:p.prevApps, months_since_last_application:p.monthsSince,
+    documents_verified:p.docs, local_oracle_confirmed:p.oracle,
+  };
+}
+
+function apiResponseToResult(j){
+  const bd=j.breakdown;
+  return {
+    inc:bd.income_score, ast:bd.asset_score, fam:bd.family_score, hou:bd.housing_score,
+    emp:bd.employment_score, hlt:bd.health_score, asc:bd.asnaf_score, crs:bd.crisis_score,
+    total:bd.raw_total, flags:j.fraud_flags, pen:bd.fraud_penalty, final:j.final_score,
+    tier:j.priority_tier, recKey:'rec_'+j.priority_tier, cats:j.asnaf_categories,
+    conf:j.confidence_level, need:j.estimated_monthly_need_usd, source:'api',
+  };
+}
+
+// Free-tier hosting can cold-start for tens of seconds; don't make the
+// visitor wait that long for a button click — fall back to the instant
+// local estimate if the live model doesn't answer quickly.
+async function fetchApiScore(p){
+  if(!AI_API_BASE) return null;
+  try{
+    const ctrl=new AbortController();
+    const timer=setTimeout(()=>ctrl.abort(),10000);
+    const res=await fetch(AI_API_BASE+'/score',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(profileToApiPayload(p)), signal:ctrl.signal,
+    });
+    clearTimeout(timer);
+    if(!res.ok) return null;
+    return apiResponseToResult(await res.json());
+  }catch(e){ return null; }
+}
+
 function calcScore(p){
   const inc=sInc(p),ast=sAst(p),fam=sFam(p),hou=sHou(p),emp=sEmp(p),hlt=sHlt(p);
   const[asc,cats]=sAsn(p);const crs=sCrs(p);
@@ -1162,8 +1223,9 @@ function toggleCond(id){
   else if(id==='cond-other')el.style.display=document.getElementById('f-other-debt').checked?'block':'none';
   else if(id==='cond-months')el.style.display=+document.getElementById('f-prev-apps').value>0?'block':'none';
 }
-function showResult(){
-  const p=getProfile();const r=calcScore(p);
+async function showResult(){
+  const p=getProfile();
+  const r=(await fetchApiScore(p))||calcScore(p);
   const colors={CRITICAL:'#e05252',HIGH:'#e07a2a',MEDIUM:'#d4b800',LOW:'#28aa5a',INELIGIBLE:'#666'};
   const c=colors[r.tier]||'#888';
   document.querySelectorAll('.step-panel').forEach(x=>x.classList.remove('active'));
