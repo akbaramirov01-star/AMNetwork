@@ -2,3 +2,5 @@ node_modules/
 artifacts-manual/
 cache/
 package-lock.json
+.env
+deployments.json

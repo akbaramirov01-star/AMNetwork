@@ -20,6 +20,20 @@ suite but not yet covered by the flow test.
 This is **not** a mainnet deployment — see "Before mainnet" below for what
 still has to happen first.
 
+## Deploy to Base Sepolia testnet (no real funds, free)
+
+```bash
+cp .env.example .env   # fill in a TESTNET-ONLY private key + address
+npm run deploy:testnet
+```
+
+Deploys a mock USDC + `AMZakatPool` to Base Sepolia and runs one real demo
+transaction, printing Basescan links so anyone can verify it on-chain. Needs
+free testnet ETH from a Base Sepolia faucet (e.g. the Coinbase or Alchemy
+Base Sepolia faucet) sent to `DEPLOYER_ADDRESS` first. This step needs real
+outbound network access to `sepolia.base.org` — it cannot run inside a
+network-restricted sandbox.
+
 ## `AMZakatPool.sol`
 
 The core escrow + distribution contract.
