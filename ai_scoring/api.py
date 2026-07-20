@@ -105,9 +105,11 @@ def chat():
 
     try:
         reply = get_reply(message, history)
-    except RuntimeError:
+    except RuntimeError as e:
+        app.logger.error("chat: not configured: %s", e)
         return jsonify({"error": "assistant not configured yet"}), 503
     except Exception:
+        app.logger.exception("chat: unhandled error calling assistant")
         return jsonify({"error": "assistant temporarily unavailable"}), 502
 
     return jsonify({"reply": reply})
