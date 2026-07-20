@@ -528,7 +528,8 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 #assistantPanel.open{display:flex}
 .asst-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bg3);border-bottom:1px solid var(--border);flex-shrink:0}
 .asst-head-title{display:flex;align-items:center;gap:8px;font-family:inherit;font-weight:700;font-size:15px;color:var(--text)}
-.asst-head-dot{width:8px;height:8px;border-radius:50%;background:#28aa5a}
+.asst-head-logo{width:28px;height:28px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.asst-head-name{font-size:15px}
 .asst-close{background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer;line-height:1;padding:2px 6px}
 .asst-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-height:180px}
 .asst-msg{max-width:85%;padding:9px 13px;border-radius:12px;font-family:inherit;font-size:15px;line-height:1.65;white-space:pre-wrap}
@@ -1502,7 +1503,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 
 <div id="assistantPanel" role="dialog" aria-label="AM Network assistant">
   <div class="asst-head">
-    <div class="asst-head-title"><span class="asst-head-dot"></span><span id="asstTitle">AM Network Assistant</span></div>
+    <div class="asst-head-title"><img class="asst-head-logo" src="/logo.webp" alt="AM Network"><span class="asst-head-name" id="asstTitle">AI Assistant</span></div>
     <button class="asst-close" id="asstCloseBtn" aria-label="Close">×</button>
   </div>
   <div class="asst-msgs" id="asstMsgs"></div>
@@ -1729,15 +1730,15 @@ setInterval(updateCD, 1000);
 // ── AI ASSISTANT WIDGET ──
 const ASSISTANT_API_BASE = 'https://amnetwork.onrender.com';
 const ASST_STR = {
-  en:{title:'AM Network Assistant',placeholder:'Ask about Zakat, AM Network…',welcome:"Assalamu alaikum! I'm the AM Network assistant. Ask me about Zakat, how the platform works, or our launch timeline.",error:"Sorry, I couldn't respond just now — please try again in a moment, or email contact@amnetwork.io.",},
-  ru:{title:'Ассистент AM Network',placeholder:'Спросите про Закят, AM Network…',welcome:'Ассаляму алейкум! Я ассистент AM Network. Спросите меня про Закят, как работает платформа, или про сроки запуска.',error:'Извините, не получилось ответить — попробуйте ещё раз через момент, либо напишите на contact@amnetwork.io.',},
-  ar:{title:'مساعد AM Network',placeholder:'اسأل عن الزكاة، AM Network…',welcome:'السلام عليكم! أنا مساعد AM Network. اسألني عن الزكاة، أو كيف تعمل المنصة، أو موعد الإطلاق.',error:'عذرًا، لم أتمكن من الرد الآن — حاول مرة أخرى بعد قليل، أو راسلنا على contact@amnetwork.io.',},
-  tj:{title:'Ёрдамчии AM Network',placeholder:'Дар бораи Закот бипурсед…',welcome:'Ассалому алейкум! Ман ёрдамчии AM Network ҳастам. Дар бораи Закот, чӣ гуна кор кардани платформа ё вақти оғоз бипурсед.',error:'Мутаассифона, ҳозир натавонистам ҷавоб диҳам — лутфан баъд аз лаҳзае боз кӯшиш кунед ё ба contact@amnetwork.io нависед.',},
-  id:{title:'Asisten AM Network',placeholder:'Tanya soal Zakat, AM Network…',welcome:'Assalamu alaikum! Saya asisten AM Network. Tanyakan tentang Zakat, cara kerja platform, atau jadwal peluncuran.',error:'Maaf, belum bisa merespons — coba lagi sesaat lagi, atau email contact@amnetwork.io.',},
-  tr:{title:'AM Network Asistanı',placeholder:'Zekat, AM Network hakkında sorun…',welcome:'Esselamü aleyküm! Ben AM Network asistanıyım. Zekat, platformun nasıl çalıştığı veya lansman zamanı hakkında sorabilirsiniz.',error:'Üzgünüm, şu an yanıt veremedim — birazdan tekrar deneyin veya contact@amnetwork.io adresine yazın.',},
-  zh:{title:'AM Network 助手',placeholder:'询问天课、AM Network…',welcome:'愿真主赐予您平安！我是 AM Network 助手。可以问我关于天课、平台如何运作或上线时间的问题。',error:'抱歉，暂时无法回复 — 请稍后再试，或发邮件至 contact@amnetwork.io。',},
-  ms:{title:'Pembantu AM Network',placeholder:'Tanya tentang Zakat, AM Network…',welcome:'Assalamualaikum! Saya pembantu AM Network. Tanya saya tentang Zakat, cara platform berfungsi, atau jadual pelancaran.',error:'Maaf, tidak dapat membalas sekarang — cuba lagi sebentar, atau emel contact@amnetwork.io.',},
-  de:{title:'AM Network Assistent',placeholder:'Frag zu Zakat, AM Network…',welcome:'Assalamu alaikum! Ich bin der AM Network Assistent. Frag mich zu Zakat, wie die Plattform funktioniert, oder zum Startzeitpunkt.',error:'Entschuldigung, gerade keine Antwort möglich — bitte gleich nochmal versuchen oder contact@amnetwork.io schreiben.',},
+  en:{title:'AI Assistant',placeholder:'Ask about Zakat, AM Network…',welcome:"Assalamu alaikum! I'm the AM Network assistant. Ask me about Zakat, how the platform works, or our launch timeline.",error:"Sorry, I couldn't respond just now — please try again in a moment, or email contact@amnetwork.io.",},
+  ru:{title:'ИИ-ассистент',placeholder:'Спросите про Закят, AM Network…',welcome:'Ассаляму алейкум! Я ассистент AM Network. Спросите меня про Закят, как работает платформа, или про сроки запуска.',error:'Извините, не получилось ответить — попробуйте ещё раз через момент, либо напишите на contact@amnetwork.io.',},
+  ar:{title:'مساعد الذكاء الاصطناعي',placeholder:'اسأل عن الزكاة، AM Network…',welcome:'السلام عليكم! أنا مساعد AM Network. اسألني عن الزكاة، أو كيف تعمل المنصة، أو موعد الإطلاق.',error:'عذرًا، لم أتمكن من الرد الآن — حاول مرة أخرى بعد قليل، أو راسلنا على contact@amnetwork.io.',},
+  tj:{title:'ИИ-ассистент',placeholder:'Дар бораи Закот бипурсед…',welcome:'Ассалому алейкум! Ман ёрдамчии AM Network ҳастам. Дар бораи Закот, чӣ гуна кор кардани платформа ё вақти оғоз бипурсед.',error:'Мутаассифона, ҳозир натавонистам ҷавоб диҳам — лутфан баъд аз лаҳзае боз кӯшиш кунед ё ба contact@amnetwork.io нависед.',},
+  id:{title:'Asisten AI',placeholder:'Tanya soal Zakat, AM Network…',welcome:'Assalamu alaikum! Saya asisten AM Network. Tanyakan tentang Zakat, cara kerja platform, atau jadwal peluncuran.',error:'Maaf, belum bisa merespons — coba lagi sesaat lagi, atau email contact@amnetwork.io.',},
+  tr:{title:'AI Asistanı',placeholder:'Zekat, AM Network hakkında sorun…',welcome:'Esselamü aleyküm! Ben AM Network asistanıyım. Zekat, platformun nasıl çalıştığı veya lansman zamanı hakkında sorabilirsiniz.',error:'Üzgünüm, şu an yanıt veremedim — birazdan tekrar deneyin veya contact@amnetwork.io adresine yazın.',},
+  zh:{title:'AI 助手',placeholder:'询问天课、AM Network…',welcome:'愿真主赐予您平安！我是 AM Network 助手。可以问我关于天课、平台如何运作或上线时间的问题。',error:'抱歉，暂时无法回复 — 请稍后再试，或发邮件至 contact@amnetwork.io。',},
+  ms:{title:'Pembantu AI',placeholder:'Tanya tentang Zakat, AM Network…',welcome:'Assalamualaikum! Saya pembantu AM Network. Tanya saya tentang Zakat, cara platform berfungsi, atau jadual pelancaran.',error:'Maaf, tidak dapat membalas sekarang — cuba lagi sebentar, atau emel contact@amnetwork.io.',},
+  de:{title:'KI-Assistent',placeholder:'Frag zu Zakat, AM Network…',welcome:'Assalamu alaikum! Ich bin der AM Network Assistent. Frag mich zu Zakat, wie die Plattform funktioniert, oder zum Startzeitpunkt.',error:'Entschuldigung, gerade keine Antwort möglich — bitte gleich nochmal versuchen oder contact@amnetwork.io schreiben.',},
 };
 let asstHistory = [];
 let asstOpened = false;
