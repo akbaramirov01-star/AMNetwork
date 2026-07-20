@@ -1729,15 +1729,15 @@ setInterval(updateCD, 1000);
 // ── AI ASSISTANT WIDGET ──
 const ASSISTANT_API_BASE = 'https://amnetwork.onrender.com';
 const ASST_STR = {
-  en:{title:'AM Network Assistant',placeholder:'Ask about Zakat, AM Network…',welcome:"Assalamu alaikum! I'm the AM Network assistant. Ask me about Zakat, how the platform works, or our launch timeline.",error:"Sorry, I couldn't respond just now — please try again in a moment, or email contact@amnetwork.io."},
-  ru:{title:'Ассистент AM Network',placeholder:'Спросите про Закят, AM Network…',welcome:'Ассаляму алейкум! Я ассистент AM Network. Спросите меня про Закят, как работает платформа, или про сроки запуска.',error:'Извините, не получилось ответить — попробуйте ещё раз через момент, либо напишите на contact@amnetwork.io.'},
-  ar:{title:'مساعد AM Network',placeholder:'اسأل عن الزكاة، AM Network…',welcome:'السلام عليكم! أنا مساعد AM Network. اسألني عن الزكاة، أو كيف تعمل المنصة، أو موعد الإطلاق.',error:'عذرًا، لم أتمكن من الرد الآن — حاول مرة أخرى بعد قليل، أو راسلنا على contact@amnetwork.io.'},
-  tj:{title:'Ёрдамчии AM Network',placeholder:'Дар бораи Закот бипурсед…',welcome:'Ассалому алейкум! Ман ёрдамчии AM Network ҳастам. Дар бораи Закот, чӣ гуна кор кардани платформа ё вақти оғоз бипурсед.',error:'Мутаассифона, ҳозир натавонистам ҷавоб диҳам — лутфан баъд аз лаҳзае боз кӯшиш кунед ё ба contact@amnetwork.io нависед.'},
-  id:{title:'Asisten AM Network',placeholder:'Tanya soal Zakat, AM Network…',welcome:'Assalamu alaikum! Saya asisten AM Network. Tanyakan tentang Zakat, cara kerja platform, atau jadwal peluncuran.',error:'Maaf, belum bisa merespons — coba lagi sesaat lagi, atau email contact@amnetwork.io.'},
-  tr:{title:'AM Network Asistanı',placeholder:'Zekat, AM Network hakkında sorun…',welcome:'Esselamü aleyküm! Ben AM Network asistanıyım. Zekat, platformun nasıl çalıştığı veya lansman zamanı hakkında sorabilirsiniz.',error:'Üzgünüm, şu an yanıt veremedim — birazdan tekrar deneyin veya contact@amnetwork.io adresine yazın.'},
-  zh:{title:'AM Network 助手',placeholder:'询问天课、AM Network…',welcome:'愿真主赐予您平安！我是 AM Network 助手。可以问我关于天课、平台如何运作或上线时间的问题。',error:'抱歉，暂时无法回复 — 请稍后再试，或发邮件至 contact@amnetwork.io。'},
-  ms:{title:'Pembantu AM Network',placeholder:'Tanya tentang Zakat, AM Network…',welcome:'Assalamualaikum! Saya pembantu AM Network. Tanya saya tentang Zakat, cara platform berfungsi, atau jadual pelancaran.',error:'Maaf, tidak dapat membalas sekarang — cuba lagi sebentar, atau emel contact@amnetwork.io.'},
-  de:{title:'AM Network Assistent',placeholder:'Frag zu Zakat, AM Network…',welcome:'Assalamu alaikum! Ich bin der AM Network Assistent. Frag mich zu Zakat, wie die Plattform funktioniert, oder zum Startzeitpunkt.',error:'Entschuldigung, gerade keine Antwort möglich — bitte gleich nochmal versuchen oder contact@amnetwork.io schreiben.'},
+  en:{title:'AM Network Assistant',placeholder:'Ask about Zakat, AM Network…',welcome:"Assalamu alaikum! I'm the AM Network assistant. Ask me about Zakat, how the platform works, or our launch timeline.",error:"Sorry, I couldn't respond just now — please try again in a moment, or email contact@amnetwork.io.",waking:"Waking up the assistant — this can take up to a minute on the first message…",},
+  ru:{title:'Ассистент AM Network',placeholder:'Спросите про Закят, AM Network…',welcome:'Ассаляму алейкум! Я ассистент AM Network. Спросите меня про Закят, как работает платформа, или про сроки запуска.',error:'Извините, не получилось ответить — попробуйте ещё раз через момент, либо напишите на contact@amnetwork.io.',waking:'Ассистент просыпается — первое сообщение может занять до минуты…',},
+  ar:{title:'مساعد AM Network',placeholder:'اسأل عن الزكاة، AM Network…',welcome:'السلام عليكم! أنا مساعد AM Network. اسألني عن الزكاة، أو كيف تعمل المنصة، أو موعد الإطلاق.',error:'عذرًا، لم أتمكن من الرد الآن — حاول مرة أخرى بعد قليل، أو راسلنا على contact@amnetwork.io.',waking:'المساعد يستيقظ — قد تستغرق الرسالة الأولى دقيقة تقريبًا…',},
+  tj:{title:'Ёрдамчии AM Network',placeholder:'Дар бораи Закот бипурсед…',welcome:'Ассалому алейкум! Ман ёрдамчии AM Network ҳастам. Дар бораи Закот, чӣ гуна кор кардани платформа ё вақти оғоз бипурсед.',error:'Мутаассифона, ҳозир натавонистам ҷавоб диҳам — лутфан баъд аз лаҳзае боз кӯшиш кунед ё ба contact@amnetwork.io нависед.',waking:'Ёрдамчӣ бедор мешавад — паёми аввал то як дақиқа вақт мегирад…',},
+  id:{title:'Asisten AM Network',placeholder:'Tanya soal Zakat, AM Network…',welcome:'Assalamu alaikum! Saya asisten AM Network. Tanyakan tentang Zakat, cara kerja platform, atau jadwal peluncuran.',error:'Maaf, belum bisa merespons — coba lagi sesaat lagi, atau email contact@amnetwork.io.',waking:'Asisten sedang bangun — pesan pertama bisa memakan waktu hingga satu menit…',},
+  tr:{title:'AM Network Asistanı',placeholder:'Zekat, AM Network hakkında sorun…',welcome:'Esselamü aleyküm! Ben AM Network asistanıyım. Zekat, platformun nasıl çalıştığı veya lansman zamanı hakkında sorabilirsiniz.',error:'Üzgünüm, şu an yanıt veremedim — birazdan tekrar deneyin veya contact@amnetwork.io adresine yazın.',waking:'Asistan uyanıyor — ilk mesaj bir dakikaya kadar sürebilir…',},
+  zh:{title:'AM Network 助手',placeholder:'询问天课、AM Network…',welcome:'愿真主赐予您平安！我是 AM Network 助手。可以问我关于天课、平台如何运作或上线时间的问题。',error:'抱歉，暂时无法回复 — 请稍后再试，或发邮件至 contact@amnetwork.io。',waking:'助手正在启动 — 第一条消息可能需要长达一分钟…',},
+  ms:{title:'Pembantu AM Network',placeholder:'Tanya tentang Zakat, AM Network…',welcome:'Assalamualaikum! Saya pembantu AM Network. Tanya saya tentang Zakat, cara platform berfungsi, atau jadual pelancaran.',error:'Maaf, tidak dapat membalas sekarang — cuba lagi sebentar, atau emel contact@amnetwork.io.',waking:'Pembantu sedang bangun — mesej pertama boleh mengambil masa sehingga seminit…',},
+  de:{title:'AM Network Assistent',placeholder:'Frag zu Zakat, AM Network…',welcome:'Assalamu alaikum! Ich bin der AM Network Assistent. Frag mich zu Zakat, wie die Plattform funktioniert, oder zum Startzeitpunkt.',error:'Entschuldigung, gerade keine Antwort möglich — bitte gleich nochmal versuchen oder contact@amnetwork.io schreiben.',waking:'Der Assistent wacht auf — die erste Nachricht kann bis zu einer Minute dauern…',},
 };
 let asstHistory = [];
 let asstOpened = false;
@@ -1780,15 +1780,29 @@ async function sendAssistantMessage(){
   box.appendChild(typing);
   box.scrollTop = box.scrollHeight;
   document.getElementById('asstSendBtn').disabled = true;
+  // Free-tier hosting can take up to ~50s+ to wake from a cold start; show
+  // a hint after a few seconds so a slow first reply doesn't look broken.
+  let wakingHint = null;
+  const wakingTimer = setTimeout(()=>{
+    wakingHint = document.createElement('div');
+    wakingHint.className = 'asst-msg bot';
+    wakingHint.style.opacity = '.7';
+    wakingHint.style.fontStyle = 'italic';
+    wakingHint.textContent = asstT().waking;
+    box.insertBefore(wakingHint, typing);
+    box.scrollTop = box.scrollHeight;
+  }, 6000);
   try{
     const ctrl = new AbortController();
-    const timer = setTimeout(()=>ctrl.abort(), 45000);
+    const timer = setTimeout(()=>ctrl.abort(), 75000);
     const res = await fetch(ASSISTANT_API_BASE + '/chat', {
       method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({message: msg, history: asstHistory}),
       signal: ctrl.signal,
     });
     clearTimeout(timer);
+    clearTimeout(wakingTimer);
+    if(wakingHint) wakingHint.remove();
     typing.remove();
     if(!res.ok) throw new Error('bad status');
     const data = await res.json();
@@ -1797,6 +1811,8 @@ async function sendAssistantMessage(){
     if(asstHistory.length > 20) asstHistory = asstHistory.slice(-20);
     asstAddMsg('bot', data.reply);
   }catch(e){
+    clearTimeout(wakingTimer);
+    if(wakingHint) wakingHint.remove();
     typing.remove();
     asstAddMsg('err', asstT().error);
   }finally{
