@@ -1761,6 +1761,10 @@ function toggleAssistant(){
     document.getElementById('asstInput').placeholder = asstT().placeholder;
     asstAddMsg('bot', asstT().welcome);
     setTimeout(()=>document.getElementById('asstInput').focus(),100);
+    // Free-tier hosting spins down when idle; ping /health now so the
+    // container is likely already warm by the time the visitor sends a
+    // message, instead of waiting for the first /chat call to wake it.
+    fetch(ASSISTANT_API_BASE + '/health').catch(()=>{});
   }
 }
 async function sendAssistantMessage(){
@@ -1778,7 +1782,7 @@ async function sendAssistantMessage(){
   document.getElementById('asstSendBtn').disabled = true;
   try{
     const ctrl = new AbortController();
-    const timer = setTimeout(()=>ctrl.abort(), 25000);
+    const timer = setTimeout(()=>ctrl.abort(), 45000);
     const res = await fetch(ASSISTANT_API_BASE + '/chat', {
       method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({message: msg, history: asstHistory}),
