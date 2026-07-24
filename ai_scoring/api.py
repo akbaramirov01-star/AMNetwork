@@ -18,7 +18,14 @@ from scorer import (
 from assistant import get_reply
 
 app = Flask(__name__)
-CORS(app)  # the site is static (GitHub Pages) and calls this from a different origin
+ALLOWED_ORIGINS = [
+    "https://amnetwork.io",
+    "https://www.amnetwork.io",
+    "http://localhost:8000", "http://localhost:8101", "http://127.0.0.1:8101",  # local dev
+]
+CORS(app, origins=ALLOWED_ORIGINS)
+MAX_BODY_BYTES = 32 * 1024  # 32KB is generous for these payloads; blocks large-body abuse
+app.config["MAX_CONTENT_LENGTH"] = MAX_BODY_BYTES
 
 ENUM_FIELDS = {
     "asset_level": AssetLevel,
@@ -34,18 +41,33 @@ def health():
     return jsonify({"status": "ok", "service": "am-network-ai-scoring", "version": "2.1"})
 
 
+def _has_non_finite(value) -> bool:
+    """True if value is (or contains, recursively) a NaN/Infinity float."""
+    if isinstance(value, float):
+        return value != value or value in (float("inf"), float("-inf"))  # nan != nan
+    if isinstance(value, dict):
+        return any(_has_non_finite(v) for v in value.values())
+    if isinstance(value, list):
+        return any(_has_non_finite(v) for v in value)
+    return False
+
+
 @app.route("/score", methods=["POST"])
 def score():
     payload = request.get_json(force=True, silent=True)
-    if not payload or "country" not in payload:
-        return jsonify({"error": "missing required field: country"}), 400
+    if not payload or not isinstance(payload, dict):
+        return jsonify({"error": "invalid JSON body"}), 400
+    if not isinstance(payload.get("country"), str) or not payload["country"].strip():
+        return jsonify({"error": "missing or invalid required field: country (must be a non-empty string)"}), 400
+    if _has_non_finite(payload):
+        return jsonify({"error": "numeric fields must be finite (no NaN/Infinity)"}), 400
 
     kwargs = dict(payload)
     for field, enum_cls in ENUM_FIELDS.items():
         if field in kwargs:
             try:
                 kwargs[field] = enum_cls(kwargs[field])
-            except ValueError:
+            except (ValueError, TypeError):
                 valid = [e.value for e in enum_cls]
                 return jsonify({"error": f"invalid {field}: {kwargs[field]!r}. Valid: {valid}"}), 400
 
@@ -53,10 +75,12 @@ def score():
 
     try:
         profile = RecipientProfile(**kwargs)
+        breakdown = score_recipient(profile)
     except TypeError as e:
         return jsonify({"error": f"invalid field in request: {e}"}), 400
-
-    breakdown = score_recipient(profile)
+    except (ValueError, AttributeError, ZeroDivisionError) as e:
+        app.logger.warning("score: rejected malformed input: %s", e)
+        return jsonify({"error": "invalid field value in request"}), 400
 
     return jsonify({
         "final_score": round(breakdown.final_score, 1),
@@ -102,6 +126,9 @@ def chat():
     for item in history:
         if not isinstance(item, dict) or item.get("role") not in ("user", "assistant") or "content" not in item:
             return jsonify({"error": "invalid history item: expected {role, content}"}), 400
+        content = item["content"]
+        if not isinstance(content, str) or len(content) > MAX_MESSAGE_LEN:
+            return jsonify({"error": f"history item content must be a string up to {MAX_MESSAGE_LEN} chars"}), 400
 
     try:
         reply = get_reply(message, history)
@@ -116,4 +143,7 @@ def chat():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=False)
+    # threaded=True: the Anthropic call in /chat (with web search) can take many
+    # seconds; without this, Werkzeug's dev server is single-threaded and one
+    # slow /chat request blocks every other visitor's /score, /chat, /health.
+    app.run(host="0.0.0.0", port=8000, debug=False, threaded=True)
