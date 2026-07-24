@@ -14,8 +14,10 @@ a full end-to-end flow — register recipient → donor donates → tiered ujrah
 computed and routed to treasury → non-oracle release attempt correctly
 reverts → oracle releases full Zakat principal to the recipient → pause/unpause
 kill-switch — against the actual compiled bytecode on a local EVM (Hardhat
-Network). 9/9 checks pass. `AMZakatPoolGeneral.sol` is compiled by the same
-suite but not yet covered by the flow test.
+Network). 11/11 checks pass. `AMZakatPoolGeneral.sol` is compiled by the same
+suite but has **zero test coverage** — no flow test exercises it. It also has a
+materially different (and unaudited) trust model from `AMZakatPool.sol`: see
+"Known issues — pre-audit" below before relying on it for anything.
 
 This is **not** a mainnet deployment — see "Before mainnet" below for what
 still has to happen first.
@@ -87,6 +89,30 @@ Do **not** deploy with real funds until:
 3. **Multisig** (Gnosis Safe) holds `ADMIN_ROLE` — never a single private key.
 4. Comprehensive **test suite** (Foundry/Hardhat) covering reentrancy, access control, edge cases.
 5. **Testnet deployment** on Base Sepolia with real oracle dry-runs.
+
+### Known issues — pre-audit (found in internal review, July 2026)
+
+Flag these explicitly to whoever does the professional audit:
+
+- **`AMZakatPoolGeneral.sol` — a single compromised Oracle key can drain the
+  entire shared pool**, not just funds routed to it. `registerRecipient()`
+  and `distribute()` are both gated only by `ORACLE_ROLE`, and `distribute()`
+  pulls from the single shared `poolBalance` rather than a per-recipient
+  escrow (unlike `AMZakatPool.sol`, where `release()` is bounded by that one
+  recipient's `escrow`). One phished/rogue oracle credential can move 100%
+  of all historical general-pool donations in a single transaction. Needs
+  either multi-oracle consensus, a per-oracle release cap, or a dispute/
+  cooldown window before mainnet. This contract also has **zero test
+  coverage** (see above) — do not treat it as equivalently vetted to
+  `AMZakatPool.sol`.
+- **`donate()` has no fee-slippage protection.** `ujrah` is computed from
+  live tier storage at execution time, not a value the donor agreed to. A
+  donor using an infinite ERC20 approval (the pattern this repo's own test
+  suite uses) who submits `donate()` while an admin tier change is in
+  flight will silently pay whatever ujrah rate is live when the tx mines —
+  up to the 2.5% cap — with no revert and no way to bound it. Add a
+  `maxUjrah` parameter to `donate()` that reverts if the live quote exceeds
+  what the donor's UI last showed them.
 
 ## Local setup (for the engineer who joins)
 

@@ -110,7 +110,7 @@ async function main() {
   console.log("PASS — unpaused successfully");
 
   console.log("\n=================================================");
-  console.log("ALL 9 CHECKS PASSED — full donate -> escrow -> verify");
+  console.log("ALL 11 CHECKS PASSED — full donate -> escrow -> verify");
   console.log("-> release flow verified end-to-end against the real");
   console.log("compiled AMZakatPool.sol bytecode on a live local EVM.");
   console.log("=================================================");
