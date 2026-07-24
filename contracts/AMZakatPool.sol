@@ -136,9 +136,19 @@ contract AMZakatPool is AccessControl, ReentrancyGuard, Pausable {
     /**
      * @param recipient   the verified recipient
      * @param zakatAmount the Zakat the donor wishes to give (reaches recipient in full)
+     * @param maxUjrah    the highest service fee the donor accepts, in stablecoin
+     *                    units. Pass the exact figure your UI showed the donor
+     *                    (`quoteUjrah`), optionally plus a small tolerance.
      * @dev Donor must approve (zakatAmount + ujrah) of the stablecoin first.
+     *
+     *      maxUjrah is REQUIRED, not optional: the fee is read from live tier
+     *      storage at execution time, so without a bound an ADMIN_ROLE tier
+     *      change landing before this transaction mines would silently charge
+     *      the donor more than they agreed to (up to MAX_UJRAH_BPS). Donors
+     *      commonly grant an infinite ERC20 allowance, so there is no
+     *      allowance ceiling to protect them either.
      */
-    function donate(address recipient, uint256 zakatAmount)
+    function donate(address recipient, uint256 zakatAmount, uint256 maxUjrah)
         external nonReentrant whenNotPaused
     {
         require(zakatAmount > 0, "zero amount");
@@ -146,6 +156,7 @@ contract AMZakatPool is AccessControl, ReentrancyGuard, Pausable {
         require(r.registered, "recipient not verified");
 
         uint256 ujrah = quoteUjrah(zakatAmount);
+        require(ujrah <= maxUjrah, "ujrah exceeds maxUjrah");
 
         // Pull Zakat into escrow and ujrah to treasury in two safe transfers.
         stablecoin.safeTransferFrom(msg.sender, address(this), zakatAmount);

@@ -52,10 +52,25 @@ contract AMZakatPoolGeneral is AccessControl, ReentrancyGuard, Pausable {
     uint256 public totalDistributed;
     uint256 public totalUjrah;
 
+    // ─── Rate limit: circuit breaker on the shared pool ───────────────────────
+    // Unlike AMZakatPool, where release() can only ever move funds a donor
+    // specifically routed to one recipient, here every oracle can reach the
+    // whole shared poolBalance. Without a cap, one phished or rogue ORACLE_ROLE
+    // key drains every donation ever made to the general pool in a single
+    // transaction. This limits each oracle to a fixed amount per rolling
+    // 24h window, converting instant total loss into rate-limited loss that
+    // ADMIN can stop with pause() / removeOracle().
+    //
+    // NOT a substitute for multi-oracle consensus — see README "Known issues".
+    uint256 public oracleDailyLimit;
+    mapping(address => uint256) public oracleDayIndex;   // block.timestamp / 1 days
+    mapping(address => uint256) public oracleSpentToday;
+
     event Donated(address indexed donor, uint256 zakat, uint256 ujrah);
     event RecipientRegistered(address indexed recipient, uint8 score, uint8 category, address indexed oracle);
     event Distributed(address indexed recipient, uint256 amount, uint8 score, address indexed oracle);
     event BatchDistributed(uint256 recipientCount, uint256 totalAmount, address indexed oracle);
+    event OracleDailyLimitUpdated(uint256 oldLimit, uint256 newLimit);
 
     constructor(address _stablecoin, address _treasury, address _admin) {
         require(_stablecoin != address(0) && _treasury != address(0) && _admin != address(0), "zero addr");
@@ -67,12 +82,25 @@ contract AMZakatPoolGeneral is AccessControl, ReentrancyGuard, Pausable {
         ujrahTiers.push(UjrahTier({minAmount: 0,        bps: 250}));
         ujrahTiers.push(UjrahTier({minAmount: 1_000e6,  bps: 150}));
         ujrahTiers.push(UjrahTier({minAmount: 10_000e6, bps: 100}));
+
+        // Conservative default: 10,000 units (e.g. $10k USDC) per oracle per day.
+        // ADMIN raises it deliberately as distribution volume grows.
+        oracleDailyLimit = 10_000e6;
+        emit OracleDailyLimitUpdated(0, 10_000e6);
     }
 
     // ─── Donor: give to the general pool ──────────────────────────────────────
-    function donate(uint256 zakatAmount) external nonReentrant whenNotPaused {
+    /**
+     * @param zakatAmount the Zakat to add to the general pool (100% reaches recipients)
+     * @param maxUjrah    highest service fee the donor accepts, in stablecoin units.
+     *                    Required — see the note on AMZakatPool.donate(): the fee is
+     *                    read from live tier storage, so an unbounded call can be
+     *                    silently overcharged by an admin tier change that lands first.
+     */
+    function donate(uint256 zakatAmount, uint256 maxUjrah) external nonReentrant whenNotPaused {
         require(zakatAmount > 0, "zero amount");
         uint256 ujrah = quoteUjrah(zakatAmount);
+        require(ujrah <= maxUjrah, "ujrah exceeds maxUjrah");
 
         stablecoin.safeTransferFrom(msg.sender, address(this), zakatAmount);
         if (ujrah > 0) {
@@ -116,10 +144,25 @@ contract AMZakatPoolGeneral is AccessControl, ReentrancyGuard, Pausable {
         emit BatchDistributed(to.length, sum, msg.sender);
     }
 
+    /// @dev Charges `amount` against msg.sender's rolling 24h allowance.
+    ///      Called on every distribution path, so batchDistribute accumulates
+    ///      across its whole loop rather than resetting per recipient.
+    function _consumeOracleAllowance(uint256 amount) internal {
+        uint256 today = block.timestamp / 1 days;
+        if (oracleDayIndex[msg.sender] != today) {
+            oracleDayIndex[msg.sender] = today;
+            oracleSpentToday[msg.sender] = 0;
+        }
+        uint256 spent = oracleSpentToday[msg.sender] + amount;
+        require(spent <= oracleDailyLimit, "oracle daily limit exceeded");
+        oracleSpentToday[msg.sender] = spent;
+    }
+
     function _distribute(address recipient, uint256 amount) internal {
         Recipient storage r = recipients[recipient];
         require(r.registered, "not registered");
         require(amount > 0 && amount <= poolBalance, "exceeds pool");
+        _consumeOracleAllowance(amount);
 
         poolBalance      -= amount;
         r.received       += amount;
@@ -147,6 +190,18 @@ contract AMZakatPoolGeneral is AccessControl, ReentrancyGuard, Pausable {
             if (i > 0) require(tiers[i].minAmount > tiers[i - 1].minAmount, "not ascending");
             ujrahTiers.push(tiers[i]);
         }
+    }
+
+    /// @notice Remaining amount `oracle` may distribute in the current 24h window.
+    function oracleRemainingToday(address oracle) external view returns (uint256) {
+        if (oracleDayIndex[oracle] != block.timestamp / 1 days) return oracleDailyLimit;
+        uint256 spent = oracleSpentToday[oracle];
+        return spent >= oracleDailyLimit ? 0 : oracleDailyLimit - spent;
+    }
+
+    function setOracleDailyLimit(uint256 newLimit) external onlyRole(ADMIN_ROLE) {
+        emit OracleDailyLimitUpdated(oracleDailyLimit, newLimit);
+        oracleDailyLimit = newLimit;
     }
 
     function setTreasury(address t) external onlyRole(ADMIN_ROLE) { require(t != address(0), "zero"); treasury = t; }

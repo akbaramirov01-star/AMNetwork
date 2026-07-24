@@ -85,7 +85,7 @@ contract AMZakatPoolTest is Test {
         uint256 ujrah = pool.quoteUjrah(zakat); // 12.5e6
 
         vm.prank(donor);
-        pool.donate(recipient, zakat);
+        pool.donate(recipient, zakat, type(uint256).max);
 
         // Full Zakat is escrowed; ujrah went to treasury.
         assertEq(usdc.balanceOf(address(pool)), zakat);
@@ -100,7 +100,7 @@ contract AMZakatPoolTest is Test {
     function testCannotDonateToUnregistered() public {
         vm.prank(donor);
         vm.expectRevert(bytes("recipient not verified"));
-        pool.donate(recipient, 500e6);
+        pool.donate(recipient, 500e6, type(uint256).max);
     }
 
     // ── Release: oracle confirms delivery, recipient receives full Zakat ───────
@@ -108,7 +108,7 @@ contract AMZakatPoolTest is Test {
         vm.prank(oracle);
         pool.registerRecipient(recipient, 82, 1);
         vm.prank(donor);
-        pool.donate(recipient, 500e6);
+        pool.donate(recipient, 500e6, type(uint256).max);
 
         vm.prank(oracle);
         pool.release(recipient, 500e6);
@@ -122,7 +122,7 @@ contract AMZakatPoolTest is Test {
         vm.prank(oracle);
         pool.registerRecipient(recipient, 82, 1);
         vm.prank(donor);
-        pool.donate(recipient, 500e6);
+        pool.donate(recipient, 500e6, type(uint256).max);
 
         vm.prank(oracle);
         vm.expectRevert(bytes("bad amount"));
@@ -133,7 +133,7 @@ contract AMZakatPoolTest is Test {
         vm.prank(oracle);
         pool.registerRecipient(recipient, 82, 1);
         vm.prank(donor);
-        pool.donate(recipient, 500e6);
+        pool.donate(recipient, 500e6, type(uint256).max);
 
         vm.prank(donor);
         vm.expectRevert();
@@ -158,6 +158,6 @@ contract AMZakatPoolTest is Test {
 
         vm.prank(donor);
         vm.expectRevert();
-        pool.donate(recipient, 500e6);
+        pool.donate(recipient, 500e6, type(uint256).max);
     }
 }

@@ -55,7 +55,7 @@ async function main() {
   console.log("PASS — quoted ujrah:", ethers.formatUnits(ujrah, 6), "USDC (1.5% tier)");
 
   await (await usdc.connect(donor).approve(await pool.getAddress(), zakatAmount + ujrah)).wait();
-  const tx = await pool.connect(donor).donate(await recipient.getAddress(), zakatAmount);
+  const tx = await pool.connect(donor).donate(await recipient.getAddress(), zakatAmount, ujrah);
   const receipt = await tx.wait();
   const donatedEvent = receipt.logs
     .map((l) => { try { return pool.interface.parseLog(l); } catch { return null; } })
@@ -94,13 +94,47 @@ async function main() {
   assert.strictEqual(rFinal.received, zakatAmount, "lifetime received mismatch");
   console.log("PASS — escrow cleared, lifetime received tracked correctly");
 
+  console.log("\n── Fee-slippage guard: admin raises tiers mid-flight ──");
+  // Donor saw the 1.5% tier (30 USDC on a 2,000 donation) and signs a donate()
+  // bounded by that. Admin then raises the applicable tier to the 2.5% cap
+  // before the donor's tx mines. Without maxUjrah the donor would silently pay
+  // 50 instead of 30; with it, the tx must revert.
+  const quoteBefore = await pool.quoteUjrah(zakatAmount);
+  await (await pool.connect(admin).setUjrahTiers([[0, 250]])).wait();
+  const quoteAfter = await pool.quoteUjrah(zakatAmount);
+  assert(quoteAfter > quoteBefore, "tier change should have raised the live quote");
+  console.log("   live ujrah moved from", ethers.formatUnits(quoteBefore, 6),
+              "->", ethers.formatUnits(quoteAfter, 6), "USDC");
+
+  await (await usdc.connect(admin).mint(await donor.getAddress(), 3_000_000000n)).wait();
+  await (await usdc.connect(donor).approve(await pool.getAddress(), ethers.MaxUint256)).wait();
+
+  let slippageReverted = false;
+  try {
+    await pool.connect(donor).donate(await recipient.getAddress(), zakatAmount, quoteBefore);
+  } catch (e) {
+    slippageReverted = true;
+  }
+  assert(slippageReverted, "donate must revert when live ujrah exceeds maxUjrah");
+  console.log("PASS — donate reverted: donor was not silently overcharged");
+
+  const treasuryBeforeOk = await usdc.balanceOf(await treasury.getAddress());
+  await (await pool.connect(donor).donate(await recipient.getAddress(), zakatAmount, quoteAfter)).wait();
+  const treasuryAfterOk = await usdc.balanceOf(await treasury.getAddress());
+  assert.strictEqual(treasuryAfterOk - treasuryBeforeOk, quoteAfter, "accepted-bound donation charged wrong ujrah");
+  console.log("PASS — same donation succeeds once the donor accepts the new bound");
+
+  // restore default tiers so later assertions see the documented schedule
+  await (await pool.connect(admin).setUjrahTiers([[0, 250], [1_000_000000n, 150], [10_000_000000n, 100]])).wait();
+  await (await pool.connect(oracle).release(await recipient.getAddress(), zakatAmount)).wait();
+
   console.log("\n── Admin pauses contract (emergency kill-switch) ──");
   await (await pool.connect(admin).pause()).wait();
   let pausedReverted = false;
   try {
     await usdc.connect(admin).mint(await donor.getAddress(), 1_000000n);
     await usdc.connect(donor).approve(await pool.getAddress(), 1_000000n);
-    await pool.connect(donor).donate(await recipient.getAddress(), 500000n);
+    await pool.connect(donor).donate(await recipient.getAddress(), 500000n, ethers.MaxUint256);
   } catch (e) {
     pausedReverted = true;
   }
@@ -110,7 +144,7 @@ async function main() {
   console.log("PASS — unpaused successfully");
 
   console.log("\n=================================================");
-  console.log("ALL 11 CHECKS PASSED — full donate -> escrow -> verify");
+  console.log("ALL 13 CHECKS PASSED — full donate -> escrow -> verify");
   console.log("-> release flow verified end-to-end against the real");
   console.log("compiled AMZakatPool.sol bytecode on a live local EVM.");
   console.log("=================================================");

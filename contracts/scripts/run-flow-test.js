@@ -24,10 +24,10 @@ function waitForNode(url, timeoutMs = 15000) {
 }
 
 async function main() {
-  console.log("=== 1/3 Compiling contracts ===\n");
+  console.log("=== 1/4 Compiling contracts ===\n");
   require("./compile.js");
 
-  console.log("\n=== 2/3 Starting local EVM (Hardhat Network) ===\n");
+  console.log("\n=== 2/4 Starting local EVM (Hardhat Network) ===\n");
   const node = spawn("npx", ["hardhat", "node"], {
     cwd: path.join(__dirname, ".."),
     stdio: "ignore",
@@ -41,9 +41,14 @@ async function main() {
     await waitForNode("http://127.0.0.1:8545");
     console.log("Local EVM ready at http://127.0.0.1:8545\n");
 
-    console.log("=== 3/3 Running end-to-end flow test ===\n");
+    console.log("=== 3/4 Running AMZakatPool flow test (directed donations) ===\n");
     const flowTest = require("./flow-test.js");
     await flowTest();
+
+    console.log("\n=== 4/4 Running AMZakatPoolGeneral flow test (shared pool) ===\n");
+    const flowTestGeneral = require("./flow-test-general.js");
+    await flowTestGeneral();
+
     cleanup();
     process.exit(0);
   } catch (e) {
