@@ -144,6 +144,57 @@ Now write the explanation body only."""
     return "".join(b.text for b in resp.content if b.type == "text").strip()
 
 
+CHROME_SYSTEM = """You translate short UI strings for an AM Academy lesson.
+
+You are given a JSON object holding a lesson title, the labels of a visual card
+block, source captions and quiz questions. Translate every string value into the
+requested language and return the SAME JSON structure with the SAME keys, the
+SAME array lengths and the SAME order.
+
+RULES
+- Translate only. Do not rephrase into something else, do not expand, do not add
+  or remove any item from any list.
+- Carry every number, unit, percentage, weight and scripture reference across
+  EXACTLY as written ("85 г" stays 85 grams; "2:275" stays 2:275; "2.5%" stays
+  2.5%). Convert the unit word to the target language, never the value.
+- Islamic terms keep their standard form in the target language (zakat, nisab,
+  riba, gharar, sadaqah, waqf, murabaha, ijara, mudaraba, musharaka, salam,
+  istisna, takaful).
+- Keep each string about as short as the original — these render inside small
+  cards.
+- Output raw JSON only. No markdown fence, no commentary, no explanation.
+"""
+
+
+def translate_chrome(payload: dict, lang: str) -> dict:
+    """Translate a lesson's title + visual labels. Returns {} if anything is off,
+    so the caller can safely fall back to the original Russian."""
+    import json
+
+    language = LANG_NAMES.get(lang)
+    if not language:
+        return {}
+
+    resp = _client().messages.create(
+        model=MODEL,
+        max_tokens=4000,
+        system=CHROME_SYSTEM,
+        messages=[{"role": "user", "content":
+                   f"TARGET LANGUAGE: {language}\n\nJSON:\n"
+                   + json.dumps(payload, ensure_ascii=False)}],
+    )
+    text = "".join(b.text for b in resp.content if b.type == "text").strip()
+    if text.startswith("```"):
+        text = text.split("```")[1]
+        if text.startswith("json"):
+            text = text[4:]
+    try:
+        out = json.loads(text)
+    except (ValueError, TypeError):
+        return {}
+    return out if isinstance(out, dict) else {}
+
+
 APPLY_SYSTEM = """You help one reader work out how a fixed AM Academy lesson applies
 to the situation they just described.
 

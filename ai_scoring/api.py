@@ -16,7 +16,7 @@ from scorer import (
     MedicalStatus, CrisisType, AssetLevel, score_recipient,
 )
 from assistant import get_reply
-from academy import explain as academy_explain, apply_to_case, AUDIENCES
+from academy import explain as academy_explain, apply_to_case, translate_chrome, AUDIENCES
 
 app = Flask(__name__)
 ALLOWED_ORIGINS = [
@@ -214,6 +214,60 @@ def academy_explain_route():
         _explain_cache.clear()
     _explain_cache[key] = text
     return jsonify({"text": text, "cached": False})
+
+
+MAX_CHROME_BYTES = 9000
+_chrome_cache: dict[tuple, dict] = {}
+
+
+@app.route("/academy/chrome", methods=["POST"])
+def academy_chrome_route():
+    """Translate a lesson's title and visual-card labels.
+
+    The lesson prose is translated by /academy/explain, but the title and the
+    visual block are static strings from curriculum.js and were staying Russian
+    whichever language the reader picked. This translates them. Cached hard:
+    unlike /explain the result depends only on (content, language), not on who
+    is reading, so one call serves every audience.
+    """
+    p = request.get_json(force=True, silent=True) or {}
+    lang = p.get("lang")
+    if lang not in VALID_LANGS:
+        return jsonify({"error": f"invalid lang. Valid: {sorted(VALID_LANGS)}"}), 400
+
+    chrome = p.get("chrome")
+    if not isinstance(chrome, dict) or not chrome:
+        return jsonify({"error": "missing required field: chrome (object)"}), 400
+    try:
+        import json as _json
+        raw = _json.dumps(chrome, ensure_ascii=False)
+    except (TypeError, ValueError):
+        return jsonify({"error": "chrome must be JSON-serialisable"}), 400
+    if len(raw.encode("utf-8")) > MAX_CHROME_BYTES:
+        return jsonify({"error": f"chrome too large (max {MAX_CHROME_BYTES} bytes)"}), 400
+
+    key = (lang, raw)
+    if key in _chrome_cache:
+        return jsonify({"chrome": _chrome_cache[key], "cached": True})
+
+    try:
+        out = translate_chrome(chrome, lang)
+    except RuntimeError as e:
+        app.logger.error("academy/chrome: not configured: %s", e)
+        return jsonify({"error": "translator not configured yet"}), 503
+    except Exception:
+        app.logger.exception("academy/chrome: unhandled error")
+        return jsonify({"error": "translator temporarily unavailable"}), 502
+
+    if not out:
+        # Model returned something unparseable. Say so rather than serving junk;
+        # the client falls back to the original text.
+        return jsonify({"error": "translation unavailable"}), 502
+
+    if len(_chrome_cache) >= MAX_CACHE_ENTRIES:
+        _chrome_cache.clear()
+    _chrome_cache[key] = out
+    return jsonify({"chrome": out, "cached": False})
 
 
 @app.route("/academy/apply", methods=["POST"])

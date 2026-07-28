@@ -361,7 +361,7 @@ const UI = {
       certWarn:'Сертификат подтверждает прохождение учебного модуля AM Academy. Он не является религиозной квалификацией или фетвой.',
       foot:'Учебный материал. Не является фетвой или религиозным заключением.',
       min:'мин',lessons:'урока',soon:'скоро',done:'пройден',lessonOf:'урок',of:'из',
-      loading:'Готовим объяснение под вас',thinking:'Разбираем',
+      loading:'Готовим объяснение под вас',thinking:'Разбираем',verify:'Проверить сам →',
       offline:'Наставник сейчас недоступен — показан исходный текст урока без адаптации.',
       offErr:'Наставник сейчас недоступен. Попробуйте через минуту.',
       auds:{teen:['Школьник','12–16 лет, простыми словами'],student:['Студент','учёба, первая работа, сбережения'],
@@ -384,7 +384,7 @@ const UI = {
       certWarn:'This certificate confirms completion of an AM Academy study module. It is not a religious qualification or a fatwa.',
       foot:'Study material. Not a fatwa or religious ruling.',
       min:'min',lessons:'lessons',soon:'soon',done:'passed',lessonOf:'lesson',of:'of',
-      loading:'Preparing your explanation',thinking:'Working through it',
+      loading:'Preparing your explanation',thinking:'Working through it',verify:'Check it yourself →',
       offline:'The tutor is unavailable — showing the original lesson text without adaptation.',
       offErr:'The tutor is unavailable. Please try again in a moment.',
       auds:{teen:['School','12–16, simple words'],student:['Student','study, first job, savings'],
@@ -407,7 +407,7 @@ const UI = {
       certWarn:'تؤكد هذه الشهادة إتمام وحدة تعليمية في AM Academy. وهي ليست مؤهلاً شرعياً ولا فتوى.',
       foot:'مادة تعليمية. ليست فتوى ولا حكماً شرعياً.',
       min:'دقيقة',lessons:'دروس',soon:'قريباً',done:'مكتملة',lessonOf:'الدرس',of:'من',
-      loading:'نُعدّ الشرح المناسب لك',thinking:'جارٍ التحليل',
+      loading:'نُعدّ الشرح المناسب لك',thinking:'جارٍ التحليل',verify:'← تحقّق بنفسك',
       offline:'المعلّم غير متاح — يُعرض نص الدرس الأصلي دون تكييف.',
       offErr:'المعلّم غير متاح حالياً. حاول بعد قليل.',
       auds:{teen:['تلميذ','12–16 سنة، بكلمات بسيطة'],student:['طالب','الدراسة، أول عمل، المدخرات'],
@@ -430,6 +430,7 @@ const store = {
 
 let cur = { mod:null, idx:0 };
 let examState = null;
+let loadToken = 0;   // guards against a slow response painting over a newer lesson
 const $ = id => document.getElementById(id);
 const T = () => UI[store.lang] || UI.en;
 const esc = s => { const d=document.createElement('div'); d.textContent=String(s); return d.innerHTML; };
@@ -475,7 +476,7 @@ function renderLang(){
     b.onclick = () => {
       store.lang = b.dataset.l;
       $('langWrap').classList.remove('open');
-      applyLangDir(); renderLang(); paintUI(); renderAuds(); renderMods();
+      applyLangDir(); renderLang(); paintUI(); renderAuds(); refreshMods();
       if ($('lesson').style.display === 'block') loadLesson();
     };
   });
@@ -507,9 +508,52 @@ function renderAuds(){
   });
 }
 
-function renderMods(){
+// ── translated chrome ──────────────────────────────────────────────────────
+// Lesson prose is translated by /academy/explain. Titles and the visual cards
+// are static Russian strings in curriculum.js, so they go through /academy/chrome
+// separately. Cached in sessionStorage: the result depends only on the text and
+// the language, never on who is reading, so it is worth keeping.
+const chromeCache = {};
+function ckey(lang, obj){ return lang + '|' + JSON.stringify(obj); }
+
+async function translateChrome(obj, lang){
+  if (lang === 'ru' || !obj) return obj;
+  const k = ckey(lang, obj);
+  if (chromeCache[k]) return chromeCache[k];
+  try {
+    const cached = sessionStorage.getItem('amn_ac_' + k);
+    if (cached) return (chromeCache[k] = JSON.parse(cached));
+  } catch(e){}
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(()=>ctrl.abort(), 45000);
+    const res = await fetch(API+'/academy/chrome', {
+      method:'POST', headers:{'Content-Type':'application/json'}, signal:ctrl.signal,
+      body: JSON.stringify({chrome:obj, lang}),
+    });
+    clearTimeout(timer);
+    if (!res.ok) throw new Error();
+    const out = (await res.json()).chrome;
+    if (!out) throw new Error();
+    chromeCache[k] = out;
+    try { sessionStorage.setItem('amn_ac_' + k, JSON.stringify(out)); } catch(e){}
+    return out;
+  } catch(e) { return obj; }   // fall back to the original — never blank
+}
+
+// The curriculum screen: module titles and subtitles in one batched call.
+async function translateMods(lang){
+  if (lang === 'ru') return null;
+  const payload = {};
+  CURRICULUM.forEach(m => { payload[m.id] = {title:m.title, subtitle:m.subtitle}; });
+  const out = await translateChrome(payload, lang);
+  return out === payload ? null : out;
+}
+
+function renderMods(tr){
   const t = T(), done = store.done, passed = store.passed;
   $('mods').innerHTML = CURRICULUM.map(m => {
+    const mt = (tr && tr[m.id]) || m;
     const total = m.lessons.length;
     const n = (done[m.id]||[]).length;
     const pct = total ? Math.round(n/total*100) : 0;
@@ -517,7 +561,7 @@ function renderMods(){
     return `<div class="mod ${m.status}" data-mod="${m.id}">
       <div class="mic">${m.icon}</div>
       <div style="flex:1;min-width:0">
-        <h3>${esc(m.title)}</h3><p>${esc(m.subtitle)}</p>
+        <h3>${esc(mt.title || m.title)}</h3><p>${esc(mt.subtitle || m.subtitle)}</p>
         <div class="meta">
           <span class="tag">${m.minutes} ${esc(t.min)}</span>
           ${total?`<span class="tag">${total} ${esc(t.lessons)}</span>`:''}
@@ -529,6 +573,16 @@ function renderMods(){
   }).join('');
   $('mods').querySelectorAll('.mod.open').forEach(el => el.onclick = () => openModule(el.dataset.mod));
 }
+
+let modTr = null;   // module titles in the current language, or null for Russian
+async function refreshMods(){
+  renderMods(modTr);                     // paint immediately, never leave it blank
+  const lang = store.lang;
+  const tr = await translateMods(lang);
+  if (store.lang !== lang) return;       // reader switched again while we waited
+  modTr = tr; renderMods(tr);
+}
+function modTitle(m){ return (modTr && modTr[m.id] && modTr[m.id].title) || m.title; }
 
 function show(w){
   ['home','lesson','exam','cert'].forEach(id =>
@@ -607,14 +661,35 @@ function renderQuestions(list, container, opts){
   return state;
 }
 
+function paintSources(list, urls){
+  const verify = T().verify;
+  $('srcs').innerHTML = (list||[]).map((s,i) => {
+    const url = urls[i];
+    return `<div class="src"><b>${esc(s.ref)}</b><span>${esc(s.note||'')}</span>
+      ${url?`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(verify)}</a>`:''}</div>`;
+  }).join('');
+}
+
+// Everything on the lesson page except the prose: title, visual cards, source
+// captions and the two check questions. One batched call, cached per language.
+function lessonChrome(l){
+  return {
+    title: l.title,
+    visual: l.visual,
+    sources: (l.sources||[]).map(s => ({ref:s.ref, note:s.note||''})),
+    check: (l.check||[]).map(q => ({q:q.q, options:q.options, why:q.why})),
+  };
+}
+
 async function loadLesson(){
-  const t = T(), m = cur.mod, l = m.lessons[cur.idx];
-  $('crumbTxt').textContent = `${m.title} · ${t.lessonOf} ${cur.idx+1} ${t.of} ${m.lessons.length}`;
+  const t = T(), m = cur.mod, l = m.lessons[cur.idx], lang = store.lang;
+  const token = ++loadToken;
+  const urls = (l.sources||[]).map(s => s.url);
+
+  $('crumbTxt').textContent = `${modTitle(m)} · ${t.lessonOf} ${cur.idx+1} ${t.of} ${m.lessons.length}`;
   $('lTitle').textContent = l.title;
   $('lVis').innerHTML = renderVisual(l.visual);
-  $('srcs').innerHTML = (l.sources||[]).map(s =>
-    `<div class="src"><b>${esc(s.ref)}</b><span>${esc(s.note||'')}</span>
-      ${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">${store.lang==='ar'?'تحقّق بنفسك ←':'Проверить сам →'}</a>`:''}</div>`).join('');
+  paintSources(l.sources, urls);
   renderChips();
   $('caseAns').classList.remove('show'); $('caseIn').value='';
   $('prevBtn').style.visibility = cur.idx===0 ? 'hidden' : 'visible';
@@ -626,28 +701,49 @@ async function loadLesson(){
   const box = $('lText');
   box.className = 'ltext loading';
   box.innerHTML = esc(t.loading) + ' <span class="dots"><i></i><i></i><i></i></span>';
-  try {
+
+  // Prose and chrome travel in parallel — the reader waits for one round trip,
+  // not two.
+  const chromeP = translateChrome(lessonChrome(l), lang);
+  const proseP = (async () => {
     const ctrl = new AbortController();
     const timer = setTimeout(()=>ctrl.abort(), 60000);
     const res = await fetch(API+'/academy/explain', {
       method:'POST', headers:{'Content-Type':'application/json'}, signal:ctrl.signal,
-      body: JSON.stringify({core:l.core, sources:l.sources, audience:store.aud, lang:store.lang, title:l.title}),
+      body: JSON.stringify({core:l.core, sources:l.sources, audience:store.aud, lang, title:l.title}),
     });
     clearTimeout(timer);
     if (!res.ok) throw new Error();
-    const d = await res.json();
-    box.className='ltext'; box.textContent = d.text;
+    return (await res.json()).text;
+  })();
+
+  try {
+    const text = await proseP;
+    if (token !== loadToken) return;
+    box.className='ltext'; box.textContent = text;
   } catch(e) {
+    if (token !== loadToken) return;
     box.className='ltext'; box.textContent = l.core;
     const n=document.createElement('p'); n.className='warn'; n.textContent=t.offline; box.appendChild(n);
   }
-  if (l.check && l.check.length) {
+
+  // On failure translateChrome hands back the original object, so re-applying
+  // is a harmless no-op rather than a special case.
+  const ch = await chromeP;
+  if (token !== loadToken) return;
+  if (ch.title) $('lTitle').textContent = ch.title;
+  if (ch.visual) $('lVis').innerHTML = renderVisual(ch.visual);
+  if (Array.isArray(ch.sources) && ch.sources.length === urls.length) paintSources(ch.sources, urls);
+  const checks = (ch && Array.isArray(ch.check) && ch.check.length === (l.check||[]).length)
+    ? ch.check.map((q,i) => ({...q, correct: l.check[i].correct}))   // correct index never comes from the model
+    : l.check;
+  if (checks && checks.length) {
     $('lQuiz').innerHTML = `<div class="qh">${esc(t.checkH)}</div><div id="lQ"></div>`;
-    renderQuestions(l.check, $('lQ'), {instant:true});
+    renderQuestions(checks, $('lQ'), {instant:true});
   }
 }
 
-$('backBtn').onclick = () => { show('home'); renderMods(); };
+$('backBtn').onclick = () => { show('home'); refreshMods(); };
 $('prevBtn').onclick = () => { if (cur.idx>0){ cur.idx--; loadLesson(); } };
 $('nextBtn').onclick = () => {
   const m = cur.mod;
@@ -657,36 +753,50 @@ $('nextBtn').onclick = () => {
 };
 
 // ── exam ──
-function openExam(){
-  const t = T(), m = cur.mod;
-  $('examCrumb').textContent = m.title;
+let examQs = [];   // the exam as displayed; `correct` always comes from curriculum.js
+
+async function openExam(){
+  const t = T(), m = cur.mod, lang = store.lang;
+  $('examCrumb').textContent = modTitle(m);
   $('examCard').innerHTML = `
     <h2 style="font-size:28px;margin-bottom:8px">${esc(t.examH)}</h2>
     <p style="color:var(--text3);font-size:14.5px;margin:0 0 22px">${esc(t.examP)}</p>
-    <div id="eQ"></div>
+    <div id="eQ" class="ltext loading">${esc(t.loading)} <span class="dots"><i></i><i></i><i></i></span></div>
     <button class="btn btn-p" id="eSubmit" style="width:100%;margin-top:8px" disabled>${esc(t.examCheck)}</button>`;
-  examState = renderQuestions(m.exam, $('eQ'), {
+  show('exam');
+
+  const src = m.exam.map(q => ({q:q.q, options:q.options, why:q.why}));
+  const tr = await translateChrome({exam:src}, lang);
+  if (cur.mod !== m || store.lang !== lang) return;
+  const got = (tr && Array.isArray(tr.exam) && tr.exam.length === m.exam.length) ? tr.exam : src;
+  examQs = got.map((q,i) => ({
+    q: q.q, why: q.why,
+    options: (Array.isArray(q.options) && q.options.length === m.exam[i].options.length) ? q.options : m.exam[i].options,
+    correct: m.exam[i].correct,          // never trust a translation with the answer key
+  }));
+
+  $('eQ').className = '';
+  examState = renderQuestions(examQs, $('eQ'), {
     instant:false,
     onChange:(st)=>{ $('eSubmit').disabled = st.some(x=>x===null); },
   });
   $('eSubmit').onclick = gradeExam;
-  show('exam');
 }
 
 function gradeExam(){
   const t = T(), m = cur.mod;
   let right = 0;
-  m.exam.forEach((q,i) => { if (examState[i] === q.correct) right++; });
-  const pct = Math.round(right / m.exam.length * 100);
-  const passed = (right / m.exam.length) >= PASS_MARK;
+  examQs.forEach((q,i) => { if (examState[i] === q.correct) right++; });
+  const pct = Math.round(right / examQs.length * 100);
+  const passed = (right / examQs.length) >= PASS_MARK;
 
   $('eQ').querySelectorAll('.opt').forEach(b => {
     const qi = +b.dataset.q, oi = +b.dataset.o;
     b.disabled = true; b.classList.remove('right');
-    if (oi === m.exam[qi].correct) b.classList.add('right');
+    if (oi === examQs[qi].correct) b.classList.add('right');
     else if (oi === examState[qi]) b.classList.add('wrong');
   });
-  m.exam.forEach((q,i) => {
+  examQs.forEach((q,i) => {
     const w = $('eQ').querySelector(`[data-why="${i}"]`);
     w.textContent = q.why; w.style.display = 'block';
   });
@@ -710,13 +820,13 @@ function gradeExam(){
   } else {
     $('eAgain').onclick = () => openExam();
   }
-  $('eHome').onclick = () => { show('home'); renderMods(); };
+  $('eHome').onclick = () => { show('home'); refreshMods(); };
 }
-$('examBack').onclick = () => { show('home'); renderMods(); };
+$('examBack').onclick = () => { show('home'); refreshMods(); };
 
 // ── certificate: only reachable after passing ──
 function openCert(score){
-  $('certMod').textContent = cur.mod.title;
+  $('certMod').textContent = modTitle(cur.mod);
   $('certName').value = '';
   $('certPrev').style.display = 'none';
   show('cert');
@@ -736,7 +846,7 @@ function drawCert(name, score){
   const W=2000, H=1414, c=document.createElement('canvas');
   c.width=W; c.height=H;
   const x=c.getContext('2d');
-  const mod = cur.mod ? cur.mod.title : '';
+  const mod = cur.mod ? modTitle(cur.mod) : '';
   const date = new Date().toLocaleDateString(store.lang==='ar'?'ar':'ru-RU',{year:'numeric',month:'long',day:'numeric'});
 
   // parchment
@@ -810,7 +920,7 @@ logoImg.onload = () => { if ($('cert').style.display==='block') drawCert($('cert
 logoImg.src = '/icons/icon-192.png';
 
 $('certName').oninput = e => drawCert(e.target.value.trim());
-$('certBack').onclick = () => { show('home'); renderMods(); };
+$('certBack').onclick = () => { show('home'); refreshMods(); };
 $('certDl').onclick = () => {
   const c = drawCert($('certName').value.trim());
   const a = document.createElement('a');
@@ -842,7 +952,7 @@ $('caseBtn').onclick = async () => {
 };
 
 fetch(API+'/health').catch(()=>{});
-initTheme(); applyLangDir(); renderLang(); paintUI(); applyScale(); renderAuds(); renderMods();
+initTheme(); applyLangDir(); renderLang(); paintUI(); applyScale(); renderAuds(); refreshMods();
 </script>
 </body>
 </html>
