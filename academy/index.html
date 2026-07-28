@@ -5,21 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AM Academy — исламские финансы понятным языком</title>
 <meta name="description" content="Бесплатные уроки об исламских финансах. Одно проверенное содержание, объяснённое так, как понятно именно вам. Каждое утверждение со ссылкой на источник.">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://amnetwork.onrender.com; base-uri 'self'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com; connect-src 'self' https://amnetwork.onrender.com; base-uri 'self'; form-action 'none'; object-src 'none'">
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg1:#F5F0E8;--bg2:#EDE8DE;--bg3:#DDD0BB;--card:#FFFFFF;
-  --gold:#A8862F;--gold2:#C9A84C;--text:#16281C;--text2:#3D4F44;--text3:#5A6B60;
-  --border:rgba(28,69,50,0.14);--ok:#1E8A4C;
+  --gold:#A8862F;--gold2:#C9A84C;--gold3:rgba(201,168,76,.12);
+  --text:#16281C;--text2:#3D4F44;--text3:#5A6B60;
+  --border:rgba(28,69,50,0.14);--ok:#1E8A4C;--bad:#C0392B;
   --fs:1;
 }
 [data-theme="dark"]{
   --bg1:#0A1A11;--bg2:#0F2117;--bg3:#1C4532;--card:#122A1C;
-  --gold:#C9A84C;--gold2:#E0C173;--text:#EDE8DE;--text2:#C6D0C9;--text3:#8FA398;
-  --border:rgba(255,255,255,0.10);--ok:#3FBE74;
+  --gold:#C9A84C;--gold2:#E0C173;--gold3:rgba(201,168,76,.14);
+  --text:#EDE8DE;--text2:#C6D0C9;--text3:#8FA398;
+  --border:rgba(255,255,255,0.10);--ok:#3FBE74;--bad:#FF8A80;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -27,472 +29,820 @@ body{margin:0;background:var(--bg1);color:var(--text);font-family:'DM Sans',sans
   line-height:1.65;font-size:calc(16px * var(--fs));transition:background .3s,color .3s}
 [lang="ar"]{font-family:'Noto Naskh Arabic','DM Sans',sans-serif}
 h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;line-height:1.2;margin:0}
+[lang="ar"] h1,[lang="ar"] h2,[lang="ar"] h3{font-family:'Noto Naskh Arabic',serif}
 a{color:var(--gold);text-decoration:none}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.topline{height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold))}
 
-nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg1) 88%,transparent);
+/* nav never mirrors, so controls stay findable in Arabic */
+nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg1) 90%,transparent);
   backdrop-filter:blur(10px);border-bottom:1px solid var(--border);direction:ltr}
-.navin{max-width:1080px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.navin{max-width:1080px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:var(--text)}
 .brand img{width:30px;height:30px;border-radius:50%}
-.navr{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.btn{font-family:inherit;font-size:14px;padding:8px 14px;border-radius:9px;border:1px solid var(--border);
-  background:var(--card);color:var(--text);cursor:pointer;transition:.15s}
+.navr{display:flex;align-items:center;gap:8px}
+.btn{font-family:'DM Sans',sans-serif;font-size:14px;padding:8px 14px;border-radius:9px;
+  border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;transition:.15s;
+  -webkit-appearance:none;appearance:none}
 .btn:hover{border-color:var(--gold)}
 .btn-p{background:var(--gold);border-color:var(--gold);color:#fff;font-weight:700}
 [data-theme="dark"] .btn-p{color:#0A1A11}
 .btn-p:hover{filter:brightness(1.08)}
-select.btn{padding-right:8px}
+.btn:disabled{opacity:.5;cursor:default}
 
-/* ── hero ── */
-header.hero{padding:56px 0 40px;text-align:center}
+/* custom language picker — a native <select> renders with system colours on
+   iOS Safari and turns invisible on the dark theme, which is what broke it */
+.lang{position:relative}
+.lang-btn{display:flex;align-items:center;gap:7px;font-size:14px;padding:7px 12px;border-radius:9px;
+  border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;font-family:'DM Sans',sans-serif}
+.lang-btn img{width:20px;height:14px;border-radius:2px;object-fit:cover}
+.lang-btn:hover{border-color:var(--gold)}
+.lang-drop{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2);border:1px solid var(--border);
+  border-radius:11px;overflow:hidden;z-index:100;min-width:168px;display:none;
+  box-shadow:0 14px 40px rgba(0,0,0,.28)}
+.lang.open .lang-drop{display:block}
+.lang-drop button{display:flex;align-items:center;gap:9px;width:100%;padding:10px 14px;border:none;
+  background:none;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;text-align:left}
+.lang-drop button:hover{background:var(--gold3)}
+.lang-drop button.on{color:var(--gold);font-weight:700}
+.lang-drop img{width:20px;height:14px;border-radius:2px;object-fit:cover;flex-shrink:0}
+
+header.hero{padding:52px 0 38px;text-align:center}
 .eyebrow{display:inline-block;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--gold);border:1px solid var(--border);border-radius:99px;padding:6px 16px;margin-bottom:22px}
-h1{font-size:clamp(34px,6vw,56px);margin-bottom:14px}
+  color:var(--gold);border:1px solid var(--border);border-radius:99px;padding:6px 16px;margin-bottom:20px}
+h1{font-size:clamp(32px,6vw,54px);margin-bottom:14px}
 h1 em{font-style:normal;color:var(--gold)}
-.lede{font-size:clamp(16px,2.2vw,19px);color:var(--text2);max-width:620px;margin:0 auto 8px}
+.lede{font-size:clamp(15px,2.2vw,19px);color:var(--text2);max-width:640px;margin:0 auto}
 
-/* ── the unique bit: audience picker ── */
-.pick{margin:38px auto 0;max-width:760px;background:var(--card);border:1px solid var(--border);
-  border-radius:18px;padding:26px 24px;text-align:left;box-shadow:0 8px 30px rgba(28,69,50,.06)}
+.pick{margin:36px auto 0;max-width:780px;background:var(--card);border:1px solid var(--border);
+  border-radius:18px;padding:24px;text-align:start;box-shadow:0 8px 30px rgba(28,69,50,.06)}
 .pick h3{font-size:21px;margin-bottom:4px}
-.pick p{font-size:14px;color:var(--text3);margin:0 0 18px}
-.auds{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.aud{border:1.5px solid var(--border);border-radius:12px;padding:14px 12px;cursor:pointer;
+.pick p{font-size:14px;color:var(--text3);margin:0 0 16px}
+.auds{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px}
+.aud{border:1.5px solid var(--border);border-radius:12px;padding:13px 11px;cursor:pointer;
   background:var(--bg2);transition:.15s;text-align:center}
 .aud:hover{border-color:var(--gold2)}
-.aud.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 12%,var(--card));box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 18%,transparent)}
+.aud.on{border-color:var(--gold);background:var(--gold3);box-shadow:0 0 0 3px rgba(201,168,76,.18)}
 .aud b{display:block;font-size:15px;margin-bottom:2px}
 .aud span{font-size:12px;color:var(--text3);line-height:1.4;display:block}
 
-/* ── modules ── */
-section{padding:44px 0}
+section{padding:42px 0}
 .sech{font-size:clamp(24px,3.6vw,32px);margin-bottom:6px}
-.secs{color:var(--text3);font-size:15px;margin:0 0 26px}
+.secs{color:var(--text3);font-size:15px;margin:0 0 24px}
 .mods{display:grid;gap:14px}
-.mod{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--border);
-  border-radius:16px;padding:20px;transition:.15s}
+.mod{display:flex;gap:15px;align-items:flex-start;background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:19px;transition:.15s}
 .mod.open{cursor:pointer}
 .mod.open:hover{border-color:var(--gold);transform:translateY(-1px)}
-.mod.soon{opacity:.62}
+.mod.soon{opacity:.6}
 .mic{width:48px;height:48px;border-radius:12px;background:var(--bg3);display:flex;align-items:center;
   justify-content:center;font-size:23px;flex-shrink:0}
 .mod h3{font-size:20px;margin-bottom:3px}
 .mod p{margin:0;font-size:14px;color:var(--text3)}
-.meta{margin-top:9px;display:flex;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--text3)}
+.meta{margin-top:9px;display:flex;gap:7px;flex-wrap:wrap;font-size:12px;color:var(--text3)}
 .tag{border:1px solid var(--border);border-radius:99px;padding:3px 10px}
 .tag.done{border-color:var(--ok);color:var(--ok)}
 .tag.soonT{border-color:var(--gold2);color:var(--gold)}
-.bar{height:5px;background:var(--bg3);border-radius:99px;overflow:hidden;margin-top:11px}
+.bar{height:5px;background:var(--bg3);border-radius:99px;overflow:hidden;margin-top:10px}
 .bar i{display:block;height:100%;background:var(--gold);border-radius:99px;transition:width .4s}
 
-/* ── lesson view ── */
-#lesson{display:none;padding:26px 0 60px}
-.crumb{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text3);margin-bottom:18px;flex-wrap:wrap}
-.lgrid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:26px;align-items:start}
+#lesson,#exam,#cert{display:none}
+.crumb{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text3);margin:22px 0 16px;flex-wrap:wrap}
+.lgrid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:24px;align-items:start;padding-bottom:56px}
 @media(max-width:900px){.lgrid{grid-template-columns:1fr}}
-.lbody{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:clamp(22px,3.4vw,34px)}
-.lbody h2{font-size:clamp(24px,3.6vw,32px);margin-bottom:16px}
-.ltext{font-size:calc(16.5px * var(--fs));line-height:1.78;white-space:pre-wrap;color:var(--text)}
+.lbody{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:clamp(20px,3.4vw,32px)}
+.lbody h2{font-size:clamp(23px,3.6vw,31px);margin-bottom:18px}
+
+/* visual blocks — a lesson never opens as a wall of text */
+.vis{margin-bottom:24px}
+.vfacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.vfact{background:var(--gold3);border:1px solid rgba(201,168,76,.3);border-radius:14px;padding:16px 12px;text-align:center}
+.vfact b{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4.4vw,34px);
+  font-weight:700;color:var(--gold);line-height:1.1}
+.vfact span{display:block;font-size:12.5px;color:var(--text3);margin-top:6px;line-height:1.4}
+.vvs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.vvs{grid-template-columns:1fr}}
+.vcol{border:1px solid var(--border);border-radius:14px;padding:15px;background:var(--bg2)}
+.vcol h4{margin:0 0 10px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px}
+.vcol.y h4{color:var(--ok)}.vcol.n h4{color:var(--text3)}
+.vcol ul{margin:0;padding:0;list-style:none}
+.vcol li{font-size:13.5px;color:var(--text2);padding:5px 0 5px 20px;position:relative;line-height:1.5}
+.vcol.y li::before{content:'✓';position:absolute;inset-inline-start:0;color:var(--ok);font-weight:700}
+.vcol.n li::before{content:'—';position:absolute;inset-inline-start:0;color:var(--text3)}
+.vsteps{counter-reset:s}
+.vstep{counter-increment:s;display:flex;gap:13px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--border)}
+.vstep:last-child{border-bottom:none}
+.vstep::before{content:counter(s);flex-shrink:0;width:27px;height:27px;border-radius:50%;background:var(--gold);
+  color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+[data-theme="dark"] .vstep::before{color:#0A1A11}
+.vstep span{font-size:14px;color:var(--text2);line-height:1.55;padding-top:3px}
+.vlist{display:grid;gap:8px}
+.vitem{display:flex;gap:11px;align-items:center;background:var(--bg2);border:1px solid var(--border);
+  border-radius:11px;padding:11px 14px}
+.vitem b{flex-shrink:0;width:25px;height:25px;border-radius:50%;background:var(--gold3);color:var(--gold);
+  font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.vitem span{font-size:14px;color:var(--text2)}
+.vtitle{font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:11px}
+
+.ltext{font-size:calc(16.5px * var(--fs));line-height:1.8;white-space:pre-wrap;color:var(--text)}
 .ltext.loading{color:var(--text3);font-style:italic}
-.dots{display:inline-flex;gap:5px;vertical-align:middle;margin-left:6px}
+.dots{display:inline-flex;gap:5px;vertical-align:middle;margin-inline-start:6px}
 .dots i{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:b 1.2s infinite}
 .dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
 @keyframes b{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
 
-.reexp{margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+.reexp{margin-top:22px;padding-top:18px;border-top:1px solid var(--border)}
 .reexp p{margin:0 0 10px;font-size:13.5px;color:var(--text3)}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{font-size:13px;padding:7px 13px;border-radius:99px;border:1px solid var(--border);
-  background:var(--bg2);color:var(--text2);cursor:pointer;font-family:inherit;transition:.15s}
+  background:var(--bg2);color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:.15s}
 .chip:hover{border-color:var(--gold2)}
 .chip.on{background:var(--gold);border-color:var(--gold);color:#fff;font-weight:600}
 [data-theme="dark"] .chip.on{color:#0A1A11}
 
-/* ── sources: fixed, never rewritten ── */
-.side{position:sticky;top:74px;display:grid;gap:14px}
+/* quiz */
+.quiz{margin-top:22px;padding-top:20px;border-top:1px solid var(--border)}
+.qh{font-size:13px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px}
+.q{margin-bottom:20px}
+.q>p{margin:0 0 10px;font-size:15.5px;font-weight:500;line-height:1.5}
+.opts{display:grid;gap:8px}
+.opt{text-align:start;font-family:'DM Sans',sans-serif;font-size:14.5px;padding:12px 15px;border-radius:11px;
+  border:1.5px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;transition:.15s;line-height:1.45}
+.opt:hover:not(:disabled){border-color:var(--gold2)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:rgba(30,138,76,.1);color:var(--ok);font-weight:600}
+.opt.wrong{border-color:var(--bad);background:rgba(192,57,43,.09);color:var(--bad)}
+.why{margin-top:9px;font-size:13.5px;color:var(--text3);line-height:1.6;padding-inline-start:13px;
+  border-inline-start:2.5px solid var(--gold)}
+
+.side{position:sticky;top:72px;display:grid;gap:14px}
 @media(max-width:900px){.side{position:static}}
 .panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px}
-.panel h4{margin:0 0 4px;font-size:15px;font-family:'DM Sans',sans-serif;font-weight:700;display:flex;align-items:center;gap:7px}
-.panel .hint{font-size:12px;color:var(--text3);margin:0 0 14px;line-height:1.5}
-.src{border-left:2.5px solid var(--gold);padding:2px 0 2px 12px;margin-bottom:14px}
+.panel h4{margin:0 0 4px;font-size:15px;font-family:'DM Sans',sans-serif;font-weight:700;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.panel .hint{font-size:12px;color:var(--text3);margin:0 0 13px;line-height:1.5}
+.src{border-inline-start:2.5px solid var(--gold);padding:2px 0;padding-inline-start:12px;margin-bottom:13px}
 .src:last-child{margin-bottom:0}
 .src b{display:block;font-size:14px;color:var(--text)}
 .src span{display:block;font-size:12.5px;color:var(--text3);line-height:1.5;margin:3px 0 5px}
 .src a{font-size:12px;font-weight:600}
 .lock{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--ok);
   border:1px solid var(--ok);border-radius:99px;padding:2px 9px;font-weight:600}
-
-/* ── my case ── */
-.case textarea{width:100%;min-height:96px;resize:vertical;padding:12px;border-radius:10px;
+.case textarea{width:100%;min-height:92px;resize:vertical;padding:12px;border-radius:10px;
   border:1px solid var(--border);background:var(--bg2);color:var(--text);font-family:inherit;
   font-size:14px;line-height:1.6;outline:none}
 .case textarea:focus{border-color:var(--gold)}
-.ans{margin-top:14px;padding:14px;border-radius:12px;background:var(--bg2);border:1px solid var(--border);
+.ans{margin-top:13px;padding:14px;border-radius:12px;background:var(--bg2);border:1px solid var(--border);
   font-size:14.5px;line-height:1.7;white-space:pre-wrap;display:none}
 .ans.show{display:block}
-.warn{margin-top:11px;font-size:11.5px;color:var(--text3);line-height:1.5}
+.warn{margin-top:10px;font-size:11.5px;color:var(--text3);line-height:1.5}
+.lnav{display:flex;justify-content:space-between;gap:12px;margin-top:24px;flex-wrap:wrap}
 
-.lnav{display:flex;justify-content:space-between;gap:12px;margin-top:26px;flex-wrap:wrap}
+/* exam */
+.examwrap{max-width:760px;margin:0 auto;padding-bottom:60px}
+.examcard{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:clamp(22px,3.4vw,34px)}
+.score{text-align:center;padding:26px 0}
+.score .n{font-family:'Cormorant Garamond',serif;font-size:62px;font-weight:700;line-height:1}
+.score .n.pass{color:var(--ok)}.score .n.fail{color:var(--bad)}
+.score p{font-size:15px;color:var(--text2);margin:10px 0 0}
 
-/* ── certificate ── */
-#cert{display:none;text-align:center;padding:50px 0 70px}
-.certcard{max-width:640px;margin:0 auto;background:var(--card);border:1px solid var(--gold);
-  border-radius:20px;padding:44px 32px;box-shadow:0 14px 44px rgba(168,134,47,.16)}
-.certcard img{width:76px;height:76px;border-radius:50%;margin-bottom:18px}
-.certcard h2{font-size:30px;margin-bottom:8px}
-.certcard .who{font-size:22px;color:var(--gold);font-family:'Cormorant Garamond',serif;margin:16px 0 6px}
-.certcard input{width:100%;max-width:330px;padding:11px 14px;border-radius:10px;border:1px solid var(--border);
-  background:var(--bg2);color:var(--text);font-family:inherit;font-size:15px;text-align:center;outline:none;margin:6px 0 16px}
+/* certificate */
+.certcard{max-width:660px;margin:0 auto;background:var(--card);border:1px solid var(--gold);
+  border-radius:20px;padding:42px 30px;box-shadow:0 14px 44px rgba(168,134,47,.16);text-align:center}
+.certcard>img{width:74px;height:74px;border-radius:50%;margin-bottom:16px}
+.certcard h2{font-size:29px;margin-bottom:8px}
+.certcard input{width:100%;max-width:340px;padding:12px 15px;border-radius:10px;border:1px solid var(--border);
+  background:var(--bg2);color:var(--text);font-family:inherit;font-size:15px;text-align:center;outline:none;margin:8px 0 18px}
 .certcard input:focus{border-color:var(--gold)}
+#certPrev{max-width:100%;border-radius:12px;border:1px solid var(--border);margin:6px 0 18px;display:none}
 
-footer{border-top:1px solid var(--border);padding:26px 0;text-align:center;font-size:13px;color:var(--text3)}
+footer{border-top:1px solid var(--border);padding:24px 0;text-align:center;font-size:13px;color:var(--text3)}
 footer a{color:var(--gold)}
-.err{color:#c0392b;font-size:13.5px}
-[data-theme="dark"] .err{color:#ff8a80}
+.err{color:var(--bad);font-size:13.5px}
 </style>
 </head>
 <body>
+<div class="topline"></div>
 
 <nav>
   <div class="navin">
     <a class="brand" href="/"><img src="/icons/icon-192.png" alt=""><span>AM Academy</span></a>
     <div class="navr">
-      <select class="btn" id="langSel" aria-label="Язык"></select>
-      <button class="btn" id="themeBtn" aria-label="Тема">🌙</button>
-      <a class="btn" href="/">На главную</a>
+      <div class="lang" id="langWrap">
+        <button class="lang-btn" id="langBtn" aria-haspopup="listbox">
+          <img id="langFlag" src="https://flagcdn.com/w20/ru.png" alt=""><span id="langName">Русский</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="lang-drop" id="langDrop" role="listbox"></div>
+      </div>
+      <button class="btn" id="themeBtn" aria-label="Theme">🌙</button>
+      <a class="btn" href="/" id="homeLink">На сайт</a>
     </div>
   </div>
 </nav>
 
 <div id="home">
   <header class="hero wrap">
-    <span class="eyebrow">Бесплатно · без регистрации</span>
-    <h1>Исламские финансы <em>понятным языком</em></h1>
-    <p class="lede">Одно проверенное содержание — объяснённое так, как понятно именно вам. Каждое утверждение со ссылкой на источник, который вы можете открыть и проверить сами.</p>
-
+    <span class="eyebrow" id="tFree">Бесплатно · без регистрации</span>
+    <h1 id="tH1">Исламские финансы <em>понятным языком</em></h1>
+    <p class="lede" id="tLede">Одно проверенное содержание — объяснённое так, как понятно именно вам. Каждое утверждение со ссылкой на источник, который вы можете открыть и проверить сами.</p>
     <div class="pick">
-      <h3>Кому объяснять?</h3>
-      <p>Уроки одни и те же. Меняется то, как они рассказаны — и примеры из вашей жизни, а не из чужой.</p>
+      <h3 id="tPickH">Кому объяснять?</h3>
+      <p id="tPickP">Уроки одни и те же. Меняется то, как они рассказаны — и примеры из вашей жизни, а не из чужой.</p>
       <div class="auds" id="auds"></div>
     </div>
   </header>
-
   <section class="wrap">
-    <h2 class="sech">Программа</h2>
-    <p class="secs">Пять модулей. Начните с любого открытого — порядок не обязателен.</p>
+    <h2 class="sech" id="tProgH">Программа</h2>
+    <p class="secs" id="tProgP">Начните с любого открытого модуля — порядок не обязателен.</p>
     <div class="mods" id="mods"></div>
   </section>
 </div>
 
 <div id="lesson" class="wrap">
   <div class="crumb">
-    <button class="btn" id="backBtn">← Программа</button>
+    <button class="btn" id="backBtn">← <span id="tBack">Программа</span></button>
     <span id="crumbTxt"></span>
   </div>
   <div class="lgrid">
     <div>
       <div class="lbody">
         <h2 id="lTitle"></h2>
+        <div class="vis" id="lVis"></div>
         <div class="ltext" id="lText"></div>
         <div class="reexp">
-          <p>Непонятно или наоборот слишком просто? Переключите — то же содержание, другое объяснение:</p>
+          <p id="tReexp">Непонятно или наоборот слишком просто? Переключите — то же содержание, другое объяснение:</p>
           <div class="chips" id="reChips"></div>
         </div>
+        <div class="quiz" id="lQuiz"></div>
       </div>
       <div class="lnav">
-        <button class="btn" id="prevBtn">← Назад</button>
-        <button class="btn btn-p" id="nextBtn">Дальше →</button>
+        <button class="btn" id="prevBtn">←</button>
+        <button class="btn btn-p" id="nextBtn">→</button>
       </div>
     </div>
-
     <aside class="side">
       <div class="panel">
-        <h4>📖 Источники <span class="lock">✓ не меняются</span></h4>
-        <p class="hint">Эти ссылки зафиксированы человеком и никогда не переписываются ИИ. Откройте и проверьте — это ваше право.</p>
+        <h4>📖 <span id="tSrcH">Источники</span> <span class="lock">✓ <span id="tLock">не меняются</span></span></h4>
+        <p class="hint" id="tSrcP">Эти ссылки зафиксированы человеком и никогда не переписываются ИИ. Откройте и проверьте — это ваше право.</p>
         <div id="srcs"></div>
       </div>
       <div class="panel case">
-        <h4>💬 А в моём случае?</h4>
-        <p class="hint">Опишите свою ситуацию — наставник соотнесёт её именно с этим уроком.</p>
-        <textarea id="caseIn" maxlength="1200" placeholder="Например: у меня есть 3 000 сомони на счёте и золотые серёжки, лежат уже два года. Нужно ли мне платить закят?"></textarea>
+        <h4>💬 <span id="tCaseH">А в моём случае?</span></h4>
+        <p class="hint" id="tCaseP">Опишите свою ситуацию — наставник соотнесёт её именно с этим уроком.</p>
+        <textarea id="caseIn" maxlength="1200"></textarea>
         <button class="btn btn-p" id="caseBtn" style="margin-top:10px;width:100%">Разобрать мой случай</button>
         <div class="ans" id="caseAns"></div>
-        <p class="warn">Это разбор учебного материала, а не фетва. По личным вопросам обращайтесь к знающему учёному.</p>
+        <p class="warn" id="tWarn">Это разбор учебного материала, а не фетва. По личным вопросам обращайтесь к знающему учёному.</p>
       </div>
     </aside>
   </div>
 </div>
 
+<div id="exam" class="wrap">
+  <div class="examwrap">
+    <div class="crumb">
+      <button class="btn" id="examBack">← <span>Программа</span></button>
+      <span id="examCrumb"></span>
+    </div>
+    <div class="examcard" id="examCard"></div>
+  </div>
+</div>
+
 <div id="cert" class="wrap">
-  <div class="certcard">
-    <img src="/icons/icon-192.png" alt="">
-    <span class="eyebrow">Модуль завершён</span>
-    <h2 id="certMod"></h2>
-    <p style="color:var(--text3);font-size:14px;margin:14px 0 0">Впишите имя — оно появится в сертификате</p>
-    <input id="certName" maxlength="60" placeholder="Ваше имя">
-    <div class="who" id="certWho"></div>
-    <p style="font-size:13.5px;color:var(--text3);max-width:420px;margin:0 auto 22px">Сертификат подтверждает прохождение учебного модуля AM Academy. Он не является религиозной квалификацией.</p>
-    <button class="btn btn-p" id="certDl">Скачать сертификат</button>
-    <button class="btn" id="certBack" style="margin-left:8px">К программе</button>
+  <div class="examwrap">
+    <div class="certcard">
+      <img src="/icons/icon-192.png" alt="">
+      <span class="eyebrow" id="tCertEy">Модуль пройден</span>
+      <h2 id="certMod"></h2>
+      <p style="color:var(--text3);font-size:14px;margin:12px 0 0" id="tCertName">Впишите имя — оно появится в сертификате</p>
+      <input id="certName" maxlength="52" placeholder="Ваше имя">
+      <img id="certPrev" alt="">
+      <div>
+        <button class="btn btn-p" id="certDl">Скачать сертификат</button>
+        <button class="btn" id="certBack" style="margin-inline-start:8px">К программе</button>
+      </div>
+      <p class="warn" style="max-width:430px;margin:18px auto 0" id="tCertWarn">Сертификат подтверждает прохождение учебного модуля AM Academy. Он не является религиозной квалификацией или фетвой.</p>
+    </div>
   </div>
 </div>
 
 <footer>
   <div class="wrap">
-    AM Academy — часть <a href="/">AM Network</a> · <a href="/zakat/">Калькулятор закята</a> · <a href="/privacy/">Конфиденциальность</a><br>
-    <span style="font-size:12px">Учебный материал. Не является фетвой или религиозным заключением.</span>
+    AM Academy — <a href="/">AM Network</a> · <a href="/zakat/">Калькулятор закята</a> · <a href="/privacy/">Конфиденциальность</a><br>
+    <span style="font-size:12px" id="tFoot">Учебный материал. Не является фетвой или религиозным заключением.</span>
   </div>
 </footer>
 
 <script src="curriculum.js"></script>
 <script>
 const API = 'https://amnetwork.onrender.com';
-const LANGS = {en:'English',ru:'Русский',ar:'العربية',tj:'Тоҷикӣ',id:'Indonesia',tr:'Türkçe',zh:'中文',ms:'Melayu',de:'Deutsch'};
-const AUDS = [
-  {id:'teen',    label:'Школьник',   hint:'12–16 лет, простыми словами'},
-  {id:'student', label:'Студент',    hint:'учёба, первая работа, сбережения'},
-  {id:'working', label:'Работающий', hint:'зарплата, семья, ипотека'},
-  {id:'senior',  label:'Пожилой',    hint:'накопления, золото, крупный шрифт'},
-];
+const LANGS = {
+  en:{n:'English',f:'gb'}, ru:{n:'Русский',f:'ru'}, ar:{n:'العربية',f:'sa'},
+  tj:{n:'Тоҷикӣ',f:'tj'},  id:{n:'Indonesia',f:'id'}, tr:{n:'Türkçe',f:'tr'},
+  zh:{n:'中文',f:'cn'},     ms:{n:'Melayu',f:'my'},   de:{n:'Deutsch',f:'de'},
+};
+const UI = {
+  ru:{free:'Бесплатно · без регистрации',h1a:'Исламские финансы ',h1b:'понятным языком',
+      lede:'Одно проверенное содержание — объяснённое так, как понятно именно вам. Каждое утверждение со ссылкой на источник, который вы можете открыть и проверить сами.',
+      pickH:'Кому объяснять?',pickP:'Уроки одни и те же. Меняется то, как они рассказаны — и примеры из вашей жизни, а не из чужой.',
+      progH:'Программа',progP:'Начните с любого открытого модуля — порядок не обязателен.',
+      back:'Программа',home:'На сайт',reexp:'Непонятно или наоборот слишком просто? Переключите — то же содержание, другое объяснение:',
+      srcH:'Источники',lock:'не меняются',srcP:'Эти ссылки зафиксированы человеком и никогда не переписываются ИИ. Откройте и проверьте — это ваше право.',
+      caseH:'А в моём случае?',caseP:'Опишите свою ситуацию — наставник соотнесёт её именно с этим уроком.',
+      casePh:'Например: у меня 3 000 сомони на счёте и золотые серьги, лежат два года. Нужно ли платить закят?',
+      caseBtn:'Разобрать мой случай',warn:'Это разбор учебного материала, а не фетва. По личным вопросам обращайтесь к знающему учёному.',
+      checkH:'Проверьте себя',next:'Дальше',prev:'Назад',toExam:'К итоговому тесту',
+      examH:'Итоговый тест',examP:'Ответьте на все вопросы. Для сертификата нужно не менее 85% правильных.',
+      examStart:'Начать тест',examCheck:'Проверить ответы',examAgain:'Пройти ещё раз',
+      pass:'Отлично! Модуль пройден.',fail:'Пока недостаточно. Для сертификата нужно 85%.',
+      getCert:'Получить сертификат',certEy:'Модуль пройден',certName:'Впишите имя — оно появится в сертификате',
+      namePh:'Ваше имя',dl:'Скачать сертификат',toProg:'К программе',
+      certWarn:'Сертификат подтверждает прохождение учебного модуля AM Academy. Он не является религиозной квалификацией или фетвой.',
+      foot:'Учебный материал. Не является фетвой или религиозным заключением.',
+      min:'мин',lessons:'урока',soon:'скоро',done:'пройден',lessonOf:'урок',of:'из',
+      loading:'Готовим объяснение под вас',thinking:'Разбираем',
+      offline:'Наставник сейчас недоступен — показан исходный текст урока без адаптации.',
+      offErr:'Наставник сейчас недоступен. Попробуйте через минуту.',
+      auds:{teen:['Школьник','12–16 лет, простыми словами'],student:['Студент','учёба, первая работа, сбережения'],
+            working:['Работающий','зарплата, семья, ипотека'],senior:['Пожилой','накопления, золото, крупный шрифт']}},
+  en:{free:'Free · no sign-up',h1a:'Islamic finance ',h1b:'in plain language',
+      lede:'One verified body of content — explained the way that makes sense to you. Every statement links to a source you can open and check yourself.',
+      pickH:'Who is reading?',pickP:'The lessons are identical. What changes is how they are told — and whose life the examples come from.',
+      progH:'Curriculum',progP:'Start with any open module — the order is up to you.',
+      back:'Curriculum',home:'Main site',reexp:'Too dense, or too simple? Switch — same content, different explanation:',
+      srcH:'Sources',lock:'never rewritten',srcP:'These references are fixed by a human and are never rewritten by the AI. Open them and check — that is your right.',
+      caseH:'What about my case?',caseP:'Describe your situation — the tutor will map it onto this lesson.',
+      casePh:'For example: I have 3,000 in savings and gold earrings, held for two years. Do I owe Zakat?',
+      caseBtn:'Work through my case',warn:'This explains study material; it is not a fatwa. For personal rulings consult a qualified scholar.',
+      checkH:'Check yourself',next:'Next',prev:'Back',toExam:'Go to final test',
+      examH:'Final test',examP:'Answer every question. The certificate requires at least 85% correct.',
+      examStart:'Start the test',examCheck:'Check answers',examAgain:'Try again',
+      pass:'Well done — module passed.',fail:'Not quite yet. The certificate needs 85%.',
+      getCert:'Get certificate',certEy:'Module passed',certName:'Enter your name — it will appear on the certificate',
+      namePh:'Your name',dl:'Download certificate',toProg:'Back to curriculum',
+      certWarn:'This certificate confirms completion of an AM Academy study module. It is not a religious qualification or a fatwa.',
+      foot:'Study material. Not a fatwa or religious ruling.',
+      min:'min',lessons:'lessons',soon:'soon',done:'passed',lessonOf:'lesson',of:'of',
+      loading:'Preparing your explanation',thinking:'Working through it',
+      offline:'The tutor is unavailable — showing the original lesson text without adaptation.',
+      offErr:'The tutor is unavailable. Please try again in a moment.',
+      auds:{teen:['School','12–16, simple words'],student:['Student','study, first job, savings'],
+            working:['Working','salary, family, mortgage'],senior:['Senior','savings, gold, larger text']}},
+  ar:{free:'مجاني · بدون تسجيل',h1a:'التمويل الإسلامي ',h1b:'بلغة واضحة',
+      lede:'محتوى واحد موثّق — مشروح بالطريقة التي تناسبك. كل معلومة مرفقة بمصدر يمكنك فتحه والتحقق منه بنفسك.',
+      pickH:'لمن الشرح؟',pickP:'الدروس واحدة. ما يتغيّر هو طريقة الشرح والأمثلة المأخوذة من حياتك أنت.',
+      progH:'المنهج',progP:'ابدأ بأي وحدة مفتوحة — الترتيب ليس ملزماً.',
+      back:'المنهج',home:'الموقع',reexp:'صعب أو بسيط أكثر من اللازم؟ بدّل — نفس المحتوى بشرح مختلف:',
+      srcH:'المصادر',lock:'لا تتغيّر',srcP:'هذه المراجع مثبّتة بيد إنسان ولا يعيد الذكاء الاصطناعي كتابتها أبداً. افتحها وتحقّق — هذا حقك.',
+      caseH:'وماذا عن حالتي؟',caseP:'صف حالتك — سيربطها المعلّم بهذا الدرس تحديداً.',
+      casePh:'مثال: لديّ 3000 مدّخرة وأقراط ذهبية منذ سنتين. هل تجب عليّ الزكاة؟',
+      caseBtn:'حلّل حالتي',warn:'هذا شرح لمادة تعليمية وليس فتوى. للمسائل الشخصية استشر عالماً مؤهلاً.',
+      checkH:'اختبر نفسك',next:'التالي',prev:'السابق',toExam:'إلى الاختبار النهائي',
+      examH:'الاختبار النهائي',examP:'أجب عن جميع الأسئلة. تتطلب الشهادة 85% صحيحة على الأقل.',
+      examStart:'ابدأ الاختبار',examCheck:'تحقق من الإجابات',examAgain:'حاول مرة أخرى',
+      pass:'أحسنت — اجتزت الوحدة.',fail:'لم تكفِ بعد. الشهادة تتطلب 85%.',
+      getCert:'احصل على الشهادة',certEy:'تم اجتياز الوحدة',certName:'اكتب اسمك — سيظهر على الشهادة',
+      namePh:'اسمك',dl:'تحميل الشهادة',toProg:'إلى المنهج',
+      certWarn:'تؤكد هذه الشهادة إتمام وحدة تعليمية في AM Academy. وهي ليست مؤهلاً شرعياً ولا فتوى.',
+      foot:'مادة تعليمية. ليست فتوى ولا حكماً شرعياً.',
+      min:'دقيقة',lessons:'دروس',soon:'قريباً',done:'مكتملة',lessonOf:'الدرس',of:'من',
+      loading:'نُعدّ الشرح المناسب لك',thinking:'جارٍ التحليل',
+      offline:'المعلّم غير متاح — يُعرض نص الدرس الأصلي دون تكييف.',
+      offErr:'المعلّم غير متاح حالياً. حاول بعد قليل.',
+      auds:{teen:['تلميذ','12–16 سنة، بكلمات بسيطة'],student:['طالب','الدراسة، أول عمل، المدخرات'],
+            working:['يعمل','الراتب، الأسرة، السكن'],senior:['كبير السن','المدخرات، الذهب، خط أكبر']}},
+};
+const AUD_IDS = ['teen','student','working','senior'];
 
 const store = {
   get aud(){ return localStorage.getItem('amn_academy_aud') || 'working'; },
   set aud(v){ localStorage.setItem('amn_academy_aud', v); },
-  get lang(){ return localStorage.getItem('amn_lang') || 'ru'; },
+  get lang(){ const l = localStorage.getItem('amn_lang'); return LANGS[l] ? l : 'ru'; },
   set lang(v){ localStorage.setItem('amn_lang', v); },
-  get done(){ try { return JSON.parse(localStorage.getItem('amn_academy_done')||'{}'); } catch(e){ return {}; } },
+  get done(){ try{ return JSON.parse(localStorage.getItem('amn_academy_done')||'{}'); }catch(e){ return {}; } },
   mark(m,l){ const d=this.done; (d[m]=d[m]||[]); if(!d[m].includes(l)) d[m].push(l);
              localStorage.setItem('amn_academy_done',JSON.stringify(d)); },
+  get passed(){ try{ return JSON.parse(localStorage.getItem('amn_academy_passed')||'{}'); }catch(e){ return {}; } },
+  pass(m,score){ const p=this.passed; p[m]={score,date:new Date().toISOString()};
+                 localStorage.setItem('amn_academy_passed',JSON.stringify(p)); },
 };
 
 let cur = { mod:null, idx:0 };
+let examState = null;
 const $ = id => document.getElementById(id);
+const T = () => UI[store.lang] || UI.en;
+const esc = s => { const d=document.createElement('div'); d.textContent=String(s); return d.innerHTML; };
 
-// ── senior gets genuinely larger text, not a token gesture ──
-function applyScale(){
-  document.documentElement.style.setProperty('--fs', store.aud === 'senior' ? '1.22' : '1');
+function applyScale(){ document.documentElement.style.setProperty('--fs', store.aud==='senior' ? '1.22' : '1'); }
+
+function applyLangDir(){
+  const l = store.lang;
+  document.documentElement.setAttribute('lang', l==='tj' ? 'tg' : l);
+  document.documentElement.setAttribute('dir', l==='ar' ? 'rtl' : 'ltr');
 }
 
-// ── theme + language ──
+function paintUI(){
+  const t = T();
+  $('tFree').textContent = t.free;
+  $('tH1').innerHTML = esc(t.h1a) + '<em>' + esc(t.h1b) + '</em>';
+  $('tLede').textContent = t.lede;
+  $('tPickH').textContent = t.pickH;  $('tPickP').textContent = t.pickP;
+  $('tProgH').textContent = t.progH;  $('tProgP').textContent = t.progP;
+  $('tBack').textContent = t.back;    $('homeLink').textContent = t.home;
+  $('tReexp').textContent = t.reexp;
+  $('tSrcH').textContent = t.srcH;    $('tLock').textContent = t.lock;
+  $('tSrcP').textContent = t.srcP;
+  $('tCaseH').textContent = t.caseH;  $('tCaseP').textContent = t.caseP;
+  $('caseIn').placeholder = t.casePh; $('caseBtn').textContent = t.caseBtn;
+  $('tWarn').textContent = t.warn;
+  $('tCertEy').textContent = t.certEy; $('tCertName').textContent = t.certName;
+  $('certName').placeholder = t.namePh; $('certDl').textContent = t.dl;
+  $('certBack').textContent = t.toProg; $('tCertWarn').textContent = t.certWarn;
+  $('tFoot').textContent = t.foot;
+  $('examBack').querySelector('span').textContent = t.back;
+}
+
+// ── language picker ──
+function renderLang(){
+  const l = store.lang;
+  $('langFlag').src = 'https://flagcdn.com/w20/' + LANGS[l].f + '.png';
+  $('langName').textContent = LANGS[l].n;
+  $('langDrop').innerHTML = Object.entries(LANGS).map(([k,v]) =>
+    `<button data-l="${k}" class="${k===l?'on':''}" role="option">
+       <img src="https://flagcdn.com/w20/${v.f}.png" alt="">${v.n}</button>`).join('');
+  $('langDrop').querySelectorAll('button').forEach(b => {
+    b.onclick = () => {
+      store.lang = b.dataset.l;
+      $('langWrap').classList.remove('open');
+      applyLangDir(); renderLang(); paintUI(); renderAuds(); renderMods();
+      if ($('lesson').style.display === 'block') loadLesson();
+    };
+  });
+}
+$('langBtn').onclick = e => { e.stopPropagation(); $('langWrap').classList.toggle('open'); };
+document.addEventListener('click', e => {
+  if (!$('langWrap').contains(e.target)) $('langWrap').classList.remove('open');
+});
+
 function initTheme(){
   const t = localStorage.getItem('amn_theme') || 'light';
   document.documentElement.setAttribute('data-theme', t);
-  $('themeBtn').textContent = t === 'dark' ? '☀️' : '🌙';
+  $('themeBtn').textContent = t==='dark' ? '☀️' : '🌙';
 }
 $('themeBtn').onclick = () => {
-  const t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  const t = document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', t);
   localStorage.setItem('amn_theme', t);
-  $('themeBtn').textContent = t === 'dark' ? '☀️' : '🌙';
+  $('themeBtn').textContent = t==='dark' ? '☀️' : '🌙';
 };
-function initLang(){
-  const sel = $('langSel');
-  sel.innerHTML = Object.entries(LANGS).map(([k,v]) =>
-    `<option value="${k}"${k===store.lang?' selected':''}>${v}</option>`).join('');
-  sel.onchange = () => {
-    store.lang = sel.value;
-    document.documentElement.setAttribute('lang', sel.value === 'tj' ? 'tg' : sel.value);
-    if ($('lesson').style.display === 'block') loadLesson();
-  };
-  document.documentElement.setAttribute('lang', store.lang === 'tj' ? 'tg' : store.lang);
-}
 
-// ── audience picker ──
 function renderAuds(){
-  $('auds').innerHTML = AUDS.map(a =>
-    `<div class="aud${a.id===store.aud?' on':''}" data-aud="${a.id}" role="button" tabindex="0">
-       <b>${a.label}</b><span>${a.hint}</span></div>`).join('');
+  const a = T().auds;
+  $('auds').innerHTML = AUD_IDS.map(id =>
+    `<div class="aud${id===store.aud?' on':''}" data-aud="${id}" role="button" tabindex="0">
+       <b>${esc(a[id][0])}</b><span>${esc(a[id][1])}</span></div>`).join('');
   $('auds').querySelectorAll('.aud').forEach(el => {
     el.onclick = () => { store.aud = el.dataset.aud; renderAuds(); applyScale(); };
   });
 }
 
-// ── modules ──
 function renderMods(){
-  const done = store.done;
+  const t = T(), done = store.done, passed = store.passed;
   $('mods').innerHTML = CURRICULUM.map(m => {
     const total = m.lessons.length;
     const n = (done[m.id]||[]).length;
     const pct = total ? Math.round(n/total*100) : 0;
-    const isDone = total && n >= total;
+    const isPassed = !!passed[m.id];
     return `<div class="mod ${m.status}" data-mod="${m.id}">
       <div class="mic">${m.icon}</div>
       <div style="flex:1;min-width:0">
-        <h3>${m.title}</h3>
-        <p>${m.subtitle}</p>
+        <h3>${esc(m.title)}</h3><p>${esc(m.subtitle)}</p>
         <div class="meta">
-          <span class="tag">${m.minutes} мин</span>
-          ${total ? `<span class="tag">${total} урока</span>` : ''}
-          ${m.status==='soon' ? '<span class="tag soonT">скоро</span>' : ''}
-          ${isDone ? '<span class="tag done">✓ пройден</span>' : ''}
+          <span class="tag">${m.minutes} ${esc(t.min)}</span>
+          ${total?`<span class="tag">${total} ${esc(t.lessons)}</span>`:''}
+          ${m.status==='soon'?`<span class="tag soonT">${esc(t.soon)}</span>`:''}
+          ${isPassed?`<span class="tag done">✓ ${esc(t.done)} · ${passed[m.id].score}%</span>`:''}
         </div>
-        ${total ? `<div class="bar"><i style="width:${pct}%"></i></div>` : ''}
+        ${total?`<div class="bar"><i style="width:${pct}%"></i></div>`:''}
       </div></div>`;
   }).join('');
-  $('mods').querySelectorAll('.mod.open').forEach(el => {
-    el.onclick = () => openModule(el.dataset.mod);
-  });
+  $('mods').querySelectorAll('.mod.open').forEach(el => el.onclick = () => openModule(el.dataset.mod));
 }
 
-function openModule(id){
-  const m = CURRICULUM.find(x => x.id === id);
-  if (!m || !m.lessons.length) return;
-  const done = store.done[id] || [];
-  const first = m.lessons.findIndex(l => !done.includes(l.id));
-  cur = { mod:m, idx: first === -1 ? 0 : first };
-  show('lesson');
-  loadLesson();
-}
-
-function show(which){
-  $('home').style.display   = which==='home'   ? '' : 'none';
-  $('lesson').style.display = which==='lesson' ? 'block' : 'none';
-  $('cert').style.display   = which==='cert'   ? 'block' : 'none';
+function show(w){
+  ['home','lesson','exam','cert'].forEach(id =>
+    $(id).style.display = (id===w ? (id==='home'?'':'block') : 'none'));
   window.scrollTo({top:0,behavior:'instant'});
 }
 
-// ── lesson ──
+function openModule(id){
+  const m = CURRICULUM.find(x => x.id===id);
+  if (!m || !m.lessons.length) return;
+  const done = store.done[id] || [];
+  const first = m.lessons.findIndex(l => !done.includes(l.id));
+  cur = { mod:m, idx: first===-1 ? 0 : first };
+  show('lesson'); loadLesson();
+}
+
+// ── visual block ──
+function renderVisual(v){
+  if (!v) return '';
+  if (v.type==='facts')
+    return `<div class="vfacts">${v.items.map(i=>
+      `<div class="vfact"><b>${esc(i.big)}</b><span>${esc(i.label)}</span></div>`).join('')}</div>`;
+  if (v.type==='vs')
+    return `<div class="vvs">
+      <div class="vcol y"><h4>✓ ${esc(v.yesTitle)}</h4><ul>${v.yes.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+      <div class="vcol n"><h4>${esc(v.noTitle)}</h4><ul>${v.no.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>`;
+  if (v.type==='steps')
+    return `${v.title?`<div class="vtitle">${esc(v.title)}</div>`:''}
+      <div class="vsteps">${v.items.map(x=>`<div class="vstep"><span>${esc(x)}</span></div>`).join('')}</div>`;
+  if (v.type==='list')
+    return `${v.title?`<div class="vtitle">${esc(v.title)}</div>`:''}
+      <div class="vlist">${v.items.map((x,i)=>
+        `<div class="vitem"><b>${i+1}</b><span>${esc(x)}</span></div>`).join('')}</div>`;
+  return '';
+}
+
 function renderChips(){
-  $('reChips').innerHTML = AUDS.map(a =>
-    `<button class="chip${a.id===store.aud?' on':''}" data-aud="${a.id}">${a.label}</button>`).join('');
-  $('reChips').querySelectorAll('.chip').forEach(c => {
-    c.onclick = () => {
-      if (c.dataset.aud === store.aud) return;
-      store.aud = c.dataset.aud;
-      applyScale(); renderChips(); renderAuds(); loadLesson();
-    };
+  const a = T().auds;
+  $('reChips').innerHTML = AUD_IDS.map(id =>
+    `<button class="chip${id===store.aud?' on':''}" data-aud="${id}">${esc(a[id][0])}</button>`).join('');
+  $('reChips').querySelectorAll('.chip').forEach(c => c.onclick = () => {
+    if (c.dataset.aud===store.aud) return;
+    store.aud = c.dataset.aud; applyScale(); renderChips(); renderAuds(); loadLesson();
   });
 }
 
-function renderSources(l){
-  $('srcs').innerHTML = (l.sources||[]).map(s =>
-    `<div class="src"><b>${s.ref}</b><span>${s.note||''}</span>
-       ${s.url?`<a href="${s.url}" target="_blank" rel="noopener">Проверить сам →</a>`:''}</div>`).join('');
+// ── quiz rendering (shared by lesson checks and the exam) ──
+function renderQuestions(list, container, opts){
+  const state = list.map(()=>null);
+  container.innerHTML = list.map((q,qi) =>
+    `<div class="q"><p>${qi+1}. ${esc(q.q)}</p>
+      <div class="opts" data-q="${qi}">${q.options.map((o,oi)=>
+        `<button class="opt" data-q="${qi}" data-o="${oi}">${esc(o)}</button>`).join('')}</div>
+      <div class="why" data-why="${qi}" style="display:none"></div></div>`).join('');
+
+  container.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+    const qi = +b.dataset.q, oi = +b.dataset.o;
+    if (opts.instant) {
+      if (state[qi] !== null) return;
+      state[qi] = oi;
+      const q = list[qi];
+      container.querySelectorAll(`.opt[data-q="${qi}"]`).forEach(x => {
+        x.disabled = true;
+        if (+x.dataset.o === q.correct) x.classList.add('right');
+        else if (+x.dataset.o === oi) x.classList.add('wrong');
+      });
+      const w = container.querySelector(`[data-why="${qi}"]`);
+      w.textContent = q.why; w.style.display = 'block';
+    } else {
+      state[qi] = oi;
+      container.querySelectorAll(`.opt[data-q="${qi}"]`).forEach(x => x.classList.remove('right'));
+      b.classList.add('right');
+    }
+    if (opts.onChange) opts.onChange(state);
+  });
+  return state;
 }
 
 async function loadLesson(){
-  const m = cur.mod, l = m.lessons[cur.idx];
-  $('crumbTxt').textContent = `${m.title} · урок ${cur.idx+1} из ${m.lessons.length}`;
+  const t = T(), m = cur.mod, l = m.lessons[cur.idx];
+  $('crumbTxt').textContent = `${m.title} · ${t.lessonOf} ${cur.idx+1} ${t.of} ${m.lessons.length}`;
   $('lTitle').textContent = l.title;
-  renderSources(l);
+  $('lVis').innerHTML = renderVisual(l.visual);
+  $('srcs').innerHTML = (l.sources||[]).map(s =>
+    `<div class="src"><b>${esc(s.ref)}</b><span>${esc(s.note||'')}</span>
+      ${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener">${store.lang==='ar'?'تحقّق بنفسك ←':'Проверить сам →'}</a>`:''}</div>`).join('');
   renderChips();
-  $('caseAns').classList.remove('show');
-  $('caseIn').value = '';
-  $('prevBtn').style.visibility = cur.idx === 0 ? 'hidden' : 'visible';
-  $('nextBtn').textContent = cur.idx === m.lessons.length-1 ? 'Завершить модуль ✓' : 'Дальше →';
+  $('caseAns').classList.remove('show'); $('caseIn').value='';
+  $('prevBtn').style.visibility = cur.idx===0 ? 'hidden' : 'visible';
+  $('prevBtn').textContent = '← ' + t.prev;
+  const last = cur.idx === m.lessons.length-1;
+  $('nextBtn').textContent = last ? (t.toExam + ' →') : (t.next + ' →');
+  $('lQuiz').innerHTML = '';
 
-  const t = $('lText');
-  t.className = 'ltext loading';
-  t.innerHTML = 'Готовим объяснение под вас <span class="dots"><i></i><i></i><i></i></span>';
-
+  const box = $('lText');
+  box.className = 'ltext loading';
+  box.innerHTML = esc(t.loading) + ' <span class="dots"><i></i><i></i><i></i></span>';
   try {
     const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 60000);
-    const res = await fetch(API + '/academy/explain', {
-      method:'POST', headers:{'Content-Type':'application/json'}, signal: ctrl.signal,
-      body: JSON.stringify({ core:l.core, sources:l.sources, audience:store.aud,
-                             lang:store.lang, title:l.title }),
+    const timer = setTimeout(()=>ctrl.abort(), 60000);
+    const res = await fetch(API+'/academy/explain', {
+      method:'POST', headers:{'Content-Type':'application/json'}, signal:ctrl.signal,
+      body: JSON.stringify({core:l.core, sources:l.sources, audience:store.aud, lang:store.lang, title:l.title}),
     });
     clearTimeout(timer);
-    if (!res.ok) throw new Error('bad status');
+    if (!res.ok) throw new Error();
     const d = await res.json();
-    t.className = 'ltext';
-    t.textContent = d.text;
+    box.className='ltext'; box.textContent = d.text;
   } catch(e) {
-    // Never leave the reader with nothing: fall back to the canonical text itself.
-    t.className = 'ltext';
-    t.textContent = l.core;
-    const note = document.createElement('p');
-    note.className = 'warn';
-    note.textContent = 'Наставник сейчас недоступен — показан исходный текст урока без адаптации.';
-    t.appendChild(note);
+    box.className='ltext'; box.textContent = l.core;
+    const n=document.createElement('p'); n.className='warn'; n.textContent=t.offline; box.appendChild(n);
+  }
+  if (l.check && l.check.length) {
+    $('lQuiz').innerHTML = `<div class="qh">${esc(t.checkH)}</div><div id="lQ"></div>`;
+    renderQuestions(l.check, $('lQ'), {instant:true});
   }
 }
 
 $('backBtn').onclick = () => { show('home'); renderMods(); };
-$('prevBtn').onclick = () => { if (cur.idx > 0) { cur.idx--; loadLesson(); } };
+$('prevBtn').onclick = () => { if (cur.idx>0){ cur.idx--; loadLesson(); } };
 $('nextBtn').onclick = () => {
   const m = cur.mod;
   store.mark(m.id, m.lessons[cur.idx].id);
-  if (cur.idx < m.lessons.length - 1) { cur.idx++; loadLesson(); }
-  else {
-    $('certMod').textContent = m.title;
-    $('certWho').textContent = '';
-    show('cert');
-    renderMods();
+  if (cur.idx < m.lessons.length-1){ cur.idx++; loadLesson(); }
+  else openExam();
+};
+
+// ── exam ──
+function openExam(){
+  const t = T(), m = cur.mod;
+  $('examCrumb').textContent = m.title;
+  $('examCard').innerHTML = `
+    <h2 style="font-size:28px;margin-bottom:8px">${esc(t.examH)}</h2>
+    <p style="color:var(--text3);font-size:14.5px;margin:0 0 22px">${esc(t.examP)}</p>
+    <div id="eQ"></div>
+    <button class="btn btn-p" id="eSubmit" style="width:100%;margin-top:8px" disabled>${esc(t.examCheck)}</button>`;
+  examState = renderQuestions(m.exam, $('eQ'), {
+    instant:false,
+    onChange:(st)=>{ $('eSubmit').disabled = st.some(x=>x===null); },
+  });
+  $('eSubmit').onclick = gradeExam;
+  show('exam');
+}
+
+function gradeExam(){
+  const t = T(), m = cur.mod;
+  let right = 0;
+  m.exam.forEach((q,i) => { if (examState[i] === q.correct) right++; });
+  const pct = Math.round(right / m.exam.length * 100);
+  const passed = (right / m.exam.length) >= PASS_MARK;
+
+  $('eQ').querySelectorAll('.opt').forEach(b => {
+    const qi = +b.dataset.q, oi = +b.dataset.o;
+    b.disabled = true; b.classList.remove('right');
+    if (oi === m.exam[qi].correct) b.classList.add('right');
+    else if (oi === examState[qi]) b.classList.add('wrong');
+  });
+  m.exam.forEach((q,i) => {
+    const w = $('eQ').querySelector(`[data-why="${i}"]`);
+    w.textContent = q.why; w.style.display = 'block';
+  });
+
+  const res = document.createElement('div');
+  res.className = 'score';
+  res.innerHTML = `<div class="n ${passed?'pass':'fail'}">${pct}%</div>
+    <p>${esc(passed ? t.pass : t.fail)} (${right}/${m.exam.length})</p>
+    <div style="margin-top:16px">
+      ${passed ? `<button class="btn btn-p" id="eCert">${esc(t.getCert)}</button>`
+               : `<button class="btn btn-p" id="eAgain">${esc(t.examAgain)}</button>`}
+      <button class="btn" id="eHome" style="margin-inline-start:8px">${esc(t.toProg)}</button>
+    </div>`;
+  $('examCard').appendChild(res);
+  $('eSubmit').style.display = 'none';
+  res.scrollIntoView({behavior:'smooth', block:'center'});
+
+  if (passed) {
+    store.pass(m.id, pct);
+    $('eCert').onclick = () => openCert(pct);
+  } else {
+    $('eAgain').onclick = () => openExam();
   }
+  $('eHome').onclick = () => { show('home'); renderMods(); };
+}
+$('examBack').onclick = () => { show('home'); renderMods(); };
+
+// ── certificate: only reachable after passing ──
+function openCert(score){
+  $('certMod').textContent = cur.mod.title;
+  $('certName').value = '';
+  $('certPrev').style.display = 'none';
+  show('cert');
+  drawCert('', score);
+}
+
+function certId(){
+  const m = cur.mod ? cur.mod.id : 'x';
+  const seed = (m + '|' + ($('certName').value.trim()||'-') + '|' + new Date().toDateString());
+  let h = 0; for (let i=0;i<seed.length;i++){ h = (h*31 + seed.charCodeAt(i)) >>> 0; }
+  return 'AMA-' + m.slice(0,4).toUpperCase() + '-' + h.toString(36).toUpperCase().slice(0,6);
+}
+
+let certScore = 0;
+function drawCert(name, score){
+  certScore = score != null ? score : certScore;
+  const W=2000, H=1414, c=document.createElement('canvas');
+  c.width=W; c.height=H;
+  const x=c.getContext('2d');
+  const mod = cur.mod ? cur.mod.title : '';
+  const date = new Date().toLocaleDateString(store.lang==='ar'?'ar':'ru-RU',{year:'numeric',month:'long',day:'numeric'});
+
+  // parchment
+  const g = x.createLinearGradient(0,0,W,H);
+  g.addColorStop(0,'#FBF8F2'); g.addColorStop(.5,'#F5F0E8'); g.addColorStop(1,'#EFE7D8');
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+
+  // corner flourishes
+  x.strokeStyle='#C9A84C'; x.lineWidth=8; x.strokeRect(56,56,W-112,H-112);
+  x.strokeStyle='rgba(168,134,47,.45)'; x.lineWidth=2.5; x.strokeRect(80,80,W-160,H-160);
+  x.strokeStyle='#A8862F'; x.lineWidth=6;
+  const cl=110;
+  [[80,80,1,1],[W-80,80,-1,1],[80,H-80,1,-1],[W-80,H-80,-1,-1]].forEach(([px,py,dx,dy])=>{
+    x.beginPath(); x.moveTo(px+dx*cl,py); x.lineTo(px,py); x.lineTo(px,py+dy*cl); x.stroke();
+  });
+
+  x.textAlign='center';
+  // logo
+  if (logoImg && logoImg.complete && logoImg.naturalWidth) {
+    const s=150; x.save(); x.beginPath(); x.arc(W/2,255,s/2,0,Math.PI*2); x.closePath(); x.clip();
+    x.drawImage(logoImg, W/2-s/2, 255-s/2, s, s); x.restore();
+    x.strokeStyle='#C9A84C'; x.lineWidth=4;
+    x.beginPath(); x.arc(W/2,255,s/2+6,0,Math.PI*2); x.stroke();
+  }
+
+  x.fillStyle='#7A6A45'; x.font='600 27px "DM Sans", sans-serif';
+  x.fillText('A M   A C A D E M Y', W/2, 400);
+  x.fillStyle='#8A9A90'; x.font='400 21px "DM Sans", sans-serif';
+  x.fillText('amnetwork.io', W/2, 438);
+
+  x.fillStyle='#16281C'; x.font='700 92px "Cormorant Garamond", Georgia, serif';
+  x.fillText(store.lang==='ar'?'شهادة إتمام':'СЕРТИФИКАТ', W/2, 570);
+  x.fillStyle='#5A6B60'; x.font='400 30px "DM Sans", sans-serif';
+  x.fillText(store.lang==='ar'?'تشهد بأن':'настоящим подтверждается, что', W/2, 640);
+
+  // name
+  x.fillStyle='#A8862F';
+  x.font='700 100px "Cormorant Garamond", Georgia, serif';
+  x.fillText(name || '—', W/2, 780);
+  x.strokeStyle='rgba(168,134,47,.5)'; x.lineWidth=3;
+  x.beginPath(); x.moveTo(W/2-460,820); x.lineTo(W/2+460,820); x.stroke();
+
+  x.fillStyle='#5A6B60'; x.font='400 30px "DM Sans", sans-serif';
+  x.fillText(store.lang==='ar'?'أتمّ الوحدة التعليمية':'успешно завершил учебный модуль', W/2, 890);
+  x.fillStyle='#16281C'; x.font='700 62px "Cormorant Garamond", Georgia, serif';
+  x.fillText(mod, W/2, 975);
+
+  // score medal
+  x.beginPath(); x.arc(W/2, 1105, 76, 0, Math.PI*2);
+  x.fillStyle='rgba(201,168,76,.16)'; x.fill();
+  x.strokeStyle='#C9A84C'; x.lineWidth=5; x.stroke();
+  x.fillStyle='#A8862F'; x.font='700 52px "Cormorant Garamond", Georgia, serif';
+  x.fillText(certScore + '%', W/2, 1122);
+
+  x.fillStyle='#5A6B60'; x.font='400 26px "DM Sans", sans-serif';
+  x.fillText(date, W/2, 1235);
+  x.fillStyle='#8A9A90'; x.font='400 20px "DM Sans", sans-serif';
+  x.fillText(certId(), W/2, 1275);
+  x.font='400 19px "DM Sans", sans-serif';
+  x.fillText(store.lang==='ar'
+    ? 'شهادة تعليمية — ليست مؤهلاً شرعياً ولا فتوى. كل معلومة منشورة مع مصدرها.'
+    : 'Учебный сертификат. Не является религиозной квалификацией или фетвой.', W/2, 1330);
+
+  $('certPrev').src = c.toDataURL('image/png');
+  $('certPrev').style.display = 'block';
+  return c;
+}
+
+let logoImg = new Image();
+logoImg.onload = () => { if ($('cert').style.display==='block') drawCert($('certName').value.trim()); };
+logoImg.src = '/icons/icon-192.png';
+
+$('certName').oninput = e => drawCert(e.target.value.trim());
+$('certBack').onclick = () => { show('home'); renderMods(); };
+$('certDl').onclick = () => {
+  const c = drawCert($('certName').value.trim());
+  const a = document.createElement('a');
+  a.download = 'AM-Academy-' + (cur.mod?cur.mod.id:'certificate') + '.png';
+  a.href = c.toDataURL('image/png'); a.click();
 };
 
 // ── my case ──
 $('caseBtn').onclick = async () => {
-  const situation = $('caseIn').value.trim();
+  const t = T(), situation = $('caseIn').value.trim();
   if (!situation) return;
-  const l = cur.mod.lessons[cur.idx];
-  const box = $('caseAns');
+  const l = cur.mod.lessons[cur.idx], box = $('caseAns');
   box.classList.add('show');
-  box.innerHTML = 'Разбираем <span class="dots"><i></i><i></i><i></i></span>';
+  box.innerHTML = esc(t.thinking) + ' <span class="dots"><i></i><i></i><i></i></span>';
   $('caseBtn').disabled = true;
   try {
     const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 60000);
-    const res = await fetch(API + '/academy/apply', {
-      method:'POST', headers:{'Content-Type':'application/json'}, signal: ctrl.signal,
-      body: JSON.stringify({ core:l.core, sources:l.sources, situation,
-                             audience:store.aud, lang:store.lang, title:l.title }),
+    const timer = setTimeout(()=>ctrl.abort(), 60000);
+    const res = await fetch(API+'/academy/apply', {
+      method:'POST', headers:{'Content-Type':'application/json'}, signal:ctrl.signal,
+      body: JSON.stringify({core:l.core, sources:l.sources, situation, audience:store.aud, lang:store.lang, title:l.title}),
     });
     clearTimeout(timer);
-    if (!res.ok) throw new Error('bad status');
-    const d = await res.json();
-    box.textContent = d.text;
+    if (!res.ok) throw new Error();
+    box.textContent = (await res.json()).text;
   } catch(e) {
-    box.innerHTML = '<span class="err">Наставник сейчас недоступен. Попробуйте через минуту.</span>';
+    box.innerHTML = `<span class="err">${esc(t.offErr)}</span>`;
   } finally { $('caseBtn').disabled = false; }
 };
 
-// ── certificate ──
-$('certName').oninput = e => { $('certWho').textContent = e.target.value.trim(); };
-$('certBack').onclick = () => { show('home'); renderMods(); };
-$('certDl').onclick = () => {
-  const name = ($('certName').value.trim() || '—');
-  const mod  = cur.mod ? cur.mod.title : '';
-  const date = new Date().toLocaleDateString('ru-RU', {year:'numeric',month:'long',day:'numeric'});
-  const c = document.createElement('canvas');
-  c.width = 1600; c.height = 1130;
-  const x = c.getContext('2d');
-  x.fillStyle = '#F5F0E8'; x.fillRect(0,0,1600,1130);
-  x.strokeStyle = '#A8862F'; x.lineWidth = 6; x.strokeRect(42,42,1516,1046);
-  x.strokeStyle = 'rgba(168,134,47,.4)'; x.lineWidth = 2; x.strokeRect(62,62,1476,1006);
-  x.textAlign = 'center'; x.fillStyle = '#5A6B60';
-  x.font = '600 26px "DM Sans", sans-serif';
-  x.fillText('AM ACADEMY · AMNETWORK.IO', 800, 168);
-  x.fillStyle = '#16281C'; x.font = '700 74px "Cormorant Garamond", Georgia, serif';
-  x.fillText('Сертификат о прохождении', 800, 300);
-  x.fillStyle = '#5A6B60'; x.font = '400 30px "DM Sans", sans-serif';
-  x.fillText('подтверждает, что', 800, 396);
-  x.fillStyle = '#A8862F'; x.font = '600 72px "Cormorant Garamond", Georgia, serif';
-  x.fillText(name, 800, 500);
-  x.fillStyle = '#5A6B60'; x.font = '400 30px "DM Sans", sans-serif';
-  x.fillText('завершил учебный модуль', 800, 588);
-  x.fillStyle = '#16281C'; x.font = '700 50px "Cormorant Garamond", Georgia, serif';
-  x.fillText(mod, 800, 672);
-  x.strokeStyle = '#A8862F'; x.lineWidth = 3;
-  x.beginPath(); x.moveTo(660,724); x.lineTo(940,724); x.stroke();
-  x.fillStyle = '#5A6B60'; x.font = '400 27px "DM Sans", sans-serif';
-  x.fillText(date, 800, 790);
-  x.font = '400 21px "DM Sans", sans-serif'; x.fillStyle = '#8A9A90';
-  x.fillText('Учебный сертификат. Не является религиозной квалификацией или фетвой.', 800, 960);
-  x.fillText('Каждое утверждение курса опубликовано со ссылкой на первоисточник.', 800, 996);
-  const a = document.createElement('a');
-  a.download = 'AM-Academy-' + (cur.mod ? cur.mod.id : 'certificate') + '.png';
-  a.href = c.toDataURL('image/png');
-  a.click();
-};
-
-// ── warm the free-tier backend so the first lesson isn't slow ──
-fetch(API + '/health').catch(()=>{});
-
-initTheme(); initLang(); applyScale(); renderAuds(); renderMods();
+fetch(API+'/health').catch(()=>{});
+initTheme(); applyLangDir(); renderLang(); paintUI(); applyScale(); renderAuds(); renderMods();
 </script>
 </body>
 </html>
