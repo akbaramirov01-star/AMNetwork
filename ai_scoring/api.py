@@ -16,6 +16,7 @@ from scorer import (
     MedicalStatus, CrisisType, AssetLevel, score_recipient,
 )
 from assistant import get_reply
+from academy import explain as academy_explain, apply_to_case, AUDIENCES
 
 app = Flask(__name__)
 ALLOWED_ORIGINS = [
@@ -140,6 +141,107 @@ def chat():
         return jsonify({"error": "assistant temporarily unavailable"}), 502
 
     return jsonify({"reply": reply})
+
+
+# ── AM Academy ────────────────────────────────────────────────────────────────
+MAX_CORE_LEN = 6000
+MAX_SITUATION_LEN = 1200
+VALID_LANGS = {"en", "ru", "ar", "tj", "id", "tr", "zh", "ms", "de"}
+
+# Adapted lessons are deterministic per (lesson, audience, language) for a given
+# canonical text, so cache them: the same reader profile shouldn't re-bill a
+# fresh Anthropic call on every page view.
+_explain_cache: dict[tuple, str] = {}
+MAX_CACHE_ENTRIES = 500
+
+
+def _read_lesson_request():
+    """Shared validation for the two academy endpoints."""
+    p = request.get_json(force=True, silent=True) or {}
+    core = p.get("core")
+    if not isinstance(core, str) or not core.strip():
+        return None, (jsonify({"error": "missing required field: core"}), 400)
+    if len(core) > MAX_CORE_LEN:
+        return None, (jsonify({"error": f"core too long (max {MAX_CORE_LEN} chars)"}), 400)
+
+    audience = p.get("audience", "working")
+    if audience not in AUDIENCES:
+        return None, (jsonify({"error": f"invalid audience. Valid: {sorted(AUDIENCES)}"}), 400)
+
+    lang = p.get("lang", "en")
+    if lang not in VALID_LANGS:
+        return None, (jsonify({"error": f"invalid lang. Valid: {sorted(VALID_LANGS)}"}), 400)
+
+    sources = p.get("sources") or []
+    if not isinstance(sources, list) or len(sources) > 20:
+        return None, (jsonify({"error": "sources must be a list of at most 20 items"}), 400)
+    for s in sources:
+        if not isinstance(s, dict):
+            return None, (jsonify({"error": "each source must be an object"}), 400)
+
+    title = p.get("title", "")
+    if not isinstance(title, str) or len(title) > 200:
+        return None, (jsonify({"error": "invalid title"}), 400)
+
+    return {"core": core, "sources": sources, "audience": audience,
+            "lang": lang, "title": title, "raw": p}, None
+
+
+@app.route("/academy/explain", methods=["POST"])
+def academy_explain_route():
+    """Re-voice a fixed lesson for one reader. Facts/sources never change."""
+    data, err = _read_lesson_request()
+    if err:
+        return err
+
+    key = (data["title"], data["audience"], data["lang"], hash(data["core"]))
+    if key in _explain_cache:
+        return jsonify({"text": _explain_cache[key], "cached": True})
+
+    try:
+        text = academy_explain(
+            core=data["core"], sources=data["sources"],
+            audience=data["audience"], lang=data["lang"], title=data["title"],
+        )
+    except RuntimeError as e:
+        app.logger.error("academy/explain: not configured: %s", e)
+        return jsonify({"error": "tutor not configured yet"}), 503
+    except Exception:
+        app.logger.exception("academy/explain: unhandled error")
+        return jsonify({"error": "tutor temporarily unavailable"}), 502
+
+    if len(_explain_cache) >= MAX_CACHE_ENTRIES:
+        _explain_cache.clear()
+    _explain_cache[key] = text
+    return jsonify({"text": text, "cached": False})
+
+
+@app.route("/academy/apply", methods=["POST"])
+def academy_apply_route():
+    """Apply a fixed lesson to the reader's own situation. Never cached."""
+    data, err = _read_lesson_request()
+    if err:
+        return err
+
+    situation = (data["raw"].get("situation") or "").strip()
+    if not situation:
+        return jsonify({"error": "missing required field: situation"}), 400
+    if len(situation) > MAX_SITUATION_LEN:
+        return jsonify({"error": f"situation too long (max {MAX_SITUATION_LEN} chars)"}), 400
+
+    try:
+        text = apply_to_case(
+            core=data["core"], sources=data["sources"], situation=situation,
+            audience=data["audience"], lang=data["lang"], title=data["title"],
+        )
+    except RuntimeError as e:
+        app.logger.error("academy/apply: not configured: %s", e)
+        return jsonify({"error": "tutor not configured yet"}), 503
+    except Exception:
+        app.logger.exception("academy/apply: unhandled error")
+        return jsonify({"error": "tutor temporarily unavailable"}), 502
+
+    return jsonify({"text": text})
 
 
 if __name__ == "__main__":
