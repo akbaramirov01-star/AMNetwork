@@ -841,74 +841,136 @@ function certId(){
 }
 
 let certScore = 0;
+
+// The AM icon is a coin on a beige square. Clipping the whole 192px file into a
+// circle keeps that beige, which read as a white ring inside the gold one.
+// Measured: the coin occupies the centre 79% of the file, so crop to it.
+const LOGO_INSET = 0.104;
+
 function drawCert(name, score){
   certScore = score != null ? score : certScore;
   const W=2000, H=1414, c=document.createElement('canvas');
   c.width=W; c.height=H;
   const x=c.getContext('2d');
+  const ar = store.lang === 'ar';
   const mod = cur.mod ? modTitle(cur.mod) : '';
-  const date = new Date().toLocaleDateString(store.lang==='ar'?'ar':'ru-RU',{year:'numeric',month:'long',day:'numeric'});
+  const date = new Date().toLocaleDateString(ar?'ar':'ru-RU',{year:'numeric',month:'long',day:'numeric'});
+  const lessons = cur.mod ? cur.mod.lessons.length : 0;
+  const GOLD='#A8862F', GOLD2='#C9A84C', INK='#16281C', MUTED='#5A6B60', FAINT='#8A9A90';
 
   // parchment
   const g = x.createLinearGradient(0,0,W,H);
   g.addColorStop(0,'#FBF8F2'); g.addColorStop(.5,'#F5F0E8'); g.addColorStop(1,'#EFE7D8');
   x.fillStyle=g; x.fillRect(0,0,W,H);
 
-  // corner flourishes
-  x.strokeStyle='#C9A84C'; x.lineWidth=8; x.strokeRect(56,56,W-112,H-112);
+  // eight-point star lattice, very faint — fills the empty field without
+  // competing with the text
+  x.save();
+  x.strokeStyle='rgba(168,134,47,.075)'; x.lineWidth=1.6;
+  const step=118, r=44;
+  for (let cy=step/2; cy<H; cy+=step){
+    for (let cx=step/2; cx<W; cx+=step){
+      x.beginPath();
+      for (let i=0;i<8;i++){
+        const a=i*Math.PI/4, rr=(i%2===0)?r:r*0.56;
+        const px=cx+Math.cos(a)*rr, py=cy+Math.sin(a)*rr;
+        i?x.lineTo(px,py):x.moveTo(px,py);
+      }
+      x.closePath(); x.stroke();
+    }
+  }
+  x.restore();
+
+  // borders
+  x.strokeStyle=GOLD2; x.lineWidth=8; x.strokeRect(56,56,W-112,H-112);
   x.strokeStyle='rgba(168,134,47,.45)'; x.lineWidth=2.5; x.strokeRect(80,80,W-160,H-160);
-  x.strokeStyle='#A8862F'; x.lineWidth=6;
+  x.strokeStyle=GOLD; x.lineWidth=6;
   const cl=110;
   [[80,80,1,1],[W-80,80,-1,1],[80,H-80,1,-1],[W-80,H-80,-1,-1]].forEach(([px,py,dx,dy])=>{
     x.beginPath(); x.moveTo(px+dx*cl,py); x.lineTo(px,py); x.lineTo(px,py+dy*cl); x.stroke();
   });
 
   x.textAlign='center';
-  // logo
+
+  // logo — cropped to the coin so no pale ring sits between it and the gold
   if (logoImg && logoImg.complete && logoImg.naturalWidth) {
-    const s=150; x.save(); x.beginPath(); x.arc(W/2,255,s/2,0,Math.PI*2); x.closePath(); x.clip();
-    x.drawImage(logoImg, W/2-s/2, 255-s/2, s, s); x.restore();
-    x.strokeStyle='#C9A84C'; x.lineWidth=4;
-    x.beginPath(); x.arc(W/2,255,s/2+6,0,Math.PI*2); x.stroke();
+    const s=158, n=logoImg.naturalWidth, pad=n*LOGO_INSET, src=n-pad*2;
+    x.save(); x.beginPath(); x.arc(W/2,242,s/2,0,Math.PI*2); x.closePath(); x.clip();
+    x.drawImage(logoImg, pad, pad, src, src, W/2-s/2, 242-s/2, s, s); x.restore();
+    x.strokeStyle=GOLD2; x.lineWidth=5;
+    x.beginPath(); x.arc(W/2,242,s/2+3,0,Math.PI*2); x.stroke();
   }
 
   x.fillStyle='#7A6A45'; x.font='600 27px "DM Sans", sans-serif';
-  x.fillText('A M   A C A D E M Y', W/2, 400);
-  x.fillStyle='#8A9A90'; x.font='400 21px "DM Sans", sans-serif';
-  x.fillText('amnetwork.io', W/2, 438);
+  x.fillText('A M   A C A D E M Y', W/2, 378);
+  x.fillStyle=FAINT; x.font='400 21px "DM Sans", sans-serif';
+  x.fillText('amnetwork.io/academy', W/2, 414);
 
-  x.fillStyle='#16281C'; x.font='700 92px "Cormorant Garamond", Georgia, serif';
-  x.fillText(store.lang==='ar'?'شهادة إتمام':'СЕРТИФИКАТ', W/2, 570);
-  x.fillStyle='#5A6B60'; x.font='400 30px "DM Sans", sans-serif';
-  x.fillText(store.lang==='ar'?'تشهد بأن':'настоящим подтверждается, что', W/2, 640);
+  // ornamental divider
+  x.strokeStyle='rgba(168,134,47,.55)'; x.lineWidth=2;
+  x.beginPath(); x.moveTo(W/2-230,444); x.lineTo(W/2-26,444); x.stroke();
+  x.beginPath(); x.moveTo(W/2+26,444); x.lineTo(W/2+230,444); x.stroke();
+  x.save(); x.translate(W/2,444); x.rotate(Math.PI/4);
+  x.fillStyle=GOLD2; x.fillRect(-8,-8,16,16); x.restore();
+
+  x.fillStyle=INK; x.font='700 88px "Cormorant Garamond", Georgia, serif';
+  x.fillText(ar?'شهادة إتمام':'СЕРТИФИКАТ', W/2, 542);
+  x.fillStyle=MUTED; x.font='400 29px "DM Sans", sans-serif';
+  x.fillText(ar?'تشهد بأن':'настоящим подтверждается, что', W/2, 604);
 
   // name
-  x.fillStyle='#A8862F';
-  x.font='700 100px "Cormorant Garamond", Georgia, serif';
-  x.fillText(name || '—', W/2, 780);
+  x.fillStyle=GOLD; x.font='700 104px "Cormorant Garamond", Georgia, serif';
+  x.fillText(name || '—', W/2, 736);
   x.strokeStyle='rgba(168,134,47,.5)'; x.lineWidth=3;
-  x.beginPath(); x.moveTo(W/2-460,820); x.lineTo(W/2+460,820); x.stroke();
+  x.beginPath(); x.moveTo(W/2-470,778); x.lineTo(W/2+470,778); x.stroke();
 
-  x.fillStyle='#5A6B60'; x.font='400 30px "DM Sans", sans-serif';
-  x.fillText(store.lang==='ar'?'أتمّ الوحدة التعليمية':'успешно завершил учебный модуль', W/2, 890);
-  x.fillStyle='#16281C'; x.font='700 62px "Cormorant Garamond", Georgia, serif';
-  x.fillText(mod, W/2, 975);
+  x.fillStyle=MUTED; x.font='400 29px "DM Sans", sans-serif';
+  x.fillText(ar?'أتمّ الوحدة التعليمية':'успешно завершил учебный модуль', W/2, 842);
+  x.fillStyle=INK; x.font='700 60px "Cormorant Garamond", Georgia, serif';
+  x.fillText(mod, W/2, 922);
 
-  // score medal
-  x.beginPath(); x.arc(W/2, 1105, 76, 0, Math.PI*2);
-  x.fillStyle='rgba(201,168,76,.16)'; x.fill();
-  x.strokeStyle='#C9A84C'; x.lineWidth=5; x.stroke();
-  x.fillStyle='#A8862F'; x.font='700 52px "Cormorant Garamond", Georgia, serif';
-  x.fillText(certScore + '%', W/2, 1122);
+  // three fact panels — this band used to be empty
+  const cells = [
+    [String(lessons), ar?'دروس':'уроков'],
+    [certScore + '%', ar?'النتيجة':'результат теста'],
+    ['85%', ar?'الحد الأدنى للنجاح':'порог сдачи'],
+  ];
+  const cw=372, gap=34, totalW=cw*3+gap*2, y0=980, ch=150;
+  cells.forEach(([big,lbl],i)=>{
+    const cx0 = W/2-totalW/2 + i*(cw+gap);
+    x.fillStyle='rgba(201,168,76,.10)';
+    x.strokeStyle='rgba(168,134,47,.34)'; x.lineWidth=2;
+    const rr=18;
+    x.beginPath();
+    x.moveTo(cx0+rr,y0); x.arcTo(cx0+cw,y0,cx0+cw,y0+ch,rr);
+    x.arcTo(cx0+cw,y0+ch,cx0,y0+ch,rr); x.arcTo(cx0,y0+ch,cx0,y0,rr);
+    x.arcTo(cx0,y0,cx0+cw,y0,rr); x.closePath(); x.fill(); x.stroke();
+    x.fillStyle=GOLD; x.font='700 60px "Cormorant Garamond", Georgia, serif';
+    x.fillText(big, cx0+cw/2, y0+76);
+    x.fillStyle=MUTED; x.font='400 23px "DM Sans", sans-serif';
+    x.fillText(lbl, cx0+cw/2, y0+118);
+  });
 
-  x.fillStyle='#5A6B60'; x.font='400 26px "DM Sans", sans-serif';
-  x.fillText(date, W/2, 1235);
-  x.fillStyle='#8A9A90'; x.font='400 20px "DM Sans", sans-serif';
-  x.fillText(certId(), W/2, 1275);
-  x.font='400 19px "DM Sans", sans-serif';
-  x.fillText(store.lang==='ar'
+  // signature left, issue details right
+  const base=1196;
+  x.strokeStyle='rgba(168,134,47,.5)'; x.lineWidth=2;
+  x.beginPath(); x.moveTo(190,base); x.lineTo(650,base); x.stroke();
+  x.textAlign='center';
+  x.fillStyle=INK; x.font='600 30px "Cormorant Garamond", Georgia, serif';
+  x.fillText(ar?'أكبر أميرزودا':'Акбар Амирзода', 420, base+42);
+  x.fillStyle=FAINT; x.font='400 21px "DM Sans", sans-serif';
+  x.fillText(ar?'مؤسس AM Network':'основатель AM Network', 420, base+76);
+
+  x.beginPath(); x.moveTo(W-650,base); x.lineTo(W-190,base); x.stroke();
+  x.fillStyle=INK; x.font='600 27px "DM Sans", sans-serif';
+  x.fillText(certId(), W-420, base+40);
+  x.fillStyle=FAINT; x.font='400 21px "DM Sans", sans-serif';
+  x.fillText(date, W-420, base+76);
+
+  x.fillStyle=FAINT; x.font='400 19px "DM Sans", sans-serif';
+  x.fillText(ar
     ? 'شهادة تعليمية — ليست مؤهلاً شرعياً ولا فتوى. كل معلومة منشورة مع مصدرها.'
-    : 'Учебный сертификат. Не является религиозной квалификацией или фетвой.', W/2, 1330);
+    : 'Учебный сертификат. Не является религиозной квалификацией или фетвой.', W/2, 1352);
 
   $('certPrev').src = c.toDataURL('image/png');
   $('certPrev').style.display = 'block';
