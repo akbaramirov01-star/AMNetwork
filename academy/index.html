@@ -513,6 +513,32 @@ function renderAuds(){
 // are static Russian strings in curriculum.js, so they go through /academy/chrome
 // separately. Cached in sessionStorage: the result depends only on the text and
 // the language, never on who is reading, so it is worth keeping.
+// ── static content, generated ahead of time ────────────────────────────────
+// ai_scoring/pregenerate.py writes every (lesson, audience, language) variant to
+// academy/content/ and commits it. Serving those files means a lesson opens
+// instantly with no backend call, no Render cold start and no per-view cost.
+// The live API stays as the fallback for anything not yet generated.
+const bundles = {};
+function bundleUrl(lang, name){ return 'content/' + lang + '/' + name + '.json'; }
+
+async function loadBundle(lang, name){
+  const k = lang + '/' + name;
+  if (k in bundles) return bundles[k];
+  bundles[k] = (async () => {
+    try {
+      const res = await fetch(bundleUrl(lang, name), {cache:'default'});
+      if (!res.ok) return null;
+      return await res.json();
+    } catch(e) { return null; }
+  })();
+  return bundles[k];
+}
+
+const lessonKey = (mod, lesson) => mod.id + '__' + lesson.id;
+
+// ── translated chrome ──────────────────────────────────────────────────────
+// Titles, visual cards, source captions and quiz text. Pre-generated where
+// available; otherwise translated live and kept for the session.
 const chromeCache = {};
 function ckey(lang, obj){ return lang + '|' + JSON.stringify(obj); }
 
@@ -541,9 +567,11 @@ async function translateChrome(obj, lang){
   } catch(e) { return obj; }   // fall back to the original — never blank
 }
 
-// The curriculum screen: module titles and subtitles in one batched call.
+// The curriculum screen: module titles and subtitles.
 async function translateMods(lang){
   if (lang === 'ru') return null;
+  const pre = await loadBundle(lang, 'chrome');
+  if (pre && pre.mods) return pre.mods;
   const payload = {};
   CURRICULUM.forEach(m => { payload[m.id] = {title:m.title, subtitle:m.subtitle}; });
   const out = await translateChrome(payload, lang);
@@ -703,9 +731,19 @@ async function loadLesson(){
   box.innerHTML = esc(t.loading) + ' <span class="dots"><i></i><i></i><i></i></span>';
 
   // Prose and chrome travel in parallel — the reader waits for one round trip,
-  // not two.
-  const chromeP = translateChrome(lessonChrome(l), lang);
+  // not two. Both check the pre-generated bundles first; the API is the fallback.
+  const key = lessonKey(m, l);
+
+  const chromeP = (async () => {
+    if (lang === 'ru') return lessonChrome(l);
+    const pre = await loadBundle(lang, 'chrome');
+    if (pre && pre.lessons && pre.lessons[key]) return pre.lessons[key];
+    return translateChrome(lessonChrome(l), lang);
+  })();
+
   const proseP = (async () => {
+    const pre = await loadBundle(lang, store.aud);
+    if (pre && pre.lessons && pre.lessons[key]) return pre.lessons[key];
     const ctrl = new AbortController();
     const timer = setTimeout(()=>ctrl.abort(), 60000);
     const res = await fetch(API+'/academy/explain', {
@@ -766,7 +804,12 @@ async function openExam(){
   show('exam');
 
   const src = m.exam.map(q => ({q:q.q, options:q.options, why:q.why}));
-  const tr = await translateChrome({exam:src}, lang);
+  let tr = null;
+  if (lang !== 'ru') {
+    const pre = await loadBundle(lang, 'chrome');
+    tr = (pre && pre.exams && pre.exams[m.id]) ? {exam: pre.exams[m.id]}
+                                               : await translateChrome({exam:src}, lang);
+  }
   if (cur.mod !== m || store.lang !== lang) return;
   const got = (tr && Array.isArray(tr.exam) && tr.exam.length === m.exam.length) ? tr.exam : src;
   examQs = got.map((q,i) => ({

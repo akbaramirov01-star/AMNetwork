@@ -1,0 +1,70 @@
+name: Pre-generate AM Academy lessons
+
+# Turns the AI from a runtime dependency into a build step: every lesson variant
+# is generated once and committed, so the site serves them as static files with
+# no backend call and no cold start.
+#
+# Run it from the Actions tab -> "Pre-generate AM Academy lessons" -> Run workflow.
+# Requires the repository secret ANTHROPIC_API_KEY.
+
+on:
+  workflow_dispatch:
+    inputs:
+      languages:
+        description: 'Languages, space-separated (blank = all nine)'
+        required: false
+        default: ''
+      force:
+        description: 'Regenerate entries that already exist'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    # Generating all nine languages is ~950 Anthropic calls; give it room.
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install the Anthropic SDK
+        run: pip install --quiet anthropic
+
+      - name: Generate
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::The ANTHROPIC_API_KEY repository secret is not set."
+            echo "Add it under Settings -> Secrets and variables -> Actions."
+            exit 1
+          fi
+          args=""
+          for l in ${{ github.event.inputs.languages }}; do args="$args --lang $l"; done
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then args="$args --force"; fi
+          python3 ai_scoring/pregenerate.py $args
+
+      - name: Commit the generated lessons
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add academy/content
+          if git diff --cached --quiet; then
+            echo "Nothing changed — every requested variant was already generated."
+            exit 0
+          fi
+          n=$(git diff --cached --numstat | wc -l)
+          git commit -m "Pre-generate AM Academy lessons ($n files)"
+          git push
