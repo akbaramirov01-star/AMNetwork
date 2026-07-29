@@ -259,7 +259,8 @@ hr.div{border:none;height:1px;background:linear-gradient(to right,transparent,va
    example, the AI technical breakdown) start collapsed to keep the page
    scannable; core value-prop, scripture and conversion sections never get
    this control. */
-.sec-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.sec-head{display:flex;align-items:center;justify-content:space-between;gap:16px 20px;flex-wrap:wrap;margin-bottom:12px}
+.sec-head .sec-title{flex:1 1 320px;min-width:0;margin-bottom:0}
 .sec-toggle{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:var(--card);
   border:1px solid var(--border);border-radius:99px;color:var(--text2);font-size:12.5px;font-weight:600;
   font-family:'DM Sans',sans-serif;cursor:pointer;transition:border-color .2s,color .2s;white-space:nowrap;flex-shrink:0}
@@ -797,9 +798,9 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <div style="text-align:center;margin-bottom:48px">
       <div class="eyebrow" data-t="how_ai_tag" style="margin-bottom:14px;justify-content:center">AM Zakat.ai</div>
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,40px);font-weight:700;line-height:1.2;color:var(--text)" data-t="how_ai_title">How the AI Works</h2>
-      <button class="sec-toggle" style="margin-top:20px" aria-expanded="false" aria-controls="how-ai-body" onclick="toggleSection('how-ai-body',this)"><span class="sec-label" data-t="sec_show">Show</span> <span class="sec-arrow">▾</span></button>
+      <button class="sec-toggle" style="margin-top:20px" aria-expanded="true" aria-controls="how-ai-body" onclick="toggleSection('how-ai-body',this)"><span class="sec-label" data-t="sec_hide">Hide</span> <span class="sec-arrow">▾</span></button>
     </div>
-    <div id="how-ai-body" hidden>
+    <div id="how-ai-body">
     <!-- Steps row -->
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative" id="how-ai-steps">
       <!-- connector line -->
@@ -904,9 +905,9 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <div class="eyebrow" data-t="case_tag">Real Impact</div>
   <div class="sec-head">
     <h2 class="sec-title" data-t="case_title">One story. Real change.</h2>
-    <button class="sec-toggle" aria-expanded="false" aria-controls="case-body" onclick="toggleSection('case-body',this)"><span class="sec-label" data-t="sec_show">Show</span> <span class="sec-arrow">▾</span></button>
+    <button class="sec-toggle" aria-expanded="true" aria-controls="case-body" onclick="toggleSection('case-body',this)"><span class="sec-label" data-t="sec_hide">Hide</span> <span class="sec-arrow">▾</span></button>
   </div>
-  <div id="case-body" hidden style="max-width:700px;background:var(--card);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:36px;position:relative;overflow:hidden" class="reveal">
+  <div id="case-body" style="max-width:700px;background:var(--card);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:36px;position:relative;overflow:hidden" class="reveal">
     <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
     <div style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap">
       <div style="width:52px;height:52px;border-radius:50%;background:var(--gold3);border:2px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🕌</div>
@@ -1143,10 +1144,10 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <div class="eyebrow" data-t="fund_tag">Seed Funding</div>
     <div class="sec-head">
       <h2 class="sec-title" data-t="fund_title">Where Your Investment Goes</h2>
-      <button class="sec-toggle" aria-expanded="false" aria-controls="fund-body" onclick="toggleSection('fund-body',this)"><span class="sec-label" data-t="sec_show">Show</span> <span class="sec-arrow">▾</span></button>
+      <button class="sec-toggle" aria-expanded="true" aria-controls="fund-body" onclick="toggleSection('fund-body',this)"><span class="sec-label" data-t="sec_hide">Hide</span> <span class="sec-arrow">▾</span></button>
     </div>
     <p style="font-size:15px;color:var(--text2);margin-bottom:36px;line-height:1.7" data-t="fund_sub">Raising $300K seed round. Full transparency on fund allocation.</p>
-    <div id="fund-body" hidden>
+    <div id="fund-body">
     <div style="display:flex;gap:40px;align-items:center;flex-wrap:wrap;justify-content:center" class="reveal">
       <div style="position:relative;width:200px;height:200px;border-radius:50%;background:conic-gradient(var(--gold) 0% 40%, #3B82F6 40% 56.7%, #EF4444 56.7% 70%, #8B5CF6 70% 83.3%, #10B981 83.3% 93.3%, #F59E0B 93.3% 100%);flex-shrink:0;box-shadow:0 8px 32px rgba(0,0,0,0.25)">
         <div style="position:absolute;inset:30px;border-radius:50%;background:var(--bg2);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
@@ -1198,10 +1199,10 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <div class="eyebrow" data-t="partners_tag">Ecosystem</div>
   <div class="sec-head">
     <h2 class="sec-title" data-t="partners_title">Built for the Islamic Finance Ecosystem</h2>
-    <button class="sec-toggle" aria-expanded="false" aria-controls="partners-body" onclick="toggleSection('partners-body',this)"><span class="sec-label" data-t="sec_show">Show</span> <span class="sec-arrow">▾</span></button>
+    <button class="sec-toggle" aria-expanded="true" aria-controls="partners-body" onclick="toggleSection('partners-body',this)"><span class="sec-label" data-t="sec_hide">Hide</span> <span class="sec-arrow">▾</span></button>
   </div>
   <p class="sec-body" data-t="partners_body">From mosques to Islamic banks — AM Network connects donors, recipients, and institutions through AI and blockchain.</p>
-  <div id="partners-body" hidden>
+  <div id="partners-body">
   <div class="pgrid">
     <div class="ppartner reveal">
       <div class="ppartner-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
