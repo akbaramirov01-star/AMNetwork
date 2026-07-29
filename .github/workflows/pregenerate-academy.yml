@@ -67,4 +67,22 @@ jobs:
           fi
           n=$(git diff --cached --numstat | wc -l)
           git commit -m "Pre-generate AM Academy lessons ($n files)"
-          git push
+
+          # A full run takes hours, and main can move underneath us in that time.
+          # A plain push then fails and the whole generation is thrown away with
+          # the runner — paid for and lost. Rebase onto whatever landed and retry.
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "Pushed on attempt $attempt."
+              exit 0
+            fi
+            echo "Push rejected — main moved. Rebasing and retrying ($attempt/5)."
+            git pull --rebase origin "${GITHUB_REF_NAME}" || {
+              echo "::error::Rebase failed. The generated lessons are in this run's"
+              echo "::error::workspace only. Re-run the workflow to regenerate."
+              exit 1
+            }
+            sleep $((attempt * 5))
+          done
+          echo "::error::Could not push after 5 attempts."
+          exit 1
