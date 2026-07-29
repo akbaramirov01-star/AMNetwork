@@ -5,7 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AM Academy — исламские финансы понятным языком</title>
 <meta name="description" content="Бесплатные уроки об исламских финансах. Одно проверенное содержание, объяснённое так, как понятно именно вам. Каждое утверждение со ссылкой на источник.">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com; connect-src 'self' https://amnetwork.onrender.com; base-uri 'self'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://amnetwork.onrender.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; form-action 'none'; object-src 'none'">
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+gtag('js',new Date());gtag('config','G-G4GSRVJB5M');
+if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{analytics_storage:'granted'});}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G4GSRVJB5M"></script>
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
@@ -435,6 +442,14 @@ const $ = id => document.getElementById(id);
 const T = () => UI[store.lang] || UI.en;
 const esc = s => { const d=document.createElement('div'); d.textContent=String(s); return d.innerHTML; };
 
+// Analytics. Without this we have no idea whether anyone opens a lesson, let
+// alone finishes one — every decision about the Academy is otherwise a guess.
+// Consent defaults to denied, so until a visitor accepts on the main site GA4
+// sends cookieless pings: we get counts, they get no tracking cookie.
+function track(name, params){
+  try { if (typeof gtag === 'function') gtag('event', name, params || {}); } catch(e){}
+}
+
 function applyScale(){ document.documentElement.style.setProperty('--fs', store.aud==='senior' ? '1.22' : '1'); }
 
 function applyLangDir(){
@@ -653,6 +668,8 @@ function renderChips(){
     `<button class="chip${id===store.aud?' on':''}" data-aud="${id}">${esc(a[id][0])}</button>`).join('');
   $('reChips').querySelectorAll('.chip').forEach(c => c.onclick = () => {
     if (c.dataset.aud===store.aud) return;
+    track('audience_switch', {from: store.aud, to: c.dataset.aud,
+                              module: cur.mod ? cur.mod.id : '', language: store.lang});
     store.aud = c.dataset.aud; applyScale(); renderChips(); renderAuds(); loadLesson();
   });
 }
@@ -714,6 +731,8 @@ async function loadLesson(){
   const token = ++loadToken;
   const urls = (l.sources||[]).map(s => s.url);
 
+  track('lesson_open', {module: m.id, lesson: l.id, audience: store.aud, language: lang,
+                        position: cur.idx + 1});
   $('crumbTxt').textContent = `${modTitle(m)} · ${t.lessonOf} ${cur.idx+1} ${t.of} ${m.lessons.length}`;
   $('lTitle').textContent = l.title;
   $('lVis').innerHTML = renderVisual(l.visual);
@@ -785,6 +804,8 @@ $('backBtn').onclick = () => { show('home'); refreshMods(); };
 $('prevBtn').onclick = () => { if (cur.idx>0){ cur.idx--; loadLesson(); } };
 $('nextBtn').onclick = () => {
   const m = cur.mod;
+  track('lesson_complete', {module: m.id, lesson: m.lessons[cur.idx].id,
+                            audience: store.aud, language: store.lang});
   store.mark(m.id, m.lessons[cur.idx].id);
   if (cur.idx < m.lessons.length-1){ cur.idx++; loadLesson(); }
   else openExam();
@@ -803,6 +824,7 @@ async function openExam(){
     <button class="btn btn-p" id="eSubmit" style="width:100%;margin-top:8px" disabled>${esc(t.examCheck)}</button>`;
   show('exam');
 
+  track('exam_start', {module: m.id, audience: store.aud, language: lang});
   const src = m.exam.map(q => ({q:q.q, options:q.options, why:q.why}));
   let tr = null;
   if (lang !== 'ru') {
@@ -843,6 +865,10 @@ function gradeExam(){
     const w = $('eQ').querySelector(`[data-why="${i}"]`);
     w.textContent = q.why; w.style.display = 'block';
   });
+
+  track('exam_finish', {module: m.id, score: pct, passed: passed ? 1 : 0,
+                        correct: right, total: examQs.length,
+                        audience: store.aud, language: store.lang});
 
   const res = document.createElement('div');
   res.className = 'score';
@@ -1027,6 +1053,8 @@ logoImg.src = '/icons/icon-192.png';
 $('certName').oninput = e => drawCert(e.target.value.trim());
 $('certBack').onclick = () => { show('home'); refreshMods(); };
 $('certDl').onclick = () => {
+  track('certificate_download', {module: cur.mod ? cur.mod.id : '', score: certScore,
+                                 language: store.lang});
   const c = drawCert($('certName').value.trim());
   const a = document.createElement('a');
   a.download = 'AM-Academy-' + (cur.mod?cur.mod.id:'certificate') + '.png';
