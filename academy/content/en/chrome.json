@@ -1,0 +1,1457 @@
+{
+ "exams": {
+  "contracts": [
+   {
+    "options": [
+     "What is it called",
+     "Who bears the risk if things go wrong",
+     "Who issued it",
+     "What is the payment amount"
+    ],
+    "q": "Which question best reveals the nature of a financial contract?",
+    "why": "The line between riba and trade runs through risk, not the product name."
+   },
+   {
+    "options": [
+     "Riba, gharar, maysir",
+     "Riba, zakat, waqf",
+     "Gharar, ijara, salam",
+     "Maysir, murabaha, riba"
+    ],
+    "q": "The three prohibitions from which the rules of Islamic contracts grow are…",
+    "why": "Profit without risk, excessive uncertainty, and betting on an outcome."
+   },
+   {
+    "options": [
+     "A hidden markup",
+     "Actual ownership of the goods by the financier before resale",
+     "A floating rate",
+     "A real estate pledge"
+    ],
+    "q": "What is mandatory in murabaha?",
+    "why": "Without real ownership and risk, this is selling what the seller does not have."
+   },
+   {
+    "options": [
+     "Yes",
+     "No — otherwise it reverts to riba",
+     "Yes, within the limits of inflation",
+     "At the bank's discretion"
+    ],
+    "q": "Can the murabaha amount grow due to late payment?",
+    "why": "The price is fixed once; growth in the amount over time is an addition for debt."
+   },
+   {
+    "options": [
+     "The lessee",
+     "The lessor — the owner",
+     "The insurer always",
+     "Both parties equally"
+    ],
+    "q": "In ijara, the leased equipment perished through no fault of the lessee. The loss is borne by…",
+    "why": "The risks of ownership are borne by the owner. If payments continue regardless, this is a loan called a lease."
+   },
+   {
+    "options": [
+     "By agreement",
+     "Strictly in proportion to invested capital",
+     "Equally",
+     "By the manager"
+    ],
+    "q": "In musharaka, loss is shared…",
+    "why": "Profit can be shared by agreement, but loss only according to capital shares."
+   },
+   {
+    "options": [
+     "A larger share of profit",
+     "A guarantee of a fixed amount regardless of outcome",
+     "The presence of a written contract",
+     "The involvement of a third party"
+    ],
+    "q": "What turns mudaraba into an interest-bearing loan?",
+    "why": "A guaranteed amount removes the risk, and profit without risk is riba."
+   },
+   {
+    "options": [
+     "No difference",
+     "Payment can be made in stages rather than fully upfront",
+     "It does not require a description of the item",
+     "It applies only to harvests"
+    ],
+    "q": "How does istisna differ from salam?",
+    "why": "In salam, payment is made in full upfront; in istisna, payment in installments or by work stages is allowed."
+   }
+  ],
+  "halal-income": [
+   {
+    "options": [
+     "Amount, term, currency",
+     "Subject matter, method of obtaining, contract conditions",
+     "Country, industry, taxes",
+     "Intention, time, place"
+    ],
+    "q": "By which three things is the permissibility of earnings checked?",
+    "why": "What is sold, how the money was obtained, and under what conditions the contract was concluded."
+   },
+   {
+    "options": [
+     "Consider it permissible",
+     "Be cautious until it is clarified",
+     "Ask the majority",
+     "Consider it forbidden forever"
+    ],
+    "q": "How should one act in the area of the doubtful?",
+    "why": "Whoever is cautious of the doubtful preserves his religion and honor."
+   },
+   {
+    "options": [
+     "With large debt",
+     "Alcohol, gambling, interest-based banks",
+     "Unprofitable",
+     "Foreign"
+    ],
+    "q": "Which companies are filtered out at the first, sector-based level of screening?",
+    "why": "The first level is by type of activity; financial thresholds are checked only at the second level."
+   },
+   {
+    "options": [
+     "30%",
+     "5%",
+     "10%",
+     "1%"
+    ],
+    "q": "The AAOIFI Standard No. 21 limits the share of income from prohibited activities to a threshold of…",
+    "why": "Standard thresholds: interest-based debt below 30%, interest-based investments below 30%, forbidden income below 5%."
+   },
+   {
+    "options": [
+     "Text of revelation",
+     "A modern industry standard developed by scholars",
+     "A stock exchange requirement",
+     "State law"
+    ],
+    "q": "Screening standards are…",
+    "why": "This is the ijtihad of specialists. Different providers apply different denominators and thresholds."
+   },
+   {
+    "options": [
+     "The operating company",
+     "The participants",
+     "The state",
+     "The reinsurer"
+    ],
+    "q": "Who owns the fund in takaful?",
+    "why": "The operator only manages the fund for a fee; the surplus is returned to the participants and does not become its profit."
+   },
+   {
+    "options": [
+     "Gharar",
+     "Maysir",
+     "Riba in reserves",
+     "Absence of a written contract"
+    ],
+    "q": "Which objection does NOT apply to commercial insurance?",
+    "why": "The objections are based on uncertainty, betting on the outcome, and interest-bearing placement of reserves."
+   },
+   {
+    "options": [
+     "It is fully permissible",
+     "It is fully forbidden",
+     "Lending at a fixed interest rate is riba, whatever the asset is",
+     "It is not subject to zakat"
+    ],
+    "q": "What does the lesson state definitively about cryptocurrency?",
+    "why": "The dispute over the nature of the asset is not resolved, but a number of operations fall under known prohibitions regardless of it."
+   }
+  ],
+  "riba": [
+   {
+    "options": [
+     "Its size",
+     "It arises over time from the use of money, without risk",
+     "Bank involvement",
+     "The presence of a contract"
+    ],
+    "q": "What makes an increase riba?",
+    "why": "The key is profit without risk, tied to the time of the debt, not to goods or labor."
+   },
+   {
+    "options": [
+     "Two",
+     "Three",
+     "Five",
+     "Only the lender"
+    ],
+    "q": "How many parties to an interest transaction are named in the hadith?",
+    "why": "The borrower, the lender, the recorder, and two witnesses — and it is said they are all the same."
+   },
+   {
+    "options": [
+     "An unequal exchange of gold for gold",
+     "An increase for delay or use of money",
+     "Any trade markup"
+    ],
+    "q": "Riba of debts (al-duyun) is…",
+    "why": "Al-duyun arises from debt: interest for the use or delay of money."
+   },
+   {
+    "options": [
+     "Any conditions",
+     "Immediate settlement by both parties",
+     "A delay of no more than a month",
+     "Equal amounts"
+    ],
+    "q": "Currency exchange is permitted on condition of…",
+    "why": "Exchange at the current rate is allowed, but settlement must be immediate — otherwise riba of exchange arises."
+   },
+   {
+    "options": [
+     "Always riba",
+     "According to the majority — permissible trade",
+     "Unanimously forbidden"
+    ],
+    "q": "Installment sale with a price fixed once and not increasing due to delay…",
+    "why": "The seller set a price for the goods with a delay. Riba would arise only if the amount grew over time."
+   },
+   {
+    "options": [
+     "Permitted for everyone",
+     "Falls under the prohibition; scholars differ on the ruling when there is no alternative",
+     "Forbidden with no differing opinions"
+    ],
+    "q": "What does the lesson say about a classic interest mortgage?",
+    "why": "The lesson explicitly notes the recognized difference of opinion about the situation where an Islamic mortgage is unavailable."
+   },
+   {
+    "options": [
+     "The smallest one",
+     "The one with the highest rate",
+     "The oldest one",
+     "It doesn't matter"
+    ],
+    "q": "Which debt is wiser to start paying off first?",
+    "why": "The higher the rate, the faster the debt grows, and the more riba will be paid with delay."
+   },
+   {
+    "options": [
+     "Any profit",
+     "Risk-free profit taken from another's need",
+     "Trading with a markup",
+     "Leasing property"
+    ],
+    "q": "Islam forbids…",
+    "why": "Profit from trade, leasing, and joint investment with shared risk is permissible and encouraged."
+   }
+  ],
+  "zakat-basics": [
+   {
+    "options": [
+     "5%",
+     "2.5%",
+     "10%",
+     "1%"
+    ],
+    "q": "What is the zakat rate on savings?",
+    "why": "The rate is 2.5%, that is one fortieth of the accumulated wealth."
+   },
+   {
+    "options": [
+     "Only in gold",
+     "85 g of gold or 595 g of silver",
+     "A fixed amount in dollars",
+     "The size of annual income"
+    ],
+    "q": "The nisab is set at…",
+    "why": "The threshold is set by two metals: 85 g of gold or 595 g of silver, converted at the current price."
+   },
+   {
+    "options": [
+     "A full lunar year",
+     "Three months",
+     "Half a year",
+     "The period doesn't matter"
+    ],
+    "q": "How long must wealth remain in possession for the obligation to arise?",
+    "why": "The hawl condition is a full lunar year, about 354 days."
+   },
+   {
+    "options": [
+     "Income at the moment it's received",
+     "Savings that have remained for a year",
+     "All expenses for the year",
+     "The value of housing"
+    ],
+    "q": "Zakat is taken from…",
+    "why": "Not from income, but from what remains as savings and has stayed for a full year."
+   },
+   {
+    "options": [
+     "Gold bars",
+     "Goods for resale",
+     "A car you use",
+     "Money in an account"
+    ],
+    "q": "Which of the following is NOT subject to zakat?",
+    "why": "Property for personal use — housing, a car, work tools — is not subject to zakat."
+   },
+   {
+    "options": [
+     "Five",
+     "Eight",
+     "Ten",
+     "Not specified"
+    ],
+    "q": "How many categories of recipients are named in the Quran?",
+    "why": "Quran 9:60 directly lists eight categories, and recipients are limited to them."
+   },
+   {
+    "options": [
+     "A needy brother",
+     "A traveler left without means",
+     "Your own children whom you support",
+     "A person in severe debt"
+    ],
+    "q": "Who cannot be given zakat?",
+    "why": "Those you are obligated to support — parents, children, spouse — are not given zakat."
+   },
+   {
+    "options": [
+     "Purchase price",
+     "Current market value",
+     "Half the value",
+     "Production cost"
+    ],
+    "q": "Goods for resale are valued at…",
+    "why": "At the current market value on the date the zakat is calculated."
+   }
+  ],
+  "zakat-sadaqah-waqf": [
+   {
+    "options": [
+     "No difference",
+     "Zakat is limited to the eight categories of the Quran, sadaqah — any needy person",
+     "Sadaqah is limited, but zakat is not",
+     "Both are limited"
+    ],
+    "q": "How does zakat differ from sadaqah in terms of the circle of recipients?",
+    "why": "The circle of zakat recipients is set by Quran 9:60 and cannot be expanded. Sadaqah can be given to any needy person."
+   },
+   {
+    "options": [
+     "Yes",
+     "No: an obligatory duty is not covered by a voluntary act",
+     "Yes, if the amount is doubled",
+     "Only in Ramadan"
+    ],
+    "q": "Can zakat be covered by a large sadaqah?",
+    "why": "Zakat requires intention and a recipient from the eight categories; otherwise the obligation remains."
+   },
+   {
+    "options": [
+     "Small amount",
+     "Reproach and injury",
+     "Absence of witnesses",
+     "Delay in payment"
+    ],
+    "q": "What destroys sadaqah according to the Quran?",
+    "why": "Do not render your charitable deeds void by reproach and injury — Quran 2:264."
+   },
+   {
+    "options": [
+     "Only money",
+     "Removing an obstacle from the road",
+     "Only helping relatives",
+     "Only donating to the mosque"
+    ],
+    "q": "Which of the following is called sadaqah in the hadith?",
+    "why": "In the hadith, a good word, a just decision, helping with a load, a step to prayer, and removing an obstacle from the road are called sadaqah."
+   },
+   {
+    "options": [
+     "Prayer, fasting, zakat",
+     "Ongoing sadaqah, beneficial knowledge, righteous child",
+     "Hajj, zakat, sadaqah",
+     "Waqf, inheritance, will"
+    ],
+    "q": "Three deeds that do not stop after death are…",
+    "why": "Sahih Muslim 1631."
+   },
+   {
+    "options": [
+     "The property itself",
+     "The income from the property, while the body is preserved",
+     "Half of the property",
+     "The property after death"
+    ],
+    "q": "In a waqf, what is distributed…",
+    "why": "Keep the land itself and distribute what it yields — this is how Umar's waqf was arranged."
+   },
+   {
+    "options": [
+     "No, the manager decides on their own",
+     "Yes — Muslims are bound by their conditions",
+     "Only for the first 10 years",
+     "Only if recorded by a judge"
+    ],
+    "q": "Are the conditions set by the founder of the waqf binding?",
+    "why": "The manager has no right to change the purpose, even if they consider another purpose more beneficial."
+   },
+   {
+    "options": [
+     "Is unanimously forbidden",
+     "Is unanimously permitted",
+     "Is allowed by a significant number of scholars, but there is no full unanimity",
+     "Was not discussed"
+    ],
+    "q": "A cash waqf…",
+    "why": "The lesson explicitly notes that a significant number of scholars allow it, but there is no unanimity."
+   }
+  ]
+ },
+ "lessons": {
+  "contracts__ijara": {
+   "check": [
+    {
+     "options": [
+      "The lessee",
+      "The lessor — he is the owner",
+      "The loss is split equally"
+     ],
+     "q": "Who bears the loss if the leased item is destroyed through no fault of the lessee?",
+     "why": "Ownership remains with the lessor, and he bears the risks of ownership. Otherwise it is a loan disguised as a lease."
+    },
+    {
+     "options": [
+      "Built into the lease contract",
+      "Through a separate promise of gift or sale",
+      "Automatically upon expiration of the term"
+     ],
+     "q": "How is the transfer of ownership properly structured in ijara muntahia bittamlik?",
+     "why": "Otherwise the two transactions merge and the lease turns into an installment sale under another name."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Three whose opponent I will be: among them — one who does not pay a worker who has completed his work",
+     "ref": "Sahih al-Bukhari 2270"
+    },
+    {
+     "note": "If they nurse for you, give them their reward",
+     "ref": "Quran 65:6"
+    },
+    {
+     "note": "Muslims are bound by their conditions",
+     "ref": "Sunan Abu Dawud 3594"
+    }
+   ],
+   "title": "Ijara: A Lease, Not a Loan",
+   "visual": {
+    "no": [
+     "Does not become the owner",
+     "Bears no risk for the item",
+     "Repairs are not its concern",
+     "Receives payment for time"
+    ],
+    "noTitle": "Loan — the Bank",
+    "type": "vs",
+    "yes": [
+     "Remains the owner",
+     "Bears the risk of the item's loss",
+     "Pays for capital repairs",
+     "Receives payment for use"
+    ],
+    "yesTitle": "Ijara — the Lessor"
+   }
+  },
+  "contracts__mudaraba-musharaka": {
+   "check": [
+    {
+     "options": [
+      "The manager",
+      "The capital owner; the manager loses his labor",
+      "Both equally"
+     ],
+     "q": "In a mudaraba, the venture suffers a loss through no fault of the manager. Who loses the money?",
+     "why": "Loss of property is borne by the capital owner. The manager is financially liable only for negligence or breach of terms."
+    },
+    {
+     "options": [
+      "Too large a profit share",
+      "Guaranteeing a fixed amount regardless of outcome",
+      "Participating in management"
+     ],
+     "q": "What turns a partnership into an interest-bearing loan?",
+     "why": "Once the amount is guaranteed, risk disappears — and profit without risk is riba."
+    }
+   ],
+   "sources": [
+    {
+     "note": "I am the third of two partners, as long as one does not betray the other",
+     "ref": "Sunan Abu Dawood 3383"
+    },
+    {
+     "note": "Except it be trade by mutual consent among you",
+     "ref": "Quran 4:29"
+    },
+    {
+     "note": "Truthfulness and clarity bring blessing to a transaction",
+     "ref": "Sahih al-Bukhari 2079"
+    }
+   ],
+   "title": "Mudaraba and Musharaka: Partnership Instead of Interest",
+   "visual": {
+    "no": [
+     "Both contribute capital",
+     "Profit — by agreement",
+     "Loss — strictly by share in capital",
+     "Management may be shared"
+    ],
+    "noTitle": "Musharaka",
+    "type": "vs",
+    "yes": [
+     "One gives capital, the other labor",
+     "Profit — by agreed share",
+     "Loss of property — borne by the capital owner",
+     "The manager loses his labor"
+    ],
+    "yesTitle": "Mudaraba"
+   }
+  },
+  "contracts__murabaha": {
+   "check": [
+    {
+     "options": [
+      "A credit history check",
+      "The financier buys the item and becomes the owner, taking on the risk",
+      "A collateral assessment"
+     ],
+     "q": "What must happen before the financier sells the item to the client?",
+     "why": "Without actual ownership and the associated risk, this is selling what the seller does not have."
+    },
+    {
+     "options": [
+      "Yes, by the inflation rate",
+      "No — otherwise riba returns",
+      "Yes, by court decision"
+     ],
+     "q": "Can the murabaha amount increase in case of delay?",
+     "why": "The price is fixed once. An increase in the amount due to time is exactly an addition for debt."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Allah has permitted trade and forbidden usury — the basis for distinguishing murabaha from a loan",
+     "ref": "Quran 2:275"
+    },
+    {
+     "note": "If the debtor is in difficulty — grant a delay",
+     "ref": "Quran 2:280"
+    },
+    {
+     "note": "Do not sell what you do not have — the requirement of actual ownership",
+     "ref": "Sunan Abu Dawud 3503"
+    }
+   ],
+   "title": "Murabaha: Purchase with a Declared Markup",
+   "visual": {
+    "items": [
+     "The client specifies the needed item",
+     "The financier buys it himself and becomes the owner",
+     "The financier sells to the client: cost plus a declared markup",
+     "The client pays in installments at a price fixed once"
+    ],
+    "title": "How Murabaha Works",
+    "type": "steps"
+   }
+  },
+  "contracts__salam-istisna": {
+   "check": [
+    {
+     "options": [
+      "In installments over the term",
+      "Fully in advance",
+      "Upon delivery"
+     ],
+     "q": "When is payment made in salam?",
+     "why": "Otherwise it becomes an exchange of debt for debt. In istisna, unlike salam, installment payment is permitted."
+    },
+    {
+     "options": [
+      "To sell at a higher price",
+      "It provides money for planting without an interest-bearing loan, and the buyer accepts part of the risk",
+      "To avoid tax"
+     ],
+     "q": "Why does salam help the farmer?",
+     "why": "The buyer pays less than the future price but takes on the harvest risk. The risk is shared, not shifted."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Whoever pays in advance, let it be for a known measure, known weight, and known term",
+     "ref": "Sahih al-Bukhari 2240"
+    },
+    {
+     "note": "Do not sell what you do not have — a general rule of which salam is an exception",
+     "ref": "Sunan Abu Dawud 3503"
+    },
+    {
+     "note": "Record the obligation for a specified term",
+     "ref": "Quran 2:282"
+    }
+   ],
+   "title": "Salam and Istisna: Paying for What Doesn't Yet Exist",
+   "visual": {
+    "no": [
+     "Payment in installments or stages",
+     "Manufacturing to order",
+     "Term allows flexibility",
+     "Construction, vessels, equipment"
+    ],
+    "noTitle": "Istisna",
+    "type": "vs",
+    "yes": [
+     "Payment made fully in advance",
+     "Goods defined by specifications",
+     "Measure, weight, and term known",
+     "Classically — harvest, raw materials"
+    ],
+    "yesTitle": "Salam"
+   }
+  },
+  "contracts__why-contract": {
+   "check": [
+    {
+     "options": [
+      "What it's called",
+      "Who bears the risk if things go wrong",
+      "Who issued the certificate"
+     ],
+     "q": "What is the main question when checking a contract?",
+     "why": "The distinction between riba and trade lies in risk, not in the product's name."
+    },
+    {
+     "options": [
+      "It's more profitable this way",
+      "You can't sell what you don't own: the financier must bear the risk of ownership",
+      "It's a regulatory requirement"
+     ],
+     "q": "Why does Islamic finance buy and sell a real good?",
+     "why": "Do not sell what you do not have. Ownership and its associated risk are what distinguish trade from a loan."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Prohibition of selling with gharar — excessive uncertainty",
+     "ref": "Sahih Muslim 1513"
+    },
+    {
+     "note": "Do not sell what you do not have",
+     "ref": "Sunan Abu Dawood 3503"
+    },
+    {
+     "note": "Truthfulness and clarity bring blessing to a deal; lying and concealment destroy it",
+     "ref": "Sahih al-Bukhari 2079"
+    },
+    {
+     "note": "Record debt for a fixed term — the longest verse of the Quran",
+     "ref": "Quran 2:282"
+    }
+   ],
+   "title": "Why We Look at the Contract, Not the Label",
+   "visual": {
+    "items": [
+     "What exactly is the subject of the deal — a good, a benefit, or money?",
+     "Who owns the subject, and at what moment?",
+     "Who loses if things go wrong?",
+     "Where does the profit come from — from risk and labor, or from time?"
+    ],
+    "title": "Three Questions That Reveal Any Contract",
+    "type": "steps"
+   }
+  },
+  "halal-income__crypto": {
+   "check": [
+    {
+     "options": [
+      "Permissible income, if the asset is permissible",
+      "Riba: an increase for funds provided",
+      "Depends on the blockchain"
+     ],
+     "q": "A promised fixed annual percentage for placing cryptocurrency is…",
+     "why": "Fixed income for providing funds is an increase over a debt — this is riba regardless of how the asset itself is classified."
+    },
+    {
+     "options": [
+      "It's technically difficult",
+      "Because of gharar and maysir: the price is uncertain, and one person's profit comes from another's pocket",
+      "It's expensive"
+     ],
+     "q": "Why doesn't AM Network issue its own token?",
+     "why": "The platform's income is a declared ujrah for a service. A speculative token creates exactly the uncertainty and gambling that the prohibition addresses."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Allah permitted trade and forbade usury",
+     "ref": "Quran 2:275"
+    },
+    {
+     "note": "Gambling (maysir) is an abomination among Satan's handiwork",
+     "ref": "Quran 5:90"
+    },
+    {
+     "note": "Prohibition of transactions with excessive uncertainty (gharar)",
+     "ref": "Sahih Muslim 1513"
+    }
+   ],
+   "title": "Cryptocurrency: Where the Boundaries Lie",
+   "visual": {
+    "items": [
+     "Fixed income for providing funds is riba, whatever the asset may be",
+     "Leveraged trading and derivatives are maysir and gharar",
+     "A project based on gambling or interest-based lending is excluded by its activity",
+     "Crypto as savings is included in the zakat calculation at market price on the calculation date"
+    ],
+    "title": "What can be said for certain without resolving the dispute about the asset itself",
+    "type": "list"
+   }
+  },
+  "halal-income__halal-basics": {
+   "check": [
+    {
+     "options": [
+      "Permissible — after all the good is halal",
+      "No: the contract is also checked, not only the item",
+      "Depends on the interest rate"
+     ],
+     "q": "A permissible good is sold on interest. The earning is…",
+     "why": "Three things are checked: the item, the method and the contract terms. A permissible good can be sold in an unlawful way."
+    },
+    {
+     "options": [
+      "Consider it permissible until proven otherwise",
+      "Be cautious until it's clarified",
+      "Consider it forbidden forever"
+     ],
+     "q": "How should one act regarding doubtful matters?",
+     "why": "Whoever is cautious about doubtful matters preserves his religion and honor. This is a rule of conduct in uncertainty, not a prohibition."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Eat of what is on earth, lawful and good",
+     "ref": "Quran 2:168"
+    },
+    {
+     "note": "Do not devour one another's property unlawfully — except through trade by mutual consent",
+     "ref": "Quran 4:29"
+    },
+    {
+     "note": "The lawful is clear and the unlawful is clear, and between them are doubtful matters",
+     "ref": "Sahih al-Bukhari 52"
+    },
+    {
+     "note": "The traveler whose food, drink and clothing are unlawful — how then will he be answered?",
+     "ref": "Sahih Muslim 1015"
+    },
+    {
+     "note": "A time will come when a person will not care where his wealth came from",
+     "ref": "Sahih al-Bukhari 2059"
+    }
+   ],
+   "title": "What Makes Income Halal",
+   "visual": {
+    "items": [
+     "What exactly is being sold or produced — is the item itself permissible?",
+     "How was the money obtained — without deceit, coercion or taking others' property?",
+     "Under what conditions was the contract made — is there no riba, gharar or maysir?",
+     "If even one answer is negative — the issue is not the amount of income, but its foundation"
+    ],
+    "title": "Three Questions for Any Earning",
+    "type": "steps"
+   }
+  },
+  "halal-income__savings-takaful": {
+   "check": [
+    {
+     "options": [
+      "The name and formatting",
+      "Who owns the fund: participants, not the company",
+      "The size of contributions"
+     ],
+     "q": "The main difference between takaful and commercial insurance is…",
+     "why": "In takaful, the fund belongs to the participants, the operator only manages it for a fee, and the surplus is returned to participants."
+    },
+    {
+     "options": [
+      "Gharar",
+      "Maysir",
+      "Prohibition of trade"
+     ],
+     "q": "Which of the three prohibitions is NOT mentioned in objections to commercial insurance?",
+     "why": "The objections are built on gharar, maysir, and riba. Trade itself is directly permitted by the Quran."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Help one another in righteousness and God-consciousness — the basis of mutual coverage",
+     "ref": "Quran 5:2"
+    },
+    {
+     "note": "Intoxicants and games of chance — filth from the deeds of Satan",
+     "ref": "Quran 5:90"
+    },
+    {
+     "note": "Prohibition of sales with gharar — excessive uncertainty in the subject of the transaction",
+     "ref": "Sahih Muslim 1513"
+    }
+   ],
+   "title": "Savings and Insurance",
+   "visual": {
+    "no": [
+     "Premium — payment for an uncertain outcome",
+     "The fund belongs to the company",
+     "Company profit — the difference",
+     "Reserves are invested at interest"
+    ],
+    "noTitle": "Commercial Insurance",
+    "type": "vs",
+    "yes": [
+     "Contributions — a gift to the common fund",
+     "The fund belongs to the participants",
+     "The operator receives a management fee",
+     "Surplus is returned to participants"
+    ],
+    "yesTitle": "Takaful — Mutual Coverage"
+   }
+  },
+  "halal-income__screening": {
+   "check": [
+    {
+     "options": [
+      "One of them is wrong",
+      "Providers use different denominators and thresholds",
+      "The data is outdated"
+     ],
+     "q": "Why does the same stock pass one screening and fail another?",
+     "why": "Some calculate from market capitalization, others from total assets. These are different sincere methodologies, not an error."
+    },
+    {
+     "options": [
+      "Keep it — it's small",
+      "Calculate it and spend it on general welfare without expecting reward",
+      "Return it to the company"
+     ],
+     "q": "What should be done with the share of income from an impermissible source?",
+     "why": "This portion is not considered yours. It is purified by spending it on general welfare — this is a purification of wealth, not charity."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Help one another in righteousness, but do not help one another in sin and transgression",
+     "ref": "Quran 5:2"
+    },
+    {
+     "note": "Do not consume one another's wealth unjustly",
+     "ref": "Quran 2:188"
+    },
+    {
+     "note": "A modern industry standard for securities (not a revealed text): thresholds of 30% / 30% / 5%",
+     "ref": "AAOIFI Standard No. 21"
+    }
+   ],
+   "title": "How to Screen a Stock",
+   "visual": {
+    "no": [
+     "Alcohol, pork, tobacco",
+     "Gambling and lotteries",
+     "Indecent content",
+     "Interest-based banks and insurers"
+    ],
+    "noTitle": "Screened Out Immediately",
+    "type": "vs",
+    "yes": [
+     "Production and trade of permissible goods",
+     "Services, IT, transport, medicine",
+     "Interest-based debt below threshold",
+     "Incidental impermissible income below 5%"
+    ],
+    "yesTitle": "Passes Screening"
+   }
+  },
+  "riba__riba-today": {
+   "check": [
+    {
+     "options": [
+      "Always riba",
+      "According to the majority — permissible trade",
+      "Depends on the amount"
+     ],
+     "q": "A seller sells a phone for 1000 upfront or 1200 in installments, the price is fixed once. This is…",
+     "why": "The seller set a price for the goods with deferred payment, and it doesn't change. Riba would arise if the amount grew from the delay."
+    },
+    {
+     "options": [
+      "Permissible income",
+      "Riba, where the person is on the receiving side",
+      "Payment for bank services"
+     ],
+     "q": "Interest on a bank deposit is…",
+     "why": "A deposit is a debt owed by the bank to the depositor, and interest is an increase on that debt."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Allah has permitted trade and forbidden usury — the basis for distinguishing installment sale from riba",
+     "ref": "Quran 2:275"
+    },
+    {
+     "note": "That which you give in usury to increase through people's wealth will not increase with Allah",
+     "ref": "Quran 30:39"
+    }
+   ],
+   "title": "Where Riba Hides Today",
+   "visual": {
+    "items": [
+     "Find exactly what the increase is charged for",
+     "Ask: is it for goods, labor or risk — or just for money and time?",
+     "Check whether the amount grows from delay alone",
+     "If the increase is tied to time and not to risk — it's riba"
+    ],
+    "title": "How to spot riba in any contract",
+    "type": "steps"
+   }
+  },
+  "riba__two-kinds": {
+   "check": [
+    {
+     "options": [
+      "Riba of exchange (al-Fadl)",
+      "Riba of debt (al-Duyun)",
+      "This is not riba"
+     ],
+     "q": "Which type of riba does interest on a bank deposit belong to?",
+     "why": "A deposit is a debt to the bank, and the accrued interest is an increase for the use of money."
+    },
+    {
+     "options": [
+      "Yes, if the difference is in purity",
+      "No — the same kind must be exchanged equal for equal",
+      "Yes, with the parties' consent"
+     ],
+     "q": "Can 10 g of gold be exchanged for 12 g of gold if the quality differs?",
+     "why": "When exchanging the same kind, the rule is strict: equal for equal, hand to hand. The correct way is to sell for money and then buy."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Gold for gold, silver for silver… equal for equal, hand to hand",
+     "ref": "Sahih Muslim 1584"
+    },
+    {
+     "note": "Do not consume riba, doubling and multiplying it",
+     "ref": "Quran 3:130"
+    }
+   ],
+   "title": "Two Types of Riba",
+   "visual": {
+    "no": [
+     "Gold for gold unequal",
+     "Silver for silver unequal",
+     "Currency exchange with delay",
+     "Unequal exchange of the same kind"
+    ],
+    "noTitle": "Riba of Exchange (al-Fadl)",
+    "type": "vs",
+    "yes": [
+     "Increase for deferral",
+     "Interest on a loan",
+     "Interest on a deposit",
+     "Penalty interest for delay"
+    ],
+    "yesTitle": "Riba of Debt (al-Duyun)"
+   }
+  },
+  "riba__way-out": {
+   "check": [
+    {
+     "options": [
+      "Pay off the smallest debt",
+      "Stop entering into new interest contracts",
+      "Wait for income to improve"
+     ],
+     "q": "What should be done first?",
+     "why": "As long as the inflow is not stopped, paying off the past barely changes the situation."
+    },
+    {
+     "options": [
+      "Keep it for yourself — it has already been received",
+      "Do not spend it on yourself, use it for the common good",
+      "Return it to the bank"
+     ],
+     "q": "What to do with interest already accrued on a deposit?",
+     "why": "It cannot be kept for yourself. The common view is to spend it on the common good without expecting reward for it: this is a purification of wealth."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Leave what remains of riba, if you are believers",
+     "ref": "Quran 2:278-279"
+    },
+    {
+     "note": "If the debtor is in difficulty — grant him a delay, and forgiving the debt is better for you",
+     "ref": "Quran 2:280"
+    }
+   ],
+   "title": "If You're Already in Riba — What to Do",
+   "visual": {
+    "items": [
+     "Stop: do not enter into new interest contracts",
+     "Make a list — where exactly and for what amount",
+     "Pay off the most expensive by interest rate first",
+     "Do not keep the interest received for yourself or spend it on yourself",
+     "Consult a knowledgeable scholar about your specific situation"
+    ],
+    "title": "Order of Actions",
+    "type": "steps"
+   }
+  },
+  "riba__what-is-riba": {
+   "check": [
+    {
+     "options": [
+      "The size of the profit",
+      "In riba, profit arises without risk, simply from the fact of debt",
+      "Who takes part in the deal"
+     ],
+     "q": "What is the main difference between riba and trade profit?",
+     "why": "A trader bears risk: the goods might not sell. In riba, the increase is guaranteed regardless of the outcome."
+    },
+    {
+     "options": [
+      "Only the one receiving interest",
+      "The receiver, the payer, the one recording the contract, and two witnesses",
+      "Only banks"
+     ],
+     "q": "Who does the prohibition of riba apply to?",
+     "why": "The hadith lists five parties and states that they are all equal in this."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Allah has permitted trade and forbidden usury",
+     "ref": "Quran 2:275"
+    },
+    {
+     "note": "Give up what remains of usury, if you are believers",
+     "ref": "Quran 2:278-279"
+    },
+    {
+     "note": "Cursed are the one who takes riba, the one who gives it, the one who records it, and the two witnesses — they are all equal",
+     "ref": "Sahih Muslim 1598"
+    }
+   ],
+   "title": "What Is Riba and Why It Matters",
+   "visual": {
+    "items": [
+     {
+      "big": "2:275",
+      "label": "Allah permitted trade and forbade riba"
+     },
+     {
+      "big": "5",
+      "label": "parties to a deal are forbidden"
+     },
+     {
+      "big": "0%",
+      "label": "allowed markup for delaying a debt"
+     }
+    ],
+    "type": "facts"
+   }
+  },
+  "zakat-basics__eight-categories": {
+   "check": [
+    {
+     "options": [
+      "Yes, this is best",
+      "No — those you're obligated to support cannot be given zakat",
+      "Only if they are over 60"
+     ],
+     "q": "Can you give zakat to your parents?",
+     "why": "Zakat is not given to parents, children, or spouse: supporting them is your direct duty, not zakat's right."
+    },
+    {
+     "options": [
+      "No, relatives are not allowed",
+      "Yes, and it's better — it combines zakat with maintaining family ties",
+      "Only through a fund"
+     ],
+     "q": "Can you give zakat to a needy brother?",
+     "why": "A brother, sister, or uncle can be given zakat if they are in need and you're not obligated to support them. This combines two rewards."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Direct listing of the eight categories of zakat recipients",
+     "ref": "Quran 9:60"
+    },
+    {
+     "note": "Taken from the wealthy of a people and given to the poor of that people",
+     "ref": "Sahih al-Bukhari 1395"
+    }
+   ],
+   "title": "Who You Can Give It To",
+   "visual": {
+    "items": [
+     "Al-fuqara — the poor",
+     "Al-masakin — the needy",
+     "Those working to collect zakat",
+     "Those whose hearts are to be reconciled",
+     "For freeing captives",
+     "Al-gharimin — those burdened by debt",
+     "In the cause of Allah",
+     "Ibn as-sabil — the traveler in need"
+    ],
+    "title": "Eight categories — straight from the Quran 9:60",
+    "type": "list"
+   }
+  },
+  "zakat-basics__nisab": {
+   "check": [
+    {
+     "options": [
+      "Zakat is paid at half the rate",
+      "Zakat is not paid at all",
+      "Zakat is paid, but later"
+     ],
+     "q": "What happens if one's wealth is below the nisab?",
+     "why": "Nisab is a threshold: below it, no obligation to pay zakat arises."
+    },
+    {
+     "options": [
+      "Silver is more expensive than gold",
+      "The threshold is lower, so more people pay and more help reaches those in need",
+      "It's simply easier to calculate"
+     ],
+     "q": "Why do many modern funds calculate using the silver nisab?",
+     "why": "The silver threshold is lower than the gold one today, so the obligation covers more people — and those in need receive more."
+    }
+   ],
+   "sources": [
+    {
+     "note": "There is no zakat on less than five awaq (of silver) — the basis of the silver nisab",
+     "ref": "Sahih al-Bukhari 1447"
+    },
+    {
+     "note": "On two hundred dirhams held for a year — five dirhams (this is exactly 2.5%)",
+     "ref": "Sunan Abu Dawud 1573"
+    }
+   ],
+   "title": "Nisab — from what amount zakat is paid",
+   "visual": {
+    "items": [
+     {
+      "big": "85 g",
+      "label": "of gold — one version of the threshold"
+     },
+     {
+      "big": "595 g",
+      "label": "of silver — the second version"
+     },
+     {
+      "big": "354",
+      "label": "days — a lunar year of ownership"
+     }
+    ],
+    "type": "facts"
+   }
+  },
+  "zakat-basics__what-counts": {
+   "check": [
+    {
+     "options": [
+      "Yes, on its market value",
+      "No",
+      "Yes, but at half the rate"
+     ],
+     "q": "Is zakat paid on the house you live in?",
+     "why": "Housing for personal use is not subject to zakat — just like the car you use and the tools of your work."
+    },
+    {
+     "options": [
+      "Purchase price",
+      "Current market value",
+      "Cost price"
+     ],
+     "q": "Goods for resale are valued at…",
+     "why": "Trade goods are valued at their current market value on the calculation date."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Spend of the good things which you have earned, and of that which We produce for you from the earth",
+     "ref": "Quran 2:267"
+    },
+    {
+     "note": "A rate of 2.5% on savings held for a year",
+     "ref": "Sunan Abu Dawood 1573"
+    }
+   ],
+   "title": "What zakat is paid on, and what it isn't",
+   "visual": {
+    "no": [
+     "The house you live in",
+     "The car you use",
+     "Personal belongings and furniture",
+     "Tools of your work",
+     "Business premises"
+    ],
+    "noTitle": "Not subject to zakat",
+    "type": "vs",
+    "yes": [
+     "Cash and money in accounts",
+     "Gold and silver",
+     "Goods for resale",
+     "Stocks, shares, investments",
+     "Debts owed to you"
+    ],
+    "yesTitle": "Subject to zakat"
+   }
+  },
+  "zakat-basics__what-is-zakat": {
+   "check": [
+    {
+     "options": [
+      "From salary at the moment of receiving it",
+      "From savings held for a year",
+      "From any spending over a year"
+     ],
+     "q": "What is zakat taken from?",
+     "why": "Zakat is taken from accumulated wealth that has been held for a full year, not from income at the moment of receiving it."
+    },
+    {
+     "options": [
+      "No difference, they are synonyms",
+      "Zakat is obligatory and has a fixed rate, sadaqah is voluntary",
+      "Sadaqah is obligatory, and zakat is not"
+     ],
+     "q": "How does zakat differ from sadaqah?",
+     "why": "Zakat is an obligation with a fixed rate and a defined circle of recipients. Sadaqah is voluntary and unrestricted."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Establish prayer and give zakat — they are mentioned together",
+     "ref": "Quran 2:110"
+    },
+    {
+     "note": "Take from their wealth a charity by which you purify and cause them increase",
+     "ref": "Quran 9:103"
+    },
+    {
+     "note": "The Prophet's instruction to Muadh when sent to Yemen: zakat is taken from the wealthy and given to the needy",
+     "ref": "Sahih al-Bukhari 1395"
+    }
+   ],
+   "title": "What is Zakat",
+   "visual": {
+    "items": [
+     {
+      "big": "3rd",
+      "label": "pillar of Islam"
+     },
+     {
+      "big": "2.5%",
+      "label": "of savings per year"
+     },
+     {
+      "big": "8",
+      "label": "categories of recipients"
+     }
+    ],
+    "type": "facts"
+   }
+  },
+  "zakat-sadaqah-waqf__sadaqah": {
+   "check": [
+    {
+     "options": [
+      "Nothing, the deed is done",
+      "The reproach renders it void",
+      "The reward is halved"
+     ],
+     "q": "What happens to sadaqah if the person is later reproached for it?",
+     "why": "The Quran directly commands not to render charity void by reproach and injury."
+    },
+    {
+     "options": [
+      "Any large sum",
+      "Something that keeps benefiting after death",
+      "Sadaqah in Ramadan"
+     ],
+     "q": "What counts as sadaqah jariyah?",
+     "why": "Ongoing sadaqah, beneficial knowledge, and a righteous child are three deeds that do not cease with death."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Every joint of a person must give sadaqah every day — and the list of what counts as it",
+     "ref": "Sahih al-Bukhari 2989"
+    },
+    {
+     "note": "Like a grain that grew seven ears, and in each ear a hundred grains",
+     "ref": "Quran 2:261"
+    },
+    {
+     "note": "Do not render your charities void by reproach and injury",
+     "ref": "Quran 2:264"
+    },
+    {
+     "note": "If you conceal it and give it to the poor, it is better for you",
+     "ref": "Quran 2:271"
+    },
+    {
+     "note": "Deeds cease except for three: ongoing sadaqah, beneficial knowledge, a righteous child",
+     "ref": "Sahih Muslim 1631"
+    }
+   ],
+   "title": "Sadaqah: what counts and what multiplies",
+   "visual": {
+    "items": [
+     "Judging fairly between two people",
+     "Helping a person mount their riding animal or lift their load",
+     "A kind word",
+     "Every step taken toward prayer",
+     "Removing something harmful from the road"
+    ],
+    "title": "The hadith calls sadaqah not only wealth",
+    "type": "list"
+   }
+  },
+  "zakat-sadaqah-waqf__three-forms": {
+   "check": [
+    {
+     "options": [
+      "Yes, if the amount is bigger",
+      "No: the obligatory is not covered by the voluntary",
+      "Yes, once a year"
+     ],
+     "q": "Can the obligation of zakat be covered by a large sadaqah?",
+     "why": "Zakat requires intention and a recipient from the eight categories. Giving more in sadaqah still leaves you owing zakat."
+    },
+    {
+     "options": [
+      "Size",
+      "The property doesn't leave: only its fruit is distributed, indefinitely",
+      "The recipient"
+     ],
+     "q": "What distinguishes waqf from sadaqah?",
+     "why": "The body of the waqf is withdrawn from circulation forever and is not sold; the income from it is distributed."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Eight categories of zakat recipients — the scope is limited to them",
+     "ref": "Quran 9:60"
+    },
+    {
+     "note": "Allah destroys riba and increases charity",
+     "ref": "Quran 2:276"
+    },
+    {
+     "note": "You will not attain righteousness until you spend from what you love",
+     "ref": "Quran 3:92"
+    }
+   ],
+   "title": "Three Forms of Giving",
+   "visual": {
+    "items": [
+     {
+      "big": "Zakat",
+      "label": "obligatory · 2.5% · 8 categories"
+     },
+     {
+      "big": "Sadaqah",
+      "label": "voluntary · any amount · any needy person"
+     },
+     {
+      "big": "Waqf",
+      "label": "forever · body preserved · fruit distributed"
+     }
+    ],
+    "type": "facts"
+   }
+  },
+  "zakat-sadaqah-waqf__waqf": {
+   "check": [
+    {
+     "options": [
+      "It is sold and the money is given away",
+      "It is frozen forever: only the income from it is given away",
+      "It passes on by inheritance"
+     ],
+     "q": "What happens to the property itself in a waqf?",
+     "why": "The body of the waqf is not sold, not gifted, and not inherited. What is given away is the yield — harvest, rent, profit."
+    },
+    {
+     "options": [
+      "Yes, if he finds a more useful one",
+      "No — Muslims are bound by their conditions",
+      "Yes, after 10 years"
+     ],
+     "q": "Can the manager change the purpose specified by the founder?",
+     "why": "The founder's conditions are binding. This is precisely the point where waqfs have historically broken down."
+    }
+   ],
+   "sources": [
+    {
+     "note": "Umar's land in Khaybar: hold the land itself and give away what it yields",
+     "ref": "Sahih al-Bukhari 2737"
+    },
+    {
+     "note": "Continuous sadaqah — the first of three deeds that do not stop with death",
+     "ref": "Sahih Muslim 1631"
+    },
+    {
+     "note": "Muslims are bound by their conditions",
+     "ref": "Sunan Abu Dawud 3594"
+    }
+   ],
+   "title": "Waqf: Property That Works Forever",
+   "visual": {
+    "items": [
+     "The owner sets aside property and declares a purpose",
+     "The body of the property is frozen: not sold, not gifted, not inherited",
+     "The income from it — harvest, rent, profit — goes to the declared purpose",
+     "The conditions set by the founder are binding on the manager",
+     "This continues even after the founder's death — indefinitely"
+    ],
+    "title": "How Waqf Works",
+    "type": "steps"
+   }
+  }
+ },
+ "mods": {
+  "contracts": {
+   "subtitle": "Murabaha, ijara, mudaraba, musharaka — without the textbook",
+   "title": "Islamic contracts in plain language"
+  },
+  "halal-income": {
+   "subtitle": "Stock screening, savings, insurance, cryptocurrency",
+   "title": "Halal income and investments"
+  },
+  "riba": {
+   "subtitle": "Credit cards, mortgages, installments, deposits — an honest breakdown",
+   "title": "Riba: where it hides"
+  },
+  "zakat-basics": {
+   "subtitle": "What it is, from what amount, on what, and to whom",
+   "title": "Zakat: the basics"
+  },
+  "zakat-sadaqah-waqf": {
+   "subtitle": "How they differ and when each applies",
+   "title": "Zakat, sadaqah and waqf"
+  }
+ }
+}
