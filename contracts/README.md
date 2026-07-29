@@ -66,9 +66,9 @@ Tiers are adjustable by ADMIN within the `MAX_UJRAH_BPS` ceiling.
 ### Flow
 
 1. **Oracle** (verified mosque imam / NGO / AM volunteer) registers a recipient with their AI score (0–100) and Asnaf category (1–8).
-2. **Donor** calls `donate(recipient, zakatAmount, maxUjrah)` after approving `zakatAmount + ujrah`. Zakat → escrow, ujrah → treasury. `maxUjrah` is the fee ceiling the donor accepts — pass the exact `quoteUjrah()` figure your UI showed them; the call reverts rather than charging more (see Known issues).
+2. **Donor** calls `donate(recipient, zakatAmount, maxUjrah)` after approving `zakatAmount + ujrah`. Zakat → escrow, ujrah → treasury. `maxUjrah` is the fee ceiling the donor accepts — pass the exact `quoteUjrah()` figure your UI showed them; the call reverts rather than charging more (see Internal review, #2).
 3. Funds sit in escrow allocated to that recipient.
-4. **Oracle** confirms physical delivery → `release(recipient, amount)` sends the full Zakat to the recipient.
+4. **Oracle** confirms physical delivery → `requestRelease(recipient, amount)`. A second, distinct oracle confirms the same request via `confirmRelease(requestId)`. Only once `releaseThreshold` oracles (default 2) agree does the full Zakat move to the recipient (see Internal review, #3).
 
 Every step emits an event — that **is** the public, auditable on-chain ledger the website advertises.
 
@@ -89,6 +89,11 @@ Every step emits an event — that **is** the public, auditable on-chain ledger 
   `oracleDailyLimit` caps how much any single `ORACLE_ROLE` key can distribute
   per rolling 24h, so one compromised key cannot sweep the pool. ADMIN-adjustable
   via `setOracleDailyLimit`; check headroom with `oracleRemainingToday(oracle)`
+- **Two-oracle release confirmation** (`AMZakatPool` only): `requestRelease()` /
+  `confirmRelease()` need `releaseThreshold` (default 2) DISTINCT oracles to
+  agree before a recipient's escrow moves, so one phished or dishonest oracle
+  key — including one colluding with a recipient address it controls — cannot
+  fabricate a delivery and drain that escrow alone
 - Score / category validation
 
 ## ⚠️ Before mainnet — this is a PROTOTYPE
@@ -141,6 +146,29 @@ succeeds.
 *Still open for the auditor:* `setUjrahTiers` and `setTreasury` have no timelock,
 so ADMIN remains fully trusted for fee policy — the multisig requirement above
 is doing that work, and should not be skipped.
+
+**3. Single-oracle escrow release on `AMZakatPool` — FIXED (July 2026).**
+`release(recipient, amount)` was gated only by `ORACLE_ROLE`: one oracle's
+say-so moved that recipient's full escrow immediately. Unlike the general
+pool's daily-limit exposure, this isn't a volume-drain risk — it's a
+single-point-of-trust risk. One phished or dishonest oracle (or an oracle
+colluding with a recipient address it controls) could fabricate a delivery
+confirmation and withdraw that recipient's entire escrow with no second check.
+
+*Fix:* `release()` was replaced with `requestRelease()` / `confirmRelease()`.
+The proposing oracle's call counts as its own confirmation; the transfer only
+executes once `releaseThreshold` (default 2, ADMIN-adjustable via
+`setReleaseThreshold`) DISTINCT oracle addresses have confirmed the same
+request. Proven by test: a single oracle's `requestRelease()` leaves the
+recipient's balance untouched; the funds move only after a second, different
+oracle calls `confirmRelease()` on that request ID.
+
+*Residual risk for the auditor:* two colluding oracles can still release
+funds without real proof of delivery — this raises the bar from "one
+compromised key" to "two independently compromised or colluding keys," it
+doesn't remove trust from the oracle network entirely. `releaseThreshold`
+itself has no timelock and is settable by a single ADMIN call, same caveat as
+the multisig note above.
 
 **Also note:** `test/AMZakatPool.t.sol` (Foundry) is **not** run by `npm test` —
 it needs `forge`, which isn't part of this toolchain. The 29 checks come from the

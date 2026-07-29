@@ -19,6 +19,7 @@ contract AMZakatPoolTest is Test {
     address admin     = address(0xA11CE);
     address treasury  = address(0x7);
     address oracle    = address(0x0AC1E);
+    address oracle2   = address(0x0AC1E2);
     address donor     = address(0xD0);
     address recipient = address(0xBEEF);
 
@@ -29,6 +30,8 @@ contract AMZakatPoolTest is Test {
 
         vm.prank(admin);
         pool.addOracle(oracle);
+        vm.prank(admin);
+        pool.addOracle(oracle2);
 
         // Fund the donor and approve the pool.
         usdc.mint(donor, 1_000_000e6);
@@ -103,7 +106,7 @@ contract AMZakatPoolTest is Test {
         pool.donate(recipient, 500e6, type(uint256).max);
     }
 
-    // ── Release: oracle confirms delivery, recipient receives full Zakat ───────
+    // ── Release: needs `releaseThreshold` DISTINCT oracles to agree ────────────
     function testReleaseToRecipient() public {
         vm.prank(oracle);
         pool.registerRecipient(recipient, 82, 1);
@@ -111,14 +114,36 @@ contract AMZakatPoolTest is Test {
         pool.donate(recipient, 500e6, type(uint256).max);
 
         vm.prank(oracle);
-        pool.release(recipient, 500e6);
+        uint256 requestId = pool.requestRelease(recipient, 500e6);
+
+        // First oracle's proposal counts as one confirmation, but the default
+        // threshold is 2 — funds must still be sitting in escrow.
+        assertEq(usdc.balanceOf(recipient), 0);
+        assertEq(pool.totalEscrow(), 500e6);
+
+        vm.prank(oracle2);
+        pool.confirmRelease(requestId);
 
         assertEq(usdc.balanceOf(recipient), 500e6);
         assertEq(pool.totalEscrow(), 0);
         assertEq(pool.totalDistributed(), 500e6);
     }
 
-    function testCannotReleaseMoreThanEscrow() public {
+    function testSameOracleCannotConfirmTwice() public {
+        vm.prank(oracle);
+        pool.registerRecipient(recipient, 82, 1);
+        vm.prank(donor);
+        pool.donate(recipient, 500e6, type(uint256).max);
+
+        vm.prank(oracle);
+        uint256 requestId = pool.requestRelease(recipient, 500e6);
+
+        vm.prank(oracle);
+        vm.expectRevert(bytes("already confirmed"));
+        pool.confirmRelease(requestId);
+    }
+
+    function testCannotRequestReleaseMoreThanEscrow() public {
         vm.prank(oracle);
         pool.registerRecipient(recipient, 82, 1);
         vm.prank(donor);
@@ -126,10 +151,10 @@ contract AMZakatPoolTest is Test {
 
         vm.prank(oracle);
         vm.expectRevert(bytes("bad amount"));
-        pool.release(recipient, 600e6);
+        pool.requestRelease(recipient, 600e6);
     }
 
-    function testOnlyOracleCanRelease() public {
+    function testOnlyOracleCanRequestOrConfirmRelease() public {
         vm.prank(oracle);
         pool.registerRecipient(recipient, 82, 1);
         vm.prank(donor);
@@ -137,7 +162,14 @@ contract AMZakatPoolTest is Test {
 
         vm.prank(donor);
         vm.expectRevert();
-        pool.release(recipient, 500e6);
+        pool.requestRelease(recipient, 500e6);
+
+        vm.prank(oracle);
+        uint256 requestId = pool.requestRelease(recipient, 500e6);
+
+        vm.prank(donor);
+        vm.expectRevert();
+        pool.confirmRelease(requestId);
     }
 
     // ── Admin: ujrah cap is enforced ───────────────────────────────────────────

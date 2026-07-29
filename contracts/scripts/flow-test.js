@@ -12,8 +12,8 @@ function load(name) {
 
 async function main() {
   const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
-  const [admin, oracle, donor, recipient, treasury] = await Promise.all(
-    [0, 1, 2, 3, 4].map((i) => provider.getSigner(i))
+  const [admin, oracle, donor, recipient, treasury, oracle2] = await Promise.all(
+    [0, 1, 2, 3, 4, 5].map((i) => provider.getSigner(i))
   );
 
   console.log("── Deploying MockUSDC (test stablecoin) ──");
@@ -32,11 +32,13 @@ async function main() {
   await pool.waitForDeployment();
   console.log("AMZakatPool deployed at", await pool.getAddress());
 
-  console.log("\n── Admin grants ORACLE_ROLE to oracle account ──");
+  console.log("\n── Admin grants ORACLE_ROLE to two oracle accounts ──");
   const ORACLE_ROLE = await pool.ORACLE_ROLE();
   await (await pool.connect(admin).addOracle(await oracle.getAddress())).wait();
+  await (await pool.connect(admin).addOracle(await oracle2.getAddress())).wait();
   assert(await pool.hasRole(ORACLE_ROLE, await oracle.getAddress()), "oracle role not granted");
-  console.log("PASS — oracle role granted:", await oracle.getAddress());
+  assert(await pool.hasRole(ORACLE_ROLE, await oracle2.getAddress()), "second oracle role not granted");
+  console.log("PASS — oracle roles granted:", await oracle.getAddress(), "and", await oracle2.getAddress());
 
   console.log("\n── Oracle registers recipient (score 87, category 4) ──");
   await (await pool.connect(oracle).registerRecipient(await recipient.getAddress(), 87, 4)).wait();
@@ -72,22 +74,34 @@ async function main() {
   assert.strictEqual(rAfterDonate.escrow, zakatAmount, "escrow mismatch");
   console.log("PASS — full Zakat principal held in escrow (0% taken):", ethers.formatUnits(rAfterDonate.escrow, 6), "USDC");
 
-  console.log("\n── Non-oracle tries to release funds early (must revert) ──");
+  console.log("\n── Non-oracle tries to request a release early (must revert) ──");
   let reverted = false;
   try {
-    await pool.connect(donor).release(await recipient.getAddress(), zakatAmount);
+    await pool.connect(donor).requestRelease(await recipient.getAddress(), zakatAmount);
   } catch (e) {
     reverted = true;
   }
-  assert(reverted, "non-oracle release should have reverted");
-  console.log("PASS — correctly reverted, only ORACLE_ROLE can release funds");
+  assert(reverted, "non-oracle requestRelease should have reverted");
+  console.log("PASS — correctly reverted, only ORACLE_ROLE can request a release");
 
-  console.log("\n── Oracle confirms physical delivery → releases escrow ──");
+  console.log("\n── One oracle confirms delivery — that alone must NOT move funds ──");
   const recipientBalBefore = await usdc.balanceOf(await recipient.getAddress());
-  await (await pool.connect(oracle).release(await recipient.getAddress(), zakatAmount)).wait();
+  const reqTx = await pool.connect(oracle).requestRelease(await recipient.getAddress(), zakatAmount);
+  const reqReceipt = await reqTx.wait();
+  const requestedEvent = reqReceipt.logs
+    .map((l) => { try { return pool.interface.parseLog(l); } catch { return null; } })
+    .find((e) => e && e.name === "ReleaseRequested");
+  assert(requestedEvent, "ReleaseRequested event not emitted");
+  const requestId = requestedEvent.args.requestId;
+  const balAfterFirstConfirm = await usdc.balanceOf(await recipient.getAddress());
+  assert.strictEqual(balAfterFirstConfirm, recipientBalBefore, "single oracle confirmation must not release funds alone");
+  console.log("PASS — a single oracle proposing/confirming did not move any funds (default threshold is 2)");
+
+  console.log("\n── Second, distinct oracle confirms → release executes ──");
+  await (await pool.connect(oracle2).confirmRelease(requestId)).wait();
   const recipientBalAfter = await usdc.balanceOf(await recipient.getAddress());
   assert.strictEqual(recipientBalAfter - recipientBalBefore, zakatAmount, "recipient did not receive full zakat");
-  console.log("PASS — recipient received full Zakat, no cut taken:", ethers.formatUnits(recipientBalAfter, 6), "USDC");
+  console.log("PASS — recipient received full Zakat once 2 oracles agreed, no cut taken:", ethers.formatUnits(recipientBalAfter, 6), "USDC");
 
   const rFinal = await pool.recipients(await recipient.getAddress());
   assert.strictEqual(rFinal.escrow, 0n, "escrow should be zero after release");
@@ -126,7 +140,12 @@ async function main() {
 
   // restore default tiers so later assertions see the documented schedule
   await (await pool.connect(admin).setUjrahTiers([[0, 250], [1_000_000000n, 150], [10_000_000000n, 100]])).wait();
-  await (await pool.connect(oracle).release(await recipient.getAddress(), zakatAmount)).wait();
+  const reqTx2 = await pool.connect(oracle).requestRelease(await recipient.getAddress(), zakatAmount);
+  const reqReceipt2 = await reqTx2.wait();
+  const requestId2 = reqReceipt2.logs
+    .map((l) => { try { return pool.interface.parseLog(l); } catch { return null; } })
+    .find((e) => e && e.name === "ReleaseRequested").args.requestId;
+  await (await pool.connect(oracle2).confirmRelease(requestId2)).wait();
 
   console.log("\n── Admin pauses contract (emergency kill-switch) ──");
   await (await pool.connect(admin).pause()).wait();
@@ -144,9 +163,10 @@ async function main() {
   console.log("PASS — unpaused successfully");
 
   console.log("\n=================================================");
-  console.log("ALL 13 CHECKS PASSED — full donate -> escrow -> verify");
-  console.log("-> release flow verified end-to-end against the real");
-  console.log("compiled AMZakatPool.sol bytecode on a live local EVM.");
+  console.log("ALL CHECKS PASSED — full donate -> escrow -> verify");
+  console.log("-> two-oracle release flow verified end-to-end against");
+  console.log("the real compiled AMZakatPool.sol bytecode on a live");
+  console.log("local EVM.");
   console.log("=================================================");
 }
 

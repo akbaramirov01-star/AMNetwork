@@ -61,7 +61,9 @@ contract AMZakatPoolGeneral is AccessControl, ReentrancyGuard, Pausable {
     // 24h window, converting instant total loss into rate-limited loss that
     // ADMIN can stop with pause() / removeOracle().
     //
-    // NOT a substitute for multi-oracle consensus — see README "Known issues".
+    // NOT a substitute for multi-oracle consensus — see README "Internal review".
+    // AMZakatPool.release() now requires distinct-oracle consensus (#3 there);
+    // this shared pool still relies on the rate limit alone.
     uint256 public oracleDailyLimit;
     mapping(address => uint256) public oracleDayIndex;   // block.timestamp / 1 days
     mapping(address => uint256) public oracleSpentToday;

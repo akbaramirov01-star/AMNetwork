@@ -1,7 +1,8 @@
-const CACHE = 'amnetwork-v3';
+const CACHE = 'amnetwork-v4';
 const STATIC = [
   '/',
   '/index.html',
+  '/i18n-data.js',
   '/logo.webp',
   '/manifest.json',
   '/icons/icon-192.png',
@@ -14,6 +15,12 @@ const STATIC = [
   '/investors/index.html',
   '/apply/',
   '/apply/index.html',
+  '/academy/',
+  '/academy/index.html',
+  '/privacy/',
+  '/privacy/index.html',
+  '/terms/',
+  '/terms/index.html',
 ];
 
 self.addEventListener('install', e => {

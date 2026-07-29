@@ -26,8 +26,10 @@ import "@openzeppelin/contracts/utils/Pausable.sol";
  *   2. Donor calls donate() — pays (zakatAmount + ujrah). Zakat goes to escrow,
  *      ujrah goes to treasury.
  *   3. Funds sit in escrow allocated to the recipient.
- *   4. An oracle confirms physical delivery / presence → release() transfers
- *      the full Zakat to the recipient.
+ *   4. An oracle confirms physical delivery / presence → requestRelease().
+ *      A second, distinct oracle → confirmRelease() on the same request.
+ *      Only once releaseThreshold oracles agree does the transfer execute —
+ *      no single oracle can move a recipient's escrow alone.
  *
  *  Every step emits an event → that IS the public, auditable blockchain ledger.
  *
@@ -75,13 +77,36 @@ contract AMZakatPool is AccessControl, ReentrancyGuard, Pausable {
     uint256 public totalDistributed;
     uint256 public totalUjrah;
 
+    // ─── Release requests ───────────────────────────────────────────────────--
+    // A single ORACLE_ROLE key confirming "delivery happened" and immediately
+    // moving that recipient's whole escrow was the gap flagged going into a
+    // security audit: one phished or dishonest oracle (or an oracle colluding
+    // with a recipient address they control) could fabricate a delivery and
+    // drain that recipient's escrow with no second check. requestRelease() /
+    // confirmRelease() require `releaseThreshold` DISTINCT oracles to agree
+    // before funds move — see README "Known issues".
+    uint8 public releaseThreshold = 2;
+
+    struct ReleaseRequest {
+        address recipient;
+        uint256 amount;
+        uint256 confirmations;
+        bool    executed;
+    }
+    uint256 public releaseRequestCount;
+    mapping(uint256 => ReleaseRequest) public releaseRequests;
+    mapping(uint256 => mapping(address => bool)) public releaseConfirmedBy;
+
     // ─── Events (the public ledger) ───────────────────────────────────────────
     event RecipientRegistered(address indexed recipient, uint8 score, uint8 category, address indexed oracle);
     event RecipientScoreUpdated(address indexed recipient, uint8 oldScore, uint8 newScore, address indexed oracle);
     event Donated(address indexed donor, address indexed recipient, uint256 zakat, uint256 ujrah);
+    event ReleaseRequested(uint256 indexed requestId, address indexed recipient, uint256 amount, address indexed oracle);
+    event ReleaseConfirmed(uint256 indexed requestId, address indexed oracle, uint256 confirmations);
     event Released(address indexed recipient, uint256 amount, address indexed oracle);
     event UjrahTiersUpdated(uint256 tierCount);
     event TreasuryUpdated(address indexed oldTreasury, address indexed newTreasury);
+    event ReleaseThresholdUpdated(uint8 oldThreshold, uint8 newThreshold);
 
     // ─── Constructor ────────────────────────────────────────────────────────--
     constructor(address _stablecoin, address _treasury, address _admin) {
@@ -172,20 +197,55 @@ contract AMZakatPool is AccessControl, ReentrancyGuard, Pausable {
     }
 
     // ─── Oracle: release escrowed Zakat after confirming delivery ──────────────
-    function release(address recipient, uint256 amount)
-        external onlyRole(ORACLE_ROLE) nonReentrant whenNotPaused
+    // Two-step by design: one oracle proposes (which also counts as its own
+    // confirmation), and `releaseThreshold` DISTINCT oracles in total must
+    // confirm before the transfer executes. See the note on ReleaseRequest.
+    function requestRelease(address recipient, uint256 amount)
+        external onlyRole(ORACLE_ROLE) whenNotPaused returns (uint256 requestId)
     {
         Recipient storage r = recipients[recipient];
         require(r.registered, "not registered");
         require(amount > 0 && amount <= r.escrow, "bad amount");
 
-        r.escrow         -= amount;
-        totalEscrow      -= amount;
-        r.received       += amount;
-        totalDistributed += amount;
+        requestId = releaseRequestCount++;
+        releaseRequests[requestId] = ReleaseRequest({
+            recipient:     recipient,
+            amount:        amount,
+            confirmations: 0,
+            executed:      false
+        });
+        emit ReleaseRequested(requestId, recipient, amount, msg.sender);
 
-        stablecoin.safeTransfer(recipient, amount);
-        emit Released(recipient, amount, msg.sender);
+        _confirmRelease(requestId, msg.sender);
+    }
+
+    function confirmRelease(uint256 requestId) external onlyRole(ORACLE_ROLE) whenNotPaused {
+        _confirmRelease(requestId, msg.sender);
+    }
+
+    function _confirmRelease(uint256 requestId, address oracle) internal nonReentrant {
+        ReleaseRequest storage req = releaseRequests[requestId];
+        require(req.recipient != address(0), "no such request");
+        require(!req.executed, "already executed");
+        require(!releaseConfirmedBy[requestId][oracle], "already confirmed");
+
+        releaseConfirmedBy[requestId][oracle] = true;
+        req.confirmations += 1;
+        emit ReleaseConfirmed(requestId, oracle, req.confirmations);
+
+        if (req.confirmations < releaseThreshold) return;
+
+        Recipient storage r = recipients[req.recipient];
+        require(req.amount <= r.escrow, "escrow changed since request");
+        req.executed = true;
+
+        r.escrow          -= req.amount;
+        totalEscrow        -= req.amount;
+        r.received         += req.amount;
+        totalDistributed   += req.amount;
+
+        stablecoin.safeTransfer(req.recipient, req.amount);
+        emit Released(req.recipient, req.amount, oracle);
     }
 
     // ─── Views ──────────────────────────────────────────────────────────────--
@@ -221,6 +281,14 @@ contract AMZakatPool is AccessControl, ReentrancyGuard, Pausable {
 
     function addOracle(address oracle)    external onlyRole(ADMIN_ROLE) { _grantRole(ORACLE_ROLE, oracle); }
     function removeOracle(address oracle) external onlyRole(ADMIN_ROLE) { _revokeRole(ORACLE_ROLE, oracle); }
+
+    /// @notice Distinct oracle confirmations required before a release executes.
+    /// @dev Keep at 1 only for local/testnet setups with a single test oracle.
+    function setReleaseThreshold(uint8 newThreshold) external onlyRole(ADMIN_ROLE) {
+        require(newThreshold >= 1, "threshold>=1");
+        emit ReleaseThresholdUpdated(releaseThreshold, newThreshold);
+        releaseThreshold = newThreshold;
+    }
 
     function pause()   external onlyRole(ADMIN_ROLE) { _pause();   }
     function unpause() external onlyRole(ADMIN_ROLE) { _unpause(); }

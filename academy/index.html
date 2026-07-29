@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AM Academy — исламские финансы понятным языком</title>
 <meta name="description" content="Бесплатные уроки об исламских финансах. Одно проверенное содержание, объяснённое так, как понятно именно вам. Каждое утверждение со ссылкой на источник.">
+<meta property="og:title" content="AM Academy — исламские финансы понятным языком">
+<meta property="og:description" content="Бесплатные уроки об исламских финансах с ИИ-тьютором 24/7. Каждое утверждение со ссылкой на источник.">
+<meta property="og:image" content="https://amnetwork.io/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AM Academy — исламские финансы понятным языком">
+<meta property="og:url" content="https://amnetwork.io/academy/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AM Network">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AM Academy — исламские финансы понятным языком">
+<meta name="twitter:description" content="Бесплатные уроки об исламских финансах с ИИ-тьютором 24/7.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://amnetwork.onrender.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; form-action 'none'; object-src 'none'">
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
@@ -15,7 +27,11 @@ if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{ana
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4GSRVJB5M"></script>
 <link rel="icon" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Cormorant+Garamond:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
 <style>
 :root{
   --bg1:#F5F0E8;--bg2:#EDE8DE;--bg3:#DDD0BB;--card:#FFFFFF;
@@ -486,7 +502,7 @@ function renderLang(){
   $('langName').textContent = LANGS[l].n;
   $('langDrop').innerHTML = Object.entries(LANGS).map(([k,v]) =>
     `<button data-l="${k}" class="${k===l?'on':''}" role="option">
-       <img src="https://flagcdn.com/w20/${v.f}.png" alt="">${v.n}</button>`).join('');
+       <img src="https://flagcdn.com/w20/${v.f}.png" alt="" loading="lazy">${v.n}</button>`).join('');
   $('langDrop').querySelectorAll('button').forEach(b => {
     b.onclick = () => {
       store.lang = b.dataset.l;
