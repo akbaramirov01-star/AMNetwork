@@ -1,0 +1,79 @@
+name: Deploy AMZakatPool to Base Sepolia testnet
+
+# Compiles AMZakatPool + MockUSDC, deploys both to Base Sepolia, registers one
+# demo recipient as a real on-chain transaction, and commits the resulting
+# addresses to contracts/deployments.json.
+#
+# Prerequisites (one-time):
+#   1. Fund the deployer address with free Base Sepolia ETH from a faucet.
+#   2. Add repository secrets under Settings -> Secrets and variables -> Actions:
+#        DEPLOYER_PRIVATE_KEY  (required — the funded testnet-only wallet)
+#        BASE_SEPOLIA_RPC_URL  (optional — defaults to https://sepolia.base.org)
+#
+# Run it from the Actions tab -> "Deploy AMZakatPool to Base Sepolia testnet"
+# -> Run workflow. This is a PROTOTYPE testnet deployment only — see
+# contracts/README.md "Before mainnet" before ever pointing this at real funds.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: contracts
+        run: npm install
+
+      - name: Compile contracts
+        working-directory: contracts
+        run: node scripts/compile.js
+
+      - name: Deploy to Base Sepolia
+        working-directory: contracts
+        env:
+          DEPLOYER_PRIVATE_KEY: ${{ secrets.DEPLOYER_PRIVATE_KEY }}
+          BASE_SEPOLIA_RPC_URL: ${{ secrets.BASE_SEPOLIA_RPC_URL }}
+        run: |
+          if [ -z "$DEPLOYER_PRIVATE_KEY" ]; then
+            echo "::error::The DEPLOYER_PRIVATE_KEY repository secret is not set."
+            echo "Add it under Settings -> Secrets and variables -> Actions, then re-run."
+            exit 1
+          fi
+          node scripts/deploy-testnet.js
+
+      - name: Commit deployment record
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f contracts/deployments.json
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+          git commit -m "Record Base Sepolia deployment"
+
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "Pushed on attempt $attempt."
+              exit 0
+            fi
+            echo "Push rejected — main moved. Rebasing and retrying ($attempt/5)."
+            git pull --rebase origin "${GITHUB_REF_NAME}" || {
+              echo "::error::Rebase failed. Re-run the workflow to redeploy and retry the commit."
+              exit 1
+            }
+            sleep $((attempt * 5))
+          done
+          echo "::error::Could not push after 5 attempts."
+          exit 1
