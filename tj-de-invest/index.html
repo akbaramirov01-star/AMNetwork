@@ -308,6 +308,85 @@
   .fmail:hover{color:var(--weft);}
   .fmail span{display:block; font-size:0.7rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:2px;}
 
+
+  /* ---------- Investment climate ---------- */
+  .clim-tabs{display:flex; flex-wrap:wrap; gap:2px; margin-bottom:34px; border-bottom:1px solid var(--line);}
+  .clim-tab{
+    border:none; border-bottom:2px solid transparent; background:transparent; padding:11px 20px;
+    font-family:var(--font-body); font-weight:700; font-size:0.88rem; color:var(--ink-faint);
+    transition:color 0.2s ease, border-color 0.2s ease; margin-bottom:-1px; cursor:pointer;
+  }
+  .clim-tab:hover{color:var(--ink-soft);}
+  .clim-tab.active{color:var(--ink); border-bottom-color:var(--weft-strong);}
+  .clim-panel{display:none;}
+  .clim-panel.active{display:block;}
+
+  .clim-two{display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start;}
+  @media (max-width:860px){ .clim-two{grid-template-columns:1fr;} }
+
+  .tax-list{display:flex; flex-direction:column; gap:0; margin-top:6px;}
+  .tax-row{display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid var(--line);}
+  .tax-row:last-child{border-bottom:none;}
+  .tax-row .tax-l{color:var(--ink-soft); font-size:0.9rem; line-height:1.5;}
+  .tax-row .tax-r{font-family:var(--font-display); font-weight:700; color:var(--ink); white-space:nowrap; font-variant-numeric:tabular-nums;}
+
+  .perk{display:flex; gap:11px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--line);}
+  .perk:last-child{border-bottom:none;}
+  .perk svg{width:17px; height:17px; color:var(--weft); flex-shrink:0; margin-top:3px;}
+  .perk b{display:block; font-family:var(--font-display); font-size:0.94rem; margin-bottom:3px; color:var(--ink);}
+  .perk span{font-size:0.85rem; color:var(--ink-soft); line-height:1.55;}
+
+  .fez-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  @media (max-width:800px){ .fez-grid{grid-template-columns:1fr;} }
+  .fez-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
+    padding:24px; display:flex; flex-direction:column; gap:9px; transition:border-color 0.2s ease;
+  }
+  .fez-card:hover{border-color:var(--steel);}
+  .fez-top{display:flex; justify-content:space-between; align-items:baseline; gap:12px;}
+  .fez-card h3{font-size:1.1rem;}
+  .fez-year{font-size:0.75rem; color:var(--ink-faint); font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .fez-meta{font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--steel-strong); font-weight:700;}
+  .fez-card p{font-size:0.88rem; color:var(--ink-soft); line-height:1.6; margin:0;}
+
+  .flow-list{display:flex; flex-direction:column; gap:0; margin-top:4px;}
+  .flow-item{padding:14px 0; border-bottom:1px solid var(--line);}
+  .flow-item:last-child{border-bottom:none;}
+  .flow-head{display:flex; justify-content:space-between; gap:14px; align-items:baseline;}
+  .flow-head b{font-family:var(--font-display); font-size:0.97rem; color:var(--ink);}
+  .flow-share{font-size:0.8rem; font-weight:700; color:var(--weft); white-space:nowrap; font-variant-numeric:tabular-nums;}
+  .flow-item p{margin:5px 0 0; font-size:0.85rem; color:var(--ink-soft); line-height:1.55;}
+  .flow-flag{
+    display:inline-block; margin-top:7px; font-size:0.7rem; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.05em; padding:3px 9px; border-radius:var(--radius-tag);
+    background:color-mix(in srgb, var(--weft-strong) 15%, transparent); color:var(--weft);
+  }
+
+  .rate-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media (max-width:820px){ .rate-grid{grid-template-columns:1fr;} }
+  .rate-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:24px;}
+  .rate-score{font-family:var(--font-display); font-weight:800; font-size:1.9rem; color:var(--weft); font-variant-numeric:tabular-nums; line-height:1.1;}
+  .rate-of{font-size:0.9rem; color:var(--ink-faint); font-weight:600;}
+  .rate-name{font-family:var(--font-display); font-weight:700; font-size:0.95rem; margin:9px 0 5px; color:var(--ink);}
+  .rate-card p{margin:0; font-size:0.84rem; color:var(--ink-soft); line-height:1.6;}
+  .caveat{
+    margin-top:22px; padding:15px 18px; border-radius:10px; font-size:0.86rem; line-height:1.6;
+    background:var(--surface-2); border-left:3px solid var(--steel-strong); color:var(--ink-soft);
+  }
+
+
+  /* ---------- Sources ---------- */
+  .src-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:0 34px;}
+  @media (max-width:820px){ .src-grid{grid-template-columns:1fr;} }
+  .src-item{padding:13px 0; border-bottom:1px solid var(--line); display:flex; gap:12px; align-items:baseline;}
+  .src-num{
+    font-family:var(--font-display); font-weight:700; font-size:0.72rem; color:var(--weft);
+    font-variant-numeric:tabular-nums; flex-shrink:0; min-width:20px;
+  }
+  .src-item a{color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line); transition:color .2s ease, border-color .2s ease; font-size:0.9rem; font-weight:600;}
+  .src-item a:hover{color:var(--weft); border-bottom-color:var(--weft);}
+  .src-item .src-what{display:block; font-size:0.79rem; color:var(--ink-faint); margin-top:3px; line-height:1.5;}
+
   /* ---------- Path selection ---------- */
   .path-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
   @media (max-width:800px){ .path-grid{grid-template-columns:1fr;} }
@@ -478,7 +557,9 @@
       <a href="#sectors" data-i18n="nav.sectors"></a>
       <a href="#opportunities" data-i18n="nav.opportunities"></a>
       <a href="#pricing" data-i18n="nav.pricing"></a>
-      <a href="#why" data-i18n="nav.why"></a>
+      <a href="#climate" data-i18n="nav.climate"></a>
+      <a href="#climate" data-i18n="nav.climate"></a>
+  <a href="#why" data-i18n="nav.why"></a>
       <a href="#process" data-i18n="nav.process"></a>
       <a href="#contact" data-i18n="nav.contact"></a>
     </nav>
@@ -662,6 +743,77 @@
     </div>
   </section>
 
+  <section id="climate">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" data-i18n="climate.eyebrow"></div>
+        <h2 class="section-title" data-i18n="climate.title"></h2>
+        <p class="section-sub" data-i18n="climate.subtitle"></p>
+      </div>
+
+      <div class="clim-tabs reveal">
+        <button class="clim-tab active" data-ctab="tax" data-i18n="climate.tabTax"></button>
+        <button class="clim-tab" data-ctab="fez" data-i18n="climate.tabFez"></button>
+        <button class="clim-tab" data-ctab="trade" data-i18n="climate.tabTrade"></button>
+        <button class="clim-tab" data-ctab="rate" data-i18n="climate.tabRate"></button>
+      </div>
+
+      <div class="clim-panel active" id="climTax">
+        <div class="clim-two">
+          <div class="panel">
+            <div class="panel-title" data-i18n="climate.taxTitle"></div>
+            <div class="tax-list" id="taxList"></div>
+            <p class="panel-note" data-i18n="climate.taxSource"></p>
+          </div>
+          <div class="panel">
+            <div class="panel-title" data-i18n="climate.perkTitle"></div>
+            <div id="perkList" style="margin-top:6px;"></div>
+            <p class="panel-note" data-i18n="climate.perkSource"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="clim-panel" id="climFez">
+        <div class="fez-grid reveal-stagger" id="fezGrid"></div>
+        <p class="panel-note" style="margin-top:18px;" data-i18n="climate.fezNote"></p>
+      </div>
+
+      <div class="clim-panel" id="climTrade">
+        <div class="clim-two">
+          <div class="panel">
+            <div class="panel-title" data-i18n="climate.expTitle"></div>
+            <p style="color:var(--ink-soft); font-size:0.89rem; line-height:1.6; margin:6px 0 0;" data-i18n="climate.expSub"></p>
+            <div class="flow-list" id="expList"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-title" data-i18n="climate.impTitle"></div>
+            <p style="color:var(--ink-soft); font-size:0.89rem; line-height:1.6; margin:6px 0 0;" data-i18n="climate.impSub"></p>
+            <div class="flow-list" id="impList"></div>
+          </div>
+        </div>
+        <p class="panel-note" style="margin-top:18px;" data-i18n="climate.tradeSource"></p>
+      </div>
+
+      <div class="clim-panel" id="climRate">
+        <div class="rate-grid reveal-stagger" id="rateGrid"></div>
+        <div class="caveat" data-i18n="climate.caveat"></div>
+        <p class="panel-note" style="margin-top:14px;" data-i18n="climate.rateSource"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sources">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" data-i18n="sources.eyebrow"></div>
+        <h2 class="section-title" data-i18n="sources.title"></h2>
+        <p class="section-sub" data-i18n="sources.subtitle"></p>
+      </div>
+      <div class="src-grid reveal" id="srcGrid"></div>
+      <p class="panel-note" style="margin-top:22px;" data-i18n="sources.note"></p>
+    </div>
+  </section>
+
   <section id="why">
     <div class="container">
       <div class="section-head center reveal">
@@ -780,7 +932,7 @@
 var translations = {
   en: {
     ribbon: "Concept preview — a demonstration of the Rohbar platform, not a live service.",
-    nav: {sectors:"Sectors", opportunities:"Opportunities", pricing:"Pricing", why:"Why Tajikistan", process:"How it works", contact:"Contact", cta:"Get in touch"},
+    nav: {climate:"Investment climate", sectors:"Sectors", opportunities:"Opportunities", pricing:"Pricing", why:"Why Tajikistan", process:"How it works", contact:"Contact", cta:"Get in touch"},
     hero: {
       badge:"Tajikistan × Germany",
       title:"Where Tajik Enterprise Meets German Capital",
@@ -812,6 +964,67 @@ var translations = {
       disclaimer:"This site is a concept preview prepared for demonstration purposes. Sample opportunities are illustrative and do not represent real listings.",
       rights:"© 2026 Rohbar. All rights reserved."
     },
+    sources: {eyebrow:"References", title:"Where Every Number Comes From", subtitle:"Each figure on this page is traceable to a published source. Follow any link and check it yourself.", note:"Figures are the most recent published values at the time of writing and are indicative, not contractual. Tax rates, tariff preferences and zone conditions change — verify with legal and tax counsel before making a commitment.", nav:"Sources"},
+    sourceWhat:["Corporate income tax, VAT and the Article 189 manufacturing exemption","Investment incentives, VAT relief on imported inputs, free-zone conditions","The four free economic zones and their status","Zone areas, establishment dates and profiles","Bilateral Germany-Tajikistan trade: ~€53M in 2024, of which ~€50M German exports","EU-Tajikistan trade: €304M in 2024","GSP status, 7% preference take-up and 95% utilisation rate","2024 goods exports: $1.95bn, −20.5%, and the export mix by share","Antimony as an EU critical and strategic raw material; 52% of EU imports","Chinese antimony export restrictions and global producer shares","Global Peace Index 2025: 79th of 163, score 1.996","Agricultural machinery access as a barrier to modernisation","Electricity mix: 98% renewable","Hydropower potential: 8th globally, about 5% developed"],
+    climate: {
+      eyebrow:"Investment climate",
+      title:"Rules, Incentives and What Actually Trades",
+      subtitle:"What an investor needs to check before a first meeting: the tax position, where the incentives are, what Tajikistan already sells to Europe, and how the country is rated.",
+      tabTax:"Tax & incentives", tabFez:"Free economic zones", tabTrade:"Trade flows", tabRate:"Ratings",
+      taxTitle:"Headline tax rates",
+      taxSource:"Source: Tax Code of the Republic of Tajikistan; U.S. State Department Investment Climate Statement 2025. Rates change — confirm with local counsel before committing.",
+      perkTitle:"Incentives available to investors",
+      perkSource:"Incentives are granted on application and are conditional. Treat this as a starting checklist, not an entitlement.",
+      fezNote:"Four free economic zones were established by decree in 2008. Businesses inside a zone are exempt from most taxes set out in the Tax Code and from customs duties on goods brought into the zone. Zone status runs for decades, but each resident agreement is negotiated individually.",
+      expTitle:"What Tajikistan already sells",
+      expSub:"Share of total goods exports in 2024 (total: $1.95bn).",
+      impTitle:"Where German technology is missing",
+      impSub:"Segments where imports are rising and domestic capacity is thin — the clearest openings for German suppliers and joint ventures.",
+      tradeSource:"Sources: national trade statistics 2024; European Commission (critical raw materials); World Bank country notes. Export shares are for goods only.",
+      caveat:"We show the weak numbers too. Goods exports fell 20.5% in 2024, Tajikistan holds standard GSP rather than GSP+, and its Global Peace Index score worsened across ten indicators in the latest edition. An investor will find these figures anyway — better to start from them.",
+      rateSource:"Sources: Institute for Economics & Peace, Global Peace Index 2025; European Commission DG TRADE; German Federal Foreign Office."
+    },
+    taxRows:[
+      {label:"Corporate income tax — standard", value:"18%"},
+      {label:"Corporate income tax — goods producers", value:"13%"},
+      {label:"Corporate income tax — banks, mobile operators", value:"20%"},
+      {label:"VAT (2024–2026)", value:"14%"},
+      {label:"VAT from 1 Jan 2027", value:"13%"},
+      {label:"Small business, turnover under 1M TJS", value:"10%"}
+    ],
+    perks:[
+      {title:"Two-year tax holiday for manufacturers", desc:"New manufacturing companies are exempt from profit tax for two years under Article 189 of the Tax Code, and the period extends with the size of the investment."},
+      {title:"Free economic zone status", desc:"Residents are exempt from most taxes in the Tax Code and from customs duties on goods entering the zone."},
+      {title:"VAT relief on imported inputs", desc:"Qualifying investors can claim VAT exemption on imported materials — applications must be filed before 1 January and are valid for that calendar year only."},
+      {title:"Duty-free access to the EU", desc:"Tajikistan is a GSP beneficiary, so much of what it ships to the EU enters at reduced or zero tariffs. Only about 7% of exports to the EU currently use the scheme — the headroom is the point."}
+    ],
+    fez:[
+      {name:"Sughd", meta:"est. 2009 · 320 ha", focus:"Industry & export", desc:"On the industrial edge of Khujand, closest to the Uzbek border and the region's road and rail links. The most developed of the four and the usual first stop for export-oriented manufacturing."},
+      {name:"Dangara", meta:"Khatlon · 521 ha", focus:"Industry & agro-processing", desc:"The largest zone by area, in the agricultural south. Suits food processing, textiles and anything that needs to sit close to raw crop supply."},
+      {name:"Panj", meta:"Afghan border", focus:"Cross-border trade", desc:"Created to move goods across the Panj river crossing and build up transit volume toward Afghanistan and South Asia."},
+      {name:"Ishkoshim", meta:"Pamir · Afghan border", focus:"Trade & tourism", desc:"High in the Pamirs on the Afghan frontier, aimed at border trade and at the mountain-tourism route through the Wakhan corridor."}
+    ],
+    exports:[
+      {name:"Antimony", share:"13.3%", desc:"Tajikistan supplied 52% of all EU antimony imports in 2025 and is the world's second-largest producer after China. The EU classes antimony as both critical and strategic, and China has cut its own export quotas sharply.", flag:"EU critical raw material"},
+      {name:"Ores & mineral products", share:"24%", desc:"The single biggest export category — concentrates and unprocessed mineral output, most of it currently leaving the country with little processing done locally."},
+      {name:"Precious metals", share:"17.8%", desc:"Chiefly unwrought gold. Switzerland is already a major buyer, which shows the logistics route to Europe works."},
+      {name:"Cotton yarn", share:"10.9%", desc:"Yarn rather than finished textiles — the value-added step is the opening for a European partner."},
+      {name:"Primary aluminium", share:"10.4%", desc:"Smelted using the country's own hydropower, which makes its carbon profile unusually favourable for EU buyers facing CBAM."},
+      {name:"Fruit, nuts & dried produce", share:"", desc:"Apricots, raisins, nuts and pulses. Small in the national accounts, but the category where a German importer can start at modest volume and low risk."}
+    ],
+    imports:[
+      {name:"Agricultural machinery at farm scale", share:"", desc:"The World Bank names lack of access to appropriately sized machinery as a principal barrier to modernising Tajik agriculture. Equipment sized for small holdings, not industrial estates."},
+      {name:"Cold chain & food processing lines", share:"", desc:"Fruit is grown well and stored badly. Refrigeration, grading, drying and EU-certified packaging are the missing links between harvest and a European shelf."},
+      {name:"Ore processing & refining", share:"", desc:"Minerals leave largely unprocessed. Concentration and refining capacity would keep margin in-country and give EU buyers a traceable, non-Chinese supply chain."},
+      {name:"Hydropower modernisation", share:"", desc:"98% of electricity is already renewable, but only about 5% of hydropower potential is developed. Turbines, grid equipment and control systems are all imported."},
+      {name:"Textile finishing & dyeing", share:"", desc:"Cotton leaves as yarn because finishing capacity is thin. Finishing equipment plus EU compliance know-how converts a commodity into a garment supply chain."},
+      {name:"Testing, certification & standards", share:"", desc:"Reaching an EU buyer means meeting EU norms. Laboratories, certification services and quality systems are in short supply and are a business in their own right."}
+    ],
+    ratings:[
+      {score:"79", of:"/ 163", name:"Global Peace Index 2025", desc:"Score 1.996 — the upper half of the table, close to Kyrgyzstan (78th) and ahead of Turkmenistan (87th). Tajikistan has climbed 36 places since 2015, though the latest edition records deterioration across ten indicators."},
+      {score:"€304M", of:"2024", name:"Total trade with the EU", desc:"Of which Germany is Tajikistan's most important EU economic partner. Roughly 7% of exports to the EU use GSP preferences, but where they are used the utilisation rate is 95%."},
+      {score:"GSP", of:"not GSP+", name:"EU market access", desc:"Tajikistan holds standard GSP status. GSP+ — which would zero tariffs on more than 6,400 product lines — has been discussed but is conditional on labour, environmental and governance reforms."}
+    ],
     analytics: {
       eyebrow:"Market analytics",
       title:"The Numbers Behind the Opportunity",
@@ -891,7 +1104,7 @@ var translations = {
   },
   ru: {
     ribbon: "Концептуальная демо-версия платформы Rohbar — не действующий сервис.",
-    nav: {sectors:"Отрасли", opportunities:"Возможности", pricing:"Тарифы", why:"Почему Таджикистан", process:"Как это работает", contact:"Контакты", cta:"Связаться"},
+    nav: {climate:"Инвестклимат", sectors:"Отрасли", opportunities:"Возможности", pricing:"Тарифы", why:"Почему Таджикистан", process:"Как это работает", contact:"Контакты", cta:"Связаться"},
     hero: {
       badge:"Таджикистан × Германия",
       title:"Там, где таджикское предпринимательство встречается с немецким капиталом",
@@ -921,6 +1134,67 @@ var translations = {
       disclaimer:"Этот сайт — концептуальная демонстрационная версия. Примеры возможностей носят иллюстративный характер и не являются реальными предложениями.",
       rights:"© 2026 Rohbar. Все права защищены."
     },
+    sources: {eyebrow:"Источники", title:"Откуда взята каждая цифра", subtitle:"Каждый показатель на этой странице возводится к опубликованному источнику. Откройте любую ссылку и проверьте сами.", note:"Приведены последние опубликованные значения на момент подготовки; они носят ориентировочный, а не договорный характер. Налоговые ставки, тарифные преференции и условия зон меняются — подтверждайте у юридических и налоговых консультантов до принятия обязательств.", nav:"Источники"},
+    sourceWhat:["Налог на прибыль, НДС и освобождение производств по статье 189","Инвестиционные льготы, освобождение от НДС на ввозимое сырьё, условия свободных зон","Четыре свободные экономические зоны и их статус","Площади зон, даты создания и профили","Двусторонняя торговля Германия–Таджикистан: ~€53 млн в 2024, из них ~€50 млн экспорт Германии","Торговля ЕС–Таджикистан: €304 млн в 2024","Статус GSP, использование преференций 7% и коэффициент использования 95%","Товарный экспорт 2024: $1,95 млрд, −20,5%, и структура экспорта по долям","Сурьма как критическое и стратегическое сырьё ЕС; 52% импорта ЕС","Экспортные ограничения Китая по сурьме и доли мировых производителей","Global Peace Index 2025: 79-е место из 163, оценка 1,996","Доступ к сельхозтехнике как барьер модернизации","Структура электроэнергии: 98% возобновляемая","Гидропотенциал: 8-е место в мире, освоено около 5%"],
+    climate: {
+      eyebrow:"Инвестиционный климат",
+      title:"Правила, льготы и то, что реально торгуется",
+      subtitle:"То, что инвестор проверяет до первой встречи: налоговый режим, где действуют льготы, что Таджикистан уже продаёт в Европу и как страну оценивают международные институты.",
+      tabTax:"Налоги и льготы", tabFez:"Свободные зоны", tabTrade:"Товарные потоки", tabRate:"Рейтинги",
+      taxTitle:"Основные ставки",
+      taxSource:"Источники: Налоговый кодекс Республики Таджикистан; Investment Climate Statement Госдепартамента США, 2025. Ставки меняются — подтверждайте у местного консультанта.",
+      perkTitle:"Льготы, доступные инвестору",
+      perkSource:"Льготы предоставляются по заявлению и на условиях. Считайте это стартовым чек-листом, а не гарантией.",
+      fezNote:"Четыре свободные экономические зоны созданы указом в 2008 году. Резиденты освобождены от большинства налогов Налогового кодекса и от таможенных пошлин на ввоз в зону. Статус зоны рассчитан на десятилетия, но соглашение с каждым резидентом обсуждается отдельно.",
+      expTitle:"Что Таджикистан уже продаёт",
+      expSub:"Доля в товарном экспорте 2024 года (всего: $1,95 млрд).",
+      impTitle:"Где не хватает немецких технологий",
+      impSub:"Сегменты, где импорт растёт, а собственных мощностей мало — самые очевидные ниши для немецких поставщиков и совместных предприятий.",
+      tradeSource:"Источники: национальная торговая статистика 2024; Еврокомиссия (критическое сырьё); страновые обзоры Всемирного банка. Доли указаны только по товарам.",
+      caveat:"Мы показываем и слабые цифры. Товарный экспорт упал на 20,5% в 2024 году, у страны обычный GSP, а не GSP+, а в последнем Global Peace Index показатели ухудшились по десяти индикаторам. Инвестор всё равно найдёт эти данные — лучше начать разговор с них.",
+      rateSource:"Источники: Institute for Economics & Peace, Global Peace Index 2025; DG TRADE Еврокомиссии; МИД ФРГ."
+    },
+    taxRows:[
+      {label:"Налог на прибыль — общая ставка", value:"18%"},
+      {label:"Налог на прибыль — производство товаров", value:"13%"},
+      {label:"Налог на прибыль — банки, операторы связи", value:"20%"},
+      {label:"НДС (2024–2026)", value:"14%"},
+      {label:"НДС с 1 января 2027", value:"13%"},
+      {label:"Малый бизнес, оборот до 1 млн сомони", value:"10%"}
+    ],
+    perks:[
+      {title:"Двухлетние налоговые каникулы для производств", desc:"Новые производственные компании освобождаются от налога на прибыль на два года по статье 189 Налогового кодекса, а срок продлевается в зависимости от объёма инвестиций."},
+      {title:"Статус резидента свободной зоны", desc:"Резиденты освобождены от большинства налогов Налогового кодекса и от таможенных пошлин на товары, ввозимые в зону."},
+      {title:"Освобождение от НДС на ввозимое сырьё", desc:"Квалифицированные инвесторы могут получить освобождение от НДС на импортируемые материалы — заявление подаётся до 1 января и действует только в течение этого календарного года."},
+      {title:"Беспошлинный доступ на рынок ЕС", desc:"Таджикистан — бенефициар GSP, поэтому значительная часть поставок в ЕС идёт по сниженным или нулевым тарифам. Сейчас схемой пользуется лишь около 7% экспорта в ЕС — в этом и есть запас."}
+    ],
+    fez:[
+      {name:"Сугд", meta:"с 2009 · 320 га", focus:"Промышленность и экспорт", desc:"На промышленной окраине Худжанда, ближе всех к узбекской границе и к автомобильным и железнодорожным узлам региона. Самая развитая из четырёх и обычная первая точка для экспортного производства."},
+      {name:"Дангара", meta:"Хатлон · 521 га", focus:"Промышленность и агропереработка", desc:"Крупнейшая по площади зона на аграрном юге. Подходит для пищевой переработки, текстиля и всего, что должно стоять рядом с сырьём."},
+      {name:"Пяндж", meta:"Афганская граница", focus:"Приграничная торговля", desc:"Создана для перемещения товаров через переправу на Пяндже и наращивания транзита в сторону Афганистана и Южной Азии."},
+      {name:"Ишкошим", meta:"Памир · граница с Афганистаном", focus:"Торговля и туризм", desc:"Высоко в Памире на афганской границе, ориентирована на приграничную торговлю и на горный туристический маршрут через Ваханский коридор."}
+    ],
+    exports:[
+      {name:"Сурьма", share:"13,3%", desc:"В 2025 году Таджикистан обеспечил 52% всего импорта сурьмы в ЕС и является вторым производителем в мире после Китая. ЕС относит сурьму к критическому и стратегическому сырью, а Китай резко сократил собственные экспортные квоты.", flag:"Критическое сырьё ЕС"},
+      {name:"Руды и минеральное сырьё", share:"24%", desc:"Крупнейшая экспортная категория — концентраты и необработанное минеральное сырьё, которое сейчас в основном вывозится почти без переработки на месте."},
+      {name:"Драгоценные металлы", share:"17,8%", desc:"Прежде всего необработанное золото. Швейцария уже крупный покупатель — значит, логистический маршрут в Европу работает."},
+      {name:"Хлопковая пряжа", share:"10,9%", desc:"Именно пряжа, а не готовый текстиль — шаг добавленной стоимости и есть ниша для европейского партнёра."},
+      {name:"Первичный алюминий", share:"10,4%", desc:"Выплавляется на собственной гидроэнергии, что даёт необычно выгодный углеродный след для покупателей в ЕС в условиях CBAM."},
+      {name:"Фрукты, орехи и сухофрукты", share:"", desc:"Абрикосы, изюм, орехи, бобовые. В масштабах страны немного, но именно здесь немецкий импортёр может начать с небольших объёмов и низкого риска."}
+    ],
+    imports:[
+      {name:"Сельхозтехника фермерского масштаба", share:"", desc:"Всемирный банк называет отсутствие доступа к технике подходящего размера главным барьером модернизации сельского хозяйства. Нужна техника для небольших хозяйств, а не для агрохолдингов."},
+      {name:"Холодовая цепь и линии переработки", share:"", desc:"Фрукты выращивают хорошо, а хранят плохо. Холод, калибровка, сушка и сертифицированная упаковка — недостающее звено между урожаем и европейской полкой."},
+      {name:"Обогащение и переработка руды", share:"", desc:"Сырьё уходит почти без переработки. Мощности обогащения и рафинирования оставили бы маржу в стране и дали бы покупателям в ЕС прослеживаемую цепочку поставок вне Китая."},
+      {name:"Модернизация гидроэнергетики", share:"", desc:"98% электроэнергии уже возобновляемая, но освоено лишь около 5% гидропотенциала. Турбины, сетевое оборудование и системы управления импортируются."},
+      {name:"Отделка и крашение текстиля", share:"", desc:"Хлопок уходит пряжей, потому что мощностей отделки мало. Оборудование отделки плюс знание норм ЕС превращают сырьё в швейную цепочку поставок."},
+      {name:"Испытания, сертификация и стандарты", share:"", desc:"Выйти на покупателя в ЕС — значит соответствовать нормам ЕС. Лабораторий, сертификации и систем качества не хватает, и это самостоятельный бизнес."}
+    ],
+    ratings:[
+      {score:"79", of:"/ 163", name:"Global Peace Index 2025", desc:"Оценка 1,996 — верхняя половина таблицы, рядом с Кыргызстаном (78-е) и выше Туркменистана (87-е). С 2015 года страна поднялась на 36 позиций, хотя в последнем выпуске зафиксировано ухудшение по десяти индикаторам."},
+      {score:"€304 млн", of:"2024", name:"Товарооборот с ЕС", desc:"При этом Германия — важнейший экономический партнёр Таджикистана в ЕС. Около 7% экспорта в ЕС идёт по преференциям GSP, но там, где они используются, коэффициент использования — 95%."},
+      {score:"GSP", of:"не GSP+", name:"Доступ на рынок ЕС", desc:"У Таджикистана обычный статус GSP. GSP+ — обнуление тарифов более чем по 6 400 товарным позициям — обсуждался, но обусловлен реформами в сфере труда, экологии и управления."}
+    ],
     analytics: {
       eyebrow:"Аналитика рынка",
       title:"Цифры, стоящие за возможностью",
@@ -1000,7 +1274,7 @@ var translations = {
   },
   de: {
     ribbon: "Konzeptvorschau der Plattform „Rohbar“ — kein aktiver Dienst.",
-    nav: {sectors:"Branchen", opportunities:"Chancen", pricing:"Preise", why:"Warum Tadschikistan", process:"Ablauf", contact:"Kontakt", cta:"Kontakt aufnehmen"},
+    nav: {climate:"Investitionsklima", sectors:"Branchen", opportunities:"Chancen", pricing:"Preise", why:"Warum Tadschikistan", process:"Ablauf", contact:"Kontakt", cta:"Kontakt aufnehmen"},
     hero: {
       badge:"Tadschikistan × Deutschland",
       title:"Wo tadschikisches Unternehmertum auf deutsches Kapital trifft",
@@ -1030,6 +1304,67 @@ var translations = {
       disclaimer:"Diese Seite ist eine Konzeptvorschau zu Demonstrationszwecken. Beispielhafte Chancen sind illustrativ und stellen keine realen Angebote dar.",
       rights:"© 2026 Rohbar. Alle Rechte vorbehalten."
     },
+    sources: {eyebrow:"Quellen", title:"Woher jede Zahl stammt", subtitle:"Jede Angabe auf dieser Seite lässt sich auf eine veröffentlichte Quelle zurückführen. Jeden Link öffnen und selbst prüfen.", note:"Angegeben sind die zum Redaktionsschluss zuletzt veröffentlichten Werte; sie sind Richtwerte und nicht vertraglich. Steuersätze, Zollpräferenzen und Zonenbedingungen ändern sich — vor einer Zusage rechtlich und steuerlich prüfen lassen.", nav:"Quellen"},
+    sourceWhat:["Körperschaftsteuer, Mehrwertsteuer und die Herstellerbefreiung nach Artikel 189","Investitionsanreize, Mehrwertsteuerbefreiung auf Vormaterial, Bedingungen der Sonderzonen","Die vier Sonderwirtschaftszonen und ihr Status","Flächen, Gründungsdaten und Profile der Zonen","Bilateraler Handel Deutschland-Tadschikistan: rund 53 Mio. € in 2024, davon ca. 50 Mio. € deutsche Ausfuhren","Handel EU-Tadschikistan: 304 Mio. € in 2024","GSP-Status, 7 % Präferenznutzung und 95 % Ausschöpfungsgrad","Warenausfuhren 2024: 1,95 Mrd. USD, −20,5 %, sowie die Exportstruktur nach Anteilen","Antimon als kritischer und strategischer Rohstoff der EU; 52 % der EU-Einfuhren","Chinesische Antimon-Ausfuhrbeschränkungen und weltweite Produzentenanteile","Global Peace Index 2025: Platz 79 von 163, Wert 1,996","Zugang zu Landmaschinen als Modernisierungsbarriere","Strommix: 98 % erneuerbar","Wasserkraftpotenzial: weltweit Platz 8, rund 5 % erschlossen"],
+    climate: {
+      eyebrow:"Investitionsklima",
+      title:"Regeln, Anreize und was tatsächlich gehandelt wird",
+      subtitle:"Was ein Investor vor dem ersten Termin prüft: Steuerlage, wo die Anreize liegen, was Tadschikistan bereits nach Europa verkauft und wie das Land bewertet wird.",
+      tabTax:"Steuern & Anreize", tabFez:"Sonderwirtschaftszonen", tabTrade:"Handelsströme", tabRate:"Bewertungen",
+      taxTitle:"Wichtigste Steuersätze",
+      taxSource:"Quellen: Steuergesetzbuch der Republik Tadschikistan; Investment Climate Statement des US-Außenministeriums 2025. Sätze ändern sich — vor einer Zusage lokal prüfen lassen.",
+      perkTitle:"Anreize für Investoren",
+      perkSource:"Anreize werden auf Antrag und unter Auflagen gewährt. Als Ausgangs-Checkliste zu verstehen, nicht als Anspruch.",
+      fezNote:"Vier Sonderwirtschaftszonen wurden 2008 per Dekret geschaffen. Ansässige Unternehmen sind von den meisten Steuern des Steuergesetzbuchs und von Zöllen auf in die Zone eingeführte Waren befreit. Der Zonenstatus läuft über Jahrzehnte, jede Ansiedlungsvereinbarung wird jedoch einzeln verhandelt.",
+      expTitle:"Was Tadschikistan bereits verkauft",
+      expSub:"Anteil an den Warenausfuhren 2024 (gesamt: 1,95 Mrd. USD).",
+      impTitle:"Wo deutsche Technik fehlt",
+      impSub:"Segmente mit steigenden Einfuhren und dünner heimischer Kapazität — die klarsten Einstiege für deutsche Lieferanten und Joint Ventures.",
+      tradeSource:"Quellen: nationale Handelsstatistik 2024; Europäische Kommission (kritische Rohstoffe); Länderberichte der Weltbank. Anteile beziehen sich nur auf Waren.",
+      caveat:"Wir zeigen auch die schwachen Zahlen. Die Warenausfuhren sanken 2024 um 20,5 %, das Land hat den normalen GSP-Status und nicht GSP+, und im jüngsten Global Peace Index verschlechterten sich zehn Indikatoren. Ein Investor findet diese Zahlen ohnehin — besser, das Gespräch beginnt damit.",
+      rateSource:"Quellen: Institute for Economics & Peace, Global Peace Index 2025; GD TRADE der Europäischen Kommission; Auswärtiges Amt."
+    },
+    taxRows:[
+      {label:"Körperschaftsteuer — Regelsatz", value:"18 %"},
+      {label:"Körperschaftsteuer — Warenhersteller", value:"13 %"},
+      {label:"Körperschaftsteuer — Banken, Mobilfunk", value:"20 %"},
+      {label:"Mehrwertsteuer (2024–2026)", value:"14 %"},
+      {label:"Mehrwertsteuer ab 1.1.2027", value:"13 %"},
+      {label:"Kleinunternehmen, Umsatz unter 1 Mio. TJS", value:"10 %"}
+    ],
+    perks:[
+      {title:"Zwei Jahre Steuerbefreiung für Hersteller", desc:"Neue Produktionsunternehmen sind nach Artikel 189 des Steuergesetzbuchs zwei Jahre von der Gewinnsteuer befreit; die Frist verlängert sich mit der Investitionshöhe."},
+      {title:"Status in der Sonderwirtschaftszone", desc:"Ansässige sind von den meisten Steuern des Steuergesetzbuchs und von Zöllen auf in die Zone eingeführte Waren befreit."},
+      {title:"Mehrwertsteuerbefreiung auf Vormaterial", desc:"Qualifizierte Investoren können eine Befreiung für eingeführte Materialien beantragen — der Antrag ist vor dem 1. Januar zu stellen und gilt nur für das jeweilige Kalenderjahr."},
+      {title:"Zollfreier Zugang zur EU", desc:"Tadschikistan ist GSP-Begünstigter, ein großer Teil der Lieferungen in die EU läuft daher zu reduzierten oder null Zöllen. Derzeit nutzen nur rund 7 % der Ausfuhren in die EU das Schema — genau darin liegt der Spielraum."}
+    ],
+    fez:[
+      {name:"Sughd", meta:"seit 2009 · 320 ha", focus:"Industrie & Export", desc:"Am Industrierand von Chudschand, am nächsten zur usbekischen Grenze und zu den Straßen- und Bahnverbindungen der Region. Die am weitesten entwickelte der vier Zonen und üblicher erster Standort für exportorientierte Fertigung."},
+      {name:"Dangara", meta:"Chatlon · 521 ha", focus:"Industrie & Agrarverarbeitung", desc:"Die flächenmäßig größte Zone im landwirtschaftlichen Süden. Geeignet für Lebensmittelverarbeitung, Textil und alles, was nah am Rohstoff stehen muss."},
+      {name:"Pandsch", meta:"Grenze zu Afghanistan", focus:"Grenzhandel", desc:"Eingerichtet für den Warenverkehr über den Pandsch-Übergang und den Aufbau von Transitvolumen Richtung Afghanistan und Südasien."},
+      {name:"Ischkoschim", meta:"Pamir · Grenze zu Afghanistan", focus:"Handel & Tourismus", desc:"Hoch im Pamir an der afghanischen Grenze, ausgerichtet auf Grenzhandel und die Bergtourismus-Route durch den Wachan-Korridor."}
+    ],
+    exports:[
+      {name:"Antimon", share:"13,3 %", desc:"Tadschikistan lieferte 2025 52 % aller Antimon-Einfuhren der EU und ist nach China der zweitgrößte Produzent weltweit. Die EU stuft Antimon als kritisch und strategisch ein, China hat seine Ausfuhrkontingente stark gekürzt.", flag:"Kritischer Rohstoff der EU"},
+      {name:"Erze & Mineralien", share:"24 %", desc:"Die größte Ausfuhrkategorie — Konzentrate und unverarbeitete Mineralien, die derzeit weitgehend ohne lokale Weiterverarbeitung das Land verlassen."},
+      {name:"Edelmetalle", share:"17,8 %", desc:"Vor allem Rohgold. Die Schweiz ist bereits ein bedeutender Abnehmer — der Logistikweg nach Europa funktioniert also."},
+      {name:"Baumwollgarn", share:"10,9 %", desc:"Garn statt fertiger Textilien — die Wertschöpfungsstufe ist der Einstieg für einen europäischen Partner."},
+      {name:"Primäraluminium", share:"10,4 %", desc:"Mit eigener Wasserkraft erschmolzen, was den CO₂-Fußabdruck für EU-Käufer im CBAM-Umfeld ungewöhnlich günstig macht."},
+      {name:"Obst, Nüsse & Trockenware", share:"", desc:"Aprikosen, Rosinen, Nüsse, Hülsenfrüchte. Gesamtwirtschaftlich klein, aber die Kategorie, in der ein deutscher Importeur mit geringem Volumen und Risiko beginnen kann."}
+    ],
+    imports:[
+      {name:"Landmaschinen in Betriebsgröße", share:"", desc:"Die Weltbank nennt den fehlenden Zugang zu passend dimensionierten Maschinen als Hauptbarriere der Modernisierung. Gefragt ist Technik für Kleinbetriebe, nicht für Agrarkonzerne."},
+      {name:"Kühlkette & Verarbeitungslinien", share:"", desc:"Obst wird gut angebaut und schlecht gelagert. Kühlung, Sortierung, Trocknung und zertifizierte Verpackung sind das fehlende Glied zwischen Ernte und europäischem Regal."},
+      {name:"Erzaufbereitung & Raffination", share:"", desc:"Rohstoffe verlassen das Land weitgehend unverarbeitet. Aufbereitungs- und Raffinationskapazität hielte Marge im Land und gäbe EU-Käufern eine nachvollziehbare Lieferkette außerhalb Chinas."},
+      {name:"Modernisierung der Wasserkraft", share:"", desc:"98 % des Stroms sind bereits erneuerbar, aber nur etwa 5 % des Wasserkraftpotenzials sind erschlossen. Turbinen, Netztechnik und Steuerungen werden eingeführt."},
+      {name:"Textilveredelung & Färberei", share:"", desc:"Baumwolle geht als Garn außer Landes, weil Veredelungskapazität fehlt. Veredelungstechnik plus EU-Normenwissen macht aus Rohware eine Bekleidungslieferkette."},
+      {name:"Prüfung, Zertifizierung & Normen", share:"", desc:"Wer an EU-Käufer liefert, muss EU-Normen erfüllen. Labore, Zertifizierung und Qualitätssysteme sind knapp — und ein Geschäft für sich."}
+    ],
+    ratings:[
+      {score:"79", of:"/ 163", name:"Global Peace Index 2025", desc:"Wert 1,996 — obere Tabellenhälfte, nahe Kirgisistan (78.) und vor Turkmenistan (87.). Seit 2015 ist das Land um 36 Plätze gestiegen, die jüngste Ausgabe verzeichnet jedoch Verschlechterungen bei zehn Indikatoren."},
+      {score:"304 Mio. €", of:"2024", name:"Handel mit der EU", desc:"Deutschland ist dabei Tadschikistans wichtigster Wirtschaftspartner in der EU. Rund 7 % der Ausfuhren in die EU nutzen GSP-Präferenzen, wo sie genutzt werden, liegt die Ausschöpfung bei 95 %."},
+      {score:"GSP", of:"nicht GSP+", name:"EU-Marktzugang", desc:"Tadschikistan hat den normalen GSP-Status. GSP+ — Nullzölle für über 6.400 Warenpositionen — wurde erörtert, ist aber an Reformen bei Arbeit, Umwelt und Regierungsführung geknüpft."}
+    ],
     analytics: {
       eyebrow:"Marktanalyse",
       title:"Die Zahlen hinter der Chance",
@@ -1109,7 +1444,7 @@ var translations = {
   },
   tg: {
     ribbon: "Намоиши консептуалии платформаи Rohbar — хизмати фаъол нест.",
-    nav: {sectors:"Соҳаҳо", opportunities:"Имкониятҳо", pricing:"Тарифҳо", why:"Чаро Тоҷикистон", process:"Раванди кор", contact:"Тамос", cta:"Тамос гирифтан"},
+    nav: {climate:"Фазои сармоя", sectors:"Соҳаҳо", opportunities:"Имкониятҳо", pricing:"Тарифҳо", why:"Чаро Тоҷикистон", process:"Раванди кор", contact:"Тамос", cta:"Тамос гирифтан"},
     hero: {
       badge:"Тоҷикистон × Германия",
       title:"Ҷое, ки соҳибкории тоҷикӣ бо сармояи олмонӣ вомехӯрад",
@@ -1139,6 +1474,67 @@ var translations = {
       disclaimer:"Ин сомона намоиши консептуалӣ барои мақсадҳои намоишӣ мебошад. Намунаҳои имкониятҳо тасвирӣ буда, пешниҳодҳои воқеӣ намебошанд.",
       rights:"© 2026 Rohbar. Ҳама ҳуқуқҳо ҳифз шудаанд."
     },
+    sources: {eyebrow:"Манбаъҳо", title:"Ҳар рақам аз куҷост", subtitle:"Ҳар нишондиҳандаи ин саҳифа ба манбаи нашршуда бармегардад. Ҳар пайвандро кушоед ва худатон санҷед.", note:"Арзишҳои охирини нашршуда дар вақти таҳия оварда шудаанд; онҳо тахминӣ мебошанд, на шартномавӣ. Меъёрҳои андоз, имтиёзҳои тарифӣ ва шартҳои минтақаҳо тағйир меёбанд — пеш аз ӯҳдадорӣ бо мушовирони ҳуқуқӣ ва андозӣ тасдиқ кунед.", nav:"Манбаъҳо"},
+    sourceWhat:["Андоз аз фоида, ААИ ва озодии истеҳсолот тибқи моддаи 189","Имтиёзҳои сармоягузорӣ, озодӣ аз ААИ барои ашёи воридотӣ, шартҳои минтақаҳои озод","Чор минтақаи озоди иқтисодӣ ва мақоми онҳо","Масоҳат, санаи таъсис ва профили минтақаҳо","Савдои дуҷонибаи Олмон–Тоҷикистон: ~€53 млн дар 2024, аз он ~€50 млн содироти Олмон","Савдои ИА–Тоҷикистон: €304 млн дар 2024","Мақоми GSP, истифодаи имтиёзҳо 7% ва дараҷаи истифода 95%","Содироти мол 2024: $1,95 млрд, −20,5%, ва сохтори содирот аз рӯи ҳисса","Сурма ҳамчун ашёи муҳим ва стратегии ИА; 52% воридоти ИА","Маҳдудиятҳои содиротии Чин оид ба сурма ва ҳиссаи истеҳсолкунандагони ҷаҳон","Global Peace Index 2025: ҷои 79 аз 163, баҳо 1,996","Дастрасӣ ба техникаи кишоварзӣ ҳамчун монеаи навсозӣ","Сохтори барқ: 98% барқароршаванда","Неруи обӣ: ҷои 8 дар ҷаҳон, тақрибан 5% азхудшуда"],
+    climate: {
+      eyebrow:"Фазои сармоягузорӣ",
+      title:"Қоидаҳо, имтиёзҳо ва он чи воқеан савдо мешавад",
+      subtitle:"Он чи сармоягузор пеш аз вохӯрии аввал месанҷад: низоми андоз, ҷои имтиёзҳо, он чи Тоҷикистон аллакай ба Аврупо мефурӯшад ва баҳои ниҳодҳои байналмилалӣ.",
+      tabTax:"Андоз ва имтиёз", tabFez:"Минтақаҳои озод", tabTrade:"Ҷараёни савдо", tabRate:"Рейтингҳо",
+      taxTitle:"Меъёрҳои асосии андоз",
+      taxSource:"Манбаъҳо: Кодекси андози Ҷумҳурии Тоҷикистон; Investment Climate Statement-и Департаменти давлатии ИМА, 2025. Меъёрҳо тағйир меёбанд — пеш аз қарор бо мушовири маҳаллӣ тасдиқ кунед.",
+      perkTitle:"Имтиёзҳои дастрас ба сармоягузор",
+      perkSource:"Имтиёзҳо бо дархост ва бо шартҳо дода мешаванд. Инро ҳамчун рӯйхати ибтидоӣ ҳисоб кунед, на кафолат.",
+      fezNote:"Чор минтақаи озоди иқтисодӣ соли 2008 бо фармон таъсис ёфтаанд. Резидентҳо аз аксари андозҳои Кодекси андоз ва аз боҷи гумрукӣ барои воридот ба минтақа озоданд. Мақоми минтақа даҳсолаҳо давом мекунад, вале созишнома бо ҳар резидент алоҳида музокира мешавад.",
+      expTitle:"Он чи Тоҷикистон аллакай мефурӯшад",
+      expSub:"Ҳисса дар содироти молҳои соли 2024 (ҳамагӣ: $1,95 млрд).",
+      impTitle:"Дар куҷо технологияи олмонӣ намерасад",
+      impSub:"Бахшҳое, ки воридот меафзояд ва иқтидори дохилӣ кам аст — равшантарин имконият барои таъминкунандагони олмонӣ ва корхонаҳои муштарак.",
+      tradeSource:"Манбаъҳо: омори миллии савдо 2024; Комиссияи Аврупо (ашёи хоми муҳим); шарҳҳои кишварии Бонки Ҷаҳонӣ. Ҳиссаҳо танҳо барои молҳо оварда шудаанд.",
+      caveat:"Мо рақамҳои сустро низ нишон медиҳем. Содироти мол дар соли 2024 ба андозаи 20,5% коҳиш ёфт, кишвар мақоми оддии GSP дорад, на GSP+, ва дар Global Peace Index-и охирин нишондиҳандаҳо аз рӯи даҳ индикатор бад шудаанд. Сармоягузор ин рақамҳоро ба ҳар ҳол меёбад — беҳтар аст, ки сӯҳбат аз онҳо оғоз ёбад.",
+      rateSource:"Манбаъҳо: Institute for Economics & Peace, Global Peace Index 2025; DG TRADE-и Комиссияи Аврупо; Вазорати корҳои хориҷии Олмон."
+    },
+    taxRows:[
+      {label:"Андоз аз фоида — меъёри умумӣ", value:"18%"},
+      {label:"Андоз аз фоида — истеҳсоли мол", value:"13%"},
+      {label:"Андоз аз фоида — бонкҳо, операторони мобилӣ", value:"20%"},
+      {label:"ААИ (2024–2026)", value:"14%"},
+      {label:"ААИ аз 1 январи 2027", value:"13%"},
+      {label:"Соҳибкории хурд, гардиш то 1 млн сомонӣ", value:"10%"}
+    ],
+    perks:[
+      {title:"Ду соли озодӣ аз андоз барои истеҳсолот", desc:"Ширкатҳои нави истеҳсолӣ тибқи моддаи 189-и Кодекси андоз ду сол аз андози фоида озоданд, ва ин мӯҳлат вобаста ба ҳаҷми сармоя дароз мешавад."},
+      {title:"Мақоми резиденти минтақаи озод", desc:"Резидентҳо аз аксари андозҳои Кодекси андоз ва аз боҷи гумрукӣ барои молҳои ба минтақа воридшаванда озоданд."},
+      {title:"Озодӣ аз ААИ барои ашёи воридотӣ", desc:"Сармоягузорони мувофиқ метавонанд аз ААИ барои маводи воридотӣ озодӣ гиранд — дархост то 1 январ дода мешавад ва танҳо дар ҳамон соли тақвимӣ эътибор дорад."},
+      {title:"Дастрасии бебоҷ ба бозори ИА", desc:"Тоҷикистон бенефитсиари GSP аст, бинобар ин қисми зиёди интиқолот ба ИА бо тарифи паст ё сифрӣ меравад. Ҳоло танҳо тақрибан 7% содирот ба ИА аз ин низом истифода мебарад — маҳз дар ҳамин захира ҳаст."}
+    ],
+    fez:[
+      {name:"Суғд", meta:"аз 2009 · 320 га", focus:"Саноат ва содирот", desc:"Дар канори саноатии Хуҷанд, наздиктарин ба марзи Ӯзбекистон ва ба роҳҳои мошингард ва оҳани минтақа. Рушдкардатарин аз чор минтақа ва нуқтаи маъмулии аввал барои истеҳсоли содиротӣ."},
+      {name:"Данғара", meta:"Хатлон · 521 га", focus:"Саноат ва коркарди кишоварзӣ", desc:"Калонтарин минтақа аз рӯи масоҳат дар ҷануби кишоварзӣ. Мувофиқ барои коркарди хӯрокворӣ, бофандагӣ ва ҳар чизе, ки бояд наздики ашёи хом бошад."},
+      {name:"Панҷ", meta:"Марзи Афғонистон", focus:"Савдои сарҳадӣ", desc:"Барои интиқоли мол аз гузаргоҳи Панҷ ва афзоиши ҳаҷми транзит ба сӯи Афғонистон ва Осиёи Ҷанубӣ таъсис ёфтааст."},
+      {name:"Ишкошим", meta:"Помир · марзи Афғонистон", focus:"Савдо ва сайёҳӣ", desc:"Баланд дар Помир дар марзи Афғонистон, нигаронида ба савдои сарҳадӣ ва ба масири сайёҳии кӯҳӣ тавассути даҳлези Вахон."}
+    ],
+    exports:[
+      {name:"Сурма", share:"13,3%", desc:"Дар соли 2025 Тоҷикистон 52% тамоми воридоти сурмаи ИА-ро таъмин кард ва пас аз Чин дуюмин истеҳсолкунандаи ҷаҳон аст. ИА сурмаро ашёи муҳим ва стратегӣ мешуморад, ва Чин квотаҳои содиротии худро сахт кам кардааст.", flag:"Ашёи хоми муҳими ИА"},
+      {name:"Маъдан ва ашёи минералӣ", share:"24%", desc:"Бузургтарин гурӯҳи содиротӣ — консентратҳо ва ашёи коркарднашуда, ки ҳоло асосан бидуни коркарди маҳаллӣ аз кишвар мебарояд."},
+      {name:"Металлҳои қиматбаҳо", share:"17,8%", desc:"Пеш аз ҳама тиллои коркарднашуда. Швейтсария аллакай харидори бузург аст — яъне масири логистикӣ ба Аврупо кор мекунад."},
+      {name:"Ресмони пахтагӣ", share:"10,9%", desc:"Маҳз ресмон, на бофандагии тайёр — маҳз ҳамин зинаи арзиши иловашуда имконияти шарики аврупоӣ аст."},
+      {name:"Алюминийи ибтидоӣ", share:"10,4%", desc:"Бо неруи обии худӣ гудохта мешавад, ки изи карбонии онро барои харидорони ИА дар шароити CBAM хеле мусоид мегардонад."},
+      {name:"Мева, чормағз ва хушкмева", share:"", desc:"Зардолу, мавиз, чормағз, лӯбиёгӣ. Дар миқёси кишвар кам, вале маҳз дар ин ҷо воридкунандаи олмонӣ метавонад бо ҳаҷми хурд ва хатари паст оғоз кунад."}
+    ],
+    imports:[
+      {name:"Техникаи кишоварзии андозаи хоҷагӣ", share:"", desc:"Бонки Ҷаҳонӣ набудани дастрасӣ ба техникаи андозаи мувофиқро монеаи асосии навсозии кишоварзӣ меномад. Техника барои хоҷагиҳои хурд лозим аст, на барои агроҳолдингҳо."},
+      {name:"Занҷири хунук ва хатҳои коркард", share:"", desc:"Мева хуб парвариш меёбад ва бад нигоҳ дошта мешавад. Хунуккунӣ, ҷудокунӣ, хушккунӣ ва бастабандии сертификатсияшуда ҳалқаи гумшуда байни ҳосил ва рафи аврупоист."},
+      {name:"Бойгардонӣ ва тозакунии маъдан", share:"", desc:"Ашё қариб бидуни коркард мебарояд. Иқтидори бойгардонӣ ва тозакунӣ фоидаро дар кишвар нигоҳ медошт ва ба харидорони ИА занҷири таъминоти назоратшавандаи берун аз Чинро медод."},
+      {name:"Навсозии гидроэнергетика", share:"", desc:"98% барқ аллакай барқароршаванда аст, вале танҳо тақрибан 5% неруи обӣ азхуд шудааст. Турбинаҳо, таҷҳизоти шабака ва системаҳои идора ворид мешаванд."},
+      {name:"Ороиш ва рангкунии бофандагӣ", share:"", desc:"Пахта ҳамчун ресмон мебарояд, зеро иқтидори ороиш кам аст. Таҷҳизоти ороиш ва донистани меъёрҳои ИА ашёи хомро ба занҷири таъминоти дӯзандагӣ табдил медиҳад."},
+      {name:"Санҷиш, сертификатсия ва стандартҳо", share:"", desc:"Расидан ба харидори ИА маънои риояи меъёрҳои ИА-ро дорад. Лабораторияҳо, сертификатсия ва системаҳои сифат кам ҳастанд ва ин худ як соҳаи тиҷорат аст."}
+    ],
+    ratings:[
+      {score:"79", of:"/ 163", name:"Global Peace Index 2025", desc:"Баҳо 1,996 — нимаи болоии ҷадвал, наздик ба Қирғизистон (78) ва болотар аз Туркманистон (87). Аз соли 2015 кишвар 36 зина боло рафтааст, ҳарчанд дар нашри охирин бадшавӣ аз рӯи даҳ индикатор сабт шудааст."},
+      {score:"€304 млн", of:"2024", name:"Гардиши савдо бо ИА", desc:"Дар айни ҳол Олмон муҳимтарин шарики иқтисодии Тоҷикистон дар ИА мебошад. Тақрибан 7% содирот ба ИА аз имтиёзҳои GSP истифода мебарад, вале дар ҷое, ки истифода мешавад, дараҷаи истифода 95% аст."},
+      {score:"GSP", of:"на GSP+", name:"Дастрасӣ ба бозори ИА", desc:"Тоҷикистон мақоми оддии GSP дорад. GSP+ — сифр кардани тариф барои беш аз 6 400 номгӯи мол — муҳокима шудааст, вале ба ислоҳот дар соҳаи меҳнат, муҳити зист ва идоракунӣ вобаста аст."}
+    ],
     analytics: {
       eyebrow:"Таҳлили бозор",
       title:"Рақамҳои паси имконият",
@@ -1218,6 +1614,26 @@ var translations = {
   }
 };
 
+
+/* Reference list shared by every language — publisher names are proper nouns.
+   The "what" line is translated via dict.sourceWhat, keyed by index. */
+var SOURCES = [
+  {t:"Tax Code of the Republic of Tajikistan", u:"https://andoz.tj/docs/kodex/Kodex_14_05_2025_Nav_ENG_en.pdf"},
+  {t:"U.S. Department of State — 2025 Investment Climate Statement: Tajikistan", u:"https://www.state.gov/reports/2025-investment-climate-statements/tajikistan"},
+  {t:"Embassy of Tajikistan in Germany — Free Economic Zones", u:"https://mfa.tj/en/berlin/relations/free-economic-zones"},
+  {t:"World Free Zones Organization — Tajikistan free zones", u:"https://www.worldfzo.org/Portals/0/OpenContent/Files/487/Tajikistan_FreeZones.pdf"},
+  {t:"German Federal Foreign Office — Germany and Tajikistan: bilateral relations", u:"https://www.auswaertiges-amt.de/en/aussenpolitik/laenderinformationen/tadschikistan-node/tajikistan-228628"},
+  {t:"European Commission, DG TRADE — EU trade relations with Central Asia", u:"https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/central-asia_en"},
+  {t:"EU GSP Hub — Tajikistan country information", u:"https://gsphub.eu/country-info/Tajikistan"},
+  {t:"Interfax — Tajikistan 2024 foreign trade results", u:"https://interfax.com/newsroom/top-stories/109791/"},
+  {t:"Eurostat — International trade in critical raw materials", u:"https://ec.europa.eu/eurostat/statistics-explained/index.php?title=International_trade_in_critical_raw_materials"},
+  {t:"CSIS — China's Antimony Export Restrictions", u:"https://www.csis.org/analysis/chinas-antimony-export-restrictions-impact-us-national-security"},
+  {t:"Institute for Economics & Peace — Global Peace Index 2025", u:"https://www.visionofhumanity.org/wp-content/uploads/2025/06/Global-Peace-Index-2025-web.pdf"},
+  {t:"World Bank — Tajikistan country overview", u:"https://www.worldbank.org/ext/en/country/tajikistan"},
+  {t:"International Energy Agency — Tajikistan 2022", u:"https://www.iea.org/reports/tajikistan-2022"},
+  {t:"CAREC — Tajikistan's Investment Opportunities in Hydropower", u:"https://energy.carecprogram.org/wp-content/uploads/2023/11/Tajikistans-Investment-Opportunities-in-Hydropower.pdf"}
+];
+
 var sectorIcons = [
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21c4-2 7-6 7-11a7 7 0 0 0-14 0c0 5 3 9 7 11z"/><path d="M12 21V10"/></svg>',
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6c3 2 6-2 9 0s6-2 9 0"/><path d="M3 12c3 2 6-2 9 0s6-2 9 0"/><path d="M3 18c3 2 6-2 9 0s6-2 9 0"/></svg>',
@@ -1290,6 +1706,44 @@ function renderLists(dict){
   }
   document.getElementById("pricingBusinessGrid").innerHTML = dict.businessTiers.map(priceCard).join("");
   document.getElementById("pricingInvestorGrid").innerHTML = dict.investorTiers.map(priceCard).join("");
+
+  document.getElementById("srcGrid").innerHTML = SOURCES.map(function(src,i){
+    var what = dict.sourceWhat[i] || "";
+    return '<div class="src-item"><span class="src-num">'+(i+1)+'</span><div>'+
+      '<a href="'+src.u+'" target="_blank" rel="noopener noreferrer">'+src.t+'</a>'+
+      '<span class="src-what">'+what+'</span></div></div>';
+  }).join("");
+
+  document.getElementById("taxList").innerHTML = dict.taxRows.map(function(r){
+    return '<div class="tax-row"><span class="tax-l">'+r.label+'</span><span class="tax-r">'+r.value+'</span></div>';
+  }).join("");
+
+  document.getElementById("perkList").innerHTML = dict.perks.map(function(x){
+    return '<div class="perk">'+checkIcon+'<div><b>'+x.title+'</b><span>'+x.desc+'</span></div></div>';
+  }).join("");
+
+  document.getElementById("fezGrid").innerHTML = dict.fez.map(function(z){
+    return '<div class="fez-card line-hover">'+
+      '<div class="fez-top"><h3>'+z.name+'</h3><span class="fez-year">'+z.meta+'</span></div>'+
+      '<div class="fez-meta">'+z.focus+'</div>'+
+      '<p>'+z.desc+'</p>'+
+    '</div>';
+  }).join("");
+
+  function flow(x){
+    return '<div class="flow-item"><div class="flow-head"><b>'+x.name+'</b>'+
+      (x.share? '<span class="flow-share">'+x.share+'</span>':'')+'</div>'+
+      '<p>'+x.desc+'</p>'+
+      (x.flag? '<span class="flow-flag">'+x.flag+'</span>':'')+'</div>';
+  }
+  document.getElementById("expList").innerHTML = dict.exports.map(flow).join("");
+  document.getElementById("impList").innerHTML = dict.imports.map(flow).join("");
+
+  document.getElementById("rateGrid").innerHTML = dict.ratings.map(function(r){
+    return '<div class="rate-card">'+
+      '<div><span class="rate-score">'+r.score+'</span> <span class="rate-of">'+r.of+'</span></div>'+
+      '<div class="rate-name">'+r.name+'</div><p>'+r.desc+'</p></div>';
+  }).join("");
 
   document.getElementById("footerAudience").innerHTML = dict.footerAudience.map(function(a){
     return '<li>'+a+'</li>';
@@ -1381,6 +1835,20 @@ document.getElementById("themeBtn").addEventListener("click", function(){
 });
 
 applyLang(current);
+
+/* investment-climate tabs */
+document.querySelectorAll(".clim-tab").forEach(function(tab){
+  tab.addEventListener("click", function(){
+    var key = tab.getAttribute("data-ctab");
+    document.querySelectorAll(".clim-tab").forEach(function(b){ b.classList.remove("active"); });
+    tab.classList.add("active");
+    var map = {tax:"climTax", fez:"climFez", trade:"climTrade", rate:"climRate"};
+    Object.keys(map).forEach(function(k){
+      document.getElementById(map[k]).classList.toggle("active", k===key);
+    });
+    document.querySelectorAll(".clim-panel.active .reveal-stagger").forEach(function(el){ el.classList.add("in"); });
+  });
+});
 
 /* pricing tabs */
 document.querySelectorAll(".pricing-tab").forEach(function(tab){
