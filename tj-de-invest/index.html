@@ -242,6 +242,14 @@
   .path-card.business .path-icon{background:color-mix(in srgb, var(--warp-strong) 16%, transparent); color:var(--warp);}
   .path-card h3{font-size:1.3rem;}
   .path-card p{color:var(--ink-soft);}
+  .path-card.photo{
+    background-image: linear-gradient(180deg, rgba(20,15,30,0.25) 0%, rgba(15,11,22,0.92) 100%), var(--card-photo);
+    background-size:cover; background-position:center; border-color:transparent; color:#F3EFE8; min-height:340px;
+  }
+  .path-card.photo .path-icon{background:rgba(255,255,255,0.14); color:#F0D9B5;}
+  .path-card.photo h3{color:#FBF8F2;}
+  .path-card.photo p{color:#E3DCEA;}
+  .path-card.photo .btn-ghost{color:#F0A94E;}
 
   /* ---------- Sectors ---------- */
   .sector-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
@@ -462,7 +470,7 @@
           <p data-i18n="path.investorDesc"></p>
           <a href="#opportunities" class="btn btn-ghost" data-i18n="path.investorCta"></a>
         </div>
-        <div class="path-card business">
+        <div class="path-card business photo" style="--card-photo:url('https://d8j0ntlcm91z4.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/hf_20260820_153534_7cc29ec7-2d8e-4478-b266-71e4c9212936.png')">
           <div class="path-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c-4-3-8-6.5-8-11a8 8 0 0 1 16 0c0 4.5-4 8-8 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
           <h3 data-i18n="path.businessTitle"></h3>
           <p data-i18n="path.businessDesc"></p>
