@@ -25,10 +25,10 @@
     --steel:#54606F;
     --steel-strong:#6E7C8C;
     --on-weft:#1E1408;
-    --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 8px 24px -8px rgba(30,20,15,0.12);
-    --radius-card:14px;
-    --radius-tag:5px;
-    --radius-btn:10px;
+    --shadow: 0 1px 1px rgba(20,16,10,0.04), 0 2px 8px -4px rgba(20,16,10,0.08);
+    --radius-card:3px;
+    --radius-tag:2px;
+    --radius-btn:2px;
     --maxw:1180px;
     --font-display:'PT Serif', Georgia, 'Times New Roman', serif;
     --font-accent:'Manrope', 'Segoe UI', system-ui, sans-serif;
@@ -50,7 +50,7 @@
       --steel:#8FA3BE;
       --steel-strong:#A9BBD1;
       --on-weft:#1A1306;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px -10px rgba(0,0,0,0.55);
+      --shadow: 0 1px 1px rgba(0,0,0,0.3), 0 2px 10px -4px rgba(0,0,0,0.4);
     }
   }
   :root[data-theme="dark"]{
@@ -150,7 +150,7 @@
   }
   .lang-menu{
     position:absolute; right:0; top:calc(100% + 8px);
-    background:var(--surface); border:1px solid var(--line); border-radius:10px;
+    background:var(--surface); border:1px solid var(--line); border-radius:4px;
     box-shadow:var(--shadow); min-width:170px; padding:6px; display:none; flex-direction:column; gap:2px;
   }
   .lang-menu.open{display:flex;}
@@ -169,8 +169,8 @@
     white-space:nowrap;
   }
   .btn:active{transform:translateY(1px);}
-  .btn-primary{background:var(--weft-strong); color:var(--on-weft); box-shadow:0 6px 18px -6px color-mix(in srgb, var(--weft-strong) 60%, transparent);}
-  .btn-primary:hover{filter:brightness(1.06); box-shadow:0 8px 22px -6px color-mix(in srgb, var(--weft-strong) 70%, transparent);}
+  .btn-primary{background:var(--weft-strong); color:var(--on-weft);}
+  .btn-primary:hover{filter:brightness(1.08);}
   .btn-outline{background:transparent; border-color:var(--line); color:var(--ink);}
   .btn-outline:hover{border-color:var(--steel-strong); color:var(--steel-strong);}
   .btn-ghost{background:transparent; color:var(--warp-strong); padding-left:0; padding-right:0;}
@@ -205,25 +205,7 @@
   .hero-copy .section-sub{font-size:1.12rem; max-width:560px; margin-top:20px;}
   .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
 
-  .bridge-viz-wrap{position:relative; height:280px; border-radius:16px; overflow:hidden; background:linear-gradient(180deg, #0A0E18 0%, #1B2436 100%); border:1px solid var(--line);}
-  canvas#bridgeCanvas{width:100%; height:100%; display:block;}
-  .bridge-node{
-    position:absolute; top:14px;
-    display:flex; flex-direction:column; align-items:center; gap:4px;
-    font-family:var(--font-accent); font-weight:800; font-size:0.72rem; letter-spacing:0.06em;
-  }
-  .bridge-node .dot{width:9px; height:9px; border-radius:50%; box-shadow:0 0 0 5px color-mix(in srgb, currentColor 16%, transparent);}
-  .bridge-node.tj{left:9%; color:var(--weft-strong);}
-  .bridge-node.de{right:9%; color:var(--steel-strong);}
-  .bridge-legend{
-    position:absolute; left:0; right:0; bottom:12px;
-    display:flex; justify-content:center; gap:22px; flex-wrap:wrap;
-    font-size:0.72rem; font-weight:700; color:var(--ink-soft);
-  }
-  .bridge-legend span{display:inline-flex; align-items:center; gap:7px;}
-  .bridge-legend i{width:9px; height:9px; border-radius:50%; display:inline-block;}
-
-  .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:64px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden;}
+  .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:64px; background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden;}
   .stat-cell{background:var(--surface); padding:24px 20px; text-align:center;}
   .stat-value{font-family:var(--font-display); font-weight:800; font-size:clamp(1.5rem,1rem+1.6vw,2.1rem); color:var(--weft);
     font-variant-numeric:tabular-nums;}
@@ -234,21 +216,26 @@
   .path-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
   @media (max-width:800px){ .path-grid{grid-template-columns:1fr;} }
   .path-card{
-    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
+    position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
     padding:36px 32px; display:flex; flex-direction:column; gap:14px;
-    transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    transition:border-color 0.25s ease;
   }
-  .path-card:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--steel);}
-  .path-icon{width:46px; height:46px; border-radius:11px; display:flex; align-items:center; justify-content:center; margin-bottom:6px;}
-  .path-card.investor .path-icon{background:color-mix(in srgb, var(--weft-strong) 16%, transparent); color:var(--weft);}
-  .path-card.business .path-icon{background:color-mix(in srgb, var(--warp-strong) 16%, transparent); color:var(--warp);}
+  .path-card::before{
+    content:""; position:absolute; top:-1px; left:-1px; height:2px; width:0;
+    background:var(--weft-strong); transition:width 0.35s ease;
+  }
+  .path-card:hover{border-color:var(--steel);}
+  .path-card:hover::before{width:64px;}
+  .path-icon{width:32px; height:32px; display:flex; align-items:center; justify-content:center; margin-bottom:6px; padding-bottom:10px; border-bottom:1px solid var(--line);}
+  .path-card.investor .path-icon{color:var(--weft);}
+  .path-card.business .path-icon{color:var(--warp);}
   .path-card h3{font-size:1.3rem;}
   .path-card p{color:var(--ink-soft);}
   .path-card.photo{
     background-image: linear-gradient(180deg, rgba(20,15,30,0.25) 0%, rgba(15,11,22,0.92) 100%), var(--card-photo);
     background-size:cover; background-position:center; border-color:transparent; color:#F3EFE8; min-height:340px;
   }
-  .path-card.photo .path-icon{background:rgba(255,255,255,0.14); color:#F0D9B5;}
+  .path-card.photo .path-icon{color:#F0D9B5; border-bottom-color:rgba(255,255,255,0.3);}
   .path-card.photo h3{color:#FBF8F2;}
   .path-card.photo p{color:#E3DCEA;}
   .path-card.photo .btn-ghost{color:#F0A94E;}
@@ -259,9 +246,9 @@
   @media (max-width:560px){ .sector-grid{grid-template-columns:1fr;} }
   .sector-card{
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
-    padding:26px; transition:border-color 0.2s ease, transform 0.2s ease;
+    padding:26px; transition:border-color 0.2s ease;
   }
-  .sector-card:hover{border-color:var(--weft-strong); transform:translateY(-3px);}
+  .sector-card:hover{border-color:var(--weft-strong);}
   .sector-icon{width:42px; height:42px; color:var(--steel-strong); margin-bottom:14px;}
   .sector-card h3{font-size:1.08rem; margin-bottom:8px;}
   .sector-card p{color:var(--ink-soft); font-size:0.94rem;}
@@ -273,7 +260,8 @@
   .opp-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
   .opp-tag{
     font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
-    background:color-mix(in srgb, var(--warp-strong) 15%, transparent); color:var(--warp); border-radius:var(--radius-tag); padding:4px 8px; white-space:nowrap;
+    background:transparent; border:1px solid color-mix(in srgb, var(--warp-strong) 45%, transparent);
+    color:var(--warp); border-radius:var(--radius-tag); padding:3px 8px; white-space:nowrap;
   }
   .opp-sector{font-size:0.78rem; font-weight:700; color:var(--steel-strong); text-transform:uppercase; letter-spacing:0.05em;}
   .opp-card h3{font-size:1.12rem;}
@@ -284,9 +272,9 @@
   .opp-seek span{display:block; font-family:var(--font-body); font-weight:500; font-size:0.7rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.05em;}
 
   /* ---------- Pricing ---------- */
-  .pricing-tabs{display:flex; justify-content:center; gap:6px; margin-bottom:40px; background:var(--surface-2); border-radius:999px; padding:5px; width:fit-content; margin-left:auto; margin-right:auto;}
-  .pricing-tab{border:none; background:transparent; padding:10px 22px; border-radius:999px; font-weight:700; font-size:0.9rem; color:var(--ink-soft); transition:background 0.2s ease, color 0.2s ease;}
-  .pricing-tab.active{background:var(--surface); color:var(--ink); box-shadow:var(--shadow);}
+  .pricing-tabs{display:flex; justify-content:center; gap:2px; margin-bottom:40px; border-bottom:1px solid var(--line); width:fit-content; margin-left:auto; margin-right:auto;}
+  .pricing-tab{border:none; border-bottom:2px solid transparent; background:transparent; padding:10px 22px; font-weight:700; font-size:0.9rem; color:var(--ink-faint); transition:color 0.2s ease, border-color 0.2s ease; margin-bottom:-1px;}
+  .pricing-tab.active{color:var(--ink); border-bottom-color:var(--weft-strong);}
   .pricing-panel{display:none;}
   .pricing-panel.active{display:block;}
   .pricing-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch;}
@@ -294,14 +282,13 @@
   .price-card{
     position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
     padding:30px 26px; display:flex; flex-direction:column; gap:18px;
-    transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    transition:border-color 0.25s ease;
   }
-  .price-card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
-  .price-card.popular{border-color:var(--weft-strong); box-shadow:0 0 0 1px var(--weft-strong), var(--shadow);}
+  .price-card.popular{border-color:var(--weft-strong); box-shadow:0 0 0 1px var(--weft-strong);}
   .price-badge{
-    position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+    position:absolute; top:-11px; left:26px;
     background:var(--weft-strong); color:var(--on-weft); font-size:0.68rem; font-weight:800;
-    text-transform:uppercase; letter-spacing:0.06em; padding:5px 14px; border-radius:999px; white-space:nowrap;
+    text-transform:uppercase; letter-spacing:0.06em; padding:4px 12px; border-radius:var(--radius-tag); white-space:nowrap;
   }
   .price-card h3{font-size:1.2rem;}
   .price-tag{display:flex; align-items:baseline; gap:6px;}
@@ -351,22 +338,22 @@
   /* ---------- Contact ---------- */
   .contact-wrap{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
   @media (max-width:860px){ .contact-wrap{grid-template-columns:1fr;} }
-  .form-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:32px; box-shadow:var(--shadow);}
+  .form-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:32px;}
   .field{margin-bottom:18px;}
   .field label{display:block; font-size:0.84rem; font-weight:700; margin-bottom:7px;}
   .field input, .field textarea, .field select{
-    width:100%; padding:11px 13px; border-radius:9px; border:1px solid var(--line);
+    width:100%; padding:11px 13px; border-radius:2px; border:1px solid var(--line);
     background:var(--ground); color:var(--ink); font-family:inherit; font-size:0.95rem;
   }
   .field input:focus, .field textarea:focus, .field select:focus{outline:2px solid var(--steel-strong); outline-offset:1px;}
   .role-row{display:flex; gap:10px; flex-wrap:wrap;}
   .role-pill{
-    border:1px solid var(--line); border-radius:999px; padding:8px 16px; font-size:0.85rem; font-weight:700;
+    border:1px solid var(--line); border-radius:2px; padding:8px 16px; font-size:0.85rem; font-weight:700;
     background:var(--ground); color:var(--ink-soft);
   }
   .role-pill input{display:none;}
   .role-pill.checked{border-color:var(--weft-strong); color:var(--weft); background:color-mix(in srgb, var(--weft-strong) 12%, transparent);}
-  .form-msg{margin-top:14px; padding:12px 14px; border-radius:9px; background:color-mix(in srgb, var(--steel-strong) 14%, transparent); color:var(--ink); font-size:0.9rem; display:none;}
+  .form-msg{margin-top:14px; padding:12px 14px; border-radius:2px; background:color-mix(in srgb, var(--steel-strong) 14%, transparent); color:var(--ink); font-size:0.9rem; display:none;}
   .form-msg.show{display:block;}
 
   /* ---------- Footer ---------- */
@@ -437,15 +424,6 @@
         <div class="hero-ctas">
           <a href="#opportunities" class="btn btn-primary" data-i18n="hero.ctaInvestor"></a>
           <a href="#contact" class="btn btn-outline" data-i18n="hero.ctaBusiness"></a>
-        </div>
-      </div>
-      <div class="bridge-viz-wrap reveal">
-        <canvas id="bridgeCanvas"></canvas>
-        <div class="bridge-node tj"><span class="dot" style="background:var(--weft-strong)"></span>Душанбе</div>
-        <div class="bridge-node de"><span class="dot" style="background:var(--steel-strong)"></span>Berlin</div>
-        <div class="bridge-legend">
-          <span><i style="background:var(--weft-strong)"></i><span data-i18n="hero.legendCapital"></span></span>
-          <span><i style="background:var(--warp-strong)"></i><span data-i18n="hero.legendGoods"></span></span>
         </div>
       </div>
     </div>
@@ -1097,211 +1075,6 @@ var cio = new IntersectionObserver(function(entries){
   });
 }, {threshold:0.6});
 countEls.forEach(function(el){ cio.observe(el); });
-
-/* bridge canvas animation — a literal suspension bridge: Pamir peaks (TJ) on the
-   left, a city skyline (DE) on the right, with particles flowing both ways
-   along the deck: capital in one direction, goods/returns in the other. */
-var canvas = document.getElementById("bridgeCanvas");
-var ctx = canvas.getContext("2d");
-var dpr = Math.min(window.devicePixelRatio||1, 2);
-var w,h;
-function resize(){
-  var rect = canvas.parentElement.getBoundingClientRect();
-  w = rect.width; h = rect.height;
-  canvas.width = w*dpr; canvas.height = h*dpr;
-  ctx.setTransform(dpr,0,0,dpr,0,0);
-}
-window.addEventListener("resize", function(){ resize(); if(reduceMotion) drawScene(0,false); });
-resize();
-
-function getVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
-
-function polygon(pts){ ctx.beginPath(); pts.forEach(function(p,i){ i? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]); }); ctx.closePath(); }
-
-/* quadratic bezier point at t, given start/control/end */
-function bezierPoint(t, p0, c, p1){
-  var mt = 1-t;
-  return { x: mt*mt*p0.x + 2*mt*t*c.x + t*t*p1.x, y: mt*mt*p0.y + 2*mt*t*c.y + t*t*p1.y };
-}
-
-var CAPITAL_N = 4, GOODS_N = 2;
-var capitalParticles = [], goodsParticles = [];
-for(var i=0;i<CAPITAL_N;i++) capitalParticles.push({t:i/CAPITAL_N});
-for(var j=0;j<GOODS_N;j++) goodsParticles.push({t:j/GOODS_N + 0.15});
-
-/* the connecting light-path draws itself once, then particles drift along it */
-var pathStartTime = null;
-var PATH_DRAW_MS = 2400;
-function easeOutCubic(x){ return 1 - Math.pow(1-x, 3); }
-
-var stars = [];
-function seedStars(){
-  stars = [];
-  var n = Math.max(30, Math.floor(w/14));
-  for(var s=0;s<n;s++){
-    stars.push({ x:Math.random()*w, y:Math.random()*h*0.55, r:Math.random()*1.3+0.4, phase:Math.random()*Math.PI*2, speed:0.0006+Math.random()*0.0008 });
-  }
-}
-
-function drawScene(time, moving){
-  var anchorL = w*0.17, anchorR = w*0.83;
-  var deckY = h*0.60;
-  var weft = getVar('--weft-strong'), warp = getVar('--warp-strong'), steel = getVar('--steel-strong');
-
-  if(pathStartTime===null) pathStartTime = time;
-  var pathProgress = reduceMotion ? 1 : Math.min(1, (time-pathStartTime)/PATH_DRAW_MS);
-  var pathEased = easeOutCubic(pathProgress);
-
-  /* night sky — fixed deep-navy palette on purpose: this is a night scene regardless of the page's light/dark theme */
-  var sky = ctx.createLinearGradient(0,0,0,deckY);
-  sky.addColorStop(0, "#0A0E18");
-  sky.addColorStop(1, "#1B2436");
-  ctx.fillStyle = sky;
-  ctx.fillRect(0,0,w,deckY+2);
-
-  /* twinkling stars */
-  if(!stars.length || stars.__w !== w) { seedStars(); stars.__w = w; }
-  stars.forEach(function(st){
-    var tw = 0.35 + 0.65*Math.abs(Math.sin(time*st.speed + st.phase));
-    ctx.globalAlpha = tw*0.8;
-    ctx.fillStyle = "#ffffff";
-    ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI*2); ctx.fill();
-  });
-  ctx.globalAlpha = 1;
-
-  /* Pamir mountain range (back layer) */
-  ctx.globalAlpha = 0.4;
-  polygon([[0,deckY],[0,deckY*0.5],[w*0.05,deckY*0.3],[w*0.10,deckY*0.48],[w*0.148,deckY*0.28],[anchorL,deckY]]);
-  ctx.fillStyle = steel; ctx.fill();
-  ctx.globalAlpha = 1;
-
-  /* foreground monument silhouette (stylised arch on a pedestal) */
-  var mx = w*0.075, mBase = deckY, mTop = deckY - h*0.30;
-  ctx.globalAlpha = 0.85; ctx.fillStyle = weft;
-  ctx.fillRect(mx-2, mTop, 4, mBase-mTop);
-  ctx.beginPath();
-  ctx.moveTo(mx-2, mTop+6);
-  ctx.quadraticCurveTo(mx-16, mTop+18, mx-2, mTop+34);
-  ctx.quadraticCurveTo(mx+12, mTop+18, mx+2, mTop+6);
-  ctx.closePath(); ctx.fill();
-  ctx.fillRect(mx-16, mBase-6, 32, 6);
-  ctx.globalAlpha = 1;
-
-  /* city skyline silhouette (DE side) with a TV tower + window lights */
-  var bx = anchorR + w*0.015;
-  var blocks = [[0.09,0.28],[0.16,0.46],[0.12,0.34],[0.17,0.58],[0.14,0.4],[0.12,0.46]];
-  var blockRects = [];
-  ctx.fillStyle = steel; ctx.globalAlpha = 0.55;
-  blocks.forEach(function(b){
-    var bw = b[0]*w, bh = b[1]*h*0.55;
-    var rx = bx, ry = deckY-bh, rw = bw*0.82;
-    ctx.fillRect(rx, ry, rw, bh);
-    blockRects.push([rx,ry,rw,bh]);
-    bx += bw;
-  });
-  ctx.globalAlpha = 1;
-  /* window lights */
-  ctx.fillStyle = weft;
-  blockRects.forEach(function(r, bi){
-    var cols = 3, rows = Math.floor(r[3]/16);
-    for(var rrow=0; rrow<rows; rrow++){
-      for(var cc=0; cc<cols; cc++){
-        var flick = Math.sin(time*0.0007 + bi*3 + rrow*1.3 + cc*2.1) > 0.15;
-        if(!flick) continue;
-        ctx.globalAlpha = 0.55;
-        ctx.fillRect(r[0]+8+cc*(r[2]-16)/cols, r[1]+10+rrow*14, 3, 4);
-      }
-    }
-  });
-  ctx.globalAlpha = 1;
-  /* TV tower */
-  var towerX = anchorR + w*0.10, towerBase = deckY, towerTopY = deckY - h*0.5;
-  ctx.strokeStyle = steel; ctx.lineWidth = 2.4; ctx.globalAlpha = 0.7;
-  ctx.beginPath(); ctx.moveTo(towerX, towerBase); ctx.lineTo(towerX, towerTopY); ctx.stroke();
-  ctx.globalAlpha = 1;
-  ctx.fillStyle = steel;
-  ctx.beginPath(); ctx.arc(towerX, towerTopY+10, 7, 0, Math.PI*2); ctx.fill();
-  var beacon = moving ? (0.5+0.5*Math.sin(time*0.005)) : 1;
-  ctx.globalAlpha = beacon; ctx.fillStyle = warp; ctx.shadowColor = warp; ctx.shadowBlur = 8;
-  ctx.beginPath(); ctx.arc(towerX, towerTopY-4, 2.6, 0, Math.PI*2); ctx.fill();
-  ctx.shadowBlur = 0; ctx.globalAlpha = 1;
-
-  /* water band beneath the deck: soft tinted gradient + faint ripple lines (no mirrored geometry — keeps this robust) */
-  var waterGrad = ctx.createLinearGradient(0,deckY,0,h);
-  waterGrad.addColorStop(0, "#1B2436");
-  waterGrad.addColorStop(1, "#0A0E18");
-  ctx.globalAlpha = 0.55;
-  ctx.fillStyle = waterGrad;
-  ctx.fillRect(0,deckY,w,h-deckY);
-  ctx.globalAlpha = 1;
-  ctx.strokeStyle = "#ffffff";
-  for(var rip=0; rip<3; rip++){
-    var ry2 = deckY + 14 + rip*16;
-    var shimmer = moving ? Math.sin(time*0.0009 + rip*2) : 0.3;
-    ctx.globalAlpha = 0.10 + 0.08*Math.abs(shimmer);
-    ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(w*0.05, ry2); ctx.lineTo(w*0.95, ry2); ctx.stroke();
-  }
-  ctx.globalAlpha = 1;
-
-  /* the connecting light-path: a single thin luminous line that draws itself
-     once on load, gently arcing between the two sides, then stays as a
-     quiet backdrop while a few particles drift along it. */
-  var pStart = { x: anchorL+w*0.02, y: deckY-h*0.10 };
-  var pEnd   = { x: towerX-w*0.02, y: deckY-h*0.10 };
-  var pCtrl  = { x: w*0.5, y: deckY-h*0.22 };
-
-  ctx.save();
-  ctx.strokeStyle = weft;
-  ctx.lineWidth = 1.4;
-  ctx.shadowColor = weft; ctx.shadowBlur = 7;
-  ctx.beginPath();
-  var STEPS = 60, drawn = Math.max(1, Math.round(STEPS*pathEased));
-  for(var si=0; si<=drawn; si++){
-    var pt = bezierPoint(si/STEPS, pStart, pCtrl, pEnd);
-    si===0 ? ctx.moveTo(pt.x,pt.y) : ctx.lineTo(pt.x,pt.y);
-  }
-  ctx.globalAlpha = 0.8;
-  ctx.stroke();
-  ctx.restore();
-
-  /* soft comet head while the line is still drawing itself */
-  if(pathProgress<1){
-    var tip = bezierPoint(pathEased, pStart, pCtrl, pEnd);
-    ctx.beginPath(); ctx.arc(tip.x, tip.y, 3, 0, Math.PI*2);
-    ctx.fillStyle = weft; ctx.shadowColor = weft; ctx.shadowBlur = 14;
-    ctx.fill(); ctx.shadowBlur = 0;
-  }
-
-  /* endpoint glow nodes */
-  [pStart,pEnd].forEach(function(pnt){
-    ctx.beginPath(); ctx.arc(pnt.x, pnt.y, 2.6, 0, Math.PI*2);
-    ctx.fillStyle = "#F5F1E8"; ctx.shadowColor = weft; ctx.shadowBlur = 10;
-    ctx.fill(); ctx.shadowBlur = 0;
-  });
-
-  /* particles slowly drifting along the completed portion of the path —
-     a few champagne-gold (capital drifting in), fewer, slower blue-gray
-     ones the other way (returns) — deliberately sparse, not a busy flow. */
-  function drawDrifter(t, dir, color, size){
-    var tt = dir>0 ? t*pathEased : (1-t)*pathEased;
-    var pt = bezierPoint(tt, pStart, pCtrl, pEnd);
-    ctx.beginPath(); ctx.arc(pt.x, pt.y, size, 0, Math.PI*2);
-    ctx.fillStyle = color; ctx.shadowColor = color; ctx.shadowBlur = 9;
-    ctx.fill(); ctx.shadowBlur = 0;
-  }
-  if(pathProgress>=1){
-    capitalParticles.forEach(function(p){ drawDrifter(p.t, 1, weft, 2.6); if(moving) p.t = (p.t + 0.0011) % 1; });
-    goodsParticles.forEach(function(p){ drawDrifter(p.t, -1, steel, 2.1); if(moving) p.t = (p.t + 0.0008) % 1; });
-  }
-}
-
-if(reduceMotion){
-  drawScene(0, false);
-} else {
-  function loop(ts){ drawScene(ts, true); requestAnimationFrame(loop); }
-  requestAnimationFrame(loop);
-}
 
 /* contact form (client-side demo only — no data is sent anywhere) */
 document.querySelectorAll('input[name="role"]').forEach(function(r){
