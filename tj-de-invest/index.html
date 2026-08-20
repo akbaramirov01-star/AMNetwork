@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TajBridge — Tajikistan–Germany Investment Bridge (Concept Preview)</title>
+<meta name="description" content="TajBridge connects vetted Tajik businesses and high-potential sectors with German investors. Concept preview — Tajik, Russian, English, German.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#F5F2F7;
+    --surface:#FFFFFF;
+    --surface-2:#EFEAF3;
+    --ink:#1E1B29;
+    --ink-soft:#4B4658;
+    --ink-faint:#7A7488;
+    --line:#DCD5E4;
+    --weft:#B8631A;
+    --weft-strong:#E08A2D;
+    --warp:#A83A66;
+    --warp-strong:#C4477A;
+    --steel:#4C6B8A;
+    --steel-strong:#6B8CAE;
+    --on-weft:#1E1408;
+    --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 8px 24px -8px rgba(30,20,15,0.12);
+    --radius-card:14px;
+    --radius-tag:5px;
+    --radius-btn:10px;
+    --maxw:1180px;
+    --font-display:'Golos Text', 'Segoe UI', system-ui, sans-serif;
+    --font-body:'Manrope', 'Segoe UI', system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#15111F;
+      --surface:#1C1830;
+      --surface-2:#241E3B;
+      --ink:#F3EFE8;
+      --ink-soft:#C9C2D6;
+      --ink-faint:#928BA3;
+      --line:#332C4A;
+      --weft:#F0A94E;
+      --weft-strong:#E08A2D;
+      --warp:#E06D9B;
+      --warp-strong:#C4477A;
+      --steel:#8FADCB;
+      --steel-strong:#6B8CAE;
+      --on-weft:#1E1408;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px -10px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#15111F;
+    --surface:#1C1830;
+    --surface-2:#241E3B;
+    --ink:#F3EFE8;
+    --ink-soft:#C9C2D6;
+    --ink-faint:#928BA3;
+    --line:#332C4A;
+    --weft:#F0A94E;
+    --weft-strong:#E08A2D;
+    --warp:#E06D9B;
+    --warp-strong:#C4477A;
+    --steel:#8FADCB;
+    --steel-strong:#6B8CAE;
+    --on-weft:#1E1408;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px -10px rgba(0,0,0,0.55);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;} }
+
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit;}
+  h1,h2,h3{font-family:var(--font-display); margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  p{margin:0;}
+  button{font-family:inherit; cursor:pointer;}
+  .container{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  section{padding:96px 0;}
+  @media (max-width:720px){ section{padding:64px 0;} }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:0.78rem; font-weight:700; letter-spacing:0.09em; text-transform:uppercase;
+    color:var(--weft); margin-bottom:14px;
+  }
+  .eyebrow::before{content:""; width:18px; height:2px; background:var(--weft-strong); display:inline-block;}
+  h2.section-title{font-size:clamp(1.7rem,1rem + 2.6vw,2.4rem); font-weight:700;}
+  .section-sub{color:var(--ink-soft); font-size:1.05rem; max-width:640px; margin-top:14px;}
+  .section-head{margin-bottom:48px;}
+  .section-head.center{text-align:center; margin-left:auto; margin-right:auto;}
+  .section-head.center .section-sub{margin-left:auto; margin-right:auto;}
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  .reveal-stagger > *{opacity:0; transform:translateY(18px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal-stagger.in > *{opacity:1; transform:translateY(0);}
+  .reveal-stagger.in > *:nth-child(1){transition-delay:0.03s;}
+  .reveal-stagger.in > *:nth-child(2){transition-delay:0.09s;}
+  .reveal-stagger.in > *:nth-child(3){transition-delay:0.15s;}
+  .reveal-stagger.in > *:nth-child(4){transition-delay:0.21s;}
+  .reveal-stagger.in > *:nth-child(5){transition-delay:0.27s;}
+  .reveal-stagger.in > *:nth-child(6){transition-delay:0.33s;}
+
+  /* ---------- Top demo ribbon ---------- */
+  .demo-ribbon{
+    background:var(--ink); color:var(--ground);
+    font-size:0.82rem; text-align:center; padding:9px 16px;
+    letter-spacing:0.01em;
+  }
+  .demo-ribbon strong{color:var(--weft-strong);}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--ground) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  header.scrolled{border-color:var(--line); box-shadow:0 4px 20px -10px rgba(0,0,0,0.25);}
+  .nav-row{display:flex; align-items:center; justify-content:space-between; gap:20px; padding:16px 0;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:800; font-size:1.15rem;}
+  .brand-mark{width:34px; height:34px;}
+  nav.primary{display:flex; gap:28px; align-items:center;}
+  nav.primary a{font-weight:600; font-size:0.94rem; color:var(--ink-soft); text-decoration:none; transition:color 0.2s ease;}
+  nav.primary a:hover{color:var(--ink);}
+  .nav-actions{display:flex; align-items:center; gap:12px;}
+
+  .lang-switch{position:relative;}
+  .lang-btn{
+    display:flex; align-items:center; gap:6px;
+    background:var(--surface); border:1px solid var(--line); color:var(--ink);
+    padding:8px 12px; border-radius:var(--radius-btn); font-weight:700; font-size:0.85rem;
+  }
+  .lang-menu{
+    position:absolute; right:0; top:calc(100% + 8px);
+    background:var(--surface); border:1px solid var(--line); border-radius:10px;
+    box-shadow:var(--shadow); min-width:170px; padding:6px; display:none; flex-direction:column; gap:2px;
+  }
+  .lang-menu.open{display:flex;}
+  .lang-menu button{
+    background:none; border:none; text-align:left; padding:9px 10px; border-radius:7px; font-size:0.88rem; color:var(--ink);
+    display:flex; justify-content:space-between;
+  }
+  .lang-menu button:hover{background:var(--surface-2);}
+  .lang-menu button.active{color:var(--weft); font-weight:700;}
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:12px 22px; border-radius:var(--radius-btn); font-weight:700; font-size:0.94rem;
+    text-decoration:none; border:1px solid transparent; transition:transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color .18s ease;
+    white-space:nowrap;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--weft-strong); color:var(--on-weft); box-shadow:0 6px 18px -6px color-mix(in srgb, var(--weft-strong) 60%, transparent);}
+  .btn-primary:hover{filter:brightness(1.06); box-shadow:0 8px 22px -6px color-mix(in srgb, var(--weft-strong) 70%, transparent);}
+  .btn-outline{background:transparent; border-color:var(--line); color:var(--ink);}
+  .btn-outline:hover{border-color:var(--steel-strong); color:var(--steel-strong);}
+  .btn-ghost{background:transparent; color:var(--warp-strong); padding-left:0; padding-right:0;}
+  .btn-block{width:100%;}
+  .btn[disabled]{opacity:0.55; cursor:not-allowed;}
+
+  .menu-toggle{display:none; background:none; border:none; padding:6px;}
+  .menu-toggle svg{width:26px; height:26px; color:var(--ink);}
+
+  @media (max-width:900px){
+    nav.primary{display:none;}
+    .menu-toggle{display:inline-flex;}
+    .nav-actions .btn-primary{display:none;}
+  }
+
+  .mobile-drawer{
+    display:none; position:fixed; inset:0 0 0 auto; width:min(320px,88vw); height:100vh; z-index:60;
+    background:var(--surface); border-left:1px solid var(--line); padding:22px; flex-direction:column; gap:6px;
+    transform:translateX(100%); transition:transform 0.32s ease;
+  }
+  .mobile-drawer.open{display:flex; transform:translateX(0);}
+  .mobile-drawer a{padding:14px 6px; border-bottom:1px solid var(--line); font-weight:700; text-decoration:none; color:var(--ink);}
+  .drawer-backdrop{display:none; position:fixed; inset:0; background:rgba(10,8,16,0.45); z-index:55;}
+  .drawer-backdrop.open{display:block;}
+  .drawer-close{align-self:flex-end; background:none; border:none; padding:8px;}
+  .drawer-close svg{width:22px;height:22px;color:var(--ink);}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative; padding-top:64px; overflow:hidden;}
+  .hero-inner{display:grid; gap:56px; align-items:center;}
+  .hero-copy h1{font-size:clamp(2.1rem, 1.1rem + 4.6vw, 3.6rem); font-weight:800; line-height:1.08;}
+  .hero-copy .section-sub{font-size:1.12rem; max-width:560px; margin-top:20px;}
+  .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+
+  .bridge-viz-wrap{position:relative; height:230px; border-radius:16px; overflow:hidden; background:var(--surface); border:1px solid var(--line);}
+  canvas#bridgeCanvas{width:100%; height:100%; display:block;}
+  .bridge-node{
+    position:absolute; top:50%; transform:translateY(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    font-family:var(--font-display); font-weight:800; font-size:0.8rem; letter-spacing:0.03em;
+  }
+  .bridge-node .dot{width:14px; height:14px; border-radius:50%; box-shadow:0 0 0 6px color-mix(in srgb, currentColor 18%, transparent);}
+  .bridge-node.tj{left:6%; color:var(--weft-strong);}
+  .bridge-node.de{right:6%; color:var(--steel-strong);}
+
+  .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:64px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden;}
+  .stat-cell{background:var(--surface); padding:24px 20px; text-align:center;}
+  .stat-value{font-family:var(--font-display); font-weight:800; font-size:clamp(1.5rem,1rem+1.6vw,2.1rem); color:var(--weft);
+    font-variant-numeric:tabular-nums;}
+  .stat-label{font-size:0.82rem; color:var(--ink-faint); margin-top:6px; line-height:1.4;}
+  @media (max-width:800px){ .stat-grid{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- Path selection ---------- */
+  .path-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  @media (max-width:800px){ .path-grid{grid-template-columns:1fr;} }
+  .path-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
+    padding:36px 32px; display:flex; flex-direction:column; gap:14px;
+    transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .path-card:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--steel);}
+  .path-icon{width:46px; height:46px; border-radius:11px; display:flex; align-items:center; justify-content:center; margin-bottom:6px;}
+  .path-card.investor .path-icon{background:color-mix(in srgb, var(--weft-strong) 16%, transparent); color:var(--weft);}
+  .path-card.business .path-icon{background:color-mix(in srgb, var(--warp-strong) 16%, transparent); color:var(--warp);}
+  .path-card h3{font-size:1.3rem;}
+  .path-card p{color:var(--ink-soft);}
+
+  /* ---------- Sectors ---------- */
+  .sector-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){ .sector-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .sector-grid{grid-template-columns:1fr;} }
+  .sector-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
+    padding:26px; transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .sector-card:hover{border-color:var(--weft-strong); transform:translateY(-3px);}
+  .sector-icon{width:42px; height:42px; color:var(--steel-strong); margin-bottom:14px;}
+  .sector-card h3{font-size:1.08rem; margin-bottom:8px;}
+  .sector-card p{color:var(--ink-soft); font-size:0.94rem;}
+
+  /* ---------- Opportunities ---------- */
+  .opp-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  @media (max-width:800px){ .opp-grid{grid-template-columns:1fr;} }
+  .opp-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:26px; display:flex; flex-direction:column; gap:12px;}
+  .opp-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  .opp-tag{
+    font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
+    background:color-mix(in srgb, var(--warp-strong) 15%, transparent); color:var(--warp); border-radius:var(--radius-tag); padding:4px 8px; white-space:nowrap;
+  }
+  .opp-sector{font-size:0.78rem; font-weight:700; color:var(--steel-strong); text-transform:uppercase; letter-spacing:0.05em;}
+  .opp-card h3{font-size:1.12rem;}
+  .opp-loc{font-size:0.85rem; color:var(--ink-faint);}
+  .opp-card p.desc{color:var(--ink-soft); font-size:0.94rem;}
+  .opp-foot{display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:10px; border-top:1px solid var(--line);}
+  .opp-seek{font-family:var(--font-display); font-weight:700; font-size:0.95rem;}
+  .opp-seek span{display:block; font-family:var(--font-body); font-weight:500; font-size:0.7rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.05em;}
+
+  /* ---------- Why ---------- */
+  .why-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  @media (max-width:900px){ .why-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .why-grid{grid-template-columns:1fr;} }
+  .why-card{padding:6px 0;}
+  .why-num{font-family:var(--font-display); font-weight:800; font-size:0.85rem; color:var(--weft); letter-spacing:0.04em; margin-bottom:10px;}
+  .why-card h3{font-size:1.05rem; margin-bottom:8px;}
+  .why-card p{color:var(--ink-soft); font-size:0.94rem;}
+
+  /* ---------- Process ---------- */
+  .process-strip{background:var(--surface-2);}
+  .process-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:0; counter-reset:step;}
+  @media (max-width:900px){ .process-grid{grid-template-columns:repeat(2,1fr); gap:28px;} }
+  @media (max-width:560px){ .process-grid{grid-template-columns:1fr;} }
+  .process-step{position:relative; padding:0 22px 0 0;}
+  .process-step:not(:last-child)::after{
+    content:""; position:absolute; top:19px; left:0; right:0; height:1px; background:var(--line);
+  }
+  @media (max-width:900px){ .process-step:not(:last-child)::after{display:none;} }
+  .process-index{
+    font-family:var(--font-display); font-weight:800; font-size:1rem;
+    width:38px; height:38px; border-radius:50%; background:var(--ground); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; margin-bottom:18px; position:relative; z-index:1;
+    color:var(--weft);
+  }
+  .process-step h3{font-size:1.05rem; margin-bottom:8px;}
+  .process-step p{color:var(--ink-soft); font-size:0.92rem;}
+
+  /* ---------- Trust strip ---------- */
+  .trust-strip{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:36px 0;}
+  @media (max-width:700px){ .trust-strip{grid-template-columns:1fr;} }
+  .trust-item{display:flex; align-items:center; gap:12px; font-weight:700; font-size:0.95rem;}
+  .trust-item svg{width:22px; height:22px; color:var(--steel-strong); flex-shrink:0;}
+
+  /* ---------- Contact ---------- */
+  .contact-wrap{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
+  @media (max-width:860px){ .contact-wrap{grid-template-columns:1fr;} }
+  .form-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:32px; box-shadow:var(--shadow);}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:0.84rem; font-weight:700; margin-bottom:7px;}
+  .field input, .field textarea, .field select{
+    width:100%; padding:11px 13px; border-radius:9px; border:1px solid var(--line);
+    background:var(--ground); color:var(--ink); font-family:inherit; font-size:0.95rem;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{outline:2px solid var(--steel-strong); outline-offset:1px;}
+  .role-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .role-pill{
+    border:1px solid var(--line); border-radius:999px; padding:8px 16px; font-size:0.85rem; font-weight:700;
+    background:var(--ground); color:var(--ink-soft);
+  }
+  .role-pill input{display:none;}
+  .role-pill.checked{border-color:var(--weft-strong); color:var(--weft); background:color-mix(in srgb, var(--weft-strong) 12%, transparent);}
+  .form-msg{margin-top:14px; padding:12px 14px; border-radius:9px; background:color-mix(in srgb, var(--steel-strong) 14%, transparent); color:var(--ink); font-size:0.9rem; display:none;}
+  .form-msg.show{display:block;}
+
+  /* ---------- Footer ---------- */
+  footer{padding:56px 0 32px; border-top:1px solid var(--line);}
+  .footer-top{display:flex; justify-content:space-between; align-items:flex-start; gap:24px; flex-wrap:wrap; margin-bottom:28px;}
+  .footer-tagline{color:var(--ink-soft); max-width:360px; font-size:0.95rem;}
+  .footer-disclaimer{font-size:0.8rem; color:var(--ink-faint); max-width:640px; line-height:1.6; border-top:1px solid var(--line); padding-top:20px;}
+  .footer-bottom{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-top:20px; font-size:0.8rem; color:var(--ink-faint);}
+</style>
+</head>
+<body>
+
+<div class="demo-ribbon" data-i18n="ribbon"></div>
+
+<header id="siteHeader">
+  <div class="container nav-row">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none"><circle cx="9" cy="24" r="4.5" fill="var(--weft-strong)"/><circle cx="31" cy="24" r="4.5" fill="var(--steel-strong)"/><path d="M9 24C13 10 27 10 31 24" stroke="var(--warp-strong)" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>
+      <span>TajBridge</span>
+    </div>
+    <nav class="primary">
+      <a href="#sectors" data-i18n="nav.sectors"></a>
+      <a href="#opportunities" data-i18n="nav.opportunities"></a>
+      <a href="#why" data-i18n="nav.why"></a>
+      <a href="#process" data-i18n="nav.process"></a>
+      <a href="#contact" data-i18n="nav.contact"></a>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-switch">
+        <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/></svg>
+          <span id="langBtnLabel">EN</span>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button data-lang="tg">Тоҷикӣ</button>
+          <button data-lang="ru">Русский</button>
+          <button data-lang="en">English</button>
+          <button data-lang="de">Deutsch</button>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn-primary" data-i18n="nav.cta"></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+  <button class="drawer-close" id="drawerClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <a href="#sectors" data-i18n="nav.sectors"></a>
+  <a href="#opportunities" data-i18n="nav.opportunities"></a>
+  <a href="#why" data-i18n="nav.why"></a>
+  <a href="#process" data-i18n="nav.process"></a>
+  <a href="#contact" data-i18n="nav.contact"></a>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy reveal">
+        <div class="eyebrow" data-i18n="hero.badge"></div>
+        <h1 data-i18n="hero.title"></h1>
+        <p class="section-sub" data-i18n="hero.subtitle"></p>
+        <div class="hero-ctas">
+          <a href="#opportunities" class="btn btn-primary" data-i18n="hero.ctaInvestor"></a>
+          <a href="#contact" class="btn btn-outline" data-i18n="hero.ctaBusiness"></a>
+        </div>
+      </div>
+      <div class="bridge-viz-wrap reveal">
+        <canvas id="bridgeCanvas"></canvas>
+        <div class="bridge-node tj"><span class="dot" style="background:var(--weft-strong)"></span>TJ</div>
+        <div class="bridge-node de"><span class="dot" style="background:var(--steel-strong)"></span>DE</div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="stat-grid reveal-stagger">
+        <div class="stat-cell"><div class="stat-value" data-count="10.8" data-suffix="M">0</div><div class="stat-label" data-i18n="hero.stat1"></div></div>
+        <div class="stat-cell"><div class="stat-value" data-count="8.4" data-suffix="%">0</div><div class="stat-label" data-i18n="hero.stat2"></div></div>
+        <div class="stat-cell"><div class="stat-value">#8</div><div class="stat-label" data-i18n="hero.stat3"></div></div>
+        <div class="stat-cell"><div class="stat-value" data-count="98" data-suffix="%">0</div><div class="stat-label" data-i18n="hero.stat4"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="path">
+    <div class="container">
+      <div class="section-head center reveal">
+        <h2 class="section-title" data-i18n="path.title"></h2>
+        <p class="section-sub" data-i18n="path.subtitle"></p>
+      </div>
+      <div class="path-grid reveal-stagger">
+        <div class="path-card investor">
+          <div class="path-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg></div>
+          <h3 data-i18n="path.investorTitle"></h3>
+          <p data-i18n="path.investorDesc"></p>
+          <a href="#opportunities" class="btn btn-ghost" data-i18n="path.investorCta"></a>
+        </div>
+        <div class="path-card business">
+          <div class="path-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c-4-3-8-6.5-8-11a8 8 0 0 1 16 0c0 4.5-4 8-8 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+          <h3 data-i18n="path.businessTitle"></h3>
+          <p data-i18n="path.businessDesc"></p>
+          <a href="#contact" class="btn btn-ghost" data-i18n="path.businessCta"></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sectors">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" data-i18n="sectors.eyebrow"></div>
+        <h2 class="section-title" data-i18n="sectors.title"></h2>
+        <p class="section-sub" data-i18n="sectors.subtitle"></p>
+      </div>
+      <div class="sector-grid reveal-stagger" id="sectorGrid"></div>
+    </div>
+  </section>
+
+  <section id="opportunities">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" data-i18n="opportunities.eyebrow"></div>
+        <h2 class="section-title" data-i18n="opportunities.title"></h2>
+        <p class="section-sub" data-i18n="opportunities.subtitle"></p>
+      </div>
+      <div class="opp-grid reveal-stagger" id="oppGrid"></div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="container">
+      <div class="section-head center reveal">
+        <h2 class="section-title" data-i18n="why.title"></h2>
+        <p class="section-sub" data-i18n="why.subtitle"></p>
+      </div>
+      <div class="why-grid reveal-stagger" id="whyGrid"></div>
+    </div>
+  </section>
+
+  <section id="process" class="process-strip">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" data-i18n="process.eyebrow"></div>
+        <h2 class="section-title" data-i18n="process.title"></h2>
+        <p class="section-sub" data-i18n="process.subtitle"></p>
+      </div>
+      <div class="process-grid reveal-stagger" id="processGrid"></div>
+    </div>
+  </section>
+
+  <section id="trust" style="padding-top:0; padding-bottom:0;">
+    <div class="container">
+      <div class="trust-strip reveal-stagger" id="trustGrid"></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container contact-wrap">
+      <div class="reveal">
+        <div class="eyebrow" data-i18n="contact.eyebrow"></div>
+        <h2 class="section-title" data-i18n="contact.title"></h2>
+        <p class="section-sub" data-i18n="contact.subtitle"></p>
+      </div>
+      <form class="form-card reveal" id="contactForm">
+        <div class="field">
+          <label for="cf-name" data-i18n="contact.name"></label>
+          <input id="cf-name" name="name" type="text" required>
+        </div>
+        <div class="field">
+          <label for="cf-email" data-i18n="contact.email"></label>
+          <input id="cf-email" name="email" type="email" required>
+        </div>
+        <div class="field">
+          <label data-i18n="contact.roleLabel"></label>
+          <div class="role-row" id="roleRow">
+            <label class="role-pill"><input type="radio" name="role" value="investor" checked><span data-i18n="contact.roleInvestor"></span></label>
+            <label class="role-pill"><input type="radio" name="role" value="business"><span data-i18n="contact.roleBusiness"></span></label>
+            <label class="role-pill"><input type="radio" name="role" value="other"><span data-i18n="contact.roleOther"></span></label>
+          </div>
+        </div>
+        <div class="field">
+          <label for="cf-msg" data-i18n="contact.message"></label>
+          <textarea id="cf-msg" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" data-i18n="contact.submit"></button>
+        <div class="form-msg" id="formMsg" data-i18n="contact.success"></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="brand" style="margin-bottom:10px;">
+          <svg class="brand-mark" viewBox="0 0 40 40" fill="none"><circle cx="9" cy="24" r="4.5" fill="var(--weft-strong)"/><circle cx="31" cy="24" r="4.5" fill="var(--steel-strong)"/><path d="M9 24C13 10 27 10 31 24" stroke="var(--warp-strong)" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>
+          <span>TajBridge</span>
+        </div>
+        <p class="footer-tagline" data-i18n="footer.tagline"></p>
+      </div>
+      <div class="lang-switch">
+        <div class="lang-menu open" style="position:static; box-shadow:none; border:none; background:none; flex-direction:row; padding:0;" id="langMenuFooter">
+          <button data-lang="tg">TG</button>
+          <button data-lang="ru">RU</button>
+          <button data-lang="en">EN</button>
+          <button data-lang="de">DE</button>
+        </div>
+      </div>
+    </div>
+    <p class="footer-disclaimer" data-i18n="footer.disclaimer"></p>
+    <div class="footer-bottom">
+      <span data-i18n="footer.rights"></span>
+      <span>contact@tajbridge.example</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+var translations = {
+  en: {
+    ribbon: "Concept preview — a demonstration of the TajBridge platform, not a live service.",
+    nav: {sectors:"Sectors", opportunities:"Opportunities", why:"Why Tajikistan", process:"How it works", contact:"Contact", cta:"Get in touch"},
+    hero: {
+      badge:"Tajikistan × Germany",
+      title:"Where Tajik Enterprise Meets German Capital",
+      subtitle:"TajBridge connects vetted businesses and high-potential sectors in Tajikistan with German investors looking for the next frontier of growth — local ground knowledge, matched with international capital and standards.",
+      ctaInvestor:"I'm an Investor", ctaBusiness:"I'm a Business",
+      stat1:"Population", stat2:"GDP growth in 2025 (World Bank)", stat3:"Global rank for hydropower potential", stat4:"Electricity from renewable sources"
+    },
+    path: {
+      title:"Two Sides of One Bridge", subtitle:"Whichever side you stand on, TajBridge gives you the tools, the vetting and the local relationships to move with confidence.",
+      investorTitle:"For German Investors", investorDesc:"Access pre-screened Tajik businesses across agriculture, textiles, mining, energy and IT — with due diligence, local representation and ongoing support handled for you.", investorCta:"Explore opportunities →",
+      businessTitle:"For Tajik Businesses", businessDesc:"Get your business investment-ready: documentation support, translation, and a direct introduction to German investors actively looking for partners in Central Asia.", businessCta:"Apply for listing →"
+    },
+    sectors: {eyebrow:"Sectors", title:"Key Industries", subtitle:"Six sectors with the strongest potential for international investment."},
+    opportunities: {eyebrow:"Opportunities", title:"Sample Opportunities", subtitle:"Four illustrative profiles showing what an investment opportunity looks like on the platform.", demoTag:"Sample profile — not an active listing", cta:"Request details →"},
+    why: {title:"Why Tajikistan", subtitle:"A market on the edge of growth, with real structural advantages."},
+    process: {eyebrow:"Process", title:"How It Works", subtitle:"A clear four-step process, from first enquiry to closed deal."},
+    trust: [
+      "On-the-ground verification","Cross-border legal support","Confidential and efficient"
+    ],
+    contact: {
+      eyebrow:"Contact", title:"Let's Build the Bridge", subtitle:"Tell us who you are and what you're looking for — we'll follow up personally.",
+      name:"Name", email:"Email", roleLabel:"I am a…", roleInvestor:"Investor", roleBusiness:"Business", roleOther:"Other",
+      message:"Message", submit:"Send message",
+      success:"Thank you — this is a concept preview, so messages aren't sent yet. In the live version, our team would follow up within 48 hours."
+    },
+    footer: {
+      tagline:"TajBridge — connecting Tajik enterprise with German investment.",
+      disclaimer:"This site is a concept preview prepared for demonstration purposes. Sample opportunities are illustrative and do not represent real listings.",
+      rights:"© 2026 TajBridge. All rights reserved."
+    },
+    sectorItems:[
+      {name:"Agriculture & Food Processing", desc:"Fruit, vegetables, dried produce and processing facilities serving both domestic and export markets."},
+      {name:"Textiles & Cotton", desc:"From raw cotton to finished garments — a century-old industry modernizing for European supply chains."},
+      {name:"Mining & Metals", desc:"Aluminum, gold, silver and rare industrial minerals, with significant unexplored reserves."},
+      {name:"Hydropower & Green Energy", desc:"Ranked 8th globally in hydropower potential, with less than a tenth currently developed."},
+      {name:"Tourism & Hospitality", desc:"Pamir mountains, Silk Road heritage cities and largely untapped adventure-tourism infrastructure."},
+      {name:"IT & Digital Services", desc:"A young, growing pool of technical talent building outsourcing and product capacity."}
+    ],
+    oppItems:[
+      {name:"Dried Fruit & Nut Exporter", sector:"Agriculture", loc:"Khatlon Region", desc:"Family-run processing facility seeking capital to add an EU-certified packaging line and cold storage.", seek:"€150,000 – €400,000"},
+      {name:"Cotton-to-Garment Manufacturer", sector:"Textiles", loc:"Sughd Region", desc:"Vertically integrated textile plant modernizing looms and seeking a European distribution partner.", seek:"€500,000 – €1.2M"},
+      {name:"Small Hydropower Project", sector:"Energy", loc:"Rasht Valley", desc:"Feasibility-stage micro-hydro plant for regional grid supply, seeking project financing.", seek:"€1M – €3M"},
+      {name:"Pamir Eco-Lodge Development", sector:"Tourism", loc:"GBAO (Pamir)", desc:"Boutique eco-tourism lodge project targeting the growing adventure-travel market.", seek:"€200,000 – €600,000"}
+    ],
+    whyItems:[
+      {title:"Strategic Location", desc:"At the crossroads of China, Russia, South Asia and the Middle East — a natural logistics and re-export hub."},
+      {title:"Young, Growing Workforce", desc:"A youthful population and rising labor participation, with costs that remain highly competitive."},
+      {title:"Untapped Natural Resources", desc:"World-class hydropower, mineral and agricultural potential — most of it still undeveloped."},
+      {title:"Reform Momentum", desc:"Ongoing efforts to simplify business registration, taxation and investor protections."}
+    ],
+    processSteps:[
+      {title:"Apply", desc:"Investors and businesses submit their profile and goals through a short form."},
+      {title:"Verify", desc:"Our local team conducts on-the-ground due diligence: site visits, document checks and reference calls."},
+      {title:"Match", desc:"We introduce verified businesses to investors whose focus and ticket size align."},
+      {title:"Support", desc:"We help structure the deal, coordinate legal and translation needs, and stay involved after closing."}
+    ]
+  },
+  ru: {
+    ribbon: "Концептуальная демо-версия платформы TajBridge — не действующий сервис.",
+    nav: {sectors:"Отрасли", opportunities:"Возможности", why:"Почему Таджикистан", process:"Как это работает", contact:"Контакты", cta:"Связаться"},
+    hero: {
+      badge:"Таджикистан × Германия",
+      title:"Там, где таджикское предпринимательство встречается с немецким капиталом",
+      subtitle:"TajBridge связывает проверенные бизнесы и перспективные отрасли Таджикистана с немецкими инвесторами, которые ищут новые рынки роста — местная экспертиза в сочетании с международным капиталом и стандартами.",
+      ctaInvestor:"Я инвестор", ctaBusiness:"Я представляю бизнес",
+      stat1:"Население", stat2:"Рост ВВП в 2025 году (Всемирный банк)", stat3:"Место в мире по потенциалу гидроэнергетики", stat4:"Доля электроэнергии из возобновляемых источников"
+    },
+    path: {
+      title:"Два берега одного моста", subtitle:"На какой бы стороне вы ни находились, TajBridge даёт инструменты, проверку и локальные связи для уверенных решений.",
+      investorTitle:"Для немецких инвесторов", investorDesc:"Доступ к проверенным таджикским компаниям в сфере сельского хозяйства, текстиля, добычи полезных ископаемых, энергетики и IT — с юридической проверкой, локальным представительством и постоянным сопровождением.", investorCta:"Смотреть возможности →",
+      businessTitle:"Для таджикского бизнеса", businessDesc:"Подготовим ваш бизнес к инвестициям: помощь с документами, перевод и прямой выход на немецких инвесторов, которые ищут партнёров в Центральной Азии.", businessCta:"Подать заявку →"
+    },
+    sectors: {eyebrow:"Отрасли", title:"Ключевые отрасли", subtitle:"Шесть направлений с наибольшим потенциалом для международных инвестиций."},
+    opportunities: {eyebrow:"Возможности", title:"Примеры возможностей", subtitle:"Четыре примерных профиля — как выглядят инвестиционные возможности на платформе.", demoTag:"Примерный профиль — не активное предложение", cta:"Запросить детали →"},
+    why: {title:"Почему Таджикистан", subtitle:"Рынок на пороге роста с реальными структурными преимуществами."},
+    process: {eyebrow:"Процесс", title:"Как это работает", subtitle:"Понятный процесс из четырёх шагов — от первой заявки до закрытия сделки."},
+    trust: ["Проверка на месте","Юридическое сопровождение сделок","Конфиденциально и эффективно"],
+    contact: {
+      eyebrow:"Контакты", title:"Построим мост вместе", subtitle:"Расскажите, кто вы и что ищете — мы свяжемся лично.",
+      name:"Имя", email:"Эл. почта", roleLabel:"Я…", roleInvestor:"Инвестор", roleBusiness:"Бизнес", roleOther:"Другое",
+      message:"Сообщение", submit:"Отправить сообщение",
+      success:"Спасибо — это концептуальная демо-версия, сообщения пока не отправляются. В реальной версии наша команда свяжется с вами в течение 48 часов."
+    },
+    footer: {
+      tagline:"TajBridge — соединяем таджикское предпринимательство с немецким капиталом.",
+      disclaimer:"Этот сайт — концептуальная демонстрационная версия. Примеры возможностей носят иллюстративный характер и не являются реальными предложениями.",
+      rights:"© 2026 TajBridge. Все права защищены."
+    },
+    sectorItems:[
+      {name:"Сельское хозяйство и переработка", desc:"Фрукты, овощи, сухофрукты и перерабатывающие мощности для внутреннего рынка и экспорта."},
+      {name:"Текстиль и хлопок", desc:"От сырого хлопка до готовой одежды — отрасль с вековой историей, модернизирующаяся под европейские цепочки поставок."},
+      {name:"Добыча полезных ископаемых", desc:"Алюминий, золото, серебро и редкие промышленные минералы со значительными неразработанными запасами."},
+      {name:"Гидроэнергетика и зелёная энергия", desc:"8-е место в мире по потенциалу гидроэнергетики — освоено менее десятой части."},
+      {name:"Туризм и гостеприимство", desc:"Горы Памира, города Великого шёлкового пути и неосвоенная инфраструктура приключенческого туризма."},
+      {name:"IT и цифровые услуги", desc:"Молодой, растущий пул технических специалистов для аутсорсинга и разработки продуктов."}
+    ],
+    oppItems:[
+      {name:"Экспортёр сухофруктов и орехов", sector:"Сельское хозяйство", loc:"Хатлонская область", desc:"Семейное перерабатывающее производство ищет капитал для линии упаковки по стандартам ЕС и холодильного склада.", seek:"€150 000 – €400 000"},
+      {name:"Производитель хлопка и текстиля", sector:"Текстиль", loc:"Согдийская область", desc:"Вертикально интегрированное текстильное производство модернизирует оборудование и ищет европейского дистрибьютора.", seek:"€500 000 – €1,2 млн"},
+      {name:"Проект малой ГЭС", sector:"Энергетика", loc:"Раштская долина", desc:"Проект микро-ГЭС на стадии обоснования для регионального энергоснабжения, ищет проектное финансирование.", seek:"€1–3 млн"},
+      {name:"Эко-лодж на Памире", sector:"Туризм", loc:"ГБАО (Памир)", desc:"Проект бутик-эко-лоджа для растущего рынка приключенческого туризма.", seek:"€200 000 – €600 000"}
+    ],
+    whyItems:[
+      {title:"Стратегическое расположение", desc:"На перекрёстке Китая, России, Южной Азии и Ближнего Востока — естественный логистический и реэкспортный узел."},
+      {title:"Молодая, растущая рабочая сила", desc:"Молодое население и растущая занятость при по-прежнему конкурентной стоимости труда."},
+      {title:"Неосвоенные природные ресурсы", desc:"Гидроэнергетический, минеральный и сельскохозяйственный потенциал мирового уровня — в основном ещё не раскрыт."},
+      {title:"Динамика реформ", desc:"Продолжающиеся усилия по упрощению регистрации бизнеса, налогообложения и защиты инвесторов."}
+    ],
+    processSteps:[
+      {title:"Заявка", desc:"Инвесторы и бизнесы подают профиль и цели через короткую форму."},
+      {title:"Проверка", desc:"Наша локальная команда проводит проверку на месте: визиты, проверку документов и звонки по рекомендациям."},
+      {title:"Подбор", desc:"Мы знакомим проверенные бизнесы с инвесторами, чьи интересы и объём инвестиций совпадают."},
+      {title:"Сопровождение", desc:"Помогаем структурировать сделку, координируем юридические и переводческие вопросы, остаёмся на связи и после закрытия."}
+    ]
+  },
+  de: {
+    ribbon: "Konzeptvorschau der TajBridge-Plattform — kein aktiver Dienst.",
+    nav: {sectors:"Branchen", opportunities:"Chancen", why:"Warum Tadschikistan", process:"Ablauf", contact:"Kontakt", cta:"Kontakt aufnehmen"},
+    hero: {
+      badge:"Tadschikistan × Deutschland",
+      title:"Wo tadschikisches Unternehmertum auf deutsches Kapital trifft",
+      subtitle:"TajBridge verbindet geprüfte Unternehmen und wachstumsstarke Branchen in Tadschikistan mit deutschen Investoren, die neue Wachstumsmärkte suchen — lokales Wissen vor Ort, verbunden mit internationalem Kapital und Standards.",
+      ctaInvestor:"Ich bin Investor", ctaBusiness:"Ich bin Unternehmer",
+      stat1:"Bevölkerung", stat2:"BIP-Wachstum 2025 (Weltbank)", stat3:"Weltrang beim Wasserkraftpotenzial", stat4:"Strom aus erneuerbaren Quellen"
+    },
+    path: {
+      title:"Zwei Seiten einer Brücke", subtitle:"Auf welcher Seite Sie auch stehen — TajBridge bietet die Werkzeuge, die Prüfung und die lokalen Beziehungen für sichere Entscheidungen.",
+      investorTitle:"Für deutsche Investoren", investorDesc:"Zugang zu geprüften tadschikischen Unternehmen aus Landwirtschaft, Textilien, Bergbau, Energie und IT — mit Sorgfaltsprüfung, lokaler Vertretung und laufender Betreuung.", investorCta:"Chancen entdecken →",
+      businessTitle:"Für tadschikische Unternehmen", businessDesc:"Machen Sie Ihr Unternehmen investitionsbereit: Unterstützung bei Unterlagen, Übersetzung und direkter Kontakt zu deutschen Investoren, die Partner in Zentralasien suchen.", businessCta:"Für Listung bewerben →"
+    },
+    sectors: {eyebrow:"Branchen", title:"Schlüsselbranchen", subtitle:"Sechs Sektoren mit dem größten Potenzial für internationale Investitionen."},
+    opportunities: {eyebrow:"Chancen", title:"Beispielhafte Chancen", subtitle:"Vier Beispielprofile, die zeigen, wie Investitionsmöglichkeiten auf der Plattform aussehen.", demoTag:"Beispielprofil — keine aktive Ausschreibung", cta:"Details anfragen →"},
+    why: {title:"Warum Tadschikistan", subtitle:"Ein Markt an der Schwelle, mit realen strukturellen Vorteilen."},
+    process: {eyebrow:"Ablauf", title:"So funktioniert es", subtitle:"Ein klarer, vierstufiger Prozess von der ersten Anfrage bis zum Geschäftsabschluss."},
+    trust: ["Lokale Prüfung vor Ort","Grenzüberschreitende rechtliche Begleitung","Diskret und effizient"],
+    contact: {
+      eyebrow:"Kontakt", title:"Bauen wir die Brücke", subtitle:"Sagen Sie uns, wer Sie sind und wonach Sie suchen — wir melden uns persönlich.",
+      name:"Name", email:"E-Mail", roleLabel:"Ich bin…", roleInvestor:"Investor", roleBusiness:"Unternehmer", roleOther:"Sonstiges",
+      message:"Nachricht", submit:"Nachricht senden",
+      success:"Danke — dies ist eine Konzeptvorschau, Nachrichten werden noch nicht versendet. In der Live-Version würde sich unser Team innerhalb von 48 Stunden melden."
+    },
+    footer: {
+      tagline:"TajBridge — verbindet tadschikisches Unternehmertum mit deutschem Kapital.",
+      disclaimer:"Diese Seite ist eine Konzeptvorschau zu Demonstrationszwecken. Beispielhafte Chancen sind illustrativ und stellen keine realen Angebote dar.",
+      rights:"© 2026 TajBridge. Alle Rechte vorbehalten."
+    },
+    sectorItems:[
+      {name:"Landwirtschaft & Lebensmittelverarbeitung", desc:"Obst, Gemüse, Trockenfrüchte und Verarbeitungsanlagen für den heimischen und den Exportmarkt."},
+      {name:"Textilien & Baumwolle", desc:"Von der Rohbaumwolle bis zum fertigen Kleidungsstück — eine jahrhundertealte Industrie im Wandel für europäische Lieferketten."},
+      {name:"Bergbau & Metalle", desc:"Aluminium, Gold, Silber und seltene Industriemineralien mit erheblichen unerschlossenen Vorkommen."},
+      {name:"Wasserkraft & grüne Energie", desc:"Weltweit auf Platz 8 beim Wasserkraftpotenzial — weniger als ein Zehntel ist bisher erschlossen."},
+      {name:"Tourismus & Gastgewerbe", desc:"Pamir-Gebirge, Städte der Seidenstraße und weitgehend ungenutzte Infrastruktur für Abenteuertourismus."},
+      {name:"IT & digitale Dienstleistungen", desc:"Ein junger, wachsender Pool an Fachkräften für Outsourcing und Produktentwicklung."}
+    ],
+    oppItems:[
+      {name:"Trockenfrüchte- & Nussexporteur", sector:"Landwirtschaft", loc:"Region Chatlon", desc:"Familienbetrieb sucht Kapital für eine EU-zertifizierte Verpackungslinie und Kühllagerung.", seek:"150.000 € – 400.000 €"},
+      {name:"Baumwoll- und Textilhersteller", sector:"Textilien", loc:"Region Sughd", desc:"Vertikal integrierter Textilbetrieb modernisiert Webstühle und sucht einen europäischen Vertriebspartner.", seek:"500.000 € – 1,2 Mio. €"},
+      {name:"Kleinwasserkraftprojekt", sector:"Energie", loc:"Rascht-Tal", desc:"Mikro-Wasserkraftprojekt in der Machbarkeitsphase für die regionale Stromversorgung, sucht Projektfinanzierung.", seek:"1 – 3 Mio. €"},
+      {name:"Pamir-Ökolodge-Projekt", sector:"Tourismus", loc:"GBAO (Pamir)", desc:"Boutique-Ökotourismusprojekt für den wachsenden Abenteuerreisemarkt.", seek:"200.000 € – 600.000 €"}
+    ],
+    whyItems:[
+      {title:"Strategische Lage", desc:"Am Schnittpunkt von China, Russland, Südasien und dem Nahen Osten — ein natürliches Logistik- und Re-Export-Zentrum."},
+      {title:"Junge, wachsende Erwerbsbevölkerung", desc:"Eine junge Bevölkerung mit steigender Erwerbsbeteiligung bei weiterhin wettbewerbsfähigen Kosten."},
+      {title:"Ungenutzte natürliche Ressourcen", desc:"Wasserkraft, Bodenschätze und landwirtschaftliches Potenzial von Weltklasse — größtenteils noch unerschlossen."},
+      {title:"Reformdynamik", desc:"Laufende Bemühungen zur Vereinfachung von Unternehmensregistrierung, Besteuerung und Investorenschutz."}
+    ],
+    processSteps:[
+      {title:"Bewerben", desc:"Investoren und Unternehmen reichen ihr Profil und ihre Ziele über ein kurzes Formular ein."},
+      {title:"Prüfen", desc:"Unser lokales Team führt eine Prüfung vor Ort durch: Besuche, Dokumentenprüfung und Referenzgespräche."},
+      {title:"Zusammenführen", desc:"Wir stellen geprüfte Unternehmen Investoren vor, deren Fokus und Investitionsgröße zusammenpassen."},
+      {title:"Begleiten", desc:"Wir unterstützen bei der Strukturierung, koordinieren Recht und Übersetzung und bleiben auch nach Abschluss beteiligt."}
+    ]
+  },
+  tg: {
+    ribbon: "Намоиши консептуалии платформаи TajBridge — хизмати фаъол нест.",
+    nav: {sectors:"Соҳаҳо", opportunities:"Имкониятҳо", why:"Чаро Тоҷикистон", process:"Раванди кор", contact:"Тамос", cta:"Тамос гирифтан"},
+    hero: {
+      badge:"Тоҷикистон × Германия",
+      title:"Ҷое, ки соҳибкории тоҷикӣ бо сармояи олмонӣ вомехӯрад",
+      subtitle:"TajBridge корхонаҳои санҷидашуда ва соҳаҳои дорои неруи баланди Тоҷикистонро бо сармоягузорони олмонӣ, ки бозорҳои нави рушдро меҷӯянд, мепайвандад — дониши маҳаллӣ бо сармоя ва стандартҳои байналмилалӣ якҷоя мешавад.",
+      ctaInvestor:"Ман сармоягузорам", ctaBusiness:"Ман соҳиби корхонаам",
+      stat1:"Аҳолӣ", stat2:"Рушди ММД дар соли 2025 (Бонки Ҷаҳонӣ)", stat3:"Ҷои Тоҷикистон дар ҷаҳон аз рӯи неруи гидроэнергетикӣ", stat4:"Ҳиссаи барқ аз манбаъҳои барқароршаванда"
+    },
+    path: {
+      title:"Ду тарафи як пул", subtitle:"Аз кадом тараф набошед, TajBridge абзорҳо, санҷиш ва алоқаҳои маҳаллиро барои қарори боэътимод медиҳад.",
+      investorTitle:"Барои сармоягузорони олмонӣ", investorDesc:"Дастрасӣ ба корхонаҳои санҷидашудаи тоҷик дар соҳаҳои кишоварзӣ, нассоҷӣ, канданиҳои фоиданок, энергетика ва ИТ — бо санҷиши ҳуқуқӣ, намояндагии маҳаллӣ ва дастгирии доимӣ.", investorCta:"Дидани имкониятҳо →",
+      businessTitle:"Барои корхонаҳои тоҷик", businessDesc:"Корхонаи худро барои сармоягузорӣ омода кунед: кӯмак бо ҳуҷҷатҳо, тарҷума ва пайвасти мустақим бо сармоягузорони олмонӣ, ки шарикро дар Осиёи Марказӣ меҷӯянд.", businessCta:"Аризадиҳӣ →"
+    },
+    sectors: {eyebrow:"Соҳаҳо", title:"Соҳаҳои калидӣ", subtitle:"Шаш соҳа бо баландтарин неру барои сармоягузории байналмилалӣ."},
+    opportunities: {eyebrow:"Имкониятҳо", title:"Намунаҳои имкониятҳо", subtitle:"Чор профили намунавӣ — намунаи имкониятҳои сармоягузорӣ дар платформа.", demoTag:"Профили намунавӣ — на пешниҳоди фаъол", cta:"Дархости тафсилот →"},
+    why: {title:"Чаро Тоҷикистон", subtitle:"Бозоре дар остонаи рушд бо бартариҳои воқеии сохторӣ."},
+    process: {eyebrow:"Раванд", title:"Раванди кор", subtitle:"Раванди равшани чормарҳилавӣ — аз дархости аввал то бастани созишнома."},
+    trust: ["Санҷиш дар маҳал","Дастгирии ҳуқуқии фаромарзӣ","Махфӣ ва самаранок"],
+    contact: {
+      eyebrow:"Тамос", title:"Биёед пулро якҷоя бисозем", subtitle:"Бигӯед, ки шумо кистед ва чиро меҷӯед — мо шахсан бо шумо тамос мегирем.",
+      name:"Ном", email:"Почтаи электронӣ", roleLabel:"Ман…", roleInvestor:"Сармоягузор", roleBusiness:"Соҳиби корхона", roleOther:"Дигар",
+      message:"Паём", submit:"Фиристодани паём",
+      success:"Ташаккур — ин намоиши консептуалӣ аст, паёмҳо ҳоло фиристода намешаванд. Дар нусхаи воқеӣ дастаи мо дар давоми 48 соат бо шумо тамос мегирад."
+    },
+    footer: {
+      tagline:"TajBridge — пайванди соҳибкории тоҷикӣ бо сармояи олмонӣ.",
+      disclaimer:"Ин сомона намоиши консептуалӣ барои мақсадҳои намоишӣ мебошад. Намунаҳои имкониятҳо тасвирӣ буда, пешниҳодҳои воқеӣ намебошанд.",
+      rights:"© 2026 TajBridge. Ҳама ҳуқуқҳо ҳифз шудаанд."
+    },
+    sectorItems:[
+      {name:"Кишоварзӣ ва коркарди маҳсулот", desc:"Мева, сабзавот, мевҷаҳои хушк ва иншооти коркард барои бозори дохилӣ ва содирот."},
+      {name:"Нассоҷӣ ва пахта", desc:"Аз пахтаи хом то либоси тайёр — саноате бо таърихи асрӣ, ки барои занҷираҳои таъминоти аврупоӣ навсозӣ мешавад."},
+      {name:"Канданиҳои фоиданок ва металлҳо", desc:"Алюминий, тилло, нуқра ва канданиҳои нодири саноатӣ бо захираҳои калони то ҳол коркарднашуда."},
+      {name:"Гидроэнергетика ва энергияи сабз", desc:"Дар ҷаҳон дар ҷои 8-ум аз рӯи неруи гидроэнергетикӣ — камтар аз даҳяки он то ҳол коркард шудааст."},
+      {name:"Сайёҳӣ ва меҳмоннавозӣ", desc:"Кӯҳҳои Помир, шаҳрҳои Роҳи Абрешим ва инфрасохтори то ҳол истифоданашудаи сайёҳии саргузаштӣ."},
+      {name:"ИТ ва хизматрасониҳои рақамӣ", desc:"Гурӯҳи ҷавон ва рӯ ба афзоиши мутахассисони техникӣ барои аутсорсинг ва таҳияи маҳсулот."}
+    ],
+    oppItems:[
+      {name:"Содиркунандаи мевҷаҳои хушк ва чормағз", sector:"Кишоварзӣ", loc:"Вилояти Хатлон", desc:"Корхонаи оилавӣ ба сармоя барои хатти бастабандии мутобиқи стандарти ИА ва анбори яхдон эҳтиёҷ дорад.", seek:"€150,000 – €400,000"},
+      {name:"Истеҳсолкунандаи пахта ва матоъ", sector:"Нассоҷӣ", loc:"Вилояти Суғд", desc:"Корхонаи амудии нассоҷӣ дастгоҳҳояшро навсозӣ карда, шарики тақсимоти аврупоиро меҷӯяд.", seek:"€500,000 – €1.2 млн"},
+      {name:"Лоиҳаи нерӯгоҳи хурди барқи обӣ", sector:"Энергетика", loc:"Водии Рашт", desc:"Лоиҳаи нерӯгоҳи хурди барқи обӣ дар марҳилаи асоснокӣ барои таъмини минтақавӣ, маблағгузории лоиҳавӣ меҷӯяд.", seek:"€1–3 млн"},
+      {name:"Лоиҳаи эко-лоҷи Помир", sector:"Сайёҳӣ", loc:"ВМКБ (Помир)", desc:"Лоиҳаи эко-лоҷи бутик барои бозори рӯ ба афзоиши сайёҳии саргузаштӣ.", seek:"€200,000 – €600,000"}
+    ],
+    whyItems:[
+      {title:"Мавқеи стратегӣ", desc:"Дар чорроҳаи Чин, Русия, Осиёи Ҷанубӣ ва Шарқи Наздик — маркази табиии логистика ва бозситодот."},
+      {title:"Қувваи корӣ ҷавон ва рӯ ба афзоиш", desc:"Аҳолии ҷавон ва иштироки рӯ ба афзоиши қувваи корӣ бо арзиши ҳанӯз рақобатпазир."},
+      {title:"Захираҳои табиии истифоданашуда", desc:"Неруи ҷаҳонии гидроэнергетикӣ, маъданӣ ва кишоварзӣ — қисми зиёдаш то ҳол коркарднашуда."},
+      {title:"Суръати ислоҳот", desc:"Кӯшишҳои идомадор барои соддагардонии сабти корхона, андозбандӣ ва ҳифзи сармоягузорон."}
+    ],
+    processSteps:[
+      {title:"Аризадиҳӣ", desc:"Сармоягузорон ва корхонаҳо профил ва ҳадафҳои худро тавассути анкетаи кӯтоҳ пешниҳод мекунанд."},
+      {title:"Санҷиш", desc:"Дастаи маҳаллии мо санҷиши мустақимро мегузаронад: боздид, санҷиши ҳуҷҷатҳо ва тамос бо тавсифгарон."},
+      {title:"Мутобиқат", desc:"Мо корхонаҳои санҷидашударо бо сармоягузороне, ки самт ва андозаи сармояашон мувофиқ аст, шинос мекунем."},
+      {title:"Дастгирӣ", desc:"Мо дар сохтани созишнома кӯмак мекунем, масъалаҳои ҳуқуқӣ ва тарҷумаро ҳамоҳанг месозем ва пас аз бастани созишнома низ ҳамроҳ мемонем."}
+    ]
+  }
+};
+
+var sectorIcons = [
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21c4-2 7-6 7-11a7 7 0 0 0-14 0c0 5 3 9 7 11z"/><path d="M12 21V10"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6c3 2 6-2 9 0s6-2 9 0"/><path d="M3 12c3 2 6-2 9 0s6-2 9 0"/><path d="M3 18c3 2 6-2 9 0s6-2 9 0"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 20l6-11 4 6 3-5 5 10z"/><circle cx="17" cy="6" r="2"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2 5 14h6l-1 8 9-13h-6z"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 20l5-9 4 5 3-6 8 10z"/><circle cx="18" cy="6" r="2.4"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m8 9-5 3 5 3M16 9l5 3-5 3M13 5l-2 14"/></svg>'
+];
+var trustIcons = [
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-7-11a7 7 0 0 1 14 0c0 6.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v5c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>'
+];
+
+var LANG_KEY = "tajbridge_lang";
+var current = localStorage.getItem(LANG_KEY) || (navigator.language||"en").slice(0,2);
+if(!translations[current]) current = "en";
+
+function t(path, dict){
+  var parts = path.split(".");
+  var node = dict;
+  for(var i=0;i<parts.length;i++){ if(!node) return ""; node = node[parts[i]]; }
+  return node == null ? "" : node;
+}
+
+function renderLists(dict){
+  var sectorGrid = document.getElementById("sectorGrid");
+  sectorGrid.innerHTML = dict.sectorItems.map(function(s,i){
+    return '<div class="sector-card"><div class="sector-icon">'+sectorIcons[i]+'</div><h3>'+s.name+'</h3><p>'+s.desc+'</p></div>';
+  }).join("");
+
+  var oppGrid = document.getElementById("oppGrid");
+  oppGrid.innerHTML = dict.oppItems.map(function(o){
+    return '<div class="opp-card">'+
+      '<div class="opp-top"><span class="opp-sector">'+o.sector+'</span><span class="opp-tag">'+dict.opportunities.demoTag+'</span></div>'+
+      '<h3>'+o.name+'</h3><div class="opp-loc">'+o.loc+'</div>'+
+      '<p class="desc">'+o.desc+'</p>'+
+      '<div class="opp-foot"><div class="opp-seek"><span>'+ (dict===translations.de? "Gesucht":dict===translations.ru?"Требуется":dict===translations.tg?"Талаб карда мешавад":"Seeking") +'</span>'+o.seek+'</div></div>'+
+    '</div>';
+  }).join("");
+
+  var whyGrid = document.getElementById("whyGrid");
+  whyGrid.innerHTML = dict.whyItems.map(function(w,i){
+    return '<div class="why-card"><div class="why-num">0'+(i+1)+'</div><h3>'+w.title+'</h3><p>'+w.desc+'</p></div>';
+  }).join("");
+
+  var processGrid = document.getElementById("processGrid");
+  processGrid.innerHTML = dict.processSteps.map(function(p,i){
+    return '<div class="process-step"><div class="process-index">'+(i+1)+'</div><h3>'+p.title+'</h3><p>'+p.desc+'</p></div>';
+  }).join("");
+
+  var trustGrid = document.getElementById("trustGrid");
+  trustGrid.innerHTML = dict.trust.map(function(tx,i){
+    return '<div class="trust-item">'+trustIcons[i]+'<span>'+tx+'</span></div>';
+  }).join("");
+}
+
+function applyLang(lang){
+  var dict = translations[lang] || translations.en;
+  current = lang;
+  localStorage.setItem(LANG_KEY, lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(function(el){
+    var val = t(el.getAttribute("data-i18n"), dict);
+    if(typeof val === "string") el.textContent = val;
+  });
+  renderLists(dict);
+  document.getElementById("langBtnLabel").textContent = lang.toUpperCase();
+  document.querySelectorAll(".lang-menu button").forEach(function(b){
+    b.classList.toggle("active", b.getAttribute("data-lang")===lang);
+  });
+}
+
+document.querySelectorAll("#langMenu button, #langMenuFooter button").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    applyLang(btn.getAttribute("data-lang"));
+    document.getElementById("langMenu").classList.remove("open");
+  });
+});
+
+var langBtn = document.getElementById("langBtn");
+langBtn.addEventListener("click", function(){
+  document.getElementById("langMenu").classList.toggle("open");
+});
+document.addEventListener("click", function(e){
+  if(!e.target.closest(".lang-switch")) document.getElementById("langMenu").classList.remove("open");
+});
+
+applyLang(current);
+
+/* header scroll state */
+var header = document.getElementById("siteHeader");
+window.addEventListener("scroll", function(){
+  header.classList.toggle("scrolled", window.scrollY > 8);
+}, {passive:true});
+
+/* mobile drawer */
+var drawer = document.getElementById("mobileDrawer");
+var backdrop = document.getElementById("drawerBackdrop");
+function openDrawer(){ drawer.classList.add("open"); backdrop.classList.add("open"); }
+function closeDrawer(){ drawer.classList.remove("open"); backdrop.classList.remove("open"); }
+document.getElementById("menuToggle").addEventListener("click", openDrawer);
+document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+backdrop.addEventListener("click", closeDrawer);
+drawer.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", closeDrawer); });
+
+/* scroll reveal */
+var revealTargets = document.querySelectorAll(".reveal, .reveal-stagger");
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){ entry.target.classList.add("in"); io.unobserve(entry.target); }
+  });
+}, {threshold:0.14});
+revealTargets.forEach(function(el){ io.observe(el); });
+/* opportunities/sectors/etc are rendered after reveal observed; re-run observe after first render */
+setTimeout(function(){
+  document.querySelectorAll(".reveal-stagger").forEach(function(el){ io.observe(el); });
+}, 50);
+
+/* counters */
+var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function animateCount(el){
+  var target = parseFloat(el.getAttribute("data-count"));
+  var suffix = el.getAttribute("data-suffix")||"";
+  if(reduceMotion){ el.textContent = target.toString().replace(".", ",").replace(",0","")+suffix; return; }
+  var start = null, duration = 1400;
+  function step(ts){
+    if(!start) start = ts;
+    var progress = Math.min((ts-start)/duration, 1);
+    var eased = 1 - Math.pow(1-progress, 3);
+    var val = target*eased;
+    el.textContent = (target % 1 === 0 ? Math.round(val) : val.toFixed(1)) + suffix;
+    if(progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+var countEls = document.querySelectorAll("[data-count]");
+var cio = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){ animateCount(entry.target); cio.unobserve(entry.target); }
+  });
+}, {threshold:0.6});
+countEls.forEach(function(el){ cio.observe(el); });
+
+/* bridge canvas animation */
+var canvas = document.getElementById("bridgeCanvas");
+var ctx = canvas.getContext("2d");
+var dpr = Math.min(window.devicePixelRatio||1, 2);
+var w,h,t0=0;
+function resize(){
+  var rect = canvas.parentElement.getBoundingClientRect();
+  w = rect.width; h = rect.height;
+  canvas.width = w*dpr; canvas.height = h*dpr;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+window.addEventListener("resize", resize);
+resize();
+
+function getVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+function drawFrame(time){
+  ctx.clearRect(0,0,w,h);
+  var waves = [
+    {color:getVar('--weft-strong'), amp:h*0.14, freq:0.016, speed:0.00028, phase:0, y:h*0.55, alpha:0.85, width:2.4},
+    {color:getVar('--warp-strong'), amp:h*0.10, freq:0.020, speed:0.00042, phase:2.1, y:h*0.6, alpha:0.6, width:2},
+    {color:getVar('--steel-strong'), amp:h*0.12, freq:0.013, speed:-0.00021, phase:4.2, y:h*0.5, alpha:0.5, width:1.8}
+  ];
+  waves.forEach(function(wv){
+    ctx.beginPath();
+    for(var x=0; x<=w; x+=4){
+      var y = wv.y + Math.sin(x*wv.freq + time*wv.speed + wv.phase)*wv.amp;
+      if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle = wv.color;
+    ctx.globalAlpha = wv.alpha;
+    ctx.lineWidth = wv.width;
+    ctx.stroke();
+  });
+  ctx.globalAlpha = 1;
+  // connecting arc between nodes
+  ctx.beginPath();
+  ctx.moveTo(w*0.08, h*0.5);
+  ctx.quadraticCurveTo(w*0.5, h*0.14, w*0.92, h*0.5);
+  ctx.strokeStyle = getVar('--line');
+  ctx.setLineDash([5,6]);
+  ctx.lineWidth = 1.4;
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+if(reduceMotion){
+  drawFrame(0);
+} else {
+  function loop(ts){ drawFrame(ts); requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
+}
+
+/* contact form (client-side demo only — no data is sent anywhere) */
+document.querySelectorAll('input[name="role"]').forEach(function(r){
+  r.addEventListener("change", function(){
+    document.querySelectorAll(".role-pill").forEach(function(p){ p.classList.remove("checked"); });
+    r.closest(".role-pill").classList.add("checked");
+  });
+});
+document.querySelector('input[name="role"]').closest(".role-pill").classList.add("checked");
+
+document.getElementById("contactForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  var msg = document.getElementById("formMsg");
+  msg.classList.add("show");
+  this.reset();
+  document.querySelectorAll(".role-pill").forEach(function(p){ p.classList.remove("checked"); });
+  document.querySelector('input[name="role"]').checked = true;
+  document.querySelector('input[name="role"]').closest(".role-pill").classList.add("checked");
+});
+
+})();
+</script>
+</body>
+</html>
