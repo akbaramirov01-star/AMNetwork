@@ -203,16 +203,23 @@
   .hero-copy .section-sub{font-size:1.12rem; max-width:560px; margin-top:20px;}
   .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
 
-  .bridge-viz-wrap{position:relative; height:230px; border-radius:16px; overflow:hidden; background:var(--surface); border:1px solid var(--line);}
+  .bridge-viz-wrap{position:relative; height:280px; border-radius:16px; overflow:hidden; background:linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%); border:1px solid var(--line);}
   canvas#bridgeCanvas{width:100%; height:100%; display:block;}
   .bridge-node{
-    position:absolute; top:50%; transform:translateY(-50%);
-    display:flex; flex-direction:column; align-items:center; gap:6px;
-    font-family:var(--font-display); font-weight:800; font-size:0.8rem; letter-spacing:0.03em;
+    position:absolute; top:14px;
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    font-family:var(--font-display); font-weight:800; font-size:0.72rem; letter-spacing:0.06em;
   }
-  .bridge-node .dot{width:14px; height:14px; border-radius:50%; box-shadow:0 0 0 6px color-mix(in srgb, currentColor 18%, transparent);}
-  .bridge-node.tj{left:6%; color:var(--weft-strong);}
-  .bridge-node.de{right:6%; color:var(--steel-strong);}
+  .bridge-node .dot{width:9px; height:9px; border-radius:50%; box-shadow:0 0 0 5px color-mix(in srgb, currentColor 16%, transparent);}
+  .bridge-node.tj{left:9%; color:var(--weft-strong);}
+  .bridge-node.de{right:9%; color:var(--steel-strong);}
+  .bridge-legend{
+    position:absolute; left:0; right:0; bottom:12px;
+    display:flex; justify-content:center; gap:22px; flex-wrap:wrap;
+    font-size:0.72rem; font-weight:700; color:var(--ink-soft);
+  }
+  .bridge-legend span{display:inline-flex; align-items:center; gap:7px;}
+  .bridge-legend i{width:9px; height:9px; border-radius:50%; display:inline-block;}
 
   .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:64px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden;}
   .stat-cell{background:var(--surface); padding:24px 20px; text-align:center;}
@@ -265,6 +272,37 @@
   .opp-foot{display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:10px; border-top:1px solid var(--line);}
   .opp-seek{font-family:var(--font-display); font-weight:700; font-size:0.95rem;}
   .opp-seek span{display:block; font-family:var(--font-body); font-weight:500; font-size:0.7rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.05em;}
+
+  /* ---------- Pricing ---------- */
+  .pricing-tabs{display:flex; justify-content:center; gap:6px; margin-bottom:40px; background:var(--surface-2); border-radius:999px; padding:5px; width:fit-content; margin-left:auto; margin-right:auto;}
+  .pricing-tab{border:none; background:transparent; padding:10px 22px; border-radius:999px; font-weight:700; font-size:0.9rem; color:var(--ink-soft); transition:background 0.2s ease, color 0.2s ease;}
+  .pricing-tab.active{background:var(--surface); color:var(--ink); box-shadow:var(--shadow);}
+  .pricing-panel{display:none;}
+  .pricing-panel.active{display:block;}
+  .pricing-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch;}
+  @media (max-width:900px){ .pricing-grid{grid-template-columns:1fr; max-width:440px; margin:0 auto;} }
+  .price-card{
+    position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
+    padding:30px 26px; display:flex; flex-direction:column; gap:18px;
+    transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .price-card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
+  .price-card.popular{border-color:var(--weft-strong); box-shadow:0 0 0 1px var(--weft-strong), var(--shadow);}
+  .price-badge{
+    position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+    background:var(--weft-strong); color:var(--on-weft); font-size:0.68rem; font-weight:800;
+    text-transform:uppercase; letter-spacing:0.06em; padding:5px 14px; border-radius:999px; white-space:nowrap;
+  }
+  .price-card h3{font-size:1.2rem;}
+  .price-tag{display:flex; align-items:baseline; gap:6px;}
+  .price-amount{font-family:var(--font-display); font-weight:800; font-size:2rem; font-variant-numeric:tabular-nums;}
+  .price-period{color:var(--ink-faint); font-size:0.85rem;}
+  .price-desc{color:var(--ink-soft); font-size:0.92rem;}
+  .price-features{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px; flex-grow:1;}
+  .price-features li{display:flex; align-items:flex-start; gap:9px; font-size:0.9rem; color:var(--ink-soft);}
+  .price-features svg{width:17px; height:17px; color:var(--weft); flex-shrink:0; margin-top:2px;}
+  .price-note{margin-top:44px; padding:22px 26px; background:var(--surface-2); border-radius:var(--radius-card); font-size:0.88rem; color:var(--ink-soft); line-height:1.7;}
+  .price-note strong{color:var(--ink);}
 
   /* ---------- Why ---------- */
   .why-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
@@ -342,6 +380,7 @@
     <nav class="primary">
       <a href="#sectors" data-i18n="nav.sectors"></a>
       <a href="#opportunities" data-i18n="nav.opportunities"></a>
+      <a href="#pricing" data-i18n="nav.pricing"></a>
       <a href="#why" data-i18n="nav.why"></a>
       <a href="#process" data-i18n="nav.process"></a>
       <a href="#contact" data-i18n="nav.contact"></a>
@@ -372,6 +411,7 @@
   <button class="drawer-close" id="drawerClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <a href="#sectors" data-i18n="nav.sectors"></a>
   <a href="#opportunities" data-i18n="nav.opportunities"></a>
+  <a href="#pricing" data-i18n="nav.pricing"></a>
   <a href="#why" data-i18n="nav.why"></a>
   <a href="#process" data-i18n="nav.process"></a>
   <a href="#contact" data-i18n="nav.contact"></a>
@@ -391,8 +431,12 @@
       </div>
       <div class="bridge-viz-wrap reveal">
         <canvas id="bridgeCanvas"></canvas>
-        <div class="bridge-node tj"><span class="dot" style="background:var(--weft-strong)"></span>TJ</div>
-        <div class="bridge-node de"><span class="dot" style="background:var(--steel-strong)"></span>DE</div>
+        <div class="bridge-node tj"><span class="dot" style="background:var(--weft-strong)"></span>Душанбе</div>
+        <div class="bridge-node de"><span class="dot" style="background:var(--steel-strong)"></span>Berlin</div>
+        <div class="bridge-legend">
+          <span><i style="background:var(--weft-strong)"></i><span data-i18n="hero.legendCapital"></span></span>
+          <span><i style="background:var(--warp-strong)"></i><span data-i18n="hero.legendGoods"></span></span>
+        </div>
       </div>
     </div>
     <div class="container">
@@ -447,6 +491,27 @@
         <p class="section-sub" data-i18n="opportunities.subtitle"></p>
       </div>
       <div class="opp-grid reveal-stagger" id="oppGrid"></div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="eyebrow" data-i18n="pricing.eyebrow"></div>
+        <h2 class="section-title" data-i18n="pricing.title"></h2>
+        <p class="section-sub" data-i18n="pricing.subtitle"></p>
+      </div>
+      <div class="pricing-tabs reveal">
+        <button class="pricing-tab active" data-tab="business" data-i18n="pricing.tabBusiness"></button>
+        <button class="pricing-tab" data-tab="investor" data-i18n="pricing.tabInvestor"></button>
+      </div>
+      <div class="pricing-panel active" id="pricingBusiness">
+        <div class="pricing-grid reveal-stagger" id="pricingBusinessGrid"></div>
+      </div>
+      <div class="pricing-panel" id="pricingInvestor">
+        <div class="pricing-grid reveal-stagger" id="pricingInvestorGrid"></div>
+      </div>
+      <p class="price-note reveal" data-i18n="pricing.feeNote"></p>
     </div>
   </section>
 
@@ -546,13 +611,14 @@
 var translations = {
   en: {
     ribbon: "Concept preview — a demonstration of the TajBridge platform, not a live service.",
-    nav: {sectors:"Sectors", opportunities:"Opportunities", why:"Why Tajikistan", process:"How it works", contact:"Contact", cta:"Get in touch"},
+    nav: {sectors:"Sectors", opportunities:"Opportunities", pricing:"Pricing", why:"Why Tajikistan", process:"How it works", contact:"Contact", cta:"Get in touch"},
     hero: {
       badge:"Tajikistan × Germany",
       title:"Where Tajik Enterprise Meets German Capital",
       subtitle:"TajBridge connects vetted businesses and high-potential sectors in Tajikistan with German investors looking for the next frontier of growth — local ground knowledge, matched with international capital and standards.",
       ctaInvestor:"I'm an Investor", ctaBusiness:"I'm a Business",
-      stat1:"Population", stat2:"GDP growth in 2025 (World Bank)", stat3:"Global rank for hydropower potential", stat4:"Electricity from renewable sources"
+      stat1:"Population", stat2:"GDP growth in 2025 (World Bank)", stat3:"Global rank for hydropower potential", stat4:"Electricity from renewable sources",
+      legendCapital:"Capital flowing in", legendGoods:"Goods & returns flowing out"
     },
     path: {
       title:"Two Sides of One Bridge", subtitle:"Whichever side you stand on, TajBridge gives you the tools, the vetting and the local relationships to move with confidence.",
@@ -602,17 +668,34 @@ var translations = {
       {title:"Verify", desc:"Our local team conducts on-the-ground due diligence: site visits, document checks and reference calls."},
       {title:"Match", desc:"We introduce verified businesses to investors whose focus and ticket size align."},
       {title:"Support", desc:"We help structure the deal, coordinate legal and translation needs, and stay involved after closing."}
+    ],
+    pricing: {
+      eyebrow:"Pricing", title:"Simple, Transparent Access",
+      subtitle:"Businesses and investors each choose the level of support that fits — from a free public listing to a fully managed deal.",
+      tabBusiness:"For Businesses", tabInvestor:"For Investors",
+      feeNote:"<strong>Success fee:</strong> in addition to any subscription, TajBridge charges the business a flat advisory fee only when a deal closes — €3,000 for deals under €500K, €8,000 for €500K–€2M, custom above that. No percentage of the investment, and nothing if no deal happens. Pricing shown is illustrative and subject to confirmation with legal and tax counsel before launch."
+    },
+    businessTiers:[
+      {name:"Basic", price:"Free", period:"", desc:"A public profile in the directory — the starting point for every business.", features:["Public profile page","Sector tagging & search visibility","Visible to registered investors"], cta:"Create a free profile", popular:false},
+      {name:"Verified", price:"€149", period:"/month", desc:"On-the-ground verification and priority visibility for businesses ready to talk to investors.", features:["On-site verification & badge","Priority placement in search","Profile translated to Russian & German","Direct investor messaging"], cta:"Get verified", popular:true},
+      {name:"Featured", price:"€399", period:"/month", desc:"Full concierge support for businesses actively raising capital.", features:["Everything in Verified","Featured homepage placement","Investor-ready pitch deck, professionally built","Warm introductions every quarter","Dedicated account manager"], cta:"Apply as Featured", popular:false}
+    ],
+    investorTiers:[
+      {name:"Guest", price:"Free", period:"", desc:"Explore the market before committing to anything.", features:["Sector overviews & market data","Teaser opportunity cards","Monthly newsletter"], cta:"Browse for free", popular:false},
+      {name:"Investor Access", price:"€79", period:"/month", desc:"Full access to verified opportunities and direct contact with businesses.", features:["Full verified business profiles","Direct contact requests","Due-diligence summary reports","Early access to new listings"], cta:"Get investor access", popular:true},
+      {name:"Concierge", price:"From €2,500", period:"/engagement", desc:"A dedicated advisor manages the search, the visit and the paperwork for you.", features:["Dedicated matchmaking advisor","Coordinated on-ground site visits","Legal & translation coordination","Support through deal closing"], cta:"Talk to an advisor", popular:false}
     ]
   },
   ru: {
     ribbon: "Концептуальная демо-версия платформы TajBridge — не действующий сервис.",
-    nav: {sectors:"Отрасли", opportunities:"Возможности", why:"Почему Таджикистан", process:"Как это работает", contact:"Контакты", cta:"Связаться"},
+    nav: {sectors:"Отрасли", opportunities:"Возможности", pricing:"Тарифы", why:"Почему Таджикистан", process:"Как это работает", contact:"Контакты", cta:"Связаться"},
     hero: {
       badge:"Таджикистан × Германия",
       title:"Там, где таджикское предпринимательство встречается с немецким капиталом",
       subtitle:"TajBridge связывает проверенные бизнесы и перспективные отрасли Таджикистана с немецкими инвесторами, которые ищут новые рынки роста — местная экспертиза в сочетании с международным капиталом и стандартами.",
       ctaInvestor:"Я инвестор", ctaBusiness:"Я представляю бизнес",
-      stat1:"Население", stat2:"Рост ВВП в 2025 году (Всемирный банк)", stat3:"Место в мире по потенциалу гидроэнергетики", stat4:"Доля электроэнергии из возобновляемых источников"
+      stat1:"Население", stat2:"Рост ВВП в 2025 году (Всемирный банк)", stat3:"Место в мире по потенциалу гидроэнергетики", stat4:"Доля электроэнергии из возобновляемых источников",
+      legendCapital:"Капитал течёт внутрь", legendGoods:"Товары и доходность — обратно"
     },
     path: {
       title:"Два берега одного моста", subtitle:"На какой бы стороне вы ни находились, TajBridge даёт инструменты, проверку и локальные связи для уверенных решений.",
@@ -660,17 +743,34 @@ var translations = {
       {title:"Проверка", desc:"Наша локальная команда проводит проверку на месте: визиты, проверку документов и звонки по рекомендациям."},
       {title:"Подбор", desc:"Мы знакомим проверенные бизнесы с инвесторами, чьи интересы и объём инвестиций совпадают."},
       {title:"Сопровождение", desc:"Помогаем структурировать сделку, координируем юридические и переводческие вопросы, остаёмся на связи и после закрытия."}
+    ],
+    pricing: {
+      eyebrow:"Тарифы", title:"Просто и прозрачно",
+      subtitle:"Бизнесы и инвесторы выбирают уровень поддержки, который им подходит — от бесплатного публичного профиля до полного сопровождения сделки.",
+      tabBusiness:"Для бизнеса", tabInvestor:"Для инвесторов",
+      feeNote:"<strong>Комиссия за сделку:</strong> помимо подписки, TajBridge берёт с бизнеса фиксированный консультационный гонорар только при закрытии сделки — €3 000 для сделок до €500 тыс., €8 000 для €500 тыс.–€2 млн, индивидуально для более крупных. Не процент от инвестиции, и ничего не платится, если сделка не состоялась. Указанные цены иллюстративны и подлежат согласованию с юристами и налоговым консультантом перед запуском."
+    },
+    businessTiers:[
+      {name:"Базовый", price:"Бесплатно", period:"", desc:"Публичный профиль в каталоге — стартовая точка для любого бизнеса.", features:["Публичная страница профиля","Тег отрасли и видимость в поиске","Виден зарегистрированным инвесторам"], cta:"Создать бесплатный профиль", popular:false},
+      {name:"Проверенный", price:"€149", period:"/мес", desc:"Проверка на месте и приоритетная видимость для бизнесов, готовых говорить с инвесторами.", features:["Проверка на месте и значок «Проверено»","Приоритет в поиске","Перевод профиля на русский и немецкий","Прямые сообщения от инвесторов"], cta:"Пройти проверку", popular:true},
+      {name:"Featured (в топе)", price:"€399", period:"/мес", desc:"Полное сопровождение для бизнесов, активно привлекающих капитал.", features:["Всё из тарифа «Проверенный»","Размещение на главной странице","Профессиональная презентация для инвесторов","Тёплые знакомства с инвесторами каждый квартал","Персональный менеджер"], cta:"Подать заявку на Featured", popular:false}
+    ],
+    investorTiers:[
+      {name:"Гость", price:"Бесплатно", period:"", desc:"Изучите рынок прежде чем принимать решение.", features:["Обзоры отраслей и рыночные данные","Тизеры возможностей","Ежемесячная рассылка"], cta:"Смотреть бесплатно", popular:false},
+      {name:"Investor Access", price:"€79", period:"/мес", desc:"Полный доступ к проверенным возможностям и прямой контакт с бизнесами.", features:["Полные проверенные профили бизнесов","Прямые запросы на контакт","Краткие отчёты due diligence","Ранний доступ к новым предложениям"], cta:"Получить доступ", popular:true},
+      {name:"Concierge", price:"От €2 500", period:"/за сделку", desc:"Персональный советник ведёт поиск, визит и документы за вас.", features:["Персональный советник по подбору","Организация визитов на месте","Координация юридических и переводческих вопросов","Сопровождение до закрытия сделки"], cta:"Связаться с советником", popular:false}
     ]
   },
   de: {
     ribbon: "Konzeptvorschau der TajBridge-Plattform — kein aktiver Dienst.",
-    nav: {sectors:"Branchen", opportunities:"Chancen", why:"Warum Tadschikistan", process:"Ablauf", contact:"Kontakt", cta:"Kontakt aufnehmen"},
+    nav: {sectors:"Branchen", opportunities:"Chancen", pricing:"Preise", why:"Warum Tadschikistan", process:"Ablauf", contact:"Kontakt", cta:"Kontakt aufnehmen"},
     hero: {
       badge:"Tadschikistan × Deutschland",
       title:"Wo tadschikisches Unternehmertum auf deutsches Kapital trifft",
       subtitle:"TajBridge verbindet geprüfte Unternehmen und wachstumsstarke Branchen in Tadschikistan mit deutschen Investoren, die neue Wachstumsmärkte suchen — lokales Wissen vor Ort, verbunden mit internationalem Kapital und Standards.",
       ctaInvestor:"Ich bin Investor", ctaBusiness:"Ich bin Unternehmer",
-      stat1:"Bevölkerung", stat2:"BIP-Wachstum 2025 (Weltbank)", stat3:"Weltrang beim Wasserkraftpotenzial", stat4:"Strom aus erneuerbaren Quellen"
+      stat1:"Bevölkerung", stat2:"BIP-Wachstum 2025 (Weltbank)", stat3:"Weltrang beim Wasserkraftpotenzial", stat4:"Strom aus erneuerbaren Quellen",
+      legendCapital:"Kapital fließt hinein", legendGoods:"Waren & Erträge fließen zurück"
     },
     path: {
       title:"Zwei Seiten einer Brücke", subtitle:"Auf welcher Seite Sie auch stehen — TajBridge bietet die Werkzeuge, die Prüfung und die lokalen Beziehungen für sichere Entscheidungen.",
@@ -718,17 +818,34 @@ var translations = {
       {title:"Prüfen", desc:"Unser lokales Team führt eine Prüfung vor Ort durch: Besuche, Dokumentenprüfung und Referenzgespräche."},
       {title:"Zusammenführen", desc:"Wir stellen geprüfte Unternehmen Investoren vor, deren Fokus und Investitionsgröße zusammenpassen."},
       {title:"Begleiten", desc:"Wir unterstützen bei der Strukturierung, koordinieren Recht und Übersetzung und bleiben auch nach Abschluss beteiligt."}
+    ],
+    pricing: {
+      eyebrow:"Preise", title:"Einfach und transparent",
+      subtitle:"Unternehmen und Investoren wählen jeweils die Unterstützung, die zu ihnen passt — vom kostenlosen öffentlichen Profil bis zur vollständig begleiteten Transaktion.",
+      tabBusiness:"Für Unternehmen", tabInvestor:"Für Investoren",
+      feeNote:"<strong>Erfolgshonorar:</strong> Zusätzlich zum Abonnement berechnet TajBridge dem Unternehmen ein pauschales Beratungshonorar nur bei Abschluss einer Transaktion — 3.000 € bei Deals unter 500.000 €, 8.000 € bei 500.000 € – 2 Mio. €, individuell darüber. Kein Prozentsatz der Investition, keine Gebühr ohne Abschluss. Die gezeigten Preise sind illustrativ und vor dem Start mit Rechts- und Steuerberatung abzustimmen."
+    },
+    businessTiers:[
+      {name:"Basis", price:"Kostenlos", period:"", desc:"Ein öffentliches Profil im Verzeichnis — der Startpunkt für jedes Unternehmen.", features:["Öffentliche Profilseite","Branchen-Tagging & Sichtbarkeit in der Suche","Sichtbar für registrierte Investoren"], cta:"Kostenloses Profil erstellen", popular:false},
+      {name:"Verifiziert", price:"149 €", period:"/Monat", desc:"Prüfung vor Ort und bevorzugte Sichtbarkeit für Unternehmen, die bereit sind, mit Investoren zu sprechen.", features:["Prüfung vor Ort & Prüfsiegel","Bevorzugte Platzierung in der Suche","Profil übersetzt ins Russische & Deutsche","Direkte Nachrichten von Investoren"], cta:"Verifizierung starten", popular:true},
+      {name:"Featured", price:"399 €", period:"/Monat", desc:"Volle Betreuung für Unternehmen, die aktiv Kapital aufnehmen.", features:["Alles aus Verifiziert","Platzierung auf der Startseite","Professionell erstelltes, investitionsreifes Pitch Deck","Warme Vorstellungen jedes Quartal","Persönlicher Ansprechpartner"], cta:"Als Featured bewerben", popular:false}
+    ],
+    investorTiers:[
+      {name:"Gast", price:"Kostenlos", period:"", desc:"Den Markt erkunden, bevor Sie sich festlegen.", features:["Branchenüberblick & Marktdaten","Vorschau-Karten zu Chancen","Monatlicher Newsletter"], cta:"Kostenlos ansehen", popular:false},
+      {name:"Investor Access", price:"79 €", period:"/Monat", desc:"Voller Zugriff auf geprüfte Chancen und direkter Kontakt zu Unternehmen.", features:["Vollständige geprüfte Unternehmensprofile","Direkte Kontaktanfragen","Due-Diligence-Kurzberichte","Früher Zugang zu neuen Chancen"], cta:"Zugang erhalten", popular:true},
+      {name:"Concierge", price:"Ab 2.500 €", period:"/Projekt", desc:"Ein persönlicher Berater übernimmt Suche, Besuch vor Ort und Unterlagen für Sie.", features:["Persönlicher Vermittlungsberater","Koordinierte Besuche vor Ort","Koordination von Recht & Übersetzung","Begleitung bis zum Abschluss"], cta:"Berater kontaktieren", popular:false}
     ]
   },
   tg: {
     ribbon: "Намоиши консептуалии платформаи TajBridge — хизмати фаъол нест.",
-    nav: {sectors:"Соҳаҳо", opportunities:"Имкониятҳо", why:"Чаро Тоҷикистон", process:"Раванди кор", contact:"Тамос", cta:"Тамос гирифтан"},
+    nav: {sectors:"Соҳаҳо", opportunities:"Имкониятҳо", pricing:"Тарифҳо", why:"Чаро Тоҷикистон", process:"Раванди кор", contact:"Тамос", cta:"Тамос гирифтан"},
     hero: {
       badge:"Тоҷикистон × Германия",
       title:"Ҷое, ки соҳибкории тоҷикӣ бо сармояи олмонӣ вомехӯрад",
       subtitle:"TajBridge корхонаҳои санҷидашуда ва соҳаҳои дорои неруи баланди Тоҷикистонро бо сармоягузорони олмонӣ, ки бозорҳои нави рушдро меҷӯянд, мепайвандад — дониши маҳаллӣ бо сармоя ва стандартҳои байналмилалӣ якҷоя мешавад.",
       ctaInvestor:"Ман сармоягузорам", ctaBusiness:"Ман соҳиби корхонаам",
-      stat1:"Аҳолӣ", stat2:"Рушди ММД дар соли 2025 (Бонки Ҷаҳонӣ)", stat3:"Ҷои Тоҷикистон дар ҷаҳон аз рӯи неруи гидроэнергетикӣ", stat4:"Ҳиссаи барқ аз манбаъҳои барқароршаванда"
+      stat1:"Аҳолӣ", stat2:"Рушди ММД дар соли 2025 (Бонки Ҷаҳонӣ)", stat3:"Ҷои Тоҷикистон дар ҷаҳон аз рӯи неруи гидроэнергетикӣ", stat4:"Ҳиссаи барқ аз манбаъҳои барқароршаванда",
+      legendCapital:"Сармоя ворид мешавад", legendGoods:"Мол ва даромад бармегардад"
     },
     path: {
       title:"Ду тарафи як пул", subtitle:"Аз кадом тараф набошед, TajBridge абзорҳо, санҷиш ва алоқаҳои маҳаллиро барои қарори боэътимод медиҳад.",
@@ -776,6 +893,22 @@ var translations = {
       {title:"Санҷиш", desc:"Дастаи маҳаллии мо санҷиши мустақимро мегузаронад: боздид, санҷиши ҳуҷҷатҳо ва тамос бо тавсифгарон."},
       {title:"Мутобиқат", desc:"Мо корхонаҳои санҷидашударо бо сармоягузороне, ки самт ва андозаи сармояашон мувофиқ аст, шинос мекунем."},
       {title:"Дастгирӣ", desc:"Мо дар сохтани созишнома кӯмак мекунем, масъалаҳои ҳуқуқӣ ва тарҷумаро ҳамоҳанг месозем ва пас аз бастани созишнома низ ҳамроҳ мемонем."}
+    ],
+    pricing: {
+      eyebrow:"Тарифҳо", title:"Содда ва равшан",
+      subtitle:"Корхонаҳо ва сармоягузорон сатҳи дастгириеро, ки ба онҳо мувофиқ аст, интихоб мекунанд — аз профили ройгони ҷамъиятӣ то ҳамроҳии пурраи созишнома.",
+      tabBusiness:"Барои корхонаҳо", tabInvestor:"Барои сармоягузорон",
+      feeNote:"<strong>Хизматпулии созишнома:</strong> ба ғайр аз обуна, TajBridge аз корхона танҳо ҳангоми бастани созишнома як хизматпулии собити машваратӣ мегирад — €3,000 барои созишномаҳои то €500 ҳазор, €8,000 барои €500 ҳазор–€2 млн, барои калонтар алоҳида муайян мешавад. На фоизи сармоягузорӣ, ва агар созишнома нашавад — ҳеҷ пардохт нест. Нархҳои нишондодашуда тасвирӣ буда, пеш аз оғоз бо машваратчиёни ҳуқуқӣ ва андоз мувофиқа карда мешаванд."
+    },
+    businessTiers:[
+      {name:"Асосӣ", price:"Ройгон", period:"", desc:"Профили ҷамъиятӣ дар феҳрист — нуқтаи оғоз барои ҳар корхона.", features:["Саҳифаи профили ҷамъиятӣ","Тег ва намоёнии соҳа дар ҷустуҷӯ","Барои сармоягузорони қайдшуда намоён"], cta:"Профили ройгон сохтан", popular:false},
+      {name:"Санҷидашуда", price:"€149", period:"/моҳ", desc:"Санҷиш дар маҳал ва намоёнии афзалиятнок барои корхонаҳое, ки омодаанд бо сармоягузорон сӯҳбат кунанд.", features:["Санҷиш дар маҳал ва нишони «Санҷидашуда»","Ҷои афзалиятнок дар ҷустуҷӯ","Профил ба забони русӣ ва олмонӣ тарҷума мешавад","Паёми мустақим аз сармоягузорон"], cta:"Санҷида шудан", popular:true},
+      {name:"Featured", price:"€399", period:"/моҳ", desc:"Дастгирии пурра барои корхонаҳое, ки фаъолона сармоя ҷалб мекунанд.", features:["Ҳама чиз аз «Санҷидашуда»","Ҷойгиршавӣ дар саҳифаи асосӣ","Тақдимоти касбии омода барои сармоягузор","Шиносоии гарм бо сармоягузорон ҳар семоҳа","Менеҷери шахсӣ"], cta:"Барои Featured аризадиҳӣ", popular:false}
+    ],
+    investorTiers:[
+      {name:"Меҳмон", price:"Ройгон", period:"", desc:"Бозорро пеш аз қарор омӯзед.", features:["Шарҳи соҳаҳо ва маълумоти бозор","Корти пешнамоиши имкониятҳо","Хабарномаи моҳона"], cta:"Ройгон дидан", popular:false},
+      {name:"Investor Access", price:"€79", period:"/моҳ", desc:"Дастрасии пурра ба имкониятҳои санҷидашуда ва тамоси мустақим бо корхонаҳо.", features:["Профилҳои пурраи санҷидашудаи корхонаҳо","Дархости тамоси мустақим","Ҳисоботи мухтасари санҷиши ҳуқуқӣ","Дастрасии барвақт ба пешниҳодҳои нав"], cta:"Дастрасӣ гирифтан", popular:true},
+      {name:"Concierge", price:"Аз €2,500", period:"/барои як созишнома", desc:"Мушовири шахсӣ ҷустуҷӯ, боздид ва ҳуҷҷатҳоро барои шумо анҷом медиҳад.", features:["Мушовири шахсии мутобиқсозӣ","Боздидҳои ҳамоҳангшудаи маҳаллӣ","Ҳамоҳангсозии масъалаҳои ҳуқуқӣ ва тарҷума","Дастгирӣ то бастани созишнома"], cta:"Бо мушовир тамос гиред", popular:false}
     ]
   }
 };
@@ -793,6 +926,8 @@ var trustIcons = [
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4 6v5c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6z"/></svg>',
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>'
 ];
+
+var checkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
 
 var LANG_KEY = "tajbridge_lang";
 var current = localStorage.getItem(LANG_KEY) || (navigator.language||"en").slice(0,2);
@@ -835,6 +970,19 @@ function renderLists(dict){
   trustGrid.innerHTML = dict.trust.map(function(tx,i){
     return '<div class="trust-item">'+trustIcons[i]+'<span>'+tx+'</span></div>';
   }).join("");
+
+  function priceCard(tier){
+    return '<div class="price-card'+(tier.popular?' popular':'')+'">'+
+      (tier.popular?'<span class="price-badge">'+ (dict===translations.de? "Beliebt":dict===translations.ru?"Популярный":dict===translations.tg?"Маъмул":"Popular") +'</span>':'')+
+      '<h3>'+tier.name+'</h3>'+
+      '<div class="price-tag"><span class="price-amount">'+tier.price+'</span><span class="price-period">'+tier.period+'</span></div>'+
+      '<p class="price-desc">'+tier.desc+'</p>'+
+      '<ul class="price-features">'+tier.features.map(function(f){ return '<li>'+checkIcon+'<span>'+f+'</span></li>'; }).join("")+'</ul>'+
+      '<a href="#contact" class="btn '+(tier.popular?'btn-primary':'btn-outline')+' btn-block">'+tier.cta+'</a>'+
+    '</div>';
+  }
+  document.getElementById("pricingBusinessGrid").innerHTML = dict.businessTiers.map(priceCard).join("");
+  document.getElementById("pricingInvestorGrid").innerHTML = dict.investorTiers.map(priceCard).join("");
 }
 
 function applyLang(lang){
@@ -844,7 +992,9 @@ function applyLang(lang){
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach(function(el){
     var val = t(el.getAttribute("data-i18n"), dict);
-    if(typeof val === "string") el.textContent = val;
+    if(typeof val === "string"){
+      if(val.indexOf("<") !== -1) el.innerHTML = val; else el.textContent = val;
+    }
   });
   renderLists(dict);
   document.getElementById("langBtnLabel").textContent = lang.toUpperCase();
@@ -869,6 +1019,18 @@ document.addEventListener("click", function(e){
 });
 
 applyLang(current);
+
+/* pricing tabs */
+document.querySelectorAll(".pricing-tab").forEach(function(tab){
+  tab.addEventListener("click", function(){
+    document.querySelectorAll(".pricing-tab").forEach(function(b){ b.classList.remove("active"); });
+    tab.classList.add("active");
+    var target = tab.getAttribute("data-tab");
+    document.getElementById("pricingBusiness").classList.toggle("active", target==="business");
+    document.getElementById("pricingInvestor").classList.toggle("active", target==="investor");
+    document.querySelectorAll(".pricing-panel.active .reveal-stagger").forEach(function(el){ el.classList.add("in"); });
+  });
+});
 
 /* header scroll state */
 var header = document.getElementById("siteHeader");
@@ -924,56 +1086,110 @@ var cio = new IntersectionObserver(function(entries){
 }, {threshold:0.6});
 countEls.forEach(function(el){ cio.observe(el); });
 
-/* bridge canvas animation */
+/* bridge canvas animation — a literal suspension bridge: Pamir peaks (TJ) on the
+   left, a city skyline (DE) on the right, with particles flowing both ways
+   along the deck: capital in one direction, goods/returns in the other. */
 var canvas = document.getElementById("bridgeCanvas");
 var ctx = canvas.getContext("2d");
 var dpr = Math.min(window.devicePixelRatio||1, 2);
-var w,h,t0=0;
+var w,h;
 function resize(){
   var rect = canvas.parentElement.getBoundingClientRect();
   w = rect.width; h = rect.height;
   canvas.width = w*dpr; canvas.height = h*dpr;
   ctx.setTransform(dpr,0,0,dpr,0,0);
 }
-window.addEventListener("resize", resize);
+window.addEventListener("resize", function(){ resize(); if(reduceMotion) drawScene(0,false); });
 resize();
 
 function getVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
 
-function drawFrame(time){
+function cableY(x, pylonL, pylonR, topY, sagY){
+  var t = (x-pylonL)/(pylonR-pylonL);
+  if(t<0) t=0; if(t>1) t=1;
+  // quadratic bezier: P0=topY at pylonL, control=sagY at midspan, P2=topY at pylonR
+  var mt = 1-t;
+  return mt*mt*topY + 2*mt*t*sagY + t*t*topY;
+}
+
+function polygon(pts){ ctx.beginPath(); pts.forEach(function(p,i){ i? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]); }); ctx.closePath(); }
+
+var CAPITAL_N = 5, GOODS_N = 5;
+var capitalParticles = [], goodsParticles = [];
+for(var i=0;i<CAPITAL_N;i++) capitalParticles.push({t:i/CAPITAL_N});
+for(var j=0;j<GOODS_N;j++) goodsParticles.push({t:j/GOODS_N});
+
+function drawScene(time, moving){
   ctx.clearRect(0,0,w,h);
-  var waves = [
-    {color:getVar('--weft-strong'), amp:h*0.14, freq:0.016, speed:0.00028, phase:0, y:h*0.55, alpha:0.85, width:2.4},
-    {color:getVar('--warp-strong'), amp:h*0.10, freq:0.020, speed:0.00042, phase:2.1, y:h*0.6, alpha:0.6, width:2},
-    {color:getVar('--steel-strong'), amp:h*0.12, freq:0.013, speed:-0.00021, phase:4.2, y:h*0.5, alpha:0.5, width:1.8}
-  ];
-  waves.forEach(function(wv){
-    ctx.beginPath();
-    for(var x=0; x<=w; x+=4){
-      var y = wv.y + Math.sin(x*wv.freq + time*wv.speed + wv.phase)*wv.amp;
-      if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-    }
-    ctx.strokeStyle = wv.color;
-    ctx.globalAlpha = wv.alpha;
-    ctx.lineWidth = wv.width;
-    ctx.stroke();
+
+  var pylonL = w*0.17, pylonR = w*0.83;
+  var deckY = h*0.66, topY = h*0.20, sagY = deckY - h*0.03;
+  var inkSoft = getVar('--ink-soft');
+  var weft = getVar('--weft-strong'), warp = getVar('--warp-strong'), steel = getVar('--steel-strong');
+
+  /* Pamir silhouette (TJ side) */
+  ctx.globalAlpha = 0.55;
+  polygon([[0,deckY],[0,deckY*0.62],[w*0.035,deckY*0.42],[w*0.06,deckY*0.58],[w*0.09,deckY*0.22],[w*0.12,deckY*0.5],[w*0.148,deckY*0.34],[pylonL,deckY],[0,deckY]]);
+  ctx.fillStyle = weft; ctx.fill();
+  ctx.globalAlpha = 1;
+
+  /* city skyline silhouette (DE side) */
+  var bx = pylonR + w*0.02;
+  var blocks = [[0.10,0.30],[0.18,0.5],[0.14,0.36],[0.20,0.62],[0.16,0.42],[0.14,0.5]];
+  ctx.globalAlpha = 0.5; ctx.fillStyle = steel;
+  blocks.forEach(function(b){
+    var bw = b[0]*w, bh = b[1]*h*0.55;
+    ctx.fillRect(bx, deckY-bh, bw*0.82, bh);
+    bx += bw;
   });
   ctx.globalAlpha = 1;
-  // connecting arc between nodes
+
+  /* main suspension cable + verticals */
+  ctx.strokeStyle = inkSoft; ctx.lineWidth = 1.6; ctx.globalAlpha = 0.85;
   ctx.beginPath();
-  ctx.moveTo(w*0.08, h*0.5);
-  ctx.quadraticCurveTo(w*0.5, h*0.14, w*0.92, h*0.5);
-  ctx.strokeStyle = getVar('--line');
-  ctx.setLineDash([5,6]);
-  ctx.lineWidth = 1.4;
+  for(var x=pylonL; x<=pylonR; x+=6){
+    var y = cableY(x, pylonL, pylonR, topY, sagY);
+    x===pylonL ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
   ctx.stroke();
-  ctx.setLineDash([]);
+  ctx.globalAlpha = 0.35;
+  for(var k=1;k<14;k++){
+    var vx = pylonL + (pylonR-pylonL)*(k/14);
+    var vy = cableY(vx, pylonL, pylonR, topY, sagY);
+    ctx.beginPath(); ctx.moveTo(vx,vy); ctx.lineTo(vx,deckY); ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+
+  /* pylons */
+  [pylonL,pylonR].forEach(function(px){
+    ctx.strokeStyle = inkSoft; ctx.lineWidth = 4; ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(px,deckY+4); ctx.lineTo(px,topY); ctx.stroke();
+  });
+
+  /* deck */
+  ctx.strokeStyle = inkSoft; ctx.lineWidth = 3; ctx.lineCap = "round";
+  ctx.beginPath(); ctx.moveTo(w*0.02,deckY); ctx.lineTo(w*0.98,deckY); ctx.stroke();
+
+  /* flowing particles: capital DE -> TJ (right to left), goods/returns TJ -> DE (left to right) */
+  function drawParticle(t, dir, color){
+    var x = dir>0 ? pylonL + (pylonR-pylonL)*t : pylonR - (pylonR-pylonL)*t;
+    var bob = Math.sin(t*Math.PI*2 + (dir>0?0:3.14)) * 3;
+    var y = deckY - 9 + bob*0 - 6; // sits slightly above deck line
+    ctx.beginPath();
+    ctx.arc(x, deckY-8, 3.4, 0, Math.PI*2);
+    ctx.fillStyle = color;
+    ctx.shadowColor = color; ctx.shadowBlur = 8;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+  capitalParticles.forEach(function(p){ drawParticle(p.t, -1, weft); if(moving) p.t = (p.t + 0.0032) % 1; });
+  goodsParticles.forEach(function(p){ drawParticle(p.t, 1, warp); if(moving) p.t = (p.t + 0.0026) % 1; });
 }
 
 if(reduceMotion){
-  drawFrame(0);
+  drawScene(0, false);
 } else {
-  function loop(ts){ drawFrame(ts); requestAnimationFrame(loop); }
+  function loop(ts){ drawScene(ts, true); requestAnimationFrame(loop); }
   requestAnimationFrame(loop);
 }
 
