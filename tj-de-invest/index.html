@@ -1114,71 +1114,155 @@ function cableY(x, pylonL, pylonR, topY, sagY){
 
 function polygon(pts){ ctx.beginPath(); pts.forEach(function(p,i){ i? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]); }); ctx.closePath(); }
 
-var CAPITAL_N = 5, GOODS_N = 5;
+var CAPITAL_N = 6, GOODS_N = 6;
 var capitalParticles = [], goodsParticles = [];
 for(var i=0;i<CAPITAL_N;i++) capitalParticles.push({t:i/CAPITAL_N});
 for(var j=0;j<GOODS_N;j++) goodsParticles.push({t:j/GOODS_N});
 
-function drawScene(time, moving){
-  ctx.clearRect(0,0,w,h);
+var stars = [];
+function seedStars(){
+  stars = [];
+  var n = Math.max(30, Math.floor(w/14));
+  for(var s=0;s<n;s++){
+    stars.push({ x:Math.random()*w, y:Math.random()*h*0.55, r:Math.random()*1.3+0.4, phase:Math.random()*Math.PI*2, speed:0.0006+Math.random()*0.0008 });
+  }
+}
 
-  var pylonL = w*0.17, pylonR = w*0.83;
-  var deckY = h*0.66, topY = h*0.20, sagY = deckY - h*0.03;
-  var inkSoft = getVar('--ink-soft');
-  var weft = getVar('--weft-strong'), warp = getVar('--warp-strong'), steel = getVar('--steel-strong');
-
-  /* Pamir silhouette (TJ side) */
-  ctx.globalAlpha = 0.55;
-  polygon([[0,deckY],[0,deckY*0.62],[w*0.035,deckY*0.42],[w*0.06,deckY*0.58],[w*0.09,deckY*0.22],[w*0.12,deckY*0.5],[w*0.148,deckY*0.34],[pylonL,deckY],[0,deckY]]);
-  ctx.fillStyle = weft; ctx.fill();
-  ctx.globalAlpha = 1;
-
-  /* city skyline silhouette (DE side) */
-  var bx = pylonR + w*0.02;
-  var blocks = [[0.10,0.30],[0.18,0.5],[0.14,0.36],[0.20,0.62],[0.16,0.42],[0.14,0.5]];
-  ctx.globalAlpha = 0.5; ctx.fillStyle = steel;
-  blocks.forEach(function(b){
-    var bw = b[0]*w, bh = b[1]*h*0.55;
-    ctx.fillRect(bx, deckY-bh, bw*0.82, bh);
-    bx += bw;
-  });
-  ctx.globalAlpha = 1;
-
-  /* main suspension cable + verticals */
-  ctx.strokeStyle = inkSoft; ctx.lineWidth = 1.6; ctx.globalAlpha = 0.85;
-  ctx.beginPath();
+function drawBridgeStructure(ctx2, pylonL, pylonR, topY, sagY, deckY, inkSoft, glow, alphaMul){
+  ctx2.globalAlpha = 0.9*alphaMul;
+  ctx2.strokeStyle = inkSoft; ctx2.lineWidth = 1.6;
+  if(glow){ ctx2.shadowColor = inkSoft; ctx2.shadowBlur = 6; }
+  ctx2.beginPath();
   for(var x=pylonL; x<=pylonR; x+=6){
     var y = cableY(x, pylonL, pylonR, topY, sagY);
-    x===pylonL ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    x===pylonL ? ctx2.moveTo(x,y) : ctx2.lineTo(x,y);
   }
-  ctx.stroke();
-  ctx.globalAlpha = 0.35;
+  ctx2.stroke();
+  ctx2.shadowBlur = 0;
+  ctx2.globalAlpha = 0.32*alphaMul;
   for(var k=1;k<14;k++){
     var vx = pylonL + (pylonR-pylonL)*(k/14);
     var vy = cableY(vx, pylonL, pylonR, topY, sagY);
-    ctx.beginPath(); ctx.moveTo(vx,vy); ctx.lineTo(vx,deckY); ctx.stroke();
+    ctx2.beginPath(); ctx2.moveTo(vx,vy); ctx2.lineTo(vx,deckY); ctx2.stroke();
+  }
+  ctx2.globalAlpha = alphaMul;
+  [pylonL,pylonR].forEach(function(px){
+    ctx2.strokeStyle = inkSoft; ctx2.lineWidth = 4; ctx2.lineCap = "round";
+    ctx2.beginPath(); ctx2.moveTo(px,deckY+4); ctx2.lineTo(px,topY); ctx2.stroke();
+  });
+  ctx2.strokeStyle = inkSoft; ctx2.lineWidth = 3; ctx2.lineCap = "round";
+  ctx2.beginPath(); ctx2.moveTo(w*0.02,deckY); ctx2.lineTo(w*0.98,deckY); ctx2.stroke();
+  ctx2.globalAlpha = 1;
+}
+
+function drawScene(time, moving){
+  var pylonL = w*0.17, pylonR = w*0.83;
+  var deckY = h*0.60, topY = h*0.15, sagY = deckY - h*0.03;
+  var lineColor = "#d7d2e6"; /* fixed light line color — the bridge sits on a night sky in both themes */
+  var weft = getVar('--weft-strong'), warp = getVar('--warp-strong'), steel = getVar('--steel-strong');
+
+  /* night sky — fixed dark palette on purpose: this is a night scene regardless of the page's light/dark theme */
+  var sky = ctx.createLinearGradient(0,0,0,deckY);
+  sky.addColorStop(0, "#171029");
+  sky.addColorStop(1, "#3d3452");
+  ctx.fillStyle = sky;
+  ctx.fillRect(0,0,w,deckY+2);
+
+  /* twinkling stars */
+  if(!stars.length || stars.__w !== w) { seedStars(); stars.__w = w; }
+  stars.forEach(function(st){
+    var tw = 0.35 + 0.65*Math.abs(Math.sin(time*st.speed + st.phase));
+    ctx.globalAlpha = tw*0.8;
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI*2); ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+
+  /* Pamir mountain range (back layer) */
+  ctx.globalAlpha = 0.4;
+  polygon([[0,deckY],[0,deckY*0.5],[w*0.05,deckY*0.3],[w*0.10,deckY*0.48],[w*0.148,deckY*0.28],[pylonL,deckY]]);
+  ctx.fillStyle = steel; ctx.fill();
+  ctx.globalAlpha = 1;
+
+  /* foreground monument silhouette (stylised arch on a pedestal) */
+  var mx = w*0.075, mBase = deckY, mTop = deckY - h*0.30;
+  ctx.globalAlpha = 0.85; ctx.fillStyle = weft;
+  ctx.fillRect(mx-2, mTop, 4, mBase-mTop);
+  ctx.beginPath();
+  ctx.moveTo(mx-2, mTop+6);
+  ctx.quadraticCurveTo(mx-16, mTop+18, mx-2, mTop+34);
+  ctx.quadraticCurveTo(mx+12, mTop+18, mx+2, mTop+6);
+  ctx.closePath(); ctx.fill();
+  ctx.fillRect(mx-16, mBase-6, 32, 6);
+  ctx.globalAlpha = 1;
+
+  /* city skyline silhouette (DE side) with a TV tower + window lights */
+  var bx = pylonR + w*0.015;
+  var blocks = [[0.09,0.28],[0.16,0.46],[0.12,0.34],[0.17,0.58],[0.14,0.4],[0.12,0.46]];
+  var blockRects = [];
+  ctx.fillStyle = steel; ctx.globalAlpha = 0.55;
+  blocks.forEach(function(b){
+    var bw = b[0]*w, bh = b[1]*h*0.55;
+    var rx = bx, ry = deckY-bh, rw = bw*0.82;
+    ctx.fillRect(rx, ry, rw, bh);
+    blockRects.push([rx,ry,rw,bh]);
+    bx += bw;
+  });
+  ctx.globalAlpha = 1;
+  /* window lights */
+  ctx.fillStyle = weft;
+  blockRects.forEach(function(r, bi){
+    var cols = 3, rows = Math.floor(r[3]/16);
+    for(var rrow=0; rrow<rows; rrow++){
+      for(var cc=0; cc<cols; cc++){
+        var flick = Math.sin(time*0.0007 + bi*3 + rrow*1.3 + cc*2.1) > 0.15;
+        if(!flick) continue;
+        ctx.globalAlpha = 0.55;
+        ctx.fillRect(r[0]+8+cc*(r[2]-16)/cols, r[1]+10+rrow*14, 3, 4);
+      }
+    }
+  });
+  ctx.globalAlpha = 1;
+  /* TV tower */
+  var towerX = pylonR + w*0.10, towerBase = deckY, towerTopY = deckY - h*0.5;
+  ctx.strokeStyle = steel; ctx.lineWidth = 2.4; ctx.globalAlpha = 0.7;
+  ctx.beginPath(); ctx.moveTo(towerX, towerBase); ctx.lineTo(towerX, towerTopY); ctx.stroke();
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = steel;
+  ctx.beginPath(); ctx.arc(towerX, towerTopY+10, 7, 0, Math.PI*2); ctx.fill();
+  var beacon = moving ? (0.5+0.5*Math.sin(time*0.005)) : 1;
+  ctx.globalAlpha = beacon; ctx.fillStyle = warp; ctx.shadowColor = warp; ctx.shadowBlur = 8;
+  ctx.beginPath(); ctx.arc(towerX, towerTopY-4, 2.6, 0, Math.PI*2); ctx.fill();
+  ctx.shadowBlur = 0; ctx.globalAlpha = 1;
+
+  /* water band beneath the deck: soft tinted gradient + faint ripple lines (no mirrored geometry — keeps this robust) */
+  var waterGrad = ctx.createLinearGradient(0,deckY,0,h);
+  waterGrad.addColorStop(0, "#3d3452");
+  waterGrad.addColorStop(1, getVar('--surface'));
+  ctx.globalAlpha = 0.55;
+  ctx.fillStyle = waterGrad;
+  ctx.fillRect(0,deckY,w,h-deckY);
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = "#ffffff";
+  for(var rip=0; rip<3; rip++){
+    var ry2 = deckY + 14 + rip*16;
+    var shimmer = moving ? Math.sin(time*0.0009 + rip*2) : 0.3;
+    ctx.globalAlpha = 0.10 + 0.08*Math.abs(shimmer);
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(w*0.05, ry2); ctx.lineTo(w*0.95, ry2); ctx.stroke();
   }
   ctx.globalAlpha = 1;
 
-  /* pylons */
-  [pylonL,pylonR].forEach(function(px){
-    ctx.strokeStyle = inkSoft; ctx.lineWidth = 4; ctx.lineCap = "round";
-    ctx.beginPath(); ctx.moveTo(px,deckY+4); ctx.lineTo(px,topY); ctx.stroke();
-  });
-
-  /* deck */
-  ctx.strokeStyle = inkSoft; ctx.lineWidth = 3; ctx.lineCap = "round";
-  ctx.beginPath(); ctx.moveTo(w*0.02,deckY); ctx.lineTo(w*0.98,deckY); ctx.stroke();
+  /* bridge (glowing) */
+  drawBridgeStructure(ctx, pylonL, pylonR, topY, sagY, deckY, lineColor, true, 1);
 
   /* flowing particles: capital DE -> TJ (right to left), goods/returns TJ -> DE (left to right) */
   function drawParticle(t, dir, color){
     var x = dir>0 ? pylonL + (pylonR-pylonL)*t : pylonR - (pylonR-pylonL)*t;
-    var bob = Math.sin(t*Math.PI*2 + (dir>0?0:3.14)) * 3;
-    var y = deckY - 9 + bob*0 - 6; // sits slightly above deck line
     ctx.beginPath();
-    ctx.arc(x, deckY-8, 3.4, 0, Math.PI*2);
+    ctx.arc(x, deckY-8, 3.6, 0, Math.PI*2);
     ctx.fillStyle = color;
-    ctx.shadowColor = color; ctx.shadowBlur = 8;
+    ctx.shadowColor = color; ctx.shadowBlur = 12;
     ctx.fill();
     ctx.shadowBlur = 0;
   }
