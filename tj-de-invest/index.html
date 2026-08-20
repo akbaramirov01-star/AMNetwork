@@ -205,27 +205,39 @@
   .hero-copy .section-sub{font-size:1.12rem; max-width:560px; margin-top:20px;}
   .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
 
-  .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:64px; background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden;}
-  .stat-cell{background:var(--surface); padding:24px 20px; text-align:center;}
-  .stat-value{font-family:var(--font-display); font-weight:800; font-size:clamp(1.5rem,1rem+1.6vw,2.1rem); color:var(--weft);
-    font-variant-numeric:tabular-nums;}
-  .stat-label{font-size:0.82rem; color:var(--ink-faint); margin-top:6px; line-height:1.4;}
-  @media (max-width:800px){ .stat-grid{grid-template-columns:repeat(2,1fr);} }
+  .hero-stats{
+    display:flex; flex-wrap:wrap; margin-top:40px; border:1px solid var(--line); border-radius:8px;
+    background:color-mix(in srgb, var(--surface) 72%, transparent); backdrop-filter:blur(10px); overflow:hidden;
+  }
+  .hstat{padding:16px 22px; border-right:1px solid var(--line); flex:1; min-width:130px;}
+  .hstat:last-child{border-right:none;}
+  .hstat-num{
+    font-family:var(--font-display); font-weight:700; font-size:1.3rem; color:var(--weft);
+    font-variant-numeric:tabular-nums; display:block;
+  }
+  .hstat-lbl{font-size:0.68rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.07em; margin-top:4px; display:block; line-height:1.3;}
+  @media (max-width:700px){
+    .hero-stats{flex-direction:column;}
+    .hstat{border-right:none; border-bottom:1px solid var(--line);}
+    .hstat:last-child{border-bottom:none;}
+  }
 
   /* ---------- Path selection ---------- */
   .path-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
   @media (max-width:800px){ .path-grid{grid-template-columns:1fr;} }
-  .path-card{
-    position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
-    padding:36px 32px; display:flex; flex-direction:column; gap:14px;
-    transition:border-color 0.25s ease;
-  }
-  .path-card::before{
+  .line-hover{position:relative;}
+  .line-hover::before{
     content:""; position:absolute; top:-1px; left:-1px; height:2px; width:0;
     background:var(--weft-strong); transition:width 0.35s ease;
   }
+  .line-hover:hover::before{width:64px;}
+
+  .path-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
+    padding:36px 32px; display:flex; flex-direction:column; gap:14px;
+    transition:border-color 0.25s ease;
+  }
   .path-card:hover{border-color:var(--steel);}
-  .path-card:hover::before{width:64px;}
   .path-icon{width:32px; height:32px; display:flex; align-items:center; justify-content:center; margin-bottom:6px; padding-bottom:10px; border-bottom:1px solid var(--line);}
   .path-card.investor .path-icon{color:var(--weft);}
   .path-card.business .path-icon{color:var(--warp);}
@@ -248,7 +260,7 @@
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
     padding:26px; transition:border-color 0.2s ease;
   }
-  .sector-card:hover{border-color:var(--weft-strong);}
+  .sector-card:hover{border-color:var(--steel);}
   .sector-icon{width:42px; height:42px; color:var(--steel-strong); margin-bottom:14px;}
   .sector-card h3{font-size:1.08rem; margin-bottom:8px;}
   .sector-card p{color:var(--ink-soft); font-size:0.94rem;}
@@ -256,7 +268,8 @@
   /* ---------- Opportunities ---------- */
   .opp-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
   @media (max-width:800px){ .opp-grid{grid-template-columns:1fr;} }
-  .opp-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:26px; display:flex; flex-direction:column; gap:12px;}
+  .opp-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:26px; display:flex; flex-direction:column; gap:12px; transition:border-color 0.2s ease;}
+  .opp-card:hover{border-color:var(--steel);}
   .opp-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
   .opp-tag{
     font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
@@ -312,19 +325,16 @@
 
   /* ---------- Process ---------- */
   .process-strip{background:var(--surface-2);}
-  .process-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:0; counter-reset:step;}
-  @media (max-width:900px){ .process-grid{grid-template-columns:repeat(2,1fr); gap:28px;} }
-  @media (max-width:560px){ .process-grid{grid-template-columns:1fr;} }
-  .process-step{position:relative; padding:0 22px 0 0;}
-  .process-step:not(:last-child)::after{
-    content:""; position:absolute; top:19px; left:0; right:0; height:1px; background:var(--line);
+  .process-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:var(--radius-card); overflow:hidden;
   }
-  @media (max-width:900px){ .process-step:not(:last-child)::after{display:none;} }
+  @media (max-width:900px){ .process-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .process-grid{grid-template-columns:1fr;} }
+  .process-step{background:var(--surface); padding:30px 24px;}
   .process-index{
-    font-family:var(--font-display); font-weight:800; font-size:1rem;
-    width:38px; height:38px; border-radius:50%; background:var(--ground); border:1px solid var(--line);
-    display:flex; align-items:center; justify-content:center; margin-bottom:18px; position:relative; z-index:1;
-    color:var(--weft);
+    font-family:var(--font-display); font-weight:700; font-size:2.6rem; line-height:1;
+    color:var(--weft); opacity:0.18; display:block; margin-bottom:8px;
   }
   .process-step h3{font-size:1.05rem; margin-bottom:8px;}
   .process-step p{color:var(--ink-soft); font-size:0.92rem;}
@@ -425,14 +435,12 @@
           <a href="#opportunities" class="btn btn-primary" data-i18n="hero.ctaInvestor"></a>
           <a href="#contact" class="btn btn-outline" data-i18n="hero.ctaBusiness"></a>
         </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="stat-grid reveal-stagger">
-        <div class="stat-cell"><div class="stat-value" data-count="10.8" data-suffix="M">0</div><div class="stat-label" data-i18n="hero.stat1"></div></div>
-        <div class="stat-cell"><div class="stat-value" data-count="8.4" data-suffix="%">0</div><div class="stat-label" data-i18n="hero.stat2"></div></div>
-        <div class="stat-cell"><div class="stat-value">#8</div><div class="stat-label" data-i18n="hero.stat3"></div></div>
-        <div class="stat-cell"><div class="stat-value" data-count="98" data-suffix="%">0</div><div class="stat-label" data-i18n="hero.stat4"></div></div>
+        <div class="hero-stats reveal-stagger">
+          <div class="hstat"><span class="hstat-num" data-count="10.8" data-suffix="M">0</span><span class="hstat-lbl" data-i18n="hero.stat1"></span></div>
+          <div class="hstat"><span class="hstat-num" data-count="8.4" data-suffix="%">0</span><span class="hstat-lbl" data-i18n="hero.stat2"></span></div>
+          <div class="hstat"><span class="hstat-num">#8</span><span class="hstat-lbl" data-i18n="hero.stat3"></span></div>
+          <div class="hstat"><span class="hstat-num" data-count="98" data-suffix="%">0</span><span class="hstat-lbl" data-i18n="hero.stat4"></span></div>
+        </div>
       </div>
     </div>
   </section>
@@ -444,13 +452,13 @@
         <p class="section-sub" data-i18n="path.subtitle"></p>
       </div>
       <div class="path-grid reveal-stagger">
-        <div class="path-card investor">
+        <div class="path-card line-hover investor">
           <div class="path-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg></div>
           <h3 data-i18n="path.investorTitle"></h3>
           <p data-i18n="path.investorDesc"></p>
           <a href="#opportunities" class="btn btn-ghost" data-i18n="path.investorCta"></a>
         </div>
-        <div class="path-card business photo" style="--card-photo:url('https://d8j0ntlcm91z4.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/hf_20260820_153534_7cc29ec7-2d8e-4478-b266-71e4c9212936.png')">
+        <div class="path-card line-hover business photo" style="--card-photo:url('https://d8j0ntlcm91z4.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/hf_20260820_153534_7cc29ec7-2d8e-4478-b266-71e4c9212936.png')">
           <div class="path-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c-4-3-8-6.5-8-11a8 8 0 0 1 16 0c0 4.5-4 8-8 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
           <h3 data-i18n="path.businessTitle"></h3>
           <p data-i18n="path.businessDesc"></p>
@@ -931,12 +939,12 @@ function t(path, dict){
 function renderLists(dict){
   var sectorGrid = document.getElementById("sectorGrid");
   sectorGrid.innerHTML = dict.sectorItems.map(function(s,i){
-    return '<div class="sector-card"><div class="sector-icon">'+sectorIcons[i]+'</div><h3>'+s.name+'</h3><p>'+s.desc+'</p></div>';
+    return '<div class="sector-card line-hover"><div class="sector-icon">'+sectorIcons[i]+'</div><h3>'+s.name+'</h3><p>'+s.desc+'</p></div>';
   }).join("");
 
   var oppGrid = document.getElementById("oppGrid");
   oppGrid.innerHTML = dict.oppItems.map(function(o){
-    return '<div class="opp-card">'+
+    return '<div class="opp-card line-hover">'+
       '<div class="opp-top"><span class="opp-sector">'+o.sector+'</span><span class="opp-tag">'+dict.opportunities.demoTag+'</span></div>'+
       '<h3>'+o.name+'</h3><div class="opp-loc">'+o.loc+'</div>'+
       '<p class="desc">'+o.desc+'</p>'+
@@ -960,7 +968,7 @@ function renderLists(dict){
   }).join("");
 
   function priceCard(tier){
-    return '<div class="price-card'+(tier.popular?' popular':'')+'">'+
+    return '<div class="price-card line-hover'+(tier.popular?' popular':'')+'">'+
       (tier.popular?'<span class="price-badge">'+ (dict===translations.de? "Beliebt":dict===translations.ru?"Популярный":dict===translations.tg?"Маъмул":"Popular") +'</span>':'')+
       '<h3>'+tier.name+'</h3>'+
       '<div class="price-tag"><span class="price-amount">'+tier.price+'</span><span class="price-period">'+tier.period+'</span></div>'+
