@@ -90,7 +90,7 @@
   p{margin:0;}
   button{font-family:inherit; cursor:pointer;}
   .container{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
-  section{padding:96px 0;}
+  section{padding:96px 0; scroll-margin-top:78px;}
   @media (max-width:720px){ section{padding:64px 0;} }
 
   .eyebrow{
@@ -222,6 +222,92 @@
     .hstat:last-child{border-bottom:none;}
   }
 
+
+  /* ---------- Hero stat icons ---------- */
+  .hstat-top{display:flex; align-items:center; gap:9px;}
+  .hstat-icon{width:17px; height:17px; color:var(--steel-strong); flex-shrink:0;}
+  .hstat-icon svg{width:100%; height:100%;}
+
+  /* ---------- Theme toggle ---------- */
+  .theme-btn{
+    display:flex; align-items:center; justify-content:center; width:40px; height:40px;
+    border-radius:10px; border:1px solid var(--line); background:var(--surface);
+    color:var(--ink-soft); cursor:pointer; transition:border-color 0.2s ease, color 0.2s ease;
+  }
+  .theme-btn:hover{border-color:var(--weft-strong); color:var(--weft);}
+  .theme-btn svg{width:18px; height:18px;}
+  .theme-btn .icon-moon{display:none;}
+  :root[data-theme="dark"] .theme-btn .icon-moon{display:block;}
+  :root[data-theme="dark"] .theme-btn .icon-sun{display:none;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .theme-btn .icon-moon{display:block;}
+    :root:not([data-theme="light"]) .theme-btn .icon-sun{display:none;}
+  }
+
+  /* ---------- Analytics ---------- */
+  .analytics-grid{display:grid; grid-template-columns:1.15fr 1fr; gap:26px; align-items:start;}
+  @media (max-width:900px){ .analytics-grid{grid-template-columns:1fr;} }
+  .panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:28px;
+  }
+  .panel-title{font-family:var(--font-display); font-weight:700; font-size:1.05rem; margin-bottom:6px;}
+  .panel-note{font-size:0.78rem; color:var(--ink-faint); line-height:1.55; margin-top:16px;}
+
+  /* trade gap bars */
+  .gap-row{margin-top:20px;}
+  .gap-head{display:flex; justify-content:space-between; align-items:baseline; font-size:0.85rem; margin-bottom:7px;}
+  .gap-head .gap-val{font-family:var(--font-display); font-weight:800; font-variant-numeric:tabular-nums;}
+  .gap-track{height:12px; border-radius:6px; background:var(--surface-2); overflow:hidden;}
+  .gap-fill{height:100%; width:0; border-radius:6px; transition:width 1.1s cubic-bezier(.22,.8,.3,1);}
+  .gap-fill.de{background:var(--steel-strong);}
+  .gap-fill.tj{background:var(--weft-strong);}
+  .gap-verdict{
+    margin-top:22px; padding:16px 18px; border-radius:10px; line-height:1.6; font-size:0.9rem;
+    background:color-mix(in srgb, var(--weft-strong) 11%, transparent);
+    border-left:3px solid var(--weft-strong); color:var(--ink);
+  }
+
+  /* indicator table */
+  .ind-table{width:100%; border-collapse:collapse; margin-top:14px; font-size:0.9rem;}
+  .ind-table th{
+    text-align:left; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.07em;
+    color:var(--ink-faint); font-weight:700; padding:0 0 10px; border-bottom:1px solid var(--line);
+  }
+  .ind-table th:last-child, .ind-table td:last-child{text-align:right;}
+  .ind-table td{padding:11px 0; border-bottom:1px solid var(--line); color:var(--ink-soft);}
+  .ind-table tr:last-child td{border-bottom:none;}
+  .ind-table td.ind-val{
+    font-family:var(--font-display); font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;
+    white-space:nowrap; padding-left:14px;
+  }
+
+  /* sector potential bars */
+  .spot{margin-top:18px; display:flex; flex-direction:column; gap:15px;}
+  .spot-row .spot-head{display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:6px; gap:12px;}
+  .spot-row .spot-head b{font-family:var(--font-display); font-variant-numeric:tabular-nums; color:var(--weft);}
+  .spot-track{height:7px; border-radius:4px; background:var(--surface-2); overflow:hidden;}
+  .spot-fill{height:100%; width:0; border-radius:4px; background:linear-gradient(90deg, var(--weft-strong), var(--steel-strong)); transition:width 1s cubic-bezier(.22,.8,.3,1);}
+
+  /* ---------- Footer (investor types / socials / contacts) ---------- */
+  .footer-cols{display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:34px; margin-top:8px;}
+  @media (max-width:860px){ .footer-cols{grid-template-columns:1fr 1fr; gap:28px;} }
+  @media (max-width:520px){ .footer-cols{grid-template-columns:1fr;} }
+  .fcol h4{
+    font-size:0.7rem; text-transform:uppercase; letter-spacing:0.09em; color:var(--ink);
+    font-family:var(--font-display); font-weight:700; margin:0 0 14px;
+  }
+  .fcol ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
+  .fcol li{font-size:0.86rem; color:var(--ink-soft); line-height:1.5;}
+  .fcol a{color:var(--ink-soft); text-decoration:none; transition:color 0.2s ease;}
+  .fcol a:hover{color:var(--weft);}
+  .fsocials{display:flex; flex-direction:column; gap:11px;}
+  .fsocial{display:flex; align-items:center; gap:9px; font-size:0.86rem; color:var(--ink-soft); text-decoration:none; transition:color 0.2s ease;}
+  .fsocial:hover{color:var(--weft);}
+  .fsocial svg{width:16px; height:16px; flex-shrink:0;}
+  .fmail{display:block; font-size:0.86rem; color:var(--ink-soft); text-decoration:none; transition:color 0.2s ease;}
+  .fmail:hover{color:var(--weft);}
+  .fmail span{display:block; font-size:0.7rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:2px;}
+
   /* ---------- Path selection ---------- */
   .path-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
   @media (max-width:800px){ .path-grid{grid-template-columns:1fr;} }
@@ -270,12 +356,16 @@
   @media (max-width:800px){ .opp-grid{grid-template-columns:1fr;} }
   .opp-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card); padding:26px; display:flex; flex-direction:column; gap:12px; transition:border-color 0.2s ease;}
   .opp-card:hover{border-color:var(--steel);}
+  /* grid items default to min-width:auto, so a nowrap tag can force the track
+     wider than the viewport — let the cards shrink and the tag wrap on phones */
+  .opp-grid > *{min-width:0;}
   .opp-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
   .opp-tag{
     font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
     background:transparent; border:1px solid color-mix(in srgb, var(--warp-strong) 45%, transparent);
     color:var(--warp); border-radius:var(--radius-tag); padding:3px 8px; white-space:nowrap;
   }
+  @media (max-width:520px){ .opp-tag{white-space:normal;} }
   .opp-sector{font-size:0.78rem; font-weight:700; color:var(--steel-strong); text-transform:uppercase; letter-spacing:0.05em;}
   .opp-card h3{font-size:1.12rem;}
   .opp-loc{font-size:0.85rem; color:var(--ink-faint);}
@@ -405,6 +495,10 @@
           <button data-lang="de"><span class="lang-flag" aria-hidden="true">🇩🇪</span>Deutsch</button>
         </div>
       </div>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></svg>
+      </button>
       <a href="#contact" class="btn btn-primary" data-i18n="nav.cta"></a>
       <button class="menu-toggle" id="menuToggle" aria-label="Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -436,10 +530,10 @@
           <a href="#contact" class="btn btn-outline" data-i18n="hero.ctaBusiness"></a>
         </div>
         <div class="hero-stats reveal-stagger">
-          <div class="hstat"><span class="hstat-num" data-count="10.8" data-suffix="M">0</span><span class="hstat-lbl" data-i18n="hero.stat1"></span></div>
-          <div class="hstat"><span class="hstat-num" data-count="8.4" data-suffix="%">0</span><span class="hstat-lbl" data-i18n="hero.stat2"></span></div>
-          <div class="hstat"><span class="hstat-num">#8</span><span class="hstat-lbl" data-i18n="hero.stat3"></span></div>
-          <div class="hstat"><span class="hstat-num" data-count="98" data-suffix="%">0</span><span class="hstat-lbl" data-i18n="hero.stat4"></span></div>
+          <div class="hstat"><div class="hstat-top"><span class="hstat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16.5 6.2a3.2 3.2 0 0 1 0 5.6"/><path d="M18 14.4a6.3 6.3 0 0 1 3.5 5.6"/></svg></span><span class="hstat-num" data-count="10.8" data-suffix="M">0</span></div><span class="hstat-lbl" data-i18n="hero.stat1"></span></div>
+          <div class="hstat"><div class="hstat-top"><span class="hstat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5.5-5.5 3.5 3.5L21 6"/><path d="M15 6h6v6"/></svg></span><span class="hstat-num" data-count="8.4" data-suffix="%">0</span></div><span class="hstat-lbl" data-i18n="hero.stat2"></span></div>
+          <div class="hstat"><div class="hstat-top"><span class="hstat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 3c3.6 4.3 5.6 7.3 5.6 9.8A5.6 5.6 0 0 1 12 18.4a5.6 5.6 0 0 1-5.6-5.6C6.4 10.3 8.4 7.3 12 3z"/></svg></span><span class="hstat-num" >#8</span></div><span class="hstat-lbl" data-i18n="hero.stat3"></span></div>
+          <div class="hstat"><div class="hstat-top"><span class="hstat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4C10 4 4 9 4 16a6 6 0 0 0 6 6c7 0 10-6 10-18z"/><path d="M4 20c4-6 8-9 13-11"/></svg></span><span class="hstat-num" data-count="98" data-suffix="%">0</span></div><span class="hstat-lbl" data-i18n="hero.stat4"></span></div>
         </div>
       </div>
     </div>
@@ -511,6 +605,63 @@
     </div>
   </section>
 
+  <section id="analytics">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" data-i18n="analytics.eyebrow"></div>
+        <h2 class="section-title" data-i18n="analytics.title"></h2>
+        <p class="section-sub" data-i18n="analytics.subtitle"></p>
+      </div>
+
+      <div class="analytics-grid">
+        <div class="panel reveal">
+          <div class="panel-title" data-i18n="analytics.gapTitle"></div>
+          <p style="color:var(--ink-soft); font-size:0.9rem; line-height:1.6;" data-i18n="analytics.gapSub"></p>
+
+          <div class="gap-row">
+            <div class="gap-head">
+              <span data-i18n="analytics.gapDe"></span>
+              <span class="gap-val">&euro;50M</span>
+            </div>
+            <div class="gap-track"><div class="gap-fill de" data-width="100"></div></div>
+          </div>
+
+          <div class="gap-row">
+            <div class="gap-head">
+              <span data-i18n="analytics.gapTj"></span>
+              <span class="gap-val">&euro;3.4M</span>
+            </div>
+            <div class="gap-track"><div class="gap-fill tj" data-width="7"></div></div>
+          </div>
+
+          <div class="gap-verdict" data-i18n="analytics.gapVerdict"></div>
+          <p class="panel-note" data-i18n="analytics.gapSource"></p>
+        </div>
+
+        <div class="panel reveal">
+          <div class="panel-title" data-i18n="analytics.indTitle"></div>
+          <table class="ind-table">
+            <thead>
+              <tr>
+                <th data-i18n="analytics.indCol1"></th>
+                <th data-i18n="analytics.indCol2"></th>
+              </tr>
+            </thead>
+            <tbody id="indBody"></tbody>
+          </table>
+          <p class="panel-note" data-i18n="analytics.indSource"></p>
+        </div>
+      </div>
+
+      <div class="panel reveal" style="margin-top:26px;">
+        <div class="panel-title" data-i18n="analytics.potTitle"></div>
+        <p style="color:var(--ink-soft); font-size:0.9rem; line-height:1.6;" data-i18n="analytics.potSub"></p>
+        <div class="spot" id="spotList"></div>
+        <p class="panel-note" data-i18n="analytics.potNote"></p>
+      </div>
+    </div>
+  </section>
+
   <section id="why">
     <div class="container">
       <div class="section-head center reveal">
@@ -575,7 +726,7 @@
 
 <footer>
   <div class="container">
-    <div class="footer-top">
+    <div class="footer-cols">
       <div>
         <div class="brand" style="margin-bottom:10px;">
           <svg class="brand-mark" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="var(--weft-strong)" stroke-width="1.8" fill="none"/><path d="M20 8 L25 20 L20 32 L15 20 Z" fill="var(--weft-strong)"/><circle cx="20" cy="20" r="2" fill="var(--surface)"/></svg>
@@ -583,19 +734,41 @@
         </div>
         <p class="footer-tagline" data-i18n="footer.tagline"></p>
       </div>
-      <div class="lang-switch">
-        <div class="lang-menu open" style="position:static; box-shadow:none; border:none; background:none; flex-direction:row; padding:0;" id="langMenuFooter">
-          <button data-lang="tg"><span class="lang-flag" aria-hidden="true">🇹🇯</span>TG</button>
-          <button data-lang="ru"><span class="lang-flag" aria-hidden="true">🇷🇺</span>RU</button>
-          <button data-lang="en"><span class="lang-flag" aria-hidden="true">🇬🇧</span>EN</button>
-          <button data-lang="de"><span class="lang-flag" aria-hidden="true">🇩🇪</span>DE</button>
+
+      <div class="fcol">
+        <h4 data-i18n="footer.audienceTitle"></h4>
+        <ul id="footerAudience"></ul>
+      </div>
+
+      <div class="fcol">
+        <h4 data-i18n="footer.contactTitle"></h4>
+        <div class="fsocials">
+          <a class="fmail" href="mailto:invest@rohbar.example">
+            <span data-i18n="footer.mailInvestors"></span>invest@rohbar.example
+          </a>
+          <a class="fmail" href="mailto:business@rohbar.example">
+            <span data-i18n="footer.mailBusiness"></span>business@rohbar.example
+          </a>
+          <a class="fmail" href="mailto:press@rohbar.example">
+            <span data-i18n="footer.mailPress"></span>press@rohbar.example
+          </a>
+        </div>
+      </div>
+
+      <div class="fcol">
+        <h4 data-i18n="footer.followTitle"></h4>
+        <div class="fsocials">
+          <a class="fsocial" href="#contact"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.02-3.06-1.9-3.06-1.9 0-2.2 1.45-2.2 2.96V21h-4z"/></svg><span>LinkedIn</span></a>
+          <a class="fsocial" href="#contact"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.8 19c-.23 1.03-.85 1.28-1.72.8l-4.75-3.5-2.29 2.2c-.25.26-.47.47-.96.47l.34-4.84 8.8-7.95c.38-.34-.08-.53-.6-.19L6.75 13.1l-4.68-1.46c-1.02-.32-1.04-1.02.21-1.51l18.3-7.05c.85-.31 1.59.2 1.32 1.22z"/></svg><span>Telegram</span></a>
+          <a class="fsocial" href="#contact"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3.3l-7.2 8.24L22 21h-6.6l-5.17-6.76L4.3 21H1l7.7-8.8L1.4 3H8.2l4.67 6.18zm-1.16 16h1.83L7.75 4.9H5.79z"/></svg><span>X / Twitter</span></a>
         </div>
       </div>
     </div>
+
     <p class="footer-disclaimer" data-i18n="footer.disclaimer"></p>
     <div class="footer-bottom">
       <span data-i18n="footer.rights"></span>
-      <span>contact@tajbridge.example</span>
+      <a class="fmail" href="mailto:contact@rohbar.example" style="display:inline">contact@rohbar.example</a>
     </div>
   </div>
 </footer>
@@ -634,11 +807,45 @@ var translations = {
       message:"Message", submit:"Send message",
       success:"Thank you — this is a concept preview, so messages aren't sent yet. In the live version, our team would follow up within 48 hours."
     },
-    footer: {
+    footer: { audienceTitle:"Who we work with", contactTitle:"Direct contacts", followTitle:"Follow", mailInvestors:"Investors", mailBusiness:"Businesses", mailPress:"Press & partnerships",
       tagline:"Rohbar — connecting Tajik enterprise with German investment.",
       disclaimer:"This site is a concept preview prepared for demonstration purposes. Sample opportunities are illustrative and do not represent real listings.",
       rights:"© 2026 Rohbar. All rights reserved."
     },
+    analytics: {
+      eyebrow:"Market analytics",
+      title:"The Numbers Behind the Opportunity",
+      subtitle:"Tajikistan is one of the least-served frontier markets in Europe's trade network. That is precisely what makes it interesting.",
+      gapTitle:"The trade gap",
+      gapSub:"Bilateral trade between Germany and Tajikistan is small — and almost entirely one-directional.",
+      gapDe:"German exports to Tajikistan",
+      gapTj:"Tajik exports to Germany",
+      gapVerdict:"For every euro Tajikistan sells into Germany, Germany sells roughly fifteen back. Closing even a fraction of that gap is a market opening, not a rounding error.",
+      gapSource:"Source: German Federal Foreign Office, bilateral trade figures for 2024 (approx. €53M total, of which ~€50M German exports).",
+      indTitle:"Key economic indicators",
+      indCol1:"Indicator", indCol2:"Value",
+      indSource:"Sources: World Bank, IEA, national statistics. Figures are the most recent published values and are indicative.",
+      potTitle:"Sector readiness for foreign capital",
+      potSub:"Our own assessment of how prepared each sector is to absorb and use international investment today.",
+      potNote:"Readiness scores are Rohbar's internal editorial assessment for this concept preview — they combine export potential, regulatory clarity and existing infrastructure. They are not investment advice."
+    },
+    indicators:[
+      {label:"Population", value:"10.8M"},
+      {label:"GDP growth (2025)", value:"8.4%"},
+      {label:"Electricity from renewables", value:"98%"},
+      {label:"World rank, hydropower potential", value:"#8"},
+      {label:"Hydropower potential developed", value:"~5%"},
+      {label:"Bilateral trade with Germany (2024)", value:"€53M"}
+    ],
+    potential:[
+      {name:"Hydropower & Green Energy", note:"Very high", score:92},
+      {name:"Agriculture & Food Processing", note:"High", score:80},
+      {name:"Mining & Metals", note:"High", score:74},
+      {name:"Textiles & Cotton", note:"Moderate", score:63},
+      {name:"IT & Digital Services", note:"Moderate", score:56},
+      {name:"Tourism & Hospitality", note:"Early stage", score:42}
+    ],
+    footerAudience:["Family offices &amp; private investors","Mittelstand manufacturers","Import &amp; distribution partners","Development finance institutions","Trade &amp; industry associations"],
     sectorItems:[
       {name:"Agriculture & Food Processing", desc:"Fruit, vegetables, dried produce and processing facilities serving both domestic and export markets."},
       {name:"Textiles & Cotton", desc:"From raw cotton to finished garments — a century-old industry modernizing for European supply chains."},
@@ -709,11 +916,45 @@ var translations = {
       message:"Сообщение", submit:"Отправить сообщение",
       success:"Спасибо — это концептуальная демо-версия, сообщения пока не отправляются. В реальной версии наша команда свяжется с вами в течение 48 часов."
     },
-    footer: {
+    footer: { audienceTitle:"С кем мы работаем", contactTitle:"Прямые контакты", followTitle:"Соцсети", mailInvestors:"Инвесторам", mailBusiness:"Бизнесу", mailPress:"Пресса и партнёрство",
       tagline:"Rohbar — соединяем таджикское предпринимательство с немецким капиталом.",
       disclaimer:"Этот сайт — концептуальная демонстрационная версия. Примеры возможностей носят иллюстративный характер и не являются реальными предложениями.",
       rights:"© 2026 Rohbar. Все права защищены."
     },
+    analytics: {
+      eyebrow:"Аналитика рынка",
+      title:"Цифры, стоящие за возможностью",
+      subtitle:"Таджикистан — один из наименее охваченных рынков в торговой сети Европы. Именно это и делает его интересным.",
+      gapTitle:"Торговый разрыв",
+      gapSub:"Двусторонняя торговля между Германией и Таджикистаном невелика — и почти полностью односторонняя.",
+      gapDe:"Экспорт Германии в Таджикистан",
+      gapTj:"Экспорт Таджикистана в Германию",
+      gapVerdict:"На каждый евро, который Таджикистан продаёт в Германию, Германия продаёт обратно около пятнадцати. Сократить даже часть этого разрыва — значит открыть рынок, а не поправить статистику.",
+      gapSource:"Источник: МИД ФРГ, данные двусторонней торговли за 2024 год (около €53 млн, из них ~€50 млн — экспорт Германии).",
+      indTitle:"Ключевые экономические показатели",
+      indCol1:"Показатель", indCol2:"Значение",
+      indSource:"Источники: Всемирный банк, МЭА, национальная статистика. Приведены последние опубликованные значения, носят ориентировочный характер.",
+      potTitle:"Готовность отраслей к иностранному капиталу",
+      potSub:"Наша собственная оценка того, насколько каждая отрасль сегодня готова принять и освоить международные инвестиции.",
+      potNote:"Оценки готовности — внутренняя редакционная оценка Rohbar для этой демо-версии; они учитывают экспортный потенциал, регуляторную ясность и существующую инфраструктуру. Это не инвестиционная рекомендация."
+    },
+    indicators:[
+      {label:"Население", value:"10,8 млн"},
+      {label:"Рост ВВП (2025)", value:"8,4%"},
+      {label:"Электроэнергия из ВИЭ", value:"98%"},
+      {label:"Место в мире по гидропотенциалу", value:"#8"},
+      {label:"Освоено гидропотенциала", value:"~5%"},
+      {label:"Товарооборот с Германией (2024)", value:"€53 млн"}
+    ],
+    potential:[
+      {name:"Гидроэнергетика и зелёная энергия", note:"Очень высокая", score:92},
+      {name:"Сельское хозяйство и переработка", note:"Высокая", score:80},
+      {name:"Горнодобыча и металлы", note:"Высокая", score:74},
+      {name:"Текстиль и хлопок", note:"Средняя", score:63},
+      {name:"ИТ и цифровые услуги", note:"Средняя", score:56},
+      {name:"Туризм и гостеприимство", note:"Ранняя стадия", score:42}
+    ],
+    footerAudience:["Семейные офисы и частные инвесторы","Производители Mittelstand","Импортёры и дистрибьюторы","Институты развития","Торгово-промышленные палаты"],
     sectorItems:[
       {name:"Сельское хозяйство и переработка", desc:"Фрукты, овощи, сухофрукты и перерабатывающие мощности для внутреннего рынка и экспорта."},
       {name:"Текстиль и хлопок", desc:"От сырого хлопка до готовой одежды — отрасль с вековой историей, модернизирующаяся под европейские цепочки поставок."},
@@ -784,11 +1025,45 @@ var translations = {
       message:"Nachricht", submit:"Nachricht senden",
       success:"Danke — dies ist eine Konzeptvorschau, Nachrichten werden noch nicht versendet. In der Live-Version würde sich unser Team innerhalb von 48 Stunden melden."
     },
-    footer: {
+    footer: { audienceTitle:"Mit wem wir arbeiten", contactTitle:"Direkte Kontakte", followTitle:"Folgen", mailInvestors:"Investoren", mailBusiness:"Unternehmen", mailPress:"Presse & Partnerschaft",
       tagline:"Rohbar — verbindet tadschikisches Unternehmertum mit deutschem Kapital.",
       disclaimer:"Diese Seite ist eine Konzeptvorschau zu Demonstrationszwecken. Beispielhafte Chancen sind illustrativ und stellen keine realen Angebote dar.",
       rights:"© 2026 Rohbar. Alle Rechte vorbehalten."
     },
+    analytics: {
+      eyebrow:"Marktanalyse",
+      title:"Die Zahlen hinter der Chance",
+      subtitle:"Tadschikistan ist einer der am wenigsten erschlossenen Märkte im europäischen Handelsnetz. Genau das macht ihn interessant.",
+      gapTitle:"Die Handelslücke",
+      gapSub:"Der bilaterale Handel zwischen Deutschland und Tadschikistan ist gering — und nahezu einseitig.",
+      gapDe:"Deutsche Ausfuhren nach Tadschikistan",
+      gapTj:"Tadschikische Ausfuhren nach Deutschland",
+      gapVerdict:"Auf jeden Euro, den Tadschikistan nach Deutschland verkauft, verkauft Deutschland rund fünfzehn zurück. Schon einen Teil dieser Lücke zu schließen, öffnet einen Markt.",
+      gapSource:"Quelle: Auswärtiges Amt, bilaterale Handelszahlen für 2024 (rund 53 Mio. €, davon ca. 50 Mio. € deutsche Ausfuhren).",
+      indTitle:"Zentrale Wirtschaftsindikatoren",
+      indCol1:"Indikator", indCol2:"Wert",
+      indSource:"Quellen: Weltbank, IEA, nationale Statistik. Angegeben sind die zuletzt veröffentlichten Werte; sie sind Richtwerte.",
+      potTitle:"Sektorreife für ausländisches Kapital",
+      potSub:"Unsere eigene Einschätzung, wie gut jeder Sektor heute internationales Kapital aufnehmen und einsetzen kann.",
+      potNote:"Die Reifegrade sind eine interne redaktionelle Einschätzung von Rohbar für diese Konzeptvorschau; sie verbinden Exportpotenzial, regulatorische Klarheit und vorhandene Infrastruktur. Sie sind keine Anlageberatung."
+    },
+    indicators:[
+      {label:"Bevölkerung", value:"10,8 Mio."},
+      {label:"BIP-Wachstum (2025)", value:"8,4 %"},
+      {label:"Strom aus erneuerbaren Quellen", value:"98 %"},
+      {label:"Weltrang Wasserkraftpotenzial", value:"#8"},
+      {label:"Erschlossenes Wasserkraftpotenzial", value:"~5 %"},
+      {label:"Handelsvolumen mit Deutschland (2024)", value:"53 Mio. €"}
+    ],
+    potential:[
+      {name:"Wasserkraft &amp; grüne Energie", note:"Sehr hoch", score:92},
+      {name:"Landwirtschaft &amp; Lebensmittel", note:"Hoch", score:80},
+      {name:"Bergbau &amp; Metalle", note:"Hoch", score:74},
+      {name:"Textil &amp; Baumwolle", note:"Mittel", score:63},
+      {name:"IT &amp; digitale Dienste", note:"Mittel", score:56},
+      {name:"Tourismus &amp; Gastgewerbe", note:"Frühphase", score:42}
+    ],
+    footerAudience:["Family Offices &amp; Privatinvestoren","Mittelständische Hersteller","Import- &amp; Vertriebspartner","Entwicklungsfinanzierer","Industrie- &amp; Handelskammern"],
     sectorItems:[
       {name:"Landwirtschaft & Lebensmittelverarbeitung", desc:"Obst, Gemüse, Trockenfrüchte und Verarbeitungsanlagen für den heimischen und den Exportmarkt."},
       {name:"Textilien & Baumwolle", desc:"Von der Rohbaumwolle bis zum fertigen Kleidungsstück — eine jahrhundertealte Industrie im Wandel für europäische Lieferketten."},
@@ -859,11 +1134,45 @@ var translations = {
       message:"Паём", submit:"Фиристодани паём",
       success:"Ташаккур — ин намоиши консептуалӣ аст, паёмҳо ҳоло фиристода намешаванд. Дар нусхаи воқеӣ дастаи мо дар давоми 48 соат бо шумо тамос мегирад."
     },
-    footer: {
+    footer: { audienceTitle:"Бо кӣ кор мекунем", contactTitle:"Тамосҳои мустақим", followTitle:"Шабакаҳо", mailInvestors:"Сармоягузорон", mailBusiness:"Соҳибкорон", mailPress:"Матбуот ва шарикӣ",
       tagline:"Rohbar — пайванди соҳибкории тоҷикӣ бо сармояи олмонӣ.",
       disclaimer:"Ин сомона намоиши консептуалӣ барои мақсадҳои намоишӣ мебошад. Намунаҳои имкониятҳо тасвирӣ буда, пешниҳодҳои воқеӣ намебошанд.",
       rights:"© 2026 Rohbar. Ҳама ҳуқуқҳо ҳифз шудаанд."
     },
+    analytics: {
+      eyebrow:"Таҳлили бозор",
+      title:"Рақамҳои паси имконият",
+      subtitle:"Тоҷикистон яке аз камфарогиртарин бозорҳо дар шабакаи савдои Аврупост. Маҳз ҳамин онро ҷолиб мегардонад.",
+      gapTitle:"Фосилаи савдо",
+      gapSub:"Савдои дуҷониба байни Олмон ва Тоҷикистон хурд аст — ва қариб пурра яктарафа.",
+      gapDe:"Содироти Олмон ба Тоҷикистон",
+      gapTj:"Содироти Тоҷикистон ба Олмон",
+      gapVerdict:"Ба ҳар евро, ки Тоҷикистон ба Олмон мефурӯшад, Олмон тақрибан понздаҳ баробар бармегардонад. Кам кардани ҳатто як қисми ин фосила кушодани бозор аст.",
+      gapSource:"Манбаъ: Вазорати корҳои хориҷии Олмон, нишондиҳандаҳои савдои дуҷониба барои соли 2024 (тақрибан €53 млн, аз он ~€50 млн содироти Олмон).",
+      indTitle:"Нишондиҳандаҳои асосии иқтисодӣ",
+      indCol1:"Нишондиҳанда", indCol2:"Арзиш",
+      indSource:"Манбаъҳо: Бонки Ҷаҳонӣ, IEA, омори миллӣ. Арзишҳои охирини нашршуда оварда шудаанд ва тахминӣ мебошанд.",
+      potTitle:"Омодагии соҳаҳо ба сармояи хориҷӣ",
+      potSub:"Арзёбии худи мо дар бораи он, ки ҳар соҳа имрӯз то чӣ андоза ба қабул ва истифодаи сармояи байналмилалӣ омода аст.",
+      potNote:"Баҳои омодагӣ арзёбии дохилии таҳририи Rohbar барои ин намоиши консептуалӣ мебошад; он неруи содиротӣ, равшании танзим ва инфрасохтори мавҷударо дар бар мегирад. Ин маслиҳати сармоягузорӣ нест."
+    },
+    indicators:[
+      {label:"Аҳолӣ", value:"10,8 млн"},
+      {label:"Рушди ММД (2025)", value:"8,4%"},
+      {label:"Барқ аз манбаъҳои барқароршаванда", value:"98%"},
+      {label:"Ҷойгоҳ дар ҷаҳон аз рӯи неруи об", value:"#8"},
+      {label:"Неруи обии азхудшуда", value:"~5%"},
+      {label:"Гардиши савдо бо Олмон (2024)", value:"€53 млн"}
+    ],
+    potential:[
+      {name:"Гидроэнергетика ва энергияи сабз", note:"Хеле баланд", score:92},
+      {name:"Кишоварзӣ ва коркарди хӯрокворӣ", note:"Баланд", score:80},
+      {name:"Маъдан ва металлҳо", note:"Баланд", score:74},
+      {name:"Бофандагӣ ва пахта", note:"Миёна", score:63},
+      {name:"IT ва хизматрасонии рақамӣ", note:"Миёна", score:56},
+      {name:"Сайёҳӣ ва меҳмоннавозӣ", note:"Марҳилаи ибтидоӣ", score:42}
+    ],
+    footerAudience:["Дафтарҳои оилавӣ ва сармоягузорони хусусӣ","Истеҳсолкунандагони Mittelstand","Шарикони воридот ва тақсимот","Ниҳодҳои маблағгузории рушд","Палатаҳои савдо ва саноат"],
     sectorItems:[
       {name:"Кишоварзӣ ва коркарди маҳсулот", desc:"Мева, сабзавот, мевҷаҳои хушк ва иншооти коркард барои бозори дохилӣ ва содирот."},
       {name:"Нассоҷӣ ва пахта", desc:"Аз пахтаи хом то либоси тайёр — саноате бо таърихи асрӣ, ки барои занҷираҳои таъминоти аврупоӣ навсозӣ мешавад."},
@@ -912,9 +1221,9 @@ var translations = {
 var sectorIcons = [
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21c4-2 7-6 7-11a7 7 0 0 0-14 0c0 5 3 9 7 11z"/><path d="M12 21V10"/></svg>',
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 6c3 2 6-2 9 0s6-2 9 0"/><path d="M3 12c3 2 6-2 9 0s6-2 9 0"/><path d="M3 18c3 2 6-2 9 0s6-2 9 0"/></svg>',
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 20l6-11 4 6 3-5 5 10z"/><circle cx="17" cy="6" r="2"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M7 3h10l4 6-9 12L3 9z"/><path d="M3 9h18M9.5 3 7 9l5 12 5-12-2.5-6"/></svg>',
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M13 2 5 14h6l-1 8 9-13h-6z"/></svg>',
-  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 20l5-9 4 5 3-6 8 10z"/><circle cx="18" cy="6" r="2.4"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M2 20h20L14.5 6 11 12.5 8.5 9z"/><path d="M12.6 9.2 14.5 6l2 3.7"/><circle cx="6" cy="6" r="2.2"/></svg>',
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m8 9-5 3 5 3M16 9l5 3-5 3M13 5l-2 14"/></svg>'
 ];
 var trustIcons = [
@@ -924,6 +1233,8 @@ var trustIcons = [
 ];
 
 var checkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+
+var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 var LANG_KEY = "tajbridge_lang";
 var current = localStorage.getItem(LANG_KEY) || (navigator.language||"en").slice(0,2);
@@ -979,6 +1290,43 @@ function renderLists(dict){
   }
   document.getElementById("pricingBusinessGrid").innerHTML = dict.businessTiers.map(priceCard).join("");
   document.getElementById("pricingInvestorGrid").innerHTML = dict.investorTiers.map(priceCard).join("");
+
+  document.getElementById("footerAudience").innerHTML = dict.footerAudience.map(function(a){
+    return '<li>'+a+'</li>';
+  }).join("");
+
+  document.getElementById("indBody").innerHTML = dict.indicators.map(function(r){
+    return '<tr><td>'+r.label+'</td><td class="ind-val">'+r.value+'</td></tr>';
+  }).join("");
+
+  document.getElementById("spotList").innerHTML = dict.potential.map(function(x){
+    return '<div class="spot-row">'+
+      '<div class="spot-head"><span>'+x.name+'</span><b>'+x.note+'</b></div>'+
+      '<div class="spot-track"><div class="spot-fill" data-width="'+x.score+'"></div></div>'+
+    '</div>';
+  }).join("");
+
+  animateBars();
+}
+
+/* fill the analytics bars once they are on screen */
+function animateBars(){
+  var bars = document.querySelectorAll(".gap-fill, .spot-fill");
+  if(reduceMotion){
+    bars.forEach(function(b){ b.style.width = b.getAttribute("data-width")+"%"; });
+    return;
+  }
+  bars.forEach(function(b){ b.style.width = "0%"; });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        var el = en.target;
+        setTimeout(function(){ el.style.width = el.getAttribute("data-width")+"%"; }, 120);
+        io.unobserve(el);
+      }
+    });
+  }, {threshold:0.1});
+  bars.forEach(function(b){ io.observe(b); });
 }
 
 function applyLang(lang){
@@ -1014,6 +1362,22 @@ langBtn.addEventListener("click", function(){
 });
 document.addEventListener("click", function(e){
   if(!e.target.closest(".lang-switch")) document.getElementById("langMenu").classList.remove("open");
+});
+
+/* light / dark theme toggle */
+var THEME_KEY = "rohbar_theme";
+function currentTheme(){
+  var stored = localStorage.getItem(THEME_KEY);
+  if(stored === "light" || stored === "dark") return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+function setTheme(mode){
+  document.documentElement.setAttribute("data-theme", mode);
+  localStorage.setItem(THEME_KEY, mode);
+}
+setTheme(currentTheme());
+document.getElementById("themeBtn").addEventListener("click", function(){
+  setTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
 });
 
 applyLang(current);
@@ -1060,7 +1424,6 @@ setTimeout(function(){
 }, 50);
 
 /* counters */
-var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 function animateCount(el){
   var target = parseFloat(el.getAttribute("data-count"));
   var suffix = el.getAttribute("data-suffix")||"";
