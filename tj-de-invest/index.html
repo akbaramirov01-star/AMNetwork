@@ -8,65 +8,66 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ground:#F5F2F7;
+    --ground:#F7F5F0;
     --surface:#FFFFFF;
-    --surface-2:#EFEAF3;
-    --ink:#1E1B29;
-    --ink-soft:#4B4658;
-    --ink-faint:#7A7488;
-    --line:#DCD5E4;
-    --weft:#B8631A;
-    --weft-strong:#E08A2D;
-    --warp:#A83A66;
-    --warp-strong:#C4477A;
-    --steel:#4C6B8A;
-    --steel-strong:#6B8CAE;
+    --surface-2:#F1EEE6;
+    --ink:#1B1D22;
+    --ink-soft:#4B4E57;
+    --ink-faint:#7C8089;
+    --line:#E2DED2;
+    --weft:#9C6B1F;
+    --weft-strong:#C9932E;
+    --warp:#54606F;
+    --warp-strong:#6E7C8C;
+    --steel:#54606F;
+    --steel-strong:#6E7C8C;
     --on-weft:#1E1408;
     --shadow: 0 1px 2px rgba(30,20,15,0.06), 0 8px 24px -8px rgba(30,20,15,0.12);
     --radius-card:14px;
     --radius-tag:5px;
     --radius-btn:10px;
     --maxw:1180px;
-    --font-display:'Golos Text', 'Segoe UI', system-ui, sans-serif;
+    --font-display:'PT Serif', Georgia, 'Times New Roman', serif;
+    --font-accent:'Manrope', 'Segoe UI', system-ui, sans-serif;
     --font-body:'Manrope', 'Segoe UI', system-ui, sans-serif;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --ground:#15111F;
-      --surface:#1C1830;
-      --surface-2:#241E3B;
-      --ink:#F3EFE8;
-      --ink-soft:#C9C2D6;
-      --ink-faint:#928BA3;
-      --line:#332C4A;
-      --weft:#F0A94E;
-      --weft-strong:#E08A2D;
-      --warp:#E06D9B;
-      --warp-strong:#C4477A;
-      --steel:#8FADCB;
-      --steel-strong:#6B8CAE;
-      --on-weft:#1E1408;
+      --ground:#0B0E14;
+      --surface:#111624;
+      --surface-2:#161C2C;
+      --ink:#F5F1E8;
+      --ink-soft:#B9C0CC;
+      --ink-faint:#7E8798;
+      --line:#232B3D;
+      --weft:#E8C27A;
+      --weft-strong:#D4A947;
+      --warp:#8FA3BE;
+      --warp-strong:#A9BBD1;
+      --steel:#8FA3BE;
+      --steel-strong:#A9BBD1;
+      --on-weft:#1A1306;
       --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px -10px rgba(0,0,0,0.55);
     }
   }
   :root[data-theme="dark"]{
-    --ground:#15111F;
-    --surface:#1C1830;
-    --surface-2:#241E3B;
-    --ink:#F3EFE8;
-    --ink-soft:#C9C2D6;
-    --ink-faint:#928BA3;
-    --line:#332C4A;
-    --weft:#F0A94E;
-    --weft-strong:#E08A2D;
-    --warp:#E06D9B;
-    --warp-strong:#C4477A;
-    --steel:#8FADCB;
-    --steel-strong:#6B8CAE;
-    --on-weft:#1E1408;
+    --ground:#0B0E14;
+    --surface:#111624;
+    --surface-2:#161C2C;
+    --ink:#F5F1E8;
+    --ink-soft:#B9C0CC;
+    --ink-faint:#7E8798;
+    --line:#232B3D;
+    --weft:#E8C27A;
+    --weft-strong:#D4A947;
+    --warp:#8FA3BE;
+    --warp-strong:#A9BBD1;
+    --steel:#8FA3BE;
+    --steel-strong:#A9BBD1;
+    --on-weft:#1A1306;
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px -10px rgba(0,0,0,0.55);
   }
 
@@ -134,7 +135,7 @@
   }
   header.scrolled{border-color:var(--line); box-shadow:0 4px 20px -10px rgba(0,0,0,0.25);}
   .nav-row{display:flex; align-items:center; justify-content:space-between; gap:20px; padding:16px 0;}
-  .brand{display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:800; font-size:1.15rem;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--font-accent); font-weight:800; font-size:1.15rem;}
   .brand-mark{width:34px; height:34px;}
   nav.primary{display:flex; gap:28px; align-items:center;}
   nav.primary a{font-weight:600; font-size:0.94rem; color:var(--ink-soft); text-decoration:none; transition:color 0.2s ease;}
@@ -155,10 +156,11 @@
   .lang-menu.open{display:flex;}
   .lang-menu button{
     background:none; border:none; text-align:left; padding:9px 10px; border-radius:7px; font-size:0.88rem; color:var(--ink);
-    display:flex; justify-content:space-between;
+    display:flex; align-items:center; gap:9px;
   }
   .lang-menu button:hover{background:var(--surface-2);}
   .lang-menu button.active{color:var(--weft); font-weight:700;}
+  .lang-flag{font-size:1.05rem; line-height:1;}
 
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:8px;
@@ -203,12 +205,12 @@
   .hero-copy .section-sub{font-size:1.12rem; max-width:560px; margin-top:20px;}
   .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
 
-  .bridge-viz-wrap{position:relative; height:280px; border-radius:16px; overflow:hidden; background:linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%); border:1px solid var(--line);}
+  .bridge-viz-wrap{position:relative; height:280px; border-radius:16px; overflow:hidden; background:linear-gradient(180deg, #0A0E18 0%, #1B2436 100%); border:1px solid var(--line);}
   canvas#bridgeCanvas{width:100%; height:100%; display:block;}
   .bridge-node{
     position:absolute; top:14px;
     display:flex; flex-direction:column; align-items:center; gap:4px;
-    font-family:var(--font-display); font-weight:800; font-size:0.72rem; letter-spacing:0.06em;
+    font-family:var(--font-accent); font-weight:800; font-size:0.72rem; letter-spacing:0.06em;
   }
   .bridge-node .dot{width:9px; height:9px; border-radius:50%; box-shadow:0 0 0 5px color-mix(in srgb, currentColor 16%, transparent);}
   .bridge-node.tj{left:9%; color:var(--weft-strong);}
@@ -278,7 +280,7 @@
   .opp-loc{font-size:0.85rem; color:var(--ink-faint);}
   .opp-card p.desc{color:var(--ink-soft); font-size:0.94rem;}
   .opp-foot{display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:10px; border-top:1px solid var(--line);}
-  .opp-seek{font-family:var(--font-display); font-weight:700; font-size:0.95rem;}
+  .opp-seek{font-family:var(--font-accent); font-weight:700; font-size:0.95rem;}
   .opp-seek span{display:block; font-family:var(--font-body); font-weight:500; font-size:0.7rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.05em;}
 
   /* ---------- Pricing ---------- */
@@ -396,14 +398,14 @@
     <div class="nav-actions">
       <div class="lang-switch">
         <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/></svg>
+          <span class="lang-flag" aria-hidden="true" id="langBtnFlag">🇬🇧</span>
           <span id="langBtnLabel">EN</span>
         </button>
         <div class="lang-menu" id="langMenu">
-          <button data-lang="tg">Тоҷикӣ</button>
-          <button data-lang="ru">Русский</button>
-          <button data-lang="en">English</button>
-          <button data-lang="de">Deutsch</button>
+          <button data-lang="tg"><span class="lang-flag" aria-hidden="true">🇹🇯</span>Тоҷикӣ</button>
+          <button data-lang="ru"><span class="lang-flag" aria-hidden="true">🇷🇺</span>Русский</button>
+          <button data-lang="en"><span class="lang-flag" aria-hidden="true">🇬🇧</span>English</button>
+          <button data-lang="de"><span class="lang-flag" aria-hidden="true">🇩🇪</span>Deutsch</button>
         </div>
       </div>
       <a href="#contact" class="btn btn-primary" data-i18n="nav.cta"></a>
@@ -597,10 +599,10 @@
       </div>
       <div class="lang-switch">
         <div class="lang-menu open" style="position:static; box-shadow:none; border:none; background:none; flex-direction:row; padding:0;" id="langMenuFooter">
-          <button data-lang="tg">TG</button>
-          <button data-lang="ru">RU</button>
-          <button data-lang="en">EN</button>
-          <button data-lang="de">DE</button>
+          <button data-lang="tg"><span class="lang-flag" aria-hidden="true">🇹🇯</span>TG</button>
+          <button data-lang="ru"><span class="lang-flag" aria-hidden="true">🇷🇺</span>RU</button>
+          <button data-lang="en"><span class="lang-flag" aria-hidden="true">🇬🇧</span>EN</button>
+          <button data-lang="de"><span class="lang-flag" aria-hidden="true">🇩🇪</span>DE</button>
         </div>
       </div>
     </div>
@@ -1006,6 +1008,8 @@ function applyLang(lang){
   });
   renderLists(dict);
   document.getElementById("langBtnLabel").textContent = lang.toUpperCase();
+  var FLAGS = { tg:"🇹🇯", ru:"🇷🇺", en:"🇬🇧", de:"🇩🇪" };
+  document.getElementById("langBtnFlag").textContent = FLAGS[lang] || "🇬🇧";
   document.querySelectorAll(".lang-menu button").forEach(function(b){
     b.classList.toggle("active", b.getAttribute("data-lang")===lang);
   });
@@ -1112,20 +1116,23 @@ resize();
 
 function getVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
 
-function cableY(x, pylonL, pylonR, topY, sagY){
-  var t = (x-pylonL)/(pylonR-pylonL);
-  if(t<0) t=0; if(t>1) t=1;
-  // quadratic bezier: P0=topY at pylonL, control=sagY at midspan, P2=topY at pylonR
-  var mt = 1-t;
-  return mt*mt*topY + 2*mt*t*sagY + t*t*topY;
-}
-
 function polygon(pts){ ctx.beginPath(); pts.forEach(function(p,i){ i? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]); }); ctx.closePath(); }
 
-var CAPITAL_N = 6, GOODS_N = 6;
+/* quadratic bezier point at t, given start/control/end */
+function bezierPoint(t, p0, c, p1){
+  var mt = 1-t;
+  return { x: mt*mt*p0.x + 2*mt*t*c.x + t*t*p1.x, y: mt*mt*p0.y + 2*mt*t*c.y + t*t*p1.y };
+}
+
+var CAPITAL_N = 4, GOODS_N = 2;
 var capitalParticles = [], goodsParticles = [];
 for(var i=0;i<CAPITAL_N;i++) capitalParticles.push({t:i/CAPITAL_N});
-for(var j=0;j<GOODS_N;j++) goodsParticles.push({t:j/GOODS_N});
+for(var j=0;j<GOODS_N;j++) goodsParticles.push({t:j/GOODS_N + 0.15});
+
+/* the connecting light-path draws itself once, then particles drift along it */
+var pathStartTime = null;
+var PATH_DRAW_MS = 2400;
+function easeOutCubic(x){ return 1 - Math.pow(1-x, 3); }
 
 var stars = [];
 function seedStars(){
@@ -1136,43 +1143,19 @@ function seedStars(){
   }
 }
 
-function drawBridgeStructure(ctx2, pylonL, pylonR, topY, sagY, deckY, inkSoft, glow, alphaMul){
-  ctx2.globalAlpha = 0.9*alphaMul;
-  ctx2.strokeStyle = inkSoft; ctx2.lineWidth = 1.6;
-  if(glow){ ctx2.shadowColor = inkSoft; ctx2.shadowBlur = 6; }
-  ctx2.beginPath();
-  for(var x=pylonL; x<=pylonR; x+=6){
-    var y = cableY(x, pylonL, pylonR, topY, sagY);
-    x===pylonL ? ctx2.moveTo(x,y) : ctx2.lineTo(x,y);
-  }
-  ctx2.stroke();
-  ctx2.shadowBlur = 0;
-  ctx2.globalAlpha = 0.32*alphaMul;
-  for(var k=1;k<14;k++){
-    var vx = pylonL + (pylonR-pylonL)*(k/14);
-    var vy = cableY(vx, pylonL, pylonR, topY, sagY);
-    ctx2.beginPath(); ctx2.moveTo(vx,vy); ctx2.lineTo(vx,deckY); ctx2.stroke();
-  }
-  ctx2.globalAlpha = alphaMul;
-  [pylonL,pylonR].forEach(function(px){
-    ctx2.strokeStyle = inkSoft; ctx2.lineWidth = 4; ctx2.lineCap = "round";
-    ctx2.beginPath(); ctx2.moveTo(px,deckY+4); ctx2.lineTo(px,topY); ctx2.stroke();
-  });
-  ctx2.strokeStyle = inkSoft; ctx2.lineWidth = 3; ctx2.lineCap = "round";
-  ctx2.beginPath(); ctx2.moveTo(w*0.02,deckY); ctx2.lineTo(w*0.98,deckY); ctx2.stroke();
-  ctx2.globalAlpha = 1;
-}
-
 function drawScene(time, moving){
-  var pylonL = w*0.17, pylonR = w*0.83;
-  var deckY = h*0.60, topY = h*0.15, sagY = deckY - h*0.03;
-  var lineColor = "#d7d2e6"; /* fixed light line color — the bridge sits on a night sky in both themes */
+  var anchorL = w*0.17, anchorR = w*0.83;
+  var deckY = h*0.60;
   var weft = getVar('--weft-strong'), warp = getVar('--warp-strong'), steel = getVar('--steel-strong');
 
-  /* night sky — fixed dark palette on purpose: this is a night scene regardless of the page's light/dark theme */
+  if(pathStartTime===null) pathStartTime = time;
+  var pathProgress = reduceMotion ? 1 : Math.min(1, (time-pathStartTime)/PATH_DRAW_MS);
+  var pathEased = easeOutCubic(pathProgress);
+
+  /* night sky — fixed deep-navy palette on purpose: this is a night scene regardless of the page's light/dark theme */
   var sky = ctx.createLinearGradient(0,0,0,deckY);
-  sky.addColorStop(0, "#171029");
-  sky.addColorStop(1, "#3d3452");
+  sky.addColorStop(0, "#0A0E18");
+  sky.addColorStop(1, "#1B2436");
   ctx.fillStyle = sky;
   ctx.fillRect(0,0,w,deckY+2);
 
@@ -1188,7 +1171,7 @@ function drawScene(time, moving){
 
   /* Pamir mountain range (back layer) */
   ctx.globalAlpha = 0.4;
-  polygon([[0,deckY],[0,deckY*0.5],[w*0.05,deckY*0.3],[w*0.10,deckY*0.48],[w*0.148,deckY*0.28],[pylonL,deckY]]);
+  polygon([[0,deckY],[0,deckY*0.5],[w*0.05,deckY*0.3],[w*0.10,deckY*0.48],[w*0.148,deckY*0.28],[anchorL,deckY]]);
   ctx.fillStyle = steel; ctx.fill();
   ctx.globalAlpha = 1;
 
@@ -1205,7 +1188,7 @@ function drawScene(time, moving){
   ctx.globalAlpha = 1;
 
   /* city skyline silhouette (DE side) with a TV tower + window lights */
-  var bx = pylonR + w*0.015;
+  var bx = anchorR + w*0.015;
   var blocks = [[0.09,0.28],[0.16,0.46],[0.12,0.34],[0.17,0.58],[0.14,0.4],[0.12,0.46]];
   var blockRects = [];
   ctx.fillStyle = steel; ctx.globalAlpha = 0.55;
@@ -1232,7 +1215,7 @@ function drawScene(time, moving){
   });
   ctx.globalAlpha = 1;
   /* TV tower */
-  var towerX = pylonR + w*0.10, towerBase = deckY, towerTopY = deckY - h*0.5;
+  var towerX = anchorR + w*0.10, towerBase = deckY, towerTopY = deckY - h*0.5;
   ctx.strokeStyle = steel; ctx.lineWidth = 2.4; ctx.globalAlpha = 0.7;
   ctx.beginPath(); ctx.moveTo(towerX, towerBase); ctx.lineTo(towerX, towerTopY); ctx.stroke();
   ctx.globalAlpha = 1;
@@ -1245,8 +1228,8 @@ function drawScene(time, moving){
 
   /* water band beneath the deck: soft tinted gradient + faint ripple lines (no mirrored geometry — keeps this robust) */
   var waterGrad = ctx.createLinearGradient(0,deckY,0,h);
-  waterGrad.addColorStop(0, "#3d3452");
-  waterGrad.addColorStop(1, getVar('--surface'));
+  waterGrad.addColorStop(0, "#1B2436");
+  waterGrad.addColorStop(1, "#0A0E18");
   ctx.globalAlpha = 0.55;
   ctx.fillStyle = waterGrad;
   ctx.fillRect(0,deckY,w,h-deckY);
@@ -1261,21 +1244,56 @@ function drawScene(time, moving){
   }
   ctx.globalAlpha = 1;
 
-  /* bridge (glowing) */
-  drawBridgeStructure(ctx, pylonL, pylonR, topY, sagY, deckY, lineColor, true, 1);
+  /* the connecting light-path: a single thin luminous line that draws itself
+     once on load, gently arcing between the two sides, then stays as a
+     quiet backdrop while a few particles drift along it. */
+  var pStart = { x: anchorL+w*0.02, y: deckY-h*0.10 };
+  var pEnd   = { x: towerX-w*0.02, y: deckY-h*0.10 };
+  var pCtrl  = { x: w*0.5, y: deckY-h*0.22 };
 
-  /* flowing particles: capital DE -> TJ (right to left), goods/returns TJ -> DE (left to right) */
-  function drawParticle(t, dir, color){
-    var x = dir>0 ? pylonL + (pylonR-pylonL)*t : pylonR - (pylonR-pylonL)*t;
-    ctx.beginPath();
-    ctx.arc(x, deckY-8, 3.6, 0, Math.PI*2);
-    ctx.fillStyle = color;
-    ctx.shadowColor = color; ctx.shadowBlur = 12;
-    ctx.fill();
-    ctx.shadowBlur = 0;
+  ctx.save();
+  ctx.strokeStyle = weft;
+  ctx.lineWidth = 1.4;
+  ctx.shadowColor = weft; ctx.shadowBlur = 7;
+  ctx.beginPath();
+  var STEPS = 60, drawn = Math.max(1, Math.round(STEPS*pathEased));
+  for(var si=0; si<=drawn; si++){
+    var pt = bezierPoint(si/STEPS, pStart, pCtrl, pEnd);
+    si===0 ? ctx.moveTo(pt.x,pt.y) : ctx.lineTo(pt.x,pt.y);
   }
-  capitalParticles.forEach(function(p){ drawParticle(p.t, -1, weft); if(moving) p.t = (p.t + 0.0032) % 1; });
-  goodsParticles.forEach(function(p){ drawParticle(p.t, 1, warp); if(moving) p.t = (p.t + 0.0026) % 1; });
+  ctx.globalAlpha = 0.8;
+  ctx.stroke();
+  ctx.restore();
+
+  /* soft comet head while the line is still drawing itself */
+  if(pathProgress<1){
+    var tip = bezierPoint(pathEased, pStart, pCtrl, pEnd);
+    ctx.beginPath(); ctx.arc(tip.x, tip.y, 3, 0, Math.PI*2);
+    ctx.fillStyle = weft; ctx.shadowColor = weft; ctx.shadowBlur = 14;
+    ctx.fill(); ctx.shadowBlur = 0;
+  }
+
+  /* endpoint glow nodes */
+  [pStart,pEnd].forEach(function(pnt){
+    ctx.beginPath(); ctx.arc(pnt.x, pnt.y, 2.6, 0, Math.PI*2);
+    ctx.fillStyle = "#F5F1E8"; ctx.shadowColor = weft; ctx.shadowBlur = 10;
+    ctx.fill(); ctx.shadowBlur = 0;
+  });
+
+  /* particles slowly drifting along the completed portion of the path —
+     a few champagne-gold (capital drifting in), fewer, slower blue-gray
+     ones the other way (returns) — deliberately sparse, not a busy flow. */
+  function drawDrifter(t, dir, color, size){
+    var tt = dir>0 ? t*pathEased : (1-t)*pathEased;
+    var pt = bezierPoint(tt, pStart, pCtrl, pEnd);
+    ctx.beginPath(); ctx.arc(pt.x, pt.y, size, 0, Math.PI*2);
+    ctx.fillStyle = color; ctx.shadowColor = color; ctx.shadowBlur = 9;
+    ctx.fill(); ctx.shadowBlur = 0;
+  }
+  if(pathProgress>=1){
+    capitalParticles.forEach(function(p){ drawDrifter(p.t, 1, weft, 2.6); if(moving) p.t = (p.t + 0.0011) % 1; });
+    goodsParticles.forEach(function(p){ drawDrifter(p.t, -1, steel, 2.1); if(moving) p.t = (p.t + 0.0008) % 1; });
+  }
 }
 
 if(reduceMotion){
