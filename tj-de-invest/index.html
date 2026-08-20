@@ -309,6 +309,60 @@
   .fmail span{display:block; font-size:0.7rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:2px;}
 
 
+  .free-banner{
+    margin:0 0 28px; padding:16px 20px; border-radius:10px; line-height:1.6; font-size:0.92rem;
+    background:color-mix(in srgb, var(--weft-strong) 12%, transparent);
+    border-left:3px solid var(--weft-strong); color:var(--ink);
+  }
+
+  .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
+
+  /* ---------- Market brief (lead magnet) ---------- */
+  .brief{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
+    padding:38px 34px; display:grid; grid-template-columns:1.25fr 1fr; gap:34px; align-items:center;
+  }
+  @media (max-width:820px){ .brief{grid-template-columns:1fr; padding:28px 24px;} }
+  .brief h2{font-size:clamp(1.35rem,1rem+1.4vw,1.85rem); margin-bottom:12px;}
+  .brief p{color:var(--ink-soft); line-height:1.65; font-size:0.95rem; margin:0;}
+  .brief-list{list-style:none; margin:18px 0 0; padding:0; display:flex; flex-direction:column; gap:9px;}
+  .brief-list li{display:flex; gap:9px; align-items:flex-start; font-size:0.88rem; color:var(--ink-soft); line-height:1.5;}
+  .brief-list svg{width:15px; height:15px; color:var(--weft); flex-shrink:0; margin-top:3px;}
+  .brief-form{display:flex; flex-direction:column; gap:11px;}
+  .brief-form input{
+    padding:13px 15px; border-radius:var(--radius-btn); border:1px solid var(--line);
+    background:var(--ground); color:var(--ink); font-family:inherit; font-size:0.94rem; width:100%;
+  }
+  .brief-form input:focus{outline:2px solid var(--weft-strong); outline-offset:1px; border-color:transparent;}
+  .brief-note{font-size:0.76rem; color:var(--ink-faint); line-height:1.5;}
+  .brief-note a{color:var(--ink-soft);}
+  .brief-ok{
+    display:none; padding:14px 16px; border-radius:10px; font-size:0.9rem; line-height:1.55;
+    background:color-mix(in srgb, var(--weft-strong) 14%, transparent);
+    border-left:3px solid var(--weft-strong); color:var(--ink);
+  }
+  .brief-ok.show{display:block;}
+
+  /* ---------- Team ---------- */
+  .team-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:860px){ .team-grid{grid-template-columns:1fr;} }
+  .team-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-card);
+    padding:26px; display:flex; flex-direction:column; gap:10px;
+  }
+  .team-photo{
+    width:64px; height:64px; border-radius:50%; background:var(--surface-2);
+    border:1px dashed var(--line); display:flex; align-items:center; justify-content:center; color:var(--ink-faint);
+  }
+  .team-photo svg{width:28px; height:28px;}
+  .team-card h3{font-size:1.05rem;}
+  .team-role{font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--steel-strong); font-weight:700;}
+  .team-card p{font-size:0.87rem; color:var(--ink-soft); line-height:1.6; margin:0;}
+  .team-todo{
+    margin-top:24px; padding:16px 20px; border-radius:10px; font-size:0.88rem; line-height:1.6;
+    background:var(--surface-2); border-left:3px solid var(--warp-strong); color:var(--ink-soft);
+  }
+
   /* ---------- Investment climate ---------- */
   .clim-tabs{display:flex; flex-wrap:wrap; gap:2px; margin-bottom:34px; border-bottom:1px solid var(--line);}
   .clim-tab{
@@ -375,7 +429,25 @@
   }
 
 
+  .footer-legal{display:flex; gap:18px; flex-wrap:wrap;}
+  .footer-legal a{color:var(--ink-faint); text-decoration:none; font-size:0.82rem; transition:color .2s ease;}
+  .footer-legal a:hover{color:var(--weft); text-decoration:underline;}
+
   /* ---------- Sources ---------- */
+  .src-details{margin-top:34px; border-top:1px solid var(--line); padding-top:20px;}
+  .src-details summary{
+    cursor:pointer; font-family:var(--font-display); font-weight:700; font-size:0.95rem;
+    color:var(--ink-soft); list-style:none; display:flex; align-items:center; gap:9px; padding:4px 0;
+    transition:color .2s ease;
+  }
+  .src-details summary:hover{color:var(--weft);}
+  .src-details summary::-webkit-details-marker{display:none;}
+  .src-details summary::before{
+    content:""; width:7px; height:7px; border-right:2px solid currentColor; border-bottom:2px solid currentColor;
+    transform:rotate(-45deg); transition:transform .2s ease; flex-shrink:0; margin-left:2px;
+  }
+  .src-details[open] summary::before{transform:rotate(45deg);}
+
   .src-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:0 34px;}
   @media (max-width:820px){ .src-grid{grid-template-columns:1fr;} }
   .src-item{padding:13px 0; border-bottom:1px solid var(--line); display:flex; gap:12px; align-items:baseline;}
@@ -554,13 +626,12 @@
       <span>Rohbar</span>
     </div>
     <nav class="primary">
+      <a href="#why" data-i18n="nav.why"></a>
       <a href="#sectors" data-i18n="nav.sectors"></a>
+      <a href="#climate" data-i18n="nav.climate"></a>
       <a href="#opportunities" data-i18n="nav.opportunities"></a>
+      <a href="#team" data-i18n="nav.team"></a>
       <a href="#pricing" data-i18n="nav.pricing"></a>
-      <a href="#climate" data-i18n="nav.climate"></a>
-      <a href="#climate" data-i18n="nav.climate"></a>
-  <a href="#why" data-i18n="nav.why"></a>
-      <a href="#process" data-i18n="nav.process"></a>
       <a href="#contact" data-i18n="nav.contact"></a>
     </nav>
     <div class="nav-actions">
@@ -608,7 +679,7 @@
         <p class="section-sub" data-i18n="hero.subtitle"></p>
         <div class="hero-ctas">
           <a href="#opportunities" class="btn btn-primary" data-i18n="hero.ctaInvestor"></a>
-          <a href="#contact" class="btn btn-outline" data-i18n="hero.ctaBusiness"></a>
+          <a href="#pricing" class="btn btn-outline" data-i18n="hero.ctaBusiness"></a>
         </div>
         <div class="hero-stats reveal-stagger">
           <div class="hstat"><div class="hstat-top"><span class="hstat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16.5 6.2a3.2 3.2 0 0 1 0 5.6"/><path d="M18 14.4a6.3 6.3 0 0 1 3.5 5.6"/></svg></span><span class="hstat-num" data-count="10.8" data-suffix="M">0</span></div><span class="hstat-lbl" data-i18n="hero.stat1"></span></div>
@@ -643,6 +714,16 @@
     </div>
   </section>
 
+  <section id="why">
+    <div class="container">
+      <div class="section-head center reveal">
+        <h2 class="section-title" data-i18n="why.title"></h2>
+        <p class="section-sub" data-i18n="why.subtitle"></p>
+      </div>
+      <div class="why-grid reveal-stagger" id="whyGrid"></div>
+    </div>
+  </section>
+
   <section id="sectors">
     <div class="container">
       <div class="section-head reveal">
@@ -654,47 +735,23 @@
     </div>
   </section>
 
-  <section id="opportunities">
+  <section id="climate">
     <div class="container">
       <div class="section-head reveal">
-        <div class="eyebrow" data-i18n="opportunities.eyebrow"></div>
-        <h2 class="section-title" data-i18n="opportunities.title"></h2>
-        <p class="section-sub" data-i18n="opportunities.subtitle"></p>
-      </div>
-      <div class="opp-grid reveal-stagger" id="oppGrid"></div>
-    </div>
-  </section>
-
-  <section id="pricing">
-    <div class="container">
-      <div class="section-head center reveal">
-        <div class="eyebrow" data-i18n="pricing.eyebrow"></div>
-        <h2 class="section-title" data-i18n="pricing.title"></h2>
-        <p class="section-sub" data-i18n="pricing.subtitle"></p>
-      </div>
-      <div class="pricing-tabs reveal">
-        <button class="pricing-tab active" data-tab="business" data-i18n="pricing.tabBusiness"></button>
-        <button class="pricing-tab" data-tab="investor" data-i18n="pricing.tabInvestor"></button>
-      </div>
-      <div class="pricing-panel active" id="pricingBusiness">
-        <div class="pricing-grid reveal-stagger" id="pricingBusinessGrid"></div>
-      </div>
-      <div class="pricing-panel" id="pricingInvestor">
-        <div class="pricing-grid reveal-stagger" id="pricingInvestorGrid"></div>
-      </div>
-      <p class="price-note reveal" data-i18n="pricing.feeNote"></p>
-    </div>
-  </section>
-
-  <section id="analytics">
-    <div class="container">
-      <div class="section-head reveal">
-        <div class="eyebrow" data-i18n="analytics.eyebrow"></div>
-        <h2 class="section-title" data-i18n="analytics.title"></h2>
-        <p class="section-sub" data-i18n="analytics.subtitle"></p>
+        <div class="eyebrow" data-i18n="climate.eyebrow"></div>
+        <h2 class="section-title" data-i18n="climate.title"></h2>
+        <p class="section-sub" data-i18n="climate.subtitle"></p>
       </div>
 
-      <div class="analytics-grid">
+      <div class="clim-tabs reveal">
+        <button class="clim-tab active" data-ctab="market" data-i18n="climate.tabMarket"></button>
+        <button class="clim-tab" data-ctab="tax" data-i18n="climate.tabTax"></button>
+        <button class="clim-tab" data-ctab="fez" data-i18n="climate.tabFez"></button>
+        <button class="clim-tab" data-ctab="trade" data-i18n="climate.tabTrade"></button>
+      </div>
+
+      <div class="clim-panel active" id="climMarket">
+<div class="analytics-grid">
         <div class="panel reveal">
           <div class="panel-title" data-i18n="analytics.gapTitle"></div>
           <p style="color:var(--ink-soft); font-size:0.9rem; line-height:1.6;" data-i18n="analytics.gapSub"></p>
@@ -733,32 +790,12 @@
           <p class="panel-note" data-i18n="analytics.indSource"></p>
         </div>
       </div>
-
-      <div class="panel reveal" style="margin-top:26px;">
-        <div class="panel-title" data-i18n="analytics.potTitle"></div>
-        <p style="color:var(--ink-soft); font-size:0.9rem; line-height:1.6;" data-i18n="analytics.potSub"></p>
-        <div class="spot" id="spotList"></div>
-        <p class="panel-note" data-i18n="analytics.potNote"></p>
-      </div>
-    </div>
-  </section>
-
-  <section id="climate">
-    <div class="container">
-      <div class="section-head reveal">
-        <div class="eyebrow" data-i18n="climate.eyebrow"></div>
-        <h2 class="section-title" data-i18n="climate.title"></h2>
-        <p class="section-sub" data-i18n="climate.subtitle"></p>
+        <div class="rate-grid reveal-stagger" id="rateGrid" style="margin-top:26px;"></div>
+        <div class="caveat" data-i18n="climate.caveat"></div>
+        <p class="panel-note" style="margin-top:14px;" data-i18n="climate.rateSource"></p>
       </div>
 
-      <div class="clim-tabs reveal">
-        <button class="clim-tab active" data-ctab="tax" data-i18n="climate.tabTax"></button>
-        <button class="clim-tab" data-ctab="fez" data-i18n="climate.tabFez"></button>
-        <button class="clim-tab" data-ctab="trade" data-i18n="climate.tabTrade"></button>
-        <button class="clim-tab" data-ctab="rate" data-i18n="climate.tabRate"></button>
-      </div>
-
-      <div class="clim-panel active" id="climTax">
+      <div class="clim-panel" id="climTax">
         <div class="clim-two">
           <div class="panel">
             <div class="panel-title" data-i18n="climate.taxTitle"></div>
@@ -792,35 +829,35 @@
           </div>
         </div>
         <p class="panel-note" style="margin-top:18px;" data-i18n="climate.tradeSource"></p>
+        <div class="panel reveal" style="margin-top:26px;">
+        <div class="panel-title" data-i18n="analytics.potTitle"></div>
+        <p style="color:var(--ink-soft); font-size:0.9rem; line-height:1.6;" data-i18n="analytics.potSub"></p>
+        <div class="spot" id="spotList"></div>
+        <p class="panel-note" data-i18n="analytics.potNote"></p>
+      
+      </div>
       </div>
 
-      <div class="clim-panel" id="climRate">
-        <div class="rate-grid reveal-stagger" id="rateGrid"></div>
-        <div class="caveat" data-i18n="climate.caveat"></div>
-        <p class="panel-note" style="margin-top:14px;" data-i18n="climate.rateSource"></p>
-      </div>
+
+
+      <details class="src-details reveal">
+        <summary><span data-i18n="sources.title"></span></summary>
+        <p class="section-sub" style="margin-top:14px;" data-i18n="sources.subtitle"></p>
+        <div class="src-grid" id="srcGrid"></div>
+        <p class="panel-note" style="margin-top:18px;" data-i18n="sources.note"></p>
+      </details>
     </div>
+
   </section>
 
-  <section id="sources">
+  <section id="opportunities">
     <div class="container">
       <div class="section-head reveal">
-        <div class="eyebrow" data-i18n="sources.eyebrow"></div>
-        <h2 class="section-title" data-i18n="sources.title"></h2>
-        <p class="section-sub" data-i18n="sources.subtitle"></p>
+        <div class="eyebrow" data-i18n="opportunities.eyebrow"></div>
+        <h2 class="section-title" data-i18n="opportunities.title"></h2>
+        <p class="section-sub" data-i18n="opportunities.subtitle"></p>
       </div>
-      <div class="src-grid reveal" id="srcGrid"></div>
-      <p class="panel-note" style="margin-top:22px;" data-i18n="sources.note"></p>
-    </div>
-  </section>
-
-  <section id="why">
-    <div class="container">
-      <div class="section-head center reveal">
-        <h2 class="section-title" data-i18n="why.title"></h2>
-        <p class="section-sub" data-i18n="why.subtitle"></p>
-      </div>
-      <div class="why-grid reveal-stagger" id="whyGrid"></div>
+      <div class="opp-grid reveal-stagger" id="oppGrid"></div>
     </div>
   </section>
 
@@ -832,6 +869,62 @@
         <p class="section-sub" data-i18n="process.subtitle"></p>
       </div>
       <div class="process-grid reveal-stagger" id="processGrid"></div>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" data-i18n="team.eyebrow"></div>
+        <h2 class="section-title" data-i18n="team.title"></h2>
+        <p class="section-sub" data-i18n="team.subtitle"></p>
+      </div>
+      <div class="team-grid reveal-stagger" id="teamGrid"></div>
+      <p class="team-todo" data-i18n="team.todo"></p>
+    </div>
+  </section>
+
+  <section id="brief">
+    <div class="container">
+      <div class="brief reveal">
+        <div>
+          <div class="eyebrow" data-i18n="brief.eyebrow"></div>
+          <h2 data-i18n="brief.title"></h2>
+          <p data-i18n="brief.desc"></p>
+          <ul class="brief-list" id="briefList"></ul>
+        </div>
+        <div>
+          <form class="brief-form" id="briefForm" novalidate>
+            <label class="sr-only" for="briefEmail" data-i18n="brief.emailLabel"></label>
+            <input type="email" id="briefEmail" name="briefEmail" required autocomplete="email" placeholder="name@firma.de">
+            <button type="submit" class="btn btn-primary btn-block" data-i18n="brief.cta"></button>
+            <p class="brief-note" data-i18n="brief.note"></p>
+          </form>
+          <div class="brief-ok" id="briefOk" data-i18n="brief.success"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="eyebrow" data-i18n="pricing.eyebrow"></div>
+        <h2 class="section-title" data-i18n="pricing.title"></h2>
+        <p class="section-sub" data-i18n="pricing.subtitle"></p>
+      </div>
+      <div class="pricing-tabs reveal">
+        <button class="pricing-tab active" data-tab="business" data-i18n="pricing.tabBusiness"></button>
+        <button class="pricing-tab" data-tab="investor" data-i18n="pricing.tabInvestor"></button>
+      </div>
+      <div class="pricing-panel active" id="pricingBusiness">
+        <p class="free-banner reveal" data-i18n="pricing.freeBanner"></p>
+        <div class="pricing-grid reveal-stagger" id="pricingBusinessGrid"></div>
+      </div>
+      <div class="pricing-panel" id="pricingInvestor">
+        <div class="pricing-grid reveal-stagger" id="pricingInvestorGrid"></div>
+      </div>
+      <p class="price-note reveal" data-i18n="pricing.feeNote"></p>
     </div>
   </section>
 
@@ -920,6 +1013,10 @@
     <p class="footer-disclaimer" data-i18n="footer.disclaimer"></p>
     <div class="footer-bottom">
       <span data-i18n="footer.rights"></span>
+      <span class="footer-legal">
+        <a href="legal/impressum.html" data-i18n="footer.impressum"></a>
+        <a href="legal/datenschutz.html" data-i18n="footer.privacy"></a>
+      </span>
       <a class="fmail" href="mailto:contact@rohbar.example" style="display:inline">contact@rohbar.example</a>
     </div>
   </div>
@@ -932,12 +1029,12 @@
 var translations = {
   en: {
     ribbon: "Concept preview — a demonstration of the Rohbar platform, not a live service.",
-    nav: {climate:"Investment climate", sectors:"Sectors", opportunities:"Opportunities", pricing:"Pricing", why:"Why Tajikistan", process:"How it works", contact:"Contact", cta:"Get in touch"},
+    nav: {team:"Team", climate:"Investment climate", sectors:"Sectors", opportunities:"Opportunities", pricing:"Access", why:"Why", process:"How it works", contact:"Contact", cta:"Get in touch"},
     hero: {
       badge:"Tajikistan × Germany",
       title:"Where Tajik Enterprise Meets German Capital",
       subtitle:"Rohbar connects vetted businesses and high-potential sectors in Tajikistan with German investors looking for the next frontier of growth — local ground knowledge, matched with international capital and standards.",
-      ctaInvestor:"I'm an Investor", ctaBusiness:"I'm a Business",
+      ctaInvestor:"I am an investor", ctaBusiness:"I am a business — free",
       stat1:"Population", stat2:"GDP growth in 2025 (World Bank)", stat3:"Global rank for hydropower potential", stat4:"Electricity from renewable sources",
       legendCapital:"Capital flowing in", legendGoods:"Goods & returns flowing out"
     },
@@ -959,18 +1056,29 @@ var translations = {
       message:"Message", submit:"Send message",
       success:"Thank you — this is a concept preview, so messages aren't sent yet. In the live version, our team would follow up within 48 hours."
     },
-    footer: { audienceTitle:"Who we work with", contactTitle:"Direct contacts", followTitle:"Follow", mailInvestors:"Investors", mailBusiness:"Businesses", mailPress:"Press & partnerships",
+    footer: { impressum:"Legal notice", privacy:"Privacy", audienceTitle:"Who we work with", contactTitle:"Direct contacts", followTitle:"Follow", mailInvestors:"Investors", mailBusiness:"Businesses", mailPress:"Press & partnerships",
       tagline:"Rohbar — connecting Tajik enterprise with German investment.",
       disclaimer:"This site is a concept preview prepared for demonstration purposes. Sample opportunities are illustrative and do not represent real listings.",
       rights:"© 2026 Rohbar. All rights reserved."
     },
+    brief: {eyebrow:"Market brief", title:"The Tajikistan Brief, Once a Quarter", desc:"A short written briefing for German investors — what changed in the rules, what moved in the trade data, and which mandates came in. No sales calls, and one click to stop it.",
+      emailLabel:"Your work email", cta:"Send me the brief", note:"We use your address only to send the brief. Unsubscribe in one click. See our <a href=\"legal/datenschutz.html\">privacy notice</a>.",
+      success:"<strong>Noted.</strong> In the live version the brief would now be on its way to your inbox. This is a concept preview, so nothing was actually sent or stored.",
+      points:["Antimony, gold and the EU critical-raw-materials picture","Changes to tax rates, free-zone terms and GSP status","New verified mandates, summarised and anonymised","What German buyers are actually asking for"]},
+    team: {eyebrow:"The people", title:"Who Stands Behind the Introduction", subtitle:"In cross-border deals an investor is not buying a platform. They are buying the judgement of the person who says a company is real, and who is still reachable when something goes wrong.",
+      todo:"<strong>Placeholder — to be completed before launch.</strong> Real names, photographs and verifiable track records belong here. An anonymous intermediary in this business reads as a warning sign, and no amount of design compensates for it. Add a LinkedIn link for each person and, where possible, a named reference on both sides.",
+      people:[
+        {role:"Founder", name:"[ Name ]", desc:"The person accountable for the promise on this page. Background in economics, finance or trade, with real standing in both countries — this is the profile the whole business rests on."},
+        {role:"On the ground, Tajikistan", name:"[ Name ]", desc:"Visits the businesses, checks the documents, and knows which registrations mean something. Verification is only worth what this person's judgement is worth."},
+        {role:"Germany / investor relations", name:"[ Name ]", desc:"Speaks the language of a Mittelstand board and a family office, and knows what a German buyer needs to see before a first flight."}
+      ]},
     sources: {eyebrow:"References", title:"Where Every Number Comes From", subtitle:"Each figure on this page is traceable to a published source. Follow any link and check it yourself.", note:"Figures are the most recent published values at the time of writing and are indicative, not contractual. Tax rates, tariff preferences and zone conditions change — verify with legal and tax counsel before making a commitment.", nav:"Sources"},
     sourceWhat:["Corporate income tax, VAT and the Article 189 manufacturing exemption","Investment incentives, VAT relief on imported inputs, free-zone conditions","The four free economic zones and their status","Zone areas, establishment dates and profiles","Bilateral Germany-Tajikistan trade: ~€53M in 2024, of which ~€50M German exports","EU-Tajikistan trade: €304M in 2024","GSP status, 7% preference take-up and 95% utilisation rate","2024 goods exports: $1.95bn, −20.5%, and the export mix by share","Antimony as an EU critical and strategic raw material; 52% of EU imports","Chinese antimony export restrictions and global producer shares","Global Peace Index 2025: 79th of 163, score 1.996","Agricultural machinery access as a barrier to modernisation","Electricity mix: 98% renewable","Hydropower potential: 8th globally, about 5% developed"],
     climate: {
       eyebrow:"Investment climate",
       title:"Rules, Incentives and What Actually Trades",
       subtitle:"What an investor needs to check before a first meeting: the tax position, where the incentives are, what Tajikistan already sells to Europe, and how the country is rated.",
-      tabTax:"Tax & incentives", tabFez:"Free economic zones", tabTrade:"Trade flows", tabRate:"Ratings",
+      tabMarket:"Market & ratings", tabTax:"Tax & incentives", tabFez:"Free economic zones", tabTrade:"Trade & sectors",
       taxTitle:"Headline tax rates",
       taxSource:"Source: Tax Code of the Republic of Tajikistan; U.S. State Department Investment Climate Statement 2025. Rates change — confirm with local counsel before committing.",
       perkTitle:"Incentives available to investors",
@@ -1068,10 +1176,9 @@ var translations = {
       {name:"IT & Digital Services", desc:"A young, growing pool of technical talent building outsourcing and product capacity."}
     ],
     oppItems:[
-      {name:"Dried Fruit & Nut Exporter", sector:"Agriculture", loc:"Khatlon Region", desc:"Family-run processing facility seeking capital to add an EU-certified packaging line and cold storage.", seek:"€150,000 – €400,000"},
-      {name:"Cotton-to-Garment Manufacturer", sector:"Textiles", loc:"Sughd Region", desc:"Vertically integrated textile plant modernizing looms and seeking a European distribution partner.", seek:"€500,000 – €1.2M"},
-      {name:"Small Hydropower Project", sector:"Energy", loc:"Rasht Valley", desc:"Feasibility-stage micro-hydro plant for regional grid supply, seeking project financing.", seek:"€1M – €3M"},
-      {name:"Pamir Eco-Lodge Development", sector:"Tourism", loc:"GBAO (Pamir)", desc:"Boutique eco-tourism lodge project targeting the growing adventure-travel market.", seek:"€200,000 – €600,000"}
+      {name:"Dried fruit and nut processing", sector:"Agriculture", loc:"Khatlon region", desc:"Family-run processor, roughly 40 staff, already exporting regionally. Needs an EU-certified packing line and cold storage to sell into Europe directly.", seek:"€150,000 – €400,000"},
+      {name:"Cotton spinning and garment assembly", sector:"Textiles", loc:"Sughd region", desc:"Vertically integrated plant with its own yarn supply. Seeking to replace ageing looms and find a European distribution partner.", seek:"€500,000 – €1.2M"},
+      {name:"Small hydropower, 4 MW run-of-river", sector:"Energy", loc:"Rasht valley", desc:"Licensed site with completed feasibility study and a grid connection agreement. Looking for equity alongside the existing local sponsor.", seek:"€2M – €5M"}
     ],
     whyItems:[
       {title:"Strategic Location", desc:"At the crossroads of China, Russia, South Asia and the Middle East — a natural logistics and re-export hub."},
@@ -1085,31 +1192,29 @@ var translations = {
       {title:"Match", desc:"We introduce verified businesses to investors whose focus and ticket size align."},
       {title:"Support", desc:"We help structure the deal, coordinate legal and translation needs, and stay involved after closing."}
     ],
-    pricing: {
-      eyebrow:"Pricing", title:"Simple, Transparent Access",
-      subtitle:"Businesses and investors each choose the level of support that fits — from a free public listing to a fully managed deal.",
-      tabBusiness:"For Businesses", tabInvestor:"For Investors",
-      feeNote:"<strong>Success fee:</strong> in addition to any subscription, Rohbar charges the business a flat advisory fee only when a deal closes — €3,000 for deals under €500K, €8,000 for €500K–€2M, custom above that. No percentage of the investment, and nothing if no deal happens. Pricing shown is illustrative and subject to confirmation with legal and tax counsel before launch."
-    },
+    pricing: {eyebrow:"Access", title:"Free for Tajik Businesses. Investors Pay.", subtitle:"The side seeking capital never pays to be found. Our revenue comes from the German side, where the budget for market entry and deal flow already exists.",
+      tabBusiness:"For Tajik businesses", tabInvestor:"For German investors",
+      freeBanner:"<strong>Everything below is free of charge for businesses in Tajikistan</strong> — listing, verification and introductions. A company with spare capital does not need us, and charging one to be discovered would select for exactly the wrong companies.",
+      feeNote:"<strong>How we earn:</strong> from the investor side only — an annual access subscription, and a fixed mandate fee agreed in advance when we are asked to run a transaction end to end. We never take a percentage of the investment. Figures are indicative for this concept preview and are subject to legal and regulatory confirmation before launch."},
     businessTiers:[
-      {name:"Basic", price:"Free", period:"", desc:"A public profile in the directory — the starting point for every business.", features:["Public profile page","Sector tagging & search visibility","Visible to registered investors"], cta:"Create a free profile", popular:false},
-      {name:"Verified", price:"€149", period:"/month", desc:"On-the-ground verification and priority visibility for businesses ready to talk to investors.", features:["On-site verification & badge","Priority placement in search","Profile translated to Russian & German","Direct investor messaging"], cta:"Get verified", popular:true},
-      {name:"Featured", price:"€399", period:"/month", desc:"Full concierge support for businesses actively raising capital.", features:["Everything in Verified","Featured homepage placement","Investor-ready pitch deck, professionally built","Warm introductions every quarter","Dedicated account manager"], cta:"Apply as Featured", popular:false}
+      {name:"Listing", price:"Free", period:"", desc:"A profile in the directory, visible to every accredited investor on the platform.", features:["Profile page in three languages","Sector tagging and search visibility","Visible to all accredited investors","No commission on any deal you close"], cta:"Submit your business", popular:false},
+      {name:"Verified", price:"Free", period:"", desc:"An on-site visit and document check, so an investor can act on your file without flying out first.", features:["Everything in Listing","On-site visit and verification badge","Registration and ownership documents checked","Financials reviewed and summarised"], cta:"Request verification", popular:true},
+      {name:"Introduced", price:"Free", period:"", desc:"For businesses we judge ready to meet capital. Selective, and by our invitation.", features:["Everything in Verified","Investor-ready summary prepared for you","Warm introductions to matched investors","Support through meetings and negotiation","Guidance on documentation and structure"], cta:"See if you qualify", popular:false}
     ],
     investorTiers:[
-      {name:"Guest", price:"Free", period:"", desc:"Explore the market before committing to anything.", features:["Sector overviews & market data","Teaser opportunity cards","Monthly newsletter"], cta:"Browse for free", popular:false},
-      {name:"Investor Access", price:"€79", period:"/month", desc:"Full access to verified opportunities and direct contact with businesses.", features:["Full verified business profiles","Direct contact requests","Due-diligence summary reports","Early access to new listings"], cta:"Get investor access", popular:true},
-      {name:"Concierge", price:"From €2,500", period:"/engagement", desc:"A dedicated advisor manages the search, the visit and the paperwork for you.", features:["Dedicated matchmaking advisor","Coordinated on-ground site visits","Legal & translation coordination","Support through deal closing"], cta:"Talk to an advisor", popular:false}
-    ]
+      {name:"Observer", price:"Free", period:"", desc:"Watch the market before committing anything.", features:["Quarterly Tajikistan market brief","Sector and regulatory updates","Anonymised summaries of new mandates"], cta:"Get the market brief", popular:false},
+      {name:"Deal flow", price:"€4,800", period:"/year", desc:"Full access to verified mandates and the people behind them.", features:["Full profiles of every verified business","Verification files and financial summaries","Direct introductions, no gatekeeping","Two market briefings a year with our team","Right of first look on new mandates"], cta:"Request access", popular:true},
+      {name:"Mandate", price:"From €12,000", period:"/transaction", desc:"We run the transaction end to end, on a fee agreed before we start.", features:["Everything in Deal flow","Sourcing against your specific criteria","Due diligence coordinated on the ground","Interpreting and document handling","Local legal and tax counsel arranged","Support until the transaction closes"], cta:"Discuss a mandate", popular:false}
+    ],
   },
   ru: {
     ribbon: "Концептуальная демо-версия платформы Rohbar — не действующий сервис.",
-    nav: {climate:"Инвестклимат", sectors:"Отрасли", opportunities:"Возможности", pricing:"Тарифы", why:"Почему Таджикистан", process:"Как это работает", contact:"Контакты", cta:"Связаться"},
+    nav: {team:"Команда", climate:"Инвестклимат", sectors:"Отрасли", opportunities:"Возможности", pricing:"Доступ", why:"Почему", process:"Как это работает", contact:"Контакты", cta:"Связаться"},
     hero: {
       badge:"Таджикистан × Германия",
       title:"Там, где таджикское предпринимательство встречается с немецким капиталом",
       subtitle:"Rohbar связывает проверенные бизнесы и перспективные отрасли Таджикистана с немецкими инвесторами, которые ищут новые рынки роста — местная экспертиза в сочетании с международным капиталом и стандартами.",
-      ctaInvestor:"Я инвестор", ctaBusiness:"Я представляю бизнес",
+      ctaInvestor:"Я инвестор", ctaBusiness:"Я бизнес — бесплатно",
       stat1:"Население", stat2:"Рост ВВП в 2025 году (Всемирный банк)", stat3:"Место в мире по потенциалу гидроэнергетики", stat4:"Доля электроэнергии из возобновляемых источников",
       legendCapital:"Капитал течёт внутрь", legendGoods:"Товары и доходность — обратно"
     },
@@ -1129,18 +1234,29 @@ var translations = {
       message:"Сообщение", submit:"Отправить сообщение",
       success:"Спасибо — это концептуальная демо-версия, сообщения пока не отправляются. В реальной версии наша команда свяжется с вами в течение 48 часов."
     },
-    footer: { audienceTitle:"С кем мы работаем", contactTitle:"Прямые контакты", followTitle:"Соцсети", mailInvestors:"Инвесторам", mailBusiness:"Бизнесу", mailPress:"Пресса и партнёрство",
+    footer: { impressum:"Impressum", privacy:"Конфиденциальность", audienceTitle:"С кем мы работаем", contactTitle:"Прямые контакты", followTitle:"Соцсети", mailInvestors:"Инвесторам", mailBusiness:"Бизнесу", mailPress:"Пресса и партнёрство",
       tagline:"Rohbar — соединяем таджикское предпринимательство с немецким капиталом.",
       disclaimer:"Этот сайт — концептуальная демонстрационная версия. Примеры возможностей носят иллюстративный характер и не являются реальными предложениями.",
       rights:"© 2026 Rohbar. Все права защищены."
     },
+    brief: {eyebrow:"Обзор рынка", title:"Обзор по Таджикистану, раз в квартал", desc:"Короткий письменный обзор для немецких инвесторов: что изменилось в правилах, что сдвинулось в торговой статистике и какие мандаты появились. Без звонков и в один клик отписаться.",
+      emailLabel:"Ваша рабочая почта", cta:"Прислать обзор", note:"Адрес используется только для отправки обзора. Отписка в один клик. См. <a href=\"legal/datenschutz.html\">политику конфиденциальности</a>.",
+      success:"<strong>Принято.</strong> В рабочей версии обзор уже летел бы вам на почту. Это демо-версия, поэтому ничего не отправлено и не сохранено.",
+      points:["Сурьма, золото и картина по критическому сырью ЕС","Изменения налоговых ставок, условий СЭЗ и статуса GSP","Новые проверенные мандаты — кратко и обезличенно","Что немецкие покупатели реально спрашивают"]},
+    team: {eyebrow:"Люди", title:"Кто стоит за знакомством", subtitle:"В трансграничной сделке инвестор покупает не платформу. Он покупает суждение человека, который говорит, что компания настоящая, и который остаётся на связи, когда что-то идёт не так.",
+      todo:"<strong>Заглушка — заполнить до запуска.</strong> Здесь должны быть настоящие имена, фотографии и проверяемый послужной список. Анонимный посредник в этом бизнесе читается как тревожный сигнал, и никакой дизайн этого не компенсирует. Добавьте ссылку на LinkedIn для каждого и, по возможности, именную рекомендацию с обеих сторон.",
+      people:[
+        {role:"Основатель", name:"[ Имя ]", desc:"Человек, отвечающий за обещание на этой странице. Образование в экономике, финансах или торговле и реальный вес в обеих странах — на этом профиле держится весь бизнес."},
+        {role:"На месте, Таджикистан", name:"[ Имя ]", desc:"Ездит на предприятия, проверяет документы и знает, какие регистрации что означают. Проверка стоит ровно столько, сколько стоит суждение этого человека."},
+        {role:"Германия / работа с инвесторами", name:"[ Имя ]", desc:"Говорит на языке правления Mittelstand и семейного офиса и знает, что немецкий покупатель должен увидеть до первого перелёта."}
+      ]},
     sources: {eyebrow:"Источники", title:"Откуда взята каждая цифра", subtitle:"Каждый показатель на этой странице возводится к опубликованному источнику. Откройте любую ссылку и проверьте сами.", note:"Приведены последние опубликованные значения на момент подготовки; они носят ориентировочный, а не договорный характер. Налоговые ставки, тарифные преференции и условия зон меняются — подтверждайте у юридических и налоговых консультантов до принятия обязательств.", nav:"Источники"},
     sourceWhat:["Налог на прибыль, НДС и освобождение производств по статье 189","Инвестиционные льготы, освобождение от НДС на ввозимое сырьё, условия свободных зон","Четыре свободные экономические зоны и их статус","Площади зон, даты создания и профили","Двусторонняя торговля Германия–Таджикистан: ~€53 млн в 2024, из них ~€50 млн экспорт Германии","Торговля ЕС–Таджикистан: €304 млн в 2024","Статус GSP, использование преференций 7% и коэффициент использования 95%","Товарный экспорт 2024: $1,95 млрд, −20,5%, и структура экспорта по долям","Сурьма как критическое и стратегическое сырьё ЕС; 52% импорта ЕС","Экспортные ограничения Китая по сурьме и доли мировых производителей","Global Peace Index 2025: 79-е место из 163, оценка 1,996","Доступ к сельхозтехнике как барьер модернизации","Структура электроэнергии: 98% возобновляемая","Гидропотенциал: 8-е место в мире, освоено около 5%"],
     climate: {
       eyebrow:"Инвестиционный климат",
       title:"Правила, льготы и то, что реально торгуется",
       subtitle:"То, что инвестор проверяет до первой встречи: налоговый режим, где действуют льготы, что Таджикистан уже продаёт в Европу и как страну оценивают международные институты.",
-      tabTax:"Налоги и льготы", tabFez:"Свободные зоны", tabTrade:"Товарные потоки", tabRate:"Рейтинги",
+      tabMarket:"Рынок и рейтинги", tabTax:"Налоги и льготы", tabFez:"Свободные зоны", tabTrade:"Торговля и отрасли",
       taxTitle:"Основные ставки",
       taxSource:"Источники: Налоговый кодекс Республики Таджикистан; Investment Climate Statement Госдепартамента США, 2025. Ставки меняются — подтверждайте у местного консультанта.",
       perkTitle:"Льготы, доступные инвестору",
@@ -1238,10 +1354,9 @@ var translations = {
       {name:"IT и цифровые услуги", desc:"Молодой, растущий пул технических специалистов для аутсорсинга и разработки продуктов."}
     ],
     oppItems:[
-      {name:"Экспортёр сухофруктов и орехов", sector:"Сельское хозяйство", loc:"Хатлонская область", desc:"Семейное перерабатывающее производство ищет капитал для линии упаковки по стандартам ЕС и холодильного склада.", seek:"€150 000 – €400 000"},
-      {name:"Производитель хлопка и текстиля", sector:"Текстиль", loc:"Согдийская область", desc:"Вертикально интегрированное текстильное производство модернизирует оборудование и ищет европейского дистрибьютора.", seek:"€500 000 – €1,2 млн"},
-      {name:"Проект малой ГЭС", sector:"Энергетика", loc:"Раштская долина", desc:"Проект микро-ГЭС на стадии обоснования для регионального энергоснабжения, ищет проектное финансирование.", seek:"€1–3 млн"},
-      {name:"Эко-лодж на Памире", sector:"Туризм", loc:"ГБАО (Памир)", desc:"Проект бутик-эко-лоджа для растущего рынка приключенческого туризма.", seek:"€200 000 – €600 000"}
+      {name:"Переработка сухофруктов и орехов", sector:"Сельское хозяйство", loc:"Хатлонская область", desc:"Семейное производство, около 40 сотрудников, уже экспортирует по региону. Нужны сертифицированная под ЕС линия упаковки и холодильное хранение, чтобы выйти в Европу напрямую.", seek:"€150 000 – €400 000"},
+      {name:"Прядение хлопка и пошив одежды", sector:"Текстиль", loc:"Согдийская область", desc:"Вертикально интегрированное предприятие с собственной пряжей. Ищет замену устаревших станков и европейского дистрибьютора.", seek:"€500 000 – €1,2 млн"},
+      {name:"Малая ГЭС, 4 МВт, руслового типа", sector:"Энергетика", loc:"Раштская долина", desc:"Лицензированная площадка с готовым ТЭО и договором на подключение к сети. Ищет соинвестора к действующему местному спонсору.", seek:"€2 млн – €5 млн"}
     ],
     whyItems:[
       {title:"Стратегическое расположение", desc:"На перекрёстке Китая, России, Южной Азии и Ближнего Востока — естественный логистический и реэкспортный узел."},
@@ -1255,31 +1370,29 @@ var translations = {
       {title:"Подбор", desc:"Мы знакомим проверенные бизнесы с инвесторами, чьи интересы и объём инвестиций совпадают."},
       {title:"Сопровождение", desc:"Помогаем структурировать сделку, координируем юридические и переводческие вопросы, остаёмся на связи и после закрытия."}
     ],
-    pricing: {
-      eyebrow:"Тарифы", title:"Просто и прозрачно",
-      subtitle:"Бизнесы и инвесторы выбирают уровень поддержки, который им подходит — от бесплатного публичного профиля до полного сопровождения сделки.",
-      tabBusiness:"Для бизнеса", tabInvestor:"Для инвесторов",
-      feeNote:"<strong>Комиссия за сделку:</strong> помимо подписки, Rohbar берёт с бизнеса фиксированный консультационный гонорар только при закрытии сделки — €3 000 для сделок до €500 тыс., €8 000 для €500 тыс.–€2 млн, индивидуально для более крупных. Не процент от инвестиции, и ничего не платится, если сделка не состоялась. Указанные цены иллюстративны и подлежат согласованию с юристами и налоговым консультантом перед запуском."
-    },
+    pricing: {eyebrow:"Доступ", title:"Для таджикского бизнеса — бесплатно. Платит инвестор.", subtitle:"Сторона, которая ищет капитал, никогда не платит за то, чтобы её нашли. Доход идёт с немецкой стороны, где бюджет на выход на рынок и на деал-флоу уже заложен.",
+      tabBusiness:"Для бизнеса Таджикистана", tabInvestor:"Для инвесторов Германии",
+      freeBanner:"<strong>Всё перечисленное ниже бесплатно для предприятий Таджикистана</strong> — размещение, проверка и знакомства. Компании, у которой есть свободные деньги, мы не нужны, а плата за то, чтобы тебя нашли, отобрала бы ровно не те компании.",
+      feeNote:"<strong>На чём мы зарабатываем:</strong> только на стороне инвестора — годовая подписка на доступ и фиксированная стоимость мандата, согласованная заранее, когда нас просят вести сделку целиком. Мы никогда не берём процент от инвестиции. Цифры ориентировочные для этой демо-версии и подлежат юридическому и регуляторному подтверждению до запуска."},
     businessTiers:[
-      {name:"Базовый", price:"Бесплатно", period:"", desc:"Публичный профиль в каталоге — стартовая точка для любого бизнеса.", features:["Публичная страница профиля","Тег отрасли и видимость в поиске","Виден зарегистрированным инвесторам"], cta:"Создать бесплатный профиль", popular:false},
-      {name:"Проверенный", price:"€149", period:"/мес", desc:"Проверка на месте и приоритетная видимость для бизнесов, готовых говорить с инвесторами.", features:["Проверка на месте и значок «Проверено»","Приоритет в поиске","Перевод профиля на русский и немецкий","Прямые сообщения от инвесторов"], cta:"Пройти проверку", popular:true},
-      {name:"Featured (в топе)", price:"€399", period:"/мес", desc:"Полное сопровождение для бизнесов, активно привлекающих капитал.", features:["Всё из тарифа «Проверенный»","Размещение на главной странице","Профессиональная презентация для инвесторов","Тёплые знакомства с инвесторами каждый квартал","Персональный менеджер"], cta:"Подать заявку на Featured", popular:false}
+      {name:"Размещение", price:"Бесплатно", period:"", desc:"Профиль в каталоге, видимый каждому аккредитованному инвестору платформы.", features:["Страница профиля на трёх языках","Отраслевые метки и видимость в поиске","Виден всем аккредитованным инвесторам","Никакой комиссии с вашей сделки"], cta:"Подать заявку", popular:false},
+      {name:"Проверено", price:"Бесплатно", period:"", desc:"Выезд на место и проверка документов, чтобы инвестор мог работать с вашим досье, не вылетая заранее.", features:["Всё из «Размещения»","Выезд на место и знак проверки","Проверка регистрационных документов и собственности","Финансовые показатели просмотрены и обобщены"], cta:"Подать заявку", popular:true},
+      {name:"Представлено", price:"Бесплатно", period:"", desc:"Для компаний, которые, по нашей оценке, готовы к встрече с капиталом. Отбор, по нашему приглашению.", features:["Всё из «Проверено»","Готовое резюме для инвестора","Личные представления подходящим инвесторам","Сопровождение встреч и переговоров","Помощь с документами и структурой сделки"], cta:"Узнать, подходите ли вы", popular:false}
     ],
     investorTiers:[
-      {name:"Гость", price:"Бесплатно", period:"", desc:"Изучите рынок прежде чем принимать решение.", features:["Обзоры отраслей и рыночные данные","Тизеры возможностей","Ежемесячная рассылка"], cta:"Смотреть бесплатно", popular:false},
-      {name:"Investor Access", price:"€79", period:"/мес", desc:"Полный доступ к проверенным возможностям и прямой контакт с бизнесами.", features:["Полные проверенные профили бизнесов","Прямые запросы на контакт","Краткие отчёты due diligence","Ранний доступ к новым предложениям"], cta:"Получить доступ", popular:true},
-      {name:"Concierge", price:"От €2 500", period:"/за сделку", desc:"Персональный советник ведёт поиск, визит и документы за вас.", features:["Персональный советник по подбору","Организация визитов на месте","Координация юридических и переводческих вопросов","Сопровождение до закрытия сделки"], cta:"Связаться с советником", popular:false}
-    ]
+      {name:"Наблюдатель", price:"Бесплатно", period:"", desc:"Смотреть на рынок, ничем себя не связывая.", features:["Ежеквартальный обзор рынка Таджикистана","Отраслевые и регуляторные обновления","Обезличенные описания новых мандатов"], cta:"Получить обзор рынка", popular:false},
+      {name:"Деал-флоу", price:"€4 800", period:"/год", desc:"Полный доступ к проверенным мандатам и к людям за ними.", features:["Полные профили всех проверенных компаний","Материалы проверки и финансовые сводки","Прямые представления, без посредников","Два брифинга в год с нашей командой","Право первого просмотра новых мандатов"], cta:"Запросить доступ", popular:true},
+      {name:"Мандат", price:"От €12 000", period:"/сделка", desc:"Ведём сделку целиком, за вознаграждение, согласованное до начала работы.", features:["Всё из «Деал-флоу»","Поиск под ваши конкретные критерии","Координация due diligence на месте","Перевод и работа с документами","Подбор местных юристов и налоговых консультантов","Сопровождение до закрытия сделки"], cta:"Обсудить мандат", popular:false}
+    ],
   },
   de: {
     ribbon: "Konzeptvorschau der Plattform „Rohbar“ — kein aktiver Dienst.",
-    nav: {climate:"Investitionsklima", sectors:"Branchen", opportunities:"Chancen", pricing:"Preise", why:"Warum Tadschikistan", process:"Ablauf", contact:"Kontakt", cta:"Kontakt aufnehmen"},
+    nav: {team:"Team", climate:"Investitionsklima", sectors:"Branchen", opportunities:"Chancen", pricing:"Zugang", why:"Warum", process:"Ablauf", contact:"Kontakt", cta:"Kontakt aufnehmen"},
     hero: {
       badge:"Tadschikistan × Deutschland",
       title:"Wo tadschikisches Unternehmertum auf deutsches Kapital trifft",
       subtitle:"Rohbar verbindet geprüfte Unternehmen und wachstumsstarke Branchen in Tadschikistan mit deutschen Investoren, die neue Wachstumsmärkte suchen — lokales Wissen vor Ort, verbunden mit internationalem Kapital und Standards.",
-      ctaInvestor:"Ich bin Investor", ctaBusiness:"Ich bin Unternehmer",
+      ctaInvestor:"Ich bin Investor", ctaBusiness:"Ich bin ein Unternehmen — kostenlos",
       stat1:"Bevölkerung", stat2:"BIP-Wachstum 2025 (Weltbank)", stat3:"Weltrang beim Wasserkraftpotenzial", stat4:"Strom aus erneuerbaren Quellen",
       legendCapital:"Kapital fließt hinein", legendGoods:"Waren & Erträge fließen zurück"
     },
@@ -1299,18 +1412,29 @@ var translations = {
       message:"Nachricht", submit:"Nachricht senden",
       success:"Danke — dies ist eine Konzeptvorschau, Nachrichten werden noch nicht versendet. In der Live-Version würde sich unser Team innerhalb von 48 Stunden melden."
     },
-    footer: { audienceTitle:"Mit wem wir arbeiten", contactTitle:"Direkte Kontakte", followTitle:"Folgen", mailInvestors:"Investoren", mailBusiness:"Unternehmen", mailPress:"Presse & Partnerschaft",
+    footer: { impressum:"Impressum", privacy:"Datenschutz", audienceTitle:"Mit wem wir arbeiten", contactTitle:"Direkte Kontakte", followTitle:"Folgen", mailInvestors:"Investoren", mailBusiness:"Unternehmen", mailPress:"Presse & Partnerschaft",
       tagline:"Rohbar — verbindet tadschikisches Unternehmertum mit deutschem Kapital.",
       disclaimer:"Diese Seite ist eine Konzeptvorschau zu Demonstrationszwecken. Beispielhafte Chancen sind illustrativ und stellen keine realen Angebote dar.",
       rights:"© 2026 Rohbar. Alle Rechte vorbehalten."
     },
+    brief: {eyebrow:"Marktbriefing", title:"Das Tadschikistan-Briefing, einmal im Quartal", desc:"Ein kurzes schriftliches Briefing für deutsche Investoren: was sich rechtlich geändert hat, was sich in den Handelsdaten bewegt hat und welche Mandate hinzugekommen sind. Keine Vertriebsanrufe, Abmeldung mit einem Klick.",
+      emailLabel:"Ihre geschäftliche E-Mail", cta:"Briefing zusenden", note:"Wir nutzen Ihre Adresse ausschließlich für den Versand des Briefings. Abmeldung mit einem Klick. Siehe <a href=\"legal/datenschutz.html\">Datenschutzerklärung</a>.",
+      success:"<strong>Notiert.</strong> In der Live-Version wäre das Briefing jetzt unterwegs zu Ihnen. Dies ist eine Konzeptvorschau — es wurde nichts gesendet oder gespeichert.",
+      points:["Antimon, Gold und das Bild bei kritischen Rohstoffen der EU","Änderungen bei Steuersätzen, Zonenbedingungen und GSP-Status","Neue geprüfte Mandate, zusammengefasst und anonymisiert","Wonach deutsche Käufer tatsächlich fragen"]},
+    team: {eyebrow:"Die Menschen", title:"Wer hinter der Vermittlung steht", subtitle:"Bei grenzüberschreitenden Geschäften kauft ein Investor keine Plattform. Er kauft das Urteil der Person, die sagt, dass ein Unternehmen echt ist — und die erreichbar bleibt, wenn etwas schiefgeht.",
+      todo:"<strong>Platzhalter — vor dem Start auszufüllen.</strong> Hier gehören echte Namen, Fotos und überprüfbare Referenzen hin. Ein anonymer Vermittler wirkt in diesem Geschäft wie ein Warnsignal, und kein Design gleicht das aus. Für jede Person einen LinkedIn-Link ergänzen und nach Möglichkeit eine namentliche Referenz auf beiden Seiten.",
+      people:[
+        {role:"Gründer", name:"[ Name ]", desc:"Die Person, die für das Versprechen auf dieser Seite einsteht. Hintergrund in Wirtschaft, Finanzen oder Handel, mit echtem Standing in beiden Ländern — auf diesem Profil ruht das gesamte Geschäft."},
+        {role:"Vor Ort, Tadschikistan", name:"[ Name ]", desc:"Besucht die Unternehmen, prüft die Unterlagen und weiß, welche Registrierungen etwas bedeuten. Die Prüfung ist genau so viel wert wie das Urteil dieser Person."},
+        {role:"Deutschland / Investor Relations", name:"[ Name ]", desc:"Spricht die Sprache einer Mittelstandsgeschäftsführung und eines Family Office und weiß, was ein deutscher Käufer vor dem ersten Flug sehen muss."}
+      ]},
     sources: {eyebrow:"Quellen", title:"Woher jede Zahl stammt", subtitle:"Jede Angabe auf dieser Seite lässt sich auf eine veröffentlichte Quelle zurückführen. Jeden Link öffnen und selbst prüfen.", note:"Angegeben sind die zum Redaktionsschluss zuletzt veröffentlichten Werte; sie sind Richtwerte und nicht vertraglich. Steuersätze, Zollpräferenzen und Zonenbedingungen ändern sich — vor einer Zusage rechtlich und steuerlich prüfen lassen.", nav:"Quellen"},
     sourceWhat:["Körperschaftsteuer, Mehrwertsteuer und die Herstellerbefreiung nach Artikel 189","Investitionsanreize, Mehrwertsteuerbefreiung auf Vormaterial, Bedingungen der Sonderzonen","Die vier Sonderwirtschaftszonen und ihr Status","Flächen, Gründungsdaten und Profile der Zonen","Bilateraler Handel Deutschland-Tadschikistan: rund 53 Mio. € in 2024, davon ca. 50 Mio. € deutsche Ausfuhren","Handel EU-Tadschikistan: 304 Mio. € in 2024","GSP-Status, 7 % Präferenznutzung und 95 % Ausschöpfungsgrad","Warenausfuhren 2024: 1,95 Mrd. USD, −20,5 %, sowie die Exportstruktur nach Anteilen","Antimon als kritischer und strategischer Rohstoff der EU; 52 % der EU-Einfuhren","Chinesische Antimon-Ausfuhrbeschränkungen und weltweite Produzentenanteile","Global Peace Index 2025: Platz 79 von 163, Wert 1,996","Zugang zu Landmaschinen als Modernisierungsbarriere","Strommix: 98 % erneuerbar","Wasserkraftpotenzial: weltweit Platz 8, rund 5 % erschlossen"],
     climate: {
       eyebrow:"Investitionsklima",
       title:"Regeln, Anreize und was tatsächlich gehandelt wird",
       subtitle:"Was ein Investor vor dem ersten Termin prüft: Steuerlage, wo die Anreize liegen, was Tadschikistan bereits nach Europa verkauft und wie das Land bewertet wird.",
-      tabTax:"Steuern & Anreize", tabFez:"Sonderwirtschaftszonen", tabTrade:"Handelsströme", tabRate:"Bewertungen",
+      tabMarket:"Markt & Bewertungen", tabTax:"Steuern & Anreize", tabFez:"Sonderwirtschaftszonen", tabTrade:"Handel & Branchen",
       taxTitle:"Wichtigste Steuersätze",
       taxSource:"Quellen: Steuergesetzbuch der Republik Tadschikistan; Investment Climate Statement des US-Außenministeriums 2025. Sätze ändern sich — vor einer Zusage lokal prüfen lassen.",
       perkTitle:"Anreize für Investoren",
@@ -1408,10 +1532,9 @@ var translations = {
       {name:"IT & digitale Dienstleistungen", desc:"Ein junger, wachsender Pool an Fachkräften für Outsourcing und Produktentwicklung."}
     ],
     oppItems:[
-      {name:"Trockenfrüchte- & Nussexporteur", sector:"Landwirtschaft", loc:"Region Chatlon", desc:"Familienbetrieb sucht Kapital für eine EU-zertifizierte Verpackungslinie und Kühllagerung.", seek:"150.000 € – 400.000 €"},
-      {name:"Baumwoll- und Textilhersteller", sector:"Textilien", loc:"Region Sughd", desc:"Vertikal integrierter Textilbetrieb modernisiert Webstühle und sucht einen europäischen Vertriebspartner.", seek:"500.000 € – 1,2 Mio. €"},
-      {name:"Kleinwasserkraftprojekt", sector:"Energie", loc:"Rascht-Tal", desc:"Mikro-Wasserkraftprojekt in der Machbarkeitsphase für die regionale Stromversorgung, sucht Projektfinanzierung.", seek:"1 – 3 Mio. €"},
-      {name:"Pamir-Ökolodge-Projekt", sector:"Tourismus", loc:"GBAO (Pamir)", desc:"Boutique-Ökotourismusprojekt für den wachsenden Abenteuerreisemarkt.", seek:"200.000 € – 600.000 €"}
+      {name:"Verarbeitung von Trockenfrüchten und Nüssen", sector:"Landwirtschaft", loc:"Region Chatlon", desc:"Familienbetrieb mit rund 40 Mitarbeitenden, bereits regional exportierend. Benötigt eine EU-zertifizierte Verpackungslinie und Kühllager für den Direktvertrieb nach Europa.", seek:"150.000 € – 400.000 €"},
+      {name:"Baumwollspinnerei und Bekleidungsfertigung", sector:"Textil", loc:"Region Sughd", desc:"Vertikal integrierter Betrieb mit eigener Garnversorgung. Sucht Ersatz für veraltete Webstühle und einen europäischen Vertriebspartner.", seek:"500.000 € – 1,2 Mio. €"},
+      {name:"Kleinwasserkraft, 4 MW Laufwasser", sector:"Energie", loc:"Rascht-Tal", desc:"Lizenzierter Standort mit abgeschlossener Machbarkeitsstudie und Netzanschlussvertrag. Sucht Eigenkapital neben dem bestehenden lokalen Sponsor.", seek:"2 Mio. € – 5 Mio. €"}
     ],
     whyItems:[
       {title:"Strategische Lage", desc:"Am Schnittpunkt von China, Russland, Südasien und dem Nahen Osten — ein natürliches Logistik- und Re-Export-Zentrum."},
@@ -1425,31 +1548,29 @@ var translations = {
       {title:"Zusammenführen", desc:"Wir stellen geprüfte Unternehmen Investoren vor, deren Fokus und Investitionsgröße zusammenpassen."},
       {title:"Begleiten", desc:"Wir unterstützen bei der Strukturierung, koordinieren Recht und Übersetzung und bleiben auch nach Abschluss beteiligt."}
     ],
-    pricing: {
-      eyebrow:"Preise", title:"Einfach und transparent",
-      subtitle:"Unternehmen und Investoren wählen jeweils die Unterstützung, die zu ihnen passt — vom kostenlosen öffentlichen Profil bis zur vollständig begleiteten Transaktion.",
-      tabBusiness:"Für Unternehmen", tabInvestor:"Für Investoren",
-      feeNote:"<strong>Erfolgshonorar:</strong> Zusätzlich zum Abonnement berechnet Rohbar dem Unternehmen ein pauschales Beratungshonorar nur bei Abschluss einer Transaktion — 3.000 € bei Deals unter 500.000 €, 8.000 € bei 500.000 € – 2 Mio. €, individuell darüber. Kein Prozentsatz der Investition, keine Gebühr ohne Abschluss. Die gezeigten Preise sind illustrativ und vor dem Start mit Rechts- und Steuerberatung abzustimmen."
-    },
+    pricing: {eyebrow:"Zugang", title:"Für tadschikische Unternehmen kostenlos. Investoren zahlen.", subtitle:"Wer Kapital sucht, zahlt bei uns nie dafür, gefunden zu werden. Die Erlöse kommen von der deutschen Seite, wo das Budget für Markteintritt und Deal Flow ohnehin besteht.",
+      tabBusiness:"Für tadschikische Unternehmen", tabInvestor:"Für deutsche Investoren",
+      freeBanner:"<strong>Alles Folgende ist für Unternehmen in Tadschikistan kostenfrei</strong> — Eintrag, Prüfung und Vermittlung. Ein Unternehmen mit freiem Kapital braucht uns nicht, und eine Gebühr fürs Gefundenwerden würde genau die falschen Unternehmen auswählen.",
+      feeNote:"<strong>Woran wir verdienen:</strong> ausschließlich auf der Investorenseite — ein jährliches Zugangsabonnement und ein vorab vereinbartes Festhonorar, wenn wir eine Transaktion vollständig begleiten sollen. Wir nehmen nie einen Prozentsatz der Investition. Die Angaben sind Richtwerte dieser Konzeptvorschau und vor dem Start rechtlich und aufsichtsrechtlich zu bestätigen."},
     businessTiers:[
-      {name:"Basis", price:"Kostenlos", period:"", desc:"Ein öffentliches Profil im Verzeichnis — der Startpunkt für jedes Unternehmen.", features:["Öffentliche Profilseite","Branchen-Tagging & Sichtbarkeit in der Suche","Sichtbar für registrierte Investoren"], cta:"Kostenloses Profil erstellen", popular:false},
-      {name:"Verifiziert", price:"149 €", period:"/Monat", desc:"Prüfung vor Ort und bevorzugte Sichtbarkeit für Unternehmen, die bereit sind, mit Investoren zu sprechen.", features:["Prüfung vor Ort & Prüfsiegel","Bevorzugte Platzierung in der Suche","Profil übersetzt ins Russische & Deutsche","Direkte Nachrichten von Investoren"], cta:"Verifizierung starten", popular:true},
-      {name:"Featured", price:"399 €", period:"/Monat", desc:"Volle Betreuung für Unternehmen, die aktiv Kapital aufnehmen.", features:["Alles aus Verifiziert","Platzierung auf der Startseite","Professionell erstelltes, investitionsreifes Pitch Deck","Warme Vorstellungen jedes Quartal","Persönlicher Ansprechpartner"], cta:"Als Featured bewerben", popular:false}
+      {name:"Eintrag", price:"Kostenlos", period:"", desc:"Ein Profil im Verzeichnis, sichtbar für jeden akkreditierten Investor.", features:["Profilseite in drei Sprachen","Branchen-Tags und Sichtbarkeit in der Suche","Für alle akkreditierten Investoren sichtbar","Keine Provision auf Ihren Abschluss"], cta:"Unternehmen einreichen", popular:false},
+      {name:"Geprüft", price:"Kostenlos", period:"", desc:"Vor-Ort-Besuch und Dokumentenprüfung, damit ein Investor mit Ihrer Akte arbeiten kann, ohne vorher anzureisen.", features:["Alles aus „Eintrag“","Vor-Ort-Besuch und Prüfsiegel","Registrierungs- und Eigentumsnachweise geprüft","Finanzkennzahlen gesichtet und zusammengefasst"], cta:"Prüfung anfragen", popular:true},
+      {name:"Vorgestellt", price:"Kostenlos", period:"", desc:"Für Unternehmen, die nach unserer Einschätzung bereit sind, Kapital zu treffen. Ausgewählt, auf unsere Einladung.", features:["Alles aus „Geprüft“","Investorenfertige Zusammenfassung für Sie erstellt","Persönliche Vorstellung bei passenden Investoren","Begleitung durch Gespräche und Verhandlung","Hilfe bei Unterlagen und Struktur"], cta:"Eignung prüfen", popular:false}
     ],
     investorTiers:[
-      {name:"Gast", price:"Kostenlos", period:"", desc:"Den Markt erkunden, bevor Sie sich festlegen.", features:["Branchenüberblick & Marktdaten","Vorschau-Karten zu Chancen","Monatlicher Newsletter"], cta:"Kostenlos ansehen", popular:false},
-      {name:"Investor Access", price:"79 €", period:"/Monat", desc:"Voller Zugriff auf geprüfte Chancen und direkter Kontakt zu Unternehmen.", features:["Vollständige geprüfte Unternehmensprofile","Direkte Kontaktanfragen","Due-Diligence-Kurzberichte","Früher Zugang zu neuen Chancen"], cta:"Zugang erhalten", popular:true},
-      {name:"Concierge", price:"Ab 2.500 €", period:"/Projekt", desc:"Ein persönlicher Berater übernimmt Suche, Besuch vor Ort und Unterlagen für Sie.", features:["Persönlicher Vermittlungsberater","Koordinierte Besuche vor Ort","Koordination von Recht & Übersetzung","Begleitung bis zum Abschluss"], cta:"Berater kontaktieren", popular:false}
-    ]
+      {name:"Beobachter", price:"Kostenlos", period:"", desc:"Den Markt beobachten, ohne sich zu binden.", features:["Vierteljährliches Tadschikistan-Marktbriefing","Branchen- und Regulierungsupdates","Anonymisierte Kurzprofile neuer Mandate"], cta:"Marktbriefing erhalten", popular:false},
+      {name:"Deal Flow", price:"4.800 €", period:"/Jahr", desc:"Voller Zugang zu geprüften Mandaten und den Menschen dahinter.", features:["Vollständige Profile aller geprüften Unternehmen","Prüfunterlagen und Finanzübersichten","Direkte Vorstellung, ohne Zwischenstufen","Zwei Marktbriefings im Jahr mit unserem Team","Erstzugriff auf neue Mandate"], cta:"Zugang anfragen", popular:true},
+      {name:"Mandat", price:"Ab 12.000 €", period:"/Transaktion", desc:"Wir begleiten die Transaktion vollständig, zu einem vor Beginn vereinbarten Honorar.", features:["Alles aus „Deal Flow“","Suche nach Ihren konkreten Kriterien","Due Diligence vor Ort koordiniert","Dolmetschen und Dokumentenabwicklung","Lokale Rechts- und Steuerberatung vermittelt","Begleitung bis zum Abschluss"], cta:"Mandat besprechen", popular:false}
+    ],
   },
   tg: {
     ribbon: "Намоиши консептуалии платформаи Rohbar — хизмати фаъол нест.",
-    nav: {climate:"Фазои сармоя", sectors:"Соҳаҳо", opportunities:"Имкониятҳо", pricing:"Тарифҳо", why:"Чаро Тоҷикистон", process:"Раванди кор", contact:"Тамос", cta:"Тамос гирифтан"},
+    nav: {team:"Даста", climate:"Фазои сармоя", sectors:"Соҳаҳо", opportunities:"Имкониятҳо", pricing:"Дастрасӣ", why:"Чаро", process:"Раванди кор", contact:"Тамос", cta:"Тамос гирифтан"},
     hero: {
       badge:"Тоҷикистон × Германия",
       title:"Ҷое, ки соҳибкории тоҷикӣ бо сармояи олмонӣ вомехӯрад",
       subtitle:"Rohbar корхонаҳои санҷидашуда ва соҳаҳои дорои неруи баланди Тоҷикистонро бо сармоягузорони олмонӣ, ки бозорҳои нави рушдро меҷӯянд, мепайвандад — дониши маҳаллӣ бо сармоя ва стандартҳои байналмилалӣ якҷоя мешавад.",
-      ctaInvestor:"Ман сармоягузорам", ctaBusiness:"Ман соҳиби корхонаам",
+      ctaInvestor:"Ман сармоягузорам", ctaBusiness:"Ман корхонаам — ройгон",
       stat1:"Аҳолӣ", stat2:"Рушди ММД дар соли 2025 (Бонки Ҷаҳонӣ)", stat3:"Ҷои Тоҷикистон дар ҷаҳон аз рӯи неруи гидроэнергетикӣ", stat4:"Ҳиссаи барқ аз манбаъҳои барқароршаванда",
       legendCapital:"Сармоя ворид мешавад", legendGoods:"Мол ва даромад бармегардад"
     },
@@ -1469,18 +1590,29 @@ var translations = {
       message:"Паём", submit:"Фиристодани паём",
       success:"Ташаккур — ин намоиши консептуалӣ аст, паёмҳо ҳоло фиристода намешаванд. Дар нусхаи воқеӣ дастаи мо дар давоми 48 соат бо шумо тамос мегирад."
     },
-    footer: { audienceTitle:"Бо кӣ кор мекунем", contactTitle:"Тамосҳои мустақим", followTitle:"Шабакаҳо", mailInvestors:"Сармоягузорон", mailBusiness:"Соҳибкорон", mailPress:"Матбуот ва шарикӣ",
+    footer: { impressum:"Impressum", privacy:"Махфият", audienceTitle:"Бо кӣ кор мекунем", contactTitle:"Тамосҳои мустақим", followTitle:"Шабакаҳо", mailInvestors:"Сармоягузорон", mailBusiness:"Соҳибкорон", mailPress:"Матбуот ва шарикӣ",
       tagline:"Rohbar — пайванди соҳибкории тоҷикӣ бо сармояи олмонӣ.",
       disclaimer:"Ин сомона намоиши консептуалӣ барои мақсадҳои намоишӣ мебошад. Намунаҳои имкониятҳо тасвирӣ буда, пешниҳодҳои воқеӣ намебошанд.",
       rights:"© 2026 Rohbar. Ҳама ҳуқуқҳо ҳифз шудаанд."
     },
+    brief: {eyebrow:"Шарҳи бозор", title:"Шарҳи Тоҷикистон, чоряк як бор", desc:"Шарҳи кӯтоҳи хаттӣ барои сармоягузорони олмонӣ: дар қоидаҳо чӣ тағйир ёфт, дар омори савдо чӣ ҷунбид ва кадом мандатҳо омаданд. Бидуни занги фурӯш, бо як клик даст кашидан мумкин.",
+      emailLabel:"Почтаи кории шумо", cta:"Шарҳро фиристед", note:"Суроғаро танҳо барои фиристодани шарҳ истифода мебарем. Даст кашидан бо як клик. Ниг. <a href=\"legal/datenschutz.html\">сиёсати махфият</a>.",
+      success:"<strong>Қабул шуд.</strong> Дар нусхаи корӣ шарҳ ҳозир ба почтаи шумо мерафт. Ин намоиши консептуалист, бинобар ин чизе фиристода ва нигоҳ дошта нашуд.",
+      points:["Сурма, тилло ва манзараи ашёи хоми муҳими ИА","Тағйири меъёрҳои андоз, шартҳои минтақаҳо ва мақоми GSP","Мандатҳои нави санҷидашуда — мухтасар ва беном","Харидорони олмонӣ воқеан чӣ мепурсанд"]},
+    team: {eyebrow:"Одамон", title:"Кӣ дар паси муаррифӣ меистад", subtitle:"Дар муомилаи фаромарзӣ сармоягузор платформа намехарад. Ӯ доварии касеро мехарад, ки мегӯяд ширкат воқеӣ аст ва ҳангоми хатогӣ дар тамос мемонад.",
+      todo:"<strong>Ҷойгоҳи холӣ — то оғоз пур карда шавад.</strong> Дар ин ҷо бояд номҳои воқеӣ, аксҳо ва таҷрибаи санҷидашаванда бошанд. Миёнарави беном дар ин соҳа ҳамчун аломати хатар хонда мешавад ва ҳеҷ тарроҳӣ инро ҷуброн намекунад. Барои ҳар шахс пайванди LinkedIn ва имкон бошад тавсияи номӣ аз ҳар ду тараф илова кунед.",
+      people:[
+        {role:"Муассис", name:"[ Ном ]", desc:"Шахсе, ки барои ваъдаи ин саҳифа масъул аст. Таҳсил дар иқтисод, молия ё савдо ва эътибори воқеӣ дар ҳар ду кишвар — тамоми тиҷорат бар ҳамин профил такя мекунад."},
+        {role:"Дар ҷои кор, Тоҷикистон", name:"[ Ном ]", desc:"Ба корхонаҳо меравад, ҳуҷҷатҳоро месанҷад ва медонад кадом бақайдгирӣ чӣ маъно дорад. Санҷиш ҳамон қадар арзиш дорад, ки доварии ин шахс."},
+        {role:"Олмон / кор бо сармоягузорон", name:"[ Ном ]", desc:"Бо забони роҳбарияти Mittelstand ва дафтари оилавӣ гап мезанад ва медонад харидори олмонӣ пеш аз парвози аввал чиро бояд бинад."}
+      ]},
     sources: {eyebrow:"Манбаъҳо", title:"Ҳар рақам аз куҷост", subtitle:"Ҳар нишондиҳандаи ин саҳифа ба манбаи нашршуда бармегардад. Ҳар пайвандро кушоед ва худатон санҷед.", note:"Арзишҳои охирини нашршуда дар вақти таҳия оварда шудаанд; онҳо тахминӣ мебошанд, на шартномавӣ. Меъёрҳои андоз, имтиёзҳои тарифӣ ва шартҳои минтақаҳо тағйир меёбанд — пеш аз ӯҳдадорӣ бо мушовирони ҳуқуқӣ ва андозӣ тасдиқ кунед.", nav:"Манбаъҳо"},
     sourceWhat:["Андоз аз фоида, ААИ ва озодии истеҳсолот тибқи моддаи 189","Имтиёзҳои сармоягузорӣ, озодӣ аз ААИ барои ашёи воридотӣ, шартҳои минтақаҳои озод","Чор минтақаи озоди иқтисодӣ ва мақоми онҳо","Масоҳат, санаи таъсис ва профили минтақаҳо","Савдои дуҷонибаи Олмон–Тоҷикистон: ~€53 млн дар 2024, аз он ~€50 млн содироти Олмон","Савдои ИА–Тоҷикистон: €304 млн дар 2024","Мақоми GSP, истифодаи имтиёзҳо 7% ва дараҷаи истифода 95%","Содироти мол 2024: $1,95 млрд, −20,5%, ва сохтори содирот аз рӯи ҳисса","Сурма ҳамчун ашёи муҳим ва стратегии ИА; 52% воридоти ИА","Маҳдудиятҳои содиротии Чин оид ба сурма ва ҳиссаи истеҳсолкунандагони ҷаҳон","Global Peace Index 2025: ҷои 79 аз 163, баҳо 1,996","Дастрасӣ ба техникаи кишоварзӣ ҳамчун монеаи навсозӣ","Сохтори барқ: 98% барқароршаванда","Неруи обӣ: ҷои 8 дар ҷаҳон, тақрибан 5% азхудшуда"],
     climate: {
       eyebrow:"Фазои сармоягузорӣ",
       title:"Қоидаҳо, имтиёзҳо ва он чи воқеан савдо мешавад",
       subtitle:"Он чи сармоягузор пеш аз вохӯрии аввал месанҷад: низоми андоз, ҷои имтиёзҳо, он чи Тоҷикистон аллакай ба Аврупо мефурӯшад ва баҳои ниҳодҳои байналмилалӣ.",
-      tabTax:"Андоз ва имтиёз", tabFez:"Минтақаҳои озод", tabTrade:"Ҷараёни савдо", tabRate:"Рейтингҳо",
+      tabMarket:"Бозор ва рейтинг", tabTax:"Андоз ва имтиёз", tabFez:"Минтақаҳои озод", tabTrade:"Савдо ва соҳаҳо",
       taxTitle:"Меъёрҳои асосии андоз",
       taxSource:"Манбаъҳо: Кодекси андози Ҷумҳурии Тоҷикистон; Investment Climate Statement-и Департаменти давлатии ИМА, 2025. Меъёрҳо тағйир меёбанд — пеш аз қарор бо мушовири маҳаллӣ тасдиқ кунед.",
       perkTitle:"Имтиёзҳои дастрас ба сармоягузор",
@@ -1578,10 +1710,9 @@ var translations = {
       {name:"ИТ ва хизматрасониҳои рақамӣ", desc:"Гурӯҳи ҷавон ва рӯ ба афзоиши мутахассисони техникӣ барои аутсорсинг ва таҳияи маҳсулот."}
     ],
     oppItems:[
-      {name:"Содиркунандаи мевҷаҳои хушк ва чормағз", sector:"Кишоварзӣ", loc:"Вилояти Хатлон", desc:"Корхонаи оилавӣ ба сармоя барои хатти бастабандии мутобиқи стандарти ИА ва анбори яхдон эҳтиёҷ дорад.", seek:"€150,000 – €400,000"},
-      {name:"Истеҳсолкунандаи пахта ва матоъ", sector:"Нассоҷӣ", loc:"Вилояти Суғд", desc:"Корхонаи амудии нассоҷӣ дастгоҳҳояшро навсозӣ карда, шарики тақсимоти аврупоиро меҷӯяд.", seek:"€500,000 – €1.2 млн"},
-      {name:"Лоиҳаи нерӯгоҳи хурди барқи обӣ", sector:"Энергетика", loc:"Водии Рашт", desc:"Лоиҳаи нерӯгоҳи хурди барқи обӣ дар марҳилаи асоснокӣ барои таъмини минтақавӣ, маблағгузории лоиҳавӣ меҷӯяд.", seek:"€1–3 млн"},
-      {name:"Лоиҳаи эко-лоҷи Помир", sector:"Сайёҳӣ", loc:"ВМКБ (Помир)", desc:"Лоиҳаи эко-лоҷи бутик барои бозори рӯ ба афзоиши сайёҳии саргузаштӣ.", seek:"€200,000 – €600,000"}
+      {name:"Коркарди хушкмева ва чормағз", sector:"Кишоварзӣ", loc:"вилояти Хатлон", desc:"Истеҳсоли оилавӣ, тақрибан 40 корманд, аллакай дар минтақа содирот мекунад. Хати бастабандии мутобиқи ИА ва анбори хунук лозим аст, то мустақиман ба Аврупо барояд.", seek:"€150 000 – €400 000"},
+      {name:"Ресандагии пахта ва дӯзандагӣ", sector:"Бофандагӣ", loc:"вилояти Суғд", desc:"Корхонаи амудӣ муттаҳидшуда бо таъминоти ресмони худӣ. Ивази дастгоҳҳои кӯҳна ва шарики тақсимоти аврупоиро меҷӯяд.", seek:"€500 000 – €1,2 млн"},
+      {name:"НБО-и хурд, 4 МВт, навъи ҷӯйборӣ", sector:"Энергетика", loc:"водии Рашт", desc:"Майдончаи иҷозатнокшуда бо омӯзиши имконпазирии анҷомёфта ва шартномаи пайвасти шабака. Ҳамсармояро дар канори сарпарасти маҳаллии мавҷуда меҷӯяд.", seek:"€2 млн – €5 млн"}
     ],
     whyItems:[
       {title:"Мавқеи стратегӣ", desc:"Дар чорроҳаи Чин, Русия, Осиёи Ҷанубӣ ва Шарқи Наздик — маркази табиии логистика ва бозситодот."},
@@ -1595,22 +1726,20 @@ var translations = {
       {title:"Мутобиқат", desc:"Мо корхонаҳои санҷидашударо бо сармоягузороне, ки самт ва андозаи сармояашон мувофиқ аст, шинос мекунем."},
       {title:"Дастгирӣ", desc:"Мо дар сохтани созишнома кӯмак мекунем, масъалаҳои ҳуқуқӣ ва тарҷумаро ҳамоҳанг месозем ва пас аз бастани созишнома низ ҳамроҳ мемонем."}
     ],
-    pricing: {
-      eyebrow:"Тарифҳо", title:"Содда ва равшан",
-      subtitle:"Корхонаҳо ва сармоягузорон сатҳи дастгириеро, ки ба онҳо мувофиқ аст, интихоб мекунанд — аз профили ройгони ҷамъиятӣ то ҳамроҳии пурраи созишнома.",
-      tabBusiness:"Барои корхонаҳо", tabInvestor:"Барои сармоягузорон",
-      feeNote:"<strong>Хизматпулии созишнома:</strong> ба ғайр аз обуна, Rohbar аз корхона танҳо ҳангоми бастани созишнома як хизматпулии собити машваратӣ мегирад — €3,000 барои созишномаҳои то €500 ҳазор, €8,000 барои €500 ҳазор–€2 млн, барои калонтар алоҳида муайян мешавад. На фоизи сармоягузорӣ, ва агар созишнома нашавад — ҳеҷ пардохт нест. Нархҳои нишондодашуда тасвирӣ буда, пеш аз оғоз бо машваратчиёни ҳуқуқӣ ва андоз мувофиқа карда мешаванд."
-    },
+    pricing: {eyebrow:"Дастрасӣ", title:"Барои соҳибкори тоҷик ройгон. Сармоягузор пардохт мекунад.", subtitle:"Тарафе, ки сармоя меҷӯяд, ҳеҷ гоҳ барои ёфта шудан пардохт намекунад. Даромад аз тарафи олмонӣ меояд, ки буҷаи вуруд ба бозор ва деал-флоу аллакай дорад.",
+      tabBusiness:"Барои соҳибкорони Тоҷикистон", tabInvestor:"Барои сармоягузорони Олмон",
+      freeBanner:"<strong>Ҳама чизи зерин барои корхонаҳои Тоҷикистон ройгон аст</strong> — ҷойгиркунӣ, санҷиш ва шиносоӣ. Корхонае, ки пули озод дорад, ба мо ниёз надорад, ва пардохт барои ёфта шудан маҳз ширкатҳои нодурустро интихоб мекард.",
+      feeNote:"<strong>Мо аз чӣ даромад мегирем:</strong> танҳо аз тарафи сармоягузор — обунаи солонаи дастрасӣ ва арзиши устувори мандат, ки пешакӣ мувофиқа шудааст, вақте аз мо хоҳиш мекунанд муомиларо пурра пеш барем. Мо ҳеҷ гоҳ аз сармоя фоиз намегирем. Рақамҳо барои ин намоиши консептуалӣ тахминӣ буда, пеш аз оғоз тасдиқи ҳуқуқӣ ва танзимӣ талаб мекунанд."},
     businessTiers:[
-      {name:"Асосӣ", price:"Ройгон", period:"", desc:"Профили ҷамъиятӣ дар феҳрист — нуқтаи оғоз барои ҳар корхона.", features:["Саҳифаи профили ҷамъиятӣ","Тег ва намоёнии соҳа дар ҷустуҷӯ","Барои сармоягузорони қайдшуда намоён"], cta:"Профили ройгон сохтан", popular:false},
-      {name:"Санҷидашуда", price:"€149", period:"/моҳ", desc:"Санҷиш дар маҳал ва намоёнии афзалиятнок барои корхонаҳое, ки омодаанд бо сармоягузорон сӯҳбат кунанд.", features:["Санҷиш дар маҳал ва нишони «Санҷидашуда»","Ҷои афзалиятнок дар ҷустуҷӯ","Профил ба забони русӣ ва олмонӣ тарҷума мешавад","Паёми мустақим аз сармоягузорон"], cta:"Санҷида шудан", popular:true},
-      {name:"Featured", price:"€399", period:"/моҳ", desc:"Дастгирии пурра барои корхонаҳое, ки фаъолона сармоя ҷалб мекунанд.", features:["Ҳама чиз аз «Санҷидашуда»","Ҷойгиршавӣ дар саҳифаи асосӣ","Тақдимоти касбии омода барои сармоягузор","Шиносоии гарм бо сармоягузорон ҳар семоҳа","Менеҷери шахсӣ"], cta:"Барои Featured аризадиҳӣ", popular:false}
+      {name:"Ҷойгиркунӣ", price:"Ройгон", period:"", desc:"Профил дар феҳраст, ки барои ҳар сармоягузори аккредитатсияшуда намоён аст.", features:["Саҳифаи профил бо се забон","Тамғаи соҳавӣ ва намоёнӣ дар ҷустуҷӯ","Барои ҳамаи сармоягузорони аккредитатсияшуда намоён","Ҳеҷ комиссия аз муомилаи шумо"], cta:"Дархост фиристодан", popular:false},
+      {name:"Санҷидашуда", price:"Ройгон", period:"", desc:"Ташриф ба ҷои кор ва санҷиши ҳуҷҷатҳо, то сармоягузор бидуни сафари пешакӣ бо парвандаи шумо кор кунад.", features:["Ҳама чиз аз «Ҷойгиркунӣ»","Ташриф ба ҷои кор ва нишони санҷиш","Санҷиши ҳуҷҷатҳои бақайдгирӣ ва моликият","Нишондиҳандаҳои молиявӣ дида ва ҷамъбаст шуда"], cta:"Санҷиш дархост кардан", popular:true},
+      {name:"Муаррифӣшуда", price:"Ройгон", period:"", desc:"Барои ширкатҳое, ки ба назари мо ба вохӯрӣ бо сармоя омодаанд. Интихобӣ, бо даъвати мо.", features:["Ҳама чиз аз «Санҷидашуда»","Ҷамъбасти омода барои сармоягузор","Муаррифии шахсӣ ба сармоягузорони мувофиқ","Дастгирӣ дар вохӯриҳо ва музокирот","Кумак дар ҳуҷҷатҳо ва сохтори муомила"], cta:"Мувофиқатро санҷед", popular:false}
     ],
     investorTiers:[
-      {name:"Меҳмон", price:"Ройгон", period:"", desc:"Бозорро пеш аз қарор омӯзед.", features:["Шарҳи соҳаҳо ва маълумоти бозор","Корти пешнамоиши имкониятҳо","Хабарномаи моҳона"], cta:"Ройгон дидан", popular:false},
-      {name:"Investor Access", price:"€79", period:"/моҳ", desc:"Дастрасии пурра ба имкониятҳои санҷидашуда ва тамоси мустақим бо корхонаҳо.", features:["Профилҳои пурраи санҷидашудаи корхонаҳо","Дархости тамоси мустақим","Ҳисоботи мухтасари санҷиши ҳуқуқӣ","Дастрасии барвақт ба пешниҳодҳои нав"], cta:"Дастрасӣ гирифтан", popular:true},
-      {name:"Concierge", price:"Аз €2,500", period:"/барои як созишнома", desc:"Мушовири шахсӣ ҷустуҷӯ, боздид ва ҳуҷҷатҳоро барои шумо анҷом медиҳад.", features:["Мушовири шахсии мутобиқсозӣ","Боздидҳои ҳамоҳангшудаи маҳаллӣ","Ҳамоҳангсозии масъалаҳои ҳуқуқӣ ва тарҷума","Дастгирӣ то бастани созишнома"], cta:"Бо мушовир тамос гиред", popular:false}
-    ]
+      {name:"Нозир", price:"Ройгон", period:"", desc:"Бозорро тамошо кардан бидуни ӯҳдадорӣ.", features:["Шарҳи чоряки бозори Тоҷикистон","Навигариҳои соҳавӣ ва танзимӣ","Тавсифи беноми мандатҳои нав"], cta:"Шарҳи бозорро гирифтан", popular:false},
+      {name:"Деал-флоу", price:"€4 800", period:"/сол", desc:"Дастрасии пурра ба мандатҳои санҷидашуда ва одамони паси онҳо.", features:["Профили пурраи ҳамаи ширкатҳои санҷидашуда","Маводи санҷиш ва ҷамъбасти молиявӣ","Муаррифии мустақим, бидуни миёнарав","Ду брифинги солона бо дастаи мо","Ҳуқуқи назари аввал ба мандатҳои нав"], cta:"Дастрасӣ дархост кардан", popular:true},
+      {name:"Мандат", price:"Аз €12 000", period:"/муомила", desc:"Муомиларо пурра пеш мебарем, бо музде, ки пеш аз оғоз мувофиқа шудааст.", features:["Ҳама чиз аз «Деал-флоу»","Ҷустуҷӯ мутобиқи меъёрҳои мушаххаси шумо","Ҳамоҳангсозии due diligence дар ҷои кор","Тарҷума ва коркарди ҳуҷҷатҳо","Интихоби ҳуқуқшинос ва мушовири андози маҳаллӣ","Дастгирӣ то анҷоми муомила"], cta:"Мандатро муҳокима кардан", popular:false}
+    ],
   }
 };
 
@@ -1633,6 +1762,8 @@ var SOURCES = [
   {t:"International Energy Agency — Tajikistan 2022", u:"https://www.iea.org/reports/tajikistan-2022"},
   {t:"CAREC — Tajikistan's Investment Opportunities in Hydropower", u:"https://energy.carecprogram.org/wp-content/uploads/2023/11/Tajikistans-Investment-Opportunities-in-Hydropower.pdf"}
 ];
+
+var personIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg>';
 
 var sectorIcons = [
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21c4-2 7-6 7-11a7 7 0 0 0-14 0c0 5 3 9 7 11z"/><path d="M12 21V10"/></svg>',
@@ -1706,6 +1837,15 @@ function renderLists(dict){
   }
   document.getElementById("pricingBusinessGrid").innerHTML = dict.businessTiers.map(priceCard).join("");
   document.getElementById("pricingInvestorGrid").innerHTML = dict.investorTiers.map(priceCard).join("");
+
+  document.getElementById("briefList").innerHTML = dict.brief.points.map(function(x){
+    return '<li>'+checkIcon+'<span>'+x+'</span></li>';
+  }).join("");
+
+  document.getElementById("teamGrid").innerHTML = dict.team.people.map(function(m){
+    return '<div class="team-card"><div class="team-photo">'+personIcon+'</div>'+
+      '<div class="team-role">'+m.role+'</div><h3>'+m.name+'</h3><p>'+m.desc+'</p></div>';
+  }).join("");
 
   document.getElementById("srcGrid").innerHTML = SOURCES.map(function(src,i){
     var what = dict.sourceWhat[i] || "";
@@ -1836,13 +1976,25 @@ document.getElementById("themeBtn").addEventListener("click", function(){
 
 applyLang(current);
 
+/* market-brief capture — concept preview, nothing is transmitted */
+(function(){
+  var f = document.getElementById("briefForm");
+  f.addEventListener("submit", function(e){
+    e.preventDefault();
+    var input = document.getElementById("briefEmail");
+    if(!input.value || input.value.indexOf("@") === -1){ input.focus(); return; }
+    f.style.display = "none";
+    document.getElementById("briefOk").classList.add("show");
+  });
+})();
+
 /* investment-climate tabs */
 document.querySelectorAll(".clim-tab").forEach(function(tab){
   tab.addEventListener("click", function(){
     var key = tab.getAttribute("data-ctab");
     document.querySelectorAll(".clim-tab").forEach(function(b){ b.classList.remove("active"); });
     tab.classList.add("active");
-    var map = {tax:"climTax", fez:"climFez", trade:"climTrade", rate:"climRate"};
+    var map = {market:"climMarket", tax:"climTax", fez:"climFez", trade:"climTrade"};
     Object.keys(map).forEach(function(k){
       document.getElementById(map[k]).classList.toggle("active", k===key);
     });
