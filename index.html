@@ -588,13 +588,6 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .asst-send:disabled{opacity:.5;cursor:default}
 @media(max-width:480px){#assistantPanel{right:12px;bottom:82px}}
 
-/* Static presentation requested by the owner. */
-html{scroll-behavior:auto!important}
-*,*::before,*::after{animation:none!important;transition:none!important}
-.reveal{opacity:1!important;transform:none!important}
-.btn-p:hover,.nav-cta:hover,.pcard:hover,.pdemo-btn:hover,.community-card:hover{transform:none!important}
-.marquee-track{overflow-x:auto;-webkit-mask:none;mask:none}
-#score-ticker-wrap{overflow-x:auto!important}
 @media(max-width:600px){nav .nav-cta{display:none}}
 </style>
 </head>
@@ -1814,12 +1807,49 @@ function toggleSection(bodyId, btn){
   if(label) label.textContent = willOpen ? (t.sec_hide||'Hide') : (t.sec_show||'Show');
 }
 
-// Static sections: content is available immediately, without reveal/count-up effects.
-document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
+// ── SCROLL REVEAL + STAGGER + COUNTER ──
+const prefRM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function easeOutExpo(t){return t===1?1:1-Math.pow(2,-10*t);}
+
+function animateCount(el){
+  const target = parseFloat(el.dataset.count);
+  if(isNaN(target) || prefRM) return;
+  const prefix = el.dataset.prefix||'';
+  const suffix = el.dataset.suffix||'';
+  const finalText = el.textContent;
+  const dur = 1400;
+  const t0 = performance.now();
+  const isDecimal = target !== Math.floor(target);
+  (function step(now){
+    const p = Math.min((now-t0)/dur, 1);
+    const v = easeOutExpo(p)*target;
+    el.textContent = prefix + (isDecimal ? v.toFixed(1) : Math.round(v)) + suffix;
+    if(p < 1) requestAnimationFrame(step);
+    else el.textContent = finalText;
+  })(t0);
+}
+
+const revObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const el = e.target;
+    const siblings = Array.from(el.parentElement.children).filter(c=>c.classList.contains('reveal'));
+    const idx = siblings.indexOf(el);
+    if(!prefRM) el.style.transitionDelay = (idx * 0.07) + 's';
+    el.classList.add('visible');
+    if(el.classList.contains('scard')){
+      const big = el.querySelector('.big[data-count]');
+      if(big) setTimeout(()=>animateCount(big), idx * 70);
+    }
+    revObs.unobserve(el);
+  });
+},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
 
 // ── NAV CTA ──
 const navCta = document.querySelector('.nav-cta');
-if(navCta) navCta.addEventListener('click', e=>{e.preventDefault();document.getElementById('waitlist').scrollIntoView({behavior:'auto'});});
+if(navCta) navCta.addEventListener('click', e=>{e.preventDefault();document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});});
 
 // ── COUNTDOWN ──
 function updateCD(){
@@ -1995,7 +2025,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     el.textContent = '$' + Math.round(val).toLocaleString('en-US');
   }
   render();
-  // The illustrative estimate is rendered once; no animated counter.
+  setInterval(render, 100);
 })();
 
 // ── LIVE LEDGER ──────────────────────────────────────────
@@ -2003,14 +2033,16 @@ document.addEventListener('DOMContentLoaded',()=>{
   const c=document.getElementById('ledgerCanvas');
   if(!c) return;
   const ctx=c.getContext('2d');
-  let W2,H2;
+  let W2,H2,animPaused=false;
+  const visObs=new IntersectionObserver(e=>{animPaused=!e[0].isIntersecting;},{threshold:0.1});
+  visObs.observe(c);
   function rsz(){
     const dpr=window.devicePixelRatio||1;
     W2=c.offsetWidth; H2=c.offsetHeight;
     c.width=W2*dpr; c.height=H2*dpr;
     ctx.setTransform(dpr,0,0,dpr,0,0);
   }
-  rsz();
+  rsz(); window.addEventListener('resize',rsz);
 
   const txBase=[
     {hash:'0x7f3a...c842',donor:'Donor #1,247',cat:'cat_family',country:'Tajikistan',amt:'$120',status:'Confirmed',time:'2s'},
@@ -2036,6 +2068,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
   function frame(ts){
+    requestAnimationFrame(frame);
+    if(animPaused) return;
     const t=T[lang]||T.en;
     const isDark=document.documentElement.getAttribute('data-theme')==='dark';
     ctx.clearRect(0,0,W2,H2);
@@ -2058,7 +2092,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const pu=(Math.sin(ts*0.005)+1)/2;
     ctx.beginPath();ctx.arc(W2-14,headerH/2,(isMobile?5:7)+pu*2,0,Math.PI*2);
     ctx.fillStyle='rgba(82,153,110,0.25)';ctx.fill();
-
+    scrollY-=0.22;
 
 
     const bg2=isDark?'#0F2117':'#EDE8DE';
@@ -2099,7 +2133,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       ];
 
       const startY=colHY+14;
-
+      scrollY-=0.03;
       if(scrollY<-rowH){scrollY=0;txs.push(txs.shift());}
       // Clip rows to the area BELOW the column-header divider so they never overlap the header
       ctx.save();ctx.beginPath();ctx.rect(0,colHY+9,W2,H2-(colHY+9)-statsH);ctx.clip();
@@ -2150,11 +2184,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       });
     }
   }
-  const redraw = () => { rsz(); frame(0); };
-  redraw();
-  window.addEventListener('resize', redraw);
-  new MutationObserver(redraw).observe(document.documentElement, {attributes:true,attributeFilter:['lang','data-theme']});
-  if(document.fonts) document.fonts.ready.then(redraw);
+  requestAnimationFrame(frame);
 })();
 
 // ── Waitlist form ──
@@ -2285,7 +2315,7 @@ function calcZakat(){
   }
   const res=document.getElementById('zc-result');
   res.style.display='block';
-  res.scrollIntoView({behavior:'auto',block:'nearest'});
+  res.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
 // ── PROGRESS BARS (IntersectionObserver) ──
@@ -2453,9 +2483,28 @@ function calcZakat(){
     return s;
   }
 
-  ENTRIES.forEach(function(e){ ticker.appendChild(buildEntry(e)); });
-  // Static, horizontally scrollable examples; no animation loop.
+  var all = ENTRIES.concat(ENTRIES).concat(ENTRIES);
+  all.forEach(function(e){ ticker.appendChild(buildEntry(e)); });
 
+  var pos = 0;
+  var speed = 0.5;
+  var rafId;
+  function animate(){
+    pos += speed;
+    var totalW = ticker.scrollWidth / 3;
+    if(pos >= totalW) pos -= totalW;
+    ticker.style.transform = 'translateX(-' + pos + 'px)';
+    rafId = requestAnimationFrame(animate);
+  }
+
+  var wrap = document.getElementById('score-ticker-wrap');
+  if(wrap){
+    wrap.addEventListener('mouseenter', function(){ cancelAnimationFrame(rafId); });
+    wrap.addEventListener('mouseleave', function(){ rafId = requestAnimationFrame(animate); });
+  }
+
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  requestAnimationFrame(animate);
 })();
 </script>
 
