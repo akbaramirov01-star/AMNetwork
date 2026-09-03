@@ -18,15 +18,17 @@
   const ease = v => { const t = clamp(v); return t * t * (3 - 2 * t); };
   const language = () => { const l = document.documentElement.lang; return l === 'tg' ? 'tj' : l; };
   const translations = () => Object.fromEntries(keys.map((k, i) => [k, (words[language()] || words.en)[i]]));
-  const cloud = Array.from({length: 92}, (_, i) => {
-    const y = 1 - 2 * (i + .5) / 92, r = Math.sqrt(1 - y * y), a = i * Math.PI * (3 - Math.sqrt(5));
-    return {x: Math.cos(a) * r, y, z: Math.sin(a) * r};
-  });
-  const edges = [];
-  for (let i = 0; i < cloud.length; i++) for (let j = i + 1; j < cloud.length; j++) {
-    const a = cloud[i], b = cloud[j];
-    if (Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z) < .44) edges.push([i, j]);
-  }
+  const identityCopy = {
+    en: ['AI-assisted assessment','Human verification','Blockchain transparency','AI assessment','Proof'],
+    ru: ['Оценка с помощью ИИ','Проверка человеком','Прозрачность блокчейна','Оценка ИИ','Подтверждение'],
+    de: ['KI-gestützte Bewertung','Menschliche Prüfung','Blockchain-Transparenz','KI-Bewertung','Nachweis'],
+    ar: ['تقييم بمساعدة الذكاء الاصطناعي','تحقق بشري','شفافية البلوكشين','تقييم ذكي','الإثبات'],
+    tj: ['Арзёбӣ бо зеҳни сунъӣ','Санҷиш аз ҷониби инсон','Шаффофияти блокчейн','Арзёбии ЗС','Тасдиқ'],
+    tr: ['Yapay zekâ destekli değerlendirme','İnsan doğrulaması','Blokzincir şeffaflığı','YZ değerlendirmesi','Kanıt'],
+    id: ['Penilaian berbantuan AI','Verifikasi manusia','Transparansi blockchain','Penilaian AI','Bukti'],
+    ms: ['Penilaian berbantu AI','Pengesahan manusia','Ketelusan blockchain','Penilaian AI','Bukti'],
+    zh: ['AI 辅助评估','人工核验','区块链透明记录','AI 评估','凭证']
+  };
 
   class BrandedMotion {
     constructor(root) {
@@ -75,8 +77,8 @@
         const rect = this.scene.getBoundingClientRect();
         this.pointer = {x: clamp((e.clientX - rect.left) / rect.width) * 2 - 1, y: clamp((e.clientY - rect.top) / rect.height) * 2 - 1};
         if (this.receipt) {
-          this.receipt.style.setProperty('--am-rx', (-this.pointer.y * 4) + 'deg');
-          this.receipt.style.setProperty('--am-ry', (this.pointer.x * 6) + 'deg');
+          this.receipt.style.setProperty('--am-rx', (-this.pointer.y * 1.2) + 'deg');
+          this.receipt.style.setProperty('--am-ry', (this.pointer.x * 1.5) + 'deg');
         }
         if (!this.running) this.draw();
       });
@@ -106,6 +108,10 @@
     isReduced() { return reduced.matches && !this.optIn; }
     refresh() {
       this.t = translations();
+      const identity = identityCopy[language()] || identityCopy.en;
+      if (this.receipt) this.receipt.dir = language() === 'ar' ? 'rtl' : 'ltr';
+      ['assisted','verified','record','assess','proof'].forEach((key,i) => { this.t[key] = identity[i]; });
+      document.querySelectorAll('[data-am-foundation]').forEach(el => { el.textContent = this.t[el.dataset.amFoundation]; });
       this.root.querySelectorAll('[data-am-copy]').forEach(el => { el.textContent = this.t[el.dataset.amCopy] || ''; });
       const style = getComputedStyle(this.root);
       this.gold = style.getPropertyValue('--gold').trim() || '#C9A84C';
@@ -175,71 +181,73 @@
       const p = this.isReduced() ? 1 : clamp(this.elapsed / this.duration), t = this.isReduced() ? 8 : this.elapsed / 1000;
       this.ctx.clearRect(0, 0, this.w, this.h);
       this.glow(this.w / 2, this.h * .45, Math.min(this.w * .45, 220), this.gold, .045);
-      for (let i = 0; i < 30; i++) this.dot((i * 127.7) % this.w, (i * 61.1) % this.h, .65, this.gold, .08 + (Math.sin(t * .4 + i) + 1) * .04);
       if (this.kind === 'network') this.network(t);
       else if (this.kind === 'thread') this.thread(t, p);
       else this.receiptFrame(t, p);
       this.root.style.setProperty('--am-progress', String(p));
     }
     network(t) {
-      const radius = Math.min(this.w * .37, this.h * .41), cx = this.w / 2, cy = this.h * .46;
-      const angle = t * .15 + this.pointer.x * .22, tilt = .2 + this.pointer.y * .14, unfold = ease(t / 2.8);
-      const projected = cloud.map((v, i) => {
-        const x = v.x * Math.cos(angle) + v.z * Math.sin(angle), z = -v.x * Math.sin(angle) + v.z * Math.cos(angle);
-        const y = v.y * Math.cos(tilt) - z * Math.sin(tilt), zz = v.y * Math.sin(tilt) + z * Math.cos(tilt), k = 3.6 / (3.6 - zz * .3);
-        const a = i * Math.PI * 2 / cloud.length, petal = .76 + .2 * Math.cos(8 * a);
-        return {x: cx + ((1 - unfold) * Math.cos(a) * petal + unfold * x * k) * radius, y: cy + ((1 - unfold) * Math.sin(a) * petal + unfold * y * k) * radius, z: zz};
+      const r = Math.min(this.w * .43, this.h * .42), cx = this.w / 2, cy = this.h * .48;
+      const rotation = -.36 + Math.sin(t * .12) * .06 + this.pointer.x * .035;
+      // A woven torus leaves clear space for the original AM symbol.
+      const point = (u, v) => {
+        const radius = r * (.75 + .20 * Math.cos(v));
+        const x = radius * Math.cos(u), y = radius * Math.sin(u), z = r * .20 * Math.sin(v);
+        const yy = y * .77 + z * .63;
+        return {x: cx + x * Math.cos(rotation) - yy * Math.sin(rotation), y: cy + x * Math.sin(rotation) + yy * Math.cos(rotation), z};
+      };
+      for (let i = 0; i < 32; i++) {
+        const u = i * Math.PI * 2 / 32 + t * .025;
+        const pts = Array.from({length: 49}, (_, j) => point(u + Math.sin(j / 48 * Math.PI * 2) * .13, j / 48 * Math.PI * 2));
+        this.path(pts, this.gold, .16 + .11 * (Math.sin(u) + 1), .65);
+      }
+      for (let j = 0; j < 12; j++) {
+        const v = j * Math.PI * 2 / 12;
+        const pts = Array.from({length: 129}, (_, i) => point(i / 128 * Math.PI * 2, v));
+        this.path(pts, this.gold, .09 + .16 * (Math.sin(v) + 1) / 2, .7);
+      }
+      const orbit = Array.from({length: 129}, (_, i) => {
+        const a = i / 128 * Math.PI * 2;
+        return {x: cx + Math.cos(a) * r * 1.09, y: cy + Math.sin(a) * r * .98};
       });
-      this.ring(cx, cy, radius * 1.12, this.gold, .1);
-      this.ring(cx, cy, radius * 1.2, this.gold, .045);
-      edges.forEach(([i, j], index) => {
-        const a = projected[i], b = projected[j];
-        this.path([a, b], this.gold, .06 + ((a.z + b.z + 2) / 4) * .2, .8);
-        if (index % 23 === 0) {
-          const f = (t * .33 + index * .17) % 1, x = a.x + (b.x - a.x) * f, y = a.y + (b.y - a.y) * f;
-          this.dot(x, y, 1.8, this.mint, .85); this.glow(x, y, 10, this.mint, .12);
-        }
-      });
-      projected.forEach((v, i) => {
-        const front = (v.z + 1) / 2;
-        this.dot(v.x, v.y, 1 + front * 1.6, i % 11 === 0 ? this.mint : this.gold, .2 + front * .7);
-        if (i % 17 === 0 && v.z > 0) this.ring(v.x, v.y, 5 + Math.sin(t + i) * 2, this.mint, .23);
-      });
+      this.path(orbit, this.gold, .12, .7);
+      for (let i = 0; i < 3; i++) {
+        const a = t * .12 + i * Math.PI * 2 / 3;
+        const p = point(a, Math.PI * .35);
+        this.glow(p.x,p.y,14,this.gold,.12);
+        this.dot(p.x,p.y,2.2,this.gold,.95);
+        this.ring(p.x,p.y,5.5,this.gold,.2);
+      }
       this.setStatus(this.t.disclaimer);
     }
-    cube(x, y, s, active, t, i) {
-      y += this.isReduced() || i === 2 ? 0 : Math.sin(t * 1.5 + i) * 2.5;
-      const a = {x,y:y-s}, b = {x:x+s*.88,y:y-s*.5}, c = {x:x+s*.88,y:y+s*.55}, d = {x,y:y+s}, e = {x:x-s*.88,y:y+s*.55}, f = {x:x-s*.88,y:y-s*.5}, mid = {x,y};
-      this.path([a,b,c,d,e,f], this.gold, .2 + active * .65, 1, true);
-      this.path([f,mid,b], this.gold, .15 + active * .5); this.path([mid,d], this.gold, .15 + active * .5);
-      if (active > .01) { this.glow(x,y,s*2.3,this.gold,active*.12); if (i !== 2) this.dot(x,y,2.5,this.gold,active); }
-    }
     thread(t, p) {
-      const y = this.h * .44, xs = [.14,.38,.62,.86].map(v => v * this.w), size = Math.min(31,this.w*.065);
-      const stage = clamp(p * 4,0,4), index = Math.min(3,Math.floor(stage));
-      for (let k = 0; k < 3; k++) {
-        const left = xs[k] + size * .95, right = xs[k+1] - size * .95;
-        for (let strand = 0; strand < 3; strand++) {
-          const vertices = Array.from({length:46},(_,n) => {const f=n/45;return{x:left+(right-left)*f,y:y+Math.sin(f*Math.PI*2+strand*Math.PI*.65)*Math.sin(f*Math.PI)*8};});
-          this.path(vertices,this.gold,.13);
-          const progress = clamp(stage-k-.1);
-          if (progress > 0) {
-            const end = Math.floor(progress*45), head = vertices[end]; this.path(vertices.slice(0,end+1),this.gold,.65,1.3);
-            if (stage < k+1.1) {this.glow(head.x,head.y,18,this.gold,.2);this.dot(head.x,head.y,2.1,this.gold);}
-          }
+      const y = this.h * .40, xs = [.1,.3,.5,.7,.9].map(v => v * this.w), size = Math.min(24,this.w*.052);
+      const stage = clamp(p * 5,0,5), index = Math.min(4,Math.floor(stage));
+      for (let k = 0; k < 4; k++) {
+        const left = xs[k] + size + 4, right = xs[k+1] - size - 4;
+        const pts = Array.from({length:45},(_,n) => {const f=n/44;return{x:left+(right-left)*f,y:y+Math.sin(f*Math.PI*2)*Math.sin(f*Math.PI)*5};});
+        this.path(pts,this.gold,.17,.8);
+        const progress = clamp(stage-k-.3);
+        if (progress > 0) {
+          const end = Math.floor(progress*44), head = pts[end];
+          this.path(pts.slice(0,end+1),this.gold,.85,1.2);
+          if (progress < 1) {this.glow(head.x,head.y,12,this.gold,.15);this.dot(head.x,head.y,2,this.gold);}
         }
       }
-      xs.forEach((x,i) => {const active=ease((stage-i)*3+.7);this.cube(x,y,size,active,t,i);this.steps[i].classList.toggle('is-lit',active>.5);});
-      this.setStatus(this.t.demo+' · '+(p>=1?this.t.done:[this.t.give,this.t.review,this.t.chain,this.t.receive][index]));
+      xs.forEach((x,i) => {
+        const active=ease((stage-i)*2+.7);
+        this.ring(x,y,size,this.gold,.18+active*.45);
+        if(i!==2){this.ring(x,y,size*.47,this.gold,.14+active*.5);this.dot(x,y,2.5,this.gold,.2+active*.8);}
+        this.steps[i].classList.toggle('is-lit',active>.5);
+      });
+      this.setStatus(this.t.demo+' · '+(p>=1?this.t.done:[this.t.give,this.t.assess,this.t.review,this.t.chain,this.t.proof][index]));
     }
     receiptFrame(t,p) {
-      const progress=ease(p*1.4),check=ease((p-.62)*4),r=Math.min(this.w*.43,185),c=this.ctx;
+      const progress=ease(p*1.4),check=ease((p-.62)*4);
       this.root.style.setProperty('--am-sheen',(-110+progress*240)+'%');
       this.root.style.setProperty('--am-bars',String(.12+.88*ease((p-.25)*2)));
       this.root.style.setProperty('--am-check',String(.25+.75*check));
       this.root.style.setProperty('--am-check-scale',String(.85+.15*check));
-      c.save();c.strokeStyle=this.gold;c.globalAlpha=.14;c.translate(this.w/2,this.h*.52);c.rotate(-.25);c.beginPath();c.ellipse(0,0,r,r*.62,0,0,Math.PI*2);c.stroke();c.restore();
-      for(let i=0;i<5;i++){const a=t*.3+i*Math.PI*.4,x=this.w/2+Math.cos(a)*r,y=this.h*.52+Math.sin(a)*r*.7;this.dot(x,y,2,this.gold,.7);this.glow(x,y,13,this.gold,.12);}
       const text=p>.72?this.t.receiptReady:this.t.forming;
       if(this.proofStatus.textContent!==text)this.proofStatus.textContent=text;
       this.setStatus(p>=1?this.t.ready:this.t.forming);

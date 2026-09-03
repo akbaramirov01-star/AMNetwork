@@ -588,16 +588,15 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .asst-send:disabled{opacity:.5;cursor:default}
 @media(max-width:480px){#assistantPanel{right:12px;bottom:82px}}
 </style>
-<link rel="stylesheet" href="/assets/am-motion.css?v=20260903-brand2">
-<script defer src="/assets/am-motion.js?v=20260903-brand2"></script>
+<link rel="stylesheet" href="/assets/am-design.css?v=20260903-refined4">
+<script defer src="/assets/am-motion.js?v=20260903-refined4"></script>
 </head>
 <body>
 <div class="topline"></div>
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#top">
-    <img src="/logo.webp" alt="AM Network">
+  <a class="nav-logo" href="#top" aria-label="AM Network"><span class="am-symbol"><img src="/logo.webp" alt="" width="480" height="294"></span><span class="nav-logo-text"><span class="am">AM</span> Network</span>
     
   </a>
   <div class="nav-right">
@@ -627,35 +626,30 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="top">
+<section class="hero am-hero" id="top">
+  <div class="am-hero-copy">
   <div class="hero-badge"><div class="hero-dot"></div><span data-t="hero_badge">Early Access · Building in Public · 2026</span></div>
-  <img class="hero-logo" src="/logo.webp" alt="AM Network">
-  <h1><span id="heroL1" data-t="hero_l1">Where Every Dollar</span><span class="line2" id="heroL2" data-t="hero_l2">Finds Its Purpose.</span></h1>
-  <p class="hero-sub" data-t="hero_sub">The first AI-assisted, human-verified, blockchain-transparent Zakat &amp; Sadaqah platform. Built for ~2 billion Muslims.</p>
+  <h1><span id="heroL1" data-t="hero_l1">Giving, built</span><span class="line2" id="heroL2" data-t="hero_l2">on trust.</span></h1>
+  <p class="hero-sub" data-t="hero_sub">We're building a transparent way to give Zakat and Sadaqah — with AI-assisted assessment, human verification, and blockchain records.</p>
 
-  <div class="hero-stats">
-    <div class="hstat"><span class="hstat-num" data-t="num_600b">$600B</span><span class="hstat-lbl" data-t="stat1">Potential Zakat/yr</span></div>
-    <div class="hstat"><span class="hstat-num" data-t="num_18b">~2B</span><span class="hstat-lbl" data-t="stat2">Muslims Worldwide</span></div>
-    <div class="hstat"><span class="hstat-num" data-t="num_4t">$6T</span><span class="hstat-lbl" data-t="stat3">Islamic Finance Market</span></div>
-    <div class="hstat"><span class="hstat-num">0</span><span class="hstat-lbl" data-t="stat4">Transparent Platforms</span></div>
-  </div>
   <div class="hero-ctas">
     <a class="btn-p" href="#waitlist" data-t="cta_join">Join the Waitlist</a>
     <a class="btn-s" href="#how" data-t="cta_how">How it works</a>
-    <a class="btn-wp" href="/AM_Network_Whitepaper_v1_EN.pdf" target="_blank" download data-t="cta_wp" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1px solid var(--gold);border-radius:8px;color:var(--gold);font-size:14px;font-weight:500;text-decoration:none;transition:all 0.3s;background:transparent;font-family:'DM Sans',sans-serif">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-      <span data-t="cta_wp">Whitepaper</span>
-    </a>
+
   </div>
 
-  <!-- AM NETWORK: BRANDED NETWORK CONCEPT -->
+  <a class="btn-wp" href="/AM_Network_Whitepaper_v1_EN.pdf" target="_blank" rel="noopener" download><span data-t="cta_wp">Whitepaper</span></a>
+  </div>
+  <!-- AM NETWORK: ORBITAL IDENTITY -->
   <div class="graph-wrap">
   <div class="am-motion" data-am-kind="network">
     <div class="am-motion-head"><span class="am-motion-name" data-am-copy="network">Network of trust</span><span class="am-motion-demo" data-am-copy="demo">Concept · Demo</span></div>
     <div class="am-motion-scene">
       <canvas aria-hidden="true"></canvas>
-      <div class="am-motion-brand"><img src="/logo.webp" alt="AM Network" width="480" height="294" decoding="async"></div>
-      <p class="am-motion-signature" data-am-copy="signature">AM Network · Every connection has a purpose.</p>
+      <div class="am-motion-brand"><span class="am-symbol"><img src="/logo.webp" alt="AM Network" width="480" height="294" decoding="async"></span></div>
+      <span class="am-network-label label-a" data-am-copy="give">Give</span>
+      <span class="am-network-label label-b" data-am-copy="review">Review</span>
+      <span class="am-network-label label-c" data-am-copy="chain">Blockchain</span>
     </div>
     <div class="am-motion-track" aria-hidden="true"><span></span></div>
     <div class="am-motion-foot">
@@ -664,35 +658,10 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     </div>
   </div>
   </div>
-</section>
-
-<hr class="div">
-
-<!-- ZAKAT DEBT CLOCK -->
-<section class="section" style="text-align:center;padding-top:56px;padding-bottom:40px">
-  <div class="eyebrow" style="justify-content:center" data-t="clock_tag">The Gap, In Real Time</div>
-  <h2 class="sec-title" data-t="clock_title">While You're Reading This, The Gap Is Growing.</h2>
-  <p class="sec-body" style="margin-left:auto;margin-right:auto" data-t="clock_sub">An estimate of Zakat obligation not yet reaching anyone formally or transparently — every year, not just today.</p>
-  <div class="zclock-box">
-    <div class="zclock-num" id="zclockNum">$0</div>
-    <div class="zclock-lbl" data-t="clock_lbl">not formally distributed this year (estimate)</div>
-  </div>
-  <p class="zclock-disclaimer" data-t="clock_disclaimer">Illustrative estimate: $600B/yr potential obligation (World Bank/IsDB, 2016) minus &lt;$25B/yr formally distributed. Not live transaction data.</p>
-</section>
-
-<!-- MOST URGENT NOW (demo preview) -->
-<section class="section" style="text-align:center;padding-top:20px;padding-bottom:56px">
-  <div class="eyebrow" style="justify-content:center" data-t="urgent_tag">Right Now</div>
-  <h2 class="sec-title" data-t="urgent_title">The Most Urgent — Verified Case</h2>
-  <p class="sec-body" style="margin-left:auto;margin-right:auto" data-t="urgent_sub">A live preview of how AM Zakat.ai ranks real cases by urgency — one at a time, most needed first.</p>
-
-  <div class="urgent-card reveal">
-    <span class="urgent-demo-ribbon">⚠ <span data-t="urgent_demo_ribbon">DEMO — not a real person. Real verified cases appear here after the pilot launch.</span></span>
-    <div class="urgent-row">
-      <div class="urgent-score-badge"><span class="urgent-score-num">94</span><span class="urgent-score-lbl" data-t="urgent_score_lbl">AI Urgency Score</span></div>
-      <p class="urgent-need" data-t="urgent_need">Family of 4, single mother, urgent medical need — verified by local oracle.</p>
-    </div>
-    <button class="urgent-cta-btn" disabled data-t="urgent_cta">Real Cases Launching Soon</button>
+  <div class="am-hero-foundation">
+    <div><small>01 /</small><span data-am-foundation="assisted">AI-assisted assessment</span></div>
+    <div><small>02 /</small><span data-am-foundation="verified">Human verification</span></div>
+    <div><small>03 /</small><span data-am-foundation="record">Blockchain transparency</span></div>
   </div>
 </section>
 
@@ -707,12 +676,13 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <div class="am-motion-head"><span class="am-motion-name" data-am-copy="thread">The path of giving</span><span class="am-motion-demo" data-am-copy="demo">Concept · Demo</span></div>
     <div class="am-motion-scene">
       <canvas aria-hidden="true"></canvas>
-      <div class="am-motion-thread-logo"><img src="/logo.webp" alt="AM Network" width="480" height="294" loading="lazy" decoding="async"></div>
+      <div class="am-motion-thread-logo"><span class="am-symbol"><img src="/logo.webp" alt="AM Network" width="480" height="294" loading="lazy" decoding="async"></span></div>
       <ol class="am-motion-steps">
         <li><small>01</small><span dir="auto" data-am-copy="give">Give</span></li>
-        <li><small>02</small><span dir="auto" data-am-copy="review">Review</span></li>
-        <li><small>03</small><span dir="auto" data-am-copy="chain">Blockchain</span></li>
-        <li><small>04</small><span dir="auto" data-am-copy="receive">Receive</span></li>
+        <li><small>02</small><span dir="auto" data-am-copy="assess">AI assessment</span></li>
+        <li><small>03</small><span dir="auto" data-am-copy="review">Review</span></li>
+        <li><small>04</small><span dir="auto" data-am-copy="chain">Blockchain</span></li>
+        <li><small>05</small><span dir="auto" data-am-copy="proof">Proof</span></li>
       </ol>
     </div>
     <div class="am-motion-track" aria-hidden="true"><span></span></div>
@@ -862,6 +832,24 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 
 <hr class="div">
 
+<!-- MOST URGENT NOW (demo preview) -->
+<section class="section" style="text-align:center;padding-top:20px;padding-bottom:56px">
+  <div class="eyebrow" style="justify-content:center" data-t="urgent_tag">Right Now</div>
+  <h2 class="sec-title" data-t="urgent_title">The Most Urgent — Verified Case</h2>
+  <p class="sec-body" style="margin-left:auto;margin-right:auto" data-t="urgent_sub">A live preview of how AM Zakat.ai ranks real cases by urgency — one at a time, most needed first.</p>
+
+  <div class="urgent-card reveal">
+    <span class="urgent-demo-ribbon">⚠ <span data-t="urgent_demo_ribbon">DEMO — not a real person. Real verified cases appear here after the pilot launch.</span></span>
+    <div class="urgent-row">
+      <div class="urgent-score-badge"><span class="urgent-score-num">94</span><span class="urgent-score-lbl" data-t="urgent_score_lbl">AI Urgency Score</span></div>
+      <p class="urgent-need" data-t="urgent_need">Family of 4, single mother, urgent medical need — verified by local oracle.</p>
+    </div>
+    <button class="urgent-cta-btn" disabled data-t="urgent_cta">Real Cases Launching Soon</button>
+  </div>
+</section>
+
+<hr class="div">
+
 <!-- C: HOW THE AI WORKS -->
 <section style="padding:70px 5vw;background:var(--bg1)">
   <div style="max-width:960px;margin:0 auto">
@@ -989,7 +977,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
       <canvas aria-hidden="true"></canvas>
       <div class="am-receipt-wrap">
         <div class="am-receipt" dir="auto">
-          <div class="am-receipt-brand"><img src="/logo.webp" alt="AM Network" width="480" height="294" loading="lazy" decoding="async"><span class="am-receipt-check" aria-hidden="true">✓</span></div>
+          <div class="am-receipt-brand"><span class="am-symbol"><img src="/logo.webp" alt="" width="480" height="294" loading="lazy" decoding="async"></span><span class="am-receipt-wordmark">AM Network</span><span class="am-receipt-check" aria-hidden="true">✓</span></div>
           <div class="am-receipt-amount">$500</div>
           <div class="am-receipt-caption" data-am-copy="sample">Illustrative amount</div>
           <div class="am-receipt-line"></div>
@@ -1021,6 +1009,18 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 </section>
 
 <hr class="div">
+
+<!-- ZAKAT DEBT CLOCK -->
+<section class="section" style="text-align:center;padding-top:56px;padding-bottom:40px">
+  <div class="eyebrow" style="justify-content:center" data-t="clock_tag">The Gap, In Real Time</div>
+  <h2 class="sec-title" data-t="clock_title">While You're Reading This, The Gap Is Growing.</h2>
+  <p class="sec-body" style="margin-left:auto;margin-right:auto" data-t="clock_sub">An estimate of Zakat obligation not yet reaching anyone formally or transparently — every year, not just today.</p>
+  <div class="zclock-box">
+    <div class="zclock-num" id="zclockNum">$0</div>
+    <div class="zclock-lbl" data-t="clock_lbl">not formally distributed this year (estimate)</div>
+  </div>
+  <p class="zclock-disclaimer" data-t="clock_disclaimer">Illustrative estimate: $600B/yr potential obligation (World Bank/IsDB, 2016) minus &lt;$25B/yr formally distributed. Not live transaction data.</p>
+</section>
 
 <!-- STATS -->
 <section class="section" id="market">
@@ -1669,7 +1669,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=prelaunch-copy-20260903"></script>
+<script src="/i18n-data.js?v=refined-copy-20260903"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)
