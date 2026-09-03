@@ -1,8 +1,11 @@
-const CACHE = 'amnetwork-v4';
+const CACHE = 'amnetwork-v5-branded-motion-2';
 const STATIC = [
   '/',
   '/index.html',
   '/i18n-data.js',
+  '/i18n-data.js?v=prelaunch-copy-20260903',
+  '/assets/am-motion.css?v=20260903-brand2',
+  '/assets/am-motion.js?v=20260903-brand2',
   '/logo.webp',
   '/manifest.json',
   '/icons/icon-192.png',

@@ -588,6 +588,8 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .asst-send:disabled{opacity:.5;cursor:default}
 @media(max-width:480px){#assistantPanel{right:12px;bottom:82px}}
 </style>
+<link rel="stylesheet" href="/assets/am-motion.css?v=20260903-brand2">
+<script defer src="/assets/am-motion.js?v=20260903-brand2"></script>
 </head>
 <body>
 <div class="topline"></div>
@@ -646,18 +648,22 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     </a>
   </div>
 
-  <!-- GRAPHICS -->
+  <!-- AM NETWORK: BRANDED NETWORK CONCEPT -->
   <div class="graph-wrap">
-  <!-- LIVE LEDGER -->
-  <div style="width:100%;max-width:900px;position:relative;margin-top:36px">
-    <div style="height:300px;border-radius:18px 18px 0 0;overflow:hidden;border:1px solid rgba(255,255,255,0.07);border-bottom:none;background:var(--bg2)">
-      <canvas id="ledgerCanvas" style="width:100%;height:100%;display:block"></canvas>
+  <div class="am-motion" data-am-kind="network">
+    <div class="am-motion-head"><span class="am-motion-name" data-am-copy="network">Network of trust</span><span class="am-motion-demo" data-am-copy="demo">Concept · Demo</span></div>
+    <div class="am-motion-scene">
+      <canvas aria-hidden="true"></canvas>
+      <div class="am-motion-brand"><img src="/logo.webp" alt="AM Network" width="480" height="294" decoding="async"></div>
+      <p class="am-motion-signature" data-am-copy="signature">AM Network · Every connection has a purpose.</p>
     </div>
-    <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-top:none;border-radius:0 0 18px 18px;padding:8px 16px;display:flex;align-items:center;gap:8px">
-      <span style="font-size:11px;color:var(--gold);letter-spacing:1px">⚠</span>
-      <span style="font-size:11px;color:var(--text3)" data-t="ledger_demo">Simulated data · Pre-launch demo · Real transactions will appear after mainnet launch Q4 2026</span>
+    <div class="am-motion-track" aria-hidden="true"><span></span></div>
+    <div class="am-motion-foot">
+      <p class="am-motion-status" role="status" aria-live="polite" data-am-status>Demo · No real transactions</p>
+      <div class="am-motion-controls" hidden><button class="am-motion-button" type="button" data-am-pause>Pause</button><button class="am-motion-button" type="button" data-am-replay>Replay</button></div>
     </div>
-  </div></div>
+  </div>
+  </div>
 </section>
 
 <hr class="div">
@@ -697,11 +703,29 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <div class="eyebrow" data-t="how_tag">How it works</div>
   <h2 class="sec-title" data-t="how_title">Simple to give. Life-changing to receive.</h2>
   <p class="sec-body" data-t="how_body">Five transparent steps — from your donation to verified delivery.</p>
+  <div class="am-motion" data-am-kind="thread">
+    <div class="am-motion-head"><span class="am-motion-name" data-am-copy="thread">The path of giving</span><span class="am-motion-demo" data-am-copy="demo">Concept · Demo</span></div>
+    <div class="am-motion-scene">
+      <canvas aria-hidden="true"></canvas>
+      <div class="am-motion-thread-logo"><img src="/logo.webp" alt="AM Network" width="480" height="294" loading="lazy" decoding="async"></div>
+      <ol class="am-motion-steps">
+        <li><small>01</small><span dir="auto" data-am-copy="give">Give</span></li>
+        <li><small>02</small><span dir="auto" data-am-copy="review">Review</span></li>
+        <li><small>03</small><span dir="auto" data-am-copy="chain">Blockchain</span></li>
+        <li><small>04</small><span dir="auto" data-am-copy="receive">Receive</span></li>
+      </ol>
+    </div>
+    <div class="am-motion-track" aria-hidden="true"><span></span></div>
+    <div class="am-motion-foot">
+      <p class="am-motion-status" role="status" aria-live="polite" data-am-status>Demo · No real transactions</p>
+      <div class="am-motion-controls" hidden><button class="am-motion-button" type="button" data-am-pause>Pause</button><button class="am-motion-button" type="button" data-am-replay>Replay</button></div>
+    </div>
+  </div>
   <div class="steps">
     <div class="step reveal"><span class="step-num">01</span><div class="step-icon">💰</div><h3 data-t="s1_h">You give</h3><p data-t="s1_p">Send zakat or sadaqah in any amount. Your funds are locked immediately in a smart contract on Base blockchain — not in our bank account.</p><span class="sbadge sm" data-t="step_badge_1">Zakat · Sadaqah</span></div>
     <div class="step reveal"><span class="step-num">02</span><div class="step-icon">🤖</div><h3 data-t="s2_h">AI scores need</h3><p data-t="s2_p">Recipients submit encrypted documents. Our AI model scores each case 0–100 based on family size, income, medical conditions and regional cost of living. Personal data stays off-chain.</p><span class="sbadge sg" data-t="step_badge_2">AI-Scored</span></div>
-    <div class="step reveal"><span class="step-num">03</span><div class="step-icon">🕌</div><h3 data-t="s3_h">Oracle verifies</h3><p data-t="s3_p">A trusted local verifier — a certified imam or licensed social worker — reviews the AI assessment and confirms eligibility.</p><span class="sbadge se" data-t="step_badge_3">Sharia-certified</span></div>
-    <div class="step reveal"><span class="step-num">04</span><div class="step-icon">⚡</div><h3 data-t="s4_h">Automatic transfer</h3><p data-t="s4_p">The smart contract executes autonomously: funds flow directly from the pool to the recipient's wallet. Zero human intermediaries. Zero possibility of diversion.</p><span class="sbadge sg" data-t="step_badge_4">Base · Solana</span></div>
+    <div class="step reveal"><span class="step-num">03</span><div class="step-icon">🕌</div><h3 data-t="s3_h">Oracle verifies</h3><p data-t="s3_p">A trusted local verifier — a certified imam or licensed social worker — reviews the AI assessment and confirms eligibility.</p><span class="sbadge se" data-t="step_badge_3">Human review</span></div>
+    <div class="step reveal"><span class="step-num">04</span><div class="step-icon">⚡</div><h3 data-t="s4_h">Automatic transfer</h3><p data-t="s4_p">Planned flow: after verification, a smart contract transfers funds from the pool to the recipient's wallet. Security and correct delivery depend on contract audits and recipient verification.</p><span class="sbadge sg" data-t="step_badge_4">Base · Solana</span></div>
     <div class="step reveal"><span class="step-num">05</span><div class="step-icon">🔍</div><h3 data-t="s5_h">You receive proof</h3><p data-t="s5_p">A permanent blockchain record is created showing exactly which verified profiles received your funds, in which countries, on which date — forever on-chain.</p><span class="sbadge sm" data-t="step_badge_5">On-chain forever</span></div>
   </div>
 </section>
@@ -713,7 +737,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <div class="eyebrow" data-t="prod_tag">The Ecosystem</div>
   <h2 class="sec-title" data-t="prod_title">Two products. One mission.</h2>
   <div class="products">
-    <div class="pcard reveal"><span class="picon">🕌</span><div class="plabel" data-t="p1_title">AM Zakat.ai</div><h3 data-t="p1_h">Transparent giving</h3><p data-t="p1_p">The world's first AI-powered, blockchain-verified zakat and sadaqah distribution platform.</p><ul class="pfeats"><li data-t="p1_f1">AI recipient verification</li><li data-t="p1_f2">Full on-chain transparency</li><li data-t="p1_f3">DAO governance</li><li data-t="p1_f4">Sharia fatwa certified</li></ul><a class="pdemo-btn" href="/ai_scoring/" target="_blank">⚡ <span data-t="p1_demo">Try AI Demo</span> →</a></div>
+    <div class="pcard reveal"><span class="picon">🕌</span><div class="plabel" data-t="p1_title">AM Zakat.ai</div><h3 data-t="p1_h">Transparent giving</h3><p data-t="p1_p">The world's first AI-powered, blockchain-verified zakat and sadaqah distribution platform.</p><ul class="pfeats"><li data-t="p1_f1">AI recipient verification</li><li data-t="p1_f2">Full on-chain transparency</li><li data-t="p1_f3">DAO governance</li><li data-t="p1_f4">Certification pending</li></ul><a class="pdemo-btn" href="/ai_scoring/" target="_blank">⚡ <span data-t="p1_demo">Try AI Demo</span> →</a></div>
     <div class="pcard reveal"><span class="picon">🎓</span><div class="plabel" data-t="p2_title">AM Academy</div><h3 data-t="p2_h">Financial freedom</h3><p data-t="p2_p">Sharia-compliant financial literacy for ~2 billion Muslims. Learn, earn, and grow without riba.</p><ul class="pfeats"><li data-t="p2_f1">5 free courses</li><li data-t="p2_f2">Certificate after passing at 85%</li><li data-t="p2_f3">AI tutor 24/7</li><li data-t="p2_f4">Halal investment screening</li></ul><a class="pdemo-btn" href="/academy/" target="_blank">🎓 <span data-t="p2_demo">Start learning free</span> →</a></div>
   </div>
 </section>
@@ -946,44 +970,42 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 
 <hr class="div">
 
-<!-- USE CASE -->
+<!-- USE CASE: ILLUSTRATIVE STORY AND BRANDED RECEIPT -->
 <section class="section" id="use-case" style="padding-top:60px;padding-bottom:60px">
-  <div class="eyebrow" data-t="case_tag">Real Impact</div>
+  <div class="eyebrow" data-t="case_tag">Illustrative Impact</div>
   <div class="sec-head">
-    <h2 class="sec-title" data-t="case_title">One story. Real change.</h2>
+    <h2 class="sec-title" data-t="case_title">What a donation could change.</h2>
     <button class="sec-toggle" aria-expanded="true" aria-controls="case-body" onclick="toggleSection('case-body',this)"><span class="sec-label" data-t="sec_hide">Hide</span> <span class="sec-arrow">▾</span></button>
   </div>
-  <div id="case-body" style="max-width:700px;background:var(--card);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:36px;position:relative;overflow:hidden" class="reveal">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
-    <div style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap">
-      <div style="width:52px;height:52px;border-radius:50%;background:var(--gold3);border:2px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🕌</div>
-      <div style="flex:1;min-width:240px">
-        <div style="font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px" data-t="case_from">Dubai → Dushanbe</div>
-        <p style="font-size:16px;color:var(--text);line-height:1.8;font-style:italic;margin-bottom:16px;font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2.2vw,20px)" data-t="case_story">"A donor in Dubai sends $500 in Zakat. Three days later, a link arrives. He opens it and sees on the blockchain — his Zakat reached a family in need in Dushanbe. Every step recorded, forever. For the first time, he knows exactly where his Zakat went."</p>
-        <div style="display:flex;align-items:center;gap:12px">
-          <div style="width:1px;height:32px;background:var(--gold);opacity:0.4"></div>
-          <div>
-            <div style="font-size:13px;font-weight:600;color:var(--text)" data-t="case_author">This is what AM Network makes possible.</div>
-            <div style="font-size:11px;color:var(--text3);margin-top:2px" data-t="case_sub">Every donation. Every recipient. Forever on-chain.</div>
-          </div>
+  <div id="case-body" class="am-case-layout reveal">
+    <div class="am-case-story">
+      <div class="am-case-route" data-t="case_from">Dubai → Dushanbe</div>
+      <blockquote data-t="case_story">A donor in Dubai sends $500 in Zakat. Three days later, a link arrives. He opens it and sees on the blockchain — his Zakat reached a family in need in Dushanbe. Every step recorded, forever. For the first time, he knows exactly where his Zakat went.</blockquote>
+      <p data-t="case_author">Illustrative scenario, not a completed transfer.</p>
+    </div>
+    <div class="am-motion" data-am-kind="receipt">
+    <div class="am-motion-head"><span class="am-motion-name" data-am-copy="receipt">Proof of giving</span><span class="am-motion-demo" data-am-copy="demo">Concept · Demo</span></div>
+    <div class="am-motion-scene">
+      <canvas aria-hidden="true"></canvas>
+      <div class="am-receipt-wrap">
+        <div class="am-receipt" dir="auto">
+          <div class="am-receipt-brand"><img src="/logo.webp" alt="AM Network" width="480" height="294" loading="lazy" decoding="async"><span class="am-receipt-check" aria-hidden="true">✓</span></div>
+          <div class="am-receipt-amount">$500</div>
+          <div class="am-receipt-caption" data-am-copy="sample">Illustrative amount</div>
+          <div class="am-receipt-line"></div>
+          <div class="am-receipt-row"><span data-am-copy="purpose">Purpose</span><strong data-am-copy="family">Family support</strong></div>
+          <div class="am-receipt-row"><span data-am-copy="receiptLabel">Receipt</span><strong data-am-proof-status>Demo receipt</strong></div>
+          <div class="am-receipt-hash">DEMO · A7F2 — 9C81 — 4E06</div>
+          <div class="am-receipt-bars" aria-hidden="true"></div>
         </div>
       </div>
     </div>
-    <!-- Stats row -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-top:24px">
-      <div style="padding:14px;background:var(--step-bg);text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold)"><span data-t="num_3days"><span data-t="num_3days">3 days</span></span></div>
-        <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px" data-t="case_s1">Donor to recipient</div>
-      </div>
-      <div style="padding:14px;background:var(--step-bg);text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold)">$0.009</div>
-        <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px" data-t="case_s2">Transaction fee</div>
-      </div>
-      <div style="padding:14px;background:var(--step-bg);text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold)">∞</div>
-        <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px" data-t="case_s3">Stored on-chain</div>
-      </div>
+    <div class="am-motion-track" aria-hidden="true"><span></span></div>
+    <div class="am-motion-foot">
+      <p class="am-motion-status" role="status" aria-live="polite" data-am-status>Demo · No real transactions</p>
+      <div class="am-motion-controls" hidden><button class="am-motion-button" type="button" data-am-pause>Pause</button><button class="am-motion-button" type="button" data-am-replay>Replay</button></div>
     </div>
+  </div>
   </div>
 </section>
 <hr class="div">
@@ -992,7 +1014,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <section class="section" id="trust" style="padding-top:48px;padding-bottom:56px">
   <div class="trust">
     <div class="titem reveal"><span class="ticon">🔐</span><h4 data-t="t1_h">Base + Solana</h4><p data-t="t1_p">Institutional-grade blockchain</p></div>
-    <div class="titem reveal"><span class="ticon">📜</span><h4 data-t="t2_h">Sharia Certified</h4><p data-t="t2_p">Recognized Islamic scholars</p></div>
+    <div class="titem reveal"><span class="ticon">📜</span><h4 data-t="t2_h">Certification pending</h4><p data-t="t2_p">Formal fatwa not yet obtained</p></div>
     <div class="titem reveal"><span class="ticon">🌍</span><h4 data-t="t3_h">60+ Countries</h4><p data-t="t3_p">Global from day one</p></div>
     <div class="titem reveal"><span class="ticon">👁</span><h4 data-t="t4_h">Zero Middlemen</h4><p data-t="t4_p">Every dollar tracked publicly</p></div>
   </div>
@@ -1289,7 +1311,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <div class="eyebrow" data-t="faq_tag">FAQ</div>
   <h2 class="sec-title" data-t="faq_title">Common Questions.</h2>
   <div class="faq">
-    <div class="fitem"><button class="fq" onclick="toggleFaq(this)"><span data-t="faq1_q">Is AM Network Sharia-compliant?</span><span class="arrow">+</span></button><div class="fa" data-t="faq1_a">Yes. Our entire model is built around halal principles: ujrah, wakala, and musharaka. We are seeking official fatwa from recognized Islamic scholars before launch.</div></div>
+    <div class="fitem"><button class="fq" onclick="toggleFaq(this)"><span data-t="faq1_q">Is AM Network Sharia-compliant?</span><span class="arrow">+</span></button><div class="fa" data-t="faq1_a">Formal Sharia certification has not yet been obtained. We are seeking qualified scholars to review the model and issue a fatwa before mainnet launch.</div></div>
     <div class="fitem"><button class="fq" onclick="toggleFaq(this)"><span data-t="faq2_q">How do I know my zakat actually arrived?</span><span class="arrow">+</span></button><div class="fa" data-t="faq2_a">Every transaction is recorded permanently on Base blockchain. You receive a link showing exactly which verified profiles received your funds, in which countries, on which date — forever on-chain.</div></div>
     <div class="fitem"><button class="fq" onclick="toggleFaq(this)"><span data-t="faq3_q">When does AM Network launch?</span><span class="arrow">+</span></button><div class="fa" data-t="faq3_a">We are in pre-launch phase building our waitlist and team. Join now to get early access and personal updates before public launch.</div></div>
     <div class="fitem"><button class="fq" onclick="toggleFaq(this)"><span data-t="faq4_q">Who verifies the recipients?</span><span class="arrow">+</span></button><div class="fa" data-t="faq4_a">A two-layer system: first our AI model scores each applicant 0–100 based on need. Then a trusted local verifier confirms eligibility.</div></div>
@@ -1647,7 +1669,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=6040edd7b1"></script>
+<script src="/i18n-data.js?v=prelaunch-copy-20260903"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)
@@ -2024,165 +2046,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
   render();
   setInterval(render, 100);
-})();
-
-// ── LIVE LEDGER ──────────────────────────────────────────
-(function(){
-  const c=document.getElementById('ledgerCanvas');
-  if(!c) return;
-  const ctx=c.getContext('2d');
-  let W2,H2,animPaused=false;
-  const visObs=new IntersectionObserver(e=>{animPaused=!e[0].isIntersecting;},{threshold:0.1});
-  visObs.observe(c);
-  function rsz(){
-    const dpr=window.devicePixelRatio||1;
-    W2=c.offsetWidth; H2=c.offsetHeight;
-    c.width=W2*dpr; c.height=H2*dpr;
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-  }
-  rsz(); window.addEventListener('resize',rsz);
-
-  const txBase=[
-    {hash:'0x7f3a...c842',donor:'Donor #1,247',cat:'cat_family',country:'Tajikistan',amt:'$120',status:'Confirmed',time:'2s'},
-    {hash:'0x2b9e...f103',donor:'Donor #892',cat:'cat_student',country:'Indonesia',amt:'$50',status:'Confirmed',time:'8s'},
-    {hash:'0x5d1c...a7f9',donor:'Donor #2,103',cat:'cat_patient',country:'Malaysia',amt:'$300',status:'Verified',time:'15s'},
-    {hash:'0x9a4b...e621',donor:'Donor #445',cat:'cat_family',country:'Egypt',amt:'$75',status:'Confirmed',time:'23s'},
-    {hash:'0x3e8d...b294',donor:'Donor #1,891',cat:'cat_business',country:'UAE',amt:'$500',status:'Pending',time:'31s'},
-  ];
-  let txs=[...txBase],scrollY=0;
-
-  function rrect(x,y,w,h,r){
-    ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);
-    ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);
-    ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);
-    ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);
-    ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
-  }
-  function trunc(text,maxW,font){
-    ctx.font=font;
-    if(ctx.measureText(text).width<=maxW) return text;
-    while(text.length>3&&ctx.measureText(text+'...').width>maxW) text=text.slice(0,-1);
-    return text+'...';
-  }
-
-  function frame(ts){
-    requestAnimationFrame(frame);
-    if(animPaused) return;
-    const t=T[lang]||T.en;
-    const isDark=document.documentElement.getAttribute('data-theme')==='dark';
-    ctx.clearRect(0,0,W2,H2);
-    ctx.fillStyle=isDark?'#0F2117':'rgba(245,240,232,0.98)';
-    ctx.fillRect(0,0,W2,H2);
-
-    const isMobile=W2<500;
-    const headerH=isMobile?40:50;
-
-    ctx.fillStyle=isDark?'#1C4532':'rgba(28,69,50,0.08)';
-    ctx.fillRect(0,0,W2,headerH);
-    ctx.font=`bold ${isMobile?9:11}px DM Sans,sans-serif`;
-    ctx.fillStyle='#C9A84C';ctx.textAlign='left';
-    ctx.fillText(t.ledger_title||'AM ZAKAT.AI · LIVE BLOCKCHAIN LEDGER',12,isMobile?16:20);
-    ctx.font=`400 ${isMobile?8:9}px DM Mono,monospace`;
-    ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':'rgba(28,69,50,0.4)';
-    ctx.fillText('Base Network · Block #'+(18450000+Math.floor(ts/3000)),12,isMobile?30:36);
-    ctx.beginPath();ctx.arc(W2-14,headerH/2,isMobile?3:4,0,Math.PI*2);
-    ctx.fillStyle='#52996E';ctx.fill();
-    const pu=(Math.sin(ts*0.005)+1)/2;
-    ctx.beginPath();ctx.arc(W2-14,headerH/2,(isMobile?5:7)+pu*2,0,Math.PI*2);
-    ctx.fillStyle='rgba(82,153,110,0.25)';ctx.fill();
-
-    scrollY-=0.22;
-
-    const bg2=isDark?'#0F2117':'#EDE8DE';
-    if(isMobile){
-      const cardH=68,gap=4,startY=headerH+4;
-      if(scrollY<-(cardH+gap)){scrollY=0;txs.push(txs.shift());}
-      ctx.save();ctx.beginPath();ctx.rect(0,headerH,W2,H2-headerH);ctx.clip();
-      txs.forEach((tx,i)=>{
-        const y=startY+i*(cardH+gap)+scrollY;
-        if(y+cardH<headerH||y>H2) return;
-        const isNew=i===0&&scrollY>-(cardH*0.3);
-        ctx.fillStyle=isNew?(isDark?'rgba(201,168,76,0.07)':'rgba(201,168,76,0.09)'):(isDark?'rgba(255,255,255,0.03)':'rgba(255,255,255,0.7)');
-        rrect(6,y,W2-12,cardH-2,6);ctx.fill();
-        if(isNew){ctx.strokeStyle='#C9A84C';ctx.lineWidth=1;rrect(6,y,W2-12,cardH-2,6);ctx.stroke();}
-        ctx.font='bold 15px DM Sans,sans-serif';ctx.fillStyle='#E8C87A';ctx.textAlign='left';ctx.fillText(tx.amt,14,y+20);
-        const sc=tx.status==='Confirmed'?'#52996E':tx.status==='Verified'?'#4A90D9':'#C9A84C';
-        ctx.font='bold 9px DM Sans,sans-serif';ctx.fillStyle=sc;ctx.textAlign='right';
-        ctx.fillText('● '+(t['ledger_'+tx.status.toLowerCase()]||tx.status),W2-14,y+20);
-        ctx.font='500 11px DM Sans,sans-serif';ctx.fillStyle=isDark?'rgba(255,255,255,0.75)':'rgba(28,69,50,0.85)';ctx.textAlign='left';
-        const recipLabel=(t[tx.cat]||tx.cat)+' · '+(t['country_'+tx.country]||tx.country);
-        ctx.fillText(trunc(recipLabel,W2-100,'500 11px DM Sans'),14,y+38);
-        ctx.font='400 9px DM Sans,sans-serif';ctx.fillStyle=isDark?'rgba(255,255,255,0.35)':'rgba(28,69,50,0.4)';
-        ctx.fillText(tx.donor,14,y+54);
-        ctx.font='400 9px DM Mono,monospace';ctx.fillStyle=isDark?'rgba(201,168,76,0.5)':'rgba(160,120,40,0.6)';ctx.textAlign='right';
-        ctx.fillText(tx.hash+' · '+tx.time,W2-14,y+54);
-      });
-      ctx.restore();
-      // Tiny fade at top clip edge only
-      const ftM=ctx.createLinearGradient(0,headerH,0,headerH+10);
-      ftM.addColorStop(0,bg2);ftM.addColorStop(1,'rgba(0,0,0,0)');
-      ctx.fillStyle=ftM;ctx.fillRect(0,headerH,W2,10);
-    } else {
-      const rowH=58,colHY=headerH+18,statsH=38;
-      const cols=[
-        {l:t.col_txhash||'TX HASH',x:12,w:W2*0.17},{l:t.col_donor||'DONOR',x:W2*0.19,w:W2*0.17},
-        {l:t.col_recipient||'RECIPIENT',x:W2*0.37,w:W2*0.22},{l:t.col_amount||'AMOUNT',x:W2*0.60,w:W2*0.10},
-        {l:t.col_status||'STATUS',x:W2*0.71,w:W2*0.13},{l:t.col_time||'TIME',x:W2*0.85,w:W2*0.13}
-      ];
-
-      const startY=colHY+14;
-      scrollY-=0.03;
-      if(scrollY<-rowH){scrollY=0;txs.push(txs.shift());}
-      // Clip rows to the area BELOW the column-header divider so they never overlap the header
-      ctx.save();ctx.beginPath();ctx.rect(0,colHY+9,W2,H2-(colHY+9)-statsH);ctx.clip();
-      txs.forEach((tx,i)=>{
-        const y=startY+i*rowH+scrollY;
-        if(y+rowH<headerH||y>H2-statsH) return;
-        const isNew=i===0&&scrollY>-8;
-        ctx.fillStyle=isDark?`rgba(45,106,79,${isNew?0.08:0.03})`:`rgba(28,69,50,${isNew?0.06:0.02})`;
-        ctx.fillRect(0,y-12,W2,rowH-2);
-        if(isNew){ctx.fillStyle='rgba(201,168,76,0.04)';ctx.fillRect(0,y-12,W2,rowH-2);ctx.fillStyle='#C9A84C';ctx.fillRect(0,y-12,2,rowH-2);}
-        const bF='400 10px DM Mono,monospace',tF='400 11px DM Sans,sans-serif';
-        ctx.font=bF;ctx.fillStyle='#C9A84C';ctx.textAlign='left';ctx.fillText(trunc(tx.hash,cols[0].w-4,bF),cols[0].x,y+2);
-        ctx.font=tF;ctx.fillStyle=isDark?'rgba(255,255,255,0.65)':'rgba(28,69,50,0.75)';ctx.fillText(trunc(tx.donor,cols[1].w-4,tF),cols[1].x,y+2);
-        const rLabel=(t[tx.cat]||tx.cat)+' · '+(t['country_'+tx.country]||tx.country);
-        ctx.fillStyle=isDark?'rgba(255,255,255,0.5)':'rgba(28,69,50,0.55)';ctx.fillText(trunc(rLabel,cols[2].w-4,tF),cols[2].x,y+2);
-        ctx.font='bold 12px DM Sans,sans-serif';ctx.fillStyle='#E8C87A';ctx.fillText(tx.amt,cols[3].x,y+2);
-        const sc=tx.status==='Confirmed'?'#52996E':tx.status==='Verified'?'#4A90D9':'#C9A84C';
-        const sl=t['ledger_'+tx.status.toLowerCase()]||tx.status;
-        ctx.fillStyle=sc+'20';rrect(cols[4].x,y-8,64,18,3);ctx.fill();
-        ctx.font='500 9px DM Sans,sans-serif';ctx.fillStyle=sc;ctx.textAlign='center';
-        ctx.fillText(sl,cols[4].x+32,y+4);ctx.textAlign='left';
-        ctx.font='400 10px DM Sans,sans-serif';ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':'rgba(28,69,50,0.4)';
-        ctx.fillText(tx.time,cols[5].x,y+2);
-        ctx.strokeStyle=isDark?'rgba(255,255,255,0.04)':'rgba(28,69,50,0.07)';
-        ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,y+rowH-14);ctx.lineTo(W2,y+rowH-14);ctx.stroke();
-      });
-
-      ctx.restore();
-
-      // Opaque column-header row drawn ON TOP — scrolling rows cleanly disappear beneath it
-      ctx.fillStyle=bg2;ctx.fillRect(0,headerH,W2,colHY+9-headerH);
-      ctx.font='bold 9px DM Sans,sans-serif';ctx.fillStyle='rgba(201,168,76,0.55)';ctx.textAlign='left';
-      cols.forEach(col=>ctx.fillText(col.l,col.x,colHY));
-      ctx.strokeStyle=isDark?'rgba(255,255,255,0.05)':'rgba(28,69,50,0.1)';ctx.lineWidth=1;
-      ctx.beginPath();ctx.moveTo(0,colHY+8);ctx.lineTo(W2,colHY+8);ctx.stroke();
-
-      // Bottom stats bar (opaque base behind it so rows vanish cleanly)
-      ctx.fillStyle=bg2;ctx.fillRect(0,H2-statsH,W2,statsH);
-      ctx.fillStyle=isDark?'#1C4532':'rgba(28,69,50,0.06)';ctx.fillRect(0,H2-statsH,W2,statsH);
-      [{l:t.ledger_total||'Total Distributed',v:'$2,847,293'},
-       {l:t.ledger_txs||'Transactions',v:'18,492'},
-       {l:t.ledger_helped||'Recipients',v:'9,247'},
-       {l:t.ledger_countries||'Countries',v:'43'}
-      ].forEach((s,i)=>{
-        const x=14+i*(W2/4);
-        ctx.font='bold 12px DM Sans,sans-serif';ctx.fillStyle='#C9A84C';ctx.textAlign='left';ctx.fillText(s.v,x,H2-22);
-        ctx.font='400 9px DM Sans,sans-serif';ctx.fillStyle=isDark?'rgba(255,255,255,0.3)':'rgba(28,69,50,0.4)';ctx.fillText(s.l,x,H2-9);
-      });
-    }
-  }
-  requestAnimationFrame(frame);
 })();
 
 // ── Waitlist form ──
