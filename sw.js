@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v7-static-review';
+const CACHE = 'amnetwork-v7-static-review-2';
 const STATIC = [
   '/',
   '/index.html',
