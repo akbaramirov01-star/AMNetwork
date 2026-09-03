@@ -1,15 +1,17 @@
 """
 AM Network — AI Scoring HTTP API
-Wraps the scorer.py rule-based engine behind a JSON API so the site's
-quiz can call a real backend instead of duplicating the logic in JS.
+Rule-based scoring API and rate-limited AI chat / Academy endpoints.
+The public website quiz computes locally and never uploads its profile here.
 
 Run locally:   python api.py
 Then:          curl -X POST http://localhost:8000/score -H "Content-Type: application/json" -d @sample_request.json
 """
 
 from __future__ import annotations
+import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from security import limited_ai
 
 from scorer import (
     RecipientProfile, HousingStatus, EmploymentStatus,
@@ -28,6 +30,27 @@ CORS(app, origins=ALLOWED_ORIGINS)
 MAX_BODY_BYTES = 32 * 1024  # 32KB is generous for these payloads; blocks large-body abuse
 app.config["MAX_CONTENT_LENGTH"] = MAX_BODY_BYTES
 
+
+@app.before_request
+def validate_json_object():
+    if request.method == "POST":
+        payload = request.get_json(force=True, silent=True)
+        if not isinstance(payload, dict):
+            return jsonify(error="body must be a JSON object"), 400
+
+
+@app.after_request
+def security_headers(response):
+    response.headers["Cache-Control"] = "no-store"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    return response
+
+
+@app.errorhandler(413)
+def body_too_large(_error):
+    return jsonify(error="request body too large"), 413
+
+
 ENUM_FIELDS = {
     "asset_level": AssetLevel,
     "housing_status": HousingStatus,
@@ -39,7 +62,7 @@ ENUM_FIELDS = {
 
 @app.route("/health", methods=["GET"])
 def health():
-    return jsonify({"status": "ok", "service": "am-network-ai-scoring", "version": "2.1"})
+    return jsonify({"status": "ok", "service": "am-network-ai-scoring", "version": "2.2", "ai_request_limits": True})
 
 
 def _has_non_finite(value) -> bool:
@@ -112,9 +135,13 @@ MAX_HISTORY_ITEMS = 20
 
 
 @app.route("/chat", methods=["POST"])
+@limited_ai
 def chat():
     payload = request.get_json(force=True, silent=True) or {}
-    message = (payload.get("message") or "").strip()
+    message = payload.get("message", "")
+    if not isinstance(message, str):
+        return jsonify({"error": "message must be a string"}), 400
+    message = message.strip()
     if not message:
         return jsonify({"error": "missing required field: message"}), 400
     if len(message) > MAX_MESSAGE_LEN:
@@ -165,11 +192,11 @@ def _read_lesson_request():
         return None, (jsonify({"error": f"core too long (max {MAX_CORE_LEN} chars)"}), 400)
 
     audience = p.get("audience", "working")
-    if audience not in AUDIENCES:
+    if not isinstance(audience, str) or audience not in AUDIENCES:
         return None, (jsonify({"error": f"invalid audience. Valid: {sorted(AUDIENCES)}"}), 400)
 
     lang = p.get("lang", "en")
-    if lang not in VALID_LANGS:
+    if not isinstance(lang, str) or lang not in VALID_LANGS:
         return None, (jsonify({"error": f"invalid lang. Valid: {sorted(VALID_LANGS)}"}), 400)
 
     sources = p.get("sources") or []
@@ -188,13 +215,14 @@ def _read_lesson_request():
 
 
 @app.route("/academy/explain", methods=["POST"])
+@limited_ai
 def academy_explain_route():
     """Re-voice a fixed lesson for one reader. Facts/sources never change."""
     data, err = _read_lesson_request()
     if err:
         return err
 
-    key = (data["title"], data["audience"], data["lang"], hash(data["core"]))
+    key = (data["title"], data["audience"], data["lang"], data["core"], json.dumps(data["sources"], sort_keys=True))
     if key in _explain_cache:
         return jsonify({"text": _explain_cache[key], "cached": True})
 
@@ -221,6 +249,7 @@ _chrome_cache: dict[tuple, dict] = {}
 
 
 @app.route("/academy/chrome", methods=["POST"])
+@limited_ai
 def academy_chrome_route():
     """Translate a lesson's title and visual-card labels.
 
@@ -232,7 +261,7 @@ def academy_chrome_route():
     """
     p = request.get_json(force=True, silent=True) or {}
     lang = p.get("lang")
-    if lang not in VALID_LANGS:
+    if not isinstance(lang, str) or lang not in VALID_LANGS:
         return jsonify({"error": f"invalid lang. Valid: {sorted(VALID_LANGS)}"}), 400
 
     chrome = p.get("chrome")
@@ -271,13 +300,17 @@ def academy_chrome_route():
 
 
 @app.route("/academy/apply", methods=["POST"])
+@limited_ai
 def academy_apply_route():
     """Apply a fixed lesson to the reader's own situation. Never cached."""
     data, err = _read_lesson_request()
     if err:
         return err
 
-    situation = (data["raw"].get("situation") or "").strip()
+    situation = data["raw"].get("situation", "")
+    if not isinstance(situation, str):
+        return jsonify({"error": "situation must be a string"}), 400
+    situation = situation.strip()
     if not situation:
         return jsonify({"error": "missing required field: situation"}), 400
     if len(situation) > MAX_SITUATION_LEN:

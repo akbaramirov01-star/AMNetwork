@@ -1,60 +1,40 @@
-# AM Network — AI Scoring API
+# AM Network API
 
-Turns the rule-based scoring engine in `scorer.py` (already used by `cli.py`
-and `demo.py`) into a real HTTP JSON API, so the site's quiz can call a real
-backend instead of duplicating the scoring logic in client-side JS.
+The public scoring quiz calculates on the visitor's device. It does **not**
+upload its questionnaire to `/score`. That rule-based API remains available
+for explicit integrations. Chat and Academy use the Anthropic API through
+this server and have shared request budgets.
 
-## Run it locally
+## Local use
 
-```bash
-python3 -m venv .venv
+From `ai_scoring/`:
+
+```sh
+python -m venv .venv
 .venv/bin/pip install -r requirements.txt
 .venv/bin/python api.py
 ```
 
-Server listens on `http://localhost:8000`.
+The development server listens on port 8000. Production uses the included
+Dockerfile with Gunicorn, one worker and eight threads. `/health` version 2.2
+identifies the security release. `ANTHROPIC_API_KEY` belongs only in the server
+environment. It is unnecessary for local scoring or mocked security tests.
 
-```bash
-curl -X POST http://localhost:8000/score \
-  -H "Content-Type: application/json" \
-  -d '{"country":"SY","monthly_income_usd":0,"family_size":5,"is_refugee":true,"housing_status":"refugee_camp"}'
+## Validation
+
+```sh
+python -m unittest test_security.py
+python test_api.py
 ```
 
-## Verify it yourself
+The security suite verifies shared budgets, concurrent requests, malformed
+inputs, emergency shutdown and fail-closed behavior with no paid provider
+calls. The HTTP suite starts the actual local API and checks scoring responses.
 
-```bash
-.venv/bin/python test_api.py
-```
+See [security deployment](../docs/security-deployment.md) for limit settings,
+Render deployment, proxy trust, persistent storage and the separately deployed
+Google Sheets intake. A GitHub Pages release alone does not update either
+server. Verify the running Render version and account spending settings.
 
-Starts the real server, sends real HTTP requests, and asserts on the real
-JSON responses — 11 checks, including a refugee-widow profile scoring
-CRITICAL and a wealthy applicant correctly being flagged INELIGIBLE with
-fraud/verification flags.
-
-## Deploy it publicly (free tier, ~5 minutes)
-
-A `Dockerfile` is included. Any of these will build and run it for free:
-
-- **Render** (render.com) — "New Web Service" → connect this repo → root
-  directory `ai_scoring/` → it auto-detects the Dockerfile.
-- **Railway** (railway.app) — same, "Deploy from GitHub" → set root to
-  `ai_scoring/`.
-- **Fly.io** (fly.io) — `fly launch` from this directory.
-
-All three have a free tier sufficient for a beta. Whichever you pick, copy
-the public URL it gives you and set it as the API base in the site's
-`ai_scoring/index.html` quiz (currently a client-side JS demo) so the score
-comes from this real backend.
-
-## Why this exists
-
-The site's `/ai_scoring/` quiz has, until now, computed a score entirely in
-client-side JavaScript — a demo, not the real engine. `scorer.py` is the
-actual, more thorough scoring model (8 Asnaf category matching, fraud
-detection, confidence levels) but was never exposed anywhere. This API
-closes that gap.
-
-Per `CLAUDE.md`: this is assessment/triage only. It does not verify a
-recipient's identity or presence — that is the Local Oracle Network's job
-(mosque imams, AM Network volunteers, partner NGO reps). The site's copy
-should keep saying so.
+Scoring is preliminary assessment only. It does not verify identity or decide
+an applicant's eligibility for assistance; human review is required.

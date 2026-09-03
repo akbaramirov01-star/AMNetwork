@@ -574,30 +574,7 @@ async function submitApp(){
   data.append('lang',currentLang);
   if(cap&&cap.value)data.append('h-captcha-response',cap.value);
   
-  const SHEETS_URL='https://script.google.com/macros/s/AKfycby5Fcwtu6h1nFHGr9cXG9WmYj_Cx2TDvU8P3BR7UVLGYJKZ02znbI7h8eE-lqOfYghnLw/exec';
-
   try{
-    // Google Sheets — fire and forget (no-cors)
-    const sheetData=new URLSearchParams({
-      ref,
-      name:document.getElementById('a-name').value||'Anonymous',
-      email:document.getElementById('a-email').value||'',
-      country:document.getElementById('a-country').value,
-      city:document.getElementById('a-city').value,
-      members:document.getElementById('a-members').value,
-      children:document.getElementById('a-children').value,
-      income:document.getElementById('a-income').value,
-      expenses:document.getElementById('a-expenses').value,
-      categories:[...document.querySelectorAll('input[name="cat"]:checked')].map(c=>c.value).join(', '),
-      duration:document.getElementById('a-duration').value+' months',
-      description:document.getElementById('a-desc').value,
-      needs:[...document.querySelectorAll('input[name="need"]:checked')].map(c=>c.value).join(', '),
-      mosque:document.getElementById('a-mosque')?.value||'none',
-      lang:currentLang,
-      submitted:new Date().toISOString()
-    });
-    fetch(SHEETS_URL,{method:'POST',mode:'no-cors',body:sheetData}).catch(()=>{});
-
     // Web3Forms — email notification. A hung request would otherwise leave
     // the submit button spinning forever, so bound it and fail loudly.
     const ac=new AbortController();

@@ -2199,17 +2199,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     btn.classList.add('loading');
     btn.disabled = true;
     try {
-      // Google Sheets — fire and forget
-      const WL_SHEETS='https://script.google.com/macros/s/AKfycbwuptTPU4ObtwesM86tvR2wObS5sXiIkKMvpZFZr_ReV_wD8nXIkTFdnT_C_2snrHFv/exec';
-      fetch(WL_SHEETS,{method:'POST',mode:'no-cors',body:new URLSearchParams({
-        name:document.getElementById('wl-name').value,
-        email:document.getElementById('wl-email').value,
-        role:document.getElementById('wl-role').value,
-        country:document.getElementById('wl-country').value,
-        lang:lang||'en',
-        submitted:new Date().toISOString()
-      })}).catch(()=>{});
-
+      // Deliver once through the CAPTCHA-checking provider.
       const data = new FormData(form);
       // Bound the request — a hung Web3Forms call would otherwise leave the
       // submit button spinning with no feedback.

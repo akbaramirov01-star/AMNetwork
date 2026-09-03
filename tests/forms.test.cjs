@@ -65,10 +65,12 @@ for(const [label,body,status] of [
 test('application accepts an explicit successful response',async()=>{
   const h=harness('{"success":true}');vm.runInContext(applyCode,h.context);
   await h.context.submitApp();assert.equal(h.get('thankyou').classList.contains('show'),true);
+  assert.deepEqual(h.calls,['https://api.web3forms.com/submit']);
 });
 test('waitlist accepts an explicit successful response',async()=>{
   const h=harness('{"success":true}');vm.runInContext(waitlistCode,h.context);
   await h.handlers.submit({preventDefault(){}});assert.equal(h.get('wl-success').classList.contains('show'),true);
+  assert.deepEqual(h.calls,['https://api.web3forms.com/submit']);
 });
 test('missing captcha blocks both submission destinations',async()=>{
   const h=harness('{"success":true}',{captcha:false});vm.runInContext(applyCode,h.context);

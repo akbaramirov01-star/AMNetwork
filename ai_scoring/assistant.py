@@ -92,7 +92,7 @@ def get_reply(message: str, history: list[dict] | None = None) -> str:
     if not api_key:
         raise RuntimeError("ANTHROPIC_API_KEY not configured")
 
-    client = anthropic.Anthropic(api_key=api_key)
+    client = anthropic.Anthropic(api_key=api_key, timeout=25.0, max_retries=0)
     messages = list(history or [])
     messages.append({"role": "user", "content": message})
 

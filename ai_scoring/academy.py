@@ -103,7 +103,7 @@ def _client() -> anthropic.Anthropic:
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
         raise RuntimeError("ANTHROPIC_API_KEY not configured")
-    return anthropic.Anthropic(api_key=api_key)
+    return anthropic.Anthropic(api_key=api_key, timeout=25.0, max_retries=0)
 
 
 def explain(core: str, sources: list[dict], audience: str, lang: str,

@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v7-static-review-2';
+const CACHE = 'amnetwork-v8-security-prices';
 const STATIC = [
   '/',
   '/index.html',
@@ -9,6 +9,7 @@ const STATIC = [
   '/icons/icon-192.png',
   '/icons/icon-512.png',
   '/zakat/',
+  '/zakat/metal-prices.js?v=20260903',
   '/zakat/index.html',
   '/ai_scoring/',
   '/ai_scoring/index.html',
@@ -40,6 +41,8 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+  // Never persist third-party API quotes or private API responses.
+  if (new URL(e.request.url).origin !== self.location.origin) return;
 
   // Network-first для HTML-страниц — всегда свежий контент
   if (e.request.mode === 'navigate') {
