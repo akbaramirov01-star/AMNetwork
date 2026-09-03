@@ -541,6 +541,7 @@ async function submitApp(){
   const agree=document.getElementById('a-agree');
   if(!agree.checked){alert(t('s5_agree'));return;}
   const btn=document.querySelector('.btn-submit');
+  if(btn.disabled)return;
   btn.textContent='...';btn.disabled=true;
   
   // Honeypot: real users never see/fill this field; if a bot did, drop silently
@@ -548,7 +549,7 @@ async function submitApp(){
   if(hp&&hp.value){btn.textContent=t('s5_submit');btn.disabled=false;return;}
 
   const cap=document.querySelector('textarea[name="h-captcha-response"]');
-  if(cap&&!cap.value){alert(t('s5_captcha')||'Please complete the captcha verification.');btn.textContent=t('s5_submit');btn.disabled=false;return;}
+  if(!cap||!cap.value){alert(t('s5_captcha')||'Please complete the captcha verification.');btn.textContent=t('s5_submit');btn.disabled=false;return;}
 
   const ref='AM-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).substr(2,4).toUpperCase();
 
@@ -605,8 +606,8 @@ async function submitApp(){
     try{ res=await fetch('https://api.web3forms.com/submit',{method:'POST',body:data,signal:ac.signal}); }
     finally{ clearTimeout(to); }
     const raw=await res.text();
-    let json; try{json=JSON.parse(raw);}catch(_){json={success:true};}
-    if(json.success){
+    let json; try{json=JSON.parse(raw);}catch(_){throw new Error('Invalid server response');}
+    if(res.ok && json?.success===true){
       document.getElementById('ref-num').textContent=ref;
       document.getElementById('step-5').classList.remove('active');
       document.getElementById('thankyou').classList.add('show');

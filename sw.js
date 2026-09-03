@@ -1,11 +1,9 @@
-const CACHE = 'amnetwork-v6-refined-4';
+const CACHE = 'amnetwork-v7-static-review';
 const STATIC = [
   '/',
   '/index.html',
   '/i18n-data.js',
-  '/i18n-data.js?v=refined-copy-20260903',
-  '/assets/am-design.css?v=20260903-refined4',
-  '/assets/am-motion.js?v=20260903-refined4',
+  '/i18n-data.js?v=static-review-20260903',
   '/logo.webp',
   '/manifest.json',
   '/icons/icon-192.png',
