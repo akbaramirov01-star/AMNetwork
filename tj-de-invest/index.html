@@ -337,28 +337,25 @@
   .brief-ok.show{display:block;}
 
   /* ---------- Audience switch ---------- */
-  .aud-bar{
-    position:sticky; top:64px; z-index:40; background:color-mix(in srgb, var(--ground) 92%, transparent);
-    backdrop-filter:blur(10px); border-bottom:1px solid var(--line); padding:12px 0;
-  }
+  .aud-bar{ border-bottom:1px solid var(--line); padding:0 0 40px; margin-bottom:40px; }
   .aud-inner{display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;}
   .aud-label{font-size:0.78rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.07em; font-weight:700;}
   .aud-switch{display:flex; gap:2px; background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:3px;}
   .aud-btn{
-    border:none; background:transparent; border-radius:999px; padding:8px 18px; cursor:pointer;
+    display:inline-block; border:none; background:transparent; border-radius:999px; padding:8px 18px;
+    cursor:pointer; text-decoration:none;
     font-family:inherit; font-weight:700; font-size:0.86rem; color:var(--ink-soft);
     transition:background .2s ease, color .2s ease; white-space:nowrap;
   }
-  .aud-btn:hover{color:var(--ink);}
-  .aud-btn.active{background:var(--weft-strong); color:var(--on-weft);}
+  .aud-btn:hover{background:var(--surface); color:var(--ink);}
+  .aud-switch a[href="#investor"]:hover{color:var(--weft);}
+  .aud-switch a[href="#exporter"]:hover{color:var(--warp);}
   @media (max-width:620px){
     .aud-inner{gap:9px;}
     .aud-label{width:100%; text-align:center;}
     .aud-switch{width:100%; max-width:100%;}
     .aud-btn{flex:1 1 0; min-width:0; padding:9px 6px; font-size:0.78rem; white-space:normal; line-height:1.25;}
   }
-  body[data-aud="inv"] [data-aud="biz"]{display:none;}
-  body[data-aud="biz"] [data-aud="inv"]{display:none;}
 
   /* ---------- Export guide (Tajik-facing) ---------- */
   .step-list{display:flex; flex-direction:column; gap:0; margin-top:8px; counter-reset:xstep;}
@@ -479,10 +476,12 @@
   .footer-legal a{color:var(--ink-faint); text-decoration:none; font-size:0.82rem; transition:color .2s ease;}
   .footer-legal a:hover{color:var(--weft); text-decoration:underline;}
 
-  /* ---------- Legal pages (hash-routed, same document) ---------- */
-  .legal-page{display:none; padding:0 0 40px;}
-  .legal-page:target, .legal-page.open{display:block;}
-  body.legal-open main, body.legal-open #brief, body.legal-open footer .footer-cols{display:none;}
+  /* ---------- Routed pages (hash-routed, all in this document) ---------- */
+  .route-page{display:none;}
+  .route-page:target, .route-page.open{display:block;}
+  body.route-open main{display:none;}
+  section.legal-page{padding:0 0 40px; border-top:none;}
+  body.legal-open .footer-cols{display:none;}
   .legal-wrap{max-width:760px; margin:0 auto; padding:60px 24px 40px;}
   .legal-wrap h1{font-size:clamp(1.7rem,1.2rem+1.9vw,2.4rem); margin-bottom:10px;}
   .legal-wrap h2{font-size:1.1rem; margin:34px 0 11px;}
@@ -699,10 +698,21 @@
 
 
   /* --- Section rhythm: one hairline per section, inset to the container - */
-  main > section{padding:100px 0; border-top:1px solid var(--line);}
+  main > section, .route-page{padding:100px 0; border-top:1px solid var(--line);}
   main > section.hero{border-top:none;}
-  main > section#trust{border-top:none;}
-  @media (max-width:720px){ main > section{padding:66px 0;} }
+  @media (max-width:720px){ main > section, .route-page{padding:66px 0;} }
+
+  .subsection{padding-top:60px; margin-top:60px; border-top:1px solid var(--line);}
+  @media (max-width:720px){ .subsection{padding-top:40px; margin-top:40px;} }
+
+  .sources-asof{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.06em; color:var(--ink-faint);
+    margin-top:10px;
+  }
+  .about-disclaimer p{color:var(--ink-soft); font-size:0.92rem; line-height:1.7; max-width:70ch;}
+
+  nav.primary a.current{color:var(--ink);}
+  .drawer-nav a.current{color:var(--weft);}
 
 
   .hero{padding-top:76px;}
@@ -828,13 +838,12 @@
       <span class="brand-word">Taj<b>Invest</b></span>
     </div>
     <nav class="primary">
-      <a href="#why" data-i18n="nav.why"></a>
-      <a href="#sectors" data-i18n="nav.sectors"></a>
-      <a href="#climate" data-i18n="nav.climate"></a>
-      <a href="#opportunities" data-i18n="nav.opportunities" data-aud="inv"></a>
-  <a href="#export" data-i18n="nav.export" data-aud="biz"></a>
-      <a href="#team" data-i18n="nav.team"></a>
-      <a href="#contact" data-i18n="nav.contact"></a>
+      <a href="#tajikistan" data-route="tajikistan" data-i18n="nav.tajikistan"></a>
+      <a href="#sectors" data-route="sectors" data-i18n="nav.sectors"></a>
+      <a href="#investor" data-route="investor" data-i18n="nav.investor"></a>
+      <a href="#exporter" data-route="exporter" data-i18n="nav.exporter"></a>
+      <a href="#analytics" data-route="analytics" data-i18n="nav.analytics"></a>
+      <a href="#about" data-route="about" data-i18n="nav.about"></a>
     </nav>
     <div class="nav-actions">
       <div class="lang-switch">
@@ -870,14 +879,12 @@
     <button class="drawer-close" id="drawerClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
   <nav class="drawer-nav">
-    <a href="#why" data-i18n="nav.why"></a>
-    <a href="#sectors" data-i18n="nav.sectors"></a>
-    <a href="#climate" data-i18n="nav.climate"></a>
-    <a href="#opportunities" data-i18n="nav.opportunities" data-aud="inv"></a>
-    <a href="#export" data-i18n="nav.export" data-aud="biz"></a>
-    <a href="#process" data-i18n="nav.process"></a>
-    <a href="#team" data-i18n="nav.team"></a>
-    <a href="#contact" data-i18n="nav.contact"></a>
+    <a href="#tajikistan" data-route="tajikistan" data-i18n="nav.tajikistan"></a>
+    <a href="#sectors" data-route="sectors" data-i18n="nav.sectors"></a>
+    <a href="#investor" data-route="investor" data-i18n="nav.investor"></a>
+    <a href="#exporter" data-route="exporter" data-i18n="nav.exporter"></a>
+    <a href="#analytics" data-route="analytics" data-i18n="nav.analytics"></a>
+    <a href="#about" data-route="about" data-i18n="nav.about"></a>
   </nav>
   <div class="drawer-foot">
     <span class="drawer-cap" data-i18n="nav.langLabel"></span>
@@ -891,26 +898,16 @@
   </div>
 </div>
 
-<div class="aud-bar">
-  <div class="container aud-inner">
-    <span class="aud-label" data-i18n="aud.label"></span>
-    <div class="aud-switch" role="tablist">
-      <button class="aud-btn active" data-aud-set="inv" data-i18n="aud.inv"></button>
-      <button class="aud-btn" data-aud-set="biz" data-i18n="aud.biz"></button>
-    </div>
-  </div>
-</div>
-
-<main>
-  <section class="hero">
+<main id="home">
+<section class="hero">
     <div class="container hero-inner">
       <div class="hero-copy reveal">
         <div class="eyebrow" data-i18n="hero.badge"></div>
         <h1 data-i18n="hero.title"></h1>
         <p class="section-sub" data-i18n="hero.subtitle"></p>
         <div class="hero-ctas">
-          <a href="#opportunities" class="btn btn-primary" data-i18n="hero.ctaInvestor"></a>
-          <a href="#contact" class="btn btn-outline" data-i18n="hero.ctaBusiness"></a>
+          <a href="#investor" class="btn btn-primary" data-i18n="hero.ctaInvestor"></a>
+          <a href="#exporter" class="btn btn-outline" data-i18n="hero.ctaBusiness"></a>
         </div>
         <div class="hero-stats reveal-stagger">
           <div class="hstat"><div class="hstat-top"><span class="hstat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16.5 6.2a3.2 3.2 0 0 1 0 5.6"/><path d="M18 14.4a6.3 6.3 0 0 1 3.5 5.6"/></svg></span><span class="hstat-num" data-count="10.8" data-suffix="M">0</span></div><span class="hstat-lbl" data-i18n="hero.stat1"></span></div>
@@ -921,6 +918,15 @@
 </div>
     </div>
   </section>
+<div class="aud-bar">
+      <div class="container aud-inner">
+        <span class="aud-label" data-i18n="aud.label"></span>
+        <div class="aud-switch" role="tablist">
+          <a class="aud-btn" href="#investor" data-i18n="aud.inv"></a>
+          <a class="aud-btn" href="#exporter" data-i18n="aud.biz"></a>
+        </div>
+      </div>
+    </div>
 
   <section id="path">
     <div class="container">
@@ -933,20 +939,32 @@
           <div class="path-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg></div>
           <h3 data-i18n="path.investorTitle"></h3>
           <p data-i18n="path.investorDesc"></p>
-          <a href="#opportunities" class="btn btn-ghost" data-i18n="path.investorCta"></a>
+          <a href="#investor" class="btn btn-ghost" data-i18n="path.investorCta"></a>
         </div>
         <div class="path-card line-hover business">
           <div class="path-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c-4-3-8-6.5-8-11a8 8 0 0 1 16 0c0 4.5-4 8-8 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
           <h3 data-i18n="path.businessTitle"></h3>
           <p data-i18n="path.businessDesc"></p>
-          <a href="#contact" class="btn btn-ghost" data-i18n="path.businessCta"></a>
+          <a href="#exporter" class="btn btn-ghost" data-i18n="path.businessCta"></a>
         </div>
       </div>
 
     </div>
   </section>
+<section id="process" class="process-strip">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" data-i18n="process.eyebrow"></div>
+        <h2 class="section-title" data-i18n="process.title"></h2>
+        <p class="section-sub" data-i18n="process.subtitle"></p>
+      </div>
+      <div class="process-grid reveal-stagger" id="processGrid"></div>
+</div>
+  </section>
+</main>
 
-  <section id="why">
+<section id="tajikistan" class="route-page">
+<div id="why">
     <div class="container">
       <div class="section-head center reveal">
         <h2 class="section-title" data-i18n="why.title"></h2>
@@ -954,20 +972,8 @@
       </div>
       <div class="why-grid reveal-stagger" id="whyGrid"></div>
 </div>
-  </section>
-
-  <section id="sectors">
-    <div class="container">
-      <div class="section-head reveal">
-        <div class="eyebrow" data-i18n="sectors.eyebrow"></div>
-        <h2 class="section-title" data-i18n="sectors.title"></h2>
-        <p class="section-sub" data-i18n="sectors.subtitle"></p>
-      </div>
-      <div class="sector-grid reveal-stagger" id="sectorGrid"></div>
-</div>
-  </section>
-
-  <section id="climate">
+  </div>
+<div id="climate" class="subsection">
     <div class="container">
       <div class="section-head reveal">
         <div class="eyebrow" data-i18n="climate.eyebrow"></div>
@@ -1072,17 +1078,23 @@
 
 
 
-      <details class="src-details reveal">
-        <summary><span data-i18n="sources.title"></span></summary>
-        <p class="section-sub" style="margin-top:14px;" data-i18n="sources.subtitle"></p>
-        <div class="src-grid" id="srcGrid"></div>
-        <p class="panel-note" style="margin-top:18px;" data-i18n="sources.note"></p>
-      </details>
 </div>
 
+  </div>
+</section>
+
+<section id="sectors" class="route-page">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow" data-i18n="sectors.eyebrow"></div>
+        <h2 class="section-title" data-i18n="sectors.title"></h2>
+        <p class="section-sub" data-i18n="sectors.subtitle"></p>
+      </div>
+      <div class="sector-grid reveal-stagger" id="sectorGrid"></div>
+</div>
   </section>
 
-  <section id="opportunities" data-aud="inv">
+<section id="investor" class="route-page">
     <div class="container">
       <div class="section-head reveal">
         <div class="eyebrow" data-i18n="opportunities.eyebrow"></div>
@@ -1093,7 +1105,7 @@
     </div>
   </section>
 
-  <section id="export" data-aud="biz">
+<section id="exporter" class="route-page">
     <div class="container">
       <div class="section-head reveal">
         <div class="eyebrow" data-i18n="export.eyebrow"></div>
@@ -1156,30 +1168,21 @@
     </div>
   </section>
 
-  <section id="process" class="process-strip">
-    <div class="container">
-      <div class="section-head reveal">
-        <div class="eyebrow" data-i18n="process.eyebrow"></div>
-        <h2 class="section-title" data-i18n="process.title"></h2>
-        <p class="section-sub" data-i18n="process.subtitle"></p>
-      </div>
-      <div class="process-grid reveal-stagger" id="processGrid"></div>
-</div>
-  </section>
-
-  <section id="team">
-    <div class="container">
-      <div class="section-head reveal">
-        <div class="eyebrow" data-i18n="team.eyebrow"></div>
-        <h2 class="section-title" data-i18n="team.title"></h2>
-        <p class="section-sub" data-i18n="team.subtitle"></p>
-      </div>
-      <div class="team-grid reveal-stagger" id="teamGrid"></div>
-      <p class="team-todo" data-i18n="team.todo"></p>
+<section id="analytics" class="route-page">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="analytics.eyebrow"></div>
+      <h2 class="section-title" data-i18n="analytics.title"></h2>
+      <p class="section-sub" data-i18n="analytics.subtitle"></p>
     </div>
-  </section>
+      <div class="src-block reveal">
+        <p class="section-sub" data-i18n="sources.subtitle"></p>
+        <p class="sources-asof"><span data-i18n="sources.asOf"></span> 09.09.2026</p>
+        <div class="src-grid" id="srcGrid"></div>
+        <p class="panel-note" style="margin-top:18px;" data-i18n="sources.note"></p>
+      </div>
 
-  <section id="brief" data-aud="inv">
+<div id="brief" class="subsection">
     <div class="container">
       <div class="brief reveal">
         <div>
@@ -1199,15 +1202,28 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
+  </div>
+</section>
 
-  <section id="trust" style="padding-top:0; padding-bottom:0;">
+<section id="about" class="route-page">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow" data-i18n="about.eyebrow"></div>
+      <h2 class="section-title" data-i18n="about.title"></h2>
+      <p class="section-sub" data-i18n="about.subtitle"></p>
+    </div>
+
     <div class="container">
       <div class="trust-strip reveal-stagger" id="trustGrid"></div>
     </div>
-  </section>
+      <div class="about-disclaimer subsection reveal">
+      <p data-i18n="about.disclaimer"></p>
+    </div>
+  </div>
+</section>
 
-  <section id="contact">
+<section id="contact" class="route-page">
     <div class="container contact-wrap">
       <div class="reveal">
         <div class="eyebrow" data-i18n="contact.eyebrow"></div>
@@ -1240,10 +1256,8 @@
       </form>
 </div>
   </section>
-</main>
 
-
-<section id="impressum" class="legal-page">
+<section id="impressum" class="route-page legal-page">
 <div class="legal-wrap">
   <a class="back-link" href="#top">&larr; <span data-i18n="footer.back"></span></a>
   <h1>Impressum</h1>
@@ -1329,7 +1343,7 @@
 </div>
 </section>
 
-<section id="datenschutz" class="legal-page">
+<section id="datenschutz" class="route-page legal-page">
 <div class="legal-wrap">
   <a class="back-link" href="#top">&larr; <span data-i18n="footer.back"></span></a>
   <h1>Datenschutzerklärung</h1>
@@ -1487,7 +1501,7 @@ var translations = {
   en: {
     ribbon: "Concept preview — a demonstration of the TajInvest platform, not a live service.",
     aud: {label:"I am a…", inv:"German investor", biz:"Tajik business"},
-    nav: {export:"Export", team:"Team", climate:"Investment climate", sectors:"Sectors", opportunities:"Opportunities", pricing:"Access", why:"Why", process:"How it works", contact:"Contact", cta:"Get in touch", langLabel:"Language"},
+    nav: {export:"Export", team:"Team", climate:"Investment climate", sectors:"Sectors", opportunities:"Opportunities", pricing:"Access", why:"Why", process:"How it works", contact:"Contact", cta:"Get in touch", langLabel:"Language", tajikistan:"Tajikistan", investor:"For investors", exporter:"For exporters", analytics:"Analytics", about:"About us"},
     hero: {
       badge:"Investment and export",
       title:"The place where Tajik production meets the German market",
@@ -1507,6 +1521,12 @@ var translations = {
     trust: [
       "On-the-ground verification","Cross-border legal support","Confidential and efficient"
     ],
+    about: {
+      eyebrow:"About TajInvest",
+      title:"A private bridge, not a government agency",
+      subtitle:"TajInvest vets Tajik businesses on the ground and represents them to German investors — and does the same in reverse for German companies looking at Tajikistan. Below is who we are and who we are not.",
+      disclaimer:"TajInvest is a private company. It is not a government agency of the Republic of Tajikistan, is not affiliated with the State Committee for Investments and State Property Management, and does not speak on behalf of the Tajik or German state. Any resemblance in name to a government body is coincidental and is being addressed as the brand is finalised."
+    },
     contact: {
       eyebrow:"Contact", title:"Let's Build the Bridge", subtitle:"Tell us who you are and what you're looking for — we'll follow up personally.",
       name:"Name", email:"Email", roleLabel:"I am a…", roleInvestor:"Investor", roleBusiness:"Business", roleOther:"Other",
@@ -1577,7 +1597,7 @@ var translations = {
         {role:"Founder", name:"[ Name ]", desc:"The person accountable for the promise on this page. Background in economics, finance or trade, with real standing in both countries — this is the profile the whole business rests on."},
         {role:"Cross-border lead", name:"[ Name ]", desc:"Visits the businesses in Tajikistan and checks the documents, while also speaking the language of a Mittelstand board and a family office in Germany. Verification and trust on both sides run through this one relationship."}
       ]},
-    sources: {eyebrow:"References", title:"Where Every Number Comes From", subtitle:"Each figure on this page is traceable to a published source. Follow any link and check it yourself.", note:"Figures are the most recent published values at the time of writing and are indicative, not contractual. Tax rates, tariff preferences and zone conditions change — verify with legal and tax counsel before making a commitment.", nav:"Sources"},
+    sources: {eyebrow:"References", title:"Where Every Number Comes From", subtitle:"Each figure on this page is traceable to a published source. Follow any link and check it yourself.", note:"Figures are the most recent published values at the time of writing and are indicative, not contractual. Tax rates, tariff preferences and zone conditions change — verify with legal and tax counsel before making a commitment.", nav:"Sources", asOf:"Figures compiled and current as of"},
     sourceWhat:["Corporate income tax, VAT and the Article 189 manufacturing exemption","Investment incentives, VAT relief on imported inputs, free-zone conditions","The four free economic zones and their status","Zone areas, establishment dates and profiles","Bilateral Germany-Tajikistan trade: ~€53M in 2024, of which ~€50M German exports","EU-Tajikistan trade: €304M in 2024","GSP status, 7% preference take-up and 95% utilisation rate","2024 goods exports: $1.95bn, −20.5%, and the export mix by share","Antimony as an EU critical and strategic raw material; 52% of EU imports","Chinese antimony export restrictions and global producer shares","Global Peace Index 2025: 79th of 163, score 1.996","Agricultural machinery access as a barrier to modernisation","Electricity mix: 98% renewable","Hydropower potential: 8th globally, about 5% developed"],
     climate: {
       eyebrow:"Investment climate",
@@ -1715,7 +1735,7 @@ var translations = {
   ru: {
     ribbon: "Концептуальная демо-версия платформы TajInvest — не действующий сервис.",
     aud: {label:"Я —", inv:"Инвестор из Германии", biz:"Бизнес из Таджикистана"},
-    nav: {export:"Экспорт", team:"Команда", climate:"Инвестклимат", sectors:"Отрасли", opportunities:"Возможности", pricing:"Доступ", why:"Почему", process:"Как это работает", contact:"Контакты", cta:"Связаться", langLabel:"Язык"},
+    nav: {export:"Экспорт", team:"Команда", climate:"Инвестклимат", sectors:"Отрасли", opportunities:"Возможности", pricing:"Доступ", why:"Почему", process:"Как это работает", contact:"Контакты", cta:"Связаться", langLabel:"Язык", tajikistan:"Таджикистан", investor:"Инвестору", exporter:"Экспортёру", analytics:"Аналитика", about:"Об организации"},
     hero: {
       badge:"Инвестиции и экспорт",
       title:"Место, где таджикское производство встречает немецкий рынок",
@@ -1733,6 +1753,12 @@ var translations = {
     why: {title:"Почему Таджикистан", subtitle:"Рынок на пороге роста с реальными структурными преимуществами."},
     process: {eyebrow:"Процесс", title:"Как это работает", subtitle:"Понятный процесс из четырёх шагов — от первой заявки до закрытия сделки."},
     trust: ["Проверка на месте","Юридическое сопровождение сделок","Конфиденциально и эффективно"],
+    about: {
+      eyebrow:"О TajInvest",
+      title:"Частный мост, а не государственное агентство",
+      subtitle:"TajInvest проверяет таджикский бизнес на месте и представляет его немецким инвесторам — и делает то же самое в обратную сторону для немецких компаний, которые смотрят на Таджикистан. Ниже — кто мы и кем не являемся.",
+      disclaimer:"TajInvest — частная компания. Это не государственный орган Республики Таджикистан, она не аффилирована с Государственным комитетом по инвестициям и управлению государственным имуществом и не выступает от имени таджикского или немецкого государства. Совпадение в названии с государственным органом случайно и будет устранено при финализации бренда."
+    },
     contact: {
       eyebrow:"Контакты", title:"Построим мост вместе", subtitle:"Расскажите, кто вы и что ищете — мы свяжемся лично.",
       name:"Имя", email:"Эл. почта", roleLabel:"Я…", roleInvestor:"Инвестор", roleBusiness:"Бизнес", roleOther:"Другое",
@@ -1803,7 +1829,7 @@ var translations = {
         {role:"Основатель", name:"[ Имя ]", desc:"Человек, отвечающий за обещание на этой странице. Образование в экономике, финансах или торговле и реальный вес в обеих странах — на этом профиле держится весь бизнес."},
         {role:"Связующее звено", name:"[ Имя ]", desc:"Ездит на предприятия в Таджикистане и проверяет документы, а также говорит на языке правления Mittelstand и семейного офиса в Германии. Доверие с обеих сторон держится на одном этом человеке."}
       ]},
-    sources: {eyebrow:"Источники", title:"Откуда взята каждая цифра", subtitle:"Каждый показатель на этой странице возводится к опубликованному источнику. Откройте любую ссылку и проверьте сами.", note:"Приведены последние опубликованные значения на момент подготовки; они носят ориентировочный, а не договорный характер. Налоговые ставки, тарифные преференции и условия зон меняются — подтверждайте у юридических и налоговых консультантов до принятия обязательств.", nav:"Источники"},
+    sources: {eyebrow:"Источники", title:"Откуда взята каждая цифра", subtitle:"Каждый показатель на этой странице возводится к опубликованному источнику. Откройте любую ссылку и проверьте сами.", note:"Приведены последние опубликованные значения на момент подготовки; они носят ориентировочный, а не договорный характер. Налоговые ставки, тарифные преференции и условия зон меняются — подтверждайте у юридических и налоговых консультантов до принятия обязательств.", nav:"Источники", asOf:"Данные собраны и актуальны по состоянию на"},
     sourceWhat:["Налог на прибыль, НДС и освобождение производств по статье 189","Инвестиционные льготы, освобождение от НДС на ввозимое сырьё, условия свободных зон","Четыре свободные экономические зоны и их статус","Площади зон, даты создания и профили","Двусторонняя торговля Германия–Таджикистан: ~€53 млн в 2024, из них ~€50 млн экспорт Германии","Торговля ЕС–Таджикистан: €304 млн в 2024","Статус GSP, использование преференций 7% и коэффициент использования 95%","Товарный экспорт 2024: $1,95 млрд, −20,5%, и структура экспорта по долям","Сурьма как критическое и стратегическое сырьё ЕС; 52% импорта ЕС","Экспортные ограничения Китая по сурьме и доли мировых производителей","Global Peace Index 2025: 79-е место из 163, оценка 1,996","Доступ к сельхозтехнике как барьер модернизации","Структура электроэнергии: 98% возобновляемая","Гидропотенциал: 8-е место в мире, освоено около 5%"],
     climate: {
       eyebrow:"Инвестиционный климат",
@@ -1941,7 +1967,7 @@ var translations = {
   de: {
     ribbon: "Konzeptvorschau der Plattform „TajInvest“ — kein aktiver Dienst.",
     aud: {label:"Ich bin…", inv:"Investor aus Deutschland", biz:"Unternehmen aus Tadschikistan"},
-    nav: {export:"Export", team:"Team", climate:"Investitionsklima", sectors:"Branchen", opportunities:"Chancen", pricing:"Zugang", why:"Warum", process:"Ablauf", contact:"Kontakt", cta:"Kontakt aufnehmen", langLabel:"Sprache"},
+    nav: {export:"Export", team:"Team", climate:"Investitionsklima", sectors:"Branchen", opportunities:"Chancen", pricing:"Zugang", why:"Warum", process:"Ablauf", contact:"Kontakt", cta:"Kontakt aufnehmen", langLabel:"Sprache", tajikistan:"Tadschikistan", investor:"Für Investoren", exporter:"Für Exporteure", analytics:"Analysen", about:"Über uns"},
     hero: {
       badge:"Investition und Export",
       title:"Der Ort, an dem tadschikische Produktion auf den deutschen Markt trifft",
@@ -1959,6 +1985,12 @@ var translations = {
     why: {title:"Warum Tadschikistan", subtitle:"Ein Markt an der Schwelle, mit realen strukturellen Vorteilen."},
     process: {eyebrow:"Ablauf", title:"So funktioniert es", subtitle:"Ein klarer, vierstufiger Prozess von der ersten Anfrage bis zum Geschäftsabschluss."},
     trust: ["Lokale Prüfung vor Ort","Grenzüberschreitende rechtliche Begleitung","Diskret und effizient"],
+    about: {
+      eyebrow:"Über TajInvest",
+      title:"Eine private Brücke, keine Regierungsstelle",
+      subtitle:"TajInvest prüft tadschikische Unternehmen vor Ort und stellt sie deutschen Investoren vor — und ebenso umgekehrt für deutsche Unternehmen, die sich für Tadschikistan interessieren. Im Folgenden: wer wir sind und wer wir nicht sind.",
+      disclaimer:"TajInvest ist ein privates Unternehmen. Es ist keine Regierungsbehörde der Republik Tadschikistan, nicht mit dem Staatlichen Komitee für Investitionen und Staatseigentum verbunden und spricht nicht im Namen des tadschikischen oder deutschen Staates. Eine Namensähnlichkeit mit einer Regierungsstelle ist zufällig und wird bei der endgültigen Markenwahl berücksichtigt."
+    },
     contact: {
       eyebrow:"Kontakt", title:"Bauen wir die Brücke", subtitle:"Sagen Sie uns, wer Sie sind und wonach Sie suchen — wir melden uns persönlich.",
       name:"Name", email:"E-Mail", roleLabel:"Ich bin…", roleInvestor:"Investor", roleBusiness:"Unternehmer", roleOther:"Sonstiges",
@@ -2029,7 +2061,7 @@ var translations = {
         {role:"Gründer", name:"[ Name ]", desc:"Die Person, die für das Versprechen auf dieser Seite einsteht. Hintergrund in Wirtschaft, Finanzen oder Handel, mit echtem Standing in beiden Ländern — auf diesem Profil ruht das gesamte Geschäft."},
         {role:"Verbindung beider Seiten", name:"[ Name ]", desc:"Besucht die Unternehmen in Tadschikistan und prüft die Unterlagen — und spricht zugleich die Sprache einer Mittelstandsgeschäftsführung und eines Family Office in Deutschland. Das Vertrauen auf beiden Seiten hängt an dieser einen Person."}
       ]},
-    sources: {eyebrow:"Quellen", title:"Woher jede Zahl stammt", subtitle:"Jede Angabe auf dieser Seite lässt sich auf eine veröffentlichte Quelle zurückführen. Jeden Link öffnen und selbst prüfen.", note:"Angegeben sind die zum Redaktionsschluss zuletzt veröffentlichten Werte; sie sind Richtwerte und nicht vertraglich. Steuersätze, Zollpräferenzen und Zonenbedingungen ändern sich — vor einer Zusage rechtlich und steuerlich prüfen lassen.", nav:"Quellen"},
+    sources: {eyebrow:"Quellen", title:"Woher jede Zahl stammt", subtitle:"Jede Angabe auf dieser Seite lässt sich auf eine veröffentlichte Quelle zurückführen. Jeden Link öffnen und selbst prüfen.", note:"Angegeben sind die zum Redaktionsschluss zuletzt veröffentlichten Werte; sie sind Richtwerte und nicht vertraglich. Steuersätze, Zollpräferenzen und Zonenbedingungen ändern sich — vor einer Zusage rechtlich und steuerlich prüfen lassen.", nav:"Quellen", asOf:"Daten zusammengestellt, Stand"},
     sourceWhat:["Körperschaftsteuer, Mehrwertsteuer und die Herstellerbefreiung nach Artikel 189","Investitionsanreize, Mehrwertsteuerbefreiung auf Vormaterial, Bedingungen der Sonderzonen","Die vier Sonderwirtschaftszonen und ihr Status","Flächen, Gründungsdaten und Profile der Zonen","Bilateraler Handel Deutschland-Tadschikistan: rund 53 Mio. € in 2024, davon ca. 50 Mio. € deutsche Ausfuhren","Handel EU-Tadschikistan: 304 Mio. € in 2024","GSP-Status, 7 % Präferenznutzung und 95 % Ausschöpfungsgrad","Warenausfuhren 2024: 1,95 Mrd. USD, −20,5 %, sowie die Exportstruktur nach Anteilen","Antimon als kritischer und strategischer Rohstoff der EU; 52 % der EU-Einfuhren","Chinesische Antimon-Ausfuhrbeschränkungen und weltweite Produzentenanteile","Global Peace Index 2025: Platz 79 von 163, Wert 1,996","Zugang zu Landmaschinen als Modernisierungsbarriere","Strommix: 98 % erneuerbar","Wasserkraftpotenzial: weltweit Platz 8, rund 5 % erschlossen"],
     climate: {
       eyebrow:"Investitionsklima",
@@ -2167,7 +2199,7 @@ var translations = {
   tg: {
     ribbon: "Намоиши консептуалии платформаи TajInvest — хизмати фаъол нест.",
     aud: {label:"Ман…", inv:"Сармоягузор аз Олмон", biz:"Соҳибкор аз Тоҷикистон"},
-    nav: {export:"Содирот", team:"Даста", climate:"Фазои сармоя", sectors:"Соҳаҳо", opportunities:"Имкониятҳо", pricing:"Дастрасӣ", why:"Чаро", process:"Раванди кор", contact:"Тамос", cta:"Тамос гирифтан", langLabel:"Забон"},
+    nav: {export:"Содирот", team:"Даста", climate:"Фазои сармоя", sectors:"Соҳаҳо", opportunities:"Имкониятҳо", pricing:"Дастрасӣ", why:"Чаро", process:"Раванди кор", contact:"Тамос", cta:"Тамос гирифтан", langLabel:"Забон", tajikistan:"Тоҷикистон", investor:"Барои сармоягузор", exporter:"Барои содиркунанда", analytics:"Таҳлил", about:"Дар бораи мо"},
     hero: {
       badge:"Сармоягузорӣ ва содирот",
       title:"Ҷое, ки истеҳсоли тоҷикӣ бо бозори олмонӣ вомехӯрад",
@@ -2185,6 +2217,12 @@ var translations = {
     why: {title:"Чаро Тоҷикистон", subtitle:"Бозоре дар остонаи рушд бо бартариҳои воқеии сохторӣ."},
     process: {eyebrow:"Раванд", title:"Раванди кор", subtitle:"Раванди равшани чормарҳилавӣ — аз дархости аввал то бастани созишнома."},
     trust: ["Санҷиш дар маҳал","Дастгирии ҳуқуқии фаромарзӣ","Махфӣ ва самаранок"],
+    about: {
+      eyebrow:"Дар бораи TajInvest",
+      title:"Пули хусусӣ, на муассисаи давлатӣ",
+      subtitle:"TajInvest корхонаҳои тоҷикро дар маҳал месанҷад ва ба сармоягузорони олмонӣ муаррифӣ мекунад — ва ҳамин корро баръакс барои ширкатҳои олмонӣ, ки ба Тоҷикистон нигаранд, иҷро мекунад. Дар зер — мо кистем ва кӣ нестем.",
+      disclaimer:"TajInvest ширкати хусусист. Он мақомоти давлатии Ҷумҳурии Тоҷикистон нест, бо Кумитаи давлатии сармоягузорӣ ва идораи амволи давлатӣ алоқаманд нест ва аз номи давлати тоҷик ё олмонӣ сухан намегӯяд. Монандии ном бо мақомоти давлатӣ тасодуфист ва ҳангоми ниҳоӣ кардани бренд бартараф карда мешавад."
+    },
     contact: {
       eyebrow:"Тамос", title:"Биёед пулро якҷоя бисозем", subtitle:"Бигӯед, ки шумо кистед ва чиро меҷӯед — мо шахсан бо шумо тамос мегирем.",
       name:"Ном", email:"Почтаи электронӣ", roleLabel:"Ман…", roleInvestor:"Сармоягузор", roleBusiness:"Соҳиби корхона", roleOther:"Дигар",
@@ -2255,7 +2293,7 @@ var translations = {
         {role:"Муассис", name:"[ Ном ]", desc:"Шахсе, ки барои ваъдаи ин саҳифа масъул аст. Таҳсил дар иқтисод, молия ё савдо ва эътибори воқеӣ дар ҳар ду кишвар — тамоми тиҷорат бар ҳамин профил такя мекунад."},
         {role:"Пайвандгари ду тараф", name:"[ Ном ]", desc:"Ба корхонаҳо дар Тоҷикистон меравад ва ҳуҷҷатҳоро месанҷад, ҳамзамон бо забони роҳбарияти Mittelstand ва дафтари оилавӣ дар Олмон гап мезанад. Эътимоди ҳар ду тараф ба ҳамин як шахс такя мекунад."}
       ]},
-    sources: {eyebrow:"Манбаъҳо", title:"Ҳар рақам аз куҷост", subtitle:"Ҳар нишондиҳандаи ин саҳифа ба манбаи нашршуда бармегардад. Ҳар пайвандро кушоед ва худатон санҷед.", note:"Арзишҳои охирини нашршуда дар вақти таҳия оварда шудаанд; онҳо тахминӣ мебошанд, на шартномавӣ. Меъёрҳои андоз, имтиёзҳои тарифӣ ва шартҳои минтақаҳо тағйир меёбанд — пеш аз ӯҳдадорӣ бо мушовирони ҳуқуқӣ ва андозӣ тасдиқ кунед.", nav:"Манбаъҳо"},
+    sources: {eyebrow:"Манбаъҳо", title:"Ҳар рақам аз куҷост", subtitle:"Ҳар нишондиҳандаи ин саҳифа ба манбаи нашршуда бармегардад. Ҳар пайвандро кушоед ва худатон санҷед.", note:"Арзишҳои охирини нашршуда дар вақти таҳия оварда шудаанд; онҳо тахминӣ мебошанд, на шартномавӣ. Меъёрҳои андоз, имтиёзҳои тарифӣ ва шартҳои минтақаҳо тағйир меёбанд — пеш аз ӯҳдадорӣ бо мушовирони ҳуқуқӣ ва андозӣ тасдиқ кунед.", nav:"Манбаъҳо", asOf:"Маълумот ҷамъоварӣ шуда, то санаи"},
     sourceWhat:["Андоз аз фоида, ААИ ва озодии истеҳсолот тибқи моддаи 189","Имтиёзҳои сармоягузорӣ, озодӣ аз ААИ барои ашёи воридотӣ, шартҳои минтақаҳои озод","Чор минтақаи озоди иқтисодӣ ва мақоми онҳо","Масоҳат, санаи таъсис ва профили минтақаҳо","Савдои дуҷонибаи Олмон–Тоҷикистон: ~€53 млн дар 2024, аз он ~€50 млн содироти Олмон","Савдои ИА–Тоҷикистон: €304 млн дар 2024","Мақоми GSP, истифодаи имтиёзҳо 7% ва дараҷаи истифода 95%","Содироти мол 2024: $1,95 млрд, −20,5%, ва сохтори содирот аз рӯи ҳисса","Сурма ҳамчун ашёи муҳим ва стратегии ИА; 52% воридоти ИА","Маҳдудиятҳои содиротии Чин оид ба сурма ва ҳиссаи истеҳсолкунандагони ҷаҳон","Global Peace Index 2025: ҷои 79 аз 163, баҳо 1,996","Дастрасӣ ба техникаи кишоварзӣ ҳамчун монеаи навсозӣ","Сохтори барқ: 98% барқароршаванда","Неруи обӣ: ҷои 8 дар ҷаҳон, тақрибан 5% азхудшуда"],
     climate: {
       eyebrow:"Фазои сармоягузорӣ",
@@ -2506,11 +2544,6 @@ function renderLists(dict){
     return '<li>'+checkIcon+'<span>'+x+'</span></li>';
   }).join("");
 
-  document.getElementById("teamGrid").innerHTML = dict.team.people.map(function(m){
-    return '<div class="team-card"><div class="team-photo">'+personIcon+'</div>'+
-      '<div class="team-role">'+m.role+'</div><h3>'+m.name+'</h3><p>'+m.desc+'</p></div>';
-  }).join("");
-
   document.getElementById("srcGrid").innerHTML = SOURCES.map(function(src,i){
     var what = dict.sourceWhat[i] || "";
     return '<div class="src-item"><span class="src-num">'+(i+1)+'</span><div>'+
@@ -2657,20 +2690,6 @@ applyLang(current);
   });
 })();
 
-/* audience switch — the page has two readers with opposite questions */
-var AUD_KEY = "tajinvest_aud";
-function setAud(a){
-  document.body.setAttribute("data-aud", a);
-  localStorage.setItem(AUD_KEY, a);
-  document.querySelectorAll(".aud-btn").forEach(function(b){
-    b.classList.toggle("active", b.getAttribute("data-aud-set") === a);
-  });
-  var tab = document.querySelector('.pricing-tab[data-tab="' + (a === "inv" ? "investor" : "business") + '"]');
-  if(tab && !tab.classList.contains("active")) tab.click();
-}
-document.querySelectorAll(".aud-btn").forEach(function(b){
-  b.addEventListener("click", function(){ setAud(b.getAttribute("data-aud-set")); });
-});
 /* export-guide tabs */
 document.querySelectorAll(".clim-tab[data-xtab]").forEach(function(tab){
   tab.addEventListener("click", function(){
@@ -2684,18 +2703,24 @@ document.querySelectorAll(".clim-tab[data-xtab]").forEach(function(tab){
   });
 });
 
-/* legal pages live in this document and are shown by hash */
-function syncLegal(){
+/* every top-level page lives in this one document and is shown by hash */
+var ROUTES = ["tajikistan","sectors","investor","exporter","analytics","about","contact","impressum","datenschutz"];
+var LEGAL_ROUTES = ["impressum","datenschutz"];
+function syncRoute(){
   var h = location.hash.replace("#","");
-  var on = (h === "impressum" || h === "datenschutz");
-  document.body.classList.toggle("legal-open", on);
-  document.querySelectorAll(".legal-page").forEach(function(el){
+  var on = ROUTES.indexOf(h) !== -1;
+  document.body.classList.toggle("route-open", on);
+  document.body.classList.toggle("legal-open", LEGAL_ROUTES.indexOf(h) !== -1);
+  document.querySelectorAll(".route-page").forEach(function(el){
     el.classList.toggle("open", el.id === h);
+  });
+  document.querySelectorAll("[data-route]").forEach(function(a){
+    a.classList.toggle("current", a.getAttribute("data-route") === h);
   });
   if(on) window.scrollTo(0,0);
 }
-window.addEventListener("hashchange", syncLegal);
-syncLegal();
+window.addEventListener("hashchange", syncRoute);
+syncRoute();
 
 /* investment-climate tabs */
 document.querySelectorAll(".clim-tab").forEach(function(tab){
@@ -2763,9 +2788,6 @@ var cio = new IntersectionObserver(function(entries){
   });
 }, {threshold:0.6});
 countEls.forEach(function(el){ cio.observe(el); });
-
-/* run once the pricing tabs are wired, so the tab can follow the audience */
-setAud(localStorage.getItem(AUD_KEY) === "biz" ? "biz" : "inv");
 
 /* contact form (client-side demo only — no data is sent anywhere) */
 document.querySelectorAll('input[name="role"]').forEach(function(r){
