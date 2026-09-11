@@ -149,6 +149,10 @@ main{padding-top:64px;min-height:100vh}
 /* Larger labels, readable in both existing themes. */
 .field label,.field-hint,.price-note{font-size:14px;line-height:1.55;color:var(--text)}
 [data-t="nisab_gold_desc"],[data-t="nisab_silver_desc"],[data-t="s5_privacy"],[data-t="s5_anon_yes_desc"],[data-t="s5_anon_partial_desc"]{font-size:14px!important;color:var(--text)!important;line-height:1.6!important}
+.review-summary{margin-bottom:28px}.review-summary h2{font-size:22px;margin-bottom:18px}.review-summary section{padding:18px 0;border-bottom:1px solid var(--border)}
+.review-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.review-heading h3{font-size:16px}.review-heading button{font:inherit;font-size:14px;min-height:44px;padding:8px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg2);color:var(--text);cursor:pointer}
+.review-summary dl{margin-top:12px;font-size:14px;line-height:1.6}.review-summary dt{font-weight:600;margin-top:10px}.review-summary dd{margin:3px 0;color:var(--text2);overflow-wrap:anywhere;white-space:pre-wrap}
+.next-steps{text-align:start;background:var(--card);padding:20px;border:1px solid var(--border);border-radius:12px;margin:16px 0}.next-steps h3{font-size:18px}.next-steps p{font-size:15px;margin:12px 0}.next-steps a{color:var(--gold)}
 </style>
 </head>
 <body>
@@ -400,6 +404,7 @@ main{padding-top:64px;min-height:100vh}
 
   <!-- STEP 5 -->
   <div class="step-card" id="step-5">
+    <div id="reviewSummary" class="review-summary"></div>
     <div class="step-title" data-t="s5_title">Privacy & Submit</div>
     <div class="step-sub" data-t="s5_sub">Almost done. Review your privacy preferences and submit your application.</div>
 
@@ -446,6 +451,7 @@ main{padding-top:64px;min-height:100vh}
     <h2 style="font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold);margin-bottom:12px" data-t="ty_title">BaarakAllahu feek</h2>
     <p style="font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:20px" data-t="ty_sub">Thank you for your trust. Your pre-launch application has been received. This does not confirm approval, a review date, or financial assistance.</p>
     <div class="ref-box" id="ref-num">AM-00000000</div>
+    <div class="next-steps"><h3 id="nextStepsTitle">What happens next</h3><p id="nextStepsText"></p><a id="applicationContact" href="mailto:contact@amnetwork.io">Contact the team</a></div>
     <p style="font-size:13px;color:var(--text3);margin:8px 0 32px" data-t="ty_ref">Save this reference number</p>
     <a href="/" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--gold);border-radius:8px;color:#060E09;font-size:14px;font-weight:700;text-decoration:none" data-t="ty_back">← Return to AM Network</a>
   </div>
@@ -474,6 +480,7 @@ function setLang(l){
     else{el.textContent=t(k);}
   });
   localStorage.setItem('amn_lang',l);
+  if(typeof AMApplyReview!=='undefined')AMApplyReview.render();
 }
 function toggleLangDrop(){
   const d=document.getElementById('langDrop');
@@ -500,6 +507,7 @@ function goStep(n){
     if(line)line.classList.add('done');
   }
   currentStep=n;
+  if(n===5 && typeof AMApplyReview!=="undefined")AMApplyReview.render();
   document.getElementById('step-'+n).classList.add('active');
   const dot=document.getElementById('dot-'+n);
   dot.classList.remove('done');
@@ -541,6 +549,7 @@ function liveScore(){
   });
 }
 async function submitApp(){
+  if(typeof AMApplyReview!=="undefined" && !AMApplyReview.validate(document,goStep))return;
   const agree=document.getElementById('a-agree');
   if(!agree.checked){alert(t('s5_agree'));return;}
   const btn=document.querySelector('.btn-submit');
@@ -575,6 +584,10 @@ async function submitApp(){
   data.append('needs',[...document.querySelectorAll('input[name="need"]:checked')].map(c=>c.value).join(', '));
   data.append('mosque',document.getElementById('a-mosque')?.value||'none');
   data.append('lang',currentLang);
+  data.append('breadwinner',document.querySelector('input[name="breadwinner"]:checked')?.value||'');
+  data.append('local_verification_consent',document.querySelector('input[name="consent"]:checked')?.value||'no');
+  data.append('privacy_level',document.querySelector('input[name="anon"]:checked')?.value||'anon');
+  data.append('has_local_mosque',document.querySelector('input[name="mosque"]:checked')?.value||'no');
   if(cap&&cap.value)data.append('h-captcha-response',cap.value);
   
   try{
@@ -711,5 +724,7 @@ document.getElementById('asstCloseBtn').addEventListener('click', toggleAssistan
 document.getElementById('asstSendBtn').addEventListener('click', sendAssistantMessage);
 document.getElementById('asstInput').addEventListener('keydown', e=>{ if(e.key==='Enter') sendAssistantMessage(); });
 </script>
+<script src="/apply/review.js?v=20260905"></script>
+<script>AMApplyReview.init({document,getLanguage:()=>currentLang,goStep});</script>
 </body>
 </html>
