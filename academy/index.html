@@ -265,6 +265,7 @@ footer a{color:var(--gold)}
 .asst-send{width:38px;height:38px;flex-shrink:0;border-radius:9px;background:var(--gold);border:none;color:#0A1A11;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
 .asst-send:hover{background:var(--gold2)}
 .asst-send:disabled{opacity:.5;cursor:default}
+.progress-transfer{padding:24px;margin:0 0 32px;border:1px solid var(--border);border-radius:16px;background:var(--card)}.progress-transfer h2{font-size:20px}.progress-transfer p{font-size:14px;line-height:1.6;margin:12px 0;color:var(--text2)}.progress-buttons{display:flex;flex-wrap:wrap;gap:12px}.progress-buttons .btn{min-height:44px}.progress-transfer [hidden]{display:none!important}#progressPreview{border-top:1px solid var(--border);margin-top:18px;padding-top:8px}
 </style>
 </head>
 <body>
@@ -299,6 +300,13 @@ footer a{color:var(--gold)}
     </div>
   </header>
   <section class="wrap">
+    <section class="progress-transfer" aria-labelledby="progressTitle">
+      <h2 id="progressTitle">Сохраните прогресс обучения</h2><p id="progressHint"></p>
+      <div class="progress-buttons"><button type="button" class="btn" id="exportProgress">Экспорт прогресса</button><button type="button" class="btn" id="importProgress">Импорт прогресса</button></div>
+      <input type="file" id="progressFile" accept=".json,application/json" hidden>
+      <div id="progressPreview" hidden><p id="progressPreviewText"></p><div class="progress-buttons"><button type="button" class="btn" id="confirmProgress">Объединить прогресс</button><button type="button" class="btn" id="cancelProgress">Отмена</button></div></div>
+      <p id="progressStatus" role="status" aria-live="polite"></p>
+    </section>
     <h2 class="sech" id="tProgH">Программа</h2>
     <p class="secs" id="tProgP">Начните с любого открытого модуля — порядок не обязателен.</p>
     <div class="mods" id="mods"></div>
@@ -491,7 +499,9 @@ function track(name, params){
 
 function applyScale(){ document.documentElement.style.setProperty('--fs', store.aud==='senior' ? '1.22' : '1'); }
 
+let progressTransfer;
 function applyLangDir(){
+  if(progressTransfer)progressTransfer.render();
   const l = store.lang;
   document.documentElement.setAttribute('lang', l==='tj' ? 'tg' : l);
   document.documentElement.setAttribute('dir', l==='ar' ? 'rtl' : 'ltr');
@@ -1224,5 +1234,7 @@ document.getElementById('asstCloseBtn').addEventListener('click', toggleAssistan
 document.getElementById('asstSendBtn').addEventListener('click', sendAssistantMessage);
 document.getElementById('asstInput').addEventListener('keydown', e=>{ if(e.key==='Enter') sendAssistantMessage(); });
 </script>
+<script src="/academy/progress-transfer.js?v=20260905"></script>
+<script>progressTransfer=AMProgressTransfer.init({document,storage:localStorage,curriculum:CURRICULUM,getLanguage:()=>store.lang,onImport:()=>renderMods(modTr)});</script>
 </body>
 </html>
