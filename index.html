@@ -607,6 +607,25 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 [data-t="ledger_demo"],[data-t="aiscore_sample"],[data-t="case_s1"],[data-t="case_s2"],[data-t="case_s3"],[data-t="case_sub"]{font-size:13px!important;color:var(--text2)!important;line-height:1.5}
 .urgent-demo-ribbon{font-size:13px;line-height:1.5;letter-spacing:.3px}
 @media(max-width:380px){.urgent-row{flex-wrap:wrap}.urgent-card{padding:24px 20px}}
+/* Owner feedback: restrained icons, source notes and brand-specific social buttons. */
+.am-icon{display:inline-block;vertical-align:middle;flex-shrink:0;color:var(--gold)}
+.step-icon .am-icon{width:24px;height:24px}.picon .am-icon{width:36px;height:36px}
+.aicon,.ticon{display:inline-flex;align-items:center;justify-content:center}
+.quote-mark{font-family:Georgia,serif;font-size:76px;line-height:.8;color:var(--gold);margin:0 auto 18px}
+.waitlist-mark{color:var(--gold);margin-bottom:16px}
+.hero-explore{display:inline-flex;align-items:center;gap:12px;margin:8px auto 30px;padding:10px;color:var(--text2);font-size:14px;text-decoration:none}
+.hero-explore:hover{color:var(--gold)}.hero-explore:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;max-width:900px}
+.hstat-num[data-t="num_600b"],.big[data-t="num_600b"]{font-size:clamp(20px,2vw,24px);line-height:1.3}
+.zakat-range{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,52px);font-weight:600;color:var(--gold);line-height:1.2}
+.zclock-disclaimer{font-size:13px;max-width:640px}.context-source{display:inline-block;margin-top:14px;color:var(--gold);font-size:13px;text-underline-offset:4px}
+.case-details{margin-top:24px;border-top:1px solid var(--border);padding-top:18px;font-size:14px;line-height:1.7;color:var(--text2)}.case-details p{margin-bottom:8px}.case-details a{color:var(--gold);text-underline-offset:4px}
+.tech-note{font-size:13px;color:var(--text2);line-height:1.6;max-width:680px;margin:8px 0 22px}
+.social-telegram{--social:#26A5E4;--social-text:#05283a}.social-linkedin{--social:#0A66C2;--social-text:#fff}.social-x{--social:#000;--social-text:#fff}
+.comm-follow-btn.brand-follow{background:var(--social);color:var(--social-text);border:1px solid var(--social);font-weight:700}
+.comm-follow-btn.brand-follow:hover{filter:brightness(.92)}.comm-follow-btn.brand-follow:focus-visible{outline:2px solid var(--text);outline-offset:4px}
+@media(max-width:640px){.hero-stats{grid-template-columns:1fr}.hero-stats .hstat{padding:16px}.zclock-box{padding:24px 16px}.case-details{font-size:14px}}
+.nav-products{display:none;position:relative;color:var(--text)}.nav-products summary{list-style:none;display:flex;align-items:center;justify-content:center;width:38px;height:40px;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:var(--card)}.nav-products summary::-webkit-details-marker{display:none}.nav-products-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.nav-products-menu{position:absolute;inset-inline-end:0;top:48px;width:210px;padding:8px;background:var(--bg2);z-index:1001;border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px #0002}.nav-products-menu a{display:block;padding:12px;color:var(--text);font-size:14px;text-decoration:none;border-radius:6px}.nav-products-menu a:hover{background:var(--gold3)}.nav-products summary:focus-visible,.nav-products-menu a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}@media(max-width:640px){.nav-products{display:block}.nav-right{gap:6px}}
 </style>
 </head>
 <body>
@@ -641,6 +660,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <a class="nav-demo" href="/academy/">🎓 <span data-t="nav_academy">Academy</span></a>
     <a class="nav-demo" href="/zakat/" data-t="nav_calc">Calculator</a>
     <a class="nav-demo nav-help" href="/apply/" data-t="nav_help">Assistance</a>
+    <details class="nav-products"><summary><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span class="nav-products-label" data-t="footer_products">Products</span></summary><div class="nav-products-menu"><a href="/academy/" data-t="nav_academy">Academy</a><a href="/zakat/" data-t="nav_calc">Calculator</a><a href="/apply/" data-t="nav_help">Assistance</a><a href="#waitlist" data-t="nav_cta">Join Waitlist</a></div></details>
     <a class="nav-cta" href="#waitlist" data-t="nav_cta">Join Waitlist</a>
   </div>
 </nav>
@@ -652,22 +672,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <h1><span id="heroL1" data-t="hero_l1">Where Every Dollar</span><span class="line2" id="heroL2" data-t="hero_l2">Finds Its Purpose.</span></h1>
   <p class="hero-sub" data-t="hero_sub">The first AI-assisted, human-verified, blockchain-transparent Zakat &amp; Sadaqah platform. Built for ~2 billion Muslims.</p>
 
-  <div class="hero-ctas product-actions">
-    <a class="btn-p" href="/zakat/" data-t="start_calc">Calculate Zakat</a>
-    <a class="btn-s" href="/academy/" data-t="start_learn">Start learning</a>
-    <a class="btn-s" href="/apply/" data-t="start_help">Explore assistance</a>
-  </div>
-  <div class="hero-secondary">
-    <a href="#how" data-t="start_how">How it works</a>
-    <a href="#waitlist" data-t="start_wait">Join the waitlist</a>
-    <a href="/AM_Network_Whitepaper_v1_EN.pdf" download data-t="cta_wp">Whitepaper</a>
-  </div>
-
-  <div class="product-statuses">
-    <div><strong data-t="status_live">Available</strong><span data-t="status_live_body">Calculator and Academy</span></div>
-    <div><strong data-t="status_demo">Demo</strong><span data-t="status_demo_body">Eligibility questionnaire and example cases</span></div>
-    <div><strong data-t="status_build">In development</strong><span data-t="status_build_body">Distribution of funds; certification pending</span></div>
-  </div>
+  <a class="hero-explore" href="#how"><span data-t="start_how">How it works</span><span aria-hidden="true">↓</span></a>
   <div class="hero-stats">
     <div class="hstat"><span class="hstat-num" data-t="num_600b">$200B–$1T</span><span class="hstat-lbl" data-t="stat1">Potential Zakat/yr</span></div>
     <div class="hstat"><span class="hstat-num" data-t="num_18b">~2B</span><span class="hstat-lbl" data-t="stat2">Muslims Worldwide</span></div>
@@ -709,11 +714,11 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <h2 class="sec-title" data-t="how_title">Simple to give. Life-changing to receive.</h2>
   <p class="sec-body" data-t="how_body">Five transparent steps — from your donation to verified delivery.</p>
   <div class="steps">
-    <div class="step reveal"><span class="step-num">01</span><div class="step-icon">💰</div><h3 data-t="s1_h">You give</h3><p data-t="s1_p">Planned flow: Send zakat or sadaka in any amount. Your funds are locked immediately in a smart contract on Base blockchain — not in our bank account. Full custody to code.</p><span class="sbadge sm" data-t="step_badge_1">Zakat · Sadaqah</span></div>
-    <div class="step reveal"><span class="step-num">02</span><div class="step-icon">🤖</div><h3 data-t="s2_h">AI scores need</h3><p data-t="s2_p">Planned flow: Recipients submit encrypted documents. Our AI model scores each case 0–100 based on family size, income level, medical conditions and regional cost of living. Personal data stays off-chain.</p><span class="sbadge sg" data-t="step_badge_2">AI-Scored</span></div>
-    <div class="step reveal"><span class="step-num">03</span><div class="step-icon">🕌</div><h3 data-t="s3_h">Oracle verifies</h3><p data-t="s3_p">Planned flow: A trusted local verifier — a certified imam or licensed social worker — reviews the AI assessment and confirms eligibility. For large distributions, the DAO votes.</p><span class="sbadge se" data-t="step_badge_3">Human review</span></div>
-    <div class="step reveal"><span class="step-num">04</span><div class="step-icon">⚡</div><h3 data-t="s4_h">Automatic transfer</h3><p data-t="s4_p">Planned flow: after verification, a smart contract transfers funds from the pool to the recipient's wallet. Security and correct delivery depend on contract audits and recipient verification.</p><span class="sbadge sg" data-t="step_badge_4">Base · Solana</span></div>
-    <div class="step reveal"><span class="step-num">05</span><div class="step-icon">🔍</div><h3 data-t="s5_h">You receive proof</h3><p data-t="s5_p">Planned flow: A permanent blockchain record is created. You receive a link showing exactly which verified profiles received your funds, in which countries, on which date — forever on-chain.</p><span class="sbadge sm" data-t="step_badge_5">On-chain forever</span></div>
+    <div class="step reveal"><span class="step-num">01</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="15" rx="3"/><path d="M3 9V6a2 2 0 0 1 2-2h13v2M16 12h5v5h-5a2.5 2.5 0 0 1 0-5Z"/></svg></div><h3 data-t="s1_h">You give</h3><p data-t="s1_p">Planned flow: Send zakat or sadaka in any amount. Your funds are locked immediately in a smart contract on Base blockchain — not in our bank account. Full custody to code.</p><span class="sbadge sm" data-t="step_badge_1">Zakat · Sadaqah</span></div>
+    <div class="step reveal"><span class="step-num">02</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20h16M6 16v-4m6 4V8m6 8V4"/><path d="m5 8 6-5 6 1"/></svg></div><h3 data-t="s2_h">AI scores need</h3><p data-t="s2_p">Planned flow: Recipients submit encrypted documents. Our AI model scores each case 0–100 based on family size, income level, medical conditions and regional cost of living. Personal data stays off-chain.</p><span class="sbadge sg" data-t="step_badge_2">AI-Scored</span></div>
+    <div class="step reveal"><span class="step-num">03</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></svg></div><h3 data-t="s3_h">Oracle verifies</h3><p data-t="s3_p">Planned flow: A trusted local verifier — a certified imam or licensed social worker — reviews the AI assessment and confirms eligibility. For large distributions, the DAO votes.</p><span class="sbadge se" data-t="step_badge_3">Human review</span></div>
+    <div class="step reveal"><span class="step-num">04</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 7h17m-4-4 4 4-4 4M21 17H4m4-4-4 4 4 4"/></svg></div><h3 data-t="s4_h">Automatic transfer</h3><p data-t="s4_p">Planned flow: after verification, a smart contract transfers funds from the pool to the recipient's wallet. Security and correct delivery depend on contract audits and recipient verification.</p><span class="sbadge sg" data-t="step_badge_4">Base · Solana</span></div>
+    <div class="step reveal"><span class="step-num">05</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg></div><h3 data-t="s5_h">You receive proof</h3><p data-t="s5_p">Planned flow: A permanent blockchain record is created. You receive a link showing exactly which verified profiles received your funds, in which countries, on which date — forever on-chain.</p><span class="sbadge sm" data-t="step_badge_5">On-chain forever</span></div>
   </div>
 </section>
 
@@ -724,8 +729,8 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <div class="eyebrow" data-t="prod_tag">The Ecosystem</div>
   <h2 class="sec-title" data-t="prod_title">Two products. One mission.</h2>
   <div class="products">
-    <div class="pcard reveal"><span class="picon">🕌</span><div class="plabel" data-t="p1_title">AM Zakat.ai</div><h3 data-t="p1_h">Transparent giving</h3><p data-t="p1_p">The world's first AI-powered, blockchain-verified zakat and sadaqah distribution platform.</p><ul class="pfeats"><li data-t="p1_f1">AI recipient verification</li><li data-t="p1_f2">Full on-chain transparency</li><li data-t="p1_f3">DAO governance</li><li data-t="p1_f4">Sharia review not started</li></ul><a class="pdemo-btn" href="/ai_scoring/" target="_blank">⚡ <span data-t="p1_demo">Try AI Demo</span> →</a></div>
-    <div class="pcard reveal"><span class="picon">🎓</span><div class="plabel" data-t="p2_title">AM Academy</div><h3 data-t="p2_h">Financial freedom</h3><p data-t="p2_p">Sharia-compliant financial literacy for ~2 billion Muslims. Learn, earn, and grow without riba.</p><ul class="pfeats"><li data-t="p2_f1">5 free courses</li><li data-t="p2_f2">Certificate after passing at 85%</li><li data-t="p2_f3">AI tutor 24/7</li><li data-t="p2_f4">Halal investment screening</li></ul><a class="pdemo-btn" href="/academy/" target="_blank">🎓 <span data-t="p2_demo">Start learning free</span> →</a></div>
+    <div class="pcard reveal"><span class="picon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 5v2"/></svg></span><div class="plabel" data-t="p1_title">AM Zakat.ai</div><h3 data-t="p1_h">Transparent giving</h3><p data-t="p1_p">The world's first AI-powered, blockchain-verified zakat and sadaqah distribution platform.</p><ul class="pfeats"><li data-t="p1_f1">AI recipient verification</li><li data-t="p1_f2">Full on-chain transparency</li><li data-t="p1_f3">DAO governance</li><li data-t="p1_f4">Sharia review not started</li></ul><a class="pdemo-btn" href="/ai_scoring/" target="_blank">⚡ <span data-t="p1_demo">Try AI Demo</span> →</a></div>
+    <div class="pcard reveal"><span class="picon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 6c-3-2-6-2-10-1v15c4-1 7-1 10 1 3-2 6-2 10-1V5c-4-1-7-1-10 1v15"/></svg></span><div class="plabel" data-t="p2_title">AM Academy</div><h3 data-t="p2_h">Financial freedom</h3><p data-t="p2_p">Sharia-compliant financial literacy for ~2 billion Muslims. Learn, earn, and grow without riba.</p><ul class="pfeats"><li data-t="p2_f1">5 free courses</li><li data-t="p2_f2">Certificate after passing at 85%</li><li data-t="p2_f3">AI tutor 24/7</li><li data-t="p2_f4">Halal investment screening</li></ul><a class="pdemo-btn" href="/academy/" target="_blank">🎓 <span data-t="p2_demo">Start learning free</span> →</a></div>
   </div>
 </section>
 
@@ -969,7 +974,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <p class="case-demo-note" data-t="case_note">Fictional example. Amounts, fees and timing are illustrative, not completed transfers or guarantees.</p>
     <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
     <div style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap">
-      <div style="width:52px;height:52px;border-radius:50%;background:var(--gold3);border:2px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🕌</div>
+      <div style="width:52px;height:52px;border-radius:50%;background:var(--gold3);border:2px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 5v2"/></svg></div>
       <div style="flex:1;min-width:240px">
         <div style="font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px" data-t="case_from">Dubai → Dushanbe</div>
         <p style="font-size:16px;color:var(--text);line-height:1.8;font-style:italic;margin-bottom:16px;font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2.2vw,20px)" data-t="case_story">A donor in Dubai could support a family in Dushanbe with $500 in Zakat. In the planned service, eligibility would be checked before a transfer and the donor could view a record of delivery. This is a fictional scenario.</p>
@@ -994,10 +999,10 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- TRUST -->
 <section class="section" id="trust" style="padding-top:48px;padding-bottom:56px">
   <div class="trust">
-    <div class="titem reveal"><span class="ticon">🔐</span><h4 data-t="t1_h">Base prototype</h4><p data-t="t1_p">Planned primary network; Solana under consideration.</p></div>
-    <div class="titem reveal"><span class="ticon">📜</span><h4 data-t="t2_h">Sharia review</h4><p data-t="t2_p">Not started. No formal opinion obtained.</p></div>
-    <div class="titem reveal"><span class="ticon">🌍</span><h4 data-t="t3_h">Security audit</h4><p data-t="t3_p">Not started. Required before handling funds.</p></div>
-    <div class="titem reveal"><span class="ticon">👁</span><h4 data-t="t4_h">Transparent reporting</h4><p data-t="t4_p">A design goal. Real transfers have not launched.</p></div>
+    <div class="titem reveal"><span class="ticon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg></span><h4 data-t="t1_h">Base prototype</h4><p data-t="t1_p">Planned primary network; Solana under consideration.</p></div>
+    <div class="titem reveal"><span class="ticon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Zm0 0v6h6M8 12h8m-8 4h6"/></svg></span><h4 data-t="t2_h">Sharia review</h4><p data-t="t2_p">Not started. No formal opinion obtained.</p></div>
+    <div class="titem reveal"><span class="ticon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg></span><h4 data-t="t3_h">Security audit</h4><p data-t="t3_p">Not started. Required before handling funds.</p></div>
+    <div class="titem reveal"><span class="ticon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></span><h4 data-t="t4_h">Transparent reporting</h4><p data-t="t4_p">A design goal. Real transfers have not launched.</p></div>
   </div>
 </section>
 
@@ -1017,10 +1022,10 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   </div>
   <div class="eyebrow" style="margin-bottom:14px" data-t="aud_title">Our Audience</div>
   <div class="aud-grid">
-    <div class="aitem reveal"><span class="aicon">🕌</span><div><h4 data-t="aud1_h">Muslim Diaspora</h4><p data-t="aud1_p">In UAE, USA, Germany, Malaysia — paying large zakat, demanding transparency.</p></div></div>
-    <div class="aitem reveal"><span class="aicon">🏛️</span><div><h4 data-t="aud2_h">Islamic Institutions</h4><p data-t="aud2_p">Mosques, foundations, Islamic banks seeking trusted digital infrastructure.</p></div></div>
-    <div class="aitem reveal"><span class="aicon">🏢</span><div><h4 data-t="aud3_h">Corporations</h4><p data-t="aud3_p">Companies in Islamic countries required to pay corporate zakat.</p></div></div>
-    <div class="aitem reveal"><span class="aicon">🎓</span><div><h4 data-t="aud4_h">Young Muslims</h4><p data-t="aud4_p">Web3-native generation seeking halal financial education and investment tools.</p></div></div>
+    <div class="aitem reveal"><span class="aicon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 5v2"/></svg></span><div><h4 data-t="aud1_h">Muslim Diaspora</h4><p data-t="aud1_p">In UAE, USA, Germany, Malaysia — paying large zakat, demanding transparency.</p></div></div>
+    <div class="aitem reveal"><span class="aicon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m3 8 9-5 9 5H3Zm0 13h18M5 10v8m5-8v8m4-8v8m5-8v8"/></svg></span><div><h4 data-t="aud2_h">Islamic Institutions</h4><p data-t="aud2_p">Mosques, foundations, Islamic banks seeking trusted digital infrastructure.</p></div></div>
+    <div class="aitem reveal"><span class="aicon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h1m4 0h1M9 11h1m4 0h1M10 21v-6h4v6"/></svg></span><div><h4 data-t="aud3_h">Corporations</h4><p data-t="aud3_p">Companies in Islamic countries required to pay corporate zakat.</p></div></div>
+    <div class="aitem reveal"><span class="aicon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 6c-3-2-6-2-10-1v15c4-1 7-1 10 1 3-2 6-2 10-1V5c-4-1-7-1-10 1v15"/></svg></span><div><h4 data-t="aud4_h">Young Muslims</h4><p data-t="aud4_p">Web3-native generation seeking halal financial education and investment tools.</p></div></div>
   </div>
 </section>
 
@@ -1064,7 +1069,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <!-- Sadaqah highlight - half a date -->
     <div class="reveal" style="background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:36px 40px;margin-bottom:32px;text-align:center;position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
-      <div style="font-size:40px;margin-bottom:16px">🌴</div>
+      <div class="quote-mark" aria-hidden="true">“</div>
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,28px);color:var(--gold);margin-bottom:14px" data-t="dv_sadaqah_h">Even Half a Date</h3>
       <p style="font-size:15px;color:var(--text2);line-height:1.8;max-width:600px;margin:0 auto 18px;font-style:italic" data-t="dv_sadaqah_p">"Save yourself from the Fire even by giving half a date in charity. And if he cannot find even that, then (let him save himself) by saying a good word." — Bukhari 1417</p>
       <p style="font-size:13px;color:var(--text3)" data-t="dv_sadaqah_sub">Sadaqah has no minimum. Every cent counts. Every act protects.</p>
@@ -1338,7 +1343,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <div class="form-card" id="wl-card">
       <!-- Form view -->
       <div id="wl-form-wrap">
-        <div style="font-size:40px;margin-bottom:12px">🌙</div>
+        <div class="waitlist-mark"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg></div>
         <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;margin-bottom:8px;color:var(--text)" data-t="wl_form_h">Join the Waitlist</h3>
         <p style="font-size:13px;color:var(--text2);margin-bottom:24px;line-height:1.7" data-t="wl_sub">We will reach out personally before launch.</p>
 
@@ -1439,10 +1444,10 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
       </div>
 
       <!-- Telegram -->
-      <div class="comm-card reveal">
-        <div style="height:4px;background:linear-gradient(90deg,#0088cc,#54a9eb)"></div>
+      <div class="comm-card reveal social-telegram">
+        <div style="height:4px;background:#26A5E4"></div>
         <div class="comm-card-hdr">
-          <div class="comm-card-icon" style="background:linear-gradient(135deg,#0088cc,#54a9eb)">
+          <div class="comm-card-icon" style="background:#26A5E4">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
           </div>
           <div style="text-align:left">
@@ -1456,15 +1461,15 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             <span data-t="comm_followers_soon">Growing community</span>
           </div>
-          <a href="https://t.me/amnetwork_global" target="_blank" rel="noopener" class="comm-follow-btn" style="background:rgba(0,136,204,0.1);border:1px solid rgba(0,136,204,0.28);color:var(--text)" onmouseover="this.style.background='rgba(0,136,204,0.22)'" onmouseout="this.style.background='rgba(0,136,204,0.1)'" data-t="comm_follow">Follow</a>
+          <a href="https://t.me/amnetwork_global" target="_blank" rel="noopener" class="comm-follow-btn brand-follow" data-t="comm_follow">Follow</a>
         </div>
       </div>
 
       <!-- Twitter/X -->
-      <div class="comm-card reveal">
-        <div style="height:4px;background:linear-gradient(90deg,#1a1a1a,#444)"></div>
+      <div class="comm-card reveal social-x">
+        <div style="height:4px;background:#000000"></div>
         <div class="comm-card-hdr">
-          <div class="comm-card-icon" style="background:#111">
+          <div class="comm-card-icon" style="background:#000000">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </div>
           <div style="text-align:left">
@@ -1478,15 +1483,15 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             <span data-t="comm_followers_soon">Growing community</span>
           </div>
-          <a href="https://x.com/amnet_io" target="_blank" rel="noopener" class="comm-follow-btn" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);color:var(--text)" onmouseover="this.style.background='rgba(255,255,255,0.14)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'" data-t="comm_follow">Follow</a>
+          <a href="https://x.com/amnet_io" target="_blank" rel="noopener" class="comm-follow-btn brand-follow" data-t="comm_follow">Follow</a>
         </div>
       </div>
 
       <!-- LinkedIn -->
-      <div class="comm-card reveal">
-        <div style="height:4px;background:linear-gradient(90deg,#0077b5,#00a0dc)"></div>
+      <div class="comm-card reveal social-linkedin">
+        <div style="height:4px;background:#0A66C2"></div>
         <div class="comm-card-hdr">
-          <div class="comm-card-icon" style="background:linear-gradient(135deg,#0077b5,#00a0dc)">
+          <div class="comm-card-icon" style="background:#0A66C2">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </div>
           <div style="text-align:left">
@@ -1500,7 +1505,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             <span data-t="comm_followers_soon">Growing community</span>
           </div>
-          <a href="https://linkedin.com/company/amnetwork-io" target="_blank" rel="noopener" class="comm-follow-btn" style="background:rgba(0,119,181,0.1);border:1px solid rgba(0,119,181,0.28);color:var(--text)" onmouseover="this.style.background='rgba(0,119,181,0.22)'" onmouseout="this.style.background='rgba(0,119,181,0.1)'" data-t="comm_follow">Follow</a>
+          <a href="https://linkedin.com/company/amnetwork-io" target="_blank" rel="noopener" class="comm-follow-btn brand-follow" data-t="comm_follow">Follow</a>
         </div>
       </div>
 
