@@ -4,7 +4,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const vm=require('node:vm');
 const root=path.join(__dirname,'..');
-for(const name of ['index.html','apply/index.html','ai_scoring/index.html','zakat/index.html','privacy/index.html']) {
+for(const name of ['index.html','apply/index.html','ai_scoring/index.html','zakat/index.html','privacy/index.html','academy/index.html','updates/index.html']) {
   test('inline JavaScript parses: '+name,()=>{
     const html=fs.readFileSync(path.join(root,name),'utf8');
     for (const [,attributes,body] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {

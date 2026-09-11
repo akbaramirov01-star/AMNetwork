@@ -1,13 +1,18 @@
-const CACHE = 'amnetwork-v8-security-prices';
+const CACHE = 'amnetwork-v9-product-improvements';
 const STATIC = [
   '/',
   '/index.html',
   '/i18n-data.js',
-  '/i18n-data.js?v=static-review-20260903',
+  '/i18n-data.js?v=approved-20260905',
   '/logo.webp',
   '/manifest.json',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
+  '/zakat/currency.js?v=20260905',
+  '/apply/review.js?v=20260905',
+  '/academy/progress-transfer.js?v=20260905',
+  '/updates/',
+  '/updates/index.html',
   '/zakat/',
   '/zakat/metal-prices.js?v=20260903',
   '/zakat/index.html',
