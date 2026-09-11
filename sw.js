@@ -1,10 +1,11 @@
-const CACHE = 'amnetwork-v9-product-improvements';
+const CACHE = 'amnetwork-v10-owner-feedback';
 const STATIC = [
   '/',
   '/index.html',
   '/i18n-data.js',
-  '/i18n-data.js?v=approved-20260905',
+  '/i18n-data.js?v=feedback-20260911',
   '/logo.webp',
+  '/favicon.svg?v=20260911',
   '/manifest.json',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
