@@ -594,6 +594,12 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .hero-secondary a{color:var(--text2);text-underline-offset:4px}
 .product-actions a:focus-visible,.hero-secondary a:focus-visible{outline:2px solid var(--gold);outline-offset:5px}
 @media(max-width:640px){.product-actions{width:100%;max-width:400px;flex-direction:column}.product-actions a{width:100%;justify-content:center;text-align:center}.nav-help{display:none}}
+.product-statuses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:800px;width:100%;margin:0 auto 28px;text-align:start}
+.product-statuses>div{padding:14px 16px;border:1px solid var(--border);border-radius:12px;background:var(--card)}
+.product-statuses strong{display:block;color:var(--gold);font-size:13px;margin-bottom:4px}.product-statuses span{font-size:13px;color:var(--text2);line-height:1.5;display:block}
+.prototype-method{max-width:760px;margin:24px auto 0;font-size:14px;color:var(--text2);line-height:1.7}.prototype-method summary{cursor:pointer;color:var(--text);padding:12px 0}.prototype-method a{color:var(--gold)}
+.case-demo-note{font-size:14px;line-height:1.6;color:var(--text2);padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--border)}
+@media(max-width:640px){.product-statuses{grid-template-columns:1fr;max-width:400px}}
 </style>
 </head>
 <body>
@@ -650,6 +656,11 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <a href="/AM_Network_Whitepaper_v1_EN.pdf" download data-t="cta_wp">Whitepaper</a>
   </div>
 
+  <div class="product-statuses">
+    <div><strong data-t="status_live">Available</strong><span data-t="status_live_body">Calculator and Academy</span></div>
+    <div><strong data-t="status_demo">Demo</strong><span data-t="status_demo_body">Eligibility questionnaire and example cases</span></div>
+    <div><strong data-t="status_build">In development</strong><span data-t="status_build_body">Distribution of funds; certification pending</span></div>
+  </div>
   <div class="hero-stats">
     <div class="hstat"><span class="hstat-num" data-t="num_600b">$600B</span><span class="hstat-lbl" data-t="stat1">Potential Zakat/yr</span></div>
     <div class="hstat"><span class="hstat-num" data-t="num_18b">~2B</span><span class="hstat-lbl" data-t="stat2">Muslims Worldwide</span></div>
@@ -688,15 +699,15 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 
 <!-- MOST URGENT NOW (demo preview) -->
 <section class="section" style="text-align:center;padding-top:20px;padding-bottom:56px">
-  <div class="eyebrow" style="justify-content:center" data-t="urgent_tag">Right Now</div>
-  <h2 class="sec-title" data-t="urgent_title">The Most Urgent — Verified Case</h2>
-  <p class="sec-body" style="margin-left:auto;margin-right:auto" data-t="urgent_sub">A live preview of how AM Zakat.ai ranks real cases by urgency — one at a time, most needed first.</p>
+  <div class="eyebrow" style="justify-content:center" data-t="urgent_tag">Demo</div>
+  <h2 class="sec-title" data-t="urgent_title">Example of case prioritisation</h2>
+  <p class="sec-body" style="margin-left:auto;margin-right:auto" data-t="urgent_sub">A fictional scenario showing how a future verified case could be presented.</p>
 
   <div class="urgent-card reveal">
     <span class="urgent-demo-ribbon">⚠ <span data-t="urgent_demo_ribbon">DEMO — not a real person. Real verified cases appear here after the pilot launch.</span></span>
     <div class="urgent-row">
       <div class="urgent-score-badge"><span class="urgent-score-num">94</span><span class="urgent-score-lbl" data-t="urgent_score_lbl">AI Urgency Score</span></div>
-      <p class="urgent-need" data-t="urgent_need">Family of 4, single mother, urgent medical need — verified by local oracle.</p>
+      <p class="urgent-need" data-t="urgent_need">Illustrative scenario: a single mother with three children needs medical support.</p>
     </div>
     <button class="urgent-cta-btn" disabled data-t="urgent_cta">Real Cases Launching Soon</button>
   </div>
@@ -710,11 +721,11 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <h2 class="sec-title" data-t="how_title">Simple to give. Life-changing to receive.</h2>
   <p class="sec-body" data-t="how_body">Five transparent steps — from your donation to verified delivery.</p>
   <div class="steps">
-    <div class="step reveal"><span class="step-num">01</span><div class="step-icon">💰</div><h3 data-t="s1_h">You give</h3><p data-t="s1_p">Send zakat or sadaqah in any amount. Your funds are locked immediately in a smart contract on Base blockchain — not in our bank account.</p><span class="sbadge sm" data-t="step_badge_1">Zakat · Sadaqah</span></div>
-    <div class="step reveal"><span class="step-num">02</span><div class="step-icon">🤖</div><h3 data-t="s2_h">AI scores need</h3><p data-t="s2_p">Recipients submit encrypted documents. Our AI model scores each case 0–100 based on family size, income, medical conditions and regional cost of living. Personal data stays off-chain.</p><span class="sbadge sg" data-t="step_badge_2">AI-Scored</span></div>
-    <div class="step reveal"><span class="step-num">03</span><div class="step-icon">🕌</div><h3 data-t="s3_h">Oracle verifies</h3><p data-t="s3_p">A trusted local verifier — a certified imam or licensed social worker — reviews the AI assessment and confirms eligibility.</p><span class="sbadge se" data-t="step_badge_3">Human review</span></div>
+    <div class="step reveal"><span class="step-num">01</span><div class="step-icon">💰</div><h3 data-t="s1_h">You give</h3><p data-t="s1_p">Planned flow: Send zakat or sadaka in any amount. Your funds are locked immediately in a smart contract on Base blockchain — not in our bank account. Full custody to code.</p><span class="sbadge sm" data-t="step_badge_1">Zakat · Sadaqah</span></div>
+    <div class="step reveal"><span class="step-num">02</span><div class="step-icon">🤖</div><h3 data-t="s2_h">AI scores need</h3><p data-t="s2_p">Planned flow: Recipients submit encrypted documents. Our AI model scores each case 0–100 based on family size, income level, medical conditions and regional cost of living. Personal data stays off-chain.</p><span class="sbadge sg" data-t="step_badge_2">AI-Scored</span></div>
+    <div class="step reveal"><span class="step-num">03</span><div class="step-icon">🕌</div><h3 data-t="s3_h">Oracle verifies</h3><p data-t="s3_p">Planned flow: A trusted local verifier — a certified imam or licensed social worker — reviews the AI assessment and confirms eligibility. For large distributions, the DAO votes.</p><span class="sbadge se" data-t="step_badge_3">Human review</span></div>
     <div class="step reveal"><span class="step-num">04</span><div class="step-icon">⚡</div><h3 data-t="s4_h">Automatic transfer</h3><p data-t="s4_p">Planned flow: after verification, a smart contract transfers funds from the pool to the recipient's wallet. Security and correct delivery depend on contract audits and recipient verification.</p><span class="sbadge sg" data-t="step_badge_4">Base · Solana</span></div>
-    <div class="step reveal"><span class="step-num">05</span><div class="step-icon">🔍</div><h3 data-t="s5_h">You receive proof</h3><p data-t="s5_p">A permanent blockchain record is created showing exactly which verified profiles received your funds, in which countries, on which date — forever on-chain.</p><span class="sbadge sm" data-t="step_badge_5">On-chain forever</span></div>
+    <div class="step reveal"><span class="step-num">05</span><div class="step-icon">🔍</div><h3 data-t="s5_h">You receive proof</h3><p data-t="s5_p">Planned flow: A permanent blockchain record is created. You receive a link showing exactly which verified profiles received your funds, in which countries, on which date — forever on-chain.</p><span class="sbadge sm" data-t="step_badge_5">On-chain forever</span></div>
   </div>
 </section>
 
@@ -919,12 +930,13 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         <div style="font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-top:4px" data-t="how_ai_stat2">Asnaf categories</div>
       </div>
       <div style="background:var(--bg2);padding:20px 24px;text-align:center">
-        <div style="font-size:28px;font-weight:800;color:var(--gold);font-family:'Cormorant Garamond',serif">76%</div>
-        <div style="font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-top:4px" data-t="how_ai_stat3">ML accuracy</div>
+        <div style="font-size:28px;font-weight:800;color:var(--gold);font-family:'Cormorant Garamond',serif">—</div>
+        <div style="font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-top:4px" data-t="how_ai_stat3">Demo</div>
       </div>
     </div>
     </div>
   </div>
+<details class="prototype-method"><summary data-t="method_title">How the prototype is evaluated</summary><p data-t="method_body">The ML prototype uses synthetic profiles and five-fold cross-validation against generated labels. This measures agreement on simulated data, not real-world eligibility accuracy. The public questionnaire calculates locally using rules. No independently verified accuracy figure for real applications is published.</p><a href="https://github.com/akbaramirov01-star/AMNetwork/blob/main/ai_scoring/ml_model.py" target="_blank" rel="noopener noreferrer">GitHub · ML</a></details>
 </section>
 
 <hr class="div">
@@ -960,12 +972,13 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 
 <!-- USE CASE -->
 <section class="section" id="use-case" style="padding-top:60px;padding-bottom:60px">
-  <div class="eyebrow" data-t="case_tag">Real Impact</div>
+  <div class="eyebrow" data-t="case_tag">Illustrative scenario</div>
   <div class="sec-head">
-    <h2 class="sec-title" data-t="case_title">One story. Real change.</h2>
+    <h2 class="sec-title" data-t="case_title">How a future donation could work</h2>
     <button class="sec-toggle" aria-expanded="true" aria-controls="case-body" onclick="toggleSection('case-body',this)"><span class="sec-label" data-t="sec_hide">Hide</span> <span class="sec-arrow">▾</span></button>
   </div>
   <div id="case-body" style="max-width:700px;background:var(--card);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:36px;position:relative;overflow:hidden" class="reveal">
+    <p class="case-demo-note" data-t="case_note">Fictional example. Amounts, fees and timing are illustrative, not completed transfers or guarantees.</p>
     <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
     <div style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap">
       <div style="width:52px;height:52px;border-radius:50%;background:var(--gold3);border:2px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🕌</div>
