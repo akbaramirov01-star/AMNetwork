@@ -669,10 +669,9 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <div><strong data-t="status_build">In development</strong><span data-t="status_build_body">Distribution of funds; certification pending</span></div>
   </div>
   <div class="hero-stats">
-    <div class="hstat"><span class="hstat-num" data-t="num_600b">$600B</span><span class="hstat-lbl" data-t="stat1">Potential Zakat/yr</span></div>
+    <div class="hstat"><span class="hstat-num" data-t="num_600b">$200B–$1T</span><span class="hstat-lbl" data-t="stat1">Potential Zakat/yr</span></div>
     <div class="hstat"><span class="hstat-num" data-t="num_18b">~2B</span><span class="hstat-lbl" data-t="stat2">Muslims Worldwide</span></div>
     <div class="hstat"><span class="hstat-num" data-t="num_4t">$6T</span><span class="hstat-lbl" data-t="stat3">Islamic Finance Market</span></div>
-    <div class="hstat"><span class="hstat-num">0</span><span class="hstat-lbl" data-t="stat4">Transparent Platforms</span></div>
   </div>
 
 
@@ -685,39 +684,21 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     </div>
     <div style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-top:none;border-radius:0 0 18px 18px;padding:8px 16px;display:flex;align-items:center;gap:8px">
       <span style="font-size:11px;color:var(--gold);letter-spacing:1px">⚠</span>
-      <span style="font-size:11px;color:var(--text3)" data-t="ledger_demo">Simulated data · Pre-launch demo · Real transactions will appear after mainnet launch Q4 2026</span>
+      <span style="font-size:11px;color:var(--text3)" data-t="ledger_demo">Simulated data · Real transfers have not launched · No launch date confirmed</span>
     </div>
   </div></div>
 </section>
 
 <hr class="div">
 
-<!-- ZAKAT DEBT CLOCK -->
-<section class="section" style="text-align:center;padding-top:56px;padding-bottom:40px">
-  <div class="eyebrow" style="justify-content:center" data-t="clock_tag">The Gap, In Real Time</div>
-  <h2 class="sec-title" data-t="clock_title">While You're Reading This, The Gap Is Growing.</h2>
-  <p class="sec-body" style="margin-left:auto;margin-right:auto" data-t="clock_sub">An estimate of Zakat obligation not yet reaching anyone formally or transparently — every year, not just today.</p>
-  <div class="zclock-box">
-    <div class="zclock-num" id="zclockNum">$0</div>
-    <div class="zclock-lbl" data-t="clock_lbl">not formally distributed this year (estimate)</div>
-  </div>
-  <p class="zclock-disclaimer" data-t="clock_disclaimer">Illustrative estimate: $600B/yr potential obligation (World Bank/IsDB, 2016) minus &lt;$25B/yr formally distributed. Not live transaction data.</p>
-</section>
-
-<!-- MOST URGENT NOW (demo preview) -->
-<section class="section" style="text-align:center;padding-top:20px;padding-bottom:56px">
-  <div class="eyebrow" style="justify-content:center" data-t="urgent_tag">Demo</div>
-  <h2 class="sec-title" data-t="urgent_title">Example of case prioritisation</h2>
-  <p class="sec-body" style="margin-left:auto;margin-right:auto" data-t="urgent_sub">A fictional scenario showing how a future verified case could be presented.</p>
-
-  <div class="urgent-card reveal">
-    <span class="urgent-demo-ribbon">⚠ <span data-t="urgent_demo_ribbon">DEMO — not a real person. Real verified cases appear here after the pilot launch.</span></span>
-    <div class="urgent-row">
-      <div class="urgent-score-badge"><span class="urgent-score-num">94</span><span class="urgent-score-lbl" data-t="urgent_score_lbl">AI Urgency Score</span></div>
-      <p class="urgent-need" data-t="urgent_need">Illustrative scenario: a single mother with three children needs medical support.</p>
-    </div>
-    <button class="urgent-cta-btn" disabled data-t="urgent_cta">Real Cases Launching Soon</button>
-  </div>
+<!-- SOURCED ZAKAT CONTEXT -->
+<section class="section zakat-context" id="zakat-context" style="text-align:center">
+  <div class="eyebrow" style="justify-content:center" data-t="clock_tag">Research context</div>
+  <h2 class="sec-title" data-t="clock_title">The potential of Zakat</h2>
+  <p class="sec-body" style="margin-inline:auto" data-t="clock_sub">A historical estimate of global annual potential, not money collected or a measured funding gap.</p>
+  <div class="zclock-box"><div class="zakat-range" data-t="num_600b">$200B–$1T</div><div class="zclock-lbl" data-t="clock_lbl">Estimated annual potential</div></div>
+  <p class="zclock-disclaimer" data-t="clock_disclaimer">UNDP, 7 September 2018, citing studies from 2015–2016. This range cannot tell us how much Zakat remains undistributed today.</p>
+  <a class="context-source" href="https://www.undp.org/blog/zakat-sdgs" target="_blank" rel="noopener" data-t="source_read">Read the source</a>
 </section>
 
 <hr class="div">
@@ -743,7 +724,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <div class="eyebrow" data-t="prod_tag">The Ecosystem</div>
   <h2 class="sec-title" data-t="prod_title">Two products. One mission.</h2>
   <div class="products">
-    <div class="pcard reveal"><span class="picon">🕌</span><div class="plabel" data-t="p1_title">AM Zakat.ai</div><h3 data-t="p1_h">Transparent giving</h3><p data-t="p1_p">The world's first AI-powered, blockchain-verified zakat and sadaqah distribution platform.</p><ul class="pfeats"><li data-t="p1_f1">AI recipient verification</li><li data-t="p1_f2">Full on-chain transparency</li><li data-t="p1_f3">DAO governance</li><li data-t="p1_f4">Certification pending</li></ul><a class="pdemo-btn" href="/ai_scoring/" target="_blank">⚡ <span data-t="p1_demo">Try AI Demo</span> →</a></div>
+    <div class="pcard reveal"><span class="picon">🕌</span><div class="plabel" data-t="p1_title">AM Zakat.ai</div><h3 data-t="p1_h">Transparent giving</h3><p data-t="p1_p">The world's first AI-powered, blockchain-verified zakat and sadaqah distribution platform.</p><ul class="pfeats"><li data-t="p1_f1">AI recipient verification</li><li data-t="p1_f2">Full on-chain transparency</li><li data-t="p1_f3">DAO governance</li><li data-t="p1_f4">Sharia review not started</li></ul><a class="pdemo-btn" href="/ai_scoring/" target="_blank">⚡ <span data-t="p1_demo">Try AI Demo</span> →</a></div>
     <div class="pcard reveal"><span class="picon">🎓</span><div class="plabel" data-t="p2_title">AM Academy</div><h3 data-t="p2_h">Financial freedom</h3><p data-t="p2_p">Sharia-compliant financial literacy for ~2 billion Muslims. Learn, earn, and grow without riba.</p><ul class="pfeats"><li data-t="p2_f1">5 free courses</li><li data-t="p2_f2">Certificate after passing at 85%</li><li data-t="p2_f3">AI tutor 24/7</li><li data-t="p2_f4">Halal investment screening</li></ul><a class="pdemo-btn" href="/academy/" target="_blank">🎓 <span data-t="p2_demo">Start learning free</span> →</a></div>
   </div>
 </section>
@@ -991,7 +972,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
       <div style="width:52px;height:52px;border-radius:50%;background:var(--gold3);border:2px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🕌</div>
       <div style="flex:1;min-width:240px">
         <div style="font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px" data-t="case_from">Dubai → Dushanbe</div>
-        <p style="font-size:16px;color:var(--text);line-height:1.8;font-style:italic;margin-bottom:16px;font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2.2vw,20px)" data-t="case_story">"A donor in Dubai sends $500 in Zakat. Three days later, a link arrives. He opens it and sees on the blockchain — his Zakat reached a family in need in Dushanbe. Every step recorded, forever. For the first time, he knows exactly where his Zakat went."</p>
+        <p style="font-size:16px;color:var(--text);line-height:1.8;font-style:italic;margin-bottom:16px;font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2.2vw,20px)" data-t="case_story">A donor in Dubai could support a family in Dushanbe with $500 in Zakat. In the planned service, eligibility would be checked before a transfer and the donor could view a record of delivery. This is a fictional scenario.</p>
         <div style="display:flex;align-items:center;gap:12px">
           <div style="width:1px;height:32px;background:var(--gold);opacity:0.4"></div>
           <div>
@@ -1001,20 +982,10 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         </div>
       </div>
     </div>
-    <!-- Stats row -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:10px;overflow:hidden;margin-top:24px">
-      <div style="padding:14px;background:var(--step-bg);text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold)"><span data-t="num_3days"><span data-t="num_3days">3 days</span></span></div>
-        <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px" data-t="case_s1">Donor to recipient</div>
-      </div>
-      <div style="padding:14px;background:var(--step-bg);text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold)">$0.009</div>
-        <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px" data-t="case_s2">Transaction fee</div>
-      </div>
-      <div style="padding:14px;background:var(--step-bg);text-align:center">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold)">∞</div>
-        <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px" data-t="case_s3">Stored on-chain</div>
-      </div>
+    <div class="case-details">
+      <p data-t="case_delivery">Delivery time depends on verification and payment processing.</p>
+      <p data-t="case_fees">Network fees vary by transaction and network conditions.</p>
+      <a href="https://docs.base.org/specifications/transactions/network-fees" target="_blank" rel="noopener" data-t="fee_source">How Base fees work</a>
     </div>
   </div>
 </section>
@@ -1023,10 +994,10 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- TRUST -->
 <section class="section" id="trust" style="padding-top:48px;padding-bottom:56px">
   <div class="trust">
-    <div class="titem reveal"><span class="ticon">🔐</span><h4 data-t="t1_h">Base + Solana</h4><p data-t="t1_p">Institutional-grade blockchain</p></div>
-    <div class="titem reveal"><span class="ticon">📜</span><h4 data-t="t2_h">Certification pending</h4><p data-t="t2_p">Formal fatwa not yet obtained</p></div>
-    <div class="titem reveal"><span class="ticon">🌍</span><h4 data-t="t3_h">60+ Countries</h4><p data-t="t3_p">Global from day one</p></div>
-    <div class="titem reveal"><span class="ticon">👁</span><h4 data-t="t4_h">Zero Middlemen</h4><p data-t="t4_p">Every dollar tracked publicly</p></div>
+    <div class="titem reveal"><span class="ticon">🔐</span><h4 data-t="t1_h">Base prototype</h4><p data-t="t1_p">Planned primary network; Solana under consideration.</p></div>
+    <div class="titem reveal"><span class="ticon">📜</span><h4 data-t="t2_h">Sharia review</h4><p data-t="t2_p">Not started. No formal opinion obtained.</p></div>
+    <div class="titem reveal"><span class="ticon">🌍</span><h4 data-t="t3_h">Security audit</h4><p data-t="t3_p">Not started. Required before handling funds.</p></div>
+    <div class="titem reveal"><span class="ticon">👁</span><h4 data-t="t4_h">Transparent reporting</h4><p data-t="t4_p">A design goal. Real transfers have not launched.</p></div>
   </div>
 </section>
 
@@ -1038,7 +1009,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <h2 class="sec-title" data-t="stats_title">The largest underserved market in global finance.</h2>
   <div class="stats-grid">
     <div class="scard reveal"><div class="big" data-t="num_4t" data-count="6" data-prefix="$" data-suffix="T">$6T</div><div class="lbl" data-t="stat3">Islamic Finance</div><div class="sub sg2" data-t="stat_if_sub">+12% CAGR</div></div>
-    <div class="scard reveal"><div class="big" data-t="num_600b" data-count="600" data-prefix="$" data-suffix="B">$600B</div><div class="lbl" data-t="stat1">Potential Zakat/yr</div><div class="sub sr" data-t="stat_zakat_sub">0% transparent</div></div>
+    <div class="scard reveal"><div class="big" data-t="num_600b">$200B–$1T</div><div class="lbl" data-t="stat1">Potential Zakat/yr</div><div class="sub sr" data-t="stat_zakat_sub">UNDP · 2018 estimate</div></div>
     <div class="scard reveal"><div class="big" data-t="num_800b" data-count="800" data-prefix="$" data-suffix="B">$800B</div><div class="lbl" data-t="stat_sukuk_lbl">Sukuk Market</div><div class="sub sr" data-t="stat_sukuk_sub">0% on blockchain</div></div>
     <div class="scard reveal"><div class="big" data-t="num_18b" data-count="2" data-prefix="" data-suffix="B">~2B</div><div class="lbl" data-t="stat2">Muslims Worldwide</div><div class="sub sr" data-t="underserved">Underserved by fintech</div></div>
     <div class="scard reveal"><div class="big" data-t="num_57b" data-count="341" data-prefix="$" data-suffix="B">$341B</div><div class="lbl" data-t="stat_ft_lbl">Islamic Fintech 2029</div><div class="sub sg2" data-t="stat_ft_sub">+11.5% CAGR</div></div>
@@ -1127,7 +1098,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <div class="roadmap">
     <div class="ritem reveal"><div class="rlabel" data-t="r1_label">Q2 2026</div><h3 data-t="r1_title">Foundation</h3><p data-t="r1_items">Waitlist · Shariah council · Legal entity · MVP design</p></div>
     <div class="ritem reveal"><div class="rlabel" data-t="r2_label">Q3 2026</div><h3 data-t="r2_title">Build</h3><p data-t="r2_items">Smart contracts · AI verification · Academy v1 · First transactions</p></div>
-    <div class="ritem reveal"><div class="rlabel" data-t="r3_label">Q4 2026</div><h3 data-t="r3_title">Launch</h3><p data-t="r3_items">Mainnet · 1,000 users · Mosque partnerships · Seed funding</p></div>
+    <div class="ritem reveal"><div class="rlabel" data-t="r3_label">After the required reviews</div><h3 data-t="r3_title">Launch</h3><p data-t="r3_items">Mainnet · 1,000 users · Mosque partnerships · Seed funding</p></div>
     <div class="ritem reveal"><div class="rlabel" data-t="r4_label">2027+</div><h3 data-t="r4_title">Scale</h3><p data-t="r4_items">AM Pay · Government contracts · 50,000 users · Series A</p></div>
   </div>
 
@@ -1181,24 +1152,6 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         </div>
         <div style="height:8px;background:var(--card);border-radius:4px;overflow:hidden;border:1px solid var(--border)">
           <div class="prog-bar" data-width="25" style="height:100%;width:0%;background:linear-gradient(90deg,#E0803A,#EFA766);border-radius:4px;transition:width 1.2s cubic-bezier(0.4,0,0.2,1) 0.32s"></div>
-        </div>
-      </div>
-      <div class="prog-row">
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-          <span style="font-size:13px;color:var(--text)" data-t="prog_m4">Sharia Certification</span>
-          <span style="font-size:13px;color:var(--text2);font-weight:600">15%</span>
-        </div>
-        <div style="height:8px;background:var(--card);border-radius:4px;overflow:hidden;border:1px solid var(--border)">
-          <div class="prog-bar" data-width="15" style="height:100%;width:0%;background:linear-gradient(90deg,#E0803A,#EFA766);border-radius:4px;transition:width 1.2s cubic-bezier(0.4,0,0.2,1) 0.40s"></div>
-        </div>
-      </div>
-      <div class="prog-row">
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-          <span style="font-size:13px;color:var(--text)" data-t="prog_m6">Security Audit</span>
-          <span style="font-size:13px;color:var(--text2);font-weight:600">10%</span>
-        </div>
-        <div style="height:8px;background:var(--card);border-radius:4px;overflow:hidden;border:1px solid var(--border)">
-          <div class="prog-bar" data-width="10" style="height:100%;width:0%;background:linear-gradient(90deg,#E0803A,#EFA766);border-radius:4px;transition:width 1.2s cubic-bezier(0.4,0,0.2,1) 0.48s"></div>
         </div>
       </div>
       <div class="prog-row">
@@ -1300,7 +1253,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     </div>
   </div>
   <div class="tech-stack">
-    <p class="tech-label">Powered by</p>
+    <p class="tech-label" data-t="tech_label">Technology & open data</p><p class="tech-note" data-t="tech_note">Tools used or considered for the project. Logos do not imply partnership or endorsement.</p>
   <div class="marquee-track" style="margin-top:0">
     <div class="marquee-row"><div class="marquee-item"><svg width="26" height="26" viewBox="0 0 111 111" fill="none"><circle cx="55.5" cy="55.5" r="55.5" fill="#0052FF"/><path d="M55.5 16.5C33.1 16.5 15 34.6 15 57s18.1 40.5 40.5 40.5S96 79.4 96 57 77.9 16.5 55.5 16.5zm0 14.2c13.2 0 24.3 8.6 28.2 20.5H27.3c3.9-11.9 15-20.5 28.2-20.5zm0 52.6c-13.2 0-24.3-8.6-28.2-20.5h56.4c-3.9 11.9-15 20.5-28.2 20.5z" fill="white"/></svg><span>Base Blockchain</span></div><div class="marquee-item"><svg width="20" height="26" viewBox="0 0 256 417"><polygon fill="#627EEA" fill-opacity=".6" points="127.9,0 125.2,8.9 125.2,285.2 127.9,287.9 255.9,212.1"/><polygon fill="#627EEA" points="127.9,0 0,212.1 127.9,287.9 127.9,154.1"/><polygon fill="#627EEA" fill-opacity=".6" points="127.9,312.1 126.3,314.1 126.3,412.5 127.9,417.1 256,236.5"/><polygon fill="#627EEA" points="127.9,417.1 127.9,312.1 0,236.5"/><polygon fill="#627EEA" fill-opacity=".2" points="127.9,287.9 255.9,212.1 127.9,154.1"/><polygon fill="#627EEA" fill-opacity=".6" points="0,212.1 127.9,287.9 127.9,154.1"/></svg><span>Ethereum</span></div><div class="marquee-item"><svg width="26" height="26" viewBox="0 0 72 72" fill="none"><circle cx="36" cy="36" r="36" fill="#0a0a0a"/><g transform="translate(22.905 12.997) scale(1.3760)" fill="#F2F2F2"><path d="M9.51364 8.3127e-07C8.25792 0.00626346 7.01571 0.26115 5.85798 0.75015C4.70025 1.23915 3.64967 1.95272 2.76624 2.85C1.8828 3.74727 1.18382 4.81074 0.709201 5.97964C0.234586 7.14855 -0.00635202 8.40001 0.00012729 9.66256V12.8542H7.72992V8.23017C7.72983 8.01301 7.7723 7.79797 7.8549 7.59732C7.9375 7.39667 8.05862 7.21436 8.21132 7.06079C8.36403 6.90722 8.54535 6.78546 8.74489 6.70237C8.94444 6.61927 9.15832 6.57654 9.37431 6.57658H9.65298C9.86897 6.57654 10.0829 6.61928 10.2824 6.70237C10.482 6.78546 10.6633 6.90722 10.8161 7.06079C10.9688 7.21435 11.0899 7.39667 11.1726 7.59732C11.2552 7.79797 11.2977 8.013 11.2977 8.23017V20.626C12.3128 20.626 13.318 20.425 14.2558 20.0345C15.1936 19.6439 16.0458 19.0714 16.7636 18.3498C17.4814 17.6281 18.0507 16.7713 18.4392 15.8284C18.8276 14.8855 19.0275 13.8748 19.0275 12.8542V9.66256C19.033 7.10448 18.0311 4.6482 16.2408 2.83057C15.3624 1.93362 14.3152 1.22142 13.1602 0.735457C12.0053 0.249496 10.7657 -0.000526135 9.51364 8.3127e-07Z"/><path d="M9.65335 26.9007H9.37468C9.15872 26.9007 8.94487 26.8579 8.74535 26.7749C8.54582 26.6918 8.36452 26.57 8.21182 26.4164C8.05911 26.2629 7.93799 26.0807 7.85537 25.8801C7.77275 25.6795 7.73024 25.4644 7.73029 25.2473V12.8516C6.71517 12.8515 5.70997 13.0524 4.77211 13.4429C3.83425 13.8335 2.98211 14.4059 2.26431 15.1276C1.54652 15.8493 0.977135 16.7061 0.588708 17.6491C0.20028 18.592 0.00041149 19.6027 0.000498842 20.6233V23.7705C-0.0123788 25.0349 0.22419 26.2893 0.696522 27.4612C1.16885 28.6331 1.86757 29.6992 2.75228 30.5979C3.63698 31.4965 4.69011 32.2099 5.85076 32.6968C7.01141 33.1837 8.25656 33.4344 9.51417 33.4344C10.7718 33.4344 12.0169 33.1837 13.1776 32.6968C14.3382 32.2099 15.3914 31.4965 16.2761 30.5979C17.1608 29.6992 17.8595 28.6331 18.3318 27.4612C18.8042 26.2893 19.0407 25.0349 19.0278 23.7705V20.6233H11.2981V25.2473C11.2981 25.4645 11.2555 25.6795 11.1729 25.8801C11.0902 26.0807 10.969 26.263 10.8163 26.4165C10.6636 26.5701 10.4823 26.6918 10.2827 26.7749C10.0832 26.8579 9.86932 26.9007 9.65335 26.9007Z"/></g></svg><span>LayerZero</span></div><div class="marquee-item"><svg width="22" height="26" viewBox="0 0 127 150" fill="none"><path d="M0 148.638C16.5023 120.086 30.5249 96.5383 48.3477 64.265C54.6433 53.3745 65.5217 46.6074 78.951 46.6074H100.052L41.1242 148.638H0Z" fill="#2E99FF"/><path d="M0.186768 0H126.804L105.17 37.7215H0.186768V0Z" fill="#4F56FA"/><path d="M63.6089 125.145C68.3703 116.728 76.0241 111.499 86.7442 111.499L126.827 111.389V148.641H50.0247C54.8332 140.394 59.0086 133.278 63.6089 125.145Z" fill="#09C2FF"/></svg><span>OpenZeppelin</span></div><div class="marquee-item"><svg width="26" height="20" viewBox="0 0 397 311" fill="none"><path fill="url(#s1)" d="M64.6 237.9a12 12 0 018.3-3.4h317a6 6 0 014.3 10.2l-53.1 53.1a12 12 0 01-8.3 3.4H15.8a6 6 0 01-4.3-10.2l53.1-53.1z"/><path fill="url(#s2)" d="M64.6 3.4A12 12 0 0172.9 0h317a6 6 0 014.3 10.2L341 63.3a12 12 0 01-8.3 3.4H15.8A6 6 0 0111.5 56.5L64.6 3.4z"/><path fill="url(#s3)" d="M332.2 120.4a12 12 0 00-8.3-3.4H6.9a6 6 0 00-4.3 10.2l53.1 53.1a12 12 0 008.3 3.4h317a6 6 0 004.3-10.2l-53.1-53.1z"/><defs><linearGradient id="s1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9945FF"/><stop offset="1" stop-color="#14F195"/></linearGradient><linearGradient id="s2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9945FF"/><stop offset="1" stop-color="#14F195"/></linearGradient><linearGradient id="s3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00C2FF"/><stop offset="1" stop-color="#9945FF"/></linearGradient></defs></svg><span>Solana</span></div><div class="marquee-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#C9A84C" stroke-width="1.8"/><path d="M12 2C12 2 8 7 8 12s4 10 4 10M12 2c0 0 4 5 4 10s-4 10-4 10" stroke="#C9A84C" stroke-width="1.8" fill="none"/><path d="M2 12h20M2.5 7.5h19M2.5 16.5h19" stroke="#C9A84C" stroke-width="1.6"/></svg><span>World Bank Data</span></div><div class="marquee-item"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#0052FF"/><path d="M12 3.5C7.3 3.5 3.5 7.3 3.5 12S7.3 20.5 12 20.5 20.5 16.7 20.5 12 16.7 3.5 12 3.5zm0 3.8c2.5 0 4.6 1.6 5.4 3.9H6.6C7.4 8.9 9.5 7.3 12 7.3zm0 9.4c-2.5 0-4.6-1.6-5.4-3.9h10.8c-.8 2.3-2.9 3.9-5.4 3.9z" fill="white"/></svg><span>Coinbase</span></div><div class="marquee-item"><svg width="26" height="26" viewBox="0 0 111 111" fill="none"><circle cx="55.5" cy="55.5" r="55.5" fill="#0052FF"/><path d="M55.5 16.5C33.1 16.5 15 34.6 15 57s18.1 40.5 40.5 40.5S96 79.4 96 57 77.9 16.5 55.5 16.5zm0 14.2c13.2 0 24.3 8.6 28.2 20.5H27.3c3.9-11.9 15-20.5 28.2-20.5zm0 52.6c-13.2 0-24.3-8.6-28.2-20.5h56.4c-3.9 11.9-15 20.5-28.2 20.5z" fill="white"/></svg><span>Base Blockchain</span></div><div class="marquee-item"><svg width="20" height="26" viewBox="0 0 256 417"><polygon fill="#627EEA" fill-opacity=".6" points="127.9,0 125.2,8.9 125.2,285.2 127.9,287.9 255.9,212.1"/><polygon fill="#627EEA" points="127.9,0 0,212.1 127.9,287.9 127.9,154.1"/><polygon fill="#627EEA" fill-opacity=".6" points="127.9,312.1 126.3,314.1 126.3,412.5 127.9,417.1 256,236.5"/><polygon fill="#627EEA" points="127.9,417.1 127.9,312.1 0,236.5"/><polygon fill="#627EEA" fill-opacity=".2" points="127.9,287.9 255.9,212.1 127.9,154.1"/><polygon fill="#627EEA" fill-opacity=".6" points="0,212.1 127.9,287.9 127.9,154.1"/></svg><span>Ethereum</span></div><div class="marquee-item"><svg width="26" height="26" viewBox="0 0 72 72" fill="none"><circle cx="36" cy="36" r="36" fill="#0a0a0a"/><g transform="translate(22.905 12.997) scale(1.3760)" fill="#F2F2F2"><path d="M9.51364 8.3127e-07C8.25792 0.00626346 7.01571 0.26115 5.85798 0.75015C4.70025 1.23915 3.64967 1.95272 2.76624 2.85C1.8828 3.74727 1.18382 4.81074 0.709201 5.97964C0.234586 7.14855 -0.00635202 8.40001 0.00012729 9.66256V12.8542H7.72992V8.23017C7.72983 8.01301 7.7723 7.79797 7.8549 7.59732C7.9375 7.39667 8.05862 7.21436 8.21132 7.06079C8.36403 6.90722 8.54535 6.78546 8.74489 6.70237C8.94444 6.61927 9.15832 6.57654 9.37431 6.57658H9.65298C9.86897 6.57654 10.0829 6.61928 10.2824 6.70237C10.482 6.78546 10.6633 6.90722 10.8161 7.06079C10.9688 7.21435 11.0899 7.39667 11.1726 7.59732C11.2552 7.79797 11.2977 8.013 11.2977 8.23017V20.626C12.3128 20.626 13.318 20.425 14.2558 20.0345C15.1936 19.6439 16.0458 19.0714 16.7636 18.3498C17.4814 17.6281 18.0507 16.7713 18.4392 15.8284C18.8276 14.8855 19.0275 13.8748 19.0275 12.8542V9.66256C19.033 7.10448 18.0311 4.6482 16.2408 2.83057C15.3624 1.93362 14.3152 1.22142 13.1602 0.735457C12.0053 0.249496 10.7657 -0.000526135 9.51364 8.3127e-07Z"/><path d="M9.65335 26.9007H9.37468C9.15872 26.9007 8.94487 26.8579 8.74535 26.7749C8.54582 26.6918 8.36452 26.57 8.21182 26.4164C8.05911 26.2629 7.93799 26.0807 7.85537 25.8801C7.77275 25.6795 7.73024 25.4644 7.73029 25.2473V12.8516C6.71517 12.8515 5.70997 13.0524 4.77211 13.4429C3.83425 13.8335 2.98211 14.4059 2.26431 15.1276C1.54652 15.8493 0.977135 16.7061 0.588708 17.6491C0.20028 18.592 0.00041149 19.6027 0.000498842 20.6233V23.7705C-0.0123788 25.0349 0.22419 26.2893 0.696522 27.4612C1.16885 28.6331 1.86757 29.6992 2.75228 30.5979C3.63698 31.4965 4.69011 32.2099 5.85076 32.6968C7.01141 33.1837 8.25656 33.4344 9.51417 33.4344C10.7718 33.4344 12.0169 33.1837 13.1776 32.6968C14.3382 32.2099 15.3914 31.4965 16.2761 30.5979C17.1608 29.6992 17.8595 28.6331 18.3318 27.4612C18.8042 26.2893 19.0407 25.0349 19.0278 23.7705V20.6233H11.2981V25.2473C11.2981 25.4645 11.2555 25.6795 11.1729 25.8801C11.0902 26.0807 10.969 26.263 10.8163 26.4165C10.6636 26.5701 10.4823 26.6918 10.2827 26.7749C10.0832 26.8579 9.86932 26.9007 9.65335 26.9007Z"/></g></svg><span>LayerZero</span></div><div class="marquee-item"><svg width="22" height="26" viewBox="0 0 127 150" fill="none"><path d="M0 148.638C16.5023 120.086 30.5249 96.5383 48.3477 64.265C54.6433 53.3745 65.5217 46.6074 78.951 46.6074H100.052L41.1242 148.638H0Z" fill="#2E99FF"/><path d="M0.186768 0H126.804L105.17 37.7215H0.186768V0Z" fill="#4F56FA"/><path d="M63.6089 125.145C68.3703 116.728 76.0241 111.499 86.7442 111.499L126.827 111.389V148.641H50.0247C54.8332 140.394 59.0086 133.278 63.6089 125.145Z" fill="#09C2FF"/></svg><span>OpenZeppelin</span></div><div class="marquee-item"><svg width="26" height="20" viewBox="0 0 397 311" fill="none"><path fill="url(#s1)" d="M64.6 237.9a12 12 0 018.3-3.4h317a6 6 0 014.3 10.2l-53.1 53.1a12 12 0 01-8.3 3.4H15.8a6 6 0 01-4.3-10.2l53.1-53.1z"/><path fill="url(#s2)" d="M64.6 3.4A12 12 0 0172.9 0h317a6 6 0 014.3 10.2L341 63.3a12 12 0 01-8.3 3.4H15.8A6 6 0 0111.5 56.5L64.6 3.4z"/><path fill="url(#s3)" d="M332.2 120.4a12 12 0 00-8.3-3.4H6.9a6 6 0 00-4.3 10.2l53.1 53.1a12 12 0 008.3 3.4h317a6 6 0 004.3-10.2l-53.1-53.1z"/><defs><linearGradient id="s1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9945FF"/><stop offset="1" stop-color="#14F195"/></linearGradient><linearGradient id="s2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9945FF"/><stop offset="1" stop-color="#14F195"/></linearGradient><linearGradient id="s3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00C2FF"/><stop offset="1" stop-color="#9945FF"/></linearGradient></defs></svg><span>Solana</span></div><div class="marquee-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#C9A84C" stroke-width="1.8"/><path d="M12 2C12 2 8 7 8 12s4 10 4 10M12 2c0 0 4 5 4 10s-4 10-4 10" stroke="#C9A84C" stroke-width="1.8" fill="none"/><path d="M2 12h20M2.5 7.5h19M2.5 16.5h19" stroke="#C9A84C" stroke-width="1.6"/></svg><span>World Bank Data</span></div><div class="marquee-item"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="12" fill="#0052FF"/><path d="M12 3.5C7.3 3.5 3.5 7.3 3.5 12S7.3 20.5 12 20.5 20.5 16.7 20.5 12 16.7 3.5 12 3.5zm0 3.8c2.5 0 4.6 1.6 5.4 3.9H6.6C7.4 8.9 9.5 7.3 12 7.3zm0 9.4c-2.5 0-4.6-1.6-5.4-3.9h10.8c-.8 2.3-2.9 3.9-5.4 3.9z" fill="white"/></svg><span>Coinbase</span></div></div>
   </div>
@@ -1323,9 +1276,9 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <div class="faq">
     <div class="fitem"><button class="fq" onclick="toggleFaq(this)"><span data-t="faq1_q">Is AM Network Sharia-compliant?</span><span class="arrow">+</span></button><div class="fa" data-t="faq1_a">Formal Sharia certification has not yet been obtained. We are seeking qualified scholars to review the model and issue a fatwa before mainnet launch.</div></div>
     <div class="fitem"><button class="fq" onclick="toggleFaq(this)"><span data-t="faq2_q">How do I know my zakat actually arrived?</span><span class="arrow">+</span></button><div class="fa" data-t="faq2_a">Every transaction is recorded permanently on Base blockchain. You receive a link showing exactly which verified profiles received your funds, in which countries, on which date — forever on-chain.</div></div>
-    <div class="fitem"><button class="fq" onclick="toggleFaq(this)"><span data-t="faq3_q">When does AM Network launch?</span><span class="arrow">+</span></button><div class="fa" data-t="faq3_a">We are in pre-launch phase building our waitlist and team. Join now to get early access and personal updates before public launch.</div></div>
+    <div class="fitem"><button class="fq" onclick="toggleFaq(this)"><span data-t="faq3_q">When does AM Network launch?</span><span class="arrow">+</span></button><div class="fa" data-t="faq3_a">No launch date is confirmed. Launch depends on development, Sharia review and security audit. Join the waitlist for updates.</div></div>
     <div class="fitem"><button class="fq" onclick="toggleFaq(this)"><span data-t="faq4_q">Who verifies the recipients?</span><span class="arrow">+</span></button><div class="fa" data-t="faq4_a">A two-layer system: first our AI model scores each applicant 0–100 based on need. Then a trusted local verifier confirms eligibility.</div></div>
-    <div class="fitem"><button class="fq" onclick="toggleFaq(this)"><span data-t="faq5_q">What blockchain do you use?</span><span class="arrow">+</span></button><div class="fa" data-t="faq5_a">Base (Coinbase L2 on Ethereum) as our primary chain — institutional-grade security at $0.009 per transaction. Solana as backup for high-volume micro-transfers.</div></div>
+    <div class="fitem"><button class="fq" onclick="toggleFaq(this)"><span data-t="faq5_q">What blockchain do you use?</span><span class="arrow">+</span></button><div class="fa" data-t="faq5_a">Base is the planned primary network; Solana is being considered. The transfer service is not live. Base fees include L2 execution and L1 data publication costs and are not a fixed dollar amount.</div></div>
   </div>
 </section>
 
@@ -1351,7 +1304,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
       <picture><source srcset="/founder.webp" type="image/webp"><img id="founderPhoto" src="/founder.jpg" alt="Akbar Amirzoda, Founder of AM Network" width="110" height="110" loading="lazy" decoding="async" style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid rgba(201,168,76,0.4);margin:0 auto 20px;display:block;box-shadow:0 8px 24px rgba(201,168,76,0.15)"></picture>
       <div class="plabel" data-t="founder_role">Founder & CEO</div>
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--text)">Akbar Amirzoda</h3>
-      <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px" data-t="founder_bio">Building AM Network to bring transparency to Islamic giving worldwide.</p>
+      <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px" data-t="founder_bio">Building AM Network to make giving transparent.</p>
       <a href="https://www.linkedin.com/in/akbar-amirzoda-65845840b" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border:1px solid rgba(10,102,194,0.4);border-radius:7px;color:rgba(10,102,194,0.9);font-size:12px;font-weight:500;text-decoration:none;background:rgba(10,102,194,0.06);transition:all 0.2s;font-family:'DM Sans',sans-serif" onmouseover="this.style.borderColor='rgba(10,102,194,0.8)';this.style.background='rgba(10,102,194,0.12)'" onmouseout="this.style.borderColor='rgba(10,102,194,0.4)';this.style.background='rgba(10,102,194,0.06)'"><svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(10,102,194,0.9)"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
 
     </div>
@@ -1382,31 +1335,6 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <h2 class="sec-title" data-t="wl_title">Be among the first. Shape the future.</h2>
     <p style="font-size:15px;color:var(--text2);line-height:1.7" data-t="wl_sub">Join the waitlist. We will reach out personally before launch.</p>
 
-    <!-- Launch countdown (merged into waitlist) -->
-    <p style="font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin:20px 0 14px;font-weight:600"><span data-t="countdown_title">Days Until Launch</span> · Q4 2026</p>
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:4px">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;text-align:center;min-width:74px">
-        <span id="cdDays" style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:var(--gold);display:block;line-height:1">0</span>
-        <span style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:2px" data-t="cd_days">Days</span>
-      </div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);opacity:0.4;align-self:center">:</div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;text-align:center;min-width:74px">
-        <span id="cdHours" style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:var(--gold);display:block;line-height:1">0</span>
-        <span style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:2px" data-t="cd_hours">Hours</span>
-      </div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);opacity:0.4;align-self:center">:</div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;text-align:center;min-width:74px">
-        <span id="cdMins" style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:var(--gold);display:block;line-height:1">0</span>
-        <span style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:2px" data-t="cd_mins">Minutes</span>
-      </div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);opacity:0.4;align-self:center">:</div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;text-align:center;min-width:74px">
-        <span id="cdSecs" style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:var(--gold);display:block;line-height:1">0</span>
-        <span style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:2px" data-t="cd_secs">Seconds</span>
-      </div>
-    </div>
-
-    
     <div class="form-card" id="wl-card">
       <!-- Form view -->
       <div id="wl-form-wrap">
@@ -1545,7 +1473,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
           </div>
         </div>
         <div class="comm-card-body">
-          <p class="comm-card-preview" data-t="comm_tw_preview">$600B in annual Zakat obligation — and almost none of it traceable end to end. We are changing that. #ZakatOnChain</p>
+          <p class="comm-card-preview" data-t="comm_tw_preview">Building AM Network for more transparent giving. Follow our progress, research and product updates.</p>
           <div class="comm-card-meta">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-1px;margin-right:4px"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             <span data-t="comm_followers_soon">Growing community</span>
@@ -1600,12 +1528,11 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         </ul>
       </div>
       <div class="fcol">
-        <h4 data-t="footer_built">Built on</h4>
+        <h4 data-t="footer_built">Planned infrastructure</h4>
         <ul>
           <li>Base Blockchain</li>
           <li>Solana Network</li>
           <li>LayerZero Bridge</li>
-          <li data-t="f_sharia">Sharia Council</li>
         </ul>
       </div>
       <div class="fcol">
@@ -1680,7 +1607,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=approved-20260905"></script>
+<script src="/i18n-data.js?v=feedback-20260911"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)
@@ -1882,24 +1809,6 @@ document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
 const navCta = document.querySelector('.nav-cta');
 if(navCta) navCta.addEventListener('click', e=>{e.preventDefault();document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});});
 
-// ── COUNTDOWN ──
-function updateCD(){
-  const launch = new Date('2026-11-01T00:00:00');
-  const now = new Date();
-  const diff = Math.max(0, launch - now);
-  const d = Math.floor(diff/86400000);
-  const h = Math.floor((diff%86400000)/3600000);
-  const m = Math.floor((diff%3600000)/60000);
-  const s = Math.floor((diff%60000)/1000);
-  const el = id => document.getElementById(id);
-  if(el('cdDays'))  el('cdDays').textContent  = String(d).padStart(3,'0');
-  if(el('cdHours')) el('cdHours').textContent = String(h).padStart(2,'0');
-  if(el('cdMins'))  el('cdMins').textContent  = String(m).padStart(2,'0');
-  if(el('cdSecs'))  el('cdSecs').textContent  = String(s).padStart(2,'0');
-}
-updateCD();
-setInterval(updateCD, 1000);
-
 // ── AI ASSISTANT WIDGET ──
 const ASSISTANT_API_BASE = 'https://amnetwork.onrender.com';
 const ASST_STR = {
@@ -2036,28 +1945,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     setTimeout(()=>{b.style.opacity='1';},1500);
   }
 });
-
-// ── ZAKAT DEBT CLOCK ─────────────────────────────────────
-// Illustrative accrual, not measured data: ($600B/yr potential obligation minus
-// <$25B/yr formally distributed) spread evenly across the calendar year and
-// ticked client-side. Paused off-screen so it doesn't burn cycles in a background tab.
-(function(){
-  const el = document.getElementById('zclockNum');
-  if(!el) return;
-  const GAP_PER_YEAR = 575e9;
-  const GAP_PER_MS = GAP_PER_YEAR / (365*24*3600*1000);
-  let paused = false;
-  new IntersectionObserver(e=>{paused=!e[0].isIntersecting;},{threshold:0.1}).observe(el);
-  function render(){
-    if(paused) return;
-    const now = new Date();
-    const yearStart = new Date(Date.UTC(now.getUTCFullYear(),0,1));
-    const val = (now - yearStart) * GAP_PER_MS;
-    el.textContent = '$' + Math.round(val).toLocaleString('en-US');
-  }
-  render();
-  setInterval(render, 100);
-})();
 
 // ── LIVE LEDGER ──────────────────────────────────────────
 (function(){
