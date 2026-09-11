@@ -589,6 +589,11 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 @media(max-width:480px){#assistantPanel{right:12px;bottom:82px}}
 
 @media(max-width:600px){nav .nav-cta{display:none}}
+/* Approved product entry points; existing motion remains intact. */
+.hero-secondary{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 24px;margin:18px 0 28px;font-size:14px}
+.hero-secondary a{color:var(--text2);text-underline-offset:4px}
+.product-actions a:focus-visible,.hero-secondary a:focus-visible{outline:2px solid var(--gold);outline-offset:5px}
+@media(max-width:640px){.product-actions{width:100%;max-width:400px;flex-direction:column}.product-actions a{width:100%;justify-content:center;text-align:center}.nav-help{display:none}}
 </style>
 </head>
 <body>
@@ -621,7 +626,8 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     </div>
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
     <a class="nav-demo" href="/academy/">🎓 <span data-t="nav_academy">Academy</span></a>
-    <a class="nav-demo" href="/ai_scoring/" target="_blank">⚡ AI Demo</a>
+    <a class="nav-demo" href="/zakat/" data-t="nav_calc">Calculator</a>
+    <a class="nav-demo nav-help" href="/apply/" data-t="nav_help">Assistance</a>
     <a class="nav-cta" href="#waitlist" data-t="nav_cta">Join Waitlist</a>
   </div>
 </nav>
@@ -633,20 +639,24 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <h1><span id="heroL1" data-t="hero_l1">Where Every Dollar</span><span class="line2" id="heroL2" data-t="hero_l2">Finds Its Purpose.</span></h1>
   <p class="hero-sub" data-t="hero_sub">The first AI-assisted, human-verified, blockchain-transparent Zakat &amp; Sadaqah platform. Built for ~2 billion Muslims.</p>
 
+  <div class="hero-ctas product-actions">
+    <a class="btn-p" href="/zakat/" data-t="start_calc">Calculate Zakat</a>
+    <a class="btn-s" href="/academy/" data-t="start_learn">Start learning</a>
+    <a class="btn-s" href="/apply/" data-t="start_help">Explore assistance</a>
+  </div>
+  <div class="hero-secondary">
+    <a href="#how" data-t="start_how">How it works</a>
+    <a href="#waitlist" data-t="start_wait">Join the waitlist</a>
+    <a href="/AM_Network_Whitepaper_v1_EN.pdf" download data-t="cta_wp">Whitepaper</a>
+  </div>
+
   <div class="hero-stats">
     <div class="hstat"><span class="hstat-num" data-t="num_600b">$600B</span><span class="hstat-lbl" data-t="stat1">Potential Zakat/yr</span></div>
     <div class="hstat"><span class="hstat-num" data-t="num_18b">~2B</span><span class="hstat-lbl" data-t="stat2">Muslims Worldwide</span></div>
     <div class="hstat"><span class="hstat-num" data-t="num_4t">$6T</span><span class="hstat-lbl" data-t="stat3">Islamic Finance Market</span></div>
     <div class="hstat"><span class="hstat-num">0</span><span class="hstat-lbl" data-t="stat4">Transparent Platforms</span></div>
   </div>
-  <div class="hero-ctas">
-    <a class="btn-p" href="#waitlist" data-t="cta_join">Join the Waitlist</a>
-    <a class="btn-s" href="#how" data-t="cta_how">How it works</a>
-    <a class="btn-wp" href="/AM_Network_Whitepaper_v1_EN.pdf" target="_blank" download data-t="cta_wp" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1px solid var(--gold);border-radius:8px;color:var(--gold);font-size:14px;font-weight:500;text-decoration:none;transition:all 0.3s;background:transparent;font-family:'DM Sans',sans-serif">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-      <span data-t="cta_wp">Whitepaper</span>
-    </a>
-  </div>
+
 
   <!-- GRAPHICS -->
   <div class="graph-wrap">
@@ -1649,7 +1659,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=static-review-20260903"></script>
+<script src="/i18n-data.js?v=approved-20260905"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)
