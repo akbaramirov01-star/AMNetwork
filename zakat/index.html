@@ -18,7 +18,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0A1A11">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.gold-api.com https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://amnetwork.onrender.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.gold-api.com https://api.frankfurter.dev https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://amnetwork.onrender.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
@@ -192,6 +192,12 @@ footer a{color:var(--gold);text-decoration:none}
 /* Larger labels, readable in both existing themes. */
 .field label,.field-hint,.price-note{font-size:14px;line-height:1.55;color:var(--text)}
 [data-t="nisab_gold_desc"],[data-t="nisab_silver_desc"],[data-t="s5_privacy"],[data-t="s5_anon_yes_desc"],[data-t="s5_anon_partial_desc"]{font-size:14px!important;color:var(--text)!important;line-height:1.6!important}
+.currency-panel{margin:24px auto;padding:24px;background:var(--card);border:1px solid var(--border);border-radius:16px;max-width:900px}
+.currency-panel label{font-size:16px;font-weight:600}.currency-panel p{font-size:14px;line-height:1.6;margin-top:10px}.currency-panel a{color:var(--gold)}.currency-controls{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+.currency-controls select,.currency-controls button,.report-actions button{font:inherit;padding:12px 18px;min-height:44px;border:1px solid var(--border);border-radius:8px;background:var(--bg2);color:var(--text)}
+.report-actions{margin-top:28px}.report-actions button{background:var(--gold);color:#060E09;cursor:pointer;font-weight:600}.report-actions p{font-size:14px;margin-top:10px}
+.currency-controls :focus-visible,.report-actions button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}.currency-controls :disabled,.calc-btn:disabled{opacity:.6;cursor:wait}
+@media print{@page{size:A4;margin:18mm}body>*{display:none!important}body>#printReport{display:block!important}html,body{background:#fff!important;color:#111!important}#printReport{font:11pt/1.5 Arial,sans-serif;color:#111}#printReport h1{font-size:22pt}#printReport h2{font-size:14pt;margin-top:18pt;break-after:avoid}#printReport table{width:100%;border-collapse:collapse}#printReport td{border-bottom:1px solid #ccc;padding:8px 0}#printReport td:last-child{text-align:end}#printReport tr,#printReport p{break-inside:avoid}#printReport p{margin:7px 0;overflow-wrap:anywhere}}
 </style>
 </head>
 <body>
@@ -226,6 +232,13 @@ footer a{color:var(--gold);text-decoration:none}
 </nav>
 
 <main>
+<div class="currency-panel">
+ <label for="calcCurrency" id="currencyLabel">Calculation currency</label>
+ <div class="currency-controls"><select id="calcCurrency" aria-describedby="currencyHint currencyStatus"><option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option><option value="TJS">TJS</option><option value="RUB">RUB</option><option value="TRY">TRY</option><option value="IDR">IDR</option><option value="MYR">MYR</option><option value="AED">AED</option><option value="SAR">SAR</option><option value="CNY">CNY</option></select><button type="button" id="refreshCurrency">Refresh rate</button></div>
+ <p id="currencyHint">Amounts are converted when you change currency. Metal quotes remain in USD per gram.</p>
+ <p id="currencyStatus" role="status" aria-live="polite"></p><a href="https://frankfurter.dev/" target="_blank" rel="noopener noreferrer">Frankfurter</a>
+</div>
+
 
 <!-- HERO -->
 <div class="hero">
@@ -540,6 +553,7 @@ footer a{color:var(--gold);text-decoration:none}
       <a class="cta-btn" href="/#waitlist" data-t="cta_btn">Join the waitlist →</a>
     </div>
 
+    <div class="report-actions"><button type="button" id="printCalculation">Print / Save PDF</button><p id="printHint"></p></div>
   </div><!-- /result-panel -->
 
 </div><!-- /calc-wrap -->
@@ -553,6 +567,7 @@ footer a{color:var(--gold);text-decoration:none}
 </footer>
 
 <script src="/zakat/metal-prices.js?v=20260903"></script>
+<script src="/zakat/currency.js?v=20260905"></script>
 <script>
 /* ═══════════════════════════════════════════════════════
    TRANSLATIONS
@@ -582,6 +597,8 @@ function setLang(l) {
   // Update nisab desc texts (non-data-t dynamic)
   updateNisabLabel();
   if (metalPrices) metalPrices.render();
+  if (money) money.render();
+  document.getElementById("resultPanel").classList.remove("visible");
   localStorage.setItem('amn_lang', l);
 }
 
@@ -616,7 +633,7 @@ document.addEventListener('click', function(e) {
 /* ═══════════════════════════════════════════════════════
    NISAB DISPLAY
 ═══════════════════════════════════════════════════════ */
-let metalPrices;
+let metalPrices, money;
 function updateNisabLabel() {
   const goldPrice = Number(document.getElementById('goldPrice').value);
   const silverPrice = Number(document.getElementById('silverPrice').value);
@@ -627,15 +644,15 @@ function updateNisabLabel() {
 
   // Update nisab desc texts
   document.querySelector('#nisab-gold-lbl [data-t="nisab_gold_desc"]').textContent =
-    t('nisab_gold_fmt') + (goldNisab > 0 && Number.isFinite(goldNisab) ? goldNisab.toLocaleString('en-US', {maximumFractionDigits:0}) : '—');
+    '85g ' + t('nisab_gold_short') + ' ≈ ' + (goldNisab > 0 && Number.isFinite(goldNisab) ? fmtUSD(goldNisab) : '—');
   document.querySelector('#nisab-silver-lbl [data-t="nisab_silver_desc"]').textContent =
-    t('nisab_silver_fmt') + (silverNisab > 0 && Number.isFinite(silverNisab) ? silverNisab.toLocaleString('en-US', {maximumFractionDigits:0}) : '—');
+    '595g ' + t('nisab_silver_short') + ' ≈ ' + (silverNisab > 0 && Number.isFinite(silverNisab) ? fmtUSD(silverNisab) : '—');
 
   // Update nisab display row
   const nisabVal = useGold ? goldNisab : silverNisab;
   const nisabLabel = useGold ? t('nisab_gold_label') : t('nisab_silver_label');
   document.getElementById('nisabValue').textContent =
-    (nisabVal > 0 && Number.isFinite(nisabVal) ? '$' + nisabVal.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) : '—') + ' (' + (useGold ? t('nisab_gold_short') : t('nisab_silver_short')) + ')';
+    (nisabVal > 0 && Number.isFinite(nisabVal) ? fmtUSD(nisabVal) : '—') + ' (' + (useGold ? t('nisab_gold_short') : t('nisab_silver_short')) + ')';
 
   // Toggle selected class on radio opts
   document.getElementById('nisab-gold-lbl').classList.toggle('selected', useGold);
@@ -646,15 +663,17 @@ function updateNisabLabel() {
    MAIN CALCULATION
 ═══════════════════════════════════════════════════════ */
 function fmtUSD(n) {
-  return '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  return money ? money.format(n) : '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
 }
 
 function parseVal(id) {
-  return parseFloat(document.getElementById(id).value) || 0;
+  const n = parseFloat(document.getElementById(id).value) || 0;
+  return money && AMCurrency.MONEY_IDS.includes(id) ? money.toUSD(n) : n;
 }
 
 function calculateZakat() {
   if (!metalPrices || !metalPrices.valid()) return;
+  if (money && !money.valid()) { document.getElementById("refreshCurrency").focus(); return; }
   for (const input of document.querySelectorAll('input[type="number"]')) {
     if (!input.reportValidity()) return;
   }
@@ -804,6 +823,8 @@ function calculateZakat() {
    INIT
 ═══════════════════════════════════════════════════════ */
 (function init() {
+  money = AMCurrency.init({document,fetch:window.fetch.bind(window),getLanguage:()=>currentLang,onChange:()=>{updateNisabLabel();document.getElementById('resultPanel').classList.remove('visible');}});
+  document.getElementById('printCalculation').addEventListener('click',()=>{if(metalPrices.valid()&&AMCurrency.report({document,money,t}))window.print();});
   metalPrices = AMMetalPrices.init({document, fetch: window.fetch.bind(window), getLanguage: () => currentLang,
     onChange: () => { updateNisabLabel(); document.getElementById('resultPanel').classList.remove('visible'); }});
   document.querySelectorAll('input').forEach(input => input.addEventListener('input', () => {
