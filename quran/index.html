@@ -121,7 +121,9 @@ main{padding-top:64px;min-height:100vh}
 .audio-status{font-size:12px;color:var(--text3);flex-basis:100%}
 .audio-status a{color:var(--gold);text-decoration:none}
 
-.verse{padding:22px 4px;border-bottom:1px solid var(--border)}
+.verse{padding:22px 4px;border-bottom:1px solid var(--border);transition:background-color .3s ease,box-shadow .3s ease;border-radius:10px}
+.verse.verse-playing{background-color:var(--gold3);box-shadow:inset 3px 0 0 0 var(--gold)}
+@media (prefers-reduced-motion: reduce){.verse{transition:none}}
 .verse:last-child{border-bottom:none}
 .verse-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--gold3);color:var(--gold);font-size:11px;font-weight:700;margin-bottom:10px}
 .verse-ar{font-family:'Noto Naskh Arabic',serif;direction:rtl;text-align:right;font-size:26px;line-height:2.1;color:var(--text);margin-bottom:10px}
@@ -304,6 +306,8 @@ let translationsList = null;
 let recitersList = null;
 let currentChapter = null;
 let currentReciterId = null;
+let currentTimestamps = null;
+let highlightedVerseKey = null;
 
 async function fetchJSON(url){
   const ctrl = new AbortController();
@@ -510,7 +514,7 @@ async function openSurah(chapterId){
         ? (localVerses[chapterId + ':' + v.verse_number] || '')
         : (v.translations && v.translations[0] ? stripTags(v.translations[0].text) : '');
       return `
-        <div class="verse">
+        <div class="verse" data-verse-key="${chapterId}:${v.verse_number}">
           <div class="verse-num">${v.verse_number}</div>
           <div class="verse-ar">${escapeHtml(v.text_uthmani || '')}</div>
           ${trText ? `<div class="verse-tr">${escapeHtml(trText)}</div>` : ''}
@@ -530,6 +534,8 @@ function closeSurah(){
   document.getElementById('audioPlayer').pause();
   document.getElementById('audioPlayer').removeAttribute('src');
   currentChapter = null;
+  currentTimestamps = null;
+  clearVersePlaying();
 }
 
 function showAudioStatus(msg){
@@ -537,6 +543,32 @@ function showAudioStatus(msg){
   if (!msg) { s.style.display = 'none'; s.innerHTML = ''; return; }
   s.style.display = 'block';
   s.innerHTML = msg;
+}
+
+// ── VERSE HIGHLIGHT / AUTO-SCROLL ── follows along with the recitation
+// using the per-ayah timestamps the API returns alongside the audio file
+// (when the reciter/recitation has them — otherwise this just never fires).
+function clearVersePlaying(){
+  if (!highlightedVerseKey) return;
+  const old = document.querySelector('.verse.verse-playing');
+  if (old) old.classList.remove('verse-playing');
+  highlightedVerseKey = null;
+}
+function onAudioTimeUpdate(){
+  if (!currentTimestamps) return;
+  const ms = this.currentTime * 1000;
+  const match = currentTimestamps.find(t =>
+    ms >= (t.timestamp_from || 0) && ms < (t.timestamp_to || Infinity));
+  const key = match ? match.verse_key : null;
+  if (key === highlightedVerseKey) return;
+  clearVersePlaying();
+  if (!key) return;
+  const el = document.querySelector('.verse[data-verse-key="' + key + '"]');
+  if (el) {
+    el.classList.add('verse-playing');
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  highlightedVerseKey = key;
 }
 
 async function setupReciterSelect(){
@@ -579,6 +611,8 @@ async function onReciterChange(){
 async function loadAudio(chapterId, reciterId){
   const player = document.getElementById('audioPlayer');
   player.removeAttribute('src');
+  currentTimestamps = null;
+  clearVersePlaying();
   // If there is no reciterId, setupReciterSelect() has already shown (or
   // cleared) the right status for that case — don't clobber it here.
   if (!reciterId) return;
@@ -586,6 +620,11 @@ async function loadAudio(chapterId, reciterId){
   try {
     const data = await fetchJSON(BACKEND + '/quran/audio/' + reciterId + '/' + chapterId);
     const url = data.audio_file && data.audio_file.audio_url;
+    // Per-ayah timing so we can highlight/auto-scroll the verse being
+    // recited right now — not every reciter/recitation has this data, so
+    // its absence just means no highlighting, never an error.
+    const timestamps = data.audio_file && data.audio_file.timestamps;
+    currentTimestamps = Array.isArray(timestamps) && timestamps.length ? timestamps : null;
     if (url) {
       const fullUrl = url.startsWith('http') ? url : ('https://' + url.replace(/^\/+/, ''));
       // The fetch above only confirms we got a URL back — the browser can
@@ -624,6 +663,7 @@ async function loadAudio(chapterId, reciterId){
   document.getElementById('listState').style.display = 'block';
   document.getElementById('listState').textContent = T[l].loading_chapters || '';
   loadChapters();
+  document.getElementById('audioPlayer').addEventListener('timeupdate', onAudioTimeUpdate);
 })();
 </script>
 </body>
