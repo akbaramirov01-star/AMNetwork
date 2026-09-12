@@ -895,16 +895,24 @@ function toggleAssistant(){
   const panel = document.getElementById('assistantPanel');
   const opening = !panel.classList.contains('open');
   panel.classList.toggle('open', opening);
-  if(opening && !asstOpened){
-    asstOpened = true;
+  if(opening){
     document.getElementById('asstTitle').textContent = asstT().title;
     document.getElementById('asstInput').placeholder = asstT().placeholder;
-    asstAddMsg('bot', asstT().welcome);
+    if(!asstOpened){
+      asstOpened = true;
+      asstAddMsg('bot', asstT().welcome);
+      // Free-tier hosting spins down when idle; ping /health now so the
+      // container is likely already warm by the time the visitor sends a
+      // message, instead of waiting for the first /chat call to wake it.
+      fetch(ASSISTANT_API_BASE + '/health').catch(()=>{});
+    } else if(asstHistory.length === 0){
+      // No real conversation started yet — refresh the greeting bubble so
+      // it matches a language switch made after the panel was first opened,
+      // instead of leaving it stuck in whatever language was active then.
+      document.getElementById('asstMsgs').innerHTML = '';
+      asstAddMsg('bot', asstT().welcome);
+    }
     setTimeout(()=>document.getElementById('asstInput').focus(),100);
-    // Free-tier hosting spins down when idle; ping /health now so the
-    // container is likely already warm by the time the visitor sends a
-    // message, instead of waiting for the first /chat call to wake it.
-    fetch(ASSISTANT_API_BASE + '/health').catch(()=>{});
   }
 }
 async function sendAssistantMessage(){
