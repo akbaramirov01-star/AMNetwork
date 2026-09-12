@@ -123,6 +123,8 @@ Verified local representatives who confirm recipient physical presence:
 - [ ] **Technical Co-Founder / CTO** — Solidity + Web3 + AI/ML, equity-based
 - [ ] **Sharia Advisory Board** — formal fatwa process
 - [ ] **Legal Registration** — UAE ADGM or Malaysia Labuan (~$1,500–5,000)
+- [ ] **Academy course content in the other 7 languages** — chrome UI + full lesson curriculum currently only exist in en/ru/ar; needs extending to tj/id/tr/zh/ms/fr/de alongside the rest of the site
+- [ ] **Spiritual reminders feature** — in-app/push reminders for time-sensitive acts: the hour of accepted du'a on Friday (two scholarly opinions exist — from the imam mounting the minbar to the end of prayer, or the last hour before Maghrib; cite the hadith source properly, same accuracy bar as the Quran section, don't state it from our own authority), when Sadaqah is most valuable on Friday, and a Ramadan-specific campaign (similar to what was run informally in a past Ramadan). Technical note: true push notifications (fire even when the site is closed) need a backend scheduler + Web Push, since Friday's Maghrib-relative hour depends on the user's location/date, not a fixed clock time — a simpler v1 without server infra would only fire while the site/PWA is open.
 
 ## Website — Section IDs
 
@@ -150,4 +152,4 @@ Read CLAUDE.md — I am Akbar, founder of AM Network.
 Continue where we left off. Next task: [describe current task]
 ```
 
-*Last updated: June 2026*
+*Last updated: September 2026*
