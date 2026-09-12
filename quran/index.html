@@ -885,6 +885,7 @@ function highlightVerse(key){
   repeatOnceConsumed = false; // a genuinely new ayah — any "repeat once" applies fresh to it
   const [chId, vNum] = key.split(':');
   saveReadingProgress(Number(chId), Number(vNum));
+  updateMediaSessionMetadata(Number(chId), Number(vNum));
 }
 
 // Reading-progress bookmark ("where you last stopped") — updated whenever
@@ -928,6 +929,56 @@ function updatePlayButtonIcons(){
     btn.setAttribute('aria-label', label);
     btn.setAttribute('title', label);
   });
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
+  }
+}
+
+// ── MEDIA SESSION — lock-screen / notification playback controls, and
+// lets recitation keep playing while the tab is backgrounded or the
+// screen is locked. A website can't keep audio running once the browser
+// itself is fully closed — that would need a native app — but this
+// covers "switched tabs / apps" and "locked the phone", which is what
+// people usually mean by playback continuing in the background.
+function setupMediaSession(){
+  if (!('mediaSession' in navigator)) return;
+  const player = document.getElementById('audioPlayer');
+  navigator.mediaSession.setActionHandler('play', () => player.play().catch(() => {}));
+  navigator.mediaSession.setActionHandler('pause', () => player.pause());
+  navigator.mediaSession.setActionHandler('previoustrack', () => stepVerse(-1));
+  navigator.mediaSession.setActionHandler('nexttrack', () => stepVerse(1));
+}
+// Steps to the adjacent ayah — within the active surah queue if one is
+// playing (Khatm mode or "play whole surah"), otherwise just the next/
+// previous verse number in the surah currently open.
+function stepVerse(delta){
+  const player = document.getElementById('audioPlayer');
+  if (playQueue) {
+    const newIndex = playQueueIndex + delta;
+    if (newIndex < 0 || newIndex >= playQueue.length) return;
+    playQueueIndex = newIndex;
+    loadQueuedVerse();
+    player.play().catch(() => {});
+    return;
+  }
+  if (!highlightedVerseKey || !currentChapter) return;
+  const [chId, vNum] = highlightedVerseKey.split(':').map(Number);
+  const target = vNum + delta;
+  if (target < 1 || target > currentChapter.verses_count) return;
+  playVerse(chId, target);
+}
+function updateMediaSessionMetadata(chapterId, verseNumber){
+  if (!('mediaSession' in navigator)) return;
+  const chapter = chapters.find(c => c.id === chapterId);
+  const reciter = RECITERS_EVERYAYAH.find(r => r.id === currentReciterId);
+  try {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: (chapter ? chapter.name_simple : ('Surah ' + chapterId)) + ' — ' + verseNumber,
+      artist: reciter ? reciterDisplayName(reciter) : 'AM Network',
+      album: 'AM Network · Quran',
+      artwork: [{ src: '/logo.webp', sizes: '512x512', type: 'image/webp' }],
+    });
+  } catch (e) { /* MediaMetadata unsupported in this browser — no-op */ }
 }
 
 function setupReciterSelect(){
@@ -1174,6 +1225,7 @@ function playVerse(chapterId, verseNumber){
   document.getElementById('audioPlayer').addEventListener('play', updatePlayButtonIcons);
   document.getElementById('audioPlayer').addEventListener('pause', updatePlayButtonIcons);
   document.getElementById('audioPlayer').addEventListener('timeupdate', onWordTimeUpdate);
+  setupMediaSession();
 })();
 </script>
 </body>
