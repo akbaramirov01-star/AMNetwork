@@ -659,7 +659,8 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .comm-follow-btn.brand-follow{background:var(--social);color:var(--social-text);border:1px solid var(--social);font-weight:700}
 .comm-follow-btn.brand-follow:hover{filter:brightness(.92)}.comm-follow-btn.brand-follow:focus-visible{outline:2px solid var(--text);outline-offset:4px}
 @media(max-width:640px){.hero-stats{grid-template-columns:1fr}.hero-stats .hstat{padding:16px}.zclock-box{padding:24px 16px}.case-details{font-size:14px}}
-.nav-products{display:none;position:relative;color:var(--text)}.nav-products summary{list-style:none;display:flex;align-items:center;justify-content:center;width:38px;height:40px;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:var(--card)}.nav-products summary::-webkit-details-marker{display:none}.nav-products-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.nav-products-menu{position:absolute;inset-inline-end:0;top:48px;width:210px;padding:8px;background:var(--bg2);z-index:1001;border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px #0002}.nav-products-menu a{display:block;padding:12px;color:var(--text);font-size:14px;text-decoration:none;border-radius:6px}.nav-products-menu a:hover{background:var(--gold3)}.nav-products summary:focus-visible,.nav-products-menu a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}@media(max-width:640px){.nav-products{display:block}.nav-right{gap:6px}}
+.nav-products{display:none;position:relative;color:var(--text)}.nav-products summary{list-style:none;display:flex;align-items:center;justify-content:center;width:38px;height:40px;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:var(--card)}.nav-products summary::-webkit-details-marker{display:none}.nav-products-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.nav-products-menu{position:absolute;inset-inline-end:0;top:48px;width:210px;padding:8px;background:var(--bg2);z-index:1001;border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px #0002}.nav-products-menu a{display:block;padding:12px;color:var(--text);font-size:14px;text-decoration:none;border-radius:6px}.nav-products-menu a:hover{background:var(--gold3)}.nav-products summary:focus-visible,.nav-products-menu a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}@media(max-width:768px){.nav-products{display:block}.nav-right{gap:6px}}
+.nav-tools{display:block;position:relative;color:var(--text)}.nav-tools summary{list-style:none;display:flex;align-items:center;gap:5px;padding:7px 14px;border:1px solid var(--border);border-radius:6px;cursor:pointer;background:transparent;color:var(--text2);font-size:12px;font-weight:500;font-family:'DM Sans',sans-serif;white-space:nowrap}.nav-tools summary::-webkit-details-marker{display:none}.nav-tools summary .chev{color:var(--gold);font-size:10px}.nav-tools-menu{position:absolute;inset-inline-end:0;top:44px;width:200px;padding:8px;background:var(--bg2);z-index:1001;border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px #0002}.nav-tools-menu a{display:block;padding:12px;color:var(--text);font-size:14px;text-decoration:none;border-radius:6px}.nav-tools-menu a:hover{background:var(--gold3)}.nav-tools summary:focus-visible,.nav-tools-menu a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}@media(max-width:768px){.nav-tools{display:none!important}}
 </style>
 </head>
 <body>
@@ -692,11 +693,12 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
       </div>
     </div>
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
-    <a class="nav-demo" href="/academy/">🎓 <span data-t="nav_academy">Academy</span></a>
-    <a class="nav-demo" href="/quran/" data-t="nav_quran">Quran</a>
-    <a class="nav-demo" href="/zakat/" data-t="nav_calc">Calculator</a>
-    <a class="nav-demo nav-help" href="/apply/" data-t="nav_help">Get Assistance</a>
-    <details class="nav-products"><summary><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span class="nav-products-label" data-t="footer_products">Products</span></summary><div class="nav-products-menu"><a href="/academy/" data-t="nav_academy">Academy</a><a href="/quran/" data-t="nav_quran">Quran</a><a href="/zakat/" data-t="nav_calc">Calculator</a><a href="/apply/" data-t="nav_help">Get Assistance</a><a href="#waitlist" data-t="nav_cta">Join Waitlist</a></div></details>
+    <a class="nav-demo" href="/academy/">🎓 <span data-t="nav_academy">AM Academy</span></a>
+    <a class="nav-demo" href="/quran/" data-t="nav_quran">The Holy Quran</a>
+    <a class="nav-demo" href="/zakat/" data-t="nav_calc">Zakat Calculator</a>
+    <a class="nav-demo nav-help" href="/apply/" data-t="nav_help">Apply for Assistance</a>
+    <details class="nav-tools"><summary><span data-t="nav_tools">Tools</span><span class="chev">▾</span></summary><div class="nav-tools-menu"><a href="/tasbeeh/" data-t="nav_tasbeeh">Count Your Dhikr</a><a href="/qibla/" data-t="nav_qibla">Qibla Direction</a><a href="/prayer-times/" data-t="nav_prayertimes">Prayer Times</a></div></details>
+    <details class="nav-products"><summary><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span class="nav-products-label" data-t="footer_products">Products</span></summary><div class="nav-products-menu"><a href="/academy/" data-t="nav_academy">AM Academy</a><a href="/quran/" data-t="nav_quran">The Holy Quran</a><a href="/zakat/" data-t="nav_calc">Zakat Calculator</a><a href="/apply/" data-t="nav_help">Apply for Assistance</a><a href="/tasbeeh/" data-t="nav_tasbeeh">Count Your Dhikr</a><a href="/qibla/" data-t="nav_qibla">Qibla Direction</a><a href="/prayer-times/" data-t="nav_prayertimes">Prayer Times</a><a href="#waitlist" data-t="nav_cta">Join Waitlist</a></div></details>
     <a class="nav-cta" href="#waitlist" data-t="nav_cta">Join Waitlist</a>
   </div>
 </nav>
@@ -1590,9 +1592,12 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         <h4 data-t="footer_products">Products</h4>
         <ul>
           <li><a href="/ai_scoring/">AM Zakat.ai</a></li>
-          <li><a href="/quran/" data-t="nav_quran">Quran</a></li>
+          <li><a href="/quran/" data-t="nav_quran">The Holy Quran</a></li>
           <li><a href="/academy/">AM Academy</a></li>
           <li><a href="/zakat/" data-t="f_calc">Zakat Calculator</a></li>
+          <li><a href="/tasbeeh/" data-t="nav_tasbeeh">Count Your Dhikr</a></li>
+          <li><a href="/qibla/" data-t="nav_qibla">Qibla Direction</a></li>
+          <li><a href="/prayer-times/" data-t="nav_prayertimes">Prayer Times</a></li>
           <li><a href="/apply/" data-t="f_apply">Apply for support</a></li>
           <li data-t="f_coming">AM Pay (coming)</li>
           <li data-t="f_coming2">AM Waqf (coming)</li>
