@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Qibla Direction — AM Network</title>
+<meta name="description" content="Find the direction to the Kaaba from anywhere using your device's location and compass. Works offline once loaded.">
+<link rel="canonical" href="https://amnetwork.io/qibla/">
+<meta property="og:title" content="Qibla Direction — AM Network">
+<meta property="og:description" content="Find the Qibla direction using your location and device compass.">
+<meta property="og:url" content="https://amnetwork.io/qibla/">
+<meta property="og:image" content="https://amnetwork.io/og-image.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0A1A11">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+gtag('js',new Date());gtag('config','G-G4GSRVJB5M');
+if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{analytics_storage:'granted'});}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G4GSRVJB5M"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet"></noscript>
+<style>
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}html{scroll-behavior:auto}}
+
+[data-theme="dark"]{
+  --bg1:#0A1A11;--bg2:#0F2117;--bg3:#1C4532;--bg4:#2D6A4F;
+  --gold:#C9A84C;--gold2:#E8C87A;--gold3:rgba(201,168,76,0.12);
+  --text:#FFFFFF;--text2:rgba(255,255,255,0.60);--text3:rgba(255,255,255,0.38);
+  --border:rgba(255,255,255,0.09);--card:rgba(255,255,255,0.04);
+  --nav-bg:rgba(10,26,17,0.92);--input-bg:rgba(255,255,255,0.06);
+  --input-border:rgba(255,255,255,0.14);
+}
+[data-theme="light"]{
+  --bg1:#F5F0E8;--bg2:#EDE8DE;--bg3:#DDD0BB;--bg4:#C8B896;
+  --gold:#C9A84C;--gold2:#B8941C;--gold3:rgba(201,168,76,0.12);
+  --text:#1C2E1F;--text2:rgba(28,46,31,0.68);--text3:rgba(28,46,31,0.42);
+  --border:rgba(28,69,50,0.12);--card:rgba(255,255,255,0.80);
+  --nav-bg:rgba(245,240,232,0.95);--input-bg:rgba(255,255,255,0.7);
+  --input-border:rgba(28,69,50,0.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg1);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;transition:background 0.3s,color 0.3s}
+[lang="ar"]{font-family:'Noto Naskh Arabic',sans-serif}
+[lang="zh"]{font-family:'Noto Serif TC',system-ui,sans-serif}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);direction:ltr}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{height:36px;width:auto}
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang-wrap{position:relative}
+.lang-sel{display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.lang-drop{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;min-width:150px;z-index:200;display:none;overflow:hidden}
+.lang-item{display:flex;align-items:center;gap:8px;padding:9px 14px;cursor:pointer;font-size:13px;color:var(--text2)}
+.lang-item:hover{background:var(--card)}
+.theme-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:16px;transition:all 0.2s}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.nav-back{padding:7px 14px;border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:12px;font-weight:500;text-decoration:none;transition:all 0.2s}
+.nav-back:hover{border-color:var(--gold);color:var(--gold)}
+
+/* LAYOUT */
+main{padding-top:64px;min-height:100vh}
+.hero{padding:44px 5vw 20px;text-align:center;max-width:640px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:var(--gold3);border:1px solid rgba(201,168,76,0.3);border-radius:30px;font-size:11px;color:var(--gold);margin-bottom:16px;text-transform:uppercase;letter-spacing:.04em}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,42px);font-weight:700;line-height:1.2;margin-bottom:12px;color:var(--text)}
+.hero p{font-size:14px;color:var(--text2);line-height:1.75;max-width:520px;margin:0 auto}
+
+.wrap{max-width:480px;margin:0 auto;padding:0 5vw 80px}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:32px 26px;text-align:center}
+.btn-gold{padding:13px 26px;border-radius:12px;border:none;background:var(--gold);color:#1a1a1a;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s}
+.btn-gold:hover{opacity:.9}
+.btn-outline{padding:11px 22px;border-radius:12px;border:1px solid var(--input-border);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.status-msg{font-size:13px;color:var(--text3);margin:14px 0}
+.status-msg.error{color:#d98c6b}
+
+/* COMPASS */
+.compass-wrap{margin:24px auto;width:240px;height:240px;position:relative}
+.compass-dial{width:100%;height:100%;border-radius:50%;border:3px solid var(--input-border);background:var(--input-bg);position:relative}
+.compass-mark{position:absolute;font-size:12px;font-weight:700;color:var(--text3)}
+.compass-mark.n{top:10px;left:50%;transform:translateX(-50%);color:var(--gold)}
+.compass-mark.e{top:50%;right:10px;transform:translateY(-50%)}
+.compass-mark.s{bottom:10px;left:50%;transform:translateX(-50%)}
+.compass-mark.w{top:50%;left:10px;transform:translateY(-50%)}
+.compass-arrow{position:absolute;top:50%;left:50%;width:6px;height:98px;margin-left:-3px;margin-top:-98px;transform-origin:50% 100%;transition:transform .2s ease-out;display:flex;flex-direction:column;align-items:center}
+.compass-arrow .kaaba{font-size:26px;line-height:1}
+.compass-arrow .shaft{width:4px;flex:1;background:linear-gradient(to bottom, var(--gold), transparent);border-radius:4px}
+.compass-center-dot{position:absolute;top:50%;left:50%;width:10px;height:10px;border-radius:50%;background:var(--gold);transform:translate(-50%,-50%)}
+
+.readout{display:flex;justify-content:center;gap:28px;margin-top:8px;flex-wrap:wrap}
+.readout-item{text-align:center}
+.readout-value{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--gold)}
+.readout-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+
+.manual-toggle-link{display:inline-block;margin-top:18px;font-size:12px;color:var(--text3);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif}
+.manual-form{display:none;margin-top:18px;gap:10px;flex-wrap:wrap;justify-content:center}
+.manual-form.visible{display:flex}
+.manual-form input{width:130px;padding:10px 12px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;text-align:center;outline:none}
+.manual-form input:focus{border-color:var(--gold)}
+
+.compass-note{font-size:11px;color:var(--text3);margin-top:16px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/logo.webp" alt="AM Network" height="36">
+  </a>
+  <div class="nav-right">
+    <div class="lang-wrap">
+      <button class="lang-sel" onclick="toggleLangDrop()" aria-label="Select language">
+        <img id="langFlag" src="https://flagcdn.com/w20/gb.png" width="18" height="13" style="border-radius:2px" alt="">
+        <span id="langName">English</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="lang-drop" id="langDrop">
+        <div class="lang-item" onclick="selectLang('en','gb','English')"><img src="https://flagcdn.com/w20/gb.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> English</div>
+        <div class="lang-item" onclick="selectLang('ar','sa','العربية')"><img src="https://flagcdn.com/w20/sa.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> العربية</div>
+        <div class="lang-item" onclick="selectLang('ru','ru','Русский')"><img src="https://flagcdn.com/w20/ru.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Русский</div>
+        <div class="lang-item" onclick="selectLang('tj','tj','Тоҷикӣ')"><img src="https://flagcdn.com/w20/tj.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Тоҷикӣ</div>
+        <div class="lang-item" onclick="selectLang('id','id','Indonesia')"><img src="https://flagcdn.com/w20/id.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Indonesia</div>
+        <div class="lang-item" onclick="selectLang('tr','tr','Türkçe')"><img src="https://flagcdn.com/w20/tr.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Türkçe</div>
+        <div class="lang-item" onclick="selectLang('zh','cn','中文')"><img src="https://flagcdn.com/w20/cn.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> 中文</div>
+        <div class="lang-item" onclick="selectLang('ms','my','Melayu')"><img src="https://flagcdn.com/w20/my.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Melayu</div>
+        <div class="lang-item" onclick="selectLang('fr','fr','Français')"><img src="https://flagcdn.com/w20/fr.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Français</div>
+        <div class="lang-item" onclick="selectLang('de','de','Deutsch')"><img src="https://flagcdn.com/w20/de.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Deutsch</div>
+      </div>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    <a class="nav-back" href="/" data-t="nav_back">← Main site</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="badge">🕋 <span data-t="hero_badge">Location-based · Works Offline</span></div>
+    <h1 data-t="hero_h1">Qibla Direction</h1>
+    <p data-t="hero_p">Find the direction to the Kaaba in Makkah from wherever you are, using your device's location and compass.</p>
+  </section>
+
+  <div class="wrap">
+    <div class="card">
+      <div id="startState">
+        <button class="btn-gold" onclick="findQibla()" data-t="find_btn">Find My Qibla</button>
+        <div class="status-msg" id="startStatus"></div>
+      </div>
+
+      <div id="resultState" style="display:none">
+        <div class="compass-wrap" id="compassWrap">
+          <div class="compass-dial">
+            <div class="compass-mark n" data-t="dir_n">N</div>
+            <div class="compass-mark e" data-t="dir_e">E</div>
+            <div class="compass-mark s" data-t="dir_s">S</div>
+            <div class="compass-mark w" data-t="dir_w">W</div>
+          </div>
+          <div class="compass-arrow" id="compassArrow">
+            <span class="kaaba">🕋</span>
+            <div class="shaft"></div>
+          </div>
+          <div class="compass-center-dot"></div>
+        </div>
+        <div class="readout">
+          <div class="readout-item">
+            <div class="readout-value" id="bearingValue">—°</div>
+            <div class="readout-label" data-t="bearing_label">Qibla Bearing</div>
+          </div>
+          <div class="readout-item">
+            <div class="readout-value" id="distanceValue">—</div>
+            <div class="readout-label" data-t="distance_label">Distance to Kaaba</div>
+          </div>
+        </div>
+        <button class="btn-outline" id="enableCompassBtn" onclick="enableCompass()" data-t="enable_compass_btn" style="margin-top:16px">Enable Compass</button>
+        <div class="compass-note" id="compassNote"></div>
+      </div>
+
+      <button class="manual-toggle-link" onclick="toggleManualForm()" data-t="manual_toggle">Enter location manually</button>
+      <div class="manual-form" id="manualForm">
+        <input type="number" id="manualLat" step="any" data-t-ph="manual_lat_ph" placeholder="Latitude">
+        <input type="number" id="manualLng" step="any" data-t-ph="manual_lng_ph" placeholder="Longitude">
+        <button class="btn-outline" onclick="useManualLocation()" data-t="manual_btn">Calculate</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   I18N
+═══════════════════════════════════════════════════════ */
+const translations = {"en":{"nav_back":"← Main site","hero_badge":"Location-based · Works Offline","hero_h1":"Qibla Direction","hero_p":"Find the direction to the Kaaba in Makkah from wherever you are, using your device's location and compass.","find_btn":"Find My Qibla","locating_msg":"Locating…","loc_error":"Could not access your location. Please allow location access, or enter your coordinates manually below.","bearing_label":"Qibla Bearing","distance_label":"Distance to Kaaba","enable_compass_btn":"Enable Compass","compass_permission_denied":"Compass access was denied. You can still use the bearing above with a separate compass.","no_compass_msg":"Your device doesn't support a live compass. Use the bearing above with a separate compass, or align it with true North.","compass_active_msg":"Point the top of your phone toward the Kaaba icon.","manual_toggle":"Enter location manually","manual_lat_ph":"Latitude","manual_lng_ph":"Longitude","manual_btn":"Calculate","dir_n":"N","dir_e":"E","dir_s":"S","dir_w":"W"},"ar":{"nav_back":"← الموقع الرئيسي","hero_badge":"حسب الموقع · يعمل دون إنترنت","hero_h1":"اتجاه القبلة","hero_p":"اعرف اتجاه الكعبة في مكة من أي مكان، باستخدام موقع جهازك وبوصلته.","find_btn":"حدد قبلتي","locating_msg":"جارٍ تحديد الموقع…","loc_error":"تعذّر الوصول إلى موقعك. يرجى السماح بالوصول إلى الموقع، أو إدخال الإحداثيات يدوياً أدناه.","bearing_label":"اتجاه القبلة","distance_label":"المسافة إلى الكعبة","enable_compass_btn":"تفعيل البوصلة","compass_permission_denied":"تم رفض الوصول إلى البوصلة. لا يزال يمكنك استخدام الاتجاه أعلاه ببوصلة أخرى.","no_compass_msg":"جهازك لا يدعم بوصلة مباشرة. استخدم الاتجاه أعلاه ببوصلة أخرى، أو وجّهه نحو الشمال الحقيقي.","compass_active_msg":"وجّه أعلى هاتفك نحو أيقونة الكعبة.","manual_toggle":"أدخل الموقع يدوياً","manual_lat_ph":"خط العرض","manual_lng_ph":"خط الطول","manual_btn":"احسب","dir_n":"ش","dir_e":"ق","dir_s":"ج","dir_w":"غ"},"ru":{"nav_back":"← Главный сайт","hero_badge":"По геолокации · Работает офлайн","hero_h1":"Направление на Киблу","hero_p":"Узнайте направление на Каабу в Мекке из любой точки — по геолокации и компасу вашего устройства.","find_btn":"Найти мою Киблу","locating_msg":"Определение местоположения…","loc_error":"Не удалось получить доступ к вашему местоположению. Разрешите доступ к геолокации или введите координаты вручную ниже.","bearing_label":"Азимут на Киблу","distance_label":"Расстояние до Каабы","enable_compass_btn":"Включить компас","compass_permission_denied":"Доступ к компасу отклонён. Вы всё равно можете использовать азимут выше с обычным компасом.","no_compass_msg":"Ваше устройство не поддерживает компас. Используйте азимут выше с обычным компасом или ориентируйтесь на истинный север.","compass_active_msg":"Направьте верх телефона на значок Каабы.","manual_toggle":"Ввести координаты вручную","manual_lat_ph":"Широта","manual_lng_ph":"Долгота","manual_btn":"Рассчитать","dir_n":"С","dir_e":"В","dir_s":"Ю","dir_w":"З"},"tj":{"nav_back":"← Сайти асосӣ","hero_badge":"Тибқи ҷойгиршавӣ · Бе интернет кор мекунад","hero_h1":"Самти Қибла","hero_p":"Самти Каъбаро дар Макка аз ҳар ҷое, ки ҳастед, тавассути ҷойгиршавӣ ва қутбнамои дастгоҳатон биёбед.","find_btn":"Қибларо ёфтан","locating_msg":"Муайян намудани ҷойгиршавӣ…","loc_error":"Дастрасӣ ба ҷойгиршавии шумо номумкин шуд. Лутфан дастрасиро иҷозат диҳед ё координатаҳоро дастӣ дар поён ворид кунед.","bearing_label":"Самти Қибла","distance_label":"Масофа то Каъба","enable_compass_btn":"Фаъол кардани қутбнамо","compass_permission_denied":"Дастрасӣ ба қутбнамо рад шуд. Шумо метавонед самти болоро бо қутбнамои алоҳида истифода баред.","no_compass_msg":"Дастгоҳи шумо қутбнамои зиндаро дастгирӣ намекунад. Самти болоро бо қутбнамои алоҳида истифода баред ё ба шимоли ҳақиқӣ рост кунед.","compass_active_msg":"Болои телефонатонро ба нишони Каъба нигаронед.","manual_toggle":"Ҷойгиршавиро дастӣ ворид кунед","manual_lat_ph":"Арз","manual_lng_ph":"Тул","manual_btn":"Ҳисоб кун","dir_n":"Ш","dir_e":"Ш.Ш","dir_s":"Ҷ","dir_w":"Ғ"},"id":{"nav_back":"← Situs utama","hero_badge":"Berbasis Lokasi · Berfungsi Offline","hero_h1":"Arah Kiblat","hero_p":"Temukan arah ke Ka'bah di Makkah dari mana pun Anda berada, menggunakan lokasi dan kompas perangkat Anda.","find_btn":"Temukan Kiblat Saya","locating_msg":"Mencari lokasi…","loc_error":"Tidak dapat mengakses lokasi Anda. Izinkan akses lokasi, atau masukkan koordinat secara manual di bawah.","bearing_label":"Arah Kiblat","distance_label":"Jarak ke Ka'bah","enable_compass_btn":"Aktifkan Kompas","compass_permission_denied":"Akses kompas ditolak. Anda tetap bisa menggunakan arah di atas dengan kompas terpisah.","no_compass_msg":"Perangkat Anda tidak mendukung kompas langsung. Gunakan arah di atas dengan kompas terpisah, atau sejajarkan dengan Utara sejati.","compass_active_msg":"Arahkan bagian atas ponsel Anda ke ikon Ka'bah.","manual_toggle":"Masukkan lokasi secara manual","manual_lat_ph":"Lintang","manual_lng_ph":"Bujur","manual_btn":"Hitung","dir_n":"U","dir_e":"T","dir_s":"S","dir_w":"B"},"tr":{"nav_back":"← Ana site","hero_badge":"Konum Tabanlı · Çevrimdışı Çalışır","hero_h1":"Kıble Yönü","hero_p":"Cihazınızın konumunu ve pusulasını kullanarak, bulunduğunuz her yerden Mekke'deki Kâbe'nin yönünü bulun.","find_btn":"Kıblemi Bul","locating_msg":"Konum belirleniyor…","loc_error":"Konumunuza erişilemedi. Lütfen konum erişimine izin verin veya koordinatlarınızı aşağıya manuel olarak girin.","bearing_label":"Kıble Yönü","distance_label":"Kâbe'ye Uzaklık","enable_compass_btn":"Pusulayı Etkinleştir","compass_permission_denied":"Pusula erişimi reddedildi. Yukarıdaki yönü ayrı bir pusula ile kullanabilirsiniz.","no_compass_msg":"Cihazınız canlı pusulayı desteklemiyor. Yukarıdaki yönü ayrı bir pusula ile kullanın veya gerçek Kuzey'e hizalayın.","compass_active_msg":"Telefonunuzun üstünü Kâbe simgesine doğrultun.","manual_toggle":"Konumu manuel olarak girin","manual_lat_ph":"Enlem","manual_lng_ph":"Boylam","manual_btn":"Hesapla","dir_n":"K","dir_e":"D","dir_s":"G","dir_w":"B"},"zh":{"nav_back":"← 主站","hero_badge":"基于位置 · 离线可用","hero_h1":"朝拜方向","hero_p":"使用您设备的定位和指南针，从任何地方找到麦加天房的方向。","find_btn":"查找我的朝向","locating_msg":"正在定位…","loc_error":"无法访问您的位置。请允许位置访问，或在下方手动输入坐标。","bearing_label":"朝拜方位角","distance_label":"到天房的距离","enable_compass_btn":"启用指南针","compass_permission_denied":"指南针访问被拒绝。您仍可以使用上方的方位角配合另一个指南针。","no_compass_msg":"您的设备不支持实时指南针。请使用上方的方位角配合另一个指南针，或对准真北。","compass_active_msg":"将手机顶部指向天房图标。","manual_toggle":"手动输入位置","manual_lat_ph":"纬度","manual_lng_ph":"经度","manual_btn":"计算","dir_n":"北","dir_e":"东","dir_s":"南","dir_w":"西"},"ms":{"nav_back":"← Laman utama","hero_badge":"Berasaskan Lokasi · Berfungsi Luar Talian","hero_h1":"Arah Kiblat","hero_p":"Cari arah ke Kaabah di Makkah dari mana-mana sahaja anda berada, menggunakan lokasi dan kompas peranti anda.","find_btn":"Cari Kiblat Saya","locating_msg":"Mengesan lokasi…","loc_error":"Tidak dapat mengakses lokasi anda. Sila benarkan akses lokasi, atau masukkan koordinat secara manual di bawah.","bearing_label":"Arah Kiblat","distance_label":"Jarak ke Kaabah","enable_compass_btn":"Dayakan Kompas","compass_permission_denied":"Akses kompas ditolak. Anda masih boleh menggunakan arah di atas dengan kompas berasingan.","no_compass_msg":"Peranti anda tidak menyokong kompas langsung. Gunakan arah di atas dengan kompas berasingan, atau jajarkan dengan Utara sebenar.","compass_active_msg":"Arahkan bahagian atas telefon anda ke ikon Kaabah.","manual_toggle":"Masukkan lokasi secara manual","manual_lat_ph":"Latitud","manual_lng_ph":"Longitud","manual_btn":"Kira","dir_n":"U","dir_e":"T","dir_s":"S","dir_w":"B"},"fr":{"nav_back":"← Site principal","hero_badge":"Basé sur la position · Fonctionne hors ligne","hero_h1":"Direction de la Qibla","hero_p":"Trouvez la direction de la Kaaba à La Mecque depuis n'importe où, grâce à la position et à la boussole de votre appareil.","find_btn":"Trouver ma Qibla","locating_msg":"Localisation en cours…","loc_error":"Impossible d'accéder à votre position. Veuillez autoriser l'accès à la position, ou saisissez vos coordonnées manuellement ci-dessous.","bearing_label":"Cap vers la Qibla","distance_label":"Distance jusqu'à la Kaaba","enable_compass_btn":"Activer la boussole","compass_permission_denied":"L'accès à la boussole a été refusé. Vous pouvez toujours utiliser le cap ci-dessus avec une boussole séparée.","no_compass_msg":"Votre appareil ne prend pas en charge une boussole en direct. Utilisez le cap ci-dessus avec une boussole séparée, ou alignez-le sur le Nord réel.","compass_active_msg":"Orientez le haut de votre téléphone vers l'icône de la Kaaba.","manual_toggle":"Saisir la position manuellement","manual_lat_ph":"Latitude","manual_lng_ph":"Longitude","manual_btn":"Calculer","dir_n":"N","dir_e":"E","dir_s":"S","dir_w":"O"},"de":{"nav_back":"← Zur Hauptseite","hero_badge":"Standortbasiert · Funktioniert offline","hero_h1":"Qibla-Richtung","hero_p":"Finden Sie die Richtung zur Kaaba in Mekka von überall aus, mithilfe des Standorts und Kompasses Ihres Geräts.","find_btn":"Meine Qibla finden","locating_msg":"Standort wird ermittelt…","loc_error":"Auf Ihren Standort konnte nicht zugegriffen werden. Bitte erlauben Sie den Standortzugriff oder geben Sie Ihre Koordinaten unten manuell ein.","bearing_label":"Qibla-Richtung","distance_label":"Entfernung zur Kaaba","enable_compass_btn":"Kompass aktivieren","compass_permission_denied":"Der Kompasszugriff wurde verweigert. Sie können die obige Richtung weiterhin mit einem separaten Kompass verwenden.","no_compass_msg":"Ihr Gerät unterstützt keinen Live-Kompass. Verwenden Sie die obige Richtung mit einem separaten Kompass oder richten Sie sich nach echtem Norden aus.","compass_active_msg":"Richten Sie die Oberseite Ihres Telefons auf das Kaaba-Symbol.","manual_toggle":"Standort manuell eingeben","manual_lat_ph":"Breitengrad","manual_lng_ph":"Längengrad","manual_btn":"Berechnen","dir_n":"N","dir_e":"O","dir_s":"S","dir_w":"W"}};
+
+let currentLang = 'en';
+function t(key){
+  const L = translations[currentLang] || translations.en;
+  return L[key] !== undefined ? L[key] : (translations.en[key] || key);
+}
+function setLang(l){
+  currentLang = l;
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.setAttribute('lang', l==='tj'?'tg':l);
+  document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.getAttribute('data-t')); });
+  document.querySelectorAll('[data-t-ph]').forEach(el => { el.placeholder = t(el.getAttribute('data-t-ph')); });
+  localStorage.setItem('amn_lang', l);
+}
+function toggleLangDrop(){
+  const d = document.getElementById('langDrop');
+  d.style.display = (d.style.display === 'none' || !d.style.display) ? 'block' : 'none';
+}
+function selectLang(l, flag, name){
+  document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + flag + '.png';
+  document.getElementById('langName').textContent = name;
+  document.getElementById('langDrop').style.display = 'none';
+  setLang(l);
+}
+function toggleTheme(){
+  const th = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', th);
+  document.querySelector('.theme-btn').textContent = th === 'dark' ? '🌙' : '☀️';
+  localStorage.setItem('amn_theme', th);
+}
+document.addEventListener('click', function(e){
+  const wrap = document.querySelector('.lang-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    const d = document.getElementById('langDrop');
+    if (d) d.style.display = 'none';
+  }
+});
+
+/* ═══════════════════════════════════════════════════════
+   QIBLA CALCULATION
+   Kaaba coordinates: 21.4225°N, 39.8262°E (standard published value)
+═══════════════════════════════════════════════════════ */
+const KAABA_LAT = 21.4225;
+const KAABA_LNG = 39.8262;
+const EARTH_RADIUS_KM = 6371;
+
+let qiblaBearing = null;
+let deviceHeading = null;
+
+function toRad(deg){ return deg * Math.PI / 180; }
+function toDeg(rad){ return rad * 180 / Math.PI; }
+
+function calcBearing(lat1, lng1, lat2, lng2){
+  const φ1 = toRad(lat1), φ2 = toRad(lat2), Δλ = toRad(lng2 - lng1);
+  const y = Math.sin(Δλ) * Math.cos(φ2);
+  const x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
+  return (toDeg(Math.atan2(y, x)) + 360) % 360;
+}
+function calcDistanceKm(lat1, lng1, lat2, lng2){
+  const φ1 = toRad(lat1), φ2 = toRad(lat2), Δφ = toRad(lat2 - lat1), Δλ = toRad(lng2 - lng1);
+  const a = Math.sin(Δφ / 2) ** 2 + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) ** 2;
+  return EARTH_RADIUS_KM * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function findQibla(){
+  const statusEl = document.getElementById('startStatus');
+  statusEl.className = 'status-msg';
+  statusEl.textContent = t('locating_msg');
+  if (!navigator.geolocation) {
+    statusEl.className = 'status-msg error';
+    statusEl.textContent = t('loc_error');
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    pos => showResult(pos.coords.latitude, pos.coords.longitude),
+    () => {
+      statusEl.className = 'status-msg error';
+      statusEl.textContent = t('loc_error');
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+}
+
+function useManualLocation(){
+  const lat = Number(document.getElementById('manualLat').value);
+  const lng = Number(document.getElementById('manualLng').value);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180) return;
+  showResult(lat, lng);
+}
+
+function toggleManualForm(){
+  document.getElementById('manualForm').classList.toggle('visible');
+}
+
+function showResult(lat, lng){
+  qiblaBearing = calcBearing(lat, lng, KAABA_LAT, KAABA_LNG);
+  const distanceKm = calcDistanceKm(lat, lng, KAABA_LAT, KAABA_LNG);
+  document.getElementById('startState').style.display = 'none';
+  document.getElementById('resultState').style.display = 'block';
+  document.getElementById('bearingValue').textContent = Math.round(qiblaBearing) + '°';
+  document.getElementById('distanceValue').textContent = Math.round(distanceKm).toLocaleString() + ' km';
+  updateArrowRotation();
+  const supported = typeof DeviceOrientationEvent !== 'undefined';
+  document.getElementById('enableCompassBtn').style.display = supported ? '' : 'none';
+  document.getElementById('compassNote').textContent = supported ? '' : t('no_compass_msg');
+}
+
+function updateArrowRotation(){
+  if (qiblaBearing === null) return;
+  const heading = deviceHeading !== null ? deviceHeading : 0;
+  const rotation = (qiblaBearing - heading + 360) % 360;
+  document.getElementById('compassArrow').style.transform = 'rotate(' + rotation + 'deg)';
+}
+
+function enableCompass(){
+  const noteEl = document.getElementById('compassNote');
+  const start = () => {
+    window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+    window.addEventListener('deviceorientation', handleOrientation, true);
+    noteEl.textContent = t('compass_active_msg');
+  };
+  if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+    DeviceOrientationEvent.requestPermission().then(state => {
+      if (state === 'granted') start();
+      else { noteEl.textContent = t('compass_permission_denied'); }
+    }).catch(() => { noteEl.textContent = t('compass_permission_denied'); });
+  } else {
+    start();
+  }
+}
+
+function handleOrientation(e){
+  let heading = null;
+  if (typeof e.webkitCompassHeading === 'number') {
+    heading = e.webkitCompassHeading; // iOS Safari: already a true compass heading
+  } else if (e.absolute && e.alpha !== null) {
+    heading = 360 - e.alpha; // Android absolute orientation
+  }
+  if (heading === null) return;
+  deviceHeading = heading;
+  updateArrowRotation();
+}
+
+/* ── INIT ── */
+(function init(){
+  const savedTheme = localStorage.getItem('amn_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  document.querySelector('.theme-btn').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+  const flagMap = {en:'gb',ar:'sa',ru:'ru',tj:'tj',id:'id',tr:'tr',zh:'cn',ms:'my',fr:'fr',de:'de'};
+  const nameMap = {en:'English',ar:'العربية',ru:'Русский',tj:'Тоҷикӣ',id:'Indonesia',tr:'Türkçe',zh:'中文',ms:'Melayu',fr:'Français',de:'Deutsch'};
+  const savedLang = localStorage.getItem('amn_lang') || 'en';
+  const l = translations[savedLang] ? savedLang : 'en';
+  document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + (flagMap[l] || 'gb') + '.png';
+  document.getElementById('langName').textContent = nameMap[l] || 'English';
+  setLang(l);
+})();
+</script>
+</body>
+</html>
