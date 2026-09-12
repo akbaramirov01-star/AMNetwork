@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Noble Quran — AM Network</title>
+<meta name="description" content="Read and listen to the Quran: verified Arabic text, certified translations, and recitations from officially licensed reciters. Part of AM Academy.">
+<link rel="canonical" href="https://amnetwork.io/quran/">
+<meta property="og:title" content="The Noble Quran — AM Network">
+<meta property="og:description" content="Verified Arabic text, certified translations, official reciters.">
+<meta property="og:url" content="https://amnetwork.io/quran/">
+<meta property="og:image" content="https://amnetwork.io/og-image.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0A1A11">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; media-src 'self' https://*.quran.com https://*.qurancdn.com; connect-src 'self' https://api.quran.com https://*.quran.com https://*.qurancdn.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+gtag('js',new Date());gtag('config','G-G4GSRVJB5M');
+if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{analytics_storage:'granted'});}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G4GSRVJB5M"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet"></noscript>
+<style>
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}html{scroll-behavior:auto}}
+
+[data-theme="dark"]{
+  --bg1:#0A1A11;--bg2:#0F2117;--bg3:#1C4532;--bg4:#2D6A4F;
+  --gold:#C9A84C;--gold2:#E8C87A;--gold3:rgba(201,168,76,0.12);
+  --text:#FFFFFF;--text2:rgba(255,255,255,0.60);--text3:rgba(255,255,255,0.38);
+  --border:rgba(255,255,255,0.09);--card:rgba(255,255,255,0.04);
+  --nav-bg:rgba(10,26,17,0.92);--input-bg:rgba(255,255,255,0.06);
+  --input-border:rgba(255,255,255,0.14);
+}
+[data-theme="light"]{
+  --bg1:#F5F0E8;--bg2:#EDE8DE;--bg3:#DDD0BB;--bg4:#C8B896;
+  --gold:#C9A84C;--gold2:#B8941C;--gold3:rgba(201,168,76,0.12);
+  --text:#1C2E1F;--text2:rgba(28,46,31,0.68);--text3:rgba(28,46,31,0.42);
+  --border:rgba(28,69,50,0.12);--card:rgba(255,255,255,0.80);
+  --nav-bg:rgba(245,240,232,0.95);--input-bg:rgba(255,255,255,0.7);
+  --input-border:rgba(28,69,50,0.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg1);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;transition:background 0.3s,color 0.3s}
+[lang="ar"]{font-family:'Noto Naskh Arabic',sans-serif}
+[lang="zh"]{font-family:'Noto Serif TC',system-ui,sans-serif}
+.ar-text{font-family:'Noto Naskh Arabic',serif;direction:rtl;text-align:right;unicode-bidi:isolate}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);direction:ltr}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{height:36px;width:auto}
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang-wrap{position:relative}
+.lang-sel{display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.lang-drop{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;min-width:150px;z-index:200;display:none;overflow:hidden;max-height:70vh;overflow-y:auto}
+.lang-item{display:flex;align-items:center;gap:8px;padding:9px 14px;cursor:pointer;font-size:13px;color:var(--text2)}
+.lang-item:hover{background:var(--card)}
+.theme-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:16px;transition:all 0.2s}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.nav-back{padding:7px 14px;border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:12px;font-weight:500;text-decoration:none;transition:all 0.2s}
+.nav-back:hover{border-color:var(--gold);color:var(--gold)}
+
+/* LAYOUT */
+main{padding-top:64px;min-height:100vh}
+.hero{padding:52px 5vw 28px;text-align:center;max-width:760px;margin:0 auto}
+.eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,5vw,50px);font-weight:700;line-height:1.2;margin-bottom:14px;color:var(--text)}
+.hero p{font-size:14px;color:var(--text2);line-height:1.8;max-width:640px;margin:0 auto 20px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--gold3);border:1px solid rgba(201,168,76,0.3);border-radius:30px;font-size:12px;color:var(--gold);margin-bottom:8px}
+
+.wrap{max-width:900px;margin:0 auto;padding:0 5vw 100px}
+
+/* SEARCH */
+.search-row{margin:24px 0 20px}
+.search-input{width:100%;padding:14px 18px;background:var(--input-bg);border:1px solid var(--input-border);border-radius:12px;color:var(--text);font-size:15px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s}
+.search-input:focus{border-color:var(--gold)}
+
+/* SURAH GRID */
+.surah-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:640px){.surah-grid{grid-template-columns:1fr}}
+.surah-card{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:border-color .2s,transform .15s;text-align:left}
+.surah-card:hover{border-color:var(--gold);transform:translateY(-1px)}
+.surah-num{flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--gold3);border:1px solid rgba(201,168,76,.3);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.surah-meta{flex:1;min-width:0}
+.surah-name-ar{font-family:'Noto Naskh Arabic',serif;font-size:19px;color:var(--text);direction:rtl}
+.surah-name-en{font-size:12px;color:var(--text2);margin-top:2px}
+.surah-tag{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-top:3px}
+
+/* STATE MESSAGES */
+.state-msg{text-align:center;padding:48px 20px;color:var(--text2);font-size:14px}
+.state-msg a{color:var(--gold);text-decoration:none;font-weight:600}
+
+/* READER */
+.reader{display:none}
+.reader.visible{display:block}
+.reader-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.back-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:9px 16px;color:var(--text2);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.back-btn:hover{border-color:var(--gold);color:var(--gold)}
+.surah-header{text-align:center;padding:24px 20px;background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:18px}
+.surah-header .ar-name{font-family:'Noto Naskh Arabic',serif;font-size:34px;color:var(--gold2)}
+.surah-header .en-name{font-size:14px;color:var(--text2);margin-top:6px}
+.surah-header .sub-line{font-size:12px;color:var(--text3);margin-top:6px}
+
+.audio-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:18px}
+.audio-bar select{flex:0 0 auto;padding:9px 12px;border-radius:8px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;max-width:220px}
+.audio-bar audio{flex:1;min-width:180px;height:38px}
+.audio-bar label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
+
+.verse{padding:22px 4px;border-bottom:1px solid var(--border)}
+.verse:last-child{border-bottom:none}
+.verse-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--gold3);color:var(--gold);font-size:11px;font-weight:700;margin-bottom:10px}
+.verse-ar{font-family:'Noto Naskh Arabic',serif;direction:rtl;text-align:right;font-size:26px;line-height:2.1;color:var(--text);margin-bottom:10px}
+.verse-tr{font-size:14px;line-height:1.8;color:var(--text2)}
+.translation-note{font-size:12px;color:var(--gold);background:var(--gold3);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:10px 14px;margin-bottom:16px}
+
+.source-note{font-size:11px;color:var(--text3);line-height:1.7;margin-top:28px;padding-top:16px;border-top:1px solid var(--border)}
+.disclaimer-note{font-size:12px;color:var(--text2);margin-top:10px;line-height:1.6}
+
+footer{text-align:center;padding:40px 5vw;color:var(--text3);font-size:12px;border-top:1px solid var(--border)}
+footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:600px){
+  .hero{padding:40px 5vw 20px}
+  .surah-header .ar-name{font-size:28px}
+  .verse-ar{font-size:22px;line-height:1.9}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/logo.webp" alt="AM Network" height="36">
+  </a>
+  <div class="nav-right">
+    <div class="lang-wrap">
+      <button class="lang-sel" onclick="toggleLangDrop()" aria-label="Select language">
+        <img id="langFlag" src="https://flagcdn.com/w20/gb.png" width="18" height="13" style="border-radius:2px" alt="">
+        <span id="langName">English</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="lang-drop" id="langDrop">
+        <div class="lang-item" onclick="selectLang('en','gb','English')"><img src="https://flagcdn.com/w20/gb.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> English</div>
+        <div class="lang-item" onclick="selectLang('ar','sa','العربية')"><img src="https://flagcdn.com/w20/sa.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> العربية</div>
+        <div class="lang-item" onclick="selectLang('ru','ru','Русский')"><img src="https://flagcdn.com/w20/ru.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Русский</div>
+        <div class="lang-item" onclick="selectLang('tj','tj','Тоҷикӣ')"><img src="https://flagcdn.com/w20/tj.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Тоҷикӣ</div>
+        <div class="lang-item" onclick="selectLang('id','id','Indonesia')"><img src="https://flagcdn.com/w20/id.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Indonesia</div>
+        <div class="lang-item" onclick="selectLang('tr','tr','Türkçe')"><img src="https://flagcdn.com/w20/tr.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Türkçe</div>
+        <div class="lang-item" onclick="selectLang('zh','cn','中文')"><img src="https://flagcdn.com/w20/cn.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> 中文</div>
+        <div class="lang-item" onclick="selectLang('ms','my','Melayu')"><img src="https://flagcdn.com/w20/my.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Melayu</div>
+        <div class="lang-item" onclick="selectLang('fr','fr','Français')"><img src="https://flagcdn.com/w20/fr.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Français</div>
+        <div class="lang-item" onclick="selectLang('de','de','Deutsch')"><img src="https://flagcdn.com/w20/de.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Deutsch</div>
+      </div>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    <a class="nav-back" href="/" data-t="nav_back">← Main site</a>
+  </div>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="eyebrow" data-t="hero_eyebrow">AM Academy</div>
+    <h1 data-t="hero_h1">The Noble Quran</h1>
+    <p data-t="hero_p">We never write, edit or translate this content ourselves. The Arabic text comes from Tanzil (the verified Uthmani script used by Quran.com and most major Quran apps), translations come from certified scholars, and recitations come from officially licensed reciters — displayed exactly as published, word for word.</p>
+    <div class="badge" data-t="page_badge">Text: Tanzil · Certified translations · Official reciters</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- LIST VIEW -->
+    <div id="listView">
+      <div class="search-row">
+        <input type="text" class="search-input" id="surahSearch" data-t-ph="search_ph" placeholder="Search a surah by name or number…" oninput="filterSurahs()">
+      </div>
+      <div id="surahGrid" class="surah-grid"></div>
+      <div id="listState" class="state-msg" style="display:none"></div>
+    </div>
+
+    <!-- READER VIEW -->
+    <div id="readerView" class="reader">
+      <div class="reader-top">
+        <button class="back-btn" onclick="closeSurah()" data-t="back_to_list">← All Surahs</button>
+      </div>
+      <div id="surahHeader" class="surah-header"></div>
+      <div class="audio-bar">
+        <label data-t="reciter_label">Reciter</label>
+        <select id="reciterSelect" onchange="onReciterChange()"></select>
+        <audio id="audioPlayer" controls preload="none"></audio>
+      </div>
+      <div id="translationNote" class="translation-note" style="display:none" data-t="translation_fallback"></div>
+      <div id="versesList"></div>
+      <div id="readerState" class="state-msg" style="display:none"></div>
+      <p class="disclaimer-note" data-t="disclaimer">This is a reading and listening tool, not a fatwa. For religious rulings, consult a qualified scholar.</p>
+      <p class="source-note" data-t="source_note">Arabic text: Tanzil Project (Uthmani script). Translations and audio: Quran Foundation, via the public Quran.com API. AM Network does not host, edit or modify this content.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 AM Network · <a href="/" data-t="nav_back">← Main site</a></p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   I18N (page chrome only — Quran text/translations/audio
+   come live from the Quran.com API, never typed by us)
+═══════════════════════════════════════════════════════ */
+const T = {"en":{"nav_back":"← Main site","page_badge":"Text: Tanzil · Certified translations · Official reciters","hero_eyebrow":"AM Academy","hero_h1":"The Noble Quran","hero_p":"We never write, edit or translate this content ourselves. The Arabic text comes from Tanzil (the verified Uthmani script used by Quran.com and most major Quran apps), translations come from certified scholars, and recitations come from officially licensed reciters — displayed exactly as published, word for word.","search_ph":"Search a surah by name or number…","meccan":"Meccan","medinan":"Medinan","verses_word":"verses","loading_chapters":"Loading the surahs…","loading_verses":"Loading the verses…","error_generic":"Could not load this content right now. Please try again in a moment, or read it directly on Quran.com.","error_link":"Open on Quran.com →","reciter_label":"Reciter","translation_label":"Translation","translation_fallback":"No certified translation is available yet in this language — showing English.","back_to_list":"← All Surahs","source_note":"Arabic text: Tanzil Project (Uthmani script). Translations and audio: Quran Foundation, via the public Quran.com API. AM Network does not host, edit or modify this content.","disclaimer":"This is a reading and listening tool, not a fatwa. For religious rulings, consult a qualified scholar.","no_results":"No surah matches your search.","play_audio":"Play recitation"},"ar":{"nav_back":"← الموقع الرئيسي","page_badge":"النص: تنزيل · ترجمات موثّقة · قرّاء رسميون","hero_eyebrow":"AM Academy","hero_h1":"القرآن الكريم","hero_p":"نحن لا نكتب هذا المحتوى أو نحرّره أو نترجمه بأنفسنا أبداً. النص العربي مأخوذ من مشروع تنزيل (الرسم العثماني الموثّق الذي يعتمده Quran.com وأغلب تطبيقات القرآن الكبرى)، والترجمات من علماء معتمدين، والتلاوات من قرّاء مرخّصين رسمياً — تُعرض هنا كما نُشرت تماماً، كلمة بكلمة.","search_ph":"ابحث عن سورة بالاسم أو الرقم…","meccan":"مكية","medinan":"مدنية","verses_word":"آيات","loading_chapters":"جارٍ تحميل السور…","loading_verses":"جارٍ تحميل الآيات…","error_generic":"تعذّر تحميل هذا المحتوى الآن. حاول مرة أخرى بعد قليل، أو اقرأه مباشرة على Quran.com.","error_link":"افتح على Quran.com ←","reciter_label":"القارئ","translation_label":"الترجمة","translation_fallback":"لا توجد حالياً ترجمة موثّقة بهذه اللغة — يُعرض النص بالإنجليزية.","back_to_list":"← جميع السور","source_note":"النص العربي: مشروع تنزيل (الرسم العثماني). الترجمات والتلاوات: Quran Foundation عبر واجهة Quran.com العامة. لا تستضيف AM Network هذا المحتوى ولا تحرّره أو تعدّله.","disclaimer":"هذه أداة قراءة واستماع، وليست فتوى. للأحكام الشرعية، استشر عالماً مؤهلاً.","no_results":"لا توجد سورة مطابقة لبحثك.","play_audio":"تشغيل التلاوة"},"ru":{"nav_back":"← Главный сайт","page_badge":"Текст: Tanzil · Проверенные переводы · Официальные чтецы","hero_eyebrow":"AM Academy","hero_h1":"Благородный Коран","hero_p":"Мы никогда сами не пишем, не редактируем и не переводим этот текст. Арабский текст взят из проекта Tanzil (проверенное усмановское написание, на которое опирается Quran.com и большинство крупных приложений с Кораном), переводы — от сертифицированных учёных, чтения — от официально лицензированных чтецов. Всё отображается точно так, как опубликовано, слово в слово.","search_ph":"Найти суру по названию или номеру…","meccan":"Мекканская","medinan":"Мединская","verses_word":"аятов","loading_chapters":"Загрузка сур…","loading_verses":"Загрузка аятов…","error_generic":"Не удалось загрузить этот раздел. Попробуйте ещё раз через минуту или прочитайте на Quran.com.","error_link":"Открыть на Quran.com →","reciter_label":"Чтец","translation_label":"Перевод","translation_fallback":"Проверенного перевода на этот язык пока нет — показан английский.","back_to_list":"← Все суры","source_note":"Арабский текст: проект Tanzil (усмановское написание). Переводы и аудио: Quran Foundation через открытый API Quran.com. AM Network не хранит, не редактирует и не изменяет этот контент.","disclaimer":"Это инструмент для чтения и прослушивания, а не фетва. По религиозным вопросам обращайтесь к квалифицированному учёному.","no_results":"Сура по вашему запросу не найдена.","play_audio":"Слушать чтение"},"tj":{"nav_back":"← Сайти асосӣ","page_badge":"Матн: Tanzil · Тарҷумаҳои тасдиқшуда · Қориёни расмӣ","hero_eyebrow":"AM Academy","hero_h1":"Қуръони Карим","hero_p":"Мо ин мазмунро худамон ҳаргиз намедиҳем, таҳрир намекунем ва тарҷума намекунем. Матни арабӣ аз лоиҳаи Tanzil гирифта шудааст (хатти усмонии тасдиқшуда, ки Quran.com ва аксари барномаҳои бузурги Қуръон ба он такя мекунанд), тарҷумаҳо аз олимони тасдиқшуда ва қироатҳо аз қориёни расмӣ иҷозатдодашуда — маҳз тавре ки нашр шудаанд, калима ба калима нишон дода мешаванд.","search_ph":"Суравро бо ном ё рақам ёбед…","meccan":"Маккӣ","medinan":"Мадинӣ","verses_word":"оят","loading_chapters":"Боркунии сураҳо…","loading_verses":"Боркунии оятҳо…","error_generic":"Ин мазмун ҳозир бор нашуд. Лутфан баъди чанде дубора кӯшиш кунед ё онро мустақим дар Quran.com хонед.","error_link":"Дар Quran.com кушоед →","reciter_label":"Қорӣ","translation_label":"Тарҷума","translation_fallback":"Ба ин забон ҳанӯз тарҷумаи тасдиқшуда нест — матни англисӣ нишон дода мешавад.","back_to_list":"← Ҳамаи сураҳо","source_note":"Матни арабӣ: лоиҳаи Tanzil (хатти усмонӣ). Тарҷумаҳо ва аудио: Quran Foundation тавассути API-и кушоди Quran.com. AM Network ин мазмунро намеҳобад, таҳрир намекунад ва тағйир намедиҳад.","disclaimer":"Ин абзори хондан ва шунидан аст, на фатво. Барои масъалаҳои шариат ба олими соҳибтахассус муроҷиат кунед.","no_results":"Сурае мувофиқи ҷустуҷӯи шумо ёфт нашуд.","play_audio":"Пахши қироат"},"id":{"nav_back":"← Situs utama","page_badge":"Teks: Tanzil · Terjemahan bersertifikat · Qari resmi","hero_eyebrow":"AM Academy","hero_h1":"Al-Qur'an Al-Karim","hero_p":"Kami tidak pernah menulis, menyunting, atau menerjemahkan konten ini sendiri. Teks Arab berasal dari proyek Tanzil (naskah Utsmani terverifikasi yang digunakan Quran.com dan sebagian besar aplikasi Al-Qur'an besar), terjemahan berasal dari ulama bersertifikat, dan bacaan berasal dari qari berlisensi resmi — ditampilkan persis seperti yang dipublikasikan, kata demi kata.","search_ph":"Cari surah berdasarkan nama atau nomor…","meccan":"Makkiyah","medinan":"Madaniyah","verses_word":"ayat","loading_chapters":"Memuat daftar surah…","loading_verses":"Memuat ayat…","error_generic":"Konten ini tidak dapat dimuat saat ini. Coba lagi sebentar, atau baca langsung di Quran.com.","error_link":"Buka di Quran.com →","reciter_label":"Qari","translation_label":"Terjemahan","translation_fallback":"Belum ada terjemahan bersertifikat dalam bahasa ini — menampilkan bahasa Inggris.","back_to_list":"← Semua Surah","source_note":"Teks Arab: Tanzil Project (naskah Utsmani). Terjemahan dan audio: Quran Foundation, melalui API publik Quran.com. AM Network tidak menyimpan, menyunting, atau mengubah konten ini.","disclaimer":"Ini adalah alat membaca dan mendengarkan, bukan fatwa. Untuk hukum keagamaan, konsultasikan dengan ulama yang berkompeten.","no_results":"Tidak ada surah yang cocok dengan pencarian Anda.","play_audio":"Putar bacaan"},"tr":{"nav_back":"← Ana site","page_badge":"Metin: Tanzil · Onaylı çeviriler · Resmî hafızlar","hero_eyebrow":"AM Academy","hero_h1":"Kur'an-ı Kerim","hero_p":"Bu içeriği asla kendimiz yazmıyor, düzenlemiyor veya çevirmiyoruz. Arapça metin, Quran.com ve başlıca Kur'an uygulamalarının dayandığı doğrulanmış Osmanlı hattını sunan Tanzil projesinden alınmıştır; çeviriler onaylı âlimlerden, tilavetler ise resmî lisanslı hafızlardan gelir — tam olarak yayınlandığı gibi, kelimesi kelimesine gösterilir.","search_ph":"Sure ismi veya numarasıyla ara…","meccan":"Mekkî","medinan":"Medenî","verses_word":"ayet","loading_chapters":"Sureler yükleniyor…","loading_verses":"Ayetler yükleniyor…","error_generic":"Bu içerik şu anda yüklenemedi. Lütfen biraz sonra tekrar deneyin veya doğrudan Quran.com üzerinden okuyun.","error_link":"Quran.com'da aç →","reciter_label":"Hafız","translation_label":"Çeviri","translation_fallback":"Bu dilde henüz onaylı bir çeviri yok — İngilizce gösteriliyor.","back_to_list":"← Tüm Sureler","source_note":"Arapça metin: Tanzil Projesi (Osmanlı hattı). Çeviriler ve ses: Quran Foundation, Quran.com'un genel API'si üzerinden. AM Network bu içeriği barındırmaz, düzenlemez veya değiştirmez.","disclaimer":"Bu bir okuma ve dinleme aracıdır, fetva değildir. Dinî hükümler için yetkin bir âlime danışın.","no_results":"Aramanıza uyan bir sure bulunamadı.","play_audio":"Tilaveti dinle"},"zh":{"nav_back":"← 主站","page_badge":"文本：Tanzil · 认证译本 · 官方诵读者","hero_eyebrow":"AM Academy","hero_h1":"尊贵的古兰经","hero_p":"我们从不自行撰写、编辑或翻译此内容。阿拉伯文文本来自 Tanzil 项目（Quran.com 及大多数主流古兰经应用所采用的经过核实的奥斯曼字体版本），译文来自认证学者，诵读来自officially持证的诵读者——完全按照原始发布内容逐字呈现。","search_ph":"按名称或编号搜索章节…","meccan":"麦加章","medinan":"麦地那章","verses_word":"节经文","loading_chapters":"正在加载章节…","loading_verses":"正在加载经文…","error_generic":"目前无法加载此内容。请稍后再试，或直接在 Quran.com 上阅读。","error_link":"在 Quran.com 打开 →","reciter_label":"诵读者","translation_label":"译本","translation_fallback":"此语言暂无认证译本 — 显示英文译本。","back_to_list":"← 所有章节","source_note":"阿拉伯文文本：Tanzil 项目（奥斯曼字体）。译文与音频：Quran Foundation，通过 Quran.com 公共 API 提供。AM Network 不托管、编辑或修改此内容。","disclaimer":"这是一个阅读和聆听工具，不是教法裁决。宗教裁决请咨询合格学者。","no_results":"没有找到符合搜索条件的章节。","play_audio":"播放诵读"},"ms":{"nav_back":"← Laman utama","page_badge":"Teks: Tanzil · Terjemahan bertauliah · Qari rasmi","hero_eyebrow":"AM Academy","hero_h1":"Al-Quran Al-Karim","hero_p":"Kami tidak pernah menulis, menyunting atau menterjemah kandungan ini sendiri. Teks Arab diambil daripada projek Tanzil (naskhah Uthmani yang disahkan dan digunakan oleh Quran.com serta kebanyakan aplikasi Al-Quran utama), terjemahan daripada ulama bertauliah, dan bacaan daripada qari berlesen rasmi — dipaparkan tepat seperti yang diterbitkan, perkataan demi perkataan.","search_ph":"Cari surah mengikut nama atau nombor…","meccan":"Makkiyah","medinan":"Madaniyah","verses_word":"ayat","loading_chapters":"Memuatkan senarai surah…","loading_verses":"Memuatkan ayat…","error_generic":"Kandungan ini tidak dapat dimuatkan sekarang. Sila cuba sebentar lagi, atau baca terus di Quran.com.","error_link":"Buka di Quran.com →","reciter_label":"Qari","translation_label":"Terjemahan","translation_fallback":"Belum ada terjemahan bertauliah dalam bahasa ini — memaparkan Bahasa Inggeris.","back_to_list":"← Semua Surah","source_note":"Teks Arab: Projek Tanzil (naskhah Uthmani). Terjemahan dan audio: Quran Foundation, melalui API awam Quran.com. AM Network tidak menyimpan, menyunting atau mengubah kandungan ini.","disclaimer":"Ini adalah alat membaca dan mendengar, bukan fatwa. Untuk hukum agama, rujuk kepada ulama yang bertauliah.","no_results":"Tiada surah yang sepadan dengan carian anda.","play_audio":"Mainkan bacaan"},"fr":{"nav_back":"← Site principal","page_badge":"Texte : Tanzil · Traductions certifiées · Récitateurs officiels","hero_eyebrow":"AM Academy","hero_h1":"Le Noble Coran","hero_p":"Nous n'écrivons, ne modifions ni ne traduisons jamais ce contenu nous-mêmes. Le texte arabe provient du projet Tanzil (l'écriture ottomane vérifiée sur laquelle s'appuient Quran.com et la plupart des grandes applications du Coran), les traductions proviennent d'érudits certifiés, et les récitations proviennent de récitateurs officiellement agréés — affichés exactement comme publiés, mot pour mot.","search_ph":"Rechercher une sourate par nom ou numéro…","meccan":"Mecquoise","medinan":"Médinoise","verses_word":"versets","loading_chapters":"Chargement des sourates…","loading_verses":"Chargement des versets…","error_generic":"Impossible de charger ce contenu pour le moment. Veuillez réessayer dans un instant, ou le lire directement sur Quran.com.","error_link":"Ouvrir sur Quran.com →","reciter_label":"Récitateur","translation_label":"Traduction","translation_fallback":"Aucune traduction certifiée n'existe encore dans cette langue — affichage en anglais.","back_to_list":"← Toutes les sourates","source_note":"Texte arabe : projet Tanzil (écriture ottomane). Traductions et audio : Quran Foundation, via l'API publique de Quran.com. AM Network n'héberge, ne modifie ni n'édite ce contenu.","disclaimer":"Ceci est un outil de lecture et d'écoute, pas une fatwa. Pour les questions religieuses, consultez un érudit qualifié.","no_results":"Aucune sourate ne correspond à votre recherche.","play_audio":"Écouter la récitation"},"de":{"nav_back":"← Hauptseite","page_badge":"Text: Tanzil · Zertifizierte Übersetzungen · Offizielle Rezitatoren","hero_eyebrow":"AM Academy","hero_h1":"Der Edle Koran","hero_p":"Wir schreiben, bearbeiten oder übersetzen diesen Inhalt niemals selbst. Der arabische Text stammt aus dem Tanzil-Projekt (die verifizierte osmanische Schrift, auf die sich Quran.com und die meisten großen Koran-Apps stützen), Übersetzungen stammen von zertifizierten Gelehrten, und Rezitationen stammen von offiziell lizenzierten Rezitatoren — genau so angezeigt, wie sie veröffentlicht wurden, Wort für Wort.","search_ph":"Sure nach Name oder Nummer suchen…","meccan":"Mekkanisch","medinan":"Medinensisch","verses_word":"Verse","loading_chapters":"Suren werden geladen…","loading_verses":"Verse werden geladen…","error_generic":"Dieser Inhalt konnte gerade nicht geladen werden. Bitte versuchen Sie es in Kürze erneut oder lesen Sie ihn direkt auf Quran.com.","error_link":"Auf Quran.com öffnen →","reciter_label":"Rezitator","translation_label":"Übersetzung","translation_fallback":"In dieser Sprache liegt noch keine zertifizierte Übersetzung vor — Englisch wird angezeigt.","back_to_list":"← Alle Suren","source_note":"Arabischer Text: Tanzil-Projekt (osmanische Schrift). Übersetzungen und Audio: Quran Foundation, über die öffentliche API von Quran.com. AM Network hostet, bearbeitet oder verändert diesen Inhalt nicht.","disclaimer":"Dies ist ein Lese- und Hörwerkzeug, keine Fatwa. Für religiöse Urteile konsultieren Sie einen qualifizierten Gelehrten.","no_results":"Keine Sure entspricht Ihrer Suche.","play_audio":"Rezitation abspielen"}};
+
+let lang = 'en';
+function setLang(l){
+  lang = T[l] ? l : 'en';
+  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('data-lang', lang);
+  document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+  const t = T[lang];
+  document.querySelectorAll('[data-t]').forEach(el => {
+    const k = el.getAttribute('data-t');
+    if (t[k] != null) el.textContent = t[k];
+  });
+  document.querySelectorAll('[data-t-ph]').forEach(el => {
+    const k = el.getAttribute('data-t-ph');
+    if (t[k] != null) el.placeholder = t[k];
+  });
+  localStorage.setItem('amn_lang', lang);
+  if (chapters.length) renderGrid();
+}
+function toggleLangDrop(){
+  const d = document.getElementById('langDrop');
+  d.style.display = (d.style.display === 'none' || !d.style.display) ? 'block' : 'none';
+}
+function selectLang(l, flag, name){
+  document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + flag + '.png';
+  document.getElementById('langName').textContent = name;
+  document.getElementById('langDrop').style.display = 'none';
+  setLang(l);
+}
+function toggleTheme(){
+  const th = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', th);
+  localStorage.setItem('amn_theme', th);
+}
+document.addEventListener('click', function(e){
+  const wrap = document.querySelector('.lang-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    const d = document.getElementById('langDrop');
+    if (d) d.style.display = 'none';
+  }
+});
+
+/* ═══════════════════════════════════════════════════════
+   QURAN DATA — every word rendered here is fetched live
+   from the Quran Foundation's public Quran.com API and
+   shown exactly as returned. We hold no local copy of the
+   Arabic text, any translation, or any recitation, and we
+   never edit or re-type any of it.
+═══════════════════════════════════════════════════════ */
+const API = 'https://api.quran.com/api/v4';
+const REQUEST_TIMEOUT_MS = 12000;
+
+const LANG_TO_QURAN = {
+  en:'english', ru:'russian', id:'indonesian', tr:'turkish',
+  zh:'chinese', ms:'malay', fr:'french', de:'german',
+  tj:null, ar:null // ar = original text, no separate translation panel; tj = no certified translation known to exist yet
+};
+const PREFERRED_TRANSLATION_HINTS = ['clear quran','khattab','saheeh international','kuliev'];
+const PREFERRED_RECITER_HINTS = ['alafasy','sudais','shuraim','muaiqly','abdul basit','husary'];
+
+let chapters = [];
+let translationsList = null;
+let recitersList = null;
+let currentChapter = null;
+let currentReciterId = null;
+
+async function fetchJSON(url){
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), REQUEST_TIMEOUT_MS);
+  try {
+    const res = await fetch(url, { signal: ctrl.signal });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function stripTags(html){
+  if (html == null) return '';
+  const d = document.createElement('div');
+  d.innerHTML = String(html);
+  return d.textContent || d.innerText || '';
+}
+
+async function loadChapters(){
+  const grid = document.getElementById('surahGrid');
+  const state = document.getElementById('listState');
+  try {
+    const cached = sessionStorage.getItem('amn_quran_chapters');
+    if (cached) {
+      chapters = JSON.parse(cached);
+    } else {
+      const data = await fetchJSON(API + '/chapters?language=en');
+      chapters = data.chapters || [];
+      sessionStorage.setItem('amn_quran_chapters', JSON.stringify(chapters));
+    }
+    renderGrid();
+  } catch (e) {
+    state.style.display = 'block';
+    state.innerHTML = (T[lang].error_generic || '') +
+      ' <a href="https://quran.com" target="_blank" rel="noopener">' + (T[lang].error_link || 'Quran.com') + '</a>';
+    grid.innerHTML = '';
+  }
+}
+
+function renderGrid(){
+  const grid = document.getElementById('surahGrid');
+  const state = document.getElementById('listState');
+  const q = (document.getElementById('surahSearch').value || '').trim().toLowerCase();
+  const t = T[lang];
+  const filtered = chapters.filter(c => {
+    if (!q) return true;
+    return String(c.id).includes(q) ||
+      (c.name_simple || '').toLowerCase().includes(q) ||
+      (c.translated_name && c.translated_name.name || '').toLowerCase().includes(q) ||
+      (c.name_arabic || '').includes(q);
+  });
+  if (!filtered.length) {
+    grid.innerHTML = '';
+    state.style.display = 'block';
+    state.textContent = t.no_results || '';
+    return;
+  }
+  state.style.display = 'none';
+  grid.innerHTML = filtered.map(c => `
+    <div class="surah-card" onclick="openSurah(${c.id})" role="button" tabindex="0">
+      <div class="surah-num">${c.id}</div>
+      <div class="surah-meta">
+        <div class="surah-name-ar">${escapeHtml(c.name_arabic || '')}</div>
+        <div class="surah-name-en">${escapeHtml(c.name_simple || '')} · ${escapeHtml((c.translated_name && c.translated_name.name) || '')}</div>
+        <div class="surah-tag">${c.revelation_place === 'makkah' ? (t.meccan||'') : (t.medinan||'')} · ${c.verses_count} ${t.verses_word||''}</div>
+      </div>
+    </div>
+  `).join('');
+}
+function escapeHtml(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+function filterSurahs(){ renderGrid(); }
+
+async function ensureReciters(){
+  if (recitersList) return recitersList;
+  const data = await fetchJSON(API + '/resources/chapter_reciters?language=en');
+  let list = data.reciters || [];
+  const score = r => {
+    const name = ((r.name || '') + ' ' + (r.translated_name && r.translated_name.name || '')).toLowerCase();
+    const i = PREFERRED_RECITER_HINTS.findIndex(h => name.includes(h));
+    return i === -1 ? 999 : i;
+  };
+  list = list.slice().sort((a, b) => score(a) - score(b));
+  recitersList = list;
+  return list;
+}
+
+async function ensureTranslations(){
+  if (translationsList) return translationsList;
+  const data = await fetchJSON(API + '/resources/translations');
+  translationsList = data.translations || [];
+  return translationsList;
+}
+
+async function resolveTranslation(){
+  const qLangTarget = LANG_TO_QURAN[lang];
+  if (!qLangTarget) return { id: null, usedFallback: false, unsupported: true };
+  const list = await ensureTranslations();
+  const pick = (langName) => {
+    const matches = list.filter(tr => (tr.language_name || '').toLowerCase() === langName);
+    if (!matches.length) return null;
+    matches.sort((a, b) => {
+      const score = t => {
+        const n = ((t.name || '') + ' ' + (t.author_name || '')).toLowerCase();
+        const i = PREFERRED_TRANSLATION_HINTS.findIndex(h => n.includes(h));
+        return i === -1 ? 999 : i;
+      };
+      return score(a) - score(b);
+    });
+    return matches[0];
+  };
+  let chosen = pick(qLangTarget);
+  if (chosen) return { id: chosen.id, usedFallback: false, unsupported: false };
+  chosen = pick('english');
+  if (chosen) return { id: chosen.id, usedFallback: true, unsupported: false };
+  return { id: null, usedFallback: false, unsupported: true };
+}
+
+async function fetchAllVerses(chapterId, translationId){
+  let all = [];
+  let page = 1;
+  const maxPages = 10;
+  while (page <= maxPages) {
+    let url = API + '/verses/by_chapter/' + chapterId +
+      '?language=en&words=false&fields=text_uthmani&per_page=50&page=' + page;
+    if (translationId) url += '&translations=' + translationId;
+    const data = await fetchJSON(url);
+    all = all.concat(data.verses || []);
+    const pag = data.pagination || {};
+    if (!pag.next_page) break;
+    page = pag.next_page;
+  }
+  return all;
+}
+
+async function openSurah(chapterId){
+  currentChapter = chapters.find(c => c.id === chapterId);
+  if (!currentChapter) return;
+  document.getElementById('listView').style.display = 'none';
+  document.getElementById('readerView').classList.add('visible');
+  window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+
+  const t = T[lang];
+  document.getElementById('surahHeader').innerHTML = `
+    <div class="ar-name">${escapeHtml(currentChapter.name_arabic || '')}</div>
+    <div class="en-name">${escapeHtml(currentChapter.name_simple || '')} · ${escapeHtml((currentChapter.translated_name && currentChapter.translated_name.name) || '')}</div>
+    <div class="sub-line">${currentChapter.id} · ${currentChapter.revelation_place === 'makkah' ? (t.meccan||'') : (t.medinan||'')} · ${currentChapter.verses_count} ${t.verses_word||''}</div>
+  `;
+
+  const versesList = document.getElementById('versesList');
+  const state = document.getElementById('readerState');
+  const note = document.getElementById('translationNote');
+  note.style.display = 'none';
+  versesList.innerHTML = '';
+  state.style.display = 'block';
+  state.textContent = t.loading_verses || '';
+
+  try {
+    await setupReciterSelect();
+    await loadAudio(chapterId, currentReciterId);
+
+    const resolved = await resolveTranslation();
+    if (resolved.usedFallback) {
+      note.style.display = 'block';
+      note.textContent = t.translation_fallback || '';
+    }
+    const verses = await fetchAllVerses(chapterId, resolved.id);
+    state.style.display = 'none';
+    versesList.innerHTML = verses.map(v => {
+      const trText = v.translations && v.translations[0] ? stripTags(v.translations[0].text) : '';
+      return `
+        <div class="verse">
+          <div class="verse-num">${v.verse_number}</div>
+          <div class="verse-ar">${escapeHtml(v.text_uthmani || '')}</div>
+          ${trText ? `<div class="verse-tr">${escapeHtml(trText)}</div>` : ''}
+        </div>
+      `;
+    }).join('');
+  } catch (e) {
+    state.style.display = 'block';
+    state.innerHTML = (t.error_generic || '') +
+      ' <a href="https://quran.com/' + chapterId + '" target="_blank" rel="noopener">' + (t.error_link || 'Quran.com') + '</a>';
+  }
+}
+
+function closeSurah(){
+  document.getElementById('readerView').classList.remove('visible');
+  document.getElementById('listView').style.display = 'block';
+  document.getElementById('audioPlayer').pause();
+  document.getElementById('audioPlayer').removeAttribute('src');
+  currentChapter = null;
+}
+
+async function setupReciterSelect(){
+  const sel = document.getElementById('reciterSelect');
+  try {
+    const reciters = await ensureReciters();
+    if (!reciters.length) { sel.innerHTML = ''; sel.style.display = 'none'; return; }
+    sel.style.display = '';
+    sel.innerHTML = reciters.map(r =>
+      `<option value="${r.id}">${escapeHtml(r.name || (r.translated_name && r.translated_name.name) || ('#' + r.id))}</option>`
+    ).join('');
+    if (!currentReciterId || !reciters.some(r => r.id === currentReciterId)) {
+      currentReciterId = reciters[0].id;
+    }
+    sel.value = currentReciterId;
+  } catch (e) {
+    sel.style.display = 'none';
+  }
+}
+
+async function onReciterChange(){
+  const sel = document.getElementById('reciterSelect');
+  currentReciterId = Number(sel.value);
+  if (currentChapter) await loadAudio(currentChapter.id, currentReciterId);
+}
+
+async function loadAudio(chapterId, reciterId){
+  const player = document.getElementById('audioPlayer');
+  if (!reciterId) return;
+  try {
+    const data = await fetchJSON(API + '/chapter_recitations/' + reciterId + '/' + chapterId);
+    const url = data.audio_file && data.audio_file.audio_url;
+    if (url) {
+      player.src = url.startsWith('http') ? url : ('https://' + url.replace(/^\/+/, ''));
+    }
+  } catch (e) {
+    // Audio is a bonus, not the core reading experience — fail silently and
+    // leave the player without a source rather than blocking the verse text.
+  }
+}
+
+/* ── INIT ── */
+(function init(){
+  const savedTheme = localStorage.getItem('amn_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  const savedLang = localStorage.getItem('amn_lang') || 'en';
+  const flagMap = {en:'gb',ar:'sa',ru:'ru',tj:'tj',id:'id',tr:'tr',zh:'cn',ms:'my',fr:'fr',de:'de'};
+  const nameMap = {en:'English',ar:'العربية',ru:'Русский',tj:'Тоҷикӣ',id:'Indonesia',tr:'Türkçe',zh:'中文',ms:'Melayu',fr:'Français',de:'Deutsch'};
+  const l = T[savedLang] ? savedLang : 'en';
+  document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + (flagMap[l] || 'gb') + '.png';
+  document.getElementById('langName').textContent = nameMap[l] || 'English';
+  setLang(l);
+  document.getElementById('listState').style.display = 'block';
+  document.getElementById('listState').textContent = T[l].loading_chapters || '';
+  loadChapters();
+})();
+</script>
+</body>
+</html>

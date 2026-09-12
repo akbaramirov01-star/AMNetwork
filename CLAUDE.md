@@ -96,6 +96,7 @@ Verified local representatives who confirm recipient physical presence:
 - `/zakat/` — Zakat Calculator (assets, nisab, 159 countries)
 - `/apply/` — Application form (5 steps, Google Sheets integration, live)
 - `/investors/` — Investor pitch page (noindex)
+- `/quran/` — The Noble Quran: 114 surahs, live from the Quran.com API (Quran Foundation) — Tanzil Uthmani Arabic text, certified translations, official reciter audio. We never store, edit or translate this content ourselves; it is always fetched live and shown exactly as published. UI chrome in 10 languages.
 
 ### Integrations working
 - **Waitlist → Google Sheets:** `AKfycbwuptTPU4ObtwesM86tvR2wObS5sXiIkKMvpZFZr_ReV_wD8nXIkTFdnT_C_2snrHFv/exec`
