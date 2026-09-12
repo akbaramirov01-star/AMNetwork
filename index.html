@@ -665,6 +665,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         <button type="button" role="option" onclick="selectLang('tr','tr','Türkçe')" style="display:flex;align-items:center;gap:8px;padding:13px 14px;cursor:pointer;font-size:13px;color:var(--text2);width:100%;background:transparent;border:none;font-family:\'DM Sans\',sans-serif;text-align:left" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='transparent'"><img src="https://flagcdn.com/w20/tr.png" style="width:18px;height:13px;border-radius:2px;object-fit:cover" alt="" loading="lazy"> Türkçe</button>
         <button type="button" role="option" onclick="selectLang('zh','cn','中文')" style="display:flex;align-items:center;gap:8px;padding:13px 14px;cursor:pointer;font-size:13px;color:var(--text2);width:100%;background:transparent;border:none;font-family:\'DM Sans\',sans-serif;text-align:left" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='transparent'"><img src="https://flagcdn.com/w20/cn.png" style="width:18px;height:13px;border-radius:2px;object-fit:cover" alt="" loading="lazy"> 中文</button>
         <button type="button" role="option" onclick="selectLang('ms','my','Melayu')" style="display:flex;align-items:center;gap:8px;padding:13px 14px;cursor:pointer;font-size:13px;color:var(--text2);width:100%;background:transparent;border:none;font-family:\'DM Sans\',sans-serif;text-align:left" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='transparent'"><img src="https://flagcdn.com/w20/my.png" style="width:18px;height:13px;border-radius:2px;object-fit:cover" alt="" loading="lazy"> Melayu</button>
+        <button type="button" role="option" onclick="selectLang('fr','fr','Français')" style="display:flex;align-items:center;gap:8px;padding:13px 14px;cursor:pointer;font-size:13px;color:var(--text2);width:100%;background:transparent;border:none;font-family:\'DM Sans\',sans-serif;text-align:left" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='transparent'"><img src="https://flagcdn.com/w20/fr.png" style="width:18px;height:13px;border-radius:2px;object-fit:cover" alt="" loading="lazy"> Français</button>
         <button type="button" role="option" onclick="selectLang('de','de','Deutsch')" style="display:flex;align-items:center;gap:8px;padding:13px 14px;cursor:pointer;font-size:13px;color:var(--text2);width:100%;background:transparent;border:none;font-family:\'DM Sans\',sans-serif;text-align:left" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='transparent'"><img src="https://flagcdn.com/w20/de.png" style="width:18px;height:13px;border-radius:2px;object-fit:cover" alt="" loading="lazy"> Deutsch</button>
       </div>
     </div>
@@ -1646,7 +1647,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=af21d5353a"></script>
+<script src="/i18n-data.js?v=eb2499d7d2"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)
@@ -1767,14 +1768,14 @@ function setLang(l){
 }
 
 // ── HERO MOSQUE BACKDROP — one real mosque per language, crossfades on switch ──
-// Only the active language's image is ever fetched (no upfront 9-image cost);
+// Only the active language's image is ever fetched (no upfront 10-image cost);
 // a fresh pick loads into the hidden layer, then swaps once decoded so there's
-// never a blank flash. French isn't wired in yet — it isn't a full site
-// language (no translated strings), so there's no 'fr' case to trigger it.
+// never a blank flash.
 const HERO_MOSQUES = {
   tj:'/mosques/tj.webp', tr:'/mosques/tr.webp', ms:'/mosques/ms.webp',
   ar:'/mosques/ar.webp', id:'/mosques/id.webp', zh:'/mosques/zh.webp',
-  ru:'/mosques/ru.webp', en:'/mosques/en.webp', de:'/mosques/de.webp'
+  ru:'/mosques/ru.webp', en:'/mosques/en.webp', fr:'/mosques/fr.webp',
+  de:'/mosques/de.webp'
 };
 let heroMosqueFront = null;
 function setHeroMosque(l){
@@ -1961,12 +1962,12 @@ document.getElementById('asstInput').addEventListener('keydown', e=>{ if(e.key==
 // ── COOKIE (handled by DOMContentLoaded below) ──
 
 // ── INIT ──
-const SUPPORTED_LANGS=['en','ar','ru','tj','id','tr','zh','ms'];
+const SUPPORTED_LANGS=['en','ar','ru','tj','id','tr','zh','ms','fr','de'];
 function detectLang(){
   const s=localStorage.getItem('amn_lang');
   if(s&&SUPPORTED_LANGS.includes(s)) return s;
   const n=(navigator.language||'en').toLowerCase().split('-')[0];
-  const m={ar:'ar',ru:'ru',tg:'tj',tj:'tj',id:'id',tr:'tr',zh:'zh',ms:'ms',my:'ms'};
+  const m={ar:'ar',ru:'ru',tg:'tj',tj:'tj',id:'id',tr:'tr',zh:'zh',ms:'ms',my:'ms',fr:'fr',de:'de'};
   return m[n]||'en';
 }
 const savedTheme = localStorage.getItem('amn_theme') || 'dark';
@@ -1977,8 +1978,8 @@ document.getElementById('themeBtn').textContent = savedTheme==='dark' ? '🌙' :
 document.getElementById('themeBtn').setAttribute('aria-label', savedTheme==='dark' ? 'Switch to light mode' : 'Switch to dark mode');
 
 // Set initial flag
-const LANG_FLAGS = {en:'gb',ar:'sa',ru:'ru',tj:'tj',id:'id',tr:'tr',zh:'cn',ms:'my',de:'de'};
-const LANG_NAMES = {en:'English',ar:'العربية',ru:'Русский',tj:'Тоҷикӣ',id:'Indonesia',tr:'Türkçe',zh:'中文',ms:'Melayu',de:'Deutsch'};
+const LANG_FLAGS = {en:'gb',ar:'sa',ru:'ru',tj:'tj',id:'id',tr:'tr',zh:'cn',ms:'my',fr:'fr',de:'de'};
+const LANG_NAMES = {en:'English',ar:'العربية',ru:'Русский',tj:'Тоҷикӣ',id:'Indonesia',tr:'Türkçe',zh:'中文',ms:'Melayu',fr:'Français',de:'Deutsch'};
 const flagEl = document.getElementById('langFlag');
 const nameEl = document.getElementById('langName');
 if(flagEl) flagEl.src = 'https://flagcdn.com/w20/'+(LANG_FLAGS[savedLang]||'gb')+'.png';

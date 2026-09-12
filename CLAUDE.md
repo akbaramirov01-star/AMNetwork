@@ -91,7 +91,7 @@ Verified local representatives who confirm recipient physical presence:
 ## What Is BUILT (as of June 2026)
 
 ### Live pages on amnetwork.io
-- `/` — Main site (8 languages, dark/light mode, all sections complete)
+- `/` — Main site (10 languages incl. French, dark/light mode, all sections complete)
 - `/ai_scoring/` — AI Scoring quiz (6 steps, score 0–100, client-side)
 - `/zakat/` — Zakat Calculator (assets, nisab, 159 countries)
 - `/apply/` — Application form (5 steps, Google Sheets integration, live)
