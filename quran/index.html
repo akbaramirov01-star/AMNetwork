@@ -122,11 +122,6 @@ main{padding-top:64px;min-height:100vh}
 .mode-btn{flex:1;padding:9px 10px;border:none;border-left:1px solid var(--input-border);background:var(--input-bg);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:background-color .15s ease,color .15s ease}
 .mode-btn:first-child{border-left:none}
 .mode-btn.active{background:var(--gold);color:#1a1a1a;font-weight:600}
-.repeat-fab{position:fixed;bottom:20px;inset-inline-end:20px;width:50px;height:50px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:150;box-shadow:0 6px 20px rgba(0,0,0,.25);transition:background-color .2s ease,color .2s ease,border-color .2s ease}
-.repeat-fab:hover{border-color:var(--gold)}
-.repeat-fab.active{background:var(--gold);color:#1a1a1a;border-color:var(--gold)}
-.repeat-fab-badge{position:absolute;top:-4px;inset-inline-end:-4px;min-width:16px;height:16px;padding:0 3px;border-radius:8px;background:var(--bg2);color:var(--gold);font-size:10px;font-weight:700;display:none;align-items:center;justify-content:center;border:1px solid var(--border);line-height:1}
-.repeat-fab.active .repeat-fab-badge{border-color:#1a1a1a}
 .resume-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--gold3);border:1px solid rgba(201,168,76,.3);border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:14px;color:var(--text)}
 .resume-banner .rb-actions{display:flex;gap:8px;flex-wrap:wrap}
 .resume-banner button{border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;background:transparent;color:var(--text)}
@@ -142,6 +137,11 @@ main{padding-top:64px;min-height:100vh}
 .verse-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--gold3);color:var(--gold);font-size:11px;font-weight:700}
 .verse-play-btn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--gold);cursor:pointer;padding:0;transition:background-color .2s ease}
 .verse-play-btn:hover,.verse-play-btn:focus-visible{background:var(--gold3)}
+.verse-repeat-btn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;padding:0;position:relative;transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+.verse-repeat-btn:hover,.verse-repeat-btn:focus-visible{background:var(--gold3)}
+.verse-repeat-btn.active{color:var(--gold);border-color:var(--gold)}
+.verse-repeat-badge{position:absolute;top:-4px;inset-inline-end:-4px;min-width:13px;height:13px;padding:0 2px;border-radius:7px;background:var(--bg2);color:var(--gold);font-size:8px;font-weight:700;display:none;align-items:center;justify-content:center;border:1px solid var(--border);line-height:1}
+.verse-repeat-btn.active .verse-repeat-badge{display:flex}
 .verse-ar{font-family:'Noto Naskh Arabic',serif;direction:rtl;text-align:right;font-size:26px;line-height:2.1;color:var(--text);margin-bottom:10px}
 .qword{cursor:pointer;border-radius:5px;padding:1px 2px;transition:background-color .15s ease}
 .qword:hover,.qword:focus-visible{background:var(--gold3);outline:none}
@@ -232,10 +232,6 @@ footer a{color:var(--gold);text-decoration:none}
           <button type="button" id="modeKhatmBtn" class="mode-btn" onclick="setReadingMode(true)" data-t="mode_khatm" data-t-title="khatm_label">Khatm mode</button>
         </div>
       </div>
-      <button type="button" id="repeatFab" class="repeat-fab" onclick="cycleRepeatMode()" aria-label="Repeat">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-        <span class="repeat-fab-badge" id="repeatFabBadge"></span>
-      </button>
       <div id="translationNote" class="translation-note" style="display:none" data-t="translation_fallback"></div>
       <div id="versesList"></div>
       <div id="readerState" class="state-msg" style="display:none"></div>
@@ -366,6 +362,12 @@ const RECITERS_EVERYAYAH = [
   // word-highlight-while-spoken feature for him.
   { id: 'Abdurrahmaan_As-Sudais_192kbps', name: 'Abdur-Rahman As-Sudais',
     names: { ar: 'عبد الرحمن السديس', ru: 'Абдур-Рахман ас-Судайс', tj: 'Абдурраҳмон ас-Судайс', zh: '阿卜杜拉赫曼·苏戴斯' } },
+  // These two aren't in the quran-align dataset either (it only ever
+  // covered the 11 reciters above) — audio-only, same graceful fallback.
+  { id: 'Maher_AlMuaiqly_64kbps', name: 'Maher Al Muaiqly',
+    names: { ar: 'ماهر المعيقلي', ru: 'Махер аль-Муайкли', tj: 'Моҳир ал-Муайқилӣ', zh: '马希尔·穆艾格利' } },
+  { id: 'Yasser_Ad-Dussary_128kbps', name: 'Yasser Al-Dosari',
+    names: { ar: 'ياسر الدوسري', ru: 'Ясер ад-Дусари', tj: 'Ёсир ад-Дусарӣ', zh: '亚西尔·杜萨里' } },
 ];
 function reciterDisplayName(r){
   return (r.names && r.names[lang]) || r.name;
@@ -733,18 +735,28 @@ async function loadSurahText(chapterId){
     const playBtn = `<button class="verse-play-btn" onclick="playVerse(${chapterId},${v.verse_number})" aria-label="${escapeHtml(t.play_audio || '')}" title="${escapeHtml(t.play_audio || '')}">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
       </button>`;
+    // One repeat mode applies globally, but the toggle sits right beside
+    // every verse's own play button — same idea as per-ayah play/pause —
+    // so it's always exactly where you're already looking, not stranded
+    // at the top of the page.
+    const repeatBtn = `<button class="verse-repeat-btn" onclick="cycleRepeatMode()" aria-label="Repeat">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        <span class="verse-repeat-badge"></span>
+      </button>`;
     const arabicHtml = renderArabicWords(v);
     return `
       <div class="verse" data-verse-key="${chapterId}:${v.verse_number}">
         <div class="verse-head">
           <div class="verse-num">${v.verse_number}</div>
           ${playBtn}
+          ${repeatBtn}
         </div>
         <div class="verse-ar">${arabicHtml}</div>
         ${trText ? `<div class="verse-tr">${escapeHtml(trText)}</div>` : ''}
       </div>
     `;
   }).join('');
+  updateRepeatButtons();
 }
 
 // Renders the Arabic line as per-word spans. Every token — and its
@@ -951,32 +963,29 @@ function setRepeatMode(mode){
   try { localStorage.setItem('amn_quran_repeat', mode); } catch (e) {}
   updateRepeatButtons();
 }
-// Cycles the single repeat FAB through the three modes — kept reachable at
-// any scroll position (unlike the old top-of-page buttons), since the icon
-// and badge alone convey the state without needing text.
+// Cycles repeat mode through the three states — every verse's repeat
+// button drives (and reflects) this same shared state, so tapping any one
+// of them updates them all.
 function cycleRepeatMode(){
   const order = ['none', 'once', 'infinite'];
   setRepeatMode(order[(order.indexOf(repeatMode) + 1) % order.length]);
 }
 function updateRepeatButtons(){
-  const fab = document.getElementById('repeatFab');
-  const badge = document.getElementById('repeatFabBadge');
-  if (!fab || !badge) return;
+  const buttons = document.querySelectorAll('.verse-repeat-btn');
+  if (!buttons.length) return;
   const t = T[lang] || T.en;
-  fab.classList.toggle('active', repeatMode !== 'none');
-  fab.setAttribute('aria-pressed', String(repeatMode !== 'none'));
-  if (repeatMode === 'once') {
-    badge.textContent = '1';
-    badge.style.display = 'flex';
-    fab.setAttribute('aria-label', t.repeat_once || 'Repeat once');
-  } else if (repeatMode === 'infinite') {
-    badge.textContent = '∞';
-    badge.style.display = 'flex';
-    fab.setAttribute('aria-label', t.repeat_inf || 'Repeat forever');
-  } else {
-    badge.style.display = 'none';
-    fab.setAttribute('aria-label', t.repeat_none || 'No repeat');
-  }
+  let label = t.repeat_none || 'No repeat';
+  let badgeText = '';
+  if (repeatMode === 'once') { label = t.repeat_once || 'Repeat once'; badgeText = '1'; }
+  else if (repeatMode === 'infinite') { label = t.repeat_inf || 'Repeat forever'; badgeText = '∞'; }
+  buttons.forEach(btn => {
+    btn.classList.toggle('active', repeatMode !== 'none');
+    btn.setAttribute('aria-pressed', String(repeatMode !== 'none'));
+    btn.setAttribute('aria-label', label);
+    btn.title = label;
+    const badge = btn.querySelector('.verse-repeat-badge');
+    if (badge) badge.textContent = badgeText;
+  });
 }
 // Re-labels the reciter dropdown's options in the current language without
 // touching the selection or restarting audio — called on a language switch.
