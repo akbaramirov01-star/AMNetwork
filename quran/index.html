@@ -18,7 +18,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0A1A11">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; media-src 'self' https://*.quran.com https://*.qurancdn.com; connect-src 'self' https://api.quran.com https://*.quran.com https://*.qurancdn.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; media-src 'self' https://*.quran.com https://*.qurancdn.com; connect-src 'self' https://api.quran.com https://*.quran.com https://*.qurancdn.com https://amnetwork.onrender.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
@@ -274,6 +274,10 @@ document.addEventListener('click', function(e){
    never edit or re-type any of it.
 ═══════════════════════════════════════════════════════ */
 const API = 'https://api.quran.com/api/v4';
+// Reciters and recitation audio require app credentials Quran Foundation
+// now gates behind OAuth2, so those two calls go through our own backend
+// (which holds the client secret) instead of straight to Quran Foundation.
+const BACKEND = 'https://amnetwork.onrender.com';
 const REQUEST_TIMEOUT_MS = 12000;
 
 const LANG_TO_QURAN = {
@@ -369,7 +373,7 @@ function filterSurahs(){ renderGrid(); }
 
 async function ensureReciters(){
   if (recitersList) return recitersList;
-  const data = await fetchJSON(API + '/resources/chapter_reciters?language=en');
+  const data = await fetchJSON(BACKEND + '/quran/reciters');
   let list = data.reciters || [];
   const score = r => {
     const name = ((r.name || '') + ' ' + (r.translated_name && r.translated_name.name || '')).toLowerCase();
@@ -566,7 +570,7 @@ async function loadAudio(chapterId, reciterId){
   if (!reciterId) return;
   showAudioStatus(null);
   try {
-    const data = await fetchJSON(API + '/chapter_recitations/' + reciterId + '/' + chapterId);
+    const data = await fetchJSON(BACKEND + '/quran/audio/' + reciterId + '/' + chapterId);
     const url = data.audio_file && data.audio_file.audio_url;
     if (url) {
       player.src = url.startsWith('http') ? url : ('https://' + url.replace(/^\/+/, ''));
