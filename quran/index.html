@@ -122,6 +122,11 @@ main{padding-top:64px;min-height:100vh}
 .mode-btn{flex:1;padding:9px 10px;border:none;border-left:1px solid var(--input-border);background:var(--input-bg);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:background-color .15s ease,color .15s ease}
 .mode-btn:first-child{border-left:none}
 .mode-btn.active{background:var(--gold);color:#1a1a1a;font-weight:600}
+.repeat-fab{position:fixed;bottom:20px;inset-inline-end:20px;width:50px;height:50px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:150;box-shadow:0 6px 20px rgba(0,0,0,.25);transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+.repeat-fab:hover{border-color:var(--gold)}
+.repeat-fab.active{background:var(--gold);color:#1a1a1a;border-color:var(--gold)}
+.repeat-fab-badge{position:absolute;top:-4px;inset-inline-end:-4px;min-width:16px;height:16px;padding:0 3px;border-radius:8px;background:var(--bg2);color:var(--gold);font-size:10px;font-weight:700;display:none;align-items:center;justify-content:center;border:1px solid var(--border);line-height:1}
+.repeat-fab.active .repeat-fab-badge{border-color:#1a1a1a}
 .resume-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--gold3);border:1px solid rgba(201,168,76,.3);border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:14px;color:var(--text)}
 .resume-banner .rb-actions{display:flex;gap:8px;flex-wrap:wrap}
 .resume-banner button{border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;background:transparent;color:var(--text)}
@@ -226,12 +231,11 @@ footer a{color:var(--gold);text-decoration:none}
           <button type="button" id="modeFreeBtn" class="mode-btn" onclick="setReadingMode(false)" data-t="mode_free">Free reading</button>
           <button type="button" id="modeKhatmBtn" class="mode-btn" onclick="setReadingMode(true)" data-t="mode_khatm" data-t-title="khatm_label">Khatm mode</button>
         </div>
-        <div class="mode-toggle" role="group" aria-label="Repeat">
-          <button type="button" id="repeatNoneBtn" class="mode-btn" onclick="setRepeatMode('none')" data-t="repeat_none">No repeat</button>
-          <button type="button" id="repeatOnceBtn" class="mode-btn" onclick="setRepeatMode('once')" data-t="repeat_once">Repeat once</button>
-          <button type="button" id="repeatInfBtn" class="mode-btn" onclick="setRepeatMode('infinite')" data-t="repeat_inf">Repeat forever</button>
-        </div>
       </div>
+      <button type="button" id="repeatFab" class="repeat-fab" onclick="cycleRepeatMode()" aria-label="Repeat">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        <span class="repeat-fab-badge" id="repeatFabBadge"></span>
+      </button>
       <div id="translationNote" class="translation-note" style="display:none" data-t="translation_fallback"></div>
       <div id="versesList"></div>
       <div id="readerState" class="state-msg" style="display:none"></div>
@@ -814,6 +818,7 @@ async function refreshOpenSurahLang(){
   if (!currentChapter) return;
   renderSurahHeader();
   refreshReciterSelectLabels();
+  updateRepeatButtons();
   try {
     await loadSurahText(currentChapter.id);
   } catch (e) {
@@ -946,17 +951,32 @@ function setRepeatMode(mode){
   try { localStorage.setItem('amn_quran_repeat', mode); } catch (e) {}
   updateRepeatButtons();
 }
+// Cycles the single repeat FAB through the three modes — kept reachable at
+// any scroll position (unlike the old top-of-page buttons), since the icon
+// and badge alone convey the state without needing text.
+function cycleRepeatMode(){
+  const order = ['none', 'once', 'infinite'];
+  setRepeatMode(order[(order.indexOf(repeatMode) + 1) % order.length]);
+}
 function updateRepeatButtons(){
-  const noneBtn = document.getElementById('repeatNoneBtn');
-  const onceBtn = document.getElementById('repeatOnceBtn');
-  const infBtn = document.getElementById('repeatInfBtn');
-  if (!noneBtn || !onceBtn || !infBtn) return;
-  noneBtn.classList.toggle('active', repeatMode === 'none');
-  onceBtn.classList.toggle('active', repeatMode === 'once');
-  infBtn.classList.toggle('active', repeatMode === 'infinite');
-  noneBtn.setAttribute('aria-pressed', String(repeatMode === 'none'));
-  onceBtn.setAttribute('aria-pressed', String(repeatMode === 'once'));
-  infBtn.setAttribute('aria-pressed', String(repeatMode === 'infinite'));
+  const fab = document.getElementById('repeatFab');
+  const badge = document.getElementById('repeatFabBadge');
+  if (!fab || !badge) return;
+  const t = T[lang] || T.en;
+  fab.classList.toggle('active', repeatMode !== 'none');
+  fab.setAttribute('aria-pressed', String(repeatMode !== 'none'));
+  if (repeatMode === 'once') {
+    badge.textContent = '1';
+    badge.style.display = 'flex';
+    fab.setAttribute('aria-label', t.repeat_once || 'Repeat once');
+  } else if (repeatMode === 'infinite') {
+    badge.textContent = '∞';
+    badge.style.display = 'flex';
+    fab.setAttribute('aria-label', t.repeat_inf || 'Repeat forever');
+  } else {
+    badge.style.display = 'none';
+    fab.setAttribute('aria-label', t.repeat_none || 'No repeat');
+  }
 }
 // Re-labels the reciter dropdown's options in the current language without
 // touching the selection or restarting audio — called on a language switch.
