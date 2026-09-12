@@ -210,6 +210,7 @@ footer a{color:var(--gold);text-decoration:none}
         <span id="audioStatus" class="audio-status" style="display:none"></span>
       </div>
       <div id="translationNote" class="translation-note" style="display:none" data-t="translation_fallback"></div>
+      <div id="timestampsNote" class="translation-note" style="display:none"></div>
       <div id="versesList"></div>
       <div id="readerState" class="state-msg" style="display:none"></div>
       <p class="disclaimer-note" data-t="disclaimer">This is a reading and listening tool, not a fatwa. For religious rulings, consult a qualified scholar.</p>
@@ -228,7 +229,7 @@ footer a{color:var(--gold);text-decoration:none}
    I18N (page chrome only — Quran text/translations/audio
    come live from the Quran.com API, never typed by us)
 ═══════════════════════════════════════════════════════ */
-const T = {"en":{"nav_back":"← Main site","page_badge":"Text: Tanzil · Certified translations · Official reciters","hero_eyebrow":"AM Academy","hero_h1":"The Holy Quran","hero_p":"We never write, edit or translate this content ourselves. The Arabic text comes from Tanzil (the verified Uthmani script used by Quran.com and most major Quran apps), translations come from certified scholars, and recitations come from officially licensed reciters — displayed exactly as published, word for word.","search_ph":"Search a surah by name or number…","meccan":"Meccan","medinan":"Medinan","verses_word":"verses","loading_chapters":"Loading the surahs…","loading_verses":"Loading the verses…","error_generic":"Could not load this content right now. Please try again in a moment, or read it directly on Quran.com.","error_link":"Open on Quran.com →","reciter_label":"Reciter","translation_label":"Translation","translation_fallback":"No certified translation is available yet in this language — showing English.","back_to_list":"← All Surahs","source_note":"Arabic text: Tanzil Project (Uthmani script). Translations and audio: Quran Foundation, via the public Quran.com API. AM Network does not host, edit or modify this content.","disclaimer":"This is a reading and listening tool, not a fatwa. For religious rulings, consult a qualified scholar.","no_results":"No surah matches your search.","play_audio":"Play recitation","audio_unavailable":"Recitation audio is temporarily unavailable."},"ar":{"nav_back":"← الموقع الرئيسي","page_badge":"النص: تنزيل · ترجمات موثّقة · قرّاء رسميون","hero_eyebrow":"AM Academy","hero_h1":"القرآن الكريم","hero_p":"نحن لا نكتب هذا المحتوى أو نحرّره أو نترجمه بأنفسنا أبداً. النص العربي مأخوذ من مشروع تنزيل (الرسم العثماني الموثّق الذي يعتمده Quran.com وأغلب تطبيقات القرآن الكبرى)، والترجمات من علماء معتمدين، والتلاوات من قرّاء مرخّصين رسمياً — تُعرض هنا كما نُشرت تماماً، كلمة بكلمة.","search_ph":"ابحث عن سورة بالاسم أو الرقم…","meccan":"مكية","medinan":"مدنية","verses_word":"آيات","loading_chapters":"جارٍ تحميل السور…","loading_verses":"جارٍ تحميل الآيات…","error_generic":"تعذّر تحميل هذا المحتوى الآن. حاول مرة أخرى بعد قليل، أو اقرأه مباشرة على Quran.com.","error_link":"افتح على Quran.com ←","reciter_label":"القارئ","translation_label":"الترجمة","translation_fallback":"لا توجد حالياً ترجمة موثّقة بهذه اللغة — يُعرض النص بالإنجليزية.","back_to_list":"← جميع السور","source_note":"النص العربي: مشروع تنزيل (الرسم العثماني). الترجمات والتلاوات: Quran Foundation عبر واجهة Quran.com العامة. لا تستضيف AM Network هذا المحتوى ولا تحرّره أو تعدّله.","disclaimer":"هذه أداة قراءة واستماع، وليست فتوى. للأحكام الشرعية، استشر عالماً مؤهلاً.","no_results":"لا توجد سورة مطابقة لبحثك.","play_audio":"تشغيل التلاوة","audio_unavailable":"تلاوة الصوت غير متوفرة مؤقتاً."},"ru":{"nav_back":"← Главный сайт","page_badge":"Текст: Tanzil · Проверенные переводы · Официальные чтецы","hero_eyebrow":"AM Academy","hero_h1":"Благородный Коран","hero_p":"Мы никогда сами не пишем, не редактируем и не переводим этот текст. Арабский текст взят из проекта Tanzil (проверенное усмановское написание, на которое опирается Quran.com и большинство крупных приложений с Кораном), переводы — от сертифицированных учёных, чтения — от официально лицензированных чтецов. Всё отображается точно так, как опубликовано, слово в слово.","search_ph":"Найти суру по названию или номеру…","meccan":"Мекканская","medinan":"Мединская","verses_word":"аятов","loading_chapters":"Загрузка сур…","loading_verses":"Загрузка аятов…","error_generic":"Не удалось загрузить этот раздел. Попробуйте ещё раз через минуту или прочитайте на Quran.com.","error_link":"Открыть на Quran.com →","reciter_label":"Чтец","translation_label":"Перевод","translation_fallback":"Проверенного перевода на этот язык пока нет — показан английский.","back_to_list":"← Все суры","source_note":"Арабский текст: проект Tanzil (усмановское написание). Переводы и аудио: Quran Foundation через открытый API Quran.com. AM Network не хранит, не редактирует и не изменяет этот контент.","disclaimer":"Это инструмент для чтения и прослушивания, а не фетва. По религиозным вопросам обращайтесь к квалифицированному учёному.","no_results":"Сура по вашему запросу не найдена.","play_audio":"Слушать чтение","audio_unavailable":"Аудио чтение временно недоступно."},"tj":{"nav_back":"← Сайти асосӣ","page_badge":"Матн: Tanzil · Тарҷумаҳои тасдиқшуда · Қориёни расмӣ","hero_eyebrow":"AM Academy","hero_h1":"Қуръони Карим","hero_p":"Мо ин мазмунро худамон ҳаргиз намедиҳем, таҳрир намекунем ва тарҷума намекунем. Матни арабӣ аз лоиҳаи Tanzil гирифта шудааст (хатти усмонии тасдиқшуда, ки Quran.com ва аксари барномаҳои бузурги Қуръон ба он такя мекунанд), тарҷумаҳо аз олимони тасдиқшуда ва қироатҳо аз қориёни расмӣ иҷозатдодашуда — маҳз тавре ки нашр шудаанд, калима ба калима нишон дода мешаванд.","search_ph":"Сураро бо ном ё рақам ёбед…","meccan":"Дар Макка нозил шудааст","medinan":"Дар Мадина нозил шудааст","verses_word":"оят","loading_chapters":"Боркунии сураҳо…","loading_verses":"Боркунии оятҳо…","error_generic":"Ин мазмун ҳозир бор нашуд. Лутфан баъди чанде дубора кӯшиш кунед ё онро мустақим дар Quran.com хонед.","error_link":"Дар Quran.com кушоед →","reciter_label":"Қорӣ","translation_label":"Тарҷума","translation_fallback":"Ба ин забон ҳанӯз тарҷумаи тасдиқшуда нест — матни англисӣ нишон дода мешавад.","back_to_list":"← Ҳамаи сураҳо","source_note":"Матни арабӣ: лоиҳаи Tanzil (хатти усмонӣ). Тарҷумаҳо ва аудио: Quran Foundation тавассути API-и кушоди Quran.com. AM Network ин мазмунро намеҳобад, таҳрир намекунад ва тағйир намедиҳад.","disclaimer":"Ин абзори хондан ва шунидан аст, на фатво. Барои масъалаҳои шариат ба олими соҳибтахассус муроҷиат кунед.","no_results":"Сурае мувофиқи ҷустуҷӯи шумо ёфт нашуд.","play_audio":"Пахши қироат","audio_unavailable":"Аудиои қироат мувақкатан дастнорас аст.","translation_src_tj":"Тарҷумаи маъно: устод Абдулмуҳаммад Оятӣ, тавассути лоиҳаи Tanzil.net"},"id":{"nav_back":"← Situs utama","page_badge":"Teks: Tanzil · Terjemahan bersertifikat · Qari resmi","hero_eyebrow":"AM Academy","hero_h1":"Al-Qur'an Al-Karim","hero_p":"Kami tidak pernah menulis, menyunting, atau menerjemahkan konten ini sendiri. Teks Arab berasal dari proyek Tanzil (naskah Utsmani terverifikasi yang digunakan Quran.com dan sebagian besar aplikasi Al-Qur'an besar), terjemahan berasal dari ulama bersertifikat, dan bacaan berasal dari qari berlisensi resmi — ditampilkan persis seperti yang dipublikasikan, kata demi kata.","search_ph":"Cari surah berdasarkan nama atau nomor…","meccan":"Makkiyah","medinan":"Madaniyah","verses_word":"ayat","loading_chapters":"Memuat daftar surah…","loading_verses":"Memuat ayat…","error_generic":"Konten ini tidak dapat dimuat saat ini. Coba lagi sebentar, atau baca langsung di Quran.com.","error_link":"Buka di Quran.com →","reciter_label":"Qari","translation_label":"Terjemahan","translation_fallback":"Belum ada terjemahan bersertifikat dalam bahasa ini — menampilkan bahasa Inggris.","back_to_list":"← Semua Surah","source_note":"Teks Arab: Tanzil Project (naskah Utsmani). Terjemahan dan audio: Quran Foundation, melalui API publik Quran.com. AM Network tidak menyimpan, menyunting, atau mengubah konten ini.","disclaimer":"Ini adalah alat membaca dan mendengarkan, bukan fatwa. Untuk hukum keagamaan, konsultasikan dengan ulama yang berkompeten.","no_results":"Tidak ada surah yang cocok dengan pencarian Anda.","play_audio":"Putar bacaan","audio_unavailable":"Audio bacaan sementara tidak tersedia."},"tr":{"nav_back":"← Ana site","page_badge":"Metin: Tanzil · Onaylı çeviriler · Resmî hafızlar","hero_eyebrow":"AM Academy","hero_h1":"Kur'an-ı Kerim","hero_p":"Bu içeriği asla kendimiz yazmıyor, düzenlemiyor veya çevirmiyoruz. Arapça metin, Quran.com ve başlıca Kur'an uygulamalarının dayandığı doğrulanmış Osmanlı hattını sunan Tanzil projesinden alınmıştır; çeviriler onaylı âlimlerden, tilavetler ise resmî lisanslı hafızlardan gelir — tam olarak yayınlandığı gibi, kelimesi kelimesine gösterilir.","search_ph":"Sure ismi veya numarasıyla ara…","meccan":"Mekkî","medinan":"Medenî","verses_word":"ayet","loading_chapters":"Sureler yükleniyor…","loading_verses":"Ayetler yükleniyor…","error_generic":"Bu içerik şu anda yüklenemedi. Lütfen biraz sonra tekrar deneyin veya doğrudan Quran.com üzerinden okuyun.","error_link":"Quran.com'da aç →","reciter_label":"Hafız","translation_label":"Çeviri","translation_fallback":"Bu dilde henüz onaylı bir çeviri yok — İngilizce gösteriliyor.","back_to_list":"← Tüm Sureler","source_note":"Arapça metin: Tanzil Projesi (Osmanlı hattı). Çeviriler ve ses: Quran Foundation, Quran.com'un genel API'si üzerinden. AM Network bu içeriği barındırmaz, düzenlemez veya değiştirmez.","disclaimer":"Bu bir okuma ve dinleme aracıdır, fetva değildir. Dinî hükümler için yetkin bir âlime danışın.","no_results":"Aramanıza uyan bir sure bulunamadı.","play_audio":"Tilaveti dinle","audio_unavailable":"Tilavet sesi geçici olarak kullanılamıyor."},"zh":{"nav_back":"← 主站","page_badge":"文本：Tanzil · 认证译本 · 官方诵读者","hero_eyebrow":"AM Academy","hero_h1":"尊贵的古兰经","hero_p":"我们从不自行撰写、编辑或翻译此内容。阿拉伯文文本来自 Tanzil 项目（Quran.com 及大多数主流古兰经应用所采用的经过核实的奥斯曼字体版本），译文来自认证学者，诵读来自officially持证的诵读者——完全按照原始发布内容逐字呈现。","search_ph":"按名称或编号搜索章节…","meccan":"麦加章","medinan":"麦地那章","verses_word":"节经文","loading_chapters":"正在加载章节…","loading_verses":"正在加载经文…","error_generic":"目前无法加载此内容。请稍后再试，或直接在 Quran.com 上阅读。","error_link":"在 Quran.com 打开 →","reciter_label":"诵读者","translation_label":"译本","translation_fallback":"此语言暂无认证译本 — 显示英文译本。","back_to_list":"← 所有章节","source_note":"阿拉伯文文本：Tanzil 项目（奥斯曼字体）。译文与音频：Quran Foundation，通过 Quran.com 公共 API 提供。AM Network 不托管、编辑或修改此内容。","disclaimer":"这是一个阅读和聆听工具，不是教法裁决。宗教裁决请咨询合格学者。","no_results":"没有找到符合搜索条件的章节。","play_audio":"播放诵读","audio_unavailable":"诵读音频暂时无法使用。"},"ms":{"nav_back":"← Laman utama","page_badge":"Teks: Tanzil · Terjemahan bertauliah · Qari rasmi","hero_eyebrow":"AM Academy","hero_h1":"Al-Quran Al-Karim","hero_p":"Kami tidak pernah menulis, menyunting atau menterjemah kandungan ini sendiri. Teks Arab diambil daripada projek Tanzil (naskhah Uthmani yang disahkan dan digunakan oleh Quran.com serta kebanyakan aplikasi Al-Quran utama), terjemahan daripada ulama bertauliah, dan bacaan daripada qari berlesen rasmi — dipaparkan tepat seperti yang diterbitkan, perkataan demi perkataan.","search_ph":"Cari surah mengikut nama atau nombor…","meccan":"Makkiyah","medinan":"Madaniyah","verses_word":"ayat","loading_chapters":"Memuatkan senarai surah…","loading_verses":"Memuatkan ayat…","error_generic":"Kandungan ini tidak dapat dimuatkan sekarang. Sila cuba sebentar lagi, atau baca terus di Quran.com.","error_link":"Buka di Quran.com →","reciter_label":"Qari","translation_label":"Terjemahan","translation_fallback":"Belum ada terjemahan bertauliah dalam bahasa ini — memaparkan Bahasa Inggeris.","back_to_list":"← Semua Surah","source_note":"Teks Arab: Projek Tanzil (naskhah Uthmani). Terjemahan dan audio: Quran Foundation, melalui API awam Quran.com. AM Network tidak menyimpan, menyunting atau mengubah kandungan ini.","disclaimer":"Ini adalah alat membaca dan mendengar, bukan fatwa. Untuk hukum agama, rujuk kepada ulama yang bertauliah.","no_results":"Tiada surah yang sepadan dengan carian anda.","play_audio":"Mainkan bacaan","audio_unavailable":"Audio bacaan buat masa ini tidak tersedia."},"fr":{"nav_back":"← Site principal","page_badge":"Texte : Tanzil · Traductions certifiées · Récitateurs officiels","hero_eyebrow":"AM Academy","hero_h1":"Le Noble Coran","hero_p":"Nous n'écrivons, ne modifions ni ne traduisons jamais ce contenu nous-mêmes. Le texte arabe provient du projet Tanzil (l'écriture ottomane vérifiée sur laquelle s'appuient Quran.com et la plupart des grandes applications du Coran), les traductions proviennent d'érudits certifiés, et les récitations proviennent de récitateurs officiellement agréés — affichés exactement comme publiés, mot pour mot.","search_ph":"Rechercher une sourate par nom ou numéro…","meccan":"Mecquoise","medinan":"Médinoise","verses_word":"versets","loading_chapters":"Chargement des sourates…","loading_verses":"Chargement des versets…","error_generic":"Impossible de charger ce contenu pour le moment. Veuillez réessayer dans un instant, ou le lire directement sur Quran.com.","error_link":"Ouvrir sur Quran.com →","reciter_label":"Récitateur","translation_label":"Traduction","translation_fallback":"Aucune traduction certifiée n'existe encore dans cette langue — affichage en anglais.","back_to_list":"← Toutes les sourates","source_note":"Texte arabe : projet Tanzil (écriture ottomane). Traductions et audio : Quran Foundation, via l'API publique de Quran.com. AM Network n'héberge, ne modifie ni n'édite ce contenu.","disclaimer":"Ceci est un outil de lecture et d'écoute, pas une fatwa. Pour les questions religieuses, consultez un érudit qualifié.","no_results":"Aucune sourate ne correspond à votre recherche.","play_audio":"Écouter la récitation","audio_unavailable":"L'audio de récitation est temporairement indisponible."},"de":{"nav_back":"← Hauptseite","page_badge":"Text: Tanzil · Zertifizierte Übersetzungen · Offizielle Rezitatoren","hero_eyebrow":"AM Academy","hero_h1":"Der Edle Koran","hero_p":"Wir schreiben, bearbeiten oder übersetzen diesen Inhalt niemals selbst. Der arabische Text stammt aus dem Tanzil-Projekt (die verifizierte osmanische Schrift, auf die sich Quran.com und die meisten großen Koran-Apps stützen), Übersetzungen stammen von zertifizierten Gelehrten, und Rezitationen stammen von offiziell lizenzierten Rezitatoren — genau so angezeigt, wie sie veröffentlicht wurden, Wort für Wort.","search_ph":"Sure nach Name oder Nummer suchen…","meccan":"Mekkanisch","medinan":"Medinensisch","verses_word":"Verse","loading_chapters":"Suren werden geladen…","loading_verses":"Verse werden geladen…","error_generic":"Dieser Inhalt konnte gerade nicht geladen werden. Bitte versuchen Sie es in Kürze erneut oder lesen Sie ihn direkt auf Quran.com.","error_link":"Auf Quran.com öffnen →","reciter_label":"Rezitator","translation_label":"Übersetzung","translation_fallback":"In dieser Sprache liegt noch keine zertifizierte Übersetzung vor — Englisch wird angezeigt.","back_to_list":"← Alle Suren","source_note":"Arabischer Text: Tanzil-Projekt (osmanische Schrift). Übersetzungen und Audio: Quran Foundation, über die öffentliche API von Quran.com. AM Network hostet, bearbeitet oder verändert diesen Inhalt nicht.","disclaimer":"Dies ist ein Lese- und Hörwerkzeug, keine Fatwa. Für religiöse Urteile konsultieren Sie einen qualifizierten Gelehrten.","no_results":"Keine Sure entspricht Ihrer Suche.","play_audio":"Rezitation abspielen","audio_unavailable":"Rezitations-Audio ist vorübergehend nicht verfügbar."}};
+const T = {"en":{"nav_back":"← Main site","page_badge":"Text: Tanzil · Certified translations · Official reciters","hero_eyebrow":"AM Academy","hero_h1":"The Holy Quran","hero_p":"We never write, edit or translate this content ourselves. The Arabic text comes from Tanzil (the verified Uthmani script used by Quran.com and most major Quran apps), translations come from certified scholars, and recitations come from officially licensed reciters — displayed exactly as published, word for word.","search_ph":"Search a surah by name or number…","meccan":"Meccan","medinan":"Medinan","verses_word":"verses","loading_chapters":"Loading the surahs…","loading_verses":"Loading the verses…","error_generic":"Could not load this content right now. Please try again in a moment, or read it directly on Quran.com.","error_link":"Open on Quran.com →","reciter_label":"Reciter","translation_label":"Translation","translation_fallback":"No certified translation is available yet in this language — showing English.","back_to_list":"← All Surahs","source_note":"Arabic text: Tanzil Project (Uthmani script). Translations and audio: Quran Foundation, via the public Quran.com API. AM Network does not host, edit or modify this content.","disclaimer":"This is a reading and listening tool, not a fatwa. For religious rulings, consult a qualified scholar.","no_results":"No surah matches your search.","play_audio":"Play recitation","audio_unavailable":"Recitation audio is temporarily unavailable.","timestamps_note":"Ayah-by-ayah highlighting and single-ayah playback aren't available for this reciter yet."},"ar":{"nav_back":"← الموقع الرئيسي","page_badge":"النص: تنزيل · ترجمات موثّقة · قرّاء رسميون","hero_eyebrow":"AM Academy","hero_h1":"القرآن الكريم","hero_p":"نحن لا نكتب هذا المحتوى أو نحرّره أو نترجمه بأنفسنا أبداً. النص العربي مأخوذ من مشروع تنزيل (الرسم العثماني الموثّق الذي يعتمده Quran.com وأغلب تطبيقات القرآن الكبرى)، والترجمات من علماء معتمدين، والتلاوات من قرّاء مرخّصين رسمياً — تُعرض هنا كما نُشرت تماماً، كلمة بكلمة.","search_ph":"ابحث عن سورة بالاسم أو الرقم…","meccan":"مكية","medinan":"مدنية","verses_word":"آيات","loading_chapters":"جارٍ تحميل السور…","loading_verses":"جارٍ تحميل الآيات…","error_generic":"تعذّر تحميل هذا المحتوى الآن. حاول مرة أخرى بعد قليل، أو اقرأه مباشرة على Quran.com.","error_link":"افتح على Quran.com ←","reciter_label":"القارئ","translation_label":"الترجمة","translation_fallback":"لا توجد حالياً ترجمة موثّقة بهذه اللغة — يُعرض النص بالإنجليزية.","back_to_list":"← جميع السور","source_note":"النص العربي: مشروع تنزيل (الرسم العثماني). الترجمات والتلاوات: Quran Foundation عبر واجهة Quran.com العامة. لا تستضيف AM Network هذا المحتوى ولا تحرّره أو تعدّله.","disclaimer":"هذه أداة قراءة واستماع، وليست فتوى. للأحكام الشرعية، استشر عالماً مؤهلاً.","no_results":"لا توجد سورة مطابقة لبحثك.","play_audio":"تشغيل التلاوة","audio_unavailable":"تلاوة الصوت غير متوفرة مؤقتاً.","timestamps_note":"التمييز آية بآية والاستماع لآية واحدة غير متوفرين لهذا القارئ حالياً."},"ru":{"nav_back":"← Главный сайт","page_badge":"Текст: Tanzil · Проверенные переводы · Официальные чтецы","hero_eyebrow":"AM Academy","hero_h1":"Благородный Коран","hero_p":"Мы никогда сами не пишем, не редактируем и не переводим этот текст. Арабский текст взят из проекта Tanzil (проверенное усмановское написание, на которое опирается Quran.com и большинство крупных приложений с Кораном), переводы — от сертифицированных учёных, чтения — от официально лицензированных чтецов. Всё отображается точно так, как опубликовано, слово в слово.","search_ph":"Найти суру по названию или номеру…","meccan":"Мекканская","medinan":"Мединская","verses_word":"аятов","loading_chapters":"Загрузка сур…","loading_verses":"Загрузка аятов…","error_generic":"Не удалось загрузить этот раздел. Попробуйте ещё раз через минуту или прочитайте на Quran.com.","error_link":"Открыть на Quran.com →","reciter_label":"Чтец","translation_label":"Перевод","translation_fallback":"Проверенного перевода на этот язык пока нет — показан английский.","back_to_list":"← Все суры","source_note":"Арабский текст: проект Tanzil (усмановское написание). Переводы и аудио: Quran Foundation через открытый API Quran.com. AM Network не хранит, не редактирует и не изменяет этот контент.","disclaimer":"Это инструмент для чтения и прослушивания, а не фетва. По религиозным вопросам обращайтесь к квалифицированному учёному.","no_results":"Сура по вашему запросу не найдена.","play_audio":"Слушать чтение","audio_unavailable":"Аудио чтение временно недоступно.","timestamps_note":"Подсветка по аятам и прослушивание отдельного аята пока недоступны для этого чтеца."},"tj":{"nav_back":"← Сайти асосӣ","page_badge":"Матн: Tanzil · Тарҷумаҳои тасдиқшуда · Қориёни расмӣ","hero_eyebrow":"AM Academy","hero_h1":"Қуръони Карим","hero_p":"Мо ин мазмунро худамон ҳаргиз намедиҳем, таҳрир намекунем ва тарҷума намекунем. Матни арабӣ аз лоиҳаи Tanzil гирифта шудааст (хатти усмонии тасдиқшуда, ки Quran.com ва аксари барномаҳои бузурги Қуръон ба он такя мекунанд), тарҷумаҳо аз олимони тасдиқшуда ва қироатҳо аз қориёни расмӣ иҷозатдодашуда — маҳз тавре ки нашр шудаанд, калима ба калима нишон дода мешаванд.","search_ph":"Сураро бо ном ё рақам ёбед…","meccan":"Дар Макка нозил шудааст","medinan":"Дар Мадина нозил шудааст","verses_word":"оят","loading_chapters":"Боркунии сураҳо…","loading_verses":"Боркунии оятҳо…","error_generic":"Ин мазмун ҳозир бор нашуд. Лутфан баъди чанде дубора кӯшиш кунед ё онро мустақим дар Quran.com хонед.","error_link":"Дар Quran.com кушоед →","reciter_label":"Қорӣ","translation_label":"Тарҷума","translation_fallback":"Ба ин забон ҳанӯз тарҷумаи тасдиқшуда нест — матни англисӣ нишон дода мешавад.","back_to_list":"← Ҳамаи сураҳо","source_note":"Матни арабӣ: лоиҳаи Tanzil (хатти усмонӣ). Тарҷумаҳо ва аудио: Quran Foundation тавассути API-и кушоди Quran.com. AM Network ин мазмунро намеҳобад, таҳрир намекунад ва тағйир намедиҳад.","disclaimer":"Ин абзори хондан ва шунидан аст, на фатво. Барои масъалаҳои шариат ба олими соҳибтахассус муроҷиат кунед.","no_results":"Сурае мувофиқи ҷустуҷӯи шумо ёфт нашуд.","play_audio":"Пахши қироат","audio_unavailable":"Аудиои қироат мувақкатан дастнорас аст.","translation_src_tj":"Тарҷумаи маъно: устод Абдулмуҳаммад Оятӣ, тавассути лоиҳаи Tanzil.net","timestamps_note":"Равшаннамоии оят ба оят ва пахши як оят барои ин қорӣ ҳанӯз дастнорас аст."},"id":{"nav_back":"← Situs utama","page_badge":"Teks: Tanzil · Terjemahan bersertifikat · Qari resmi","hero_eyebrow":"AM Academy","hero_h1":"Al-Qur'an Al-Karim","hero_p":"Kami tidak pernah menulis, menyunting, atau menerjemahkan konten ini sendiri. Teks Arab berasal dari proyek Tanzil (naskah Utsmani terverifikasi yang digunakan Quran.com dan sebagian besar aplikasi Al-Qur'an besar), terjemahan berasal dari ulama bersertifikat, dan bacaan berasal dari qari berlisensi resmi — ditampilkan persis seperti yang dipublikasikan, kata demi kata.","search_ph":"Cari surah berdasarkan nama atau nomor…","meccan":"Makkiyah","medinan":"Madaniyah","verses_word":"ayat","loading_chapters":"Memuat daftar surah…","loading_verses":"Memuat ayat…","error_generic":"Konten ini tidak dapat dimuat saat ini. Coba lagi sebentar, atau baca langsung di Quran.com.","error_link":"Buka di Quran.com →","reciter_label":"Qari","translation_label":"Terjemahan","translation_fallback":"Belum ada terjemahan bersertifikat dalam bahasa ini — menampilkan bahasa Inggris.","back_to_list":"← Semua Surah","source_note":"Teks Arab: Tanzil Project (naskah Utsmani). Terjemahan dan audio: Quran Foundation, melalui API publik Quran.com. AM Network tidak menyimpan, menyunting, atau mengubah konten ini.","disclaimer":"Ini adalah alat membaca dan mendengarkan, bukan fatwa. Untuk hukum keagamaan, konsultasikan dengan ulama yang berkompeten.","no_results":"Tidak ada surah yang cocok dengan pencarian Anda.","play_audio":"Putar bacaan","audio_unavailable":"Audio bacaan sementara tidak tersedia.","timestamps_note":"Sorotan per ayat dan pemutaran satu ayat belum tersedia untuk qari ini."},"tr":{"nav_back":"← Ana site","page_badge":"Metin: Tanzil · Onaylı çeviriler · Resmî hafızlar","hero_eyebrow":"AM Academy","hero_h1":"Kur'an-ı Kerim","hero_p":"Bu içeriği asla kendimiz yazmıyor, düzenlemiyor veya çevirmiyoruz. Arapça metin, Quran.com ve başlıca Kur'an uygulamalarının dayandığı doğrulanmış Osmanlı hattını sunan Tanzil projesinden alınmıştır; çeviriler onaylı âlimlerden, tilavetler ise resmî lisanslı hafızlardan gelir — tam olarak yayınlandığı gibi, kelimesi kelimesine gösterilir.","search_ph":"Sure ismi veya numarasıyla ara…","meccan":"Mekkî","medinan":"Medenî","verses_word":"ayet","loading_chapters":"Sureler yükleniyor…","loading_verses":"Ayetler yükleniyor…","error_generic":"Bu içerik şu anda yüklenemedi. Lütfen biraz sonra tekrar deneyin veya doğrudan Quran.com üzerinden okuyun.","error_link":"Quran.com'da aç →","reciter_label":"Hafız","translation_label":"Çeviri","translation_fallback":"Bu dilde henüz onaylı bir çeviri yok — İngilizce gösteriliyor.","back_to_list":"← Tüm Sureler","source_note":"Arapça metin: Tanzil Projesi (Osmanlı hattı). Çeviriler ve ses: Quran Foundation, Quran.com'un genel API'si üzerinden. AM Network bu içeriği barındırmaz, düzenlemez veya değiştirmez.","disclaimer":"Bu bir okuma ve dinleme aracıdır, fetva değildir. Dinî hükümler için yetkin bir âlime danışın.","no_results":"Aramanıza uyan bir sure bulunamadı.","play_audio":"Tilaveti dinle","audio_unavailable":"Tilavet sesi geçici olarak kullanılamıyor.","timestamps_note":"Bu hafız için ayet ayet vurgulama ve tek ayet dinleme henüz kullanılamıyor."},"zh":{"nav_back":"← 主站","page_badge":"文本：Tanzil · 认证译本 · 官方诵读者","hero_eyebrow":"AM Academy","hero_h1":"尊贵的古兰经","hero_p":"我们从不自行撰写、编辑或翻译此内容。阿拉伯文文本来自 Tanzil 项目（Quran.com 及大多数主流古兰经应用所采用的经过核实的奥斯曼字体版本），译文来自认证学者，诵读来自officially持证的诵读者——完全按照原始发布内容逐字呈现。","search_ph":"按名称或编号搜索章节…","meccan":"麦加章","medinan":"麦地那章","verses_word":"节经文","loading_chapters":"正在加载章节…","loading_verses":"正在加载经文…","error_generic":"目前无法加载此内容。请稍后再试，或直接在 Quran.com 上阅读。","error_link":"在 Quran.com 打开 →","reciter_label":"诵读者","translation_label":"译本","translation_fallback":"此语言暂无认证译本 — 显示英文译本。","back_to_list":"← 所有章节","source_note":"阿拉伯文文本：Tanzil 项目（奥斯曼字体）。译文与音频：Quran Foundation，通过 Quran.com 公共 API 提供。AM Network 不托管、编辑或修改此内容。","disclaimer":"这是一个阅读和聆听工具，不是教法裁决。宗教裁决请咨询合格学者。","no_results":"没有找到符合搜索条件的章节。","play_audio":"播放诵读","audio_unavailable":"诵读音频暂时无法使用。","timestamps_note":"该诵读者暂不支持逐节高亮显示和单节播放。"},"ms":{"nav_back":"← Laman utama","page_badge":"Teks: Tanzil · Terjemahan bertauliah · Qari rasmi","hero_eyebrow":"AM Academy","hero_h1":"Al-Quran Al-Karim","hero_p":"Kami tidak pernah menulis, menyunting atau menterjemah kandungan ini sendiri. Teks Arab diambil daripada projek Tanzil (naskhah Uthmani yang disahkan dan digunakan oleh Quran.com serta kebanyakan aplikasi Al-Quran utama), terjemahan daripada ulama bertauliah, dan bacaan daripada qari berlesen rasmi — dipaparkan tepat seperti yang diterbitkan, perkataan demi perkataan.","search_ph":"Cari surah mengikut nama atau nombor…","meccan":"Makkiyah","medinan":"Madaniyah","verses_word":"ayat","loading_chapters":"Memuatkan senarai surah…","loading_verses":"Memuatkan ayat…","error_generic":"Kandungan ini tidak dapat dimuatkan sekarang. Sila cuba sebentar lagi, atau baca terus di Quran.com.","error_link":"Buka di Quran.com →","reciter_label":"Qari","translation_label":"Terjemahan","translation_fallback":"Belum ada terjemahan bertauliah dalam bahasa ini — memaparkan Bahasa Inggeris.","back_to_list":"← Semua Surah","source_note":"Teks Arab: Projek Tanzil (naskhah Uthmani). Terjemahan dan audio: Quran Foundation, melalui API awam Quran.com. AM Network tidak menyimpan, menyunting atau mengubah kandungan ini.","disclaimer":"Ini adalah alat membaca dan mendengar, bukan fatwa. Untuk hukum agama, rujuk kepada ulama yang bertauliah.","no_results":"Tiada surah yang sepadan dengan carian anda.","play_audio":"Mainkan bacaan","audio_unavailable":"Audio bacaan buat masa ini tidak tersedia.","timestamps_note":"Sorotan ayat demi ayat dan main balik ayat tunggal belum tersedia untuk qari ini."},"fr":{"nav_back":"← Site principal","page_badge":"Texte : Tanzil · Traductions certifiées · Récitateurs officiels","hero_eyebrow":"AM Academy","hero_h1":"Le Noble Coran","hero_p":"Nous n'écrivons, ne modifions ni ne traduisons jamais ce contenu nous-mêmes. Le texte arabe provient du projet Tanzil (l'écriture ottomane vérifiée sur laquelle s'appuient Quran.com et la plupart des grandes applications du Coran), les traductions proviennent d'érudits certifiés, et les récitations proviennent de récitateurs officiellement agréés — affichés exactement comme publiés, mot pour mot.","search_ph":"Rechercher une sourate par nom ou numéro…","meccan":"Mecquoise","medinan":"Médinoise","verses_word":"versets","loading_chapters":"Chargement des sourates…","loading_verses":"Chargement des versets…","error_generic":"Impossible de charger ce contenu pour le moment. Veuillez réessayer dans un instant, ou le lire directement sur Quran.com.","error_link":"Ouvrir sur Quran.com →","reciter_label":"Récitateur","translation_label":"Traduction","translation_fallback":"Aucune traduction certifiée n'existe encore dans cette langue — affichage en anglais.","back_to_list":"← Toutes les sourates","source_note":"Texte arabe : projet Tanzil (écriture ottomane). Traductions et audio : Quran Foundation, via l'API publique de Quran.com. AM Network n'héberge, ne modifie ni n'édite ce contenu.","disclaimer":"Ceci est un outil de lecture et d'écoute, pas une fatwa. Pour les questions religieuses, consultez un érudit qualifié.","no_results":"Aucune sourate ne correspond à votre recherche.","play_audio":"Écouter la récitation","audio_unavailable":"L'audio de récitation est temporairement indisponible.","timestamps_note":"Le surlignage verset par verset et la lecture d'un seul verset ne sont pas encore disponibles pour ce récitateur."},"de":{"nav_back":"← Hauptseite","page_badge":"Text: Tanzil · Zertifizierte Übersetzungen · Offizielle Rezitatoren","hero_eyebrow":"AM Academy","hero_h1":"Der Edle Koran","hero_p":"Wir schreiben, bearbeiten oder übersetzen diesen Inhalt niemals selbst. Der arabische Text stammt aus dem Tanzil-Projekt (die verifizierte osmanische Schrift, auf die sich Quran.com und die meisten großen Koran-Apps stützen), Übersetzungen stammen von zertifizierten Gelehrten, und Rezitationen stammen von offiziell lizenzierten Rezitatoren — genau so angezeigt, wie sie veröffentlicht wurden, Wort für Wort.","search_ph":"Sure nach Name oder Nummer suchen…","meccan":"Mekkanisch","medinan":"Medinensisch","verses_word":"Verse","loading_chapters":"Suren werden geladen…","loading_verses":"Verse werden geladen…","error_generic":"Dieser Inhalt konnte gerade nicht geladen werden. Bitte versuchen Sie es in Kürze erneut oder lesen Sie ihn direkt auf Quran.com.","error_link":"Auf Quran.com öffnen →","reciter_label":"Rezitator","translation_label":"Übersetzung","translation_fallback":"In dieser Sprache liegt noch keine zertifizierte Übersetzung vor — Englisch wird angezeigt.","back_to_list":"← Alle Suren","source_note":"Arabischer Text: Tanzil-Projekt (osmanische Schrift). Übersetzungen und Audio: Quran Foundation, über die öffentliche API von Quran.com. AM Network hostet, bearbeitet oder verändert diesen Inhalt nicht.","disclaimer":"Dies ist ein Lese- und Hörwerkzeug, keine Fatwa. Für religiöse Urteile konsultieren Sie einen qualifizierten Gelehrten.","no_results":"Keine Sure entspricht Ihrer Suche.","play_audio":"Rezitation abspielen","audio_unavailable":"Rezitations-Audio ist vorübergehend nicht verfügbar.","timestamps_note":"Vers-für-Vers-Hervorhebung und das Abspielen einzelner Verse sind für diesen Rezitator noch nicht verfügbar."}};
 
 // Chapter names ("The Opener", "The Cow"...) are localized too — Quran.com's
 // /chapters endpoint takes a short language code, which isn't always the
@@ -238,7 +239,7 @@ const SITE_LANG_TO_QURAN_SHORT = {en:'en',ru:'ru',ar:'ar',id:'id',tr:'tr',fr:'fr
 let chaptersLang = null;
 
 let lang = 'en';
-function setLang(l){
+async function setLang(l){
   lang = T[l] ? l : 'en';
   document.documentElement.setAttribute('lang', lang);
   document.documentElement.setAttribute('data-lang', lang);
@@ -255,8 +256,15 @@ function setLang(l){
   localStorage.setItem('amn_lang', lang);
   if (chapters.length) {
     const qLang = SITE_LANG_TO_QURAN_SHORT[lang] || 'en';
-    if (chaptersLang !== qLang) loadChapters();
+    if (chaptersLang !== qLang) await loadChapters();
     else renderGrid();
+  }
+  if (currentChapter) {
+    // chapters may have just been replaced wholesale by loadChapters() above
+    // (a fresh array in the new language) — repoint at the matching entry
+    // so the header picks up its localized name_simple/translated_name.
+    currentChapter = chapters.find(c => c.id === currentChapter.id) || currentChapter;
+    refreshOpenSurahLang();
   }
 }
 function toggleLangDrop(){
@@ -537,6 +545,24 @@ async function openSurah(chapterId){
   document.getElementById('readerView').classList.add('visible');
   window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
 
+  renderSurahHeader();
+
+  try {
+    await setupReciterSelect();
+    await loadAudio(chapterId, currentReciterId);
+    await loadSurahText(chapterId);
+  } catch (e) {
+    const t = T[lang];
+    const state = document.getElementById('readerState');
+    state.style.display = 'block';
+    state.innerHTML = (t.error_generic || '') +
+      ' <a href="https://quran.com/' + chapterId + '" target="_blank" rel="noopener">' + (t.error_link || 'Quran.com') + '</a>';
+  }
+}
+
+// Chapter name/meta line — depends only on lang + currentChapter, no network,
+// so it's cheap to re-run whenever the site language changes.
+function renderSurahHeader(){
   const t = T[lang];
   const localName = localChapterName(currentChapter.id);
   const headerNameLine = localName
@@ -547,7 +573,13 @@ async function openSurah(chapterId){
     <div class="en-name">${headerNameLine}</div>
     <div class="sub-line">${currentChapter.id} · ${currentChapter.revelation_place === 'makkah' ? (t.meccan||'') : (t.medinan||'')} · ${currentChapter.verses_count} ${t.verses_word||''}</div>
   `;
+}
 
+// Verse text + translation for the open surah — re-fetches in the current
+// site language. Reused both for the initial open and for a language switch
+// while a surah is already open (so it never needs a manual page refresh).
+async function loadSurahText(chapterId){
+  const t = T[lang];
   const versesList = document.getElementById('versesList');
   const state = document.getElementById('readerState');
   const note = document.getElementById('translationNote');
@@ -556,46 +588,55 @@ async function openSurah(chapterId){
   state.style.display = 'block';
   state.textContent = t.loading_verses || '';
 
-  try {
-    await setupReciterSelect();
-    await loadAudio(chapterId, currentReciterId);
-
-    const resolved = await resolveTranslation();
-    let localVerses = null;
-    if (resolved.local) {
-      localVerses = await ensureLocalTranslation(resolved.local);
-      note.style.display = 'block';
-      note.textContent = t[LOCAL_TRANSLATIONS[resolved.local].src] || '';
-    } else if (resolved.usedFallback) {
-      note.style.display = 'block';
-      note.textContent = t.translation_fallback || '';
-    }
-    const verses = await fetchAllVerses(chapterId, resolved.id);
-    state.style.display = 'none';
-    versesList.innerHTML = verses.map(v => {
-      const trText = localVerses
-        ? (localVerses[chapterId + ':' + v.verse_number] || '')
-        : (v.translations && v.translations[0] ? stripTags(v.translations[0].text) : '');
-      const playBtn = currentTimestamps
-        ? `<button class="verse-play-btn" onclick="playVerse(${chapterId},${v.verse_number})" aria-label="${escapeHtml(t.play_audio || '')}" title="${escapeHtml(t.play_audio || '')}">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-          </button>`
-        : '';
-      return `
-        <div class="verse" data-verse-key="${chapterId}:${v.verse_number}">
-          <div class="verse-head">
-            <div class="verse-num">${v.verse_number}</div>
-            ${playBtn}
-          </div>
-          <div class="verse-ar">${escapeHtml(v.text_uthmani || '')}</div>
-          ${trText ? `<div class="verse-tr">${escapeHtml(trText)}</div>` : ''}
+  const resolved = await resolveTranslation();
+  let localVerses = null;
+  if (resolved.local) {
+    localVerses = await ensureLocalTranslation(resolved.local);
+    note.style.display = 'block';
+    note.textContent = t[LOCAL_TRANSLATIONS[resolved.local].src] || '';
+  } else if (resolved.usedFallback) {
+    note.style.display = 'block';
+    note.textContent = t.translation_fallback || '';
+  }
+  const verses = await fetchAllVerses(chapterId, resolved.id);
+  state.style.display = 'none';
+  versesList.innerHTML = verses.map(v => {
+    const trText = localVerses
+      ? (localVerses[chapterId + ':' + v.verse_number] || '')
+      : (v.translations && v.translations[0] ? stripTags(v.translations[0].text) : '');
+    const playBtn = currentTimestamps
+      ? `<button class="verse-play-btn" onclick="playVerse(${chapterId},${v.verse_number})" aria-label="${escapeHtml(t.play_audio || '')}" title="${escapeHtml(t.play_audio || '')}">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </button>`
+      : '';
+    return `
+      <div class="verse" data-verse-key="${chapterId}:${v.verse_number}">
+        <div class="verse-head">
+          <div class="verse-num">${v.verse_number}</div>
+          ${playBtn}
         </div>
-      `;
-    }).join('');
+        <div class="verse-ar">${escapeHtml(v.text_uthmani || '')}</div>
+        ${trText ? `<div class="verse-tr">${escapeHtml(trText)}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+// Called by setLang() when a surah is already open — re-translates the
+// header + verse text without touching the reciter/audio that may be
+// mid-playback, so switching site language never needs a page refresh.
+async function refreshOpenSurahLang(){
+  if (!currentChapter) return;
+  renderSurahHeader();
+  updateTimestampsNote();
+  try {
+    await loadSurahText(currentChapter.id);
   } catch (e) {
+    const t = T[lang];
+    const state = document.getElementById('readerState');
     state.style.display = 'block';
     state.innerHTML = (t.error_generic || '') +
-      ' <a href="https://quran.com/' + chapterId + '" target="_blank" rel="noopener">' + (t.error_link || 'Quran.com') + '</a>';
+      ' <a href="https://quran.com/' + currentChapter.id + '" target="_blank" rel="noopener">' + (t.error_link || 'Quran.com') + '</a>';
   }
 }
 
@@ -716,6 +757,9 @@ async function loadAudio(chapterId, reciterId){
     // its absence just means no highlighting, never an error.
     const timestamps = data.audio_file && data.audio_file.timestamps;
     currentTimestamps = Array.isArray(timestamps) && timestamps.length ? timestamps : null;
+    if (!currentTimestamps) {
+      console.info('[Quran audio] No per-ayah timestamps for reciter ' + reciterId + ', chapter ' + chapterId + ' — highlight/auto-scroll and per-ayah play are disabled for this recitation. Raw audio_file keys:', data.audio_file ? Object.keys(data.audio_file) : data);
+    }
     if (url) {
       const fullUrl = url.startsWith('http') ? url : ('https://' + url.replace(/^\/+/, ''));
       // The fetch above only confirms we got a URL back — the browser can
@@ -738,6 +782,23 @@ async function loadAudio(chapterId, reciterId){
     console.error('[Quran audio] Failed to load /chapter_recitations/' + reciterId + '/' + chapterId + ':', e);
     showAudioStatusUnavailable();
   }
+  updateTimestampsNote();
+}
+
+// Tells the visitor (instead of silently disabling the feature) when the
+// current reciter/recitation has no per-ayah timestamp data, since that's
+// what drives both highlight/auto-scroll and the per-verse play button.
+function updateTimestampsNote(){
+  const note = document.getElementById('timestampsNote');
+  if (!note) return;
+  const player = document.getElementById('audioPlayer');
+  const t = T[lang];
+  if (currentTimestamps || !player.src) {
+    note.style.display = 'none';
+    return;
+  }
+  note.style.display = 'block';
+  note.textContent = t.timestamps_note || '';
 }
 
 /* ── INIT ── */
