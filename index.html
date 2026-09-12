@@ -144,7 +144,7 @@ nav{position:fixed;top:3px;left:0;right:0;z-index:100;display:flex;align-items:c
 .hero-bg-img.is-active{opacity:1}
 .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,26,17,.74) 0%,rgba(10,26,17,.62) 45%,rgba(10,26,17,.88) 100%)}
 [data-theme="light"] .hero-bg::after{background:linear-gradient(180deg,rgba(245,240,232,.58) 0%,rgba(245,240,232,.42) 45%,rgba(245,240,232,.80) 100%)}
-@keyframes heroMosqueZoom{from{transform:scale(1)}to{transform:scale(1.09)}}
+@keyframes heroMosqueZoom{from{transform:scale(1.09)}to{transform:scale(1)}}
 @media (prefers-reduced-motion: reduce){.hero-bg-img{animation:none}}
 
 .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border:1px solid rgba(201,168,76,0.3);border-radius:999px;background:var(--gold3);font-size:11px;font-weight:500;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;animation:fadeUp 0.7s ease both}
@@ -156,7 +156,8 @@ nav{position:fixed;top:3px;left:0;right:0;z-index:100;display:flex;align-items:c
 .hero-wordmark .wm-network{color:var(--text)}
 .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,82px);font-weight:700;line-height:1.05;margin-bottom:16px;text-shadow:0 2px 18px rgba(0,0,0,0.3);animation:fadeUp 0.7s 0.15s ease both}
 .hero h1 .line2{display:block;background:linear-gradient(135deg,var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(13px,1.8vw,16px);color:var(--text3);max-width:460px;line-height:1.75;margin-bottom:8px;background:var(--card);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:16px;padding:14px 22px;animation:fadeUp 0.7s 0.18s ease both}
+.hero-sub{font-size:clamp(13px,1.8vw,16px);color:var(--text3);max-width:460px;line-height:1.75;margin-bottom:8px;background:rgba(10,26,17,.38);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:16px;padding:14px 22px;animation:fadeUp 0.7s 0.18s ease both}
+[data-theme="light"] .hero-sub{background:rgba(245,240,232,.30);color:rgba(28,46,31,.85);text-shadow:0 1px 6px rgba(255,255,255,.4)}
 .hero-sub2{font-size:clamp(14px,2vw,18px);color:var(--text2);max-width:520px;line-height:1.7;font-weight:300;margin-bottom:44px;text-shadow:0 1px 8px rgba(0,0,0,0.2);animation:fadeUp 0.7s 0.2s ease both}
 .hero-stats{display:flex;gap:0;border:1px solid var(--border);border-radius:14px;background:var(--card);backdrop-filter:blur(10px);margin-bottom:40px;animation:fadeUp 0.7s 0.25s ease both;overflow:hidden;flex-wrap:wrap}
 .hstat{padding:18px 28px;border-right:1px solid var(--border);text-align:center;flex:1;min-width:110px}
@@ -627,7 +628,6 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .step-icon .am-icon{width:24px;height:24px}.picon .am-icon{width:36px;height:36px}
 .aicon,.ticon{display:inline-flex;align-items:center;justify-content:center}
 .quote-mark{font-family:Georgia,serif;font-size:76px;line-height:.8;color:var(--gold);margin:0 auto 18px}
-.date-icon{color:var(--gold);margin:0 auto 16px;display:block}
 .hadith-card{background:var(--card);border:1px solid var(--border);border-inline-start:3px solid var(--gold);border-radius:14px;padding:24px 28px 22px}
 .hadith-quote-mark{font-family:Georgia,serif;font-size:34px;line-height:.6;color:var(--gold);opacity:.55;margin-bottom:4px}
 .hadith-body{font-size:15px;color:var(--text);line-height:1.8;font-family:'Cormorant Garamond',serif;font-style:italic;margin-bottom:12px}
@@ -1096,27 +1096,14 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     </div>
 
     <!-- Sadaqah highlight - half a date -->
-    <div class="reveal" style="background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:36px 40px;margin-bottom:32px;text-align:center;position:relative;overflow:hidden">
-      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
-      <svg class="date-icon" width="72" height="72" viewBox="0 0 64 64" aria-hidden="true">
-        <path d="M32 60 C31 48,33 36,32 26" stroke="var(--gold2)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-        <g stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.9">
-          <path d="M32 26 C21 22,10 15,5 6"/>
-          <path d="M32 26 C23 19,17 11,15 3"/>
-          <path d="M32 26 C28 17,26 9,27 1"/>
-          <path d="M32 26 C36 17,38 9,37 1"/>
-          <path d="M32 26 C41 19,47 11,49 3"/>
-          <path d="M32 26 C43 22,54 15,59 6"/>
-        </g>
-        <g fill="var(--gold2)">
-          <ellipse cx="25" cy="33" rx="3.4" ry="4.6" transform="rotate(-18 25 33)"/>
-          <ellipse cx="32" cy="36" rx="3.4" ry="4.8"/>
-          <ellipse cx="39" cy="33" rx="3.4" ry="4.6" transform="rotate(18 39 33)"/>
-        </g>
-      </svg>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,28px);color:var(--gold);margin-bottom:14px" data-t="dv_sadaqah_h">Even Half a Date</h3>
-      <p style="font-size:15px;color:var(--text2);line-height:1.8;max-width:600px;margin:0 auto 18px;font-style:italic" data-t="dv_sadaqah_p">"Save yourself from the Fire even by giving half a date in charity. And if he cannot find even that, then (let him save himself) by saying a good word." — Bukhari 1417</p>
-      <p style="font-size:13px;color:var(--text3)" data-t="dv_sadaqah_sub">Sadaqah has no minimum. Every cent counts. Every act protects.</p>
+    <div class="reveal" style="border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:36px 40px;margin-bottom:32px;text-align:center;position:relative;overflow:hidden;background:url('/date-palm.webp') center 32%/cover">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,14,.50) 0%,rgba(10,20,14,.68) 55%,rgba(10,20,14,.86) 100%)"></div>
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:2"></div>
+      <div style="position:relative;z-index:2">
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,28px);color:var(--gold2);margin-bottom:14px;text-shadow:0 2px 10px rgba(0,0,0,.45)" data-t="dv_sadaqah_h">Even Half a Date</h3>
+        <p style="font-size:15px;color:rgba(255,255,255,.94);line-height:1.8;max-width:600px;margin:0 auto 18px;font-style:italic;text-shadow:0 1px 8px rgba(0,0,0,.45)" data-t="dv_sadaqah_p">"Save yourself from the Fire even by giving half a date in charity. And if he cannot find even that, then (let him save himself) by saying a good word." — Bukhari 1417</p>
+        <p style="font-size:13px;color:rgba(255,255,255,.72);text-shadow:0 1px 8px rgba(0,0,0,.4)" data-t="dv_sadaqah_sub">Sadaqah has no minimum. Every cent counts. Every act protects.</p>
+      </div>
     </div>
 
     <!-- Hadith -->
