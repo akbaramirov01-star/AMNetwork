@@ -130,6 +130,10 @@ main{padding-top:64px;min-height:100vh}
 .verse-play-btn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--gold);cursor:pointer;padding:0;transition:background-color .2s ease}
 .verse-play-btn:hover,.verse-play-btn:focus-visible{background:var(--gold3)}
 .verse-ar{font-family:'Noto Naskh Arabic',serif;direction:rtl;text-align:right;font-size:26px;line-height:2.1;color:var(--text);margin-bottom:10px}
+.qword{cursor:pointer;border-radius:5px;padding:1px 2px;transition:background-color .15s ease}
+.qword:hover,.qword:focus-visible{background:var(--gold3);outline:none}
+.qword-plain{padding:1px 2px}
+.word-popup{position:fixed;display:none;z-index:300;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.4;color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,.3);max-width:min(240px,80vw);text-align:center;pointer-events:none}
 .verse-tr{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.85;color:var(--text)}
 .translation-note{font-size:12px;color:var(--gold);background:var(--gold3);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:10px 14px;margin-bottom:16px}
 
@@ -518,13 +522,17 @@ async function resolveTranslation(){
   return { id: null, usedFallback: false, unsupported: true };
 }
 
-async function fetchAllVerses(chapterId, translationId){
+async function fetchAllVerses(chapterId, translationId, wordLang){
   let all = [];
   let page = 1;
   const maxPages = 10;
   while (page <= maxPages) {
     let url = API + '/verses/by_chapter/' + chapterId +
-      '?language=en&words=false&fields=text_uthmani&per_page=50&page=' + page;
+      '?language=en&fields=text_uthmani&per_page=50&page=' + page;
+    // wordLang requests a per-word translation (tap-to-translate) in the
+    // Quran.com "language_name" format (e.g. 'russian') — omitted entirely
+    // for languages with no certified word-level data (Arabic, Tajik).
+    url += wordLang ? ('&words=true&word_translation_language=' + wordLang) : '&words=false';
     if (translationId) url += '&translations=' + translationId;
     const data = await fetchJSON(url);
     all = all.concat(data.verses || []);
@@ -582,6 +590,7 @@ async function loadSurahText(chapterId){
   const versesList = document.getElementById('versesList');
   const state = document.getElementById('readerState');
   const note = document.getElementById('translationNote');
+  hideWordPopup();
   note.style.display = 'none';
   versesList.innerHTML = '';
   state.style.display = 'block';
@@ -597,7 +606,11 @@ async function loadSurahText(chapterId){
     note.style.display = 'block';
     note.textContent = t.translation_fallback || '';
   }
-  const verses = await fetchAllVerses(chapterId, resolved.id);
+  // Word-by-word tap-to-translate needs a certified per-word translation
+  // language from Quran.com; Arabic (the original) and Tajik (no certified
+  // data yet, same gap as full-verse translation) simply don't get it.
+  const wordLang = (lang !== 'ar' && lang !== 'tj') ? (LANG_TO_QURAN[lang] || 'english') : null;
+  const verses = await fetchAllVerses(chapterId, resolved.id, wordLang);
   state.style.display = 'none';
   versesList.innerHTML = verses.map(v => {
     const trText = localVerses
@@ -606,18 +619,75 @@ async function loadSurahText(chapterId){
     const playBtn = `<button class="verse-play-btn" onclick="playVerse(${chapterId},${v.verse_number})" aria-label="${escapeHtml(t.play_audio || '')}" title="${escapeHtml(t.play_audio || '')}">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
       </button>`;
+    const arabicHtml = renderArabicWords(v);
     return `
       <div class="verse" data-verse-key="${chapterId}:${v.verse_number}">
         <div class="verse-head">
           <div class="verse-num">${v.verse_number}</div>
           ${playBtn}
         </div>
-        <div class="verse-ar">${escapeHtml(v.text_uthmani || '')}</div>
+        <div class="verse-ar">${arabicHtml}</div>
         ${trText ? `<div class="verse-tr">${escapeHtml(trText)}</div>` : ''}
       </div>
     `;
   }).join('');
 }
+
+// Renders the Arabic line as tappable word spans carrying that word's own
+// certified translation (from Quran.com's word-by-word data) when it's
+// available — falls back to plain, non-interactive text otherwise, so a
+// missing or differently-shaped API response never breaks the reading view.
+function renderArabicWords(v){
+  if (!Array.isArray(v.words) || !v.words.length) {
+    return escapeHtml(v.text_uthmani || '');
+  }
+  return v.words
+    .filter(w => w.char_type_name !== 'end')
+    .map(w => {
+      const wordText = w.text_uthmani || w.text || '';
+      const wordTr = w.translation && w.translation.text ? stripTags(w.translation.text) : '';
+      return wordTr
+        ? `<span class="qword" tabindex="0" role="button" data-tr="${escapeHtml(wordTr)}">${escapeHtml(wordText)}</span>`
+        : `<span class="qword-plain">${escapeHtml(wordText)}</span>`;
+    })
+    .join(' ');
+}
+
+let wordPopupTimer = null;
+function showWordPopup(el, text){
+  let pop = document.getElementById('wordPopup');
+  if (!pop) {
+    pop = document.createElement('div');
+    pop.id = 'wordPopup';
+    pop.className = 'word-popup';
+    document.body.appendChild(pop);
+  }
+  pop.textContent = text;
+  pop.style.display = 'block';
+  const r = el.getBoundingClientRect();
+  const pw = pop.offsetWidth;
+  pop.style.left = Math.min(Math.max(8, r.left + r.width / 2 - pw / 2), window.innerWidth - pw - 8) + 'px';
+  pop.style.top = Math.max(8, r.top - pop.offsetHeight - 8) + 'px';
+  clearTimeout(wordPopupTimer);
+  wordPopupTimer = setTimeout(hideWordPopup, 4000);
+}
+function hideWordPopup(){
+  const pop = document.getElementById('wordPopup');
+  if (pop) pop.style.display = 'none';
+}
+document.getElementById('versesList').addEventListener('click', function(e){
+  const w = e.target.closest('.qword');
+  if (w) { showWordPopup(w, w.dataset.tr); e.stopPropagation(); }
+});
+document.getElementById('versesList').addEventListener('keydown', function(e){
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('qword')) {
+    e.preventDefault();
+    showWordPopup(e.target, e.target.dataset.tr);
+  }
+});
+document.addEventListener('click', function(e){
+  if (!e.target.closest('.qword')) hideWordPopup();
+});
 
 // Called by setLang() when a surah is already open — re-translates the
 // header + verse text without touching the reciter/audio that may be
@@ -644,6 +714,7 @@ function closeSurah(){
   currentChapter = null;
   playQueue = null;
   clearVersePlaying();
+  hideWordPopup();
 }
 
 function showAudioStatus(msg){
