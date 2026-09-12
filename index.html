@@ -156,7 +156,7 @@ nav{position:fixed;top:3px;left:0;right:0;z-index:100;display:flex;align-items:c
 .hero-wordmark .wm-network{color:var(--text)}
 .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,82px);font-weight:700;line-height:1.05;margin-bottom:16px;text-shadow:0 2px 18px rgba(0,0,0,0.3);animation:fadeUp 0.7s 0.15s ease both}
 .hero h1 .line2{display:block;background:linear-gradient(135deg,var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(13px,1.8vw,16px);color:var(--text3);max-width:420px;line-height:1.75;margin-bottom:8px;text-shadow:0 1px 8px rgba(0,0,0,0.2);animation:fadeUp 0.7s 0.18s ease both}
+.hero-sub{font-size:clamp(13px,1.8vw,16px);color:var(--text3);max-width:460px;line-height:1.75;margin-bottom:8px;background:var(--card);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:16px;padding:14px 22px;animation:fadeUp 0.7s 0.18s ease both}
 .hero-sub2{font-size:clamp(14px,2vw,18px);color:var(--text2);max-width:520px;line-height:1.7;font-weight:300;margin-bottom:44px;text-shadow:0 1px 8px rgba(0,0,0,0.2);animation:fadeUp 0.7s 0.2s ease both}
 .hero-stats{display:flex;gap:0;border:1px solid var(--border);border-radius:14px;background:var(--card);backdrop-filter:blur(10px);margin-bottom:40px;animation:fadeUp 0.7s 0.25s ease both;overflow:hidden;flex-wrap:wrap}
 .hstat{padding:18px 28px;border-right:1px solid var(--border);text-align:center;flex:1;min-width:110px}
@@ -627,6 +627,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .step-icon .am-icon{width:24px;height:24px}.picon .am-icon{width:36px;height:36px}
 .aicon,.ticon{display:inline-flex;align-items:center;justify-content:center}
 .quote-mark{font-family:Georgia,serif;font-size:76px;line-height:.8;color:var(--gold);margin:0 auto 18px}
+.date-icon{color:var(--gold);margin:0 auto 16px;display:block}
 .hadith-card{background:var(--card);border:1px solid var(--border);border-inline-start:3px solid var(--gold);border-radius:14px;padding:24px 28px 22px}
 .hadith-quote-mark{font-family:Georgia,serif;font-size:34px;line-height:.6;color:var(--gold);opacity:.55;margin-bottom:4px}
 .hadith-body{font-size:15px;color:var(--text);line-height:1.8;font-family:'Cormorant Garamond',serif;font-style:italic;margin-bottom:12px}
@@ -1097,7 +1098,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <!-- Sadaqah highlight - half a date -->
     <div class="reveal" style="background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:36px 40px;margin-bottom:32px;text-align:center;position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
-      <div class="quote-mark" aria-hidden="true">“</div>
+      <svg class="date-icon" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1.1 1.1 1.1 2.3 0 3.4"/><ellipse cx="12" cy="14.2" rx="5.2" ry="7.2"/><path d="M7.8 11.6c1.3-.9 2.7-1.3 4.2-1.3s2.9.4 4.2 1.3"/><path d="M7.3 15.3c1.5.7 3 1 4.7 1s3.2-.3 4.7-1"/></svg>
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,28px);color:var(--gold);margin-bottom:14px" data-t="dv_sadaqah_h">Even Half a Date</h3>
       <p style="font-size:15px;color:var(--text2);line-height:1.8;max-width:600px;margin:0 auto 18px;font-style:italic" data-t="dv_sadaqah_p">"Save yourself from the Fire even by giving half a date in charity. And if he cannot find even that, then (let him save himself) by saying a good word." — Bukhari 1417</p>
       <p style="font-size:13px;color:var(--text3)" data-t="dv_sadaqah_sub">Sadaqah has no minimum. Every cent counts. Every act protects.</p>
