@@ -140,7 +140,7 @@ nav{position:fixed;top:3px;left:0;right:0;z-index:100;display:flex;align-items:c
    every other child. Two <img> layers crossfade so switching language
    never shows a blank flash while the next image loads. */
 .hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;background:var(--bg1)}
-.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease;transform:scale(1);animation:heroMosqueZoom 42s ease-in-out infinite alternate;will-change:opacity,transform}
+.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease;transform:scale(1.09);animation:heroMosqueZoom 16s ease-in-out infinite alternate;will-change:opacity,transform}
 .hero-bg-img.is-active{opacity:1}
 .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,26,17,.74) 0%,rgba(10,26,17,.62) 45%,rgba(10,26,17,.88) 100%)}
 [data-theme="light"] .hero-bg::after{background:linear-gradient(180deg,rgba(245,240,232,.58) 0%,rgba(245,240,232,.42) 45%,rgba(245,240,232,.80) 100%)}
@@ -159,8 +159,11 @@ nav{position:fixed;top:3px;left:0;right:0;z-index:100;display:flex;align-items:c
 .hero-sub{font-size:clamp(13px,1.8vw,16px);color:var(--text3);max-width:460px;line-height:1.75;margin-bottom:8px;background:rgba(10,26,17,.38);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:16px;padding:14px 22px;animation:fadeUp 0.7s 0.18s ease both}
 [data-theme="light"] .hero-sub{background:rgba(245,240,232,.30);color:rgba(28,46,31,.85);text-shadow:0 1px 6px rgba(255,255,255,.4)}
 .hero-sub2{font-size:clamp(14px,2vw,18px);color:var(--text2);max-width:520px;line-height:1.7;font-weight:300;margin-bottom:44px;text-shadow:0 1px 8px rgba(0,0,0,0.2);animation:fadeUp 0.7s 0.2s ease both}
-.hero-stats{display:flex;gap:0;border:1px solid var(--border);border-radius:14px;background:var(--card);backdrop-filter:blur(10px);margin-bottom:40px;animation:fadeUp 0.7s 0.25s ease both;overflow:hidden;flex-wrap:wrap}
+.hero-stats{display:flex;gap:0;border:1px solid var(--border);border-radius:14px;background:rgba(10,26,17,.32);backdrop-filter:blur(10px);margin-bottom:40px;animation:fadeUp 0.7s 0.25s ease both;overflow:hidden;flex-wrap:wrap}
+[data-theme="light"] .hero-stats{background:rgba(245,240,232,.28)}
 .hstat{padding:18px 28px;border-right:1px solid var(--border);text-align:center;flex:1;min-width:110px}
+.hstat-num,.hstat-lbl{text-shadow:0 1px 6px rgba(0,0,0,.3)}
+[data-theme="light"] .hstat-lbl{color:rgba(28,46,31,.8);text-shadow:0 1px 6px rgba(255,255,255,.4)}
 .hstat:last-child{border-right:none}
 .hstat-num{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--gold);display:block}
 .hstat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;display:block}
@@ -467,6 +470,10 @@ html, body { min-height: 100vh; }
 /* Ledger canvas */
 @media(max-width:600px){
   #ledgerCanvas{height:180px}
+}
+@media(max-width:600px){
+  .date-card{min-height:300px;padding:28px 24px!important;background-position:75% 40%!important}
+  .date-card > div[style*="max-width:380px"]{max-width:100%!important}
 }
 
 
@@ -1096,13 +1103,12 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     </div>
 
     <!-- Sadaqah highlight - half a date -->
-    <div class="reveal" style="border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:36px 40px;margin-bottom:32px;text-align:center;position:relative;overflow:hidden;background:url('/date-palm.webp') center 32%/cover">
-      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,14,.50) 0%,rgba(10,20,14,.68) 55%,rgba(10,20,14,.86) 100%)"></div>
+    <div class="reveal date-card" style="border:1px solid rgba(201,168,76,0.3);border-radius:20px;padding:40px;margin-bottom:32px;position:relative;overflow:hidden;min-height:360px;display:flex;align-items:center;background:url('/date-palm.webp') 68% 48%/cover">
+      <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(10,20,14,.90) 0%,rgba(10,20,14,.60) 42%,rgba(10,20,14,.18) 72%)"></div>
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:2"></div>
-      <div style="position:relative;z-index:2">
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,28px);color:var(--gold2);margin-bottom:14px;text-shadow:0 2px 10px rgba(0,0,0,.45)" data-t="dv_sadaqah_h">Even Half a Date</h3>
-        <p style="font-size:15px;color:rgba(255,255,255,.94);line-height:1.8;max-width:600px;margin:0 auto 18px;font-style:italic;text-shadow:0 1px 8px rgba(0,0,0,.45)" data-t="dv_sadaqah_p">"Save yourself from the Fire even by giving half a date in charity. And if he cannot find even that, then (let him save himself) by saying a good word." — Bukhari 1417</p>
-        <p style="font-size:13px;color:rgba(255,255,255,.72);text-shadow:0 1px 8px rgba(0,0,0,.4)" data-t="dv_sadaqah_sub">Sadaqah has no minimum. Every cent counts. Every act protects.</p>
+      <div style="position:relative;z-index:2;text-align:left;max-width:380px">
+        <p style="font-size:16px;color:rgba(255,255,255,.96);line-height:1.85;margin-bottom:16px;font-style:italic;text-shadow:0 1px 8px rgba(0,0,0,.5)" data-t="dv_sadaqah_p">"Save yourself from the Fire even by giving half a date in charity. And if he cannot find even that, then (let him save himself) by saying a good word." — Bukhari 1417</p>
+        <p style="font-size:13px;color:rgba(255,255,255,.78);text-shadow:0 1px 8px rgba(0,0,0,.45)" data-t="dv_sadaqah_sub">Sadaqah has no minimum. Every cent counts. Every act protects.</p>
       </div>
     </div>
 
