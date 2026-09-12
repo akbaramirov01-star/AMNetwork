@@ -88,12 +88,14 @@ main{padding-top:64px;min-height:100vh}
 .phrase-btn.active{background:var(--gold);color:#1a1a1a;border-color:var(--gold);font-weight:600}
 
 /* COUNTER CARD */
-.counter-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:36px 28px;text-align:center}
+.counter-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:36px 28px;text-align:center;touch-action:manipulation}
 .counter-phrase-ar{font-family:'Noto Naskh Arabic',serif;font-size:34px;color:var(--gold);margin-bottom:6px;line-height:1.4}
 .counter-phrase-name{font-size:13px;color:var(--text3);margin-bottom:24px}
-.counter-circle{width:220px;height:220px;border-radius:50%;border:4px solid var(--gold3);background:var(--input-bg);margin:0 auto 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform .08s ease,border-color .2s ease;-webkit-tap-highlight-color:transparent;user-select:none;position:relative}
+.counter-circle{width:220px;height:220px;border-radius:50%;border:4px solid var(--gold3);background:var(--input-bg);margin:0 auto 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform .08s ease,border-color .2s ease;-webkit-tap-highlight-color:transparent;user-select:none;position:relative;touch-action:manipulation}
 .counter-circle:active{transform:scale(0.96)}
 .counter-circle.complete{border-color:var(--gold);animation:pulseGold .5s ease}
+@keyframes tapPulse{0%{box-shadow:0 0 0 0 rgba(201,168,76,.4)}100%{box-shadow:0 0 0 16px rgba(201,168,76,0)}}
+.counter-circle.tap-pulse{animation:tapPulse .35s ease-out}
 @keyframes pulseGold{0%{box-shadow:0 0 0 0 rgba(201,168,76,.5)}100%{box-shadow:0 0 0 22px rgba(201,168,76,0)}}
 .counter-value{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:700;color:var(--text);line-height:1}
 .counter-target{font-size:14px;color:var(--text3);margin-top:4px}
@@ -308,11 +310,17 @@ function renderLapInfo(){
 function incrementCount(){
   state.count++;
   vibrate(10);
+  const btn = document.getElementById('counterBtn');
+  // Restart the tap-pulse animation on every press, even in rapid
+  // succession — removing the class and forcing a reflow before
+  // re-adding it is what lets it replay instead of no-op.
+  btn.classList.remove('tap-pulse');
+  void btn.offsetWidth;
+  btn.classList.add('tap-pulse');
   if (state.target > 0 && state.count >= state.target) {
     state.laps++;
     state.count = 0;
     vibrate([40, 30, 40]);
-    const btn = document.getElementById('counterBtn');
     btn.classList.add('complete');
     setTimeout(() => btn.classList.remove('complete'), 500);
   }
