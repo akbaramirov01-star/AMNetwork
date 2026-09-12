@@ -336,6 +336,27 @@ const RECITERS_EVERYAYAH = [
     names: { ar: 'محمود خليل الحصري', ru: 'Махмуд Халиль аль-Хусари', tj: 'Маҳмуд Халил ал-Ҳусорӣ', zh: '马哈茅德·哈利勒·侯萨里' } },
   { id: 'Abdul_Basit_Murattal_192kbps', name: 'Abdul Basit Abdul Samad',
     names: { ar: 'عبد الباسط عبد الصمد', ru: 'Абдул Басит Абдус Самад', tj: 'Абдулбосит Абдусамад', zh: '阿卜杜·巴西特·阿卜杜·萨迈德' } },
+  { id: 'Abdul_Basit_Mujawwad_128kbps', name: 'Abdul Basit Abdul Samad (Mujawwad)',
+    names: { ar: 'عبد الباسط عبد الصمد (مجود)', ru: 'Абдул Басит Абдус Самад (Муджаввад)', tj: 'Абдулбосит Абдусамад (Муҷаввад)', zh: '阿卜杜·巴西特（穆贾瓦德风格）' } },
+  { id: 'Saood_ash-Shuraym_128kbps', name: 'Saud Al-Shuraim',
+    names: { ar: 'سعود الشريم', ru: 'Сауд аш-Шурайм', tj: 'Саъуд аш-Шурайм', zh: '苏德·舒赖姆' } },
+  { id: 'Abu_Bakr_Ash-Shaatree_128kbps', name: 'Abu Bakr Al-Shatri',
+    names: { ar: 'أبو بكر الشاطري', ru: 'Абу Бакр аш-Шатри', tj: 'Абӯбакр аш-Шотирӣ', zh: '艾布·伯克尔·沙特里' } },
+  { id: 'Minshawy_Murattal_128kbps', name: 'Mohamed Siddiq Al-Minshawi',
+    names: { ar: 'محمد صديق المنشاوي', ru: 'Мухаммад Сиддик аль-Миншави', tj: 'Муҳаммад Сиддиқ ал-Миншовӣ', zh: '穆罕默德·西迪克·明沙维' } },
+  { id: 'Minshawy_Mujawwad_192kbps', name: 'Mohamed Siddiq Al-Minshawi (Mujawwad)',
+    names: { ar: 'محمد صديق المنشاوي (مجود)', ru: 'Мухаммад Сиддик аль-Миншави (Муджаввад)', tj: 'Муҳаммад Сиддиқ ал-Миншовӣ (Муҷаввад)', zh: '明沙维（穆贾瓦德风格）' } },
+  { id: 'Husary_Muallim_128kbps', name: 'Mahmoud Khalil Al-Husary (Muallim)',
+    names: { ar: 'محمود خليل الحصري (المعلم)', ru: 'Махмуд Халиль аль-Хусари (Муаллим)', tj: 'Маҳмуд Халил ал-Ҳусорӣ (Муаллим)', zh: '侯萨里（教学风格）' } },
+  { id: 'Hani_Rifai_192kbps', name: 'Hani Ar-Rifai',
+    names: { ar: 'هاني الرفاعي', ru: 'Хани ар-Рифаи', tj: 'Ҳонӣ ар-Рифоӣ', zh: '哈尼·里法伊' } },
+  { id: 'Mohammad_al_Tablaway_128kbps', name: 'Mohammad Al-Tablawi',
+    names: { ar: 'محمد الطبلاوي', ru: 'Мухаммад ат-Таблави', tj: 'Муҳаммад ат-Таблавӣ', zh: '穆罕默德·塔布拉维' } },
+  // No word-timing data for this one (source alignment failed for this
+  // reciter specifically) — everything still works, just without the
+  // word-highlight-while-spoken feature for him.
+  { id: 'Abdurrahmaan_As-Sudais_192kbps', name: 'Abdur-Rahman As-Sudais',
+    names: { ar: 'عبد الرحمن السديس', ru: 'Абдур-Рахман ас-Судайс', tj: 'Абдурраҳмон ас-Судайс', zh: '阿卜杜拉赫曼·苏戴斯' } },
 ];
 function reciterDisplayName(r){
   return (r.names && r.names[lang]) || r.name;
