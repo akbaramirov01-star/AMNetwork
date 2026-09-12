@@ -26,12 +26,12 @@
 
 ## Key Numbers (verified sources)
 
-- **$600B** — annual Zakat *obligation/potential* (World Bank + IRTI/IsDB, 2016). Actually distributed formally: <$25B
+- **$50B–$600B** — annual Zakat *obligation/potential*, global (World Bank + IRTI/IsDB, "Global Report on Islamic Finance," 2016). The primary source states this as a range, not a single figure — secondary sources vary ($50B–$600B in most citations, occasionally misquoted as $550B–$600B). Cross-checked independently against OIC countries' combined GDP (~$9.2T in 2024) and published Zakat-to-GDP estimation ratios (~1%–7.5% depending on country/method): 1–7.5% of $9.2T ≈ $92B–$690B, consistent with the $50B–$600B range. Actually distributed formally: <$25B
 - **~2B** Muslims globally (Pew Research / Carnegie 2024)
 - **$6T** Islamic Finance market (LSEG/ICD Report 2025: $5.98T in 2024), +12% CAGR
 - **$341B** Islamic Fintech by 2029 (GIFT Report 2025/26, Qatar Financial Centre), +11.5% CAGR
 
-⚠️ When writing about $600B: always say "potential/obligation", never "collected". The collected amount is <$25B.
+⚠️ When writing about Zakat potential: always cite it as the "$50B–$600B" range (or "up to $600B"), always say "potential/obligation", never "collected" and never a flat "$600B" as if it were a precise point estimate. The collected amount is <$25B. Do NOT cite UNDP (2018) for this figure — that blog post's $200B–$1T range is a different secondary citation; World Bank/IRTI-IsDB 2016 is the source we've verified and standardized on.
 
 ## Socials
 
