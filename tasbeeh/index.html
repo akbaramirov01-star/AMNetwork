@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Digital Tasbeeh — AM Network</title>
+<meta name="description" content="A simple digital tasbeeh counter — tap to count your dhikr, choose a target (33, 99, 100), works offline, saves automatically.">
+<link rel="canonical" href="https://amnetwork.io/tasbeeh/">
+<meta property="og:title" content="Digital Tasbeeh — AM Network">
+<meta property="og:description" content="Tap-to-count dhikr counter with common tasbeeh presets. Free, works offline.">
+<meta property="og:url" content="https://amnetwork.io/tasbeeh/">
+<meta property="og:image" content="https://amnetwork.io/og-image.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0A1A11">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+gtag('js',new Date());gtag('config','G-G4GSRVJB5M');
+if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{analytics_storage:'granted'});}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G4GSRVJB5M"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet"></noscript>
+<style>
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}html{scroll-behavior:auto}}
+
+[data-theme="dark"]{
+  --bg1:#0A1A11;--bg2:#0F2117;--bg3:#1C4532;--bg4:#2D6A4F;
+  --gold:#C9A84C;--gold2:#E8C87A;--gold3:rgba(201,168,76,0.12);
+  --text:#FFFFFF;--text2:rgba(255,255,255,0.60);--text3:rgba(255,255,255,0.38);
+  --border:rgba(255,255,255,0.09);--card:rgba(255,255,255,0.04);
+  --nav-bg:rgba(10,26,17,0.92);--input-bg:rgba(255,255,255,0.06);
+  --input-border:rgba(255,255,255,0.14);
+}
+[data-theme="light"]{
+  --bg1:#F5F0E8;--bg2:#EDE8DE;--bg3:#DDD0BB;--bg4:#C8B896;
+  --gold:#C9A84C;--gold2:#B8941C;--gold3:rgba(201,168,76,0.12);
+  --text:#1C2E1F;--text2:rgba(28,46,31,0.68);--text3:rgba(28,46,31,0.42);
+  --border:rgba(28,69,50,0.12);--card:rgba(255,255,255,0.80);
+  --nav-bg:rgba(245,240,232,0.95);--input-bg:rgba(255,255,255,0.7);
+  --input-border:rgba(28,69,50,0.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg1);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;transition:background 0.3s,color 0.3s}
+[lang="ar"]{font-family:'Noto Naskh Arabic',sans-serif}
+[lang="zh"]{font-family:'Noto Serif TC',system-ui,sans-serif}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);direction:ltr}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{height:36px;width:auto}
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang-wrap{position:relative}
+.lang-sel{display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.lang-drop{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;min-width:150px;z-index:200;display:none;overflow:hidden}
+.lang-item{display:flex;align-items:center;gap:8px;padding:9px 14px;cursor:pointer;font-size:13px;color:var(--text2)}
+.lang-item:hover{background:var(--card)}
+.theme-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:16px;transition:all 0.2s}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.nav-back{padding:7px 14px;border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:12px;font-weight:500;text-decoration:none;transition:all 0.2s}
+.nav-back:hover{border-color:var(--gold);color:var(--gold)}
+
+/* LAYOUT */
+main{padding-top:64px;min-height:100vh}
+.hero{padding:44px 5vw 20px;text-align:center;max-width:640px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:var(--gold3);border:1px solid rgba(201,168,76,0.3);border-radius:30px;font-size:11px;color:var(--gold);margin-bottom:16px;text-transform:uppercase;letter-spacing:.04em}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,42px);font-weight:700;line-height:1.2;margin-bottom:12px;color:var(--text)}
+.hero p{font-size:14px;color:var(--text2);line-height:1.75;max-width:520px;margin:0 auto}
+
+.wrap{max-width:520px;margin:0 auto;padding:0 5vw 80px}
+
+/* PHRASE SELECT */
+.phrase-select{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px}
+.phrase-btn{padding:9px 16px;border-radius:20px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text2);font-size:13px;cursor:pointer;transition:all .15s ease;font-family:'DM Sans',sans-serif}
+.phrase-btn:hover{border-color:var(--gold)}
+.phrase-btn.active{background:var(--gold);color:#1a1a1a;border-color:var(--gold);font-weight:600}
+
+/* COUNTER CARD */
+.counter-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:36px 28px;text-align:center}
+.counter-phrase-ar{font-family:'Noto Naskh Arabic',serif;font-size:34px;color:var(--gold);margin-bottom:6px;line-height:1.4}
+.counter-phrase-name{font-size:13px;color:var(--text3);margin-bottom:24px}
+.counter-circle{width:220px;height:220px;border-radius:50%;border:4px solid var(--gold3);background:var(--input-bg);margin:0 auto 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform .08s ease,border-color .2s ease;-webkit-tap-highlight-color:transparent;user-select:none;position:relative}
+.counter-circle:active{transform:scale(0.96)}
+.counter-circle.complete{border-color:var(--gold);animation:pulseGold .5s ease}
+@keyframes pulseGold{0%{box-shadow:0 0 0 0 rgba(201,168,76,.5)}100%{box-shadow:0 0 0 22px rgba(201,168,76,0)}}
+.counter-value{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:700;color:var(--text);line-height:1}
+.counter-target{font-size:14px;color:var(--text3);margin-top:4px}
+.counter-progress-bar{height:6px;background:var(--input-bg);border-radius:6px;overflow:hidden;margin-bottom:20px}
+.counter-progress-fill{height:100%;background:var(--gold);border-radius:6px;transition:width .15s ease;width:0%}
+.counter-actions{display:flex;gap:10px;justify-content:center;margin-bottom:6px}
+.ctr-btn{padding:10px 20px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text2);font-size:13px;cursor:pointer;transition:all .15s ease;font-family:'DM Sans',sans-serif}
+.ctr-btn:hover{border-color:var(--gold);color:var(--gold)}
+.lap-info{margin-top:16px;font-size:12px;color:var(--text3)}
+.tap-hint{margin-top:18px;font-size:12px;color:var(--text3)}
+
+.custom-row{display:flex;gap:8px;justify-content:center;align-items:center;margin-bottom:24px}
+.custom-row input{width:80px;padding:9px 12px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;text-align:center;outline:none}
+.custom-row input:focus{border-color:var(--gold)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/logo.webp" alt="AM Network" height="36">
+  </a>
+  <div class="nav-right">
+    <div class="lang-wrap">
+      <button class="lang-sel" onclick="toggleLangDrop()" aria-label="Select language">
+        <img id="langFlag" src="https://flagcdn.com/w20/gb.png" width="18" height="13" style="border-radius:2px" alt="">
+        <span id="langName">English</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="lang-drop" id="langDrop">
+        <div class="lang-item" onclick="selectLang('en','gb','English')"><img src="https://flagcdn.com/w20/gb.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> English</div>
+        <div class="lang-item" onclick="selectLang('ar','sa','العربية')"><img src="https://flagcdn.com/w20/sa.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> العربية</div>
+        <div class="lang-item" onclick="selectLang('ru','ru','Русский')"><img src="https://flagcdn.com/w20/ru.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Русский</div>
+        <div class="lang-item" onclick="selectLang('tj','tj','Тоҷикӣ')"><img src="https://flagcdn.com/w20/tj.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Тоҷикӣ</div>
+        <div class="lang-item" onclick="selectLang('id','id','Indonesia')"><img src="https://flagcdn.com/w20/id.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Indonesia</div>
+        <div class="lang-item" onclick="selectLang('tr','tr','Türkçe')"><img src="https://flagcdn.com/w20/tr.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Türkçe</div>
+        <div class="lang-item" onclick="selectLang('zh','cn','中文')"><img src="https://flagcdn.com/w20/cn.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> 中文</div>
+        <div class="lang-item" onclick="selectLang('ms','my','Melayu')"><img src="https://flagcdn.com/w20/my.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Melayu</div>
+        <div class="lang-item" onclick="selectLang('fr','fr','Français')"><img src="https://flagcdn.com/w20/fr.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Français</div>
+        <div class="lang-item" onclick="selectLang('de','de','Deutsch')"><img src="https://flagcdn.com/w20/de.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Deutsch</div>
+      </div>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    <a class="nav-back" href="/" data-t="nav_back">← Main site</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="badge">📿 <span data-t="hero_badge">Tap to Count · Saves Automatically</span></div>
+    <h1 data-t="hero_h1">Count Your Dhikr</h1>
+    <p data-t="hero_p">A simple digital tasbeeh — tap to count, choose a target, and let your remembrance of Allah flow without distraction.</p>
+  </section>
+
+  <div class="wrap">
+    <div class="phrase-select" id="phraseSelect">
+      <button class="phrase-btn" data-key="subhanallah" data-target="33" onclick="selectPhrase(this)">
+        <span data-t="phrase_subhanallah">SubhanAllah</span></button>
+      <button class="phrase-btn" data-key="alhamdulillah" data-target="33" onclick="selectPhrase(this)">
+        <span data-t="phrase_alhamdulillah">Alhamdulillah</span></button>
+      <button class="phrase-btn" data-key="allahuakbar" data-target="34" onclick="selectPhrase(this)">
+        <span data-t="phrase_allahuakbar">Allahu Akbar</span></button>
+      <button class="phrase-btn" data-key="astaghfirullah" data-target="100" onclick="selectPhrase(this)">
+        <span data-t="phrase_astaghfirullah">Astaghfirullah</span></button>
+      <button class="phrase-btn" data-key="lailaha" data-target="100" onclick="selectPhrase(this)">
+        <span data-t="phrase_lailaha">La ilaha illallah</span></button>
+      <button class="phrase-btn" data-key="custom" data-target="0" onclick="selectPhrase(this)">
+        <span data-t="phrase_custom">Free Count</span></button>
+    </div>
+
+    <div class="custom-row" id="customRow" style="display:none">
+      <span data-t="custom_target_lbl" style="font-size:12px;color:var(--text3)">Custom target</span>
+      <input type="number" id="customTarget" min="0" value="100" oninput="setCustomTarget(this.value)">
+    </div>
+
+    <div class="counter-card">
+      <div class="counter-phrase-ar" id="phraseAr">سُبْحَانَ اللَّٰهِ</div>
+      <div class="counter-phrase-name" id="phraseName">SubhanAllah</div>
+      <button class="counter-circle" id="counterBtn" onclick="incrementCount()" aria-label="Count">
+        <span class="counter-value" id="counterValue">0</span>
+        <span class="counter-target" id="counterTargetLbl">/ 33</span>
+      </button>
+      <div class="counter-progress-bar"><div class="counter-progress-fill" id="progressFill"></div></div>
+      <div class="counter-actions">
+        <button class="ctr-btn" onclick="decrementCount()">−1</button>
+        <button class="ctr-btn" onclick="resetCount()" data-t="reset_btn">Reset</button>
+      </div>
+      <div class="lap-info" id="lapInfo"></div>
+      <div class="tap-hint" data-t="tap_hint">Tap the circle to count</div>
+    </div>
+  </div>
+</main>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   I18N
+═══════════════════════════════════════════════════════ */
+const translations = {"en":{"nav_back":"← Main site","hero_badge":"Tap to Count · Saves Automatically","hero_h1":"Count Your Dhikr","hero_p":"A simple digital tasbeeh — tap to count, choose a target, and let your remembrance of Allah flow without distraction.","phrase_subhanallah":"SubhanAllah","phrase_alhamdulillah":"Alhamdulillah","phrase_allahuakbar":"Allahu Akbar","phrase_astaghfirullah":"Astaghfirullah","phrase_lailaha":"La ilaha illallah","phrase_custom":"Free Count","custom_target_lbl":"Custom target","reset_btn":"Reset","tap_hint":"Tap the circle to count","lap_label":"Cycles completed: "},"ar":{"nav_back":"← الموقع الرئيسي","hero_badge":"اضغط للعد · يُحفظ تلقائياً","hero_h1":"عدّ أذكارك","hero_p":"سبحة رقمية بسيطة — اضغط للعد، اختر هدفاً، ودع ذكرك لله يتدفق دون تشتيت.","phrase_subhanallah":"سبحان الله","phrase_alhamdulillah":"الحمد لله","phrase_allahuakbar":"الله أكبر","phrase_astaghfirullah":"أستغفر الله","phrase_lailaha":"لا إله إلا الله","phrase_custom":"عدّ حر","custom_target_lbl":"هدف مخصص","reset_btn":"إعادة تعيين","tap_hint":"اضغط على الدائرة للعد","lap_label":"الدورات المكتملة: "},"ru":{"nav_back":"← Главный сайт","hero_badge":"Нажимайте для счёта · Сохраняется автоматически","hero_h1":"Считайте свои зикры","hero_p":"Простые цифровые чётки — нажимайте, чтобы считать, выберите цель и пусть ваше поминание Аллаха течёт без помех.","phrase_subhanallah":"СубханаЛлах","phrase_alhamdulillah":"Альхамдулиллях","phrase_allahuakbar":"Аллаху Акбар","phrase_astaghfirullah":"АстагфируЛлах","phrase_lailaha":"Ля иляха илля Ллах","phrase_custom":"Свободный счёт","custom_target_lbl":"Своя цель","reset_btn":"Сбросить","tap_hint":"Нажмите на круг, чтобы считать","lap_label":"Завершено циклов: "},"tj":{"nav_back":"← Сайти асосӣ","hero_badge":"Барои шумориш зер кунед · Худкор захира мешавад","hero_h1":"Зикрҳои худро шуморед","hero_p":"Тасбеҳи рақамии сода — барои шумориш зер кунед, ҳадаф интихоб кунед ва зикри Аллоҳ бидуни халал ҷараён ёбад.","phrase_subhanallah":"Субҳоналлоҳ","phrase_alhamdulillah":"Алҳамдулиллоҳ","phrase_allahuakbar":"Аллоҳу акбар","phrase_astaghfirullah":"Астағфируллоҳ","phrase_lailaha":"Ла илаҳа иллаллоҳ","phrase_custom":"Шумориши озод","custom_target_lbl":"Ҳадафи шахсӣ","reset_btn":"Аз нав","tap_hint":"Барои шумориш ба доира зер кунед","lap_label":"Даврҳои анҷомёфта: "},"id":{"nav_back":"← Situs utama","hero_badge":"Ketuk untuk Menghitung · Tersimpan Otomatis","hero_h1":"Hitung Dzikir Anda","hero_p":"Tasbih digital sederhana — ketuk untuk menghitung, pilih target, dan biarkan zikir Anda mengalir tanpa gangguan.","phrase_subhanallah":"Subhanallah","phrase_alhamdulillah":"Alhamdulillah","phrase_allahuakbar":"Allahu Akbar","phrase_astaghfirullah":"Astaghfirullah","phrase_lailaha":"La ilaha illallah","phrase_custom":"Hitungan Bebas","custom_target_lbl":"Target khusus","reset_btn":"Atur Ulang","tap_hint":"Ketuk lingkaran untuk menghitung","lap_label":"Siklus selesai: "},"tr":{"nav_back":"← Ana site","hero_badge":"Saymak İçin Dokun · Otomatik Kaydedilir","hero_h1":"Zikrinizi Sayın","hero_p":"Basit bir dijital tesbih — saymak için dokunun, bir hedef seçin ve Allah'ı zikrinizin dikkatiniz dağılmadan aksın.","phrase_subhanallah":"Sübhanallah","phrase_alhamdulillah":"Elhamdülillah","phrase_allahuakbar":"Allahu Ekber","phrase_astaghfirullah":"Estağfirullah","phrase_lailaha":"La ilahe illallah","phrase_custom":"Özgür Sayım","custom_target_lbl":"Özel hedef","reset_btn":"Sıfırla","tap_hint":"Saymak için daireye dokunun","lap_label":"Tamamlanan tur: "},"zh":{"nav_back":"← 主站","hero_badge":"点击计数 · 自动保存","hero_h1":"记录您的赞念","hero_p":"简单的电子念珠——点击计数，选择目标，让您对真主的赞念顺畅进行，不受干扰。","phrase_subhanallah":"苏布哈纳拉","phrase_alhamdulillah":"阿兰杜里拉","phrase_allahuakbar":"真主至大","phrase_astaghfirullah":"求真主饶恕","phrase_lailaha":"万物非主唯有真主","phrase_custom":"自由计数","custom_target_lbl":"自定义目标","reset_btn":"重置","tap_hint":"点击圆圈计数","lap_label":"已完成轮次："},"ms":{"nav_back":"← Laman utama","hero_badge":"Ketik untuk Mengira · Disimpan Secara Automatik","hero_h1":"Kira Zikir Anda","hero_p":"Tasbih digital yang ringkas — ketik untuk mengira, pilih sasaran, dan biarkan zikir anda mengalir tanpa gangguan.","phrase_subhanallah":"Subhanallah","phrase_alhamdulillah":"Alhamdulillah","phrase_allahuakbar":"Allahu Akbar","phrase_astaghfirullah":"Astaghfirullah","phrase_lailaha":"La ilaha illallah","phrase_custom":"Kiraan Bebas","custom_target_lbl":"Sasaran tersuai","reset_btn":"Tetapkan Semula","tap_hint":"Ketik bulatan untuk mengira","lap_label":"Kitaran selesai: "},"fr":{"nav_back":"← Site principal","hero_badge":"Appuyez pour compter · Enregistrement automatique","hero_h1":"Comptez votre dhikr","hero_p":"Un chapelet numérique simple — appuyez pour compter, choisissez un objectif, et laissez votre invocation d'Allah s'écouler sans distraction.","phrase_subhanallah":"SubhanAllah","phrase_alhamdulillah":"Alhamdulillah","phrase_allahuakbar":"Allahu Akbar","phrase_astaghfirullah":"Astaghfirullah","phrase_lailaha":"La ilaha illallah","phrase_custom":"Comptage libre","custom_target_lbl":"Objectif personnalisé","reset_btn":"Réinitialiser","tap_hint":"Appuyez sur le cercle pour compter","lap_label":"Cycles terminés : "},"de":{"nav_back":"← Zur Hauptseite","hero_badge":"Zum Zählen tippen · Speichert automatisch","hero_h1":"Zählen Sie Ihr Dhikr","hero_p":"Ein einfacher digitaler Tasbih — tippen Sie zum Zählen, wählen Sie ein Ziel, und lassen Sie Ihr Gedenken an Allah ungestört fließen.","phrase_subhanallah":"SubhanAllah","phrase_alhamdulillah":"Alhamdulillah","phrase_allahuakbar":"Allahu Akbar","phrase_astaghfirullah":"Astaghfirullah","phrase_lailaha":"La ilaha illallah","phrase_custom":"Freies Zählen","custom_target_lbl":"Eigenes Ziel","reset_btn":"Zurücksetzen","tap_hint":"Tippen Sie auf den Kreis, um zu zählen","lap_label":"Abgeschlossene Zyklen: "}};
+
+let currentLang = 'en';
+function t(key){
+  const L = translations[currentLang] || translations.en;
+  return L[key] !== undefined ? L[key] : (translations.en[key] || key);
+}
+
+const PHRASES_AR = {
+  subhanallah: 'سُبْحَانَ اللَّٰهِ',
+  alhamdulillah: 'الْحَمْدُ لِلَّٰهِ',
+  allahuakbar: 'اللَّٰهُ أَكْبَرُ',
+  astaghfirullah: 'أَسْتَغْفِرُ اللَّٰهَ',
+  lailaha: 'لَا إِلٰهَ إِلَّا اللَّٰهُ',
+  custom: ''
+};
+
+function setLang(l){
+  currentLang = l;
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.setAttribute('lang', l==='tj'?'tg':l);
+  document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+  document.querySelectorAll('[data-t]').forEach(el => {
+    const k = el.getAttribute('data-t');
+    el.textContent = t(k);
+  });
+  document.getElementById('phraseName').textContent = t('phrase_' + state.phraseKey);
+  renderLapInfo();
+  localStorage.setItem('amn_lang', l);
+}
+function toggleLangDrop(){
+  const d = document.getElementById('langDrop');
+  d.style.display = (d.style.display === 'none' || !d.style.display) ? 'block' : 'none';
+}
+function selectLang(l, flag, name){
+  document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + flag + '.png';
+  document.getElementById('langName').textContent = name;
+  document.getElementById('langDrop').style.display = 'none';
+  setLang(l);
+}
+function toggleTheme(){
+  const th = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', th);
+  document.querySelector('.theme-btn').textContent = th === 'dark' ? '🌙' : '☀️';
+  localStorage.setItem('amn_theme', th);
+}
+document.addEventListener('click', function(e){
+  const wrap = document.querySelector('.lang-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    const d = document.getElementById('langDrop');
+    if (d) d.style.display = 'none';
+  }
+});
+
+/* ═══════════════════════════════════════════════════════
+   TASBEEH COUNTER — state persisted in localStorage
+═══════════════════════════════════════════════════════ */
+const STORAGE_KEY = 'amn_tasbeeh_state';
+let state = { count: 0, target: 33, phraseKey: 'subhanallah', laps: 0, customTarget: 100 };
+try {
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if (saved) state = Object.assign(state, saved);
+} catch (e) {}
+
+function saveState(){
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+}
+function vibrate(pattern){
+  if (navigator.vibrate) { try { navigator.vibrate(pattern); } catch (e) {} }
+}
+function render(){
+  document.getElementById('counterValue').textContent = state.count;
+  document.getElementById('counterTargetLbl').textContent = state.target > 0 ? ('/ ' + state.target) : '';
+  document.getElementById('phraseAr').textContent = PHRASES_AR[state.phraseKey] || '';
+  document.getElementById('phraseAr').style.display = PHRASES_AR[state.phraseKey] ? '' : 'none';
+  document.getElementById('phraseName').textContent = t('phrase_' + state.phraseKey);
+  const pct = state.target > 0 ? Math.min(100, (state.count / state.target) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.querySelectorAll('.phrase-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.key === state.phraseKey);
+  });
+  document.getElementById('customRow').style.display = state.phraseKey === 'custom' ? 'flex' : 'none';
+  if (state.phraseKey === 'custom') document.getElementById('customTarget').value = state.customTarget;
+  renderLapInfo();
+}
+function renderLapInfo(){
+  const el = document.getElementById('lapInfo');
+  el.textContent = state.laps > 0 ? (t('lap_label') + state.laps) : '';
+}
+function incrementCount(){
+  state.count++;
+  vibrate(10);
+  if (state.target > 0 && state.count >= state.target) {
+    state.laps++;
+    state.count = 0;
+    vibrate([40, 30, 40]);
+    const btn = document.getElementById('counterBtn');
+    btn.classList.add('complete');
+    setTimeout(() => btn.classList.remove('complete'), 500);
+  }
+  saveState();
+  render();
+}
+function decrementCount(){
+  state.count = Math.max(0, state.count - 1);
+  saveState();
+  render();
+}
+function resetCount(){
+  state.count = 0;
+  state.laps = 0;
+  saveState();
+  render();
+}
+function selectPhrase(btn){
+  const key = btn.dataset.key;
+  state.phraseKey = key;
+  state.target = key === 'custom' ? Number(state.customTarget) || 0 : Number(btn.dataset.target);
+  state.count = 0;
+  state.laps = 0;
+  saveState();
+  render();
+}
+function setCustomTarget(val){
+  const n = Math.max(0, Number(val) || 0);
+  state.customTarget = n;
+  state.target = n;
+  saveState();
+  render();
+}
+
+/* ── INIT ── */
+(function init(){
+  const savedTheme = localStorage.getItem('amn_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  document.querySelector('.theme-btn').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+  const flagMap = {en:'gb',ar:'sa',ru:'ru',tj:'tj',id:'id',tr:'tr',zh:'cn',ms:'my',fr:'fr',de:'de'};
+  const nameMap = {en:'English',ar:'العربية',ru:'Русский',tj:'Тоҷикӣ',id:'Indonesia',tr:'Türkçe',zh:'中文',ms:'Melayu',fr:'Français',de:'Deutsch'};
+  const savedLang = localStorage.getItem('amn_lang') || 'en';
+  const l = translations[savedLang] ? savedLang : 'en';
+  document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + (flagMap[l] || 'gb') + '.png';
+  document.getElementById('langName').textContent = nameMap[l] || 'English';
+  setLang(l);
+  render();
+})();
+</script>
+</body>
+</html>
