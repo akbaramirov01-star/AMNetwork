@@ -352,7 +352,13 @@ function stripTags(html){
   if (html == null) return '';
   const d = document.createElement('div');
   d.innerHTML = String(html);
-  return d.textContent || d.innerText || '';
+  // Footnote reference markers (Quran.com wraps them as e.g.
+  // <sup foot_note=95>1</sup>) aren't meaningful without the footnote's
+  // actual content, and left in they read as a bare digit glued onto the
+  // previous word with no space — drop the whole marker rather than that.
+  d.querySelectorAll('sup, sub').forEach(el => el.remove());
+  const text = d.textContent || d.innerText || '';
+  return text.replace(/\s+/g, ' ').trim();
 }
 
 async function loadChapters(){
@@ -635,20 +641,26 @@ async function loadSurahText(chapterId){
 
 // Renders the Arabic line as tappable word spans carrying that word's own
 // certified translation (from Quran.com's word-by-word data) when it's
-// available — falls back to plain, non-interactive text otherwise, so a
-// missing or differently-shaped API response never breaks the reading view.
+// available. The VISIBLE Arabic always comes from v.text_uthmani itself —
+// split on whitespace — never from the words[] array's own text fields,
+// since those can be a different (e.g. glyph-encoded) representation not
+// meant for display with a regular font; we only use words[] to look up
+// each token's translation by position. Falls back to plain, unsplit text
+// whenever anything doesn't line up, so this can never corrupt what's shown.
 function renderArabicWords(v){
-  if (!Array.isArray(v.words) || !v.words.length) {
-    return escapeHtml(v.text_uthmani || '');
+  const tokens = String(v.text_uthmani || '').split(/\s+/).filter(Boolean);
+  if (!tokens.length) return '';
+  const words = Array.isArray(v.words) ? v.words.filter(w => w.char_type_name !== 'end') : [];
+  if (words.length !== tokens.length) {
+    return escapeHtml(tokens.join(' '));
   }
-  return v.words
-    .filter(w => w.char_type_name !== 'end')
-    .map(w => {
-      const wordText = w.text_uthmani || w.text || '';
+  return tokens
+    .map((tok, i) => {
+      const w = words[i];
       const wordTr = w.translation && w.translation.text ? stripTags(w.translation.text) : '';
       return wordTr
-        ? `<span class="qword" tabindex="0" role="button" data-tr="${escapeHtml(wordTr)}">${escapeHtml(wordText)}</span>`
-        : `<span class="qword-plain">${escapeHtml(wordText)}</span>`;
+        ? `<span class="qword" tabindex="0" role="button" data-tr="${escapeHtml(wordTr)}">${escapeHtml(tok)}</span>`
+        : `<span class="qword-plain">${escapeHtml(tok)}</span>`;
     })
     .join(' ');
 }
