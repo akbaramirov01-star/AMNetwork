@@ -133,6 +133,20 @@ nav{position:fixed;top:3px;left:0;right:0;z-index:100;display:flex;align-items:c
 /* ── HERO ── */
 .hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 5vw 80px;overflow:hidden}
 
+/* ── HERO MOSQUE BACKDROP ──
+   One image per site language, generated to match this exact mosque per
+   country — see AGENTS.md-adjacent session notes. z-index:-1 keeps this
+   behind the hero's own (non-positioned) content without needing to touch
+   every other child. Two <img> layers crossfade so switching language
+   never shows a blank flash while the next image loads. */
+.hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;background:var(--bg1)}
+.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease;transform:scale(1);animation:heroMosqueZoom 42s ease-in-out infinite alternate;will-change:opacity,transform}
+.hero-bg-img.is-active{opacity:1}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,26,17,.90) 0%,rgba(10,26,17,.82) 45%,rgba(10,26,17,.95) 100%)}
+[data-theme="light"] .hero-bg::after{background:linear-gradient(180deg,rgba(245,240,232,.92) 0%,rgba(245,240,232,.85) 45%,rgba(245,240,232,.96) 100%)}
+@keyframes heroMosqueZoom{from{transform:scale(1)}to{transform:scale(1.09)}}
+@media (prefers-reduced-motion: reduce){.hero-bg-img{animation:none}}
+
 .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border:1px solid rgba(201,168,76,0.3);border-radius:999px;background:var(--gold3);font-size:11px;font-weight:500;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;animation:fadeUp 0.7s ease both}
 .hero-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2.5s ease infinite}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.6)}}
@@ -665,6 +679,10 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 
 <!-- HERO -->
 <section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <img class="hero-bg-img" id="heroMosqueA" alt="">
+    <img class="hero-bg-img" id="heroMosqueB" alt="">
+  </div>
   <div class="hero-badge"><div class="hero-dot"></div><span data-t="hero_badge">Early Access · Building in Public · 2026</span></div>
   <img class="hero-logo" src="/logo.webp" alt="AM Network">
   <h1><span id="heroL1" data-t="hero_l1">Where Every Dollar</span><span class="line2" id="heroL2" data-t="hero_l2">Finds Its Purpose.</span></h1>
@@ -1744,7 +1762,36 @@ function setLang(l){
   buildCountry(l);
   buildWgCountry(l);
   buildWaitlistRoles(l);
+  setHeroMosque(l);
   localStorage.setItem('amn_lang', l);
+}
+
+// ── HERO MOSQUE BACKDROP — one real mosque per language, crossfades on switch ──
+// Only the active language's image is ever fetched (no upfront 9-image cost);
+// a fresh pick loads into the hidden layer, then swaps once decoded so there's
+// never a blank flash. French isn't wired in yet — it isn't a full site
+// language (no translated strings), so there's no 'fr' case to trigger it.
+const HERO_MOSQUES = {
+  tj:'/mosques/tj.webp', tr:'/mosques/tr.webp', ms:'/mosques/ms.webp',
+  ar:'/mosques/ar.webp', id:'/mosques/id.webp', zh:'/mosques/zh.webp',
+  ru:'/mosques/ru.webp', en:'/mosques/en.webp', de:'/mosques/de.webp'
+};
+let heroMosqueFront = null;
+function setHeroMosque(l){
+  const src = HERO_MOSQUES[l] || HERO_MOSQUES.en;
+  const a = document.getElementById('heroMosqueA');
+  const b = document.getElementById('heroMosqueB');
+  if(!a || !b) return;
+  const front = heroMosqueFront === b ? b : a;
+  const back  = front === a ? b : a;
+  if(front.dataset.src === src) return;
+  back.dataset.src = src;
+  back.onload = () => {
+    back.classList.add('is-active');
+    front.classList.remove('is-active');
+    heroMosqueFront = back;
+  };
+  back.src = src;
 }
 
 function buildWaitlistRoles(l){
