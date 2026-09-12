@@ -19,6 +19,7 @@ from scorer import (
 )
 from assistant import get_reply
 from academy import explain as academy_explain, apply_to_case, translate_chrome, AUDIENCES
+from quran_audio import get_reciters as quran_get_reciters, get_chapter_audio, QuranAudioError
 
 app = Flask(__name__)
 ALLOWED_ORIGINS = [
@@ -63,6 +64,26 @@ ENUM_FIELDS = {
 @app.route("/health", methods=["GET"])
 def health():
     return jsonify({"status": "ok", "service": "am-network-ai-scoring", "version": "2.2", "ai_request_limits": True})
+
+
+@app.route("/quran/reciters", methods=["GET"])
+def quran_reciters():
+    try:
+        return jsonify(quran_get_reciters())
+    except QuranAudioError as e:
+        app.logger.error("quran_reciters: %s", e)
+        return jsonify({"error": "reciters_unavailable"}), 502
+
+
+@app.route("/quran/audio/<int:reciter_id>/<int:chapter_id>", methods=["GET"])
+def quran_audio(reciter_id, chapter_id):
+    if not (1 <= chapter_id <= 114):
+        return jsonify({"error": "invalid_chapter"}), 400
+    try:
+        return jsonify(get_chapter_audio(reciter_id, chapter_id))
+    except QuranAudioError as e:
+        app.logger.error("quran_audio: %s", e)
+        return jsonify({"error": "audio_unavailable"}), 502
 
 
 def _has_non_finite(value) -> bool:
