@@ -702,25 +702,27 @@ async function loadSurahText(chapterId){
   }).join('');
 }
 
-// Renders the Arabic line as tappable word spans carrying that word's own
-// certified translation (from Quran.com's word-by-word data) when it's
-// available. The VISIBLE Arabic always comes from v.text_uthmani itself —
-// split on whitespace — never from the words[] array's own text fields,
-// since those can be a different (e.g. glyph-encoded) representation not
-// meant for display with a regular font; we only use words[] to look up
-// each token's translation by position. Falls back to plain, unsplit text
-// whenever anything doesn't line up, so this can never corrupt what's shown.
+// Renders the Arabic line as per-word spans. Every token — and its
+// data-widx position, which is what onWordTimeUpdate() and quran-align's
+// segment indices both key off — comes from v.text_uthmani itself, split
+// on whitespace, the same word-splitting quran-align used to generate our
+// timing data. That's independent of Quran.com's own words[] breakdown, so
+// audio-sync highlighting works on every verse regardless of it.
+// Quran.com's words[] (used only for the tap-to-translate popup) is a
+// *separate*, optional layer on top: attached per-token only when its
+// count happens to line up with our own tokens, so a mismatch there just
+// means that verse's words aren't tappable — never a missing highlight,
+// and never corrupted Arabic (words[]'s own text fields, which can be a
+// different, e.g. glyph-encoded representation, are never displayed).
 function renderArabicWords(v){
   const tokens = String(v.text_uthmani || '').split(/\s+/).filter(Boolean);
   if (!tokens.length) return '';
   const words = Array.isArray(v.words) ? v.words.filter(w => w.char_type_name !== 'end') : [];
-  if (words.length !== tokens.length) {
-    return escapeHtml(tokens.join(' '));
-  }
+  const wordsAlign = words.length === tokens.length;
   return tokens
     .map((tok, i) => {
-      const w = words[i];
-      const wordTr = w.translation && w.translation.text ? stripTags(w.translation.text) : '';
+      const w = wordsAlign ? words[i] : null;
+      const wordTr = w && w.translation && w.translation.text ? stripTags(w.translation.text) : '';
       return wordTr
         ? `<span class="qword" tabindex="0" role="button" data-widx="${i}" data-tr="${escapeHtml(wordTr)}">${escapeHtml(tok)}</span>`
         : `<span class="qword-plain" data-widx="${i}">${escapeHtml(tok)}</span>`;
