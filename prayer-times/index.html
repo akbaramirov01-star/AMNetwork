@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Prayer Times — AM Network</title>
+<meta name="description" content="Accurate daily prayer times (Fajr, Dhuhr, Asr, Maghrib, Isha) for your location, with a choice of calculation methods.">
+<link rel="canonical" href="https://amnetwork.io/prayer-times/">
+<meta property="og:title" content="Prayer Times — AM Network">
+<meta property="og:description" content="Daily prayer times for your location, multiple calculation methods.">
+<meta property="og:url" content="https://amnetwork.io/prayer-times/">
+<meta property="og:image" content="https://amnetwork.io/og-image.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0A1A11">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.aladhan.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+gtag('js',new Date());gtag('config','G-G4GSRVJB5M');
+if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{analytics_storage:'granted'});}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G4GSRVJB5M"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet"></noscript>
+<style>
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}html{scroll-behavior:auto}}
+
+[data-theme="dark"]{
+  --bg1:#0A1A11;--bg2:#0F2117;--bg3:#1C4532;--bg4:#2D6A4F;
+  --gold:#C9A84C;--gold2:#E8C87A;--gold3:rgba(201,168,76,0.12);
+  --text:#FFFFFF;--text2:rgba(255,255,255,0.60);--text3:rgba(255,255,255,0.38);
+  --border:rgba(255,255,255,0.09);--card:rgba(255,255,255,0.04);
+  --nav-bg:rgba(10,26,17,0.92);--input-bg:rgba(255,255,255,0.06);
+  --input-border:rgba(255,255,255,0.14);
+}
+[data-theme="light"]{
+  --bg1:#F5F0E8;--bg2:#EDE8DE;--bg3:#DDD0BB;--bg4:#C8B896;
+  --gold:#C9A84C;--gold2:#B8941C;--gold3:rgba(201,168,76,0.12);
+  --text:#1C2E1F;--text2:rgba(28,46,31,0.68);--text3:rgba(28,46,31,0.42);
+  --border:rgba(28,69,50,0.12);--card:rgba(255,255,255,0.80);
+  --nav-bg:rgba(245,240,232,0.95);--input-bg:rgba(255,255,255,0.7);
+  --input-border:rgba(28,69,50,0.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg1);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;transition:background 0.3s,color 0.3s}
+[lang="ar"]{font-family:'Noto Naskh Arabic',sans-serif}
+[lang="zh"]{font-family:'Noto Serif TC',system-ui,sans-serif}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);direction:ltr}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{height:36px;width:auto}
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang-wrap{position:relative}
+.lang-sel{display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.lang-drop{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;min-width:150px;z-index:200;display:none;overflow:hidden}
+.lang-item{display:flex;align-items:center;gap:8px;padding:9px 14px;cursor:pointer;font-size:13px;color:var(--text2)}
+.lang-item:hover{background:var(--card)}
+.theme-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:16px;transition:all 0.2s}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.nav-back{padding:7px 14px;border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:12px;font-weight:500;text-decoration:none;transition:all 0.2s}
+.nav-back:hover{border-color:var(--gold);color:var(--gold)}
+
+/* LAYOUT */
+main{padding-top:64px;min-height:100vh}
+.hero{padding:44px 5vw 20px;text-align:center;max-width:640px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:var(--gold3);border:1px solid rgba(201,168,76,0.3);border-radius:30px;font-size:11px;color:var(--gold);margin-bottom:16px;text-transform:uppercase;letter-spacing:.04em}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,42px);font-weight:700;line-height:1.2;margin-bottom:12px;color:var(--text)}
+.hero p{font-size:14px;color:var(--text2);line-height:1.75;max-width:520px;margin:0 auto}
+
+.wrap{max-width:520px;margin:0 auto;padding:0 5vw 80px}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:30px 26px;text-align:center;margin-bottom:18px}
+.btn-gold{padding:13px 26px;border-radius:12px;border:none;background:var(--gold);color:#1a1a1a;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s}
+.btn-gold:hover{opacity:.9}
+.btn-outline{padding:11px 22px;border-radius:12px;border:1px solid var(--input-border);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.status-msg{font-size:13px;color:var(--text3);margin:14px 0}
+.status-msg.error{color:#d98c6b}
+
+.select-row{display:flex;flex-direction:column;gap:14px;margin-bottom:6px;text-align:left}
+.select-row label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text3)}
+.select-row select{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;margin-top:6px}
+.select-row select:focus{border-color:var(--gold)}
+
+.manual-toggle-link{display:inline-block;margin-top:14px;font-size:12px;color:var(--text3);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif}
+.manual-form{display:none;margin-top:14px;gap:10px;flex-wrap:wrap;justify-content:center}
+.manual-form.visible{display:flex}
+.manual-form input{width:130px;padding:10px 12px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;text-align:center;outline:none}
+.manual-form input:focus{border-color:var(--gold)}
+
+/* RESULTS */
+.date-readable{font-size:13px;color:var(--text3);margin-bottom:16px}
+.prayer-row{display:flex;justify-content:space-between;align-items:center;padding:14px 4px;border-bottom:1px solid var(--border)}
+.prayer-row:last-child{border-bottom:none}
+.prayer-row.next{background:var(--gold3);border-radius:10px;padding:14px 12px;margin:2px -8px}
+.prayer-name{font-size:14px;color:var(--text2);display:flex;align-items:center;gap:8px}
+.prayer-row.next .prayer-name{color:var(--gold);font-weight:600}
+.prayer-time{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--text)}
+.prayer-row.next .prayer-time{color:var(--gold)}
+.next-badge{font-size:10px;background:var(--gold);color:#1a1a1a;padding:2px 8px;border-radius:8px;text-transform:uppercase;letter-spacing:.03em}
+.sunrise-note{font-size:11px;color:var(--text3)}
+.source-note{font-size:11px;color:var(--text3);text-align:center;margin-top:6px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/logo.webp" alt="AM Network" height="36">
+  </a>
+  <div class="nav-right">
+    <div class="lang-wrap">
+      <button class="lang-sel" onclick="toggleLangDrop()" aria-label="Select language">
+        <img id="langFlag" src="https://flagcdn.com/w20/gb.png" width="18" height="13" style="border-radius:2px" alt="">
+        <span id="langName">English</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="lang-drop" id="langDrop">
+        <div class="lang-item" onclick="selectLang('en','gb','English')"><img src="https://flagcdn.com/w20/gb.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> English</div>
+        <div class="lang-item" onclick="selectLang('ar','sa','العربية')"><img src="https://flagcdn.com/w20/sa.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> العربية</div>
+        <div class="lang-item" onclick="selectLang('ru','ru','Русский')"><img src="https://flagcdn.com/w20/ru.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Русский</div>
+        <div class="lang-item" onclick="selectLang('tj','tj','Тоҷикӣ')"><img src="https://flagcdn.com/w20/tj.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Тоҷикӣ</div>
+        <div class="lang-item" onclick="selectLang('id','id','Indonesia')"><img src="https://flagcdn.com/w20/id.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Indonesia</div>
+        <div class="lang-item" onclick="selectLang('tr','tr','Türkçe')"><img src="https://flagcdn.com/w20/tr.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Türkçe</div>
+        <div class="lang-item" onclick="selectLang('zh','cn','中文')"><img src="https://flagcdn.com/w20/cn.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> 中文</div>
+        <div class="lang-item" onclick="selectLang('ms','my','Melayu')"><img src="https://flagcdn.com/w20/my.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Melayu</div>
+        <div class="lang-item" onclick="selectLang('fr','fr','Français')"><img src="https://flagcdn.com/w20/fr.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Français</div>
+        <div class="lang-item" onclick="selectLang('de','de','Deutsch')"><img src="https://flagcdn.com/w20/de.png" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Deutsch</div>
+      </div>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    <a class="nav-back" href="/" data-t="nav_back">← Main site</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="badge">🕐 <span data-t="hero_badge">Location-based · 5 Calculation Methods</span></div>
+    <h1 data-t="hero_h1">Prayer Times</h1>
+    <p data-t="hero_p">Get accurate daily prayer times for your location, calculated by AlAdhan — used by Muslims worldwide, with a choice of calculation method.</p>
+  </section>
+
+  <div class="wrap">
+    <div class="card" id="settingsCard">
+      <div class="select-row">
+        <div>
+          <label data-t="method_label">Calculation Method</label>
+          <select id="methodSelect">
+            <option value="0" data-t="method_mwl">Muslim World League</option>
+            <option value="1" data-t="method_isna">Islamic Society of North America (ISNA)</option>
+            <option value="2" data-t="method_egypt">Egyptian General Authority of Survey</option>
+            <option value="3" data-t="method_ummalqura">Umm Al-Qura University, Makkah</option>
+            <option value="4" data-t="method_karachi">University of Islamic Sciences, Karachi</option>
+          </select>
+        </div>
+        <div>
+          <label data-t="school_label">Asr Calculation</label>
+          <select id="schoolSelect">
+            <option value="0" data-t="school_shafi">Standard (Shafi'i / Maliki / Hanbali)</option>
+            <option value="1" data-t="school_hanafi">Hanafi</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-gold" onclick="fetchPrayerTimes()" style="margin-top:18px" data-t="find_btn">Get My Prayer Times</button>
+      <div class="status-msg" id="ptStatus"></div>
+      <button class="manual-toggle-link" onclick="toggleManualForm()" data-t="manual_toggle">Enter location manually</button>
+      <div class="manual-form" id="manualForm">
+        <input type="number" id="manualLat" step="any" data-t-ph="manual_lat_ph" placeholder="Latitude">
+        <input type="number" id="manualLng" step="any" data-t-ph="manual_lng_ph" placeholder="Longitude">
+        <button class="btn-outline" onclick="useManualLocation()" data-t="manual_btn">Calculate</button>
+      </div>
+    </div>
+
+    <div class="card" id="resultsCard" style="display:none">
+      <div class="date-readable" id="dateReadable"></div>
+      <div id="prayerList"></div>
+      <p class="source-note" data-t="source_note">Prayer times calculated by AlAdhan.com from your location and chosen method. This is a calculation tool, not a fatwa — for exact local timing, verify with your local mosque.</p>
+    </div>
+  </div>
+</main>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   I18N
+═══════════════════════════════════════════════════════ */
+const translations = {"en":{"nav_back":"← Main site","hero_badge":"Location-based · 5 Calculation Methods","hero_h1":"Prayer Times","hero_p":"Get accurate daily prayer times for your location, calculated by AlAdhan — used by Muslims worldwide, with a choice of calculation method.","method_label":"Calculation Method","method_mwl":"Muslim World League","method_isna":"Islamic Society of North America (ISNA)","method_egypt":"Egyptian General Authority of Survey","method_ummalqura":"Umm Al-Qura University, Makkah","method_karachi":"University of Islamic Sciences, Karachi","school_label":"Asr Calculation","school_shafi":"Standard (Shafi'i / Maliki / Hanbali)","school_hanafi":"Hanafi","find_btn":"Get My Prayer Times","locating_msg":"Locating…","loading_msg":"Loading prayer times…","loc_error":"Could not access your location. Please allow location access, or enter coordinates manually below.","fetch_error":"Could not load prayer times right now. Please try again.","manual_toggle":"Enter location manually","manual_lat_ph":"Latitude","manual_lng_ph":"Longitude","manual_btn":"Calculate","source_note":"Prayer times calculated by AlAdhan.com from your location and chosen method. This is a calculation tool, not a fatwa — for exact local timing, verify with your local mosque.","fajr":"Fajr","sunrise":"Sunrise","dhuhr":"Dhuhr","asr":"Asr","maghrib":"Maghrib","isha":"Isha","sunrise_note":"(not a prayer time)","next_label":"Next"},"ar":{"nav_back":"← الموقع الرئيسي","hero_badge":"حسب الموقع · 5 طرق حساب","hero_h1":"مواقيت الصلاة","hero_p":"احصل على مواقيت الصلاة اليومية الدقيقة لموقعك، محسوبة بواسطة AlAdhan — التي يستخدمها المسلمون حول العالم، مع اختيار طريقة الحساب.","method_label":"طريقة الحساب","method_mwl":"رابطة العالم الإسلامي","method_isna":"الجمعية الإسلامية لأمريكا الشمالية (ISNA)","method_egypt":"الهيئة المصرية العامة للمساحة","method_ummalqura":"جامعة أم القرى، مكة المكرمة","method_karachi":"جامعة العلوم الإسلامية، كراتشي","school_label":"حساب العصر","school_shafi":"المعتاد (الشافعي / المالكي / الحنبلي)","school_hanafi":"الحنفي","find_btn":"احصل على مواقيتي","locating_msg":"جارٍ تحديد الموقع…","loading_msg":"جارٍ تحميل مواقيت الصلاة…","loc_error":"تعذّر الوصول إلى موقعك. يرجى السماح بالوصول إلى الموقع، أو إدخال الإحداثيات يدوياً أدناه.","fetch_error":"تعذّر تحميل مواقيت الصلاة الآن. حاول مرة أخرى.","manual_toggle":"أدخل الموقع يدوياً","manual_lat_ph":"خط العرض","manual_lng_ph":"خط الطول","manual_btn":"احسب","source_note":"مواقيت الصلاة محسوبة بواسطة AlAdhan.com من موقعك وطريقة الحساب المختارة. هذه أداة حسابية وليست فتوى — للتوقيت المحلي الدقيق، تحقق مع مسجدك المحلي.","fajr":"الفجر","sunrise":"الشروق","dhuhr":"الظهر","asr":"العصر","maghrib":"المغرب","isha":"العشاء","sunrise_note":"(ليس وقت صلاة)","next_label":"التالية"},"ru":{"nav_back":"← Главный сайт","hero_badge":"По геолокации · 5 методов расчёта","hero_h1":"Время намаза","hero_p":"Точное время намаза для вашего местоположения, рассчитанное AlAdhan — сервисом, которым пользуются мусульмане по всему миру, с выбором метода расчёта.","method_label":"Метод расчёта","method_mwl":"Muslim World League","method_isna":"Islamic Society of North America (ISNA)","method_egypt":"Египетское геодезическое управление","method_ummalqura":"Университет Умм-эль-Кура, Мекка","method_karachi":"Университет исламских наук, Карачи","school_label":"Расчёт Аср","school_shafi":"Стандартный (шафии / малики / ханбали)","school_hanafi":"Ханафи","find_btn":"Показать время намаза","locating_msg":"Определение местоположения…","loading_msg":"Загрузка времени намаза…","loc_error":"Не удалось получить доступ к вашему местоположению. Разрешите доступ к геолокации или введите координаты вручную ниже.","fetch_error":"Не удалось загрузить время намаза. Попробуйте ещё раз.","manual_toggle":"Ввести координаты вручную","manual_lat_ph":"Широта","manual_lng_ph":"Долгота","manual_btn":"Рассчитать","source_note":"Время намаза рассчитано сервисом AlAdhan.com по вашему местоположению и выбранному методу. Это инструмент расчёта, а не фетва — для точного местного времени уточните в вашей мечети.","fajr":"Фаджр","sunrise":"Восход","dhuhr":"Зухр","asr":"Аср","maghrib":"Магриб","isha":"Иша","sunrise_note":"(не время намаза)","next_label":"Следующий"},"tj":{"nav_back":"← Сайти асосӣ","hero_badge":"Тибқи ҷойгиршавӣ · 5 усули ҳисоб","hero_h1":"Вақти намоз","hero_p":"Вақти дурусти намозҳои рӯзонаро барои ҷойгиршавии худ бо AlAdhan ҳисоб кунед — хидмате, ки мусалмонон дар саросари ҷаҳон истифода мебаранд, бо интихоби усули ҳисоб.","method_label":"Усули ҳисоб","method_mwl":"Muslim World League","method_isna":"Islamic Society of North America (ISNA)","method_egypt":"Идораи геодезии Миср","method_ummalqura":"Донишгоҳи Умм-ул-Қура, Макка","method_karachi":"Донишгоҳи илмҳои исломӣ, Карачӣ","school_label":"Ҳисоби Аср","school_shafi":"Стандартӣ (шофиӣ / моликӣ / ҳанбалӣ)","school_hanafi":"Ҳанафӣ","find_btn":"Вақти намози маро нишон деҳ","locating_msg":"Муайян намудани ҷойгиршавӣ…","loading_msg":"Боркунии вақти намоз…","loc_error":"Дастрасӣ ба ҷойгиршавии шумо номумкин шуд. Лутфан дастрасиро иҷозат диҳед ё координатаҳоро дастӣ ворид кунед.","fetch_error":"Вақти намоз бор нашуд. Лутфан дубора кӯшиш кунед.","manual_toggle":"Ҷойгиршавиро дастӣ ворид кунед","manual_lat_ph":"Арз","manual_lng_ph":"Тул","manual_btn":"Ҳисоб кун","source_note":"Вақти намоз тавассути AlAdhan.com тибқи ҷойгиршавии шумо ва усули интихобшуда ҳисоб шудааст. Ин абзори ҳисобӣ аст, на фатво — барои вақти дақиқи маҳаллӣ бо масҷиди худ муроҷиат кунед.","fajr":"Фаҷр","sunrise":"Тулӯи офтоб","dhuhr":"Зуҳр","asr":"Аср","maghrib":"Мағриб","isha":"Ишо","sunrise_note":"(вақти намоз нест)","next_label":"Навбатӣ"},"id":{"nav_back":"← Situs utama","hero_badge":"Berbasis Lokasi · 5 Metode Perhitungan","hero_h1":"Waktu Sholat","hero_p":"Dapatkan waktu sholat harian yang akurat untuk lokasi Anda, dihitung oleh AlAdhan — digunakan oleh umat Islam di seluruh dunia, dengan pilihan metode perhitungan.","method_label":"Metode Perhitungan","method_mwl":"Muslim World League","method_isna":"Islamic Society of North America (ISNA)","method_egypt":"Otoritas Survei Umum Mesir","method_ummalqura":"Universitas Umm Al-Qura, Makkah","method_karachi":"Universitas Ilmu Islam, Karachi","school_label":"Perhitungan Ashar","school_shafi":"Standar (Syafi'i / Maliki / Hanbali)","school_hanafi":"Hanafi","find_btn":"Tampilkan Waktu Sholat Saya","locating_msg":"Mencari lokasi…","loading_msg":"Memuat waktu sholat…","loc_error":"Tidak dapat mengakses lokasi Anda. Izinkan akses lokasi, atau masukkan koordinat secara manual di bawah.","fetch_error":"Tidak dapat memuat waktu sholat. Silakan coba lagi.","manual_toggle":"Masukkan lokasi secara manual","manual_lat_ph":"Lintang","manual_lng_ph":"Bujur","manual_btn":"Hitung","source_note":"Waktu sholat dihitung oleh AlAdhan.com berdasarkan lokasi dan metode pilihan Anda. Ini alat perhitungan, bukan fatwa — untuk waktu lokal yang tepat, periksa dengan masjid setempat.","fajr":"Subuh","sunrise":"Terbit","dhuhr":"Dzuhur","asr":"Ashar","maghrib":"Maghrib","isha":"Isya","sunrise_note":"(bukan waktu sholat)","next_label":"Berikutnya"},"tr":{"nav_back":"← Ana site","hero_badge":"Konum Tabanlı · 5 Hesaplama Yöntemi","hero_h1":"Namaz Vakitleri","hero_p":"Konumunuz için doğru günlük namaz vakitlerini, dünya çapında Müslümanların kullandığı AlAdhan tarafından hesaplanmış olarak, hesaplama yöntemi seçeneğiyle alın.","method_label":"Hesaplama Yöntemi","method_mwl":"Muslim World League","method_isna":"Islamic Society of North America (ISNA)","method_egypt":"Mısır Genel Anket Otoritesi","method_ummalqura":"Ümmü'l-Kura Üniversitesi, Mekke","method_karachi":"İslami Bilimler Üniversitesi, Karaçi","school_label":"İkindi Hesabı","school_shafi":"Standart (Şafii / Maliki / Hanbeli)","school_hanafi":"Hanefi","find_btn":"Namaz Vakitlerimi Göster","locating_msg":"Konum belirleniyor…","loading_msg":"Namaz vakitleri yükleniyor…","loc_error":"Konumunuza erişilemedi. Lütfen konum erişimine izin verin veya koordinatlarınızı aşağıya manuel olarak girin.","fetch_error":"Namaz vakitleri yüklenemedi. Lütfen tekrar deneyin.","manual_toggle":"Konumu manuel olarak girin","manual_lat_ph":"Enlem","manual_lng_ph":"Boylam","manual_btn":"Hesapla","source_note":"Namaz vakitleri, konumunuza ve seçtiğiniz yönteme göre AlAdhan.com tarafından hesaplanmıştır. Bu bir hesaplama aracıdır, fetva değildir — kesin yerel vakit için yerel camiinizle doğrulayın.","fajr":"İmsak","sunrise":"Güneş","dhuhr":"Öğle","asr":"İkindi","maghrib":"Akşam","isha":"Yatsı","sunrise_note":"(namaz vakti değildir)","next_label":"Sıradaki"},"zh":{"nav_back":"← 主站","hero_badge":"基于位置 · 5种计算方法","hero_h1":"礼拜时间","hero_p":"获取根据您的位置计算的准确每日礼拜时间，由全球穆斯林使用的 AlAdhan 计算，可选择计算方法。","method_label":"计算方法","method_mwl":"世界伊斯兰联盟","method_isna":"北美伊斯兰协会 (ISNA)","method_egypt":"埃及测量总局","method_ummalqura":"麦加乌姆库拉大学","method_karachi":"卡拉奇伊斯兰科学大学","school_label":"晌礼计算","school_shafi":"标准（沙斐仪 / 马利基 / 罕百里）","school_hanafi":"哈纳菲","find_btn":"显示我的礼拜时间","locating_msg":"正在定位…","loading_msg":"正在加载礼拜时间…","loc_error":"无法访问您的位置。请允许位置访问，或在下方手动输入坐标。","fetch_error":"无法加载礼拜时间。请重试。","manual_toggle":"手动输入位置","manual_lat_ph":"纬度","manual_lng_ph":"经度","manual_btn":"计算","source_note":"礼拜时间由 AlAdhan.com 根据您的位置和所选方法计算。这是一个计算工具，不是教法裁决——精确的当地时间请咨询当地清真寺。","fajr":"晨礼","sunrise":"日出","dhuhr":"晌礼","asr":"晡礼","maghrib":"昏礼","isha":"宵礼","sunrise_note":"（不是礼拜时间）","next_label":"下一个"},"ms":{"nav_back":"← Laman utama","hero_badge":"Berasaskan Lokasi · 5 Kaedah Pengiraan","hero_h1":"Waktu Solat","hero_p":"Dapatkan waktu solat harian yang tepat untuk lokasi anda, dikira oleh AlAdhan — digunakan oleh umat Islam di seluruh dunia, dengan pilihan kaedah pengiraan.","method_label":"Kaedah Pengiraan","method_mwl":"Muslim World League","method_isna":"Islamic Society of North America (ISNA)","method_egypt":"Pihak Berkuasa Tinjauan Umum Mesir","method_ummalqura":"Universiti Umm Al-Qura, Makkah","method_karachi":"Universiti Sains Islam, Karachi","school_label":"Pengiraan Asar","school_shafi":"Standard (Syafie / Maliki / Hanbali)","school_hanafi":"Hanafi","find_btn":"Tunjukkan Waktu Solat Saya","locating_msg":"Mengesan lokasi…","loading_msg":"Memuatkan waktu solat…","loc_error":"Tidak dapat mengakses lokasi anda. Sila benarkan akses lokasi, atau masukkan koordinat secara manual di bawah.","fetch_error":"Tidak dapat memuatkan waktu solat. Sila cuba lagi.","manual_toggle":"Masukkan lokasi secara manual","manual_lat_ph":"Latitud","manual_lng_ph":"Longitud","manual_btn":"Kira","source_note":"Waktu solat dikira oleh AlAdhan.com berdasarkan lokasi dan kaedah pilihan anda. Ini alat pengiraan, bukan fatwa — untuk waktu tempatan yang tepat, sahkan dengan masjid tempatan anda.","fajr":"Subuh","sunrise":"Syuruk","dhuhr":"Zohor","asr":"Asar","maghrib":"Maghrib","isha":"Isyak","sunrise_note":"(bukan waktu solat)","next_label":"Seterusnya"},"fr":{"nav_back":"← Site principal","hero_badge":"Basé sur la position · 5 méthodes de calcul","hero_h1":"Heures de prière","hero_p":"Obtenez les heures de prière quotidiennes précises pour votre position, calculées par AlAdhan — utilisé par les musulmans du monde entier, avec un choix de méthode de calcul.","method_label":"Méthode de calcul","method_mwl":"Muslim World League","method_isna":"Islamic Society of North America (ISNA)","method_egypt":"Autorité générale égyptienne de l'arpentage","method_ummalqura":"Université Umm Al-Qura, La Mecque","method_karachi":"Université des sciences islamiques, Karachi","school_label":"Calcul de l'Asr","school_shafi":"Standard (Chafi'ite / Malikite / Hanbalite)","school_hanafi":"Hanafite","find_btn":"Afficher mes heures de prière","locating_msg":"Localisation en cours…","loading_msg":"Chargement des heures de prière…","loc_error":"Impossible d'accéder à votre position. Veuillez autoriser l'accès à la position, ou saisissez vos coordonnées manuellement ci-dessous.","fetch_error":"Impossible de charger les heures de prière. Veuillez réessayer.","manual_toggle":"Saisir la position manuellement","manual_lat_ph":"Latitude","manual_lng_ph":"Longitude","manual_btn":"Calculer","source_note":"Les heures de prière sont calculées par AlAdhan.com à partir de votre position et de la méthode choisie. Ceci est un outil de calcul, pas une fatwa — pour l'heure locale exacte, vérifiez auprès de votre mosquée locale.","fajr":"Fajr","sunrise":"Lever du soleil","dhuhr":"Dhuhr","asr":"Asr","maghrib":"Maghrib","isha":"Isha","sunrise_note":"(pas une heure de prière)","next_label":"Suivante"},"de":{"nav_back":"← Zur Hauptseite","hero_badge":"Standortbasiert · 5 Berechnungsmethoden","hero_h1":"Gebetszeiten","hero_p":"Erhalten Sie genaue tägliche Gebetszeiten für Ihren Standort, berechnet von AlAdhan — von Muslimen weltweit genutzt, mit Wahl der Berechnungsmethode.","method_label":"Berechnungsmethode","method_mwl":"Muslim World League","method_isna":"Islamic Society of North America (ISNA)","method_egypt":"Ägyptische Generalvermessungsbehörde","method_ummalqura":"Umm-Al-Qura-Universität, Mekka","method_karachi":"Universität für Islamische Wissenschaften, Karachi","school_label":"Asr-Berechnung","school_shafi":"Standard (Schafiitisch / Malikitisch / Hanbalitisch)","school_hanafi":"Hanafitisch","find_btn":"Meine Gebetszeiten anzeigen","locating_msg":"Standort wird ermittelt…","loading_msg":"Gebetszeiten werden geladen…","loc_error":"Auf Ihren Standort konnte nicht zugegriffen werden. Bitte erlauben Sie den Standortzugriff oder geben Sie Ihre Koordinaten unten manuell ein.","fetch_error":"Gebetszeiten konnten nicht geladen werden. Bitte versuchen Sie es erneut.","manual_toggle":"Standort manuell eingeben","manual_lat_ph":"Breitengrad","manual_lng_ph":"Längengrad","manual_btn":"Berechnen","source_note":"Die Gebetszeiten werden von AlAdhan.com anhand Ihres Standorts und der gewählten Methode berechnet. Dies ist ein Berechnungswerkzeug, keine Fatwa — für die genaue Ortszeit wenden Sie sich an Ihre örtliche Moschee.","fajr":"Fajr","sunrise":"Sonnenaufgang","dhuhr":"Dhuhr","asr":"Asr","maghrib":"Maghrib","isha":"Isha","sunrise_note":"(keine Gebetszeit)","next_label":"Nächstes"}};
+
+let currentLang = 'en';
+function t(key){
+  const L = translations[currentLang] || translations.en;
+  return L[key] !== undefined ? L[key] : (translations.en[key] || key);
+}
+function setLang(l){
+  currentLang = l;
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.setAttribute('lang', l==='tj'?'tg':l);
+  document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.getAttribute('data-t')); });
+  document.querySelectorAll('[data-t-ph]').forEach(el => { el.placeholder = t(el.getAttribute('data-t-ph')); });
+  localStorage.setItem('amn_lang', l);
+  if (lastTimings) renderResults(lastTimings, lastDateReadable);
+}
+function toggleLangDrop(){
+  const d = document.getElementById('langDrop');
+  d.style.display = (d.style.display === 'none' || !d.style.display) ? 'block' : 'none';
+}
+function selectLang(l, flag, name){
+  document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + flag + '.png';
+  document.getElementById('langName').textContent = name;
+  document.getElementById('langDrop').style.display = 'none';
+  setLang(l);
+}
+function toggleTheme(){
+  const th = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', th);
+  document.querySelector('.theme-btn').textContent = th === 'dark' ? '🌙' : '☀️';
+  localStorage.setItem('amn_theme', th);
+}
+document.addEventListener('click', function(e){
+  const wrap = document.querySelector('.lang-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    const d = document.getElementById('langDrop');
+    if (d) d.style.display = 'none';
+  }
+});
+
+/* ═══════════════════════════════════════════════════════
+   PRAYER TIMES — via AlAdhan.com's public API (the same
+   established service countless Muslim prayer-time apps use),
+   never computed by us — we don't self-derive astronomical
+   calculations for something with real religious consequence.
+═══════════════════════════════════════════════════════ */
+const ALADHAN_API = 'https://api.aladhan.com/v1/timings';
+let lastTimings = null;
+let lastDateReadable = null;
+
+function toggleManualForm(){
+  document.getElementById('manualForm').classList.toggle('visible');
+}
+
+function fetchPrayerTimes(){
+  const statusEl = document.getElementById('ptStatus');
+  statusEl.className = 'status-msg';
+  statusEl.textContent = t('locating_msg');
+  if (!navigator.geolocation) {
+    statusEl.className = 'status-msg error';
+    statusEl.textContent = t('loc_error');
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    pos => loadTimings(pos.coords.latitude, pos.coords.longitude),
+    () => {
+      statusEl.className = 'status-msg error';
+      statusEl.textContent = t('loc_error');
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+}
+
+function useManualLocation(){
+  const lat = Number(document.getElementById('manualLat').value);
+  const lng = Number(document.getElementById('manualLng').value);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180) return;
+  loadTimings(lat, lng);
+}
+
+function pad2(n){ return String(n).padStart(2, '0'); }
+
+async function loadTimings(lat, lng){
+  const statusEl = document.getElementById('ptStatus');
+  statusEl.className = 'status-msg';
+  statusEl.textContent = t('loading_msg');
+  const method = document.getElementById('methodSelect').value;
+  const school = document.getElementById('schoolSelect').value;
+  const now = new Date();
+  const dateStr = pad2(now.getDate()) + '-' + pad2(now.getMonth() + 1) + '-' + now.getFullYear();
+  const url = ALADHAN_API + '/' + dateStr + '?latitude=' + lat + '&longitude=' + lng + '&method=' + method + '&school=' + school;
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 12000);
+    const res = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(timer);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if (!data || !data.data || !data.data.timings) throw new Error('Unexpected response shape');
+    statusEl.textContent = '';
+    lastTimings = data.data.timings;
+    lastDateReadable = (data.data.date && data.data.date.readable) || '';
+    renderResults(lastTimings, lastDateReadable);
+  } catch (e) {
+    console.error('[Prayer Times] Failed to load timings:', e);
+    statusEl.className = 'status-msg error';
+    statusEl.textContent = t('fetch_error');
+  }
+}
+
+// Prayers shown, in order, with their AlAdhan.com response key.
+const PRAYER_ORDER = [
+  { key: 'Fajr', labelKey: 'fajr' },
+  { key: 'Sunrise', labelKey: 'sunrise', isNotPrayer: true },
+  { key: 'Dhuhr', labelKey: 'dhuhr' },
+  { key: 'Asr', labelKey: 'asr' },
+  { key: 'Maghrib', labelKey: 'maghrib' },
+  { key: 'Isha', labelKey: 'isha' },
+];
+
+function parseTimeToday(hhmm){
+  // AlAdhan returns "HH:mm" (optionally with a trailing " (TZ)"); take the
+  // first 5 chars and build a Date for today in the browser's local clock —
+  // valid because the API already returns times in the location's own zone.
+  const clean = String(hhmm).slice(0, 5);
+  const [h, m] = clean.split(':').map(Number);
+  const d = new Date();
+  d.setHours(h, m, 0, 0);
+  return d;
+}
+
+function renderResults(timings, dateReadable){
+  document.getElementById('resultsCard').style.display = 'block';
+  document.getElementById('dateReadable').textContent = dateReadable;
+
+  const now = new Date();
+  const rows = PRAYER_ORDER.map(p => ({ ...p, time: parseTimeToday(timings[p.key]) }));
+  // Find the next upcoming prayer (skipping Sunrise, which isn't one) —
+  // if every prayer for today has passed, the "next" one wraps to Fajr.
+  const prayerRows = rows.filter(r => !r.isNotPrayer);
+  let nextKey = prayerRows.find(r => r.time > now)?.key || prayerRows[0].key;
+
+  document.getElementById('prayerList').innerHTML = rows.map(r => {
+    const isNext = r.key === nextKey;
+    const timeStr = String(timings[r.key]).slice(0, 5);
+    return `
+      <div class="prayer-row${isNext ? ' next' : ''}">
+        <div class="prayer-name">
+          ${t(r.labelKey)}
+          ${r.isNotPrayer ? `<span class="sunrise-note">${t('sunrise_note')}</span>` : ''}
+          ${isNext ? `<span class="next-badge">${t('next_label')}</span>` : ''}
+        </div>
+        <div class="prayer-time">${timeStr}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* ── INIT ── */
+(function init(){
+  const savedTheme = localStorage.getItem('amn_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  document.querySelector('.theme-btn').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+  const flagMap = {en:'gb',ar:'sa',ru:'ru',tj:'tj',id:'id',tr:'tr',zh:'cn',ms:'my',fr:'fr',de:'de'};
+  const nameMap = {en:'English',ar:'العربية',ru:'Русский',tj:'Тоҷикӣ',id:'Indonesia',tr:'Türkçe',zh:'中文',ms:'Melayu',fr:'Français',de:'Deutsch'};
+  const savedLang = localStorage.getItem('amn_lang') || 'en';
+  const l = translations[savedLang] ? savedLang : 'en';
+  document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + (flagMap[l] || 'gb') + '.png';
+  document.getElementById('langName').textContent = nameMap[l] || 'English';
+  setLang(l);
+})();
+</script>
+</body>
+</html>
