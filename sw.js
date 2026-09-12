@@ -1,9 +1,9 @@
-const CACHE = 'amnetwork-v13-owner-feedback';
+const CACHE = 'amnetwork-v14-owner-feedback';
 const STATIC = [
   '/',
   '/index.html',
   '/i18n-data.js',
-  '/i18n-data.js?v=515478443a',
+  '/i18n-data.js?v=37d4aa547a',
   '/logo.webp',
   '/favicon.svg?v=20260911',
   '/manifest.json',
@@ -37,6 +37,8 @@ const STATIC = [
   '/roadmap/index.html',
   '/tasbeeh/',
   '/tasbeeh/index.html',
+  '/calendar/',
+  '/calendar/index.html',
   '/qibla/',
   '/qibla/index.html',
   '/prayer-times/',

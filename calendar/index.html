@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Islamic Calendar — AM Network</title>
+<meta name="description" content="Today's Hijri date and the Islamic calendar's upcoming dates — Ramadan, Eid al-Fitr, Eid al-Adha, Ashura and more — plus a Gregorian/Hijri date converter.">
+<link rel="canonical" href="https://amnetwork.io/calendar/">
+<meta property="og:title" content="Islamic Calendar — AM Network">
+<meta property="og:description" content="Today's Hijri date, upcoming Islamic dates, and a Gregorian/Hijri converter.">
+<meta property="og:url" content="https://amnetwork.io/calendar/">
+<meta property="og:image" content="https://amnetwork.io/og-image.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0A1A11">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.aladhan.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+gtag('js',new Date());gtag('config','G-G4GSRVJB5M');
+if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{analytics_storage:'granted'});}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G4GSRVJB5M"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Serif+TC:wght@400;700&display=swap" rel="stylesheet"></noscript>
+<style>
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}html{scroll-behavior:auto}}
+
+[data-theme="dark"]{
+  --bg1:#0A1A11;--bg2:#0F2117;--bg3:#1C4532;--bg4:#2D6A4F;
+  --gold:#C9A84C;--gold2:#E8C87A;--gold3:rgba(201,168,76,0.12);
+  --text:#FFFFFF;--text2:rgba(255,255,255,0.60);--text3:rgba(255,255,255,0.38);
+  --border:rgba(255,255,255,0.09);--card:rgba(255,255,255,0.04);
+  --nav-bg:rgba(10,26,17,0.92);--input-bg:rgba(255,255,255,0.06);
+  --input-border:rgba(255,255,255,0.14);
+}
+[data-theme="light"]{
+  --bg1:#F5F0E8;--bg2:#EDE8DE;--bg3:#DDD0BB;--bg4:#C8B896;
+  --gold:#C9A84C;--gold2:#B8941C;--gold3:rgba(201,168,76,0.12);
+  --text:#1C2E1F;--text2:rgba(28,46,31,0.68);--text3:rgba(28,46,31,0.42);
+  --border:rgba(28,69,50,0.12);--card:rgba(255,255,255,0.80);
+  --nav-bg:rgba(245,240,232,0.95);--input-bg:rgba(255,255,255,0.7);
+  --input-border:rgba(28,69,50,0.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg1);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;transition:background 0.3s,color 0.3s}
+[lang="ar"]{font-family:'Noto Naskh Arabic',sans-serif}
+[lang="zh"]{font-family:'Noto Serif TC',system-ui,sans-serif}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:64px;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);direction:ltr}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{height:36px;width:auto}
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang-wrap{position:relative}
+.lang-sel{display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.lang-drop{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;min-width:150px;z-index:200;display:none;overflow:hidden}
+.lang-item{display:flex;align-items:center;gap:8px;padding:9px 14px;cursor:pointer;font-size:13px;color:var(--text2)}
+.lang-item:hover{background:var(--card)}
+.theme-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:16px;transition:all 0.2s}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.nav-back{padding:7px 14px;border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:12px;font-weight:500;text-decoration:none;transition:all 0.2s}
+.nav-back:hover{border-color:var(--gold);color:var(--gold)}
+.tool-links{position:relative}
+.tool-links summary{list-style:none;width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.tool-links summary::-webkit-details-marker{display:none}
+.tool-links summary:hover{border-color:var(--gold);color:var(--gold)}
+.tool-links-menu{position:absolute;top:calc(100% + 6px);inset-inline-end:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;min-width:200px;max-height:70vh;overflow-y:auto;z-index:200;box-shadow:0 12px 40px rgba(0,0,0,0.3)}
+.tool-links-menu a{display:flex;align-items:center;gap:10px;padding:11px 14px;font-size:13px;color:var(--text);text-decoration:none}
+.tool-links-menu a:hover{background:var(--card)}
+
+/* LAYOUT */
+main{padding-top:64px;min-height:100vh}
+.hero{padding:44px 5vw 20px;text-align:center;max-width:640px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:var(--gold3);border:1px solid rgba(201,168,76,0.3);border-radius:30px;font-size:11px;color:var(--gold);margin-bottom:16px;text-transform:uppercase;letter-spacing:.04em}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,42px);font-weight:700;line-height:1.2;margin-bottom:12px;color:var(--text)}
+.hero p{font-size:14px;color:var(--text2);line-height:1.75;max-width:520px;margin:0 auto}
+
+.wrap{max-width:640px;margin:0 auto;padding:0 5vw 80px}
+
+/* TODAY CARD */
+.today-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:34px 26px;text-align:center;margin-bottom:22px}
+.today-hijri{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,6vw,38px);font-weight:700;color:var(--gold);margin-bottom:6px}
+.today-hijri-ar{font-family:'Noto Naskh Arabic',serif;font-size:20px;color:var(--gold2);margin-bottom:10px}
+.today-greg{font-size:13px;color:var(--text3)}
+.status-msg{font-size:13px;color:var(--text3);margin:14px 0}
+.status-msg.error{color:#d98c6b}
+.location-note{font-size:12px;color:var(--text3);line-height:1.6;margin:14px 0 0;display:flex;align-items:flex-start;gap:8px;text-align:left}
+.location-note svg{flex-shrink:0;margin-top:1px;opacity:.8}
+
+/* UPCOMING LIST */
+.sec-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin:0 0 14px}
+.events-list{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.event-row{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.event-name{font-size:14px;font-weight:600;color:var(--text)}
+.event-hijri{font-size:12px;color:var(--text3);margin-top:2px}
+.event-greg{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);text-align:right;white-space:nowrap}
+.event-days{font-size:11px;color:var(--text3);text-align:right}
+
+/* CONVERTER */
+.converter-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px 22px;margin-bottom:24px}
+.conv-tabs{display:flex;border:1px solid var(--input-border);border-radius:10px;overflow:hidden;margin-bottom:16px}
+.conv-tab{flex:1;padding:9px 10px;border:none;border-left:1px solid var(--input-border);background:var(--input-bg);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer}
+.conv-tab:first-child{border-left:none}
+.conv-tab.active{background:var(--gold);color:#1a1a1a;font-weight:600}
+.conv-row{display:flex;gap:10px;flex-wrap:wrap}
+.conv-row input,.conv-row select{flex:1;min-width:80px;padding:11px 12px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none}
+.conv-row input:focus,.conv-row select:focus{border-color:var(--gold)}
+.btn-gold{padding:13px 26px;border-radius:12px;border:none;background:var(--gold);color:#1a1a1a;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s;width:100%;margin-top:12px}
+.btn-gold:hover{opacity:.9}
+.conv-result{margin-top:14px;font-size:14px;color:var(--text);text-align:center;min-height:20px}
+
+.disclaimer-note{font-size:12px;color:var(--text3);line-height:1.7;text-align:center;margin-bottom:8px}
+.source-note{font-size:11px;color:var(--text3);text-align:center;line-height:1.6}
+
+@media(max-width:480px){.event-row{flex-direction:column;align-items:flex-start;gap:4px}.event-greg,.event-days{text-align:left}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/logo.webp" alt="AM Network" height="36">
+  </a>
+  <div class="nav-right">
+    <div class="lang-wrap">
+      <button class="lang-sel" onclick="toggleLangDrop()" aria-label="Select language">
+        <img id="langFlag" src="https://flagcdn.com/tj.svg" width="18" height="13" style="border-radius:2px" alt="">
+        <span id="langName">Тоҷикӣ</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="lang-drop" id="langDrop">
+        <div class="lang-item" onclick="selectLang('tj','tj','Тоҷикӣ')"><img src="https://flagcdn.com/tj.svg" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Тоҷикӣ</div>
+        <div class="lang-item" onclick="selectLang('ar','sa','العربية')"><img src="https://flagcdn.com/sa.svg" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> العربية</div>
+        <div class="lang-item" onclick="selectLang('en','gb','English')"><img src="https://flagcdn.com/gb.svg" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> English</div>
+        <div class="lang-item" onclick="selectLang('de','de','Deutsch')"><img src="https://flagcdn.com/de.svg" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Deutsch</div>
+        <div class="lang-item" onclick="selectLang('ru','ru','Русский')"><img src="https://flagcdn.com/ru.svg" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Русский</div>
+        <div class="lang-item" onclick="selectLang('id','id','Indonesia')"><img src="https://flagcdn.com/id.svg" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Indonesia</div>
+        <div class="lang-item" onclick="selectLang('tr','tr','Türkçe')"><img src="https://flagcdn.com/tr.svg" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Türkçe</div>
+        <div class="lang-item" onclick="selectLang('zh','cn','中文')"><img src="https://flagcdn.com/cn.svg" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> 中文</div>
+        <div class="lang-item" onclick="selectLang('ms','my','Melayu')"><img src="https://flagcdn.com/my.svg" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Melayu</div>
+        <div class="lang-item" onclick="selectLang('fr','fr','Français')"><img src="https://flagcdn.com/fr.svg" width="18" height="13" style="border-radius:2px" alt="" loading="lazy"> Français</div>
+      </div>
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    <details class="tool-links" id="toolLinksDetails">
+      <summary aria-label="Other tools"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></summary>
+      <div class="tool-links-menu">
+        <a href="/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span data-t="label_home">Main site</span></a>
+        <a href="/quran/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span data-t="label_quran">Quran</span></a>
+        <a href="/prayer-times/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-t="label_prayertimes">Prayer Times</span></a>
+        <a href="/qibla/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-t="label_qibla">Qibla</span></a>
+        <a href="/tasbeeh/"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="4" cy="12" r="2"/><circle cx="10" cy="7" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="20" cy="18" r="2.6"/></svg><span data-t="label_tasbeeh">Tasbeeh</span></a>
+        <a href="/academy/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5"/></svg><span data-t="label_academy">AM Academy</span></a>
+        <a href="/zakat/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg><span data-t="label_calc">Zakat Calculator</span></a>
+        <a href="/apply/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span data-t="label_apply">Apply for Assistance</span></a>
+        <a href="/#waitlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/></svg><span data-t="label_join">Join Waitlist</span></a>
+      </div>
+    </details>
+    <a class="nav-back" href="/" data-t="nav_back">← Main site</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="badge">🌙 <span data-t="hero_badge">Hijri Calendar · Umm al-Qura</span></div>
+    <h1 data-t="hero_h1">Islamic Calendar</h1>
+    <p data-t="hero_p">Today's Hijri date, the calendar's upcoming dates, and a Gregorian/Hijri converter — calculated by AlAdhan.com, the same service used for prayer times.</p>
+  </section>
+
+  <div class="wrap">
+    <div class="today-card">
+      <div class="today-hijri" id="todayHijri">—</div>
+      <div class="today-hijri-ar" id="todayHijriAr"></div>
+      <div class="today-greg" id="todayGreg" data-t="loading_msg">Loading…</div>
+      <p class="location-note" id="locationNote" style="display:none"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-t="hijri_note">Hijri dates begin at sunset the evening before, and the exact local start of each month can vary by a day depending on moon sighting.</span></p>
+      <div class="status-msg" id="todayStatus"></div>
+    </div>
+
+    <h2 class="sec-title" data-t="upcoming_title">Upcoming Islamic Dates</h2>
+    <div class="events-list" id="eventsList">
+      <div class="status-msg" data-t="loading_msg">Loading…</div>
+    </div>
+
+    <h2 class="sec-title" data-t="converter_title">Date Converter</h2>
+    <div class="converter-card">
+      <div class="conv-tabs" role="group">
+        <button type="button" class="conv-tab active" id="tabGtoH" onclick="setConvMode('gtoh')" data-t="tab_gtoh">Gregorian → Hijri</button>
+        <button type="button" class="conv-tab" id="tabHtoG" onclick="setConvMode('htog')" data-t="tab_htog">Hijri → Gregorian</button>
+      </div>
+      <div class="conv-row">
+        <input type="number" id="convDay" min="1" max="31" data-t-ph="day_ph" placeholder="Day">
+        <select id="convMonth"></select>
+        <input type="number" id="convYear" min="1" max="9999" data-t-ph="year_ph" placeholder="Year">
+      </div>
+      <button class="btn-gold" onclick="runConvert()" data-t="convert_btn">Convert</button>
+      <div class="conv-result" id="convResult"></div>
+    </div>
+
+    <p class="disclaimer-note" data-t="disclaimer">This is a calculation tool based on the Umm al-Qura calendar, not a fatwa — local moon-sighting announcements may shift a date by a day. Laylat al-Qadr's exact night is not fixed by any calendar; the 27th of Ramadan is shown as the most commonly observed estimate.</p>
+    <p class="source-note" data-t="source_note">Hijri/Gregorian conversion by AlAdhan.com (Umm al-Qura method) — the same service used for the Prayer Times page.</p>
+  </div>
+</main>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   I18N
+═══════════════════════════════════════════════════════ */
+const translations = {"en":{"nav_back":"← Main site","label_home":"Main site","label_quran":"The Holy Quran","label_prayertimes":"Prayer Times","label_qibla":"Qibla Direction","label_tasbeeh":"Count Your Dhikr","label_academy":"AM Academy","label_calc":"Zakat Calculator","label_apply":"Apply for Assistance","label_join":"Join Waitlist","hero_badge":"Hijri Calendar · Umm al-Qura","hero_h1":"Islamic Calendar","hero_p":"Today's Hijri date, the calendar's upcoming dates, and a Gregorian/Hijri converter — calculated by AlAdhan.com, the same service used for prayer times.","loading_msg":"Loading…","hijri_note":"Hijri dates begin at sunset the evening before, and the exact local start of each month can vary by a day depending on moon sighting.","upcoming_title":"Upcoming Islamic Dates","converter_title":"Date Converter","tab_gtoh":"Gregorian → Hijri","tab_htog":"Hijri → Gregorian","day_ph":"Day","year_ph":"Year","convert_btn":"Convert","disclaimer":"This is a calculation tool based on the Umm al-Qura calendar, not a fatwa — local moon-sighting announcements may shift a date by a day. Laylat al-Qadr's exact night is not fixed by any calendar; the 27th of Ramadan is shown as the most commonly observed estimate.","source_note":"Hijri/Gregorian conversion by AlAdhan.com (Umm al-Qura method) — the same service used for the Prayer Times page.","fetch_error":"Could not load calendar data right now. Please try again.","days_left_one":"in 1 day","days_left_other":"in {n} days","today_label":"Today","month_muharram":"Muharram","month_safar":"Safar","month_rabi1":"Rabi' al-Awwal","month_rabi2":"Rabi' al-Thani","month_jumada1":"Jumada al-Awwal","month_jumada2":"Jumada al-Thani","month_rajab":"Rajab","month_shaban":"Sha'ban","month_ramadan":"Ramadan","month_shawwal":"Shawwal","month_dhulqadah":"Dhul-Qa'dah","month_dhulhijjah":"Dhul-Hijjah","ev_newyear":"Islamic New Year","ev_ashura":"Ashura","ev_ramadan":"Start of Ramadan","ev_qadr":"Laylat al-Qadr (estimated)","ev_eidfitr":"Eid al-Fitr","ev_arafah":"Day of Arafah","ev_eidadha":"Eid al-Adha"},"ar":{"nav_back":"← الموقع الرئيسي","label_home":"الموقع الرئيسي","label_quran":"القرآن الكريم","label_prayertimes":"مواقيت الصلاة","label_qibla":"اتجاه القبلة","label_tasbeeh":"عدّ أذكارك","label_academy":"AM Academy","label_calc":"حاسبة الزكاة","label_apply":"تقدم بطلب للحصول على المساعدة","label_join":"انضم لقائمة الانتظار","hero_badge":"التقويم الهجري · أم القرى","hero_h1":"التقويم الإسلامي","hero_p":"تاريخ اليوم الهجري، والمناسبات الإسلامية القادمة، ومحول التاريخ الميلادي/الهجري — بحساب AlAdhan.com، الخدمة نفسها المستخدمة لمواقيت الصلاة.","loading_msg":"جارٍ التحميل…","hijri_note":"يبدأ التاريخ الهجري عند غروب شمس اليوم السابق، وقد يختلف بداية الشهر محلياً بيوم واحد حسب رؤية الهلال.","upcoming_title":"المناسبات الإسلامية القادمة","converter_title":"محول التاريخ","tab_gtoh":"ميلادي ← هجري","tab_htog":"هجري ← ميلادي","day_ph":"اليوم","year_ph":"السنة","convert_btn":"تحويل","disclaimer":"هذه أداة حسابية معتمدة على تقويم أم القرى، وليست فتوى — قد تُحدَّد المواعيد محلياً برؤية الهلال فتختلف بيوم. ليلة القدر غير محددة بتقويم؛ يُعرض 27 رمضان كالتقدير الأكثر شيوعاً.","source_note":"التحويل الهجري/الميلادي بواسطة AlAdhan.com (طريقة أم القرى) — نفس الخدمة المستخدمة في صفحة مواقيت الصلاة.","fetch_error":"تعذّر تحميل بيانات التقويم الآن. حاول مرة أخرى.","days_left_one":"بعد يوم واحد","days_left_other":"بعد {n} يوم","today_label":"اليوم","month_muharram":"محرم","month_safar":"صفر","month_rabi1":"ربيع الأول","month_rabi2":"ربيع الآخر","month_jumada1":"جمادى الأولى","month_jumada2":"جمادى الآخرة","month_rajab":"رجب","month_shaban":"شعبان","month_ramadan":"رمضان","month_shawwal":"شوال","month_dhulqadah":"ذو القعدة","month_dhulhijjah":"ذو الحجة","ev_newyear":"رأس السنة الهجرية","ev_ashura":"عاشوراء","ev_ramadan":"بداية رمضان","ev_qadr":"ليلة القدر (تقديرية)","ev_eidfitr":"عيد الفطر","ev_arafah":"يوم عرفة","ev_eidadha":"عيد الأضحى"},"ru":{"nav_back":"← Главный сайт","label_home":"Главный сайт","label_quran":"Священный Коран","label_prayertimes":"Время намаза","label_qibla":"Направление на Киблу","label_tasbeeh":"Считайте свои зикры","label_academy":"AM Academy","label_calc":"Калькулятор закята","label_apply":"Подать заявку на помощь","label_join":"Присоединиться","hero_badge":"Хиджра-календарь · Умм-эль-Кура","hero_h1":"Исламский календарь","hero_p":"Сегодняшняя дата по Хиджре, ближайшие исламские даты и конвертер григорианского/хиджри календаря — расчёт AlAdhan.com, тот же сервис, что и для времени намаза.","loading_msg":"Загрузка…","hijri_note":"Дата по Хиджре начинается с заката предыдущего дня, и точное начало месяца на местах может отличаться на день в зависимости от наблюдения луны.","upcoming_title":"Ближайшие исламские даты","converter_title":"Конвертер дат","tab_gtoh":"Григорианский → Хиджри","tab_htog":"Хиджри → Григорианский","day_ph":"День","year_ph":"Год","convert_btn":"Конвертировать","disclaimer":"Это инструмент расчёта на основе календаря Умм-эль-Кура, а не фетва — по местному наблюдению луны дата может сдвинуться на день. Точная ночь Ляйлят аль-Кадр не зафиксирована ни одним календарём; 27-е рамадана показано как наиболее часто отмечаемая оценка.","source_note":"Конвертация Хиджри/григорианского календаря — AlAdhan.com (метод Умм-эль-Кура), тот же сервис, что используется на странице времени намаза.","fetch_error":"Не удалось загрузить данные календаря. Попробуйте ещё раз.","days_left_one":"через 1 день","days_left_other":"через {n} дн.","today_label":"Сегодня","month_muharram":"Мухаррам","month_safar":"Сафар","month_rabi1":"Раби-уль-авваль","month_rabi2":"Раби-уль-ахир","month_jumada1":"Джумада-уль-уля","month_jumada2":"Джумада-уль-ахира","month_rajab":"Раджаб","month_shaban":"Шаабан","month_ramadan":"Рамадан","month_shawwal":"Шавваль","month_dhulqadah":"Зуль-каада","month_dhulhijjah":"Зуль-хиджа","ev_newyear":"Исламский Новый год","ev_ashura":"Ашура","ev_ramadan":"Начало Рамадана","ev_qadr":"Ляйлят аль-Кадр (оценочно)","ev_eidfitr":"Ураза-байрам (Ид аль-Фитр)","ev_arafah":"День Арафа","ev_eidadha":"Курбан-байрам (Ид аль-Адха)"},"tj":{"nav_back":"← Сайти асосӣ","label_home":"Сайти асосӣ","label_quran":"Қуръони Карим","label_prayertimes":"Вақти намоз","label_qibla":"Самти Қибла","label_tasbeeh":"Зикрҳои худро шуморед","label_academy":"AM Academy","label_calc":"Ҳисобкунаки закот","label_apply":"Барои кӯмак аризадиҳӣ","label_join":"Ба рӯйхат шомил шав","hero_badge":"Тақвими ҳиҷрӣ · Умм-ул-Қуро","hero_h1":"Тақвими исломӣ","hero_p":"Санаи имрӯзаи ҳиҷрӣ, санаҳои наздики исломӣ ва мубаддили тақвими мелодӣ/ҳиҷрӣ — ҳисобшуда аз ҷониби AlAdhan.com, ҳамон хидмате, ки барои вақти намоз истифода мешавад.","loading_msg":"Боргирӣ…","hijri_note":"Санаи ҳиҷрӣ аз ғуруби офтоби рӯзи қаблӣ оғоз меёбад ва оғози дақиқи моҳ дар маҳал вобаста ба мушоҳидаи моҳтоб то як рӯз фарқ карда метавонад.","upcoming_title":"Санаҳои наздики исломӣ","converter_title":"Мубаддили сана","tab_gtoh":"Мелодӣ → Ҳиҷрӣ","tab_htog":"Ҳиҷрӣ → Мелодӣ","day_ph":"Рӯз","year_ph":"Сол","convert_btn":"Мубаддил кунед","disclaimer":"Ин абзори ҳисобӣ дар асоси тақвими Умм-ул-Қуро аст, на фатво — тибқи мушоҳидаи маҳаллии моҳтоб сана метавонад як рӯз тағйир ёбад. Шаби дақиқи Лайлат-ул-Қадр бо ҳеҷ тақвим муайян нашудааст; 27-уми Рамазон ҳамчун тахмини бештар қабулшуда нишон дода шудааст.","source_note":"Мубаддилаи ҳиҷрӣ/мелодӣ аз ҷониби AlAdhan.com (усули Умм-ул-Қуро) — ҳамон хидмате, ки дар саҳифаи вақти намоз истифода мешавад.","fetch_error":"Маълумоти тақвим бор нашуд. Лутфан дубора кӯшиш кунед.","days_left_one":"пас аз 1 рӯз","days_left_other":"пас аз {n} рӯз","today_label":"Имрӯз","month_muharram":"Муҳаррам","month_safar":"Сафар","month_rabi1":"Рабеъ-ул-аввал","month_rabi2":"Рабеъ-ус-сонӣ","month_jumada1":"Ҷумод-ул-аввал","month_jumada2":"Ҷумод-ус-сонӣ","month_rajab":"Раҷаб","month_shaban":"Шаъбон","month_ramadan":"Рамазон","month_shawwal":"Шаввол","month_dhulqadah":"Зул-қаъда","month_dhulhijjah":"Зул-ҳиҷҷа","ev_newyear":"Соли нави ҳиҷрӣ","ev_ashura":"Ашуро","ev_ramadan":"Оғози Рамазон","ev_qadr":"Лайлат-ул-Қадр (тахминӣ)","ev_eidfitr":"Иди Рамазон","ev_arafah":"Рӯзи Арафа","ev_eidadha":"Иди Қурбон"},"id":{"nav_back":"← Situs utama","label_home":"Situs utama","label_quran":"Al-Qur'an Al-Karim","label_prayertimes":"Waktu Sholat","label_qibla":"Arah Kiblat","label_tasbeeh":"Hitung Dzikir Anda","label_academy":"AM Academy","label_calc":"Kalkulator Zakat","label_apply":"Ajukan Bantuan","label_join":"Daftar Sekarang","hero_badge":"Kalender Hijriah · Umm al-Qura","hero_h1":"Kalender Islam","hero_p":"Tanggal Hijriah hari ini, tanggal-tanggal Islam mendatang, dan konverter Masehi/Hijriah — dihitung oleh AlAdhan.com, layanan yang sama dengan waktu sholat.","loading_msg":"Memuat…","hijri_note":"Tanggal Hijriah dimulai saat matahari terbenam malam sebelumnya, dan awal bulan yang tepat secara lokal dapat berbeda satu hari tergantung rukyat hilal.","upcoming_title":"Tanggal Islam Mendatang","converter_title":"Konverter Tanggal","tab_gtoh":"Masehi → Hijriah","tab_htog":"Hijriah → Masehi","day_ph":"Tanggal","year_ph":"Tahun","convert_btn":"Konversi","disclaimer":"Ini adalah alat perhitungan berdasarkan kalender Umm al-Qura, bukan fatwa — pengumuman rukyat hilal setempat dapat menggeser tanggal satu hari. Malam pasti Lailatul Qadar tidak ditetapkan oleh kalender manapun; 27 Ramadhan ditampilkan sebagai perkiraan yang paling umum diperingati.","source_note":"Konversi Hijriah/Masehi oleh AlAdhan.com (metode Umm al-Qura) — layanan yang sama dengan halaman Waktu Sholat.","fetch_error":"Tidak dapat memuat data kalender. Silakan coba lagi.","days_left_one":"dalam 1 hari","days_left_other":"dalam {n} hari","today_label":"Hari ini","month_muharram":"Muharram","month_safar":"Safar","month_rabi1":"Rabiul Awal","month_rabi2":"Rabiul Akhir","month_jumada1":"Jumadil Awal","month_jumada2":"Jumadil Akhir","month_rajab":"Rajab","month_shaban":"Sya'ban","month_ramadan":"Ramadhan","month_shawwal":"Syawal","month_dhulqadah":"Dzulqa'dah","month_dhulhijjah":"Dzulhijjah","ev_newyear":"Tahun Baru Islam","ev_ashura":"Hari Asyura","ev_ramadan":"Awal Ramadhan","ev_qadr":"Lailatul Qadar (perkiraan)","ev_eidfitr":"Idul Fitri","ev_arafah":"Hari Arafah","ev_eidadha":"Idul Adha"},"tr":{"nav_back":"← Ana site","label_home":"Ana site","label_quran":"Kur'an-ı Kerim","label_prayertimes":"Namaz Vakitleri","label_qibla":"Kıble Yönü","label_tasbeeh":"Zikrinizi Sayın","label_academy":"AM Academy","label_calc":"Zekât Hesaplayıcı","label_apply":"Yardım Başvurusu Yapın","label_join":"Listeye Katıl","hero_badge":"Hicri Takvim · Ümmü'l-Kura","hero_h1":"İslami Takvim","hero_p":"Bugünün Hicri tarihi, yaklaşan İslami tarihler ve Miladi/Hicri tarih dönüştürücü — namaz vakitleri için kullanılanla aynı hizmet olan AlAdhan.com tarafından hesaplanmıştır.","loading_msg":"Yükleniyor…","hijri_note":"Hicri tarih bir önceki akşam gün batımıyla başlar ve ayın kesin yerel başlangıcı hilal gözlemine bağlı olarak bir gün farklılık gösterebilir.","upcoming_title":"Yaklaşan İslami Tarihler","converter_title":"Tarih Dönüştürücü","tab_gtoh":"Miladi → Hicri","tab_htog":"Hicri → Miladi","day_ph":"Gün","year_ph":"Yıl","convert_btn":"Dönüştür","disclaimer":"Bu, Ümmü'l-Kura takvimine dayalı bir hesaplama aracıdır, fetva değildir — yerel hilal gözlem duyuruları tarihi bir gün kaydırabilir. Kadir Gecesi'nin kesin gecesi hiçbir takvimle sabitlenmemiştir; Ramazan'ın 27. günü en yaygın kabul edilen tahmin olarak gösterilir.","source_note":"Hicri/Miladi dönüşümü AlAdhan.com (Ümmü'l-Kura yöntemi) tarafından yapılmıştır — Namaz Vakitleri sayfasında kullanılanla aynı hizmet.","fetch_error":"Takvim verileri yüklenemedi. Lütfen tekrar deneyin.","days_left_one":"1 gün sonra","days_left_other":"{n} gün sonra","today_label":"Bugün","month_muharram":"Muharrem","month_safar":"Safer","month_rabi1":"Rebîülevvel","month_rabi2":"Rebîülahir","month_jumada1":"Cemâziyelevvel","month_jumada2":"Cemâziyelahir","month_rajab":"Recep","month_shaban":"Şaban","month_ramadan":"Ramazan","month_shawwal":"Şevval","month_dhulqadah":"Zilkade","month_dhulhijjah":"Zilhicce","ev_newyear":"Hicri Yılbaşı","ev_ashura":"Aşure Günü","ev_ramadan":"Ramazan'ın Başlangıcı","ev_qadr":"Kadir Gecesi (tahmini)","ev_eidfitr":"Ramazan Bayramı","ev_arafah":"Arefe Günü","ev_eidadha":"Kurban Bayramı"},"zh":{"nav_back":"← 主站","label_home":"主站","label_quran":"尊贵的古兰经","label_prayertimes":"礼拜时间","label_qibla":"朝拜方向","label_tasbeeh":"记录您的赞念","label_academy":"AM Academy","label_calc":"天课计算器","label_apply":"申请援助","label_join":"加入候补名单","hero_badge":"伊斯兰历 · 乌姆库拉","hero_h1":"伊斯兰历法","hero_p":"今天的伊斯兰历日期、即将到来的伊斯兰历重要日子，以及公历/伊斯兰历换算器——由 AlAdhan.com 计算，与礼拜时间使用的是同一服务。","loading_msg":"加载中…","hijri_note":"伊斯兰历日期从前一天日落开始，各地新月的确切起始日可能因观测新月而相差一天。","upcoming_title":"即将到来的伊斯兰历日子","converter_title":"日期换算器","tab_gtoh":"公历 → 伊斯兰历","tab_htog":"伊斯兰历 → 公历","day_ph":"日","year_ph":"年","convert_btn":"换算","disclaimer":"这是基于乌姆库拉历法的计算工具，不是教法裁决——当地观月公告可能使日期相差一天。盖德尔夜的确切夜晚没有任何历法可以固定；斋月27日作为最常被纪念的估计日期显示。","source_note":"伊斯兰历/公历换算由 AlAdhan.com（乌姆库拉方法）提供——与礼拜时间页面使用的是同一服务。","fetch_error":"目前无法加载历法数据。请重试。","days_left_one":"1天后","days_left_other":"{n}天后","today_label":"今天","month_muharram":"穆哈兰姆月","month_safar":"色法尔月","month_rabi1":"赖比尔·敖外鲁月","month_rabi2":"赖比尔·阿色尼月","month_jumada1":"主马达·敖外鲁月","month_jumada2":"主马达·阿色尼月","month_rajab":"赖哲卜月","month_shaban":"舍尔邦月","month_ramadan":"莱麦丹月（斋月）","month_shawwal":"闪瓦鲁月","month_dhulqadah":"都尔喀尔德月","month_dhulhijjah":"都尔黑哲月","ev_newyear":"伊斯兰新年","ev_ashura":"阿舒拉节","ev_ramadan":"斋月开始","ev_qadr":"盖德尔夜（估计）","ev_eidfitr":"开斋节","ev_arafah":"阿拉法日","ev_eidadha":"宰牲节"},"ms":{"nav_back":"← Laman utama","label_home":"Laman utama","label_quran":"Al-Quran Al-Karim","label_prayertimes":"Waktu Solat","label_qibla":"Arah Kiblat","label_tasbeeh":"Kira Zikir Anda","label_academy":"AM Academy","label_calc":"Kalkulator Zakat","label_apply":"Mohon Bantuan","label_join":"Sertai Senarai Tunggu","hero_badge":"Kalendar Hijrah · Umm al-Qura","hero_h1":"Kalendar Islam","hero_p":"Tarikh Hijrah hari ini, tarikh-tarikh Islam yang akan datang, dan penukar tarikh Masihi/Hijrah — dikira oleh AlAdhan.com, perkhidmatan yang sama digunakan untuk waktu solat.","loading_msg":"Memuatkan…","hijri_note":"Tarikh Hijrah bermula pada waktu matahari terbenam petang sebelumnya, dan permulaan tepat bulan tempatan boleh berbeza sehari bergantung kepada cerapan anak bulan.","upcoming_title":"Tarikh Islam Akan Datang","converter_title":"Penukar Tarikh","tab_gtoh":"Masihi → Hijrah","tab_htog":"Hijrah → Masihi","day_ph":"Hari","year_ph":"Tahun","convert_btn":"Tukar","disclaimer":"Ini adalah alat pengiraan berdasarkan kalendar Umm al-Qura, bukan fatwa — pengumuman cerapan anak bulan tempatan boleh menganjak tarikh sehari. Malam sebenar Lailatulqadar tidak ditetapkan oleh mana-mana kalendar; 27 Ramadan ditunjukkan sebagai anggaran yang paling biasa disambut.","source_note":"Penukaran Hijrah/Masihi oleh AlAdhan.com (kaedah Umm al-Qura) — perkhidmatan yang sama digunakan pada halaman Waktu Solat.","fetch_error":"Tidak dapat memuatkan data kalendar. Sila cuba lagi.","days_left_one":"dalam 1 hari","days_left_other":"dalam {n} hari","today_label":"Hari ini","month_muharram":"Muharam","month_safar":"Safar","month_rabi1":"Rabiulawal","month_rabi2":"Rabiulakhir","month_jumada1":"Jamadilawal","month_jumada2":"Jamadilakhir","month_rajab":"Rajab","month_shaban":"Syaaban","month_ramadan":"Ramadan","month_shawwal":"Syawal","month_dhulqadah":"Zulkaedah","month_dhulhijjah":"Zulhijjah","ev_newyear":"Tahun Baharu Hijrah","ev_ashura":"Hari Asyura","ev_ramadan":"Permulaan Ramadan","ev_qadr":"Lailatulqadar (anggaran)","ev_eidfitr":"Hari Raya Aidilfitri","ev_arafah":"Hari Arafah","ev_eidadha":"Hari Raya Aidiladha"},"fr":{"nav_back":"← Site principal","label_home":"Site principal","label_quran":"Le Noble Coran","label_prayertimes":"Heures de prière","label_qibla":"Direction de la Qibla","label_tasbeeh":"Comptez votre dhikr","label_academy":"AM Academy","label_calc":"Calculateur de Zakat","label_apply":"Demander une aide","label_join":"Rejoindre la liste","hero_badge":"Calendrier hégirien · Oumm al-Qura","hero_h1":"Calendrier islamique","hero_p":"La date hégirienne d'aujourd'hui, les prochaines dates islamiques, et un convertisseur grégorien/hégirien — calculé par AlAdhan.com, le même service utilisé pour les heures de prière.","loading_msg":"Chargement…","hijri_note":"La date hégirienne commence au coucher du soleil de la veille, et le début exact local du mois peut varier d'un jour selon l'observation de la lune.","upcoming_title":"Prochaines dates islamiques","converter_title":"Convertisseur de dates","tab_gtoh":"Grégorien → Hégirien","tab_htog":"Hégirien → Grégorien","day_ph":"Jour","year_ph":"Année","convert_btn":"Convertir","disclaimer":"Ceci est un outil de calcul basé sur le calendrier Oumm al-Qura, pas une fatwa — les annonces locales d'observation de la lune peuvent décaler une date d'un jour. La nuit exacte de Laylat al-Qadr n'est fixée par aucun calendrier ; le 27e jour du Ramadan est indiqué comme l'estimation la plus communément observée.","source_note":"Conversion hégirienne/grégorienne par AlAdhan.com (méthode Oumm al-Qura) — le même service utilisé sur la page des Heures de prière.","fetch_error":"Impossible de charger les données du calendrier. Veuillez réessayer.","days_left_one":"dans 1 jour","days_left_other":"dans {n} jours","today_label":"Aujourd'hui","month_muharram":"Mouharram","month_safar":"Safar","month_rabi1":"Rabi al-Awwal","month_rabi2":"Rabi al-Thani","month_jumada1":"Joumada al-Oula","month_jumada2":"Joumada al-Thania","month_rajab":"Rajab","month_shaban":"Cha'ban","month_ramadan":"Ramadan","month_shawwal":"Chawwal","month_dhulqadah":"Dhou al-Qi'da","month_dhulhijjah":"Dhou al-Hijja","ev_newyear":"Nouvel An islamique","ev_ashura":"Achoura","ev_ramadan":"Début du Ramadan","ev_qadr":"Laylat al-Qadr (estimée)","ev_eidfitr":"Aïd al-Fitr","ev_arafah":"Jour d'Arafat","ev_eidadha":"Aïd al-Adha"},"de":{"nav_back":"← Zur Hauptseite","label_home":"Hauptseite","label_quran":"Der Edle Koran","label_prayertimes":"Gebetszeiten","label_qibla":"Qibla-Richtung","label_tasbeeh":"Zählen Sie Ihr Dhikr","label_academy":"AM Academy","label_calc":"Zakat-Rechner","label_apply":"Unterstützung beantragen","label_join":"Warteliste beitreten","hero_badge":"Hidschri-Kalender · Umm al-Qura","hero_h1":"Islamischer Kalender","hero_p":"Das heutige Hidschri-Datum, kommende islamische Daten und ein Gregorianisch/Hidschri-Umrechner — berechnet von AlAdhan.com, demselben Dienst, der für die Gebetszeiten verwendet wird.","loading_msg":"Wird geladen…","hijri_note":"Das Hidschri-Datum beginnt mit dem Sonnenuntergang des Vorabends, und der genaue lokale Monatsbeginn kann je nach Mondsichtung um einen Tag abweichen.","upcoming_title":"Kommende islamische Daten","converter_title":"Datumsumrechner","tab_gtoh":"Gregorianisch → Hidschri","tab_htog":"Hidschri → Gregorianisch","day_ph":"Tag","year_ph":"Jahr","convert_btn":"Umrechnen","disclaimer":"Dies ist ein Berechnungswerkzeug auf Basis des Umm-al-Qura-Kalenders, keine Fatwa — lokale Mondsichtungsankündigungen können ein Datum um einen Tag verschieben. Die genaue Nacht der Laylat al-Qadr ist durch keinen Kalender festgelegt; der 27. Ramadan wird als die am häufigsten begangene Schätzung angezeigt.","source_note":"Hidschri/Gregorianische Umrechnung durch AlAdhan.com (Umm-al-Qura-Methode) — derselbe Dienst, der auf der Gebetszeiten-Seite verwendet wird.","fetch_error":"Kalenderdaten konnten nicht geladen werden. Bitte versuchen Sie es erneut.","days_left_one":"in 1 Tag","days_left_other":"in {n} Tagen","today_label":"Heute","month_muharram":"Muharram","month_safar":"Safar","month_rabi1":"Rabi al-Awwal","month_rabi2":"Rabi al-Thani","month_jumada1":"Jumada al-Awwal","month_jumada2":"Jumada al-Thani","month_rajab":"Rajab","month_shaban":"Scha'ban","month_ramadan":"Ramadan","month_shawwal":"Schawwal","month_dhulqadah":"Dhu al-Qa'da","month_dhulhijjah":"Dhu al-Hidscha","ev_newyear":"Islamisches Neujahr","ev_ashura":"Aschura","ev_ramadan":"Beginn des Ramadan","ev_qadr":"Laylat al-Qadr (geschätzt)","ev_eidfitr":"Eid al-Fitr","ev_arafah":"Tag von Arafat","ev_eidadha":"Eid al-Adha"}};
+
+let currentLang = 'tj';
+function t(key){
+  const L = translations[currentLang] || translations.en;
+  return L[key] !== undefined ? L[key] : (translations.en[key] || key);
+}
+function setLang(l){
+  currentLang = l;
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.setAttribute('lang', l==='tj'?'tg':l);
+  document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.getAttribute('data-t')); });
+  document.querySelectorAll('[data-t-ph]').forEach(el => { el.placeholder = t(el.getAttribute('data-t-ph')); });
+  localStorage.setItem('amn_lang', l);
+  populateMonthSelect();
+  if (lastToday) renderToday(lastToday);
+  if (lastEvents) renderEvents(lastEvents);
+}
+function toggleLangDrop(){
+  const d = document.getElementById('langDrop');
+  d.style.display = (d.style.display === 'none' || !d.style.display) ? 'block' : 'none';
+}
+function selectLang(l, flag, name){
+  document.getElementById('langFlag').src = 'https://flagcdn.com/' + flag + '.svg';
+  document.getElementById('langName').textContent = name;
+  document.getElementById('langDrop').style.display = 'none';
+  setLang(l);
+}
+function toggleTheme(){
+  const th = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', th);
+  document.querySelector('.theme-btn').textContent = th === 'dark' ? '🌙' : '☀️';
+  localStorage.setItem('amn_theme', th);
+}
+document.addEventListener('click', function(e){
+  const wrap = document.querySelector('.lang-wrap');
+  if (wrap && !wrap.contains(e.target)) {
+    const d = document.getElementById('langDrop');
+    if (d) d.style.display = 'none';
+  }
+  const tl = document.getElementById('toolLinksDetails');
+  if (tl && tl.open && !tl.contains(e.target)) tl.removeAttribute('open');
+});
+(function(){
+  const tl = document.getElementById('toolLinksDetails');
+  if (tl) tl.addEventListener('toggle', function(){
+    if (tl.open) { const d = document.getElementById('langDrop'); if (d) d.style.display = 'none'; }
+  });
+})();
+
+/* ═══════════════════════════════════════════════════════
+   ISLAMIC CALENDAR — dates computed via AlAdhan.com's
+   Hijri/Gregorian conversion (Umm al-Qura method), the same
+   established service this site already uses for Prayer
+   Times. We never compute the Hijri calendar ourselves —
+   getting a religious date wrong has real consequences.
+
+   Observances are looked up by their universally-fixed Hijri
+   month/day (1 Muharram, 10 Muharram, 1 Ramadan, 1 Shawwal,
+   9 & 10 Dhul-Hijjah), each converted to this Hijri year's
+   Gregorian date via the API — never a "holidays list" we
+   can't fully verify. Mawlid an-Nabi is deliberately excluded
+   per founder request (scholars are divided on observing it).
+   Laylat al-Qadr has no fixed date in any calendar; showing
+   the 27th of Ramadan as the most commonly observed estimate,
+   clearly labeled as such.
+═══════════════════════════════════════════════════════ */
+const ALADHAN_BASE = 'https://api.aladhan.com/v1';
+const MONTH_KEYS = ['month_muharram','month_safar','month_rabi1','month_rabi2','month_jumada1','month_jumada2','month_rajab','month_shaban','month_ramadan','month_shawwal','month_dhulqadah','month_dhulhijjah'];
+// [hijriMonth, hijriDay, translationKey] — sorted by month/day, NOT including Mawlid an-Nabi (12 Rabi' al-Awwal).
+const OBSERVANCES = [
+  [1, 1, 'ev_newyear'],
+  [1, 10, 'ev_ashura'],
+  [9, 1, 'ev_ramadan'],
+  [9, 27, 'ev_qadr'],
+  [10, 1, 'ev_eidfitr'],
+  [12, 9, 'ev_arafah'],
+  [12, 10, 'ev_eidadha'],
+];
+
+let lastToday = null;
+let lastEvents = null;
+
+function pad2(n){ return String(n).padStart(2, '0'); }
+
+async function fetchJSON(url){
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 12000);
+  try {
+    const res = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(timer);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// Defensive extraction — the exact nesting of AlAdhan's conversion
+// response wasn't fully verifiable offline, so this tries the
+// documented shape first and a couple of reasonable fallbacks rather
+// than crashing the whole page on a shape mismatch.
+function extractHijri(data){
+  return (data && data.data && data.data.hijri) || (data && data.hijri) || null;
+}
+function extractGregorian(data){
+  return (data && data.data && data.data.gregorian) || (data && data.gregorian) || null;
+}
+
+async function gToH(day, month, year){
+  const url = ALADHAN_BASE + '/gToH/' + pad2(day) + '-' + pad2(month) + '-' + year;
+  const data = await fetchJSON(url);
+  const hijri = extractHijri(data);
+  if (!hijri) throw new Error('Unexpected gToH response shape');
+  return hijri;
+}
+async function hToG(day, month, year){
+  const url = ALADHAN_BASE + '/hToG/' + pad2(day) + '-' + pad2(month) + '-' + year;
+  const data = await fetchJSON(url);
+  const greg = extractGregorian(data);
+  if (!greg) throw new Error('Unexpected hToG response shape');
+  return greg;
+}
+
+function monthName(monthNumber){
+  return t(MONTH_KEYS[monthNumber - 1] || '');
+}
+
+function renderToday(hijri){
+  lastToday = hijri;
+  const day = hijri.day;
+  const monthNum = hijri.month && hijri.month.number;
+  const monthAr = hijri.month && hijri.month.ar;
+  const year = hijri.year;
+  document.getElementById('todayHijri').textContent = day + ' ' + monthName(monthNum) + ' ' + year + ' ' + (t('designation') || 'AH');
+  document.getElementById('todayHijriAr').textContent = monthAr ? (day + ' ' + monthAr + ' ' + year + 'هـ') : '';
+  const now = new Date();
+  document.getElementById('todayGreg').textContent = now.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+  document.getElementById('locationNote').style.display = 'flex';
+}
+
+function renderEvents(events){
+  lastEvents = events;
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  const list = document.getElementById('eventsList');
+  list.innerHTML = events.map(ev => {
+    const diffDays = Math.round((ev.gregDate - now) / 86400000);
+    let daysLabel;
+    if (diffDays <= 0) daysLabel = t('today_label');
+    else if (diffDays === 1) daysLabel = t('days_left_one');
+    else daysLabel = t('days_left_other').replace('{n}', diffDays);
+    return `
+      <div class="event-row">
+        <div>
+          <div class="event-name">${t(ev.key)}</div>
+          <div class="event-hijri">${ev.day} ${monthName(ev.month)}</div>
+        </div>
+        <div>
+          <div class="event-greg">${ev.gregDate.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+          <div class="event-days">${daysLabel}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+async function loadCalendar(){
+  const statusEl = document.getElementById('todayStatus');
+  statusEl.textContent = '';
+  const eventsList = document.getElementById('eventsList');
+  try {
+    const now = new Date();
+    const todayHijri = await gToH(now.getDate(), now.getMonth() + 1, now.getFullYear());
+    renderToday(todayHijri);
+
+    const currentHijriYear = parseInt(todayHijri.year, 10);
+    const todayMidnight = new Date();
+    todayMidnight.setHours(0, 0, 0, 0);
+
+    const events = [];
+    for (const [month, day, key] of OBSERVANCES) {
+      let hijriYear = currentHijriYear;
+      let greg = await hToG(day, month, hijriYear);
+      let gregDate = new Date(parseInt(greg.year, 10), (greg.month.number || month) - 1, parseInt(greg.day, 10));
+      if (gregDate < todayMidnight) {
+        hijriYear = currentHijriYear + 1;
+        greg = await hToG(day, month, hijriYear);
+        gregDate = new Date(parseInt(greg.year, 10), (greg.month.number || month) - 1, parseInt(greg.day, 10));
+      }
+      events.push({ key, month, day, gregDate });
+    }
+    events.sort((a, b) => a.gregDate - b.gregDate);
+    renderEvents(events);
+  } catch (e) {
+    console.error('[Islamic Calendar] Failed to load calendar data:', e);
+    statusEl.className = 'status-msg error';
+    statusEl.textContent = t('fetch_error');
+    eventsList.innerHTML = '<div class="status-msg error">' + t('fetch_error') + '</div>';
+  }
+}
+
+/* ── CONVERTER ── */
+let convMode = 'gtoh';
+function populateMonthSelect(){
+  const sel = document.getElementById('convMonth');
+  const prevValue = sel.value;
+  if (convMode === 'gtoh') {
+    const names = [];
+    for (let m = 1; m <= 12; m++) {
+      names.push(new Date(2000, m - 1, 1).toLocaleDateString(currentLang === 'ar' ? 'ar' : undefined, { month: 'long' }));
+    }
+    sel.innerHTML = names.map((n, i) => `<option value="${i + 1}">${n}</option>`).join('');
+  } else {
+    sel.innerHTML = MONTH_KEYS.map((k, i) => `<option value="${i + 1}">${t(k)}</option>`).join('');
+  }
+  if (prevValue) sel.value = prevValue;
+}
+function setConvMode(mode){
+  convMode = mode;
+  document.getElementById('tabGtoH').classList.toggle('active', mode === 'gtoh');
+  document.getElementById('tabHtoG').classList.toggle('active', mode === 'htog');
+  document.getElementById('convResult').textContent = '';
+  populateMonthSelect();
+}
+async function runConvert(){
+  const day = parseInt(document.getElementById('convDay').value, 10);
+  const month = parseInt(document.getElementById('convMonth').value, 10);
+  const year = parseInt(document.getElementById('convYear').value, 10);
+  const resultEl = document.getElementById('convResult');
+  if (!day || !month || !year) { resultEl.textContent = ''; return; }
+  resultEl.textContent = t('loading_msg');
+  try {
+    if (convMode === 'gtoh') {
+      const hijri = await gToH(day, month, year);
+      resultEl.textContent = hijri.day + ' ' + monthName(hijri.month.number) + ' ' + hijri.year + ' ' + (hijri.designation && hijri.designation.abbreviated || 'AH');
+    } else {
+      const greg = await hToG(day, month, year);
+      const d = new Date(parseInt(greg.year, 10), (greg.month.number || month) - 1, parseInt(greg.day, 10));
+      resultEl.textContent = d.toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+  } catch (e) {
+    console.error('[Islamic Calendar] Convert failed:', e);
+    resultEl.textContent = t('fetch_error');
+  }
+}
+
+/* ── INIT ── */
+(function init(){
+  const savedTheme = localStorage.getItem('amn_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  document.querySelector('.theme-btn').textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+  const flagMap = {tj:'tj',ar:'sa',en:'gb',de:'de',ru:'ru',id:'id',tr:'tr',zh:'cn',ms:'my',fr:'fr'};
+  const nameMap = {tj:'Тоҷикӣ',ar:'العربية',en:'English',de:'Deutsch',ru:'Русский',id:'Indonesia',tr:'Türkçe',zh:'中文',ms:'Melayu',fr:'Français'};
+  const savedLang = localStorage.getItem('amn_lang') || 'tj';
+  const l = translations[savedLang] ? savedLang : 'tj';
+  document.getElementById('langFlag').src = 'https://flagcdn.com/' + (flagMap[l] || 'tj') + '.svg';
+  document.getElementById('langName').textContent = nameMap[l] || 'Тоҷикӣ';
+  setLang(l);
+  loadCalendar();
+})();
+</script>
+</body>
+</html>
