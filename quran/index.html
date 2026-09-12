@@ -125,7 +125,10 @@ main{padding-top:64px;min-height:100vh}
 .verse.verse-playing{background-color:var(--gold3);box-shadow:inset 3px 0 0 0 var(--gold)}
 @media (prefers-reduced-motion: reduce){.verse{transition:none}}
 .verse:last-child{border-bottom:none}
-.verse-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--gold3);color:var(--gold);font-size:11px;font-weight:700;margin-bottom:10px}
+.verse-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.verse-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--gold3);color:var(--gold);font-size:11px;font-weight:700}
+.verse-play-btn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--gold);cursor:pointer;padding:0;transition:background-color .2s ease}
+.verse-play-btn:hover,.verse-play-btn:focus-visible{background:var(--gold3)}
 .verse-ar{font-family:'Noto Naskh Arabic',serif;direction:rtl;text-align:right;font-size:26px;line-height:2.1;color:var(--text);margin-bottom:10px}
 .verse-tr{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1.85;color:var(--text)}
 .translation-note{font-size:12px;color:var(--gold);background:var(--gold3);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:10px 14px;margin-bottom:16px}
@@ -308,6 +311,7 @@ let currentChapter = null;
 let currentReciterId = null;
 let currentTimestamps = null;
 let highlightedVerseKey = null;
+let singleVersePlayEndMs = null;
 
 async function fetchJSON(url){
   const ctrl = new AbortController();
@@ -371,16 +375,22 @@ function renderGrid(){
     return;
   }
   state.style.display = 'none';
-  grid.innerHTML = filtered.map(c => `
+  grid.innerHTML = filtered.map(c => {
+    const local = localChapterName(c.id);
+    const nameLine = local
+      ? `${escapeHtml(local.name)} · ${escapeHtml(local.meaning)}`
+      : `${escapeHtml(c.name_simple || '')} · ${escapeHtml((c.translated_name && c.translated_name.name) || '')}`;
+    return `
     <div class="surah-card" onclick="openSurah(${c.id})" role="button" tabindex="0">
       <div class="surah-num">${c.id}</div>
       <div class="surah-meta">
         <div class="surah-name-ar">${escapeHtml(c.name_arabic || '')}</div>
-        <div class="surah-name-en">${escapeHtml(c.name_simple || '')} · ${escapeHtml((c.translated_name && c.translated_name.name) || '')}</div>
+        <div class="surah-name-en">${nameLine}</div>
         <div class="surah-tag">${c.revelation_place === 'makkah' ? (t.meccan||'') : (t.medinan||'')} · ${c.verses_count} ${t.verses_word||''}</div>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 function escapeHtml(s){
   const d = document.createElement('div');
@@ -416,6 +426,55 @@ async function ensureTranslations(){
 // from. We host that file locally (unmodified, byte-for-byte from Tanzil)
 // and use it in place of the live API call for this one language only.
 const LOCAL_TRANSLATIONS = { tj: { url: '/quran/data/tj-ayati.json', src: 'translation_src_tj' } };
+
+// Tajik surah names/meanings — Quran.com has no Tajik chapter-name
+// localization at all, so unlike other languages this can't be fetched live.
+// [name, meaning] per chapter id, sourced from an existing Tajik Quran app.
+const LOCAL_CHAPTER_NAMES_TJ = {
+  1:['Ал-Фотиҳа','Сураи Фотиҳа'],2:['Ал-Бақара','Гов'],3:['Оли Имрон','Сураи Оли Имрон'],
+  4:['Ан-Нисо','Занон'],5:['Ал-Моида','Дастархон'],6:['Ал-Анъам','Чорпоён'],
+  7:['Ал-Аъроф','Баландихо'],8:['Ал-Анфол','Ғаниматхо'],9:['Ат-Тавба','Тавба'],
+  10:['Юнус','Юнус'],11:['Ҳуд','Ҳуд'],12:['Юсуф','Юсуф'],
+  13:['Ар-Раъд','Тундар'],14:['Иброхим','Иброхим'],15:['Ал-Ҳичр','Ал-Ҳичр'],
+  16:['Ан-Наҳл','Занбури асал'],17:['Ал-Исро','Исро'],18:['Ал-Каҳф','Ғор'],
+  19:['Марям','Марям'],20:['То,Ҳо','То,Ҳо'],21:['Ал-Анбиё','Паёмбарон'],
+  22:['Ал-Ҳачч','Ҳачч'],23:['Ал-Муъминун','Муъминун'],24:['Ан-Нур','Нур'],
+  25:['Ал-Фурқон','Фурқон'],26:['Аш-Шуъаро','Шуъаро'],27:['Ан-Намл','Мурча'],
+  28:['Ал-Қасас','Достон'],29:['Ал-Анкабут','Тортанак'],30:['Ар-Рум','Румиён'],
+  31:['Луқмон','Луқмон'],32:['Ас-Сачда','Сачда'],33:['Ал-Аҳзоб','Гуруххо'],
+  34:['Сабо','Сабо'],35:['Фотир','Офаринанда'],36:['Ё Син','Ё Син'],
+  37:['Ас-Соффот','Фариштагони сафбаста'],38:['Сод','Сод'],39:['Аз-Зумар','Чамоъатхо'],
+  40:['Ғофир','Бахшоянда'],41:['Фуссилат','Фуссилат'],42:['Аш-Шуро','Машварат кардан'],
+  43:['Аз-Зухруф','Зинат'],44:['Ад-Духан','Дуд'],45:['Ал-Чосия','Зонузананда'],
+  46:['Ал-Аҳқоф','Регистонхо'],47:['Муҳаммад','Муҳаммад'],48:['Ал-Фатҳ','Пирузи'],
+  49:['Ал-Хучурот','Хучрахо'],50:['Қоф','Қоф'],51:['Аз-Зориёт','Бодхои хокпаракандасозанда'],
+  52:['Ат-Тур','Кухи Тур'],53:['Ан-Начм','Ситора'],54:['Ал-Қамар','Қамар'],
+  55:['Ар-Раҳмон','Бахшоянда'],56:['Ал-Воқеъа','Қиёмат'],57:['Ал-Ҳадид','Оҳан'],
+  58:['Ал-Муҷодала','Ҳидол кардан'],59:['Ал-Ҳашр','Рондан'],60:['Ал-Мумтаҳана','Зани имтихоншуда'],
+  61:['Ас-Сафф','Саф'],62:['Ал-Чумъа','Чумъа'],63:['Ал-Мунофиқун','Дуруяхо'],
+  64:['Ат-Тағобун','Мағбуни'],65:['Ат-Талоқ','Талоқ'],66:['Ат-Таҳрим','Ҳаром кардан'],
+  67:['Ал-Мулк','Мулк'],68:['Ал-Қалам','Қалам'],69:['Ал-Ҳоққа','Ҳоққа'],
+  70:['Ал-Маорич','Осмонхо'],71:['Нуҳ','(Пайғомбар) Нуҳ'],72:['Ал-Чин','Чин'],
+  73:['Ал-Муззаммил','Муззаммил'],74:['Ал-Муддассир','Муддассир'],75:['Ал-Қиёмат','Қиёмат'],
+  76:['Ал-Инсон','Инсон'],77:['Ал-Мурсалот','Мурсалот'],78:['Ан-Набаъ','Набаъ'],
+  79:['Ан-Нозиъот','Нозиъот'],80:['Абаса','Руй туш кардан'],81:['Ат-Таквир','Торик шудан'],
+  82:['Ал-Инфитор','Шикофтан'],83:['Ал-Мутаффифин','Камфурушон'],84:['Ал-Иншиқоқ','Шикофта шудан'],
+  85:['Ал-Буруч','Буручхо'],86:['Ат-Ториқ','Он чи дар шаб оят'],87:['Ал-Аъло','Бартар'],
+  88:['Ал-Ғошия','Пушида'],89:['Ал-Фачр','Сапедаи субх'],90:['Ал-Балад','Шахр'],
+  91:['Аш-Шамс','Офтоб'],92:['Ал-Лайл','Шаб'],93:['Аз-Зухо','Огози руз'],
+  94:['Аш-Шарх','Ошкор намудани'],95:['Ат-Тин','Анчир'],96:['Ал-Алақ','Хунлахта'],
+  97:['Ал-Қадр','Тақдир'],98:['Ал-Баййина','Бурхони равшан'],99:['Аз-Зилзол','Ларзиш'],
+  100:['Ал-Одиёт','Аспони даванда'],101:['Ал-Қориа','Кубанда'],102:['Ат-Такосур','Афзунхохи'],
+  103:['Ал-Аср','Замон'],104:['Ал-Ҳумаза','Айбчу'],105:['Ал-Фил','Фил'],
+  106:['Қурайш','Қурайш'],107:['Ал-Моъун','Моъун'],108:['Ал-Кавсар','Кавсар'],
+  109:['Ал-Кофирун','Кофирун'],110:['Ан-Наср','Наср'],111:['Ал-Масад','Масад'],
+  112:['Ал-Ихлос','Ихлос'],113:['Ал-Фалақ','Фалақ'],114:['Ан-Нос','Мардум'],
+};
+function localChapterName(chapterId){
+  if (lang !== 'tj') return null;
+  const entry = LOCAL_CHAPTER_NAMES_TJ[chapterId];
+  return entry ? { name: entry[0], meaning: entry[1] } : null;
+}
 let localTranslationCache = {};
 async function ensureLocalTranslation(key){
   if (localTranslationCache[key]) return localTranslationCache[key];
@@ -479,9 +538,13 @@ async function openSurah(chapterId){
   window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
 
   const t = T[lang];
+  const localName = localChapterName(currentChapter.id);
+  const headerNameLine = localName
+    ? `${escapeHtml(localName.name)} · ${escapeHtml(localName.meaning)}`
+    : `${escapeHtml(currentChapter.name_simple || '')} · ${escapeHtml((currentChapter.translated_name && currentChapter.translated_name.name) || '')}`;
   document.getElementById('surahHeader').innerHTML = `
     <div class="ar-name">${escapeHtml(currentChapter.name_arabic || '')}</div>
-    <div class="en-name">${escapeHtml(currentChapter.name_simple || '')} · ${escapeHtml((currentChapter.translated_name && currentChapter.translated_name.name) || '')}</div>
+    <div class="en-name">${headerNameLine}</div>
     <div class="sub-line">${currentChapter.id} · ${currentChapter.revelation_place === 'makkah' ? (t.meccan||'') : (t.medinan||'')} · ${currentChapter.verses_count} ${t.verses_word||''}</div>
   `;
 
@@ -513,9 +576,17 @@ async function openSurah(chapterId){
       const trText = localVerses
         ? (localVerses[chapterId + ':' + v.verse_number] || '')
         : (v.translations && v.translations[0] ? stripTags(v.translations[0].text) : '');
+      const playBtn = currentTimestamps
+        ? `<button class="verse-play-btn" onclick="playVerse(${chapterId},${v.verse_number})" aria-label="${escapeHtml(t.play_audio || '')}" title="${escapeHtml(t.play_audio || '')}">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>`
+        : '';
       return `
         <div class="verse" data-verse-key="${chapterId}:${v.verse_number}">
-          <div class="verse-num">${v.verse_number}</div>
+          <div class="verse-head">
+            <div class="verse-num">${v.verse_number}</div>
+            ${playBtn}
+          </div>
           <div class="verse-ar">${escapeHtml(v.text_uthmani || '')}</div>
           ${trText ? `<div class="verse-tr">${escapeHtml(trText)}</div>` : ''}
         </div>
@@ -535,6 +606,7 @@ function closeSurah(){
   document.getElementById('audioPlayer').removeAttribute('src');
   currentChapter = null;
   currentTimestamps = null;
+  singleVersePlayEndMs = null;
   clearVersePlaying();
 }
 
@@ -555,6 +627,10 @@ function clearVersePlaying(){
   highlightedVerseKey = null;
 }
 function onAudioTimeUpdate(){
+  if (singleVersePlayEndMs !== null && this.currentTime * 1000 >= singleVersePlayEndMs) {
+    this.pause();
+    singleVersePlayEndMs = null;
+  }
   if (!currentTimestamps) return;
   const ms = this.currentTime * 1000;
   const match = currentTimestamps.find(t =>
@@ -569,6 +645,20 @@ function onAudioTimeUpdate(){
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
   highlightedVerseKey = key;
+}
+
+// Play a single ayah on demand, reusing the same per-ayah timestamps used
+// for highlight-sync — no separate audio file needed, just seek + auto-pause.
+function playVerse(chapterId, verseNumber){
+  if (!currentTimestamps) return;
+  const key = chapterId + ':' + verseNumber;
+  const match = currentTimestamps.find(t => t.verse_key === key);
+  if (!match) return;
+  const player = document.getElementById('audioPlayer');
+  if (!player.src) return;
+  singleVersePlayEndMs = match.timestamp_to || null;
+  player.currentTime = (match.timestamp_from || 0) / 1000;
+  player.play();
 }
 
 async function setupReciterSelect(){
@@ -612,6 +702,7 @@ async function loadAudio(chapterId, reciterId){
   const player = document.getElementById('audioPlayer');
   player.removeAttribute('src');
   currentTimestamps = null;
+  singleVersePlayEndMs = null;
   clearVersePlaying();
   // If there is no reciterId, setupReciterSelect() has already shown (or
   // cleared) the right status for that case — don't clobber it here.
