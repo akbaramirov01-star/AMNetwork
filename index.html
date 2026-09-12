@@ -610,6 +610,12 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .asst-send:hover{background:var(--gold2)}
 .asst-send:disabled{opacity:.5;cursor:default}
 @media(max-width:480px){#assistantPanel{right:12px;bottom:82px}}
+@keyframes asstPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+#bttBtn.asst-pulse{animation:asstPulse .6s ease 2}
+.asst-nudge{position:fixed;bottom:88px;right:20px;max-width:230px;background:var(--bg2);border:1px solid var(--border);border-radius:14px 14px 4px 14px;padding:12px 16px;font-size:13px;line-height:1.5;color:var(--text);box-shadow:0 10px 30px rgba(0,0,0,.3);z-index:9997;opacity:0;transform:translateY(6px) scale(.92);transition:opacity .3s ease,transform .3s ease;pointer-events:none;font-family:'DM Sans',sans-serif}
+.asst-nudge.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;cursor:pointer}
+@media(max-width:480px){.asst-nudge{right:12px;bottom:80px}}
+@media (prefers-reduced-motion: reduce){#bttBtn.asst-pulse{animation:none}.asst-nudge{transition:opacity .3s ease}}
 
 @media(max-width:600px){nav .nav-cta{display:none}}
 /* Approved product entry points; existing motion remains intact. */
@@ -1904,15 +1910,16 @@ if(navCta) navCta.addEventListener('click', e=>{e.preventDefault();document.getE
 // ── AI ASSISTANT WIDGET ──
 const ASSISTANT_API_BASE = 'https://amnetwork.onrender.com';
 const ASST_STR = {
-  en:{title:'AI Assistant',placeholder:'Ask about Zakat, AM Network…',welcome:"Assalamu alaikum! I'm the AM Network assistant. Ask me about Zakat, how the platform works, or our launch timeline.",error:"Sorry, I couldn't respond just now — please try again in a moment, or email contact@amnetwork.io.",},
-  ru:{title:'ИИ-ассистент',placeholder:'Спросите про Закят, AM Network…',welcome:'Ассаляму алейкум! Я ассистент AM Network. Спросите меня про Закят, как работает платформа, или про сроки запуска.',error:'Извините, не получилось ответить — попробуйте ещё раз через момент, либо напишите на contact@amnetwork.io.',},
-  ar:{title:'مساعد الذكاء الاصطناعي',placeholder:'اسأل عن الزكاة، AM Network…',welcome:'السلام عليكم! أنا مساعد AM Network. اسألني عن الزكاة، أو كيف تعمل المنصة، أو موعد الإطلاق.',error:'عذرًا، لم أتمكن من الرد الآن — حاول مرة أخرى بعد قليل، أو راسلنا على contact@amnetwork.io.',},
-  tj:{title:'ИИ-ассистент',placeholder:'Дар бораи Закот бипурсед…',welcome:'Ассалому алейкум! Ман ёрдамчии AM Network ҳастам. Дар бораи Закот, чӣ гуна кор кардани платформа ё вақти оғоз бипурсед.',error:'Мутаассифона, ҳозир натавонистам ҷавоб диҳам — лутфан баъд аз лаҳзае боз кӯшиш кунед ё ба contact@amnetwork.io нависед.',},
-  id:{title:'Asisten AI',placeholder:'Tanya soal Zakat, AM Network…',welcome:'Assalamu alaikum! Saya asisten AM Network. Tanyakan tentang Zakat, cara kerja platform, atau jadwal peluncuran.',error:'Maaf, belum bisa merespons — coba lagi sesaat lagi, atau email contact@amnetwork.io.',},
-  tr:{title:'AI Asistanı',placeholder:'Zekat, AM Network hakkında sorun…',welcome:'Esselamü aleyküm! Ben AM Network asistanıyım. Zekat, platformun nasıl çalıştığı veya lansman zamanı hakkında sorabilirsiniz.',error:'Üzgünüm, şu an yanıt veremedim — birazdan tekrar deneyin veya contact@amnetwork.io adresine yazın.',},
-  zh:{title:'AI 助手',placeholder:'询问天课、AM Network…',welcome:'愿真主赐予您平安！我是 AM Network 助手。可以问我关于天课、平台如何运作或上线时间的问题。',error:'抱歉，暂时无法回复 — 请稍后再试，或发邮件至 contact@amnetwork.io。',},
-  ms:{title:'Pembantu AI',placeholder:'Tanya tentang Zakat, AM Network…',welcome:'Assalamualaikum! Saya pembantu AM Network. Tanya saya tentang Zakat, cara platform berfungsi, atau jadual pelancaran.',error:'Maaf, tidak dapat membalas sekarang — cuba lagi sebentar, atau emel contact@amnetwork.io.',},
-  de:{title:'KI-Assistent',placeholder:'Frag zu Zakat, AM Network…',welcome:'Assalamu alaikum! Ich bin der AM Network Assistent. Frag mich zu Zakat, wie die Plattform funktioniert, oder zum Startzeitpunkt.',error:'Entschuldigung, gerade keine Antwort möglich — bitte gleich nochmal versuchen oder contact@amnetwork.io schreiben.',},
+  en:{title:'AI Assistant',placeholder:'Ask about Zakat, AM Network…',welcome:"Assalamu alaikum! I'm the AM Network assistant. Ask me about Zakat, how the platform works, or our launch timeline.",error:"Sorry, I couldn't respond just now — please try again in a moment, or email contact@amnetwork.io.",nudge:"👋 Need anything? I'm here to help.",},
+  ru:{title:'ИИ-ассистент',placeholder:'Спросите про Закят, AM Network…',welcome:'Ассаляму алейкум! Я ассистент AM Network. Спросите меня про Закят, как работает платформа, или про сроки запуска.',error:'Извините, не получилось ответить — попробуйте ещё раз через момент, либо напишите на contact@amnetwork.io.',nudge:'👋 Нужна помощь? Я рядом, спрашивайте.',},
+  ar:{title:'مساعد الذكاء الاصطناعي',placeholder:'اسأل عن الزكاة، AM Network…',welcome:'السلام عليكم! أنا مساعد AM Network. اسألني عن الزكاة، أو كيف تعمل المنصة، أو موعد الإطلاق.',error:'عذرًا، لم أتمكن من الرد الآن — حاول مرة أخرى بعد قليل، أو راسلنا على contact@amnetwork.io.',nudge:'👋 تحتاج شيئاً؟ أنا هنا للمساعدة.',},
+  tj:{title:'ИИ-ассистент',placeholder:'Дар бораи Закот бипурсед…',welcome:'Ассалому алейкум! Ман ёрдамчии AM Network ҳастам. Дар бораи Закот, чӣ гуна кор кардани платформа ё вақти оғоз бипурсед.',error:'Мутаассифона, ҳозир натавонистам ҷавоб диҳам — лутфан баъд аз лаҳзае боз кӯшиш кунед ё ба contact@amnetwork.io нависед.',nudge:'👋 Чизе лозим? Ман инҳоям, бипурсед.',},
+  id:{title:'Asisten AI',placeholder:'Tanya soal Zakat, AM Network…',welcome:'Assalamu alaikum! Saya asisten AM Network. Tanyakan tentang Zakat, cara kerja platform, atau jadwal peluncuran.',error:'Maaf, belum bisa merespons — coba lagi sesaat lagi, atau email contact@amnetwork.io.',nudge:'👋 Butuh bantuan? Saya di sini.',},
+  tr:{title:'AI Asistanı',placeholder:'Zekat, AM Network hakkında sorun…',welcome:'Esselamü aleyküm! Ben AM Network asistanıyım. Zekat, platformun nasıl çalıştığı veya lansman zamanı hakkında sorabilirsiniz.',error:'Üzgünüm, şu an yanıt veremedim — birazdan tekrar deneyin veya contact@amnetwork.io adresine yazın.',nudge:'👋 Bir şeye mi ihtiyacın var? Buradayım.',},
+  zh:{title:'AI 助手',placeholder:'询问天课、AM Network…',welcome:'愿真主赐予您平安！我是 AM Network 助手。可以问我关于天课、平台如何运作或上线时间的问题。',error:'抱歉，暂时无法回复 — 请稍后再试，或发邮件至 contact@amnetwork.io。',nudge:'👋 需要帮助吗？我随时都在。',},
+  ms:{title:'Pembantu AI',placeholder:'Tanya tentang Zakat, AM Network…',welcome:'Assalamualaikum! Saya pembantu AM Network. Tanya saya tentang Zakat, cara platform berfungsi, atau jadual pelancaran.',error:'Maaf, tidak dapat membalas sekarang — cuba lagi sebentar, atau emel contact@amnetwork.io.',nudge:'👋 Perlukan bantuan? Saya di sini.',},
+  fr:{title:'Assistant IA',placeholder:'Demandez sur la Zakat, AM Network…',welcome:"Assalamu alaikum ! Je suis l'assistant AM Network. Demandez-moi tout sur la Zakat, le fonctionnement de la plateforme, ou notre calendrier de lancement.",error:"Désolé, je n'ai pas pu répondre — réessayez dans un instant, ou écrivez à contact@amnetwork.io.",nudge:"👋 Besoin d'aide ? Je suis là.",},
+  de:{title:'KI-Assistent',placeholder:'Frag zu Zakat, AM Network…',welcome:'Assalamu alaikum! Ich bin der AM Network Assistent. Frag mich zu Zakat, wie die Plattform funktioniert, oder zum Startzeitpunkt.',error:'Entschuldigung, gerade keine Antwort möglich — bitte gleich nochmal versuchen oder contact@amnetwork.io schreiben.',nudge:'👋 Brauchst du etwas? Ich bin für dich da.',},
 };
 let asstHistory = [];
 let asstOpened = false;
@@ -1931,6 +1938,7 @@ function toggleAssistant(){
   const opening = !panel.classList.contains('open');
   panel.classList.toggle('open', opening);
   if(opening){
+    hideAsstNudge();
     document.getElementById('asstTitle').textContent = asstT().title;
     document.getElementById('asstInput').placeholder = asstT().placeholder;
     if(!asstOpened){
@@ -1950,6 +1958,48 @@ function toggleAssistant(){
     setTimeout(()=>document.getElementById('asstInput').focus(),100);
   }
 }
+
+// ── ASSISTANT NUDGE ── a brief bounce + speech bubble inviting a visitor
+// to chat, shown a couple of times per visit (never once the panel has
+// actually been opened) so the widget doesn't go unnoticed but also never
+// nags indefinitely.
+const ASST_NUDGE_MAX = 2;
+let asstNudgeCount = 0;
+let asstNudgeTimer = null;
+function hideAsstNudge(){
+  const n = document.getElementById('asstNudge');
+  if(n) n.classList.remove('show');
+}
+function showAsstNudge(){
+  if(asstOpened) return;
+  const btn = document.getElementById('bttBtn');
+  if(!btn) return;
+  let nudge = document.getElementById('asstNudge');
+  if(!nudge){
+    nudge = document.createElement('div');
+    nudge.id = 'asstNudge';
+    nudge.className = 'asst-nudge';
+    nudge.setAttribute('role', 'button');
+    nudge.addEventListener('click', () => { hideAsstNudge(); toggleAssistant(); });
+    document.body.appendChild(nudge);
+  }
+  nudge.textContent = asstT().nudge || '';
+  nudge.classList.add('show');
+  btn.classList.add('asst-pulse');
+  setTimeout(() => btn.classList.remove('asst-pulse'), 1300);
+  setTimeout(hideAsstNudge, 7000);
+  asstNudgeCount++;
+}
+function scheduleAsstNudge(){
+  if(asstOpened || asstNudgeCount >= ASST_NUDGE_MAX) return;
+  clearTimeout(asstNudgeTimer);
+  asstNudgeTimer = setTimeout(() => {
+    showAsstNudge();
+    scheduleAsstNudge();
+  }, asstNudgeCount === 0 ? 12000 : 50000);
+}
+scheduleAsstNudge();
+
 async function sendAssistantMessage(){
   const input = document.getElementById('asstInput');
   const msg = input.value.trim();
