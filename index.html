@@ -151,6 +151,7 @@ nav{position:fixed;top:3px;left:0;right:0;z-index:100;display:flex;align-items:c
 .hero-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2.5s ease infinite}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.6)}}
 .hero-logo-wrap{position:relative;display:flex;flex-direction:column;align-items:center}
+[data-lang="tj"] .hero-logo-wrap{margin-top:-22px}
 .hero-logo-wrap::before{content:'';position:absolute;top:-24px;left:50%;width:320px;height:220px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(10,26,17,.65) 0%,rgba(10,26,17,.32) 55%,transparent 78%);z-index:-1}
 [data-theme="light"] .hero-logo-wrap::before{background:radial-gradient(ellipse at center,rgba(245,240,232,.75) 0%,rgba(245,240,232,.38) 55%,transparent 78%)}
 .hero-logo{width:88px;margin-bottom:10px;filter:drop-shadow(0 8px 28px rgba(201,168,76,0.35));animation:fadeUp 0.7s 0.1s ease both}
@@ -731,7 +732,6 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <h1><span id="heroL1" data-t="hero_l1">Where Every Dollar</span><span class="line2" id="heroL2" data-t="hero_l2">Finds Its Purpose.</span></h1>
   <p class="hero-sub" data-t="hero_sub">The first AI-assisted, human-verified, blockchain-transparent Zakat &amp; Sadaqah platform. Built for ~2 billion Muslims.</p>
 
-  <a class="hero-explore" href="#how"><span data-t="start_how">How it works</span><span aria-hidden="true">↓</span></a>
   <div class="hero-stats">
     <div class="hstat"><span class="hstat-num" data-t="num_600b">$50-600B</span><span class="hstat-lbl" data-t="stat1">Potential Zakat/yr</span></div>
     <div class="hstat"><span class="hstat-num" data-t="num_18b">~2B</span><span class="hstat-lbl" data-t="stat2">Muslims Worldwide</span></div>
