@@ -152,6 +152,11 @@ nav{position:fixed;top:3px;left:0;right:0;z-index:100;display:flex;align-items:c
 @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.6)}}
 .hero-logo-wrap{position:relative;display:flex;flex-direction:column;align-items:center}
 [data-lang="tj"] .hero-logo-wrap{margin-top:-36px}
+/* The -36px pull-up above (tuned so the logo doesn't sit over the mosque
+   dome in the Tajik hero photo) leaves less than a badge-height of
+   clearance below the badge — push the badge itself down a bit more so
+   they don't overlap. */
+[data-lang="tj"] .hero-badge{margin-bottom:48px}
 .hero-logo-wrap::before{content:'';position:absolute;top:-24px;left:50%;width:320px;height:220px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(10,26,17,.65) 0%,rgba(10,26,17,.32) 55%,transparent 78%);z-index:-1}
 [data-theme="light"] .hero-logo-wrap::before{background:radial-gradient(ellipse at center,rgba(245,240,232,.75) 0%,rgba(245,240,232,.38) 55%,transparent 78%)}
 .hero-logo{width:88px;margin-bottom:10px;filter:drop-shadow(0 8px 28px rgba(201,168,76,0.35));animation:fadeUp 0.7s 0.1s ease both}
@@ -608,7 +613,8 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 #assistantPanel.open{display:flex}
 .asst-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bg3);border-bottom:1px solid var(--border);flex-shrink:0}
 .asst-head-title{display:flex;align-items:center;gap:8px;font-family:inherit;font-weight:700;font-size:15px;color:var(--text)}
-.asst-head-logo{width:28px;height:28px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.asst-head-logo{width:28px;height:28px;border-radius:50%;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.asst-head-logo img{width:160%;height:160%;object-fit:cover}
 .asst-head-name{font-size:15px}
 .asst-close{background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer;line-height:1;padding:2px 6px}
 .asst-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-height:180px}
@@ -1610,7 +1616,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 
 <div id="assistantPanel" role="dialog" aria-label="AM Network assistant">
   <div class="asst-head">
-    <div class="asst-head-title"><img class="asst-head-logo" src="/icons/icon-192.png" alt="AM Network"><span class="asst-head-name" id="asstTitle">AI Assistant</span></div>
+    <div class="asst-head-title"><span class="asst-head-logo"><img src="/icons/icon-192.png" alt="AM Network"></span><span class="asst-head-name" id="asstTitle">AI Assistant</span></div>
     <button class="asst-close" id="asstCloseBtn" aria-label="Close">×</button>
   </div>
   <div class="asst-msgs" id="asstMsgs"></div>
@@ -2178,6 +2184,11 @@ function scheduleAsstNudge(){
     scheduleAsstNudge();
   }, asstNudgeCount === 0 ? 12000 : ASST_NUDGE_REPEAT_MS);
 }
+// Ping /health immediately on page load (not just when the panel first
+// opens) — free-tier hosting spins the backend down when idle, and
+// this gives it the maximum possible head start to wake up before a
+// visitor actually sends a message, on whichever page they land on.
+fetch(ASSISTANT_API_BASE + '/health').catch(()=>{});
 scheduleAsstNudge();
 
 async function sendAssistantMessage(){
