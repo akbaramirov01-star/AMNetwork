@@ -304,8 +304,12 @@ function selectCity(city){
 function renderCity(){
   document.querySelectorAll('.live-tab').forEach(b => b.classList.toggle('active', b.dataset.city === currentCity));
   const ch = LIVE_CHANNELS[currentCity];
+  // autoplay=1&mute=1 starts the stream immediately without a click (browsers
+  // only allow autoplay when muted; viewers can unmute from the player's own
+  // controls) — modestbranding/rel/iv_load_policy trim YouTube's own chrome
+  // as far as their embed API allows without breaking the required attribution.
   document.getElementById('playerFrameWrap').innerHTML =
-    `<iframe src="https://www.youtube-nocookie.com/embed/live_stream?channel=${ch.id}&autoplay=0" title="${t('title_' + currentCity)}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    `<iframe src="https://www.youtube-nocookie.com/embed/live_stream?channel=${ch.id}&autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3&controls=1" title="${t('title_' + currentCity)}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   document.getElementById('playerTitle').textContent = t('title_' + currentCity);
   document.getElementById('playerSub').textContent = t('sub_' + currentCity);
   document.getElementById('watchLink').href = ch.url;
