@@ -377,14 +377,23 @@ async function renderChapters(){
     `).join('') + '</div>';
 
     const englishTitles = nums.map(n => sections[n]);
-    content.innerHTML = renderGrid(englishTitles, lang !== 'en' ? t('chapter_titles_note') : '');
+    if (lang === 'en') { content.innerHTML = renderGrid(englishTitles, ''); return; }
 
-    if (lang !== 'en') {
-      translateTexts(englishTitles, lang, myToken).then(translated => {
-        if (myToken !== hadithChapterToken || !translated) return;
-        content.innerHTML = renderGrid(englishTitles.map((orig, i) => translated[i] || orig), t('ai_translation_note'));
-      });
+    const staticTitles = await loadStaticTitles(lang);
+    if (myToken !== hadithChapterToken) return;
+    const ready = staticTitles && staticTitles[currentBook];
+    if (ready) {
+      content.innerHTML = renderGrid(nums.map((n, i) => ready[n] || englishTitles[i]), t('ai_translation_note'));
+      return;
     }
+
+    // No pre-translated file for this language/book — fall back to the
+    // on-demand endpoint, upgrading the English titles in place.
+    content.innerHTML = renderGrid(englishTitles, t('chapter_titles_note'));
+    translateTexts(englishTitles, lang, myToken).then(translated => {
+      if (myToken !== hadithChapterToken || !translated) return;
+      content.innerHTML = renderGrid(englishTitles.map((orig, i) => translated[i] || orig), t('ai_translation_note'));
+    });
   } catch (e) {
     console.error('[Hadith] failed to load chapters:', e);
     content.innerHTML = '<div class="state-msg">' + t('error_generic') + '</div>';
@@ -403,6 +412,25 @@ function backToChapters(){
 // fallback_note it always had.
 const HADITH_AI_LANGS = ['ru', 'tj', 'zh', 'ms', 'fr', 'de'];
 let hadithChapterToken = 0;
+
+// Chapter/section titles are a small fixed set (202 across all three books)
+// and the dataset only ever publishes them in English, so they are
+// translated once, up front, and served as static files from our own repo —
+// instant, free, and works even when the backend is asleep or down. The
+// on-demand endpoint stays as the fallback for anything not covered here.
+let hadithTitlesCache = {}; // lang -> {book: {num: title}} | null
+async function loadStaticTitles(targetLang){
+  if (targetLang === 'en') return null;
+  if (Object.prototype.hasOwnProperty.call(hadithTitlesCache, targetLang)) return hadithTitlesCache[targetLang];
+  try {
+    const res = await fetch('/hadith/data/titles/' + targetLang + '.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    hadithTitlesCache[targetLang] = await res.json();
+  } catch (e) {
+    hadithTitlesCache[targetLang] = null;
+  }
+  return hadithTitlesCache[targetLang];
+}
 
 function renderHadithList(trList, arByNum, opts){
   opts = opts || {};
@@ -480,9 +508,14 @@ async function openChapter(chapterNum){
     document.getElementById('crumb').style.display = 'flex';
     document.getElementById('crumbChapterName').textContent = chapterTitleEn;
     if (lang !== 'en' && sections[chapterNum]) {
-      translateTexts([chapterTitleEn], lang, myToken).then(translated => {
-        if (myToken !== hadithChapterToken || !translated || !translated[0]) return;
-        document.getElementById('crumbChapterName').textContent = translated[0];
+      loadStaticTitles(lang).then(staticTitles => {
+        if (myToken !== hadithChapterToken) return;
+        const fromFile = staticTitles && staticTitles[currentBook] && staticTitles[currentBook][chapterNum];
+        if (fromFile) { document.getElementById('crumbChapterName').textContent = fromFile; return; }
+        translateTexts([chapterTitleEn], lang, myToken).then(translated => {
+          if (myToken !== hadithChapterToken || !translated || !translated[0]) return;
+          document.getElementById('crumbChapterName').textContent = translated[0];
+        });
       });
     }
 
