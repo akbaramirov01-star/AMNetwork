@@ -91,23 +91,23 @@ Verified local representatives who confirm recipient physical presence:
 ## What Is BUILT (as of September 2026)
 
 ### Live pages on amnetwork.io
-- `/` — Main site (10 languages incl. French, dark/light mode, all sections complete). Includes an "Ayah of the Day" widget near the top (date-seeded verse, fetched live from Quran.com, translated in the site's language with English fallback; optional foreground-only daily reminder via the Notification API — see note below).
+- `/` — Main site (10 languages incl. French, dark/light mode, all sections complete). The "Ayah of the Day" widget that used to sit near the top was removed per founder's request (September 2026).
 - `/ai_scoring/` — AI Scoring quiz (6 steps, score 0–100, client-side)
 - `/zakat/` — Zakat Calculator (assets, nisab, 159 countries)
 - `/apply/` — Application form (5 steps, Google Sheets integration, live)
 - `/investors/` — Investor pitch page (noindex)
 - `/quran/` — The Noble Quran: 114 surahs, live from the Quran.com API (Quran Foundation) — Tanzil Uthmani Arabic text, certified translations, official reciter audio, word-by-word tap-to-translate, per-ayah/whole-surah repeat modes, Khatm (continuous) mode, and a Mushaf view (authentic Madinah-layout page images via the self-hosted quran-qcf4 dataset — real QCF4 Hafs font/glyphs, not our own rendering). We never store, edit or translate this content ourselves; it is always fetched live and shown exactly as published. UI chrome in 10 languages.
 - `/hadith/` — Hadith Collection: Sahih al-Bukhari, Sahih Muslim, Jami' at-Tirmidhi by chapter, live from the open fawazahmed0/hadith-api dataset. Arabic + certified translation where available (en/ar/ru/id/tr, fr for Bukhari & Muslim only), English fallback elsewhere.
-- `/dua/` — Dua & Dhikr: morning/evening dhikr, dhikr after prayer, daily duas, selected duas — Arabic, transliteration, translation, repeat count and virtue (fawaid), each with its hadith citation, from the open fitrahive/dua-dhikr dataset. Only en/id are natively translated; other languages fall back to English.
+- `/dua/` — Dua & Dhikr: morning/evening dhikr, dhikr after prayer, daily duas, selected duas — Arabic, transliteration, translation, repeat count and virtue (fawaid/benefits — both fields now render; a bug previously dropped "benefits" text entirely), each with its hadith citation, from the open fitrahive/dua-dhikr dataset. en/id are natively translated by the dataset; ar/ru/tj/tr/zh/ms/fr are covered by our own AI-generated translation (self-hosted under `/dua/data/ai/<lang>/<category>.json`), shown with a clear "AI-translated, unverified, will be replaced once certified" disclosure; de is the only language still falling back to English (translation attempt pending, see Next Priority Tasks).
 - `/tasbeeh/` — Dhikr counter (tap counter with haptic-style tap animation), plus the two most-repeated dhikr with full Arabic text and translated hadith citation, in all 10 languages.
 - `/qibla/` — Qibla direction: geolocation + device compass, with manual lat/lng fallback.
 - `/prayer-times/` — Prayer times via AlAdhan.com (5 calculation methods, Asr school choice), plus a simple daily 5-prayer tracker checklist (resets automatically each calendar day, independent of the location lookup).
 - `/calendar/` — Islamic Calendar: today's Hijri date, upcoming named observances (explicitly excluding Mawlid an-Nabi per founder's instruction), and a two-way Hijri↔Gregorian converter, via AlAdhan.com's confirmed conversion endpoints.
 - `/faq/`, `/team/`, `/roadmap/` — extracted from homepage sections into standalone pages, with short teasers + "Read more" links left in place on the homepage at their original anchors.
 
-All of the above (`/quran/`, `/hadith/`, `/dua/`, `/tasbeeh/`, `/qibla/`, `/prayer-times/`, `/calendar/`) cross-link to every other page and to the homepage via a shared "other tools" nav dropdown, and are wired into `sw.js`'s offline precache list.
+All of the above (`/quran/`, `/hadith/`, `/dua/`, `/tasbeeh/`, `/qibla/`, `/prayer-times/`, `/calendar/`, `/names/`, `/live/`), plus `/zakat/`, `/apply/`, and `/academy/` (the last three only got this in September 2026 — they previously had just a single "back to main site" link, a real gap the founder caught with "go through the tabs so there are buttons between them"), cross-link to every other page via a shared "other tools" nav dropdown, and are wired into `sw.js`'s offline precache list.
 
-⚠️ **Push notifications, sitewide:** any "remind me" feature built so far (Ayah of the Day) only fires while the site/PWA tab is actually open — there is no backend scheduler or Web Push yet, so nothing fires when the site is fully closed. Say this plainly if asked about notifications; don't imply background push already works.
+⚠️ **Push notifications, sitewide:** there is no "remind me" feature left on the site (the Ayah of the Day widget, the only one that had this, was removed) and no backend scheduler or Web Push yet — nothing fires when the site is closed, and nothing fires at all right now even when it's open. Say this plainly if asked about notifications; don't imply background push already works.
 
 ### Integrations working
 - **Waitlist → Google Sheets:** `AKfycbwuptTPU4ObtwesM86tvR2wObS5sXiIkKMvpZFZr_ReV_wD8nXIkTFdnT_C_2snrHFv/exec`
@@ -135,8 +135,10 @@ All of the above (`/quran/`, `/hadith/`, `/dua/`, `/tasbeeh/`, `/qibla/`, `/pray
 - [ ] **Sharia Advisory Board** — formal fatwa process
 - [ ] **Legal Registration** — UAE ADGM or Malaysia Labuan (~$1,500–5,000)
 - [ ] **Academy course content in the other 7 languages** — chrome UI + full lesson curriculum currently only exist in en/ru/ar; needs extending to tj/id/tr/zh/ms/fr/de alongside the rest of the site
-- [ ] **Real background push notifications** — a backend scheduler + Web Push (VAPID), needed for: the Ayah of the Day reminder to fire when the site/app is fully closed (currently foreground-only); a Friday "hour of accepted du'a" reminder (two scholarly opinions exist — from the imam mounting the minbar to the end of prayer, or the last hour before Maghrib; cite the hadith source properly, same accuracy bar as the Quran section, don't state it from our own authority) and when Sadaqah is most valuable on Friday — both are date/location-relative, not a fixed clock time; and a Ramadan-specific campaign (similar to what was run informally in a past Ramadan)
-- [x] Prayer tracker, Ayah of the Day (foreground-only), Hadith Collection, and Dua & Dhikr collection — built this session, see "What Is BUILT" above
+- [ ] **Real background push notifications** — a backend scheduler + Web Push (VAPID), needed for: a Friday "hour of accepted du'a" reminder (two scholarly opinions exist — from the imam mounting the minbar to the end of prayer, or the last hour before Maghrib; cite the hadith source properly, same accuracy bar as the Quran section, don't state it from our own authority) and when Sadaqah is most valuable on Friday — both are date/location-relative, not a fixed clock time; and a Ramadan-specific campaign (similar to what was run informally in a past Ramadan). The Ayah of the Day reminder that used to motivate this is gone (section removed), but the Friday/Ramadan use case still stands on its own.
+- [ ] **AI-translate the Hadith Collection** for the languages it doesn't cover (zh/ms/de everywhere, tj everywhere, matching the founder's "not a single word left untranslated" instruction) — NOT started. At ~19,000 hadiths × up to 4 missing languages, pre-translating everything the way Dua & Dhikr was done is not practical in one pass; needs a scoped decision (on-demand backend translation + cache vs. incremental bulk) before starting. Flagged to the founder as a tradeoff, not yet decided.
+- [ ] **Finish the German (de) Dua & Dhikr translation** — the other 7 non-dataset languages (ar/ru/tj/tr/zh/ms/fr) are done and live under `/dua/data/ai/`; German hit a session rate limit mid-translation and needs a retry.
+- [x] Prayer tracker, Hadith Collection, and Dua & Dhikr collection — built earlier this project; Ayah of the Day was built earlier too and then removed per founder's request (September 2026)
 
 ## Website — Section IDs
 
@@ -165,4 +167,4 @@ Read CLAUDE.md — I am Akbar, founder of AM Network.
 Continue where we left off. Next task: [describe current task]
 ```
 
-*Last updated: September 2026*
+*Last updated: September 2026 (mid-session: Mushaf word-highlight fix, Zakat/Apply/Academy nav dropdowns added, Ayah of the Day removed, Dua & Dhikr AI translations for 7/8 missing languages)*
