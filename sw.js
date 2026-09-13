@@ -3,7 +3,7 @@ const STATIC = [
   '/',
   '/index.html',
   '/i18n-data.js',
-  '/i18n-data.js?v=0369bf256c',
+  '/i18n-data.js?v=ce8e9a2b56',
   '/logo.webp',
   '/favicon.svg?v=20260911',
   '/manifest.json',
