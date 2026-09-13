@@ -22,7 +22,7 @@
 <meta name="twitter:description" content="Blockchain-verified Zakat and Sadaqah for ~2 billion Muslims.">
 <!-- Google Analytics -->
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.web3forms.com https://script.google.com https://script.googleusercontent.com https://*.hcaptcha.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://api.worldbank.org https://amnetwork.onrender.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-src https://*.hcaptcha.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.hcaptcha.com; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.web3forms.com https://script.google.com https://script.googleusercontent.com https://*.hcaptcha.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://api.worldbank.org https://amnetwork.onrender.com https://api.quran.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-src https://*.hcaptcha.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.hcaptcha.com; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
@@ -197,6 +197,22 @@ canvas.gc{width:100%;height:100%;display:block}
 .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4.5vw,48px);font-weight:700;line-height:1.1;margin-bottom:12px;color:var(--text)}
 .sec-body{font-size:15px;color:var(--text2);max-width:500px;line-height:1.8;margin-bottom:40px}
 hr.div{border:none;height:1px;background:linear-gradient(to right,transparent,var(--border),transparent)}
+
+/* ── AYAH OF THE DAY ── */
+.ayah-section{padding:36px 5vw 8px}
+.ayah-card{max-width:640px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:22px;padding:32px 28px;text-align:center}
+.ayah-arabic{font-family:'Noto Naskh Arabic',sans-serif;direction:rtl;font-size:clamp(20px,3.2vw,28px);line-height:2;color:var(--text);margin-bottom:16px}
+.ayah-translation{font-size:14px;color:var(--text2);line-height:1.8;max-width:520px;margin:0 auto 10px}
+.ayah-note{font-size:11px;color:var(--text3);margin-bottom:10px}
+.ayah-ref{font-size:12px;color:var(--gold);font-weight:600;margin-bottom:18px}
+.ayah-actions{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.ayah-notify-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:10px;border:1px solid var(--input-border,var(--border));background:transparent;color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.ayah-notify-btn:hover{border-color:var(--gold);color:var(--gold)}
+.ayah-notify-btn.on{border-color:var(--gold);background:var(--gold3);color:var(--gold)}
+.ayah-read-link{font-size:12px;color:var(--text2);text-decoration:none;font-weight:600}
+.ayah-read-link:hover{color:var(--gold)}
+.ayah-notify-hint{font-size:10.5px;color:var(--text3);margin-top:12px;line-height:1.6;max-width:440px;margin-inline:auto}
+.ayah-state{font-size:13px;color:var(--text3);padding:10px 0}
 
 /* ── ZAKAT DEBT CLOCK ── */
 .zclock-box{max-width:640px;margin:28px auto 18px;padding:36px 28px;background:var(--card);border:1px solid rgba(201,168,76,0.3);border-radius:20px}
@@ -738,6 +754,14 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <div class="hstat"><span class="hstat-num" data-t="num_600b">$50-600B</span><span class="hstat-lbl" data-t="stat1">Potential Zakat/yr</span></div>
     <div class="hstat"><span class="hstat-num" data-t="num_18b">~2B</span><span class="hstat-lbl" data-t="stat2">Muslims Worldwide</span></div>
     <div class="hstat"><span class="hstat-num" data-t="num_4t">$6T</span><span class="hstat-lbl" data-t="stat3">Islamic Finance Market</span></div>
+  </div>
+</section>
+
+<!-- AYAH OF THE DAY -->
+<section class="ayah-section">
+  <div class="eyebrow" style="justify-content:center;max-width:640px;margin-inline:auto" data-t="ayah_eyebrow">Daily Reflection</div>
+  <div class="ayah-card" id="ayahCard">
+    <div class="ayah-state" data-t="ayah_loading">Loading today's ayah…</div>
   </div>
 </section>
 
@@ -1591,7 +1615,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=37d4aa547a"></script>
+<script src="/i18n-data.js?v=dc83dd88e1"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)
@@ -1708,6 +1732,206 @@ function buildWgCountry(l){
   if(prev) sel.value = prev;
 }
 
+// ── AYAH OF THE DAY — fetched live from Quran.com's public API (the same
+// service /quran/ uses), never authored or approximated by us. The verse
+// picked for "today" is seeded from the UTC calendar day, so every
+// visitor worldwide sees the same ayah on the same day. ──
+const AYAH_API = 'https://api.quran.com/api/v4';
+const AYAH_LANG_TO_QURAN = { en:'english', ru:'russian', id:'indonesian', tr:'turkish', zh:'chinese', ms:'malay', fr:'french', de:'german', tj:null, ar:null };
+const AYAH_QSHORT = { en:'en', ru:'ru', ar:'ar', id:'id', tr:'tr', zh:'zh', ms:'ms', fr:'fr', de:'de', tj:'en' };
+const AYAH_PREFERRED_HINTS = ['clear quran','khattab','saheeh international','kuliev'];
+let ayahChaptersCache = {};
+let ayahVerseCache = null; // {chapterId, verseNumber, chapter, arabic} — fixed for the whole day, independent of language
+let ayahTjCache = null;
+let ayahLoadToken = 0;
+
+async function ayahFetchJSON(url){
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 10000);
+  try {
+    const res = await fetch(url, { signal: ctrl.signal });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.json();
+  } finally { clearTimeout(timer); }
+}
+function ayahStripTags(html){
+  if (html == null) return '';
+  const d = document.createElement('div');
+  d.innerHTML = String(html);
+  d.querySelectorAll('sup, sub').forEach(el => el.remove());
+  return (d.textContent || '').replace(/\s+/g, ' ').trim();
+}
+function escapeAyahHtml(s){
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+function ayahTodaySeed(){
+  // UTC day count, so the picked verse is the same for every visitor on
+  // a given calendar day regardless of local timezone.
+  return Math.floor(Date.now() / 86400000);
+}
+async function ayahGetChapters(qShort){
+  if (ayahChaptersCache[qShort]) return ayahChaptersCache[qShort];
+  const cacheKey = 'amn_ayah_chapters_' + qShort;
+  try {
+    const cached = sessionStorage.getItem(cacheKey);
+    if (cached) { ayahChaptersCache[qShort] = JSON.parse(cached); return ayahChaptersCache[qShort]; }
+  } catch (e) {}
+  const data = await ayahFetchJSON(AYAH_API + '/chapters?language=' + qShort);
+  const chapters = data.chapters || [];
+  ayahChaptersCache[qShort] = chapters;
+  try { sessionStorage.setItem(cacheKey, JSON.stringify(chapters)); } catch (e) {}
+  return chapters;
+}
+function ayahPickForSeed(chapters, seed){
+  const total = chapters.reduce((s, c) => s + c.verses_count, 0);
+  let idx = seed % total;
+  for (const c of chapters) {
+    if (idx < c.verses_count) return { chapterId: c.id, verseNumber: idx + 1, chapter: c };
+    idx -= c.verses_count;
+  }
+  return { chapterId: 1, verseNumber: 1, chapter: chapters[0] };
+}
+async function ayahResolveTranslationId(qLangTarget){
+  const data = await ayahFetchJSON(AYAH_API + '/resources/translations');
+  const list = data.translations || [];
+  const pick = (langName) => {
+    if (!langName) return null;
+    const matches = list.filter(tr => (tr.language_name || '').toLowerCase() === langName);
+    if (!matches.length) return null;
+    matches.sort((a, b) => {
+      const score = tr => {
+        const n = ((tr.name || '') + ' ' + (tr.author_name || '')).toLowerCase();
+        const i = AYAH_PREFERRED_HINTS.findIndex(h => n.includes(h));
+        return i === -1 ? 999 : i;
+      };
+      return score(a) - score(b);
+    });
+    return matches[0];
+  };
+  let chosen = pick(qLangTarget);
+  if (chosen) return { id: chosen.id, usedFallback: false };
+  chosen = pick('english');
+  if (chosen) return { id: chosen.id, usedFallback: true };
+  return { id: null, usedFallback: false };
+}
+
+async function renderAyahOfDay(){
+  const card = document.getElementById('ayahCard');
+  if (!card) return;
+  const myToken = ++ayahLoadToken;
+  const l = lang;
+  const tt = T[l] || T.en;
+  try {
+    const qShort = AYAH_QSHORT[l] || 'en';
+    if (!ayahVerseCache) {
+      const chapters = await ayahGetChapters(qShort);
+      const picked = ayahPickForSeed(chapters, ayahTodaySeed());
+      const verseData = await ayahFetchJSON(AYAH_API + '/verses/by_key/' + picked.chapterId + ':' + picked.verseNumber + '?language=en&fields=text_uthmani');
+      ayahVerseCache = Object.assign({}, picked, { arabic: verseData.verse.text_uthmani });
+    }
+    if (myToken !== ayahLoadToken) return; // a newer language switch superseded this call
+
+    const chaptersLocal = await ayahGetChapters(qShort);
+    const chapterLocal = chaptersLocal.find(c => c.id === ayahVerseCache.chapterId) || ayahVerseCache.chapter;
+    if (myToken !== ayahLoadToken) return;
+
+    let translationText = '';
+    let usedFallback = false;
+    const key = ayahVerseCache.chapterId + ':' + ayahVerseCache.verseNumber;
+    if (l === 'tj') {
+      if (!ayahTjCache) ayahTjCache = await ayahFetchJSON('/quran/data/tj-ayati.json');
+      translationText = ayahTjCache[key] || '';
+      if (!translationText) {
+        usedFallback = true;
+        const resolved = await ayahResolveTranslationId('english');
+        if (resolved.id) {
+          const data = await ayahFetchJSON(AYAH_API + '/verses/by_key/' + key + '?language=en&fields=text_uthmani&translations=' + resolved.id);
+          translationText = ayahStripTags(data.verse.translations && data.verse.translations[0] && data.verse.translations[0].text);
+        }
+      }
+    } else if (l !== 'ar') {
+      const resolved = await ayahResolveTranslationId(AYAH_LANG_TO_QURAN[l]);
+      usedFallback = resolved.usedFallback;
+      if (resolved.id) {
+        const data = await ayahFetchJSON(AYAH_API + '/verses/by_key/' + key + '?language=en&fields=text_uthmani&translations=' + resolved.id);
+        translationText = ayahStripTags(data.verse.translations && data.verse.translations[0] && data.verse.translations[0].text);
+      }
+    }
+    if (myToken !== ayahLoadToken) return;
+
+    const chapterName = (chapterLocal && (chapterLocal.name_simple || chapterLocal.name_arabic)) || '';
+    const refText = (chapterName ? chapterName + ' ' : '') + key;
+    const notifyOn = localStorage.getItem('amn_ayah_notify') === '1' && typeof Notification !== 'undefined' && Notification.permission === 'granted';
+
+    card.innerHTML = `
+      <div class="ayah-arabic">${ayahVerseCache.arabic}</div>
+      ${translationText ? `<div class="ayah-translation">${escapeAyahHtml(translationText)}</div>` : ''}
+      ${usedFallback && translationText ? `<div class="ayah-note">${tt.ayah_fallback_note || ''}</div>` : ''}
+      <div class="ayah-ref">${escapeAyahHtml(refText)}</div>
+      <div class="ayah-actions">
+        <button type="button" class="ayah-notify-btn${notifyOn ? ' on' : ''}" id="ayahNotifyBtn" onclick="toggleAyahNotify()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span id="ayahNotifyLabel">${notifyOn ? (tt.ayah_notify_enabled || '') : (tt.ayah_notify_enable || '')}</span>
+        </button>
+        <a class="ayah-read-link" href="/quran/">${tt.ayah_read_more || ''}</a>
+      </div>
+      <div class="ayah-notify-hint">${tt.ayah_notify_hint || ''}</div>
+    `;
+    maybeFireAyahNotification(translationText, refText);
+  } catch (e) {
+    console.error('[Ayah of the Day] failed to load:', e);
+    if (myToken === ayahLoadToken) card.innerHTML = `<div class="ayah-state">${tt.ayah_error || ''}</div>`;
+  }
+}
+
+function toggleAyahNotify(){
+  const tt = T[lang] || T.en;
+  const btn = document.getElementById('ayahNotifyBtn');
+  const label = document.getElementById('ayahNotifyLabel');
+  if (typeof Notification === 'undefined') return;
+  const isOn = localStorage.getItem('amn_ayah_notify') === '1' && Notification.permission === 'granted';
+  if (isOn) {
+    localStorage.setItem('amn_ayah_notify', '0');
+    if (btn) btn.classList.remove('on');
+    if (label) label.textContent = tt.ayah_notify_enable || '';
+    return;
+  }
+  if (Notification.permission === 'denied') {
+    alert(tt.ayah_notify_denied || '');
+    return;
+  }
+  Notification.requestPermission().then(perm => {
+    if (perm === 'granted') {
+      localStorage.setItem('amn_ayah_notify', '1');
+      if (btn) btn.classList.add('on');
+      if (label) label.textContent = tt.ayah_notify_enabled || '';
+      try { new Notification('AM Network', { body: tt.ayah_notify_enabled || '', icon: '/icons/icon-192.png' }); } catch (e) {}
+    } else if (perm === 'denied') {
+      alert(tt.ayah_notify_denied || '');
+    }
+  });
+}
+
+// Fires at most once per calendar day, and only while this site/PWA tab
+// is actually open — a true background push (firing when the site is
+// closed) needs a server-side scheduler + Web Push, which isn't built yet.
+function maybeFireAyahNotification(translationText, refText){
+  if (typeof Notification === 'undefined') return;
+  if (localStorage.getItem('amn_ayah_notify') !== '1') return;
+  if (Notification.permission !== 'granted') return;
+  const today = new Date().toISOString().slice(0, 10);
+  if (localStorage.getItem('amn_ayah_last_notified') === today) return;
+  localStorage.setItem('amn_ayah_last_notified', today);
+  try {
+    new Notification((T[lang] && T[lang].ayah_title) || 'Ayah of the Day', {
+      body: translationText ? translationText.slice(0, 140) : refText,
+      icon: '/icons/icon-192.png',
+    });
+  } catch (e) {}
+}
+
 function setLang(l){
   lang = l;
   const t = T[l]||T.en;
@@ -1735,6 +1959,7 @@ function setLang(l){
   buildWgCountry(l);
   buildWaitlistRoles(l);
   setHeroMosque(l);
+  renderAyahOfDay();
   localStorage.setItem('amn_lang', l);
 }
 
