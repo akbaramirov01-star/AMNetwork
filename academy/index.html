@@ -90,6 +90,19 @@ nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg1) 90%
 .lang-drop button.on{color:var(--gold);font-weight:700}
 .lang-drop img{width:20px;height:14px;border-radius:2px;object-fit:cover;flex-shrink:0}
 
+.tools{position:relative}
+.tools-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:9px;
+  border:1px solid var(--border);background:var(--card);color:var(--text2);cursor:pointer}
+.tools-btn:hover{border-color:var(--gold);color:var(--gold)}
+.tools-drop{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2);border:1px solid var(--border);
+  border-radius:11px;overflow:hidden;z-index:100;min-width:200px;max-height:70vh;overflow-y:auto;display:none;
+  box-shadow:0 14px 40px rgba(0,0,0,.28)}
+.tools.open .tools-drop{display:block}
+.tools-drop a{display:flex;align-items:center;gap:10px;width:100%;padding:10px 14px;color:var(--text);
+  font-size:13px;font-family:'DM Sans',sans-serif;text-decoration:none}
+.tools-drop a:hover{background:var(--gold3)}
+.tools-drop svg{flex-shrink:0}
+
 header.hero{padding:52px 0 38px;text-align:center}
 .eyebrow{display:inline-block;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
   color:var(--gold);border:1px solid var(--border);border-radius:99px;padding:6px 16px;margin-bottom:20px}
@@ -283,7 +296,26 @@ footer a{color:var(--gold)}
         <div class="lang-drop" id="langDrop" role="listbox"></div>
       </div>
       <button class="btn" id="themeBtn" aria-label="Theme">🌙</button>
-      <a class="btn" href="/" id="homeLink">← Главный сайт</a>
+      <div class="tools" id="toolsWrap">
+        <button class="tools-btn" id="toolsBtn" aria-label="Other tools" aria-haspopup="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </button>
+        <div class="tools-drop" id="toolsDrop">
+          <a href="/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span data-tool="label_home">Main site</span></a>
+          <a href="/quran/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span data-tool="label_quran">The Holy Quran</span></a>
+          <a href="/hadith/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span data-tool="label_hadith">Hadith Collection</span></a>
+          <a href="/dua/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V7a5 5 0 0 1 10 0v4"/><path d="M5 11h14l-1.5 9a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2z"/></svg><span data-tool="label_dua">Dua &amp; Dhikr</span></a>
+          <a href="/prayer-times/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-tool="label_prayertimes">Prayer Times</span></a>
+          <a href="/qibla/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-tool="label_qibla">Qibla Direction</span></a>
+          <a href="/tasbeeh/"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="4" cy="12" r="2"/><circle cx="10" cy="7" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="20" cy="18" r="2.6"/></svg><span data-tool="label_tasbeeh">Count Your Dhikr</span></a>
+          <a href="/calendar/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span data-tool="label_calendar">Islamic Calendar</span></a>
+          <a href="/names/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.5 6.5L21 9l-5 4.5 1.5 7-5.5-3.5L6.5 20.5 8 13.5 3 9l6.5-.5z"/></svg><span data-tool="label_names">99 Names of Allah</span></a>
+          <a href="/live/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg><span data-tool="label_live">Live: Makkah &amp; Madinah</span></a>
+          <a href="/zakat/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/><line x1="8" y1="14" x2="8" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="16" y1="14" x2="16" y2="14.01"/><line x1="8" y1="18" x2="8" y2="18.01"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg><span data-tool="label_calc">Zakat Calculator</span></a>
+          <a href="/apply/"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span data-tool="label_apply">Apply for Assistance</span></a>
+          <a href="/#waitlist"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/></svg><span data-tool="label_join">Join Waitlist</span></a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
@@ -514,7 +546,8 @@ function paintUI(){
   $('tLede').textContent = t.lede;
   $('tPickH').textContent = t.pickH;  $('tPickP').textContent = t.pickP;
   $('tProgH').textContent = t.progH;  $('tProgP').textContent = t.progP;
-  $('tBack').textContent = t.back;    $('homeLink').textContent = t.home;
+  $('tBack').textContent = t.back;
+  renderTools();
   $('tReexp').textContent = t.reexp;
   $('tSrcH').textContent = t.srcH;    $('tLock').textContent = t.lock;
   $('tSrcP').textContent = t.srcP;
@@ -545,9 +578,38 @@ function renderLang(){
     };
   });
 }
-$('langBtn').onclick = e => { e.stopPropagation(); $('langWrap').classList.toggle('open'); };
+$('langBtn').onclick = e => { e.stopPropagation(); $('toolsWrap').classList.remove('open'); $('langWrap').classList.toggle('open'); };
 document.addEventListener('click', e => {
   if (!$('langWrap').contains(e.target)) $('langWrap').classList.remove('open');
+});
+
+// ── other-tools menu — same cross-page links every other AM Network
+// tool page carries; text only exists in en/ru/ar (this page's own chrome
+// language coverage), falling back to en like the rest of this page's UI.
+const TOOLS_LABELS = {
+  en:{label_home:'Main site',label_quran:'The Holy Quran',label_hadith:'Hadith Collection',label_dua:'Dua & Dhikr',
+      label_prayertimes:'Prayer Times',label_qibla:'Qibla Direction',label_tasbeeh:'Count Your Dhikr',
+      label_calendar:'Islamic Calendar',label_names:'99 Names of Allah',label_live:'Live: Makkah & Madinah',
+      label_calc:'Zakat Calculator',label_apply:'Apply for Assistance',label_join:'Join Waitlist'},
+  ru:{label_home:'Главный сайт',label_quran:'Священный Коран',label_hadith:'Сборник хадисов',label_dua:'Дуа и Зикр',
+      label_prayertimes:'Время намаза',label_qibla:'Направление на Киблу',label_tasbeeh:'Считайте свои зикры',
+      label_calendar:'Исламский календарь',label_names:'99 имён Аллаха',label_live:'Прямой эфир: Мекка и Медина',
+      label_calc:'Калькулятор закята',label_apply:'Подать заявку на помощь',label_join:'Присоединиться'},
+  ar:{label_home:'الموقع الرئيسي',label_quran:'القرآن الكريم',label_hadith:'مجموعة الأحاديث',label_dua:'الدعاء والذكر',
+      label_prayertimes:'مواقيت الصلاة',label_qibla:'اتجاه القبلة',label_tasbeeh:'عدّ أذكارك',
+      label_calendar:'التقويم الإسلامي',label_names:'أسماء الله الحسنى',label_live:'مباشر: مكة والمدينة',
+      label_calc:'حاسبة الزكاة',label_apply:'تقدم بطلب للحصول على المساعدة',label_join:'انضم لقائمة الانتظار'},
+};
+function renderTools(){
+  const l = TOOLS_LABELS[store.lang] ? store.lang : 'en';
+  $('toolsDrop').querySelectorAll('[data-tool]').forEach(el => {
+    const v = TOOLS_LABELS[l][el.dataset.tool];
+    if (v) el.textContent = v;
+  });
+}
+$('toolsBtn').onclick = e => { e.stopPropagation(); $('langWrap').classList.remove('open'); $('toolsWrap').classList.toggle('open'); };
+document.addEventListener('click', e => {
+  if (!$('toolsWrap').contains(e.target)) $('toolsWrap').classList.remove('open');
 });
 
 function initTheme(){
