@@ -9,9 +9,11 @@ Then:          curl -X POST http://localhost:8000/score -H "Content-Type: applic
 
 from __future__ import annotations
 import json
+import os
+import sqlite3
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from security import limited_ai
+from security import limited_ai, budget, client_address, _in_flight
 
 from scorer import (
     RecipientProfile, HousingStatus, EmploymentStatus,
@@ -20,6 +22,8 @@ from scorer import (
 from assistant import get_reply
 from academy import explain as academy_explain, apply_to_case, translate_chrome, AUDIENCES
 from quran_audio import get_reciters as quran_get_reciters, get_chapter_audio, QuranAudioError
+from hadith_translate import translate_hadiths, LANG_NAMES as HADITH_TRANSLATE_LANGS
+from translate_cache import cache as translation_cache
 
 app = Flask(__name__)
 ALLOWED_ORIGINS = [
@@ -350,6 +354,79 @@ def academy_apply_route():
         return jsonify({"error": "tutor temporarily unavailable"}), 502
 
     return jsonify({"text": text})
+
+
+# ── Hadith translation ──────────────────────────────────────────────────────
+# The open hadith-api dataset only publishes certified translations for a
+# handful of languages, and not the same set for every book (Tirmidhi has no
+# Russian or French edition, for instance). For everything else, translate
+# on demand and cache the result forever, keyed by the source text — so each
+# hadith is only ever paid for once per language, shared across every reader
+# and every book/edition it appears in, not re-billed on every page view.
+#
+# Deliberately NOT wrapped in @limited_ai for the whole route: a request that
+# is fully served from cache costs nothing and should never compete with
+# /chat's budget for a live person waiting on a reply. The budget/concurrency
+# gate below is applied only around the actual paid call, when there's a
+# genuine cache miss.
+MAX_HADITH_ITEMS = 40
+MAX_HADITH_TEXT_LEN = 4000
+
+
+@app.route("/hadith/translate", methods=["POST"])
+def hadith_translate_route():
+    payload = request.get_json(force=True, silent=True) or {}
+    lang = payload.get("lang")
+    if not isinstance(lang, str) or lang not in HADITH_TRANSLATE_LANGS:
+        return jsonify({"error": f"invalid lang. Valid: {sorted(HADITH_TRANSLATE_LANGS)}"}), 400
+
+    texts = payload.get("texts")
+    if not isinstance(texts, list) or not texts or len(texts) > MAX_HADITH_ITEMS:
+        return jsonify({"error": f"texts must be a non-empty list of at most {MAX_HADITH_ITEMS} items"}), 400
+    for item in texts:
+        if not isinstance(item, str) or not item.strip() or len(item) > MAX_HADITH_TEXT_LEN:
+            return jsonify({"error": f"each text must be a non-empty string up to {MAX_HADITH_TEXT_LEN} chars"}), 400
+
+    found = translation_cache.get_many(lang, texts)
+    missing = [t for t in dict.fromkeys(texts) if t not in found]  # de-duped, order preserved
+
+    if missing:
+        if os.environ.get("AI_ENABLED", "true").lower() != "true":
+            return jsonify(error="AI temporarily unavailable"), 503
+        if not _in_flight.acquire(blocking=False):
+            response = jsonify(error="AI busy. Please try again later.", retry_after=5)
+            response.status_code = 429
+            response.headers["Retry-After"] = "5"
+            return response
+        try:
+            lease, retry = budget.acquire(client_address())
+        except (sqlite3.Error, ValueError):
+            _in_flight.release()
+            return jsonify(error="AI temporarily unavailable"), 503
+        if not lease:
+            _in_flight.release()
+            response = jsonify(error="Too many requests. Please try again later.", retry_after=retry)
+            response.status_code = 429
+            response.headers["Retry-After"] = str(retry)
+            return response
+        try:
+            translated = translate_hadiths(missing, lang)
+        except Exception:
+            app.logger.exception("hadith/translate: unhandled error")
+            translated = None
+        finally:
+            _in_flight.release()
+            try:
+                budget.release(lease)
+            except sqlite3.Error:
+                pass
+        if translated is None:
+            return jsonify({"error": "translation unavailable"}), 502
+        new_map = dict(zip(missing, translated))
+        translation_cache.set_many(lang, new_map)
+        found.update(new_map)
+
+    return jsonify({"translations": [found[t] for t in texts]})
 
 
 if __name__ == "__main__":
