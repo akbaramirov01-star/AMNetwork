@@ -62,7 +62,8 @@ nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg1) 90%
   backdrop-filter:blur(10px);border-bottom:1px solid var(--border);direction:ltr}
 .navin{max-width:1080px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:var(--text)}
-.brand img{width:30px;height:30px;border-radius:50%}
+.brand-logo{width:30px;height:30px;border-radius:50%;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.brand-logo img{width:160%;height:160%;object-fit:cover}
 .navr{display:flex;align-items:center;gap:8px}
 .btn{font-family:'DM Sans',sans-serif;font-size:14px;padding:8px 14px;border-radius:9px;
   border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;transition:.15s;
@@ -286,7 +287,7 @@ footer a{color:var(--gold)}
 
 <nav>
   <div class="navin">
-    <a class="brand" href="/"><img src="/icons/icon-192.png" alt=""><span>AM Academy</span></a>
+    <a class="brand" href="/"><span class="brand-logo"><img src="/icons/icon-192.png" alt=""></span><span>AM Academy</span></a>
     <div class="navr">
       <div class="lang" id="langWrap">
         <button class="lang-btn" id="langBtn" aria-haspopup="listbox">
