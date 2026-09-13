@@ -35,6 +35,18 @@
       "short_name": "Academy",
       "url": "/academy/",
       "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Ayah of the Day",
+      "short_name": "Ayah",
+      "url": "/#ayah",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Prayer Tracker",
+      "short_name": "Prayers",
+      "url": "/prayer-times/#trackerCard",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
