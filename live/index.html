@@ -18,7 +18,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0A1A11">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://amnetwork.onrender.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src https://www.youtube-nocookie.com; base-uri 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://amnetwork.onrender.com https://www.googleapis.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src https://www.youtube-nocookie.com; base-uri 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
@@ -287,9 +287,7 @@ document.addEventListener('click', function(e){
    Authority's own official state-TV channels (verified via their
    YouTube "About" pages / channel IDs, cross-checked against
    Wikidata and their own government-body description), not a
-   third-party re-stream. We use the channel-ID "live_stream" embed
-   form so it always follows whatever video is currently live,
-   rather than a specific video ID that would go stale.
+   third-party re-stream.
 ═══════════════════════════════════════════════════════ */
 const LIVE_CHANNELS = {
   makkah: { id: 'UCos52azQNBgW63_9uDJoPDA', url: 'https://www.youtube.com/channel/UCos52azQNBgW63_9uDJoPDA/live' },
@@ -297,22 +295,61 @@ const LIVE_CHANNELS = {
 };
 let currentCity = 'makkah';
 
+// Optional YouTube Data API v3 key. When set, we resolve each channel's
+// ACTUAL currently-live video ID via search.list?eventType=live before
+// embedding it directly — this is the reliable approach; the plain
+// `embed/live_stream?channel=` redirect below is a known-flaky YouTube
+// mechanism that can latch onto a scheduled/upcoming placeholder instead
+// of the true live broadcast, especially on a channel (like Madinah's)
+// that alternates live prayer coverage with other programming. Get a
+// free key at console.cloud.google.com/apis/credentials (enable "YouTube
+// Data API v3", restrict it to this domain) and paste it below — without
+// one we fall back to the channel-redirect form.
+const YOUTUBE_API_KEY = '';
+const liveVideoIdCache = {};
+async function resolveLiveVideoId(channelId){
+  if (!YOUTUBE_API_KEY) return null;
+  if (liveVideoIdCache[channelId] !== undefined) return liveVideoIdCache[channelId];
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 8000);
+    const url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=' + channelId + '&eventType=live&type=video&key=' + YOUTUBE_API_KEY;
+    const res = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(timer);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const videoId = data.items && data.items[0] && data.items[0].id && data.items[0].id.videoId;
+    liveVideoIdCache[channelId] = videoId || null;
+  } catch (e) {
+    console.error('[Live] Failed to resolve live video ID:', e);
+    liveVideoIdCache[channelId] = null;
+  }
+  return liveVideoIdCache[channelId];
+}
+
 function selectCity(city){
   currentCity = city;
   renderCity();
 }
-function renderCity(){
+async function renderCity(){
   document.querySelectorAll('.live-tab').forEach(b => b.classList.toggle('active', b.dataset.city === currentCity));
   const ch = LIVE_CHANNELS[currentCity];
+  document.getElementById('playerTitle').textContent = t('title_' + currentCity);
+  document.getElementById('playerSub').textContent = t('sub_' + currentCity);
+  document.getElementById('watchLink').href = ch.url;
+  const thisCity = currentCity;
+  const videoId = await resolveLiveVideoId(ch.id);
+  if (thisCity !== currentCity) return; // a newer tab switch superseded this lookup
   // autoplay=1&mute=1 starts the stream immediately without a click (browsers
   // only allow autoplay when muted; viewers can unmute from the player's own
   // controls) — modestbranding/rel/iv_load_policy trim YouTube's own chrome
   // as far as their embed API allows without breaking the required attribution.
+  const params = 'autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3&controls=1';
+  const src = videoId
+    ? `https://www.youtube-nocookie.com/embed/${videoId}?${params}`
+    : `https://www.youtube-nocookie.com/embed/live_stream?channel=${ch.id}&${params}`;
   document.getElementById('playerFrameWrap').innerHTML =
-    `<iframe src="https://www.youtube-nocookie.com/embed/live_stream?channel=${ch.id}&autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3&controls=1" title="${t('title_' + currentCity)}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-  document.getElementById('playerTitle').textContent = t('title_' + currentCity);
-  document.getElementById('playerSub').textContent = t('sub_' + currentCity);
-  document.getElementById('watchLink').href = ch.url;
+    `<iframe src="${src}" title="${t('title_' + currentCity)}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
 }
 
 // ── AI ASSISTANT WIDGET ──
