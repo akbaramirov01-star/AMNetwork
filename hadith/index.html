@@ -352,27 +352,39 @@ function selectBook(book){
 
 async function renderChapters(){
   const content = document.getElementById('content');
+  const myToken = ++hadithChapterToken;
   content.innerHTML = '<div class="state-msg">' + t('loading_chapters') + '</div>';
   try {
     // The dataset's chapter/book titles (metadata.sections) are English-only
     // in EVERY edition it publishes, including the Arabic one — confirmed
     // directly against the source files. Only the hadith TEXT itself is
-    // actually translated per language, so there's no per-language edition
-    // to fetch here; we always read the titles from the English edition and
-    // say so plainly below rather than implying they're localized.
+    // published per language, so there's no per-language edition to fetch
+    // titles from; we show the English titles first, then upgrade them in
+    // place via the same on-demand AI translation used for hadith text.
     const data = await fetchHadithEdition('eng-' + currentBook);
     const sections = (data.metadata && data.metadata.sections) || {};
     const nums = Object.keys(sections).filter(k => k !== '0').map(Number).sort((a, b) => a - b);
     if (!nums.length) { content.innerHTML = '<div class="state-msg">' + t('error_generic') + '</div>'; return; }
-    content.innerHTML = (lang !== 'en' ? `<div class="chapter-titles-note">${t('chapter_titles_note')}</div>` : '') +
-      '<div class="chapter-grid">' + nums.map(n => `
+
+    const renderGrid = (titles, note) => (note ? `<div class="chapter-titles-note">${note}</div>` : '') +
+      '<div class="chapter-grid">' + nums.map((n, i) => `
       <button type="button" class="chapter-card" onclick="openChapter(${n})">
         <div class="chapter-num">${n}</div>
         <div>
-          <div class="chapter-name">${escapeHadithHtml(sections[n])}</div>
+          <div class="chapter-name">${escapeHadithHtml(titles[i])}</div>
         </div>
       </button>
     `).join('') + '</div>';
+
+    const englishTitles = nums.map(n => sections[n]);
+    content.innerHTML = renderGrid(englishTitles, lang !== 'en' ? t('chapter_titles_note') : '');
+
+    if (lang !== 'en') {
+      translateTexts(englishTitles, lang, myToken).then(translated => {
+        if (myToken !== hadithChapterToken || !translated) return;
+        content.innerHTML = renderGrid(englishTitles.map((orig, i) => translated[i] || orig), t('ai_translation_note'));
+      });
+    }
   } catch (e) {
     console.error('[Hadith] failed to load chapters:', e);
     content.innerHTML = '<div class="state-msg">' + t('error_generic') + '</div>';
@@ -413,34 +425,32 @@ function renderHadithList(trList, arByNum, opts){
   }).join('');
 }
 
-// Batches the chapter's hadith texts to our self-hosted /hadith/translate
-// endpoint (chunked to stay under its per-request item cap, run in
-// parallel). Each hadith is only ever paid for once per language, ever —
-// the backend caches by source text and serves every later reader from
-// that cache. Returns {hadithnumber: translatedText}, or null on any
-// failure, in which case the caller just keeps showing the English text
-// and the plain fallback note rather than break the page.
+// Generic on-demand translation via our self-hosted /hadith/translate
+// endpoint (chunked to stay under its per-request item cap, chunks run in
+// parallel). Used both for hadith body text and for chapter/section
+// titles — either way, the backend caches by the exact source string, so
+// each distinct piece of text is only ever paid for once per language,
+// ever, shared across every reader. Returns an array aligned 1:1 with
+// `texts` (missing/failed entries are falsy), or null on total failure —
+// callers keep showing whatever they already have rather than break the
+// page.
 const HADITH_TRANSLATE_CHUNK = 40;
-async function translateHadithChapter(trList, targetLang, token){
+async function translateTexts(texts, targetLang, token){
   const chunks = [];
-  for (let i = 0; i < trList.length; i += HADITH_TRANSLATE_CHUNK) chunks.push(trList.slice(i, i + HADITH_TRANSLATE_CHUNK));
+  for (let i = 0; i < texts.length; i += HADITH_TRANSLATE_CHUNK) chunks.push(texts.slice(i, i + HADITH_TRANSLATE_CHUNK));
   try {
     const results = await Promise.all(chunks.map(async chunk => {
       const res = await fetch(ASSISTANT_API_BASE + '/hadith/translate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lang: targetLang, texts: chunk.map(h => h.text) }),
+        body: JSON.stringify({ lang: targetLang, texts: chunk }),
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const data = await res.json();
-      return { chunk, translations: data.translations || [] };
+      return data.translations || [];
     }));
     if (token !== hadithChapterToken) return null; // a newer chapter/language switch superseded this
-    const out = {};
-    results.forEach(({ chunk, translations }) => {
-      chunk.forEach((h, i) => { if (translations[i]) out[h.hadithnumber] = translations[i]; });
-    });
-    return out;
+    return results.flat();
   } catch (e) {
     console.error('[Hadith] AI translation unavailable:', e);
     return null;
@@ -466,8 +476,15 @@ async function openChapter(chapterNum){
     if (myToken !== hadithChapterToken) return;
 
     const sections = (trData.metadata && trData.metadata.sections) || {};
+    const chapterTitleEn = sections[chapterNum] || ('#' + chapterNum);
     document.getElementById('crumb').style.display = 'flex';
-    document.getElementById('crumbChapterName').textContent = sections[chapterNum] || ('#' + chapterNum);
+    document.getElementById('crumbChapterName').textContent = chapterTitleEn;
+    if (lang !== 'en' && sections[chapterNum]) {
+      translateTexts([chapterTitleEn], lang, myToken).then(translated => {
+        if (myToken !== hadithChapterToken || !translated || !translated[0]) return;
+        document.getElementById('crumbChapterName').textContent = translated[0];
+      });
+    }
 
     const arByNum = {};
     (arData.hadiths || []).forEach(h => { if (h.reference && h.reference.book === chapterNum) arByNum[h.hadithnumber] = h; });
@@ -479,8 +496,10 @@ async function openChapter(chapterNum){
     content.innerHTML = renderHadithList(trList, arByNum, { showFallbackNote: usedFallback });
 
     if (canAiTranslate) {
-      translateHadithChapter(trList, lang, myToken).then(aiText => {
-        if (myToken !== hadithChapterToken || !aiText) return;
+      translateTexts(trList.map(h => h.text), lang, myToken).then(translated => {
+        if (myToken !== hadithChapterToken || !translated) return;
+        const aiText = {};
+        trList.forEach((h, i) => { if (translated[i]) aiText[h.hadithnumber] = translated[i]; });
         content.innerHTML = renderHadithList(trList, arByNum, { aiText, showAiNote: true });
       });
     }

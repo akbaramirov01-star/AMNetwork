@@ -15,13 +15,16 @@ import anthropic
 
 MODEL = "claude-sonnet-5"
 
-# Only languages the dataset never publishes a certified edition for, in at
-# least one of the three books — id and tr are covered everywhere already,
-# and ar is never a "translation" target (Arabic readers see the original
-# Arabic hadith text directly, not a rendered line under it).
+# Every non-English UI language. Used for two different things by the
+# caller: (1) hadith BODY text, only for languages/books the dataset has no
+# certified edition for (ar is never a target there — Arabic readers see
+# the original Arabic text directly, not a rendered line under it); and
+# (2) chapter/section TITLES, which the dataset only ever publishes in
+# English in every edition it has, including the Arabic one — so every
+# language other than English needs this for titles, ar included.
 LANG_NAMES = {
-    "ru": "Russian", "tj": "Tajik (Cyrillic)", "zh": "Chinese (Simplified)",
-    "ms": "Malay", "fr": "French", "de": "German",
+    "ar": "Arabic", "ru": "Russian", "tj": "Tajik (Cyrillic)", "id": "Indonesian",
+    "tr": "Turkish", "zh": "Chinese (Simplified)", "ms": "Malay", "fr": "French", "de": "German",
 }
 
 SYSTEM_PROMPT = """You translate hadith text for an Islamic reference website.
