@@ -901,8 +901,13 @@ function updateViewButtons(){
 async function ensureMushafFont(fontName){
   if (!fontName || mushafLoadedFonts.has(fontName)) return;
   mushafLoadedFonts.add(fontName);
+  // The dataset's actual page-glyph font files carry a "_W" suffix
+  // (e.g. QCF4_Hafs_01_W.woff2) that the page JSON's own "font" field
+  // (e.g. "QCF4_Hafs_01") doesn't include — QCF4_QBSML is the one
+  // exception, already matching its file name exactly.
+  const fileName = fontName.startsWith('QCF4_Hafs_') ? fontName + '_W' : fontName;
   const style = document.createElement('style');
-  style.textContent = `@font-face{font-family:'${fontName}';src:url('/quran/fonts/qcf4/${fontName}.woff2') format('woff2');font-display:swap;}`;
+  style.textContent = `@font-face{font-family:'${fontName}';src:url('/quran/fonts/qcf4/${fileName}.woff2') format('woff2');font-display:swap;}`;
   document.head.appendChild(style);
 }
 
