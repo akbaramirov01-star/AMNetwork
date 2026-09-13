@@ -1,9 +1,9 @@
-const CACHE = 'amnetwork-v17-owner-feedback';
+const CACHE = 'amnetwork-v18-owner-feedback';
 const STATIC = [
   '/',
   '/index.html',
   '/i18n-data.js',
-  '/i18n-data.js?v=6758e4a654',
+  '/i18n-data.js?v=eddd6a177c',
   '/logo.webp',
   '/favicon.svg?v=20260911',
   '/manifest.json',
@@ -47,6 +47,8 @@ const STATIC = [
   '/hadith/index.html',
   '/dua/',
   '/dua/index.html',
+  '/live/',
+  '/live/index.html',
 ];
 
 self.addEventListener('install', e => {
