@@ -1473,13 +1473,13 @@ function onAudioError(){
   showAudioStatusUnavailable();
 }
 
-// Plays one ayah on demand from its per-verse button, doubling as that
-// button's pause/resume toggle when its own verse is already the one
-// loaded — clicking a *different* verse always (re)starts that verse,
-// clearing any in-progress "whole surah" queue so it stops after just
-// this one instead of auto-advancing; but toggling pause/resume on the
-// verse currently playing as part of a surah leaves the queue intact, so
-// it naturally continues from where it left off once resumed.
+// Plays one ayah on demand from its per-verse button (or an ayah-end tap
+// in Mushaf mode), doubling as that button's pause/resume toggle when its
+// own verse is already the one loaded. Starting a *different* verse
+// always builds a fresh queue running from that verse through the end of
+// the surah — a tap is "start listening from here", not "play just this
+// one ayah and stop"; repeat mode already covers listening to a single
+// ayah on loop.
 function playVerse(chapterId, verseNumber){
   if (!currentReciterId) return;
   const key = chapterId + ':' + verseNumber;
@@ -1488,8 +1488,15 @@ function playVerse(chapterId, verseNumber){
     if (player.paused) player.play().catch(() => {}); else player.pause();
     return;
   }
-  playQueue = null;
   showAudioStatus(null);
+  // Tapping any ayah plays on through the rest of the surah (and into the
+  // next surah in Khatm mode), the same as opening a surah fresh — not
+  // just that one ayah. Repeat mode (and toggling pause/resume above)
+  // already cover "listen to just this one on loop", so a plain tap
+  // should never mean "stop after one ayah".
+  playQueue = currentChapter ? Array.from({ length: currentChapter.verses_count - verseNumber + 1 }, (_, i) => verseNumber + i) : null;
+  playQueueIndex = 0;
+  playQueueChapterId = chapterId;
   player.src = everyAyahUrl(currentReciterId, chapterId, verseNumber);
   highlightVerse(key);
   player.play().catch(() => {});
