@@ -97,7 +97,7 @@ Verified local representatives who confirm recipient physical presence:
 - `/apply/` — Application form (5 steps, Google Sheets integration, live)
 - `/investors/` — Investor pitch page (noindex)
 - `/quran/` — The Noble Quran: 114 surahs, live from the Quran.com API (Quran Foundation) — Tanzil Uthmani Arabic text, certified translations, official reciter audio, word-by-word tap-to-translate, per-ayah/whole-surah repeat modes, Khatm (continuous) mode, and a Mushaf view (authentic Madinah-layout page images via the self-hosted quran-qcf4 dataset — real QCF4 Hafs font/glyphs, not our own rendering). We never store, edit or translate this content ourselves; it is always fetched live and shown exactly as published. UI chrome in 10 languages.
-- `/hadith/` — Hadith Collection: Sahih al-Bukhari, Sahih Muslim, Jami' at-Tirmidhi by chapter, live from the open fawazahmed0/hadith-api dataset. Arabic + certified translation where available (en/ar/ru/id/tr, fr for Bukhari & Muslim only), English fallback elsewhere.
+- `/hadith/` — Hadith Collection: Sahih al-Bukhari, Sahih Muslim, Jami' at-Tirmidhi by chapter, live from the open fawazahmed0/hadith-api dataset. Arabic + certified translation where available (en/ar/ru/id/tr, fr for Bukhari & Muslim only). Everywhere else (zh/ms/de always, tj always, ru/fr for Tirmidhi specifically), the chapter opens with the English text first, then upgrades in place to an on-demand AI translation from the backend's new `/hadith/translate` endpoint (see Backend section) — cached forever server-side so each hadith is only ever paid for once per language, with a clear "AI-translated, unverified" disclosure. Falls back to plain English + the old honest note if that call fails.
 - `/dua/` — Dua & Dhikr: morning/evening dhikr, dhikr after prayer, daily duas, selected duas — Arabic, transliteration, translation, repeat count and virtue (fawaid/benefits — both fields now render; a bug previously dropped "benefits" text entirely), each with its hadith citation, from the open fitrahive/dua-dhikr dataset. en/id are natively translated by the dataset; every other language (ar/ru/tj/tr/zh/ms/fr/de) is covered by our own AI-generated translation (self-hosted under `/dua/data/ai/<lang>/<category>.json`), shown with a clear "AI-translated, unverified, will be replaced once certified" disclosure — no language falls back to English anymore.
 - `/tasbeeh/` — Dhikr counter (tap counter with haptic-style tap animation), plus the two most-repeated dhikr with full Arabic text and translated hadith citation, in all 10 languages.
 - `/qibla/` — Qibla direction: geolocation + device compass, with manual lat/lng fallback.
@@ -118,6 +118,11 @@ All of the above (`/quran/`, `/hadith/`, `/dua/`, `/tasbeeh/`, `/qibla/`, `/pray
 - **SEO:** og-image.jpg (1200×630), sitemap.xml, JSON-LD schema
 - **Google Search Console:** verified, pages indexed ✅
 
+### Backend (ai_scoring/, deployed on Render at amnetwork.onrender.com)
+- Flask API behind a shared rate-limit budget (security.py — 6/min, 60/hour per client, 3 concurrent, 200/day global; SQLite-backed, fails closed). `/chat` (homepage assistant), `/academy/explain`, `/academy/chrome`, `/academy/apply` all share this budget.
+- `/hadith/translate` (added September 2026): on-demand hadith translation for languages the dataset doesn't cover. Deliberately NOT gated by the shared budget on a cache hit — only a genuine cache miss (a hadith+language never translated before) consumes a budget slot, so heavy browsing of already-cached content never competes with a live /chat user. Cache is `translate_cache.py`, a separate persistent SQLite file (`TRANSLATE_CACHE_DB_PATH`, defaults elsewhere in tmp) keyed by (lang, sha256(source text)) — survives worker restarts, unlike the in-memory `_explain_cache`/`_chrome_cache` dicts used by the Academy routes.
+- `/score` (rule-based, no AI, unlimited) and `/quran/reciters`, `/quran/audio/*` (no AI) are not part of that budget.
+
 ### Code prototypes (not deployed)
 - `/contracts/` — Solidity smart contracts (AMZakatPool.sol), audit-ready, NOT on mainnet
 - `/ai_scoring/scorer.py` + `ml_model.py` — Python scoring engine, full ML model, NOT exposed as API
@@ -136,7 +141,7 @@ All of the above (`/quran/`, `/hadith/`, `/dua/`, `/tasbeeh/`, `/qibla/`, `/pray
 - [ ] **Legal Registration** — UAE ADGM or Malaysia Labuan (~$1,500–5,000)
 - [ ] **Academy course content in the other 7 languages** — chrome UI + full lesson curriculum currently only exist in en/ru/ar; needs extending to tj/id/tr/zh/ms/fr/de alongside the rest of the site
 - [ ] **Real background push notifications** — a backend scheduler + Web Push (VAPID), needed for: a Friday "hour of accepted du'a" reminder (two scholarly opinions exist — from the imam mounting the minbar to the end of prayer, or the last hour before Maghrib; cite the hadith source properly, same accuracy bar as the Quran section, don't state it from our own authority) and when Sadaqah is most valuable on Friday — both are date/location-relative, not a fixed clock time; and a Ramadan-specific campaign (similar to what was run informally in a past Ramadan). The Ayah of the Day reminder that used to motivate this is gone (section removed), but the Friday/Ramadan use case still stands on its own.
-- [ ] **AI-translate the Hadith Collection** for the languages it doesn't cover (zh/ms/de everywhere, tj everywhere, matching the founder's "not a single word left untranslated" instruction) — NOT started. At ~19,000 hadiths × up to 4 missing languages, pre-translating everything the way Dua & Dhikr was done is not practical in one pass; needs a scoped decision (on-demand backend translation + cache vs. incremental bulk) before starting. Flagged to the founder as a tradeoff, not yet decided.
+- [x] **Hadith Collection translation for languages it doesn't cover** — founder chose on-demand backend translation + cache (over bulk pre-translating ~19,000 hadiths). Built and deployed: `/hadith/translate` backend endpoint (see Backend section) + frontend progressive upgrade in `/hadith/`. Each hadith is translated (and billed) once per language, ever, then served from cache to everyone after.
 - [x] Dua & Dhikr AI translation for all 8 non-dataset languages (ar/ru/tj/tr/zh/ms/fr/de) — done, live under `/dua/data/ai/`, honestly labeled
 - [x] Prayer tracker, Hadith Collection, and Dua & Dhikr collection — built earlier this project; Ayah of the Day was built earlier too and then removed per founder's request (September 2026)
 
@@ -167,4 +172,4 @@ Read CLAUDE.md — I am Akbar, founder of AM Network.
 Continue where we left off. Next task: [describe current task]
 ```
 
-*Last updated: September 2026 (mid-session: Mushaf word-highlight fix, Zakat/Apply/Academy nav dropdowns added, Ayah of the Day removed, Dua & Dhikr AI translations complete for all 8 missing languages)*
+*Last updated: September 2026 (mid-session: Mushaf word-highlight fix, Zakat/Apply/Academy nav dropdowns added, Ayah of the Day removed, Dua & Dhikr AI translations complete for all 8 missing languages, on-demand cached AI translation live for the Hadith Collection)*
