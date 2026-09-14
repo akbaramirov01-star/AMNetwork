@@ -2431,8 +2431,19 @@ function calcZakat(){
     {min:28,label:'LOW',color:'#28aa5a'},
     {min:0, label:'INELIGIBLE',color:'#888'}
   ];
-  var TIER_LABELS_RU={CRITICAL:'КРИТИЧЕСКИЙ',HIGH:'ВЫСОКИЙ',MEDIUM:'СРЕДНИЙ',LOW:'НИЗКИЙ',INELIGIBLE:'НЕ СООТВЕТСТВУЕТ'};
-  var TIER_LABELS_AR={CRITICAL:'حرج',HIGH:'عالي',MEDIUM:'متوسط',LOW:'منخفض',INELIGIBLE:'غير مؤهل'};
+  // Every site language, not just ru/ar — the other eight were showing the
+  // raw English tier name to people reading the page in their own language.
+  var TIER_LABELS={
+    ru:{CRITICAL:'КРИТИЧЕСКИЙ',HIGH:'ВЫСОКИЙ',MEDIUM:'СРЕДНИЙ',LOW:'НИЗКИЙ',INELIGIBLE:'НЕ СООТВЕТСТВУЕТ'},
+    ar:{CRITICAL:'حرج',HIGH:'عالي',MEDIUM:'متوسط',LOW:'منخفض',INELIGIBLE:'غير مؤهل'},
+    tj:{CRITICAL:'БУҲРОНӢ',HIGH:'БАЛАНД',MEDIUM:'МИЁНА',LOW:'ПАСТ',INELIGIBLE:'МУВОФИҚ НЕСТ'},
+    id:{CRITICAL:'KRITIS',HIGH:'TINGGI',MEDIUM:'SEDANG',LOW:'RENDAH',INELIGIBLE:'TIDAK MEMENUHI SYARAT'},
+    tr:{CRITICAL:'KRİTİK',HIGH:'YÜKSEK',MEDIUM:'ORTA',LOW:'DÜŞÜK',INELIGIBLE:'UYGUN DEĞİL'},
+    zh:{CRITICAL:'紧急',HIGH:'高',MEDIUM:'中',LOW:'低',INELIGIBLE:'不符合条件'},
+    ms:{CRITICAL:'KRITIKAL',HIGH:'TINGGI',MEDIUM:'SEDERHANA',LOW:'RENDAH',INELIGIBLE:'TIDAK LAYAK'},
+    fr:{CRITICAL:'CRITIQUE',HIGH:'ÉLEVÉ',MEDIUM:'MOYEN',LOW:'FAIBLE',INELIGIBLE:'NON ÉLIGIBLE'},
+    de:{CRITICAL:'KRITISCH',HIGH:'HOCH',MEDIUM:'MITTEL',LOW:'NIEDRIG',INELIGIBLE:'NICHT BERECHTIGT'}
+  };
 
   window.wgCalc=function(){
     var country=document.getElementById('wg-country').value;
@@ -2487,8 +2498,7 @@ function calcZakat(){
 
     var lbl=tier.label;
     var curLang=(typeof lang!=='undefined'?lang:'en');
-    if(curLang==='ru'&&TIER_LABELS_RU[lbl])lbl=TIER_LABELS_RU[lbl];
-    else if(curLang==='ar'&&TIER_LABELS_AR[lbl])lbl=TIER_LABELS_AR[lbl];
+    if(TIER_LABELS[curLang]&&TIER_LABELS[curLang][lbl])lbl=TIER_LABELS[curLang][lbl];
 
     numEl.textContent=score;
     barEl.style.width=score+'%';

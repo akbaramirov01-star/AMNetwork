@@ -352,6 +352,23 @@ async function hToG(day, month, year){
   return greg;
 }
 
+// Browsers ship no date-formatting data for Tajik, so Intl silently falls
+// back to English — a Tajik reader was getting "September 14, 2026" under a
+// Tajik heading. Format that one ourselves; everything else Intl handles.
+const TJ_MONTHS = ['январ','феврал','март','апрел','май','июн','июл','август','сентябр','октябр','ноябр','декабр'];
+
+function gregLocale(){
+  const map = { zh:'zh-CN' };
+  return map[currentLang] || currentLang || 'en';
+}
+
+function formatGregorian(date){
+  if (currentLang === 'tj') {
+    return date.getDate() + ' ' + TJ_MONTHS[date.getMonth()] + 'и ' + date.getFullYear();
+  }
+  return date.toLocaleDateString(gregLocale(), { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
 function monthName(monthNumber){
   return t(MONTH_KEYS[monthNumber - 1] || '');
 }
@@ -365,7 +382,9 @@ function renderToday(hijri){
   document.getElementById('todayHijri').textContent = day + ' ' + monthName(monthNum) + ' ' + year + ' ' + (t('designation') || 'AH');
   document.getElementById('todayHijriAr').textContent = monthAr ? (day + ' ' + monthAr + ' ' + year + 'هـ') : '';
   const now = new Date();
-  document.getElementById('todayGreg').textContent = now.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+  // Site language, not the browser's: a Russian reader with an English
+  // browser was getting "September 14, 2026" under a Russian heading.
+  document.getElementById('todayGreg').textContent = formatGregorian(now);
   document.getElementById('locationNote').style.display = 'flex';
 }
 
