@@ -161,6 +161,7 @@ main{padding-top:64px;min-height:100vh}
 #mushafPages{display:flex;flex-direction:column;gap:24px;align-items:center}
 .mushaf-page{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 20px 34px;max-width:520px;width:100%;position:relative}
 .mushaf-line{direction:rtl;unicode-bidi:bidi-override;text-align:justify;text-align-last:center;line-height:2.7;font-size:26px}
+.mushaf-line-deco{text-align:center}
 [data-theme="light"] .mushaf-line{color:#1c1c1c}
 .mword{display:inline}
 .mword-deco{color:var(--gold);opacity:.9}
@@ -170,6 +171,17 @@ main{padding-top:64px;min-height:100vh}
 .mword.qword-active{background:var(--gold);color:#1a1a1a;border-radius:4px}
 .mushaf-page-num{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--text3)}
 @media(max-width:480px){.mushaf-line{font-size:21px;line-height:2.4}.mushaf-page{padding:16px 12px 28px}}
+
+/* MUSHAF FLOATING PLAY BAR — in Mushaf mode the only per-verse control is
+   the small tap target on each ayah-end ornament; once you've scrolled
+   past the top audio-bar there's nowhere reachable to pause or toggle
+   repeat, so this stays pinned to the viewport while Mushaf mode is on. */
+.mushaf-playbar{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:60;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;background:var(--nav-bg,var(--bg2));border:1px solid var(--border);box-shadow:0 8px 24px rgba(0,0,0,.28);backdrop-filter:blur(10px)}
+.mushaf-playbar.show{display:flex}
+.mushaf-playbar .verse-play-btn{width:40px;height:40px}
+.mushaf-playbar .verse-play-btn svg{width:18px;height:18px}
+.mushaf-playbar .verse-repeat-btn{width:36px;height:36px}
+@media(max-width:480px){.mushaf-playbar{bottom:14px}}
 .verse-ar{font-family:'Noto Naskh Arabic',serif;direction:rtl;text-align:right;font-size:26px;line-height:2.1;color:var(--text);margin-bottom:10px}
 .qword{cursor:pointer;border-radius:5px;padding:1px 2px;transition:background-color .15s ease}
 .qword:hover,.qword:focus-visible{background:var(--gold3);outline:none}
@@ -303,6 +315,15 @@ footer a{color:var(--gold);text-decoration:none}
       </div>
       <div id="translationNote" class="translation-note" style="display:none" data-t="translation_fallback"></div>
       <div id="versesList"></div>
+      <div id="mushafPlayBar" class="mushaf-playbar">
+        <button type="button" id="mushafPlayBtn" class="verse-play-btn" onclick="toggleMushafPlayback()" aria-label="" title="">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button type="button" class="verse-repeat-btn" onclick="cycleRepeatMode()" aria-label="Repeat" data-t-aria="aria_repeat">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          <span class="verse-repeat-badge"></span>
+        </button>
+      </div>
       <div id="readerState" class="state-msg" style="display:none"></div>
       <p class="disclaimer-note" data-t="disclaimer">This is a reading and listening tool, not a fatwa. For religious rulings, consult a qualified scholar.</p>
       <p class="source-note" data-t="source_note">Arabic text: Tanzil Project (Uthmani script). Translations and audio: Quran Foundation, via the public Quran.com API. AM Network does not host, edit or modify this content.</p>
@@ -932,11 +953,23 @@ function setMushafMode(on){
 function updateViewButtons(){
   const listBtn = document.getElementById('viewListBtn');
   const mushafBtn = document.getElementById('viewMushafBtn');
+  const playBar = document.getElementById('mushafPlayBar');
+  if (playBar) playBar.classList.toggle('show', mushafMode);
   if (!listBtn || !mushafBtn) return;
   listBtn.classList.toggle('active', !mushafMode);
   mushafBtn.classList.toggle('active', mushafMode);
   listBtn.setAttribute('aria-pressed', String(!mushafMode));
   mushafBtn.setAttribute('aria-pressed', String(mushafMode));
+}
+// The Mushaf page has no per-verse play button — the only way to start
+// audio there is tapping an ayah-end ornament (onMushafEndTap) — so once
+// something is loaded, this floating button just toggles play/pause on
+// whichever verse that was, same as tapping a native player's button.
+function toggleMushafPlayback(){
+  const player = document.getElementById('audioPlayer');
+  if (!player.src) return;
+  if (player.paused) player.play().catch(() => {});
+  else player.pause();
 }
 
 async function ensureMushafFont(fontName){
@@ -947,9 +980,23 @@ async function ensureMushafFont(fontName){
   // (e.g. "QCF4_Hafs_01") doesn't include — QCF4_QBSML is the one
   // exception, already matching its file name exactly.
   const fileName = fontName.startsWith('QCF4_Hafs_') ? fontName + '_W' : fontName;
-  const style = document.createElement('style');
-  style.textContent = `@font-face{font-family:'${fontName}';src:url('/quran/fonts/qcf4/${fileName}.woff2') format('woff2');font-display:swap;}`;
-  document.head.appendChild(style);
+  // Every QCF4 glyph is a private-use-area codepoint with no shape in any
+  // fallback font, so until this font is truly ready the browser paints an
+  // empty box — and on a slower mobile connection that box can sit there
+  // for a while. A plain @font-face + font-display:swap doesn't wait for
+  // that; it lets renderMushafGlyph's HTML land (and get measured/laid
+  // out) before the real glyph exists, which is also why the layout could
+  // still shift — and the page appear to jump — once the font swapped in
+  // later. Loading via the FontFace API and awaiting it here means the
+  // glyphs are only ever built after the real font is already usable.
+  try {
+    const face = new FontFace(fontName, `url('/quran/fonts/qcf4/${fileName}.woff2') format('woff2')`);
+    document.fonts.add(face);
+    await face.load();
+  } catch (e) {
+    console.error('[Mushaf] font failed to load:', fontName, e);
+    mushafLoadedFonts.delete(fontName); // allow a retry the next time this page/font is needed
+  }
 }
 
 async function fetchMushafPage(pageNumber){
@@ -1029,7 +1076,13 @@ async function renderMushafView(chapterId, verses){
 
     const linesHtml = pageData.lines.map(line => {
       const wordsHtml = line.words.map(w => renderMushafGlyph(w, translations)).join('');
-      return `<div class="mushaf-line">${wordsHtml}</div>`;
+      // A line made only of the surah-name banner / Bismillah / a quarter
+      // marker has no real words to justify across the page width — under
+      // text-align:justify that single ornamental glyph gets stretched
+      // into a distorted, elongated banner. Center those lines instead.
+      const isDeco = line.words.every(w => w.type !== 'word' && w.type !== 'end');
+      const cls = isDeco ? 'mushaf-line mushaf-line-deco' : 'mushaf-line';
+      return `<div class="${cls}">${wordsHtml}</div>`;
     }).join('');
 
     const pageEl = document.createElement('div');
@@ -1038,6 +1091,7 @@ async function renderMushafView(chapterId, verses){
     container.appendChild(pageEl);
   }
   reapplyVersePlaying();
+  updatePlayButtonIcons();
 }
 
 let wordPopupTimer = null;
@@ -1188,6 +1242,13 @@ function updatePlayButtonIcons(){
     btn.setAttribute('aria-label', label);
     btn.setAttribute('title', label);
   });
+  const mushafBtn = document.getElementById('mushafPlayBtn');
+  if (mushafBtn) {
+    mushafBtn.innerHTML = playing ? PAUSE_ICON_SVG : PLAY_ICON_SVG;
+    const label = playing ? (t.pause_audio || '') : (t.play_audio || '');
+    mushafBtn.setAttribute('aria-label', label);
+    mushafBtn.setAttribute('title', label);
+  }
   if ('mediaSession' in navigator) {
     navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
   }

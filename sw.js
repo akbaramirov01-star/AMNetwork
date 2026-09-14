@@ -1,11 +1,11 @@
-const CACHE = 'amnetwork-v23-store';
+const CACHE = 'amnetwork-v24-favicon-mushaf';
 const STATIC = [
   '/',
   '/index.html',
   '/i18n-data.js',
   '/i18n-data.js?v=218ea40a32',
   '/logo.webp',
-  '/favicon.svg?v=20260911',
+  '/favicon.svg?v=20260914',
   '/manifest.json',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
