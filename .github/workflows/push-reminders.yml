@@ -24,10 +24,26 @@ jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
+      # Until the two secrets exist there is nothing to call, and a job that
+      # fails hourly would just send a failure email every hour. Stay quiet
+      # instead: this is the expected state before push is switched on.
+      - name: Skip until push is configured
+        id: check
+        run: |
+          if [ -z "${{ secrets.BACKEND_URL }}" ] || [ -z "${{ secrets.PUSH_DISPATCH_TOKEN }}" ]; then
+            echo "Push reminders are not configured yet (BACKEND_URL / PUSH_DISPATCH_TOKEN missing)."
+            echo "See docs/founder-checklist.md, step 4."
+            echo "ready=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=yes" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Wake the backend
+        if: steps.check.outputs.ready == 'yes'
         run: curl -fsS --max-time 90 --retry 3 --retry-delay 10 "${{ secrets.BACKEND_URL }}/health" || true
 
       - name: Send any reminders that are due
+        if: steps.check.outputs.ready == 'yes'
         run: |
           code=$(curl -s -o /tmp/out.json -w '%{http_code}' \
             --max-time 120 --retry 2 --retry-delay 15 \
@@ -35,7 +51,7 @@ jobs:
             -H "X-Dispatch-Token: ${{ secrets.PUSH_DISPATCH_TOKEN }}")
           echo "HTTP $code"
           cat /tmp/out.json || true
-          # 503 just means push isn't configured yet — not a failure worth
-          # emailing the founder about every hour.
+          # 503 means the VAPID keys are not set on the backend yet — also an
+          # expected waiting state, not something to alert about.
           if [ "$code" = "503" ]; then exit 0; fi
           [ "$code" = "200" ]
