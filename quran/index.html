@@ -1070,9 +1070,17 @@ async function renderMushafView(chapterId, verses){
       console.error('[Mushaf] Failed to load page', page, e);
       continue; // skip a single bad page rather than breaking the whole view
     }
-    await ensureMushafFont(pageData.font);
-    const hasHeader = pageData.lines.some(l => l.words.some(w => w.type === 'surah_header' || w.type === 'bismillah'));
-    if (hasHeader) await ensureMushafFont('QCF4_QBSML');
+    // Every word on the page carries its own "font" field, and it does
+    // NOT always match the page's own default font or QCF4_QBSML: the
+    // Bismillah ligature in particular is reused from page 1's own font
+    // file (e.g. "QCF4_Hafs_01") on every page it appears on, regardless
+    // of that page's own font id — so loading only pageData.font plus a
+    // hardcoded QCF4_QBSML left the Bismillah's real font never loaded at
+    // all, rendering as an empty box. Load every distinct font actually
+    // referenced on this page instead of guessing which ones might be needed.
+    const fontsOnPage = new Set([pageData.font]);
+    pageData.lines.forEach(l => l.words.forEach(w => { if (w.font) fontsOnPage.add(w.font); }));
+    await Promise.all([...fontsOnPage].map(f => ensureMushafFont(f)));
 
     const linesHtml = pageData.lines.map(line => {
       const wordsHtml = line.words.map(w => renderMushafGlyph(w, translations)).join('');
