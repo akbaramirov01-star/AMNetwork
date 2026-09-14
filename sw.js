@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v24-favicon-mushaf';
+const CACHE = 'amnetwork-v25-hadith-grades';
 const STATIC = [
   '/',
   '/index.html',
