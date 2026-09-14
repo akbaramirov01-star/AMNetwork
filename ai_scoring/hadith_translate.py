@@ -49,7 +49,14 @@ def _client() -> anthropic.Anthropic:
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
         raise RuntimeError("ANTHROPIC_API_KEY not configured")
-    return anthropic.Anthropic(api_key=api_key, timeout=25.0, max_retries=0)
+    # A batch of up to MAX_HADITH_ITEMS hadiths (each with a full chain of
+    # narrators) can be a genuinely large generation — comfortably past
+    # what a 25s timeout allows at realistic model throughput, which was
+    # silently turning "the model needed more time" into a hard failure
+    # indistinguishable from a real error. The client already caps its
+    # own wait per chunk (see HADITH_TRANSLATE_TIMEOUT_MS in hadith/
+    # index.html), so this just needs to not be the tighter of the two.
+    return anthropic.Anthropic(api_key=api_key, timeout=90.0, max_retries=0)
 
 
 def translate_hadiths(texts: list[str], lang: str) -> list[str] | None:
@@ -62,7 +69,7 @@ def translate_hadiths(texts: list[str], lang: str) -> list[str] | None:
 
     resp = _client().messages.create(
         model=MODEL,
-        max_tokens=8000,
+        max_tokens=16000,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content":
                    f"TARGET LANGUAGE: {language}\n\nJSON array of texts to translate:\n"

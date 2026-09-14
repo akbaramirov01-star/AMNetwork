@@ -13,4 +13,4 @@ COPY scorer.py api.py assistant.py academy.py security.py quran_audio.py hadith_
 # everyone. Must stay 0 (the code default) anywhere the app is exposed directly.
 ENV TRUSTED_PROXY_HOPS=1
 EXPOSE 8000
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "1", "--threads", "8", "--timeout", "60", "api:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "1", "--threads", "8", "--timeout", "120", "api:app"]
