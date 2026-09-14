@@ -44,6 +44,35 @@ RULES
   input, same length. No markdown fence, no commentary, no explanation.
 """
 
+# Per-language style notes distilled from an actual certified, government-
+# reviewed published translation (not written by us) — currently: "Мухтасари
+# Саҳеҳи Бухорӣ" (Imam az-Zubaydi's abridgment), Tajik translation by
+# Abdulhalim Orifi, Dushanbe, ЭР-граф, 2011, ISBN 978-99947-41-86-1. This
+# doesn't replace that book as a source (see /hadith/data/tj-certified/ for
+# the actual matched, human-translated hadith text where it's available) —
+# it just steers the AI translator's own output, for every hadith this book
+# doesn't cover, toward the same register a professional Tajik translator
+# of hadith actually uses, instead of a cold, unguided AI guess.
+LANG_STYLE_NOTES = {
+    "tj": """
+TAJIK STYLE — matching the conventions of a published, government-reviewed
+Tajik hadith translation (Мухтасари Саҳеҳи Бухорӣ, Дар "ЭР-граф", 2011):
+- Render "Narrated X:" as "Аз X (р) ривоят аст, ки гуфт:" (or "...ривоят
+  мекунад, ки" when the source keeps the verb in present/habitual sense).
+  Always attach "(р)" immediately after a Companion's name on first mention
+  in a hadith — the standard abbreviation for "радиаллоҳу анҳу", never
+  spelled out in full in running text.
+- Render "the Prophet" / "Allah's Messenger" as "Паёмбари Худо" and always
+  attach "(с)" right after it (standard abbreviation for "саллаллоҳу алайҳи
+  ва саллам"), every time the title appears, including in reported speech.
+- A Qur'an citation inside a hadith is given as (Tajik surah name: verse or
+  verse range), e.g. "(Исро, ояи 78)" or "(Мудассир: 1-5)" — use the
+  conventional Tajik surah name, not a transliteration of the Arabic.
+- Keep names and place names transliterated (e.g. "ибни", "Абуҳурайра",
+  "Зулхулайфа"), never translated or replaced with a local equivalent.
+""",
+}
+
 
 def _client() -> anthropic.Anthropic:
     api_key = os.environ.get("ANTHROPIC_API_KEY")
@@ -67,10 +96,11 @@ def translate_hadiths(texts: list[str], lang: str) -> list[str] | None:
     if not language or not texts:
         return None
 
+    system = SYSTEM_PROMPT + LANG_STYLE_NOTES.get(lang, "")
     resp = _client().messages.create(
         model=MODEL,
         max_tokens=16000,
-        system=SYSTEM_PROMPT,
+        system=system,
         messages=[{"role": "user", "content":
                    f"TARGET LANGUAGE: {language}\n\nJSON array of texts to translate:\n"
                    + json.dumps(texts, ensure_ascii=False)}],
