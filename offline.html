@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Offline — AM Network</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A1A11">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<style>
+:root{--bg1:#0A1A11;--card:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.09);
+  --gold:#C9A84C;--text:#FFFFFF;--text2:rgba(255,255,255,0.60);--text3:rgba(255,255,255,0.38)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg1);color:var(--text);font-family:system-ui,-apple-system,'DM Sans',sans-serif;
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;line-height:1.7}
+.box{max-width:440px;text-align:center}
+img{width:72px;height:72px;border-radius:50%;margin-bottom:24px}
+h1{font-size:24px;font-weight:700;margin-bottom:12px}
+p{color:var(--text2);font-size:15px;margin-bottom:10px}
+.links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px}
+a{display:inline-block;padding:10px 16px;border:1px solid var(--border);border-radius:10px;
+  color:var(--text2);text-decoration:none;font-size:13px}
+a:hover{border-color:var(--gold);color:var(--gold)}
+.note{font-size:12px;color:var(--text3);margin-top:22px}
+</style>
+</head>
+<body>
+<div class="box">
+  <img src="/icons/icon-192.png" alt="">
+  <h1 id="t-title">You are offline</h1>
+  <p id="t-body">This page has not been saved for offline use yet. Pages you have already opened still work without a connection.</p>
+  <div class="links">
+    <a href="/" id="t-home">Home</a>
+    <a href="/quran/" id="t-quran">Quran</a>
+    <a href="/dua/" id="t-dua">Dua &amp; Dhikr</a>
+    <a href="/tasbeeh/" id="t-tasbeeh">Tasbeeh</a>
+    <a href="/qibla/" id="t-qibla">Qibla</a>
+  </div>
+  <p class="note" id="t-note">The tasbeeh counter and qibla compass work entirely offline.</p>
+</div>
+<script>
+// Standalone page: it must not depend on the shared i18n bundle, which may
+// itself be the thing that failed to load.
+const S = {
+  en:{title:'You are offline',body:'This page has not been saved for offline use yet. Pages you have already opened still work without a connection.',home:'Home',quran:'Quran',dua:'Dua & Dhikr',tasbeeh:'Tasbeeh',qibla:'Qibla',note:'The tasbeeh counter and qibla compass work entirely offline.'},
+  ru:{title:'Нет подключения',body:'Эта страница ещё не сохранена для офлайн-доступа. Страницы, которые вы уже открывали, работают без интернета.',home:'Главная',quran:'Коран',dua:'Дуа и Зикр',tasbeeh:'Тасбих',qibla:'Кибла',note:'Счётчик тасбиха и компас киблы работают полностью офлайн.'},
+  ar:{title:'أنت غير متصل',body:'لم تُحفظ هذه الصفحة للاستخدام دون اتصال بعد. الصفحات التي فتحتها من قبل تعمل بدون إنترنت.',home:'الرئيسية',quran:'القرآن',dua:'الدعاء والذكر',tasbeeh:'التسبيح',qibla:'القبلة',note:'عدّاد التسبيح وبوصلة القبلة يعملان بالكامل دون اتصال.'},
+  tj:{title:'Пайваст нест',body:'Ин саҳифа ҳанӯз барои истифодаи офлайн нигоҳ дошта нашудааст. Саҳифаҳое, ки аллакай кушодаед, бе интернет кор мекунанд.',home:'Асосӣ',quran:'Қуръон',dua:'Дуо ва Зикр',tasbeeh:'Тасбеҳ',qibla:'Қибла',note:'Ҳисобкунаки тасбеҳ ва компаси қибла пурра офлайн кор мекунанд.'},
+  id:{title:'Anda sedang offline',body:'Halaman ini belum disimpan untuk penggunaan offline. Halaman yang pernah Anda buka tetap bisa dibuka tanpa koneksi.',home:'Beranda',quran:'Al-Quran',dua:'Doa & Dzikir',tasbeeh:'Tasbih',qibla:'Kiblat',note:'Penghitung tasbih dan kompas kiblat bekerja sepenuhnya offline.'},
+  tr:{title:'Çevrimdışısınız',body:'Bu sayfa henüz çevrimdışı kullanım için kaydedilmedi. Daha önce açtığınız sayfalar bağlantı olmadan da çalışır.',home:'Ana sayfa',quran:'Kur\'an',dua:'Dua ve Zikir',tasbeeh:'Tesbih',qibla:'Kıble',note:'Tesbih sayacı ve kıble pusulası tamamen çevrimdışı çalışır.'},
+  zh:{title:'您已离线',body:'此页面尚未保存以供离线使用。您此前打开过的页面在无网络时仍可使用。',home:'首页',quran:'古兰经',dua:'祈祷与赞念',tasbeeh:'赞念计数',qibla:'朝向',note:'赞念计数器和朝向指南针完全可离线使用。'},
+  ms:{title:'Anda di luar talian',body:'Halaman ini belum disimpan untuk kegunaan luar talian. Halaman yang pernah anda buka masih berfungsi tanpa sambungan.',home:'Laman utama',quran:'Al-Quran',dua:'Doa & Zikir',tasbeeh:'Tasbih',qibla:'Kiblat',note:'Pengira tasbih dan kompas kiblat berfungsi sepenuhnya di luar talian.'},
+  fr:{title:'Vous êtes hors ligne',body:"Cette page n'a pas encore été enregistrée pour un usage hors ligne. Les pages déjà ouvertes fonctionnent sans connexion.",home:'Accueil',quran:'Coran',dua:'Dua et Dhikr',tasbeeh:'Tasbih',qibla:'Qibla',note:'Le compteur de tasbih et la boussole qibla fonctionnent entièrement hors ligne.'},
+  de:{title:'Sie sind offline',body:'Diese Seite wurde noch nicht für die Offline-Nutzung gespeichert. Bereits geöffnete Seiten funktionieren weiterhin ohne Verbindung.',home:'Startseite',quran:'Koran',dua:'Dua & Dhikr',tasbeeh:'Tasbih',qibla:'Qibla',note:'Tasbih-Zähler und Qibla-Kompass funktionieren vollständig offline.'},
+};
+let lang = 'en';
+try { lang = localStorage.getItem('amn_lang') || 'en'; } catch (e) {}
+const s = S[lang] || S.en;
+document.documentElement.lang = lang === 'tj' ? 'tg' : lang;
+document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+for (const [key, value] of Object.entries(s)) {
+  const el = document.getElementById('t-' + key);
+  if (el) el.textContent = value;
+}
+document.title = s.title + ' — AM Network';
+</script>
+</body>
+</html>

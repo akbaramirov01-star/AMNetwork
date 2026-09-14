@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v22-push';
+const CACHE = 'amnetwork-v23-store';
 const STATIC = [
   '/',
   '/index.html',
@@ -47,6 +47,9 @@ const STATIC = [
   '/hadith/index.html',
   '/dua/',
   '/dua/index.html',
+  '/offline.html',
+  '/icons/maskable-192.png',
+  '/icons/maskable-512.png',
   '/live/',
   '/live/index.html',
   '/names/',
@@ -94,7 +97,9 @@ self.addEventListener('fetch', e => {
           caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
           return r;
         })
-        .catch(() => caches.match(e.request).then(c => c || caches.match('/')))
+        .catch(() => caches.match(e.request)
+          .then(hit => hit || caches.match('/offline.html'))
+          .then(hit => hit || caches.match('/')))
     );
     return;
   }
