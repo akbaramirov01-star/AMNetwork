@@ -687,7 +687,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         <span id="langName">English</span>
         <span style="margin-left:auto;color:var(--gold);font-size:10px">▾</span>
       </button>
-      <div id="langDrop" role="listbox" aria-label="Language" style="display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;z-index:200;min-width:140px;box-shadow:0 12px 40px rgba(0,0,0,0.3)">
+      <div id="langDrop" role="listbox" aria-label="Language" data-t-aria="aria_language" style="display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;z-index:200;min-width:140px;box-shadow:0 12px 40px rgba(0,0,0,0.3)">
         <button type="button" role="option" onclick="selectLang('tj','tj','Тоҷикӣ')" style="display:flex;align-items:center;gap:8px;padding:13px 14px;cursor:pointer;font-size:13px;color:var(--text2);width:100%;background:transparent;border:none;font-family:\'DM Sans\',sans-serif;text-align:left" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='transparent'"><img src="https://flagcdn.com/tj.svg" style="width:18px;height:13px;border-radius:2px;object-fit:cover" alt="" loading="lazy"> Тоҷикӣ</button>
         <button type="button" role="option" onclick="selectLang('ar','sa','العربية')" style="display:flex;align-items:center;gap:8px;padding:13px 14px;cursor:pointer;font-size:13px;color:var(--text2);width:100%;background:transparent;border:none;font-family:\'DM Sans\',sans-serif;text-align:left" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='transparent'"><img src="https://flagcdn.com/sa.svg" style="width:18px;height:13px;border-radius:2px;object-fit:cover" alt="" loading="lazy"> العربية</button>
         <button type="button" role="option" onclick="selectLang('en','gb','English')" style="display:flex;align-items:center;gap:8px;padding:13px 14px;cursor:pointer;font-size:13px;color:var(--text2);width:100%;background:transparent;border:none;font-family:\'DM Sans\',sans-serif;text-align:left" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='transparent'"><img src="https://flagcdn.com/gb.svg" style="width:18px;height:13px;border-radius:2px;object-fit:cover" alt="" loading="lazy"> English</button>
@@ -700,7 +700,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         <button type="button" role="option" onclick="selectLang('fr','fr','Français')" style="display:flex;align-items:center;gap:8px;padding:13px 14px;cursor:pointer;font-size:13px;color:var(--text2);width:100%;background:transparent;border:none;font-family:\'DM Sans\',sans-serif;text-align:left" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='transparent'"><img src="https://flagcdn.com/fr.svg" style="width:18px;height:13px;border-radius:2px;object-fit:cover" alt="" loading="lazy"> Français</button>
       </div>
     </div>
-    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme" data-t-aria="aria_theme">🌙</button>
     <a class="nav-demo" href="/academy/">🎓 <span data-t="nav_academy">AM Academy</span></a>
     <a class="nav-demo" href="/quran/" data-t="nav_quran">The Holy Quran</a>
     <a class="nav-demo" href="/zakat/" data-t="nav_calc">Zakat Calculator</a>
@@ -1582,7 +1582,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:36px;max-width:560px;width:100%;max-height:80vh;overflow-y:auto">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--text)" data-t="privacy_title">Privacy Policy</h3>
-      <button onclick="document.getElementById('privacyModal').style.display='none'" aria-label="Close privacy policy" style="background:none;border:none;color:var(--text2);font-size:22px;cursor:pointer;line-height:1;min-width:44px;min-height:44px">×</button>
+      <button onclick="document.getElementById('privacyModal').style.display='none'" aria-label="Close privacy policy" data-t-aria="aria_close" style="background:none;border:none;color:var(--text2);font-size:22px;cursor:pointer;line-height:1;min-width:44px;min-height:44px">×</button>
     </div>
     <p style="font-size:13px;color:var(--text2);line-height:1.75" data-t="privacy_body">AM Network collects: your name and email (waitlist); information you provide in the assistance application (family situation, income, need category); anonymous analytics via Google Analytics — only after you accept cookies. Form submissions are processed by Web3Forms and delivered to our team by email. We NEVER sell your data. You may request deletion of your data at any time: contact@amnetwork.io</p>
     <button onclick="document.getElementById('privacyModal').style.display='none'" style="margin-top:20px;padding:10px 24px;background:var(--gold);border:none;border-radius:7px;color:#060E09;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">Close</button>
@@ -1610,7 +1610,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=ce8e9a2b56"></script>
+<script src="/i18n-data.js?v=218ea40a32"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)
@@ -1735,6 +1735,11 @@ function setLang(l){
   document.documentElement.setAttribute('dir', isRTL?'rtl':'ltr');
   document.documentElement.setAttribute('lang', l==='tj'?'tg':l); // 'tj' is our internal key; ISO 639-1 for Tajik is 'tg'
   document.documentElement.setAttribute('data-lang', l);
+  document.querySelectorAll('[data-t-aria]').forEach(el => {
+    const k = el.getAttribute('data-t-aria');
+    const v = t[k];
+    if (v != null) el.setAttribute('aria-label', v);
+  });
   document.querySelectorAll('[data-t]').forEach(el=>{
     const k = el.dataset.t;
     if(t[k]!==undefined) el.innerHTML = t[k];
@@ -2550,10 +2555,10 @@ function calcZakat(){
 </script>
 
 <!-- PWA INSTALL BANNER -->
-<div id="pwa-banner" role="complementary" aria-label="Установить приложение">
+<div id="pwa-banner" role="complementary" aria-label="Установить приложение" data-t-aria="aria_install">
   <p><strong>AM Network</strong> — добавьте на главный экран для быстрого доступа</p>
-  <button id="pwa-install-btn" aria-label="Установить">Добавить</button>
-  <button id="pwa-banner-close" aria-label="Закрыть">&times;</button>
+  <button id="pwa-install-btn" aria-label="Установить" data-t-aria="aria_install">Добавить</button>
+  <button id="pwa-banner-close" aria-label="Закрыть" data-t-aria="aria_close">&times;</button>
 </div>
 
 <script>

@@ -1,9 +1,9 @@
-const CACHE = 'amnetwork-v20-hardening';
+const CACHE = 'amnetwork-v21-i18n';
 const STATIC = [
   '/',
   '/index.html',
   '/i18n-data.js',
-  '/i18n-data.js?v=ce8e9a2b56',
+  '/i18n-data.js?v=218ea40a32',
   '/logo.webp',
   '/favicon.svg?v=20260911',
   '/manifest.json',
