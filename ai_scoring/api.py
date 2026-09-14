@@ -24,6 +24,8 @@ from academy import explain as academy_explain, apply_to_case, translate_chrome,
 from quran_audio import get_reciters as quran_get_reciters, get_chapter_audio, QuranAudioError
 from hadith_translate import translate_hadiths, LANG_NAMES as HADITH_TRANSLATE_LANGS
 from translate_cache import cache as translation_cache
+from push_store import store as push_store, VALID_KINDS as PUSH_KINDS
+import push_send
 
 app = Flask(__name__)
 ALLOWED_ORIGINS = [
@@ -36,9 +38,14 @@ MAX_BODY_BYTES = 32 * 1024  # 32KB is generous for these payloads; blocks large-
 app.config["MAX_CONTENT_LENGTH"] = MAX_BODY_BYTES
 
 
+# Endpoints that are triggered rather than submitted to, and so legitimately
+# arrive with no body at all (the reminder cron just POSTs with a header).
+BODYLESS_POST_ROUTES = {"/push/dispatch"}
+
+
 @app.before_request
 def validate_json_object():
-    if request.method == "POST":
+    if request.method == "POST" and request.path not in BODYLESS_POST_ROUTES:
         payload = request.get_json(force=True, silent=True)
         if not isinstance(payload, dict):
             return jsonify(error="body must be a JSON object"), 400
@@ -435,6 +442,110 @@ def hadith_translate_route():
         found.update(new_map)
 
     return jsonify({"translations": [found[t] for t in texts]})
+
+
+# ── Web Push ────────────────────────────────────────────────────────────────
+# Reminders that fire when the site is closed, which the old
+# Notification-API version could never do. Free tier sleeps, so the clock
+# comes from outside: a GitHub Actions cron calls /push/dispatch hourly
+# (see .github/workflows/push-reminders.yml) with PUSH_DISPATCH_TOKEN.
+MAX_SUBSCRIPTION_BYTES = 2000
+
+
+@app.route("/push/public-key", methods=["GET"])
+def push_public_key():
+    key = os.environ.get("VAPID_PUBLIC_KEY", "")
+    if not key:
+        return jsonify({"error": "push not configured"}), 503
+    return jsonify({"publicKey": key})
+
+
+@app.route("/push/subscribe", methods=["POST"])
+def push_subscribe():
+    if not cheap_limiter.allow(client_address()):
+        return jsonify(error="Too many requests. Please try again shortly."), 429
+    p = request.get_json(force=True, silent=True) or {}
+
+    subscription = p.get("subscription")
+    if not isinstance(subscription, dict) or not isinstance(subscription.get("endpoint"), str):
+        return jsonify({"error": "invalid subscription"}), 400
+    if len(json.dumps(subscription)) > MAX_SUBSCRIPTION_BYTES:
+        return jsonify({"error": "subscription too large"}), 400
+    # Only ever talk to a real push service, never an arbitrary URL we are
+    # handed — this endpoint would otherwise make the server fetch anything.
+    if not subscription["endpoint"].startswith("https://"):
+        return jsonify({"error": "invalid endpoint"}), 400
+
+    kinds = p.get("kinds")
+    if not isinstance(kinds, list) or not set(kinds) & PUSH_KINDS:
+        return jsonify({"error": f"kinds must include one of {sorted(PUSH_KINDS)}"}), 400
+
+    offset = p.get("utcOffsetMinutes")
+    if not isinstance(offset, int) or not -14 * 60 <= offset <= 14 * 60:
+        return jsonify({"error": "invalid utcOffsetMinutes"}), 400
+
+    lang = p.get("lang") if isinstance(p.get("lang"), str) else "en"
+
+    try:
+        push_store.save(subscription, kinds, offset, lang[:5])
+    except (ValueError, sqlite3.Error) as e:
+        app.logger.warning("push/subscribe rejected: %s", e)
+        return jsonify({"error": "could not save subscription"}), 400
+    return jsonify({"ok": True})
+
+
+@app.route("/push/unsubscribe", methods=["POST"])
+def push_unsubscribe():
+    p = request.get_json(force=True, silent=True) or {}
+    endpoint = p.get("endpoint")
+    if not isinstance(endpoint, str) or not endpoint:
+        return jsonify({"error": "missing endpoint"}), 400
+    try:
+        push_store.delete(endpoint)
+    except sqlite3.Error:
+        return jsonify({"error": "could not remove subscription"}), 500
+    return jsonify({"ok": True})
+
+
+@app.route("/push/dispatch", methods=["POST"])
+def push_dispatch():
+    expected = os.environ.get("PUSH_DISPATCH_TOKEN")
+    if not expected:
+        return jsonify({"error": "dispatch not configured"}), 503
+    # hmac.compare_digest: constant-time, so the token can't be guessed by
+    # timing the response.
+    import hmac
+    provided = request.headers.get("X-Dispatch-Token", "")
+    if not hmac.compare_digest(provided, expected):
+        return jsonify({"error": "forbidden"}), 403
+
+    hour = int(os.environ.get("JUMUA_LOCAL_HOUR", "10"))  # local time on Friday
+    try:
+        due = push_store.due("jumua", local_hour=hour, weekday=4)  # 4 = Friday
+    except sqlite3.Error:
+        return jsonify({"error": "store unavailable"}), 503
+
+    sent, dropped, failed = [], 0, 0
+    for row in due:
+        try:
+            ok, status = push_send.send(row["subscription"], push_send.build_payload("jumua", row["lang"]))
+        except RuntimeError as e:
+            app.logger.error("push/dispatch: %s", e)
+            return jsonify({"error": "push not configured"}), 503
+        except Exception:
+            app.logger.exception("push/dispatch: send failed")
+            failed += 1
+            continue
+        if ok:
+            sent.append(row["endpoint"])
+        elif status in (404, 410):
+            # The browser dropped this subscription; stop trying forever.
+            push_store.delete(row["endpoint"])
+            dropped += 1
+        else:
+            failed += 1
+    push_store.mark_sent(sent)
+    return jsonify({"considered": len(due), "sent": len(sent), "dropped": dropped, "failed": failed})
 
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Every module api.py imports must be listed here. Miss one and the container
 # dies on startup with ModuleNotFoundError — which is exactly what happened
 # when assistant.py was left out.
-COPY scorer.py api.py assistant.py academy.py security.py quran_audio.py hadith_translate.py translate_cache.py ./
+COPY scorer.py api.py assistant.py academy.py security.py quran_audio.py hadith_translate.py translate_cache.py push_store.py push_send.py ./
 # This image only ever runs behind Render's reverse proxy, which appends the
 # real caller to X-Forwarded-For. Without this, remote_addr is Render's edge
 # address for every visitor alike and the whole internet shares one per-client

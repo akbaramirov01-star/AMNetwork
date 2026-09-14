@@ -1466,5 +1466,10 @@ document.getElementById('asstCloseBtn').addEventListener('click', toggleAssistan
 document.getElementById('asstSendBtn').addEventListener('click', sendAssistantMessage);
 document.getElementById('asstInput').addEventListener('keydown', e=>{ if(e.key==='Enter') sendAssistantMessage(); });
 </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+}
+</script>
 </body>
 </html>

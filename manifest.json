@@ -1,45 +1,58 @@
 {
-  "name": "AM Network",
+  "id": "/",
+  "name": "AM Network — Zakat, Quran & Prayer",
   "short_name": "AM Network",
-  "description": "Blockchain-verified Zakat & Sadaqah. AI-verified recipients. Sharia-compliant.",
-  "start_url": "/",
+  "description": "Free Islamic tools in 10 languages: the Quran with word-by-word audio, hadith, dua & dhikr, prayer times, qibla, tasbeeh, Hijri calendar, and a Zakat calculator. Plus AM Network — blockchain-verified Zakat with AI-assisted, human-verified recipients.",
+  "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "orientation": "portrait-primary",
-  "background_color": "#020810",
+  "background_color": "#0A1A11",
   "theme_color": "#C9A84C",
   "lang": "en",
-  "categories": ["finance", "utilities", "social"],
+  "dir": "auto",
+  "categories": ["finance", "education", "lifestyle"],
+  "prefer_related_applications": false,
   "icons": [
-    { "src": "/icons/icon-144.png", "sizes": "144x144", "type": "image/png" },
-    { "src": "/icons/icon-152.png", "sizes": "152x152", "type": "image/png" },
-    { "src": "/icons/icon-180.png", "sizes": "180x180", "type": "image/png" },
-    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "/icons/icon-144.png", "sizes": "144x144", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-152.png", "sizes": "152x152", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    { "src": "/screenshots/home-mobile.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Zakat and Sadaqah, verified on-chain" },
+    { "src": "/screenshots/quran-mobile.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "The Quran with word-by-word recitation" },
+    { "src": "/screenshots/prayer-mobile.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Prayer times and a daily tracker" },
+    { "src": "/screenshots/zakat-mobile.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Zakat calculator for 159 countries" },
+    { "src": "/screenshots/home-wide.png", "sizes": "1920x1080", "type": "image/png", "form_factor": "wide", "label": "AM Network on desktop" }
   ],
   "shortcuts": [
+    {
+      "name": "The Holy Quran",
+      "short_name": "Quran",
+      "url": "/quran/",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Prayer Times",
+      "short_name": "Prayer",
+      "url": "/prayer-times/",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Qibla Direction",
+      "short_name": "Qibla",
+      "url": "/qibla/",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
     {
       "name": "Zakat Calculator",
       "short_name": "Zakat",
       "url": "/zakat/",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "AI Scoring",
-      "short_name": "AI Score",
-      "url": "/ai_scoring/",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "AM Academy",
-      "short_name": "Academy",
-      "url": "/academy/",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "Prayer Tracker",
-      "short_name": "Prayers",
-      "url": "/prayer-times/#trackerCard",
       "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
     }
   ]

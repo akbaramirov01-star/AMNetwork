@@ -1,0 +1,41 @@
+# This is the external clock for the Friday reminder.
+#
+# The backend runs on Render's free tier, which sleeps when idle and has no
+# scheduler of its own, so something outside has to wake it and ask it to
+# send. This runs hourly; the backend itself decides who is actually due —
+# it only sends to people whose *local* time is the configured hour on
+# their local Friday, and it refuses to send twice within 12 hours, so an
+# extra or retried run cannot double-send.
+#
+# Needs two repository secrets:
+#   PUSH_DISPATCH_TOKEN — the same value as the backend's env var
+#   BACKEND_URL         — https://amnetwork.onrender.com
+
+name: Friday reminders
+
+on:
+  schedule:
+    # Hourly, a few minutes past, so it never collides with the top-of-hour
+    # spike every other GitHub cron job runs at.
+    - cron: '7 * * * *'
+  workflow_dispatch: {}
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wake the backend
+        run: curl -fsS --max-time 90 --retry 3 --retry-delay 10 "${{ secrets.BACKEND_URL }}/health" || true
+
+      - name: Send any reminders that are due
+        run: |
+          code=$(curl -s -o /tmp/out.json -w '%{http_code}' \
+            --max-time 120 --retry 2 --retry-delay 15 \
+            -X POST "${{ secrets.BACKEND_URL }}/push/dispatch" \
+            -H "X-Dispatch-Token: ${{ secrets.PUSH_DISPATCH_TOKEN }}")
+          echo "HTTP $code"
+          cat /tmp/out.json || true
+          # 503 just means push isn't configured yet — not a failure worth
+          # emailing the founder about every hour.
+          if [ "$code" = "503" ]; then exit 0; fi
+          [ "$code" = "200" ]

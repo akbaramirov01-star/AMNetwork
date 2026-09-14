@@ -210,5 +210,13 @@ document.addEventListener('click', function(e){
   setLang(l);
 })();
 </script>
+<script>
+// Registered on every page, not just the homepage: someone who lands
+// directly on /prayer-times/ should get offline support and be able to
+// turn on reminders without visiting the front page first.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+}
+</script>
 </body>
 </html>

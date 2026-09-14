@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v21-i18n';
+const CACHE = 'amnetwork-v22-push';
 const STATIC = [
   '/',
   '/index.html',
@@ -111,4 +111,32 @@ self.addEventListener('fetch', e => {
       });
     })
   );
+});
+
+// ── Web Push ──
+// Fires when the site is closed — the whole point of moving off the
+// Notification API. Payload is whatever ai_scoring/push_send.py built.
+self.addEventListener('push', e => {
+  let data = {};
+  try { data = e.data ? e.data.json() : {}; } catch (err) {}
+  const title = data.title || 'AM Network';
+  e.waitUntil(self.registration.showNotification(title, {
+    body: data.body || '',
+    icon: '/icons/icon-192.png',
+    badge: '/icons/icon-192.png',
+    tag: data.tag || 'amnetwork',
+    data: { url: data.url || '/' },
+  }));
+});
+
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  const target = (e.notification.data && e.notification.data.url) || '/';
+  // Focus an open tab if there is one rather than piling up new windows.
+  e.waitUntil(clients.matchAll({ type: 'window', includeUncontrolled: true }).then(wins => {
+    for (const w of wins) {
+      if (w.url.includes(target) && 'focus' in w) return w.focus();
+    }
+    return clients.openWindow(target);
+  }));
 });
