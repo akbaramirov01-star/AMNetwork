@@ -381,11 +381,21 @@ async function renderCity(){
   // controls) — modestbranding/rel/iv_load_policy trim YouTube's own chrome
   // as far as their embed API allows without breaking the required attribution.
   const params = 'autoplay=1&mute=1&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3&controls=1';
-  const src = resolved && resolved.videoId
-    ? `https://www.youtube-nocookie.com/embed/${resolved.videoId}?${params}`
-    : `https://www.youtube-nocookie.com/embed/live_stream?channel=${ch.id}&${params}`;
-  document.getElementById('playerFrameWrap').innerHTML =
-    `<iframe src="${src}" title="${t('title_' + currentCity)}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  // The video id comes back from the YouTube API and is pasted straight into
+  // an iframe src, so hold it to YouTube's own id alphabet rather than
+  // trusting the response — anything else falls back to the channel embed.
+  const safeVideoId = resolved && /^[A-Za-z0-9_-]{6,20}$/.test(resolved.videoId || '') ? resolved.videoId : null;
+  const src = safeVideoId
+    ? `https://www.youtube-nocookie.com/embed/${safeVideoId}?${params}`
+    : `https://www.youtube-nocookie.com/embed/live_stream?channel=${encodeURIComponent(ch.id)}&${params}`;
+  const frame = document.createElement('iframe');
+  frame.src = src;
+  frame.title = t('title_' + currentCity);
+  frame.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
+  frame.setAttribute('allowfullscreen', '');
+  const wrap = document.getElementById('playerFrameWrap');
+  wrap.textContent = '';
+  wrap.appendChild(frame);
   if (resolved) {
     liveBadge.textContent = resolved.isLive ? t('badge_live') : t('badge_recent');
     liveBadge.className = 'live-badge' + (resolved.isLive ? ' is-live' : '');

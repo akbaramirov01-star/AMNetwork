@@ -6,5 +6,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # dies on startup with ModuleNotFoundError — which is exactly what happened
 # when assistant.py was left out.
 COPY scorer.py api.py assistant.py academy.py security.py quran_audio.py hadith_translate.py translate_cache.py ./
+# This image only ever runs behind Render's reverse proxy, which appends the
+# real caller to X-Forwarded-For. Without this, remote_addr is Render's edge
+# address for every visitor alike and the whole internet shares one per-client
+# rate-limit bucket — six chat messages a minute would mute the assistant for
+# everyone. Must stay 0 (the code default) anywhere the app is exposed directly.
+ENV TRUSTED_PROXY_HOPS=1
 EXPOSE 8000
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "1", "--threads", "8", "--timeout", "60", "api:app"]

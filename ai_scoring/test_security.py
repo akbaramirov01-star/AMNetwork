@@ -89,5 +89,24 @@ class SecurityTests(unittest.TestCase):
         with patch.object(api,'get_reply',return_value='ok'):
             self.assertEqual(self.client.post('/chat',json={'message':'hi'}).status_code,200)
 
+    def test_trusted_proxy_hops_separates_clients_but_ignores_spoofing(self):
+        """Behind exactly one proxy (the Dockerfile sets TRUSTED_PROXY_HOPS=1),
+        each visitor must get their own bucket, and a forged leftmost entry
+        must be ignored — the proxy appends the address it actually saw."""
+        with patch.dict(os.environ, {'TRUSTED_PROXY_HOPS': '1'}):
+            with api.app.test_request_context('/', headers={'X-Forwarded-For': '198.51.100.7'},
+                                              environ_base={'REMOTE_ADDR': '10.0.0.1'}):
+                self.assertEqual(security.client_address(), '198.51.100.7')
+            # client forges a hop; the proxy's own entry is still rightmost
+            with api.app.test_request_context('/', headers={'X-Forwarded-For': '203.0.113.9, 198.51.100.7'},
+                                              environ_base={'REMOTE_ADDR': '10.0.0.1'}):
+                self.assertEqual(security.client_address(), '198.51.100.7')
+
+    def test_cheap_limiter_caps_unpaid_requests_per_client(self):
+        limiter = security.CheapLimiter(3)
+        self.assertEqual([limiter.allow('a') for _ in range(4)], [True, True, True, False])
+        self.assertTrue(limiter.allow('b'))  # a flood from one client never blocks another
+
+
 if __name__ == '__main__':
     unittest.main()

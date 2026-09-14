@@ -84,14 +84,30 @@ class RequestBudget:
 
 
 def client_address():
-    """Trust forwarded addresses only from explicitly configured proxy networks.
+    """Identify the caller for rate-limiting purposes.
 
-    Defaults to socket address, conservatively sharing a limit behind a proxy.
-    Walk from the trusted side; never accept arbitrary leftmost X-Forwarded-For.
+    Never accept an arbitrary leftmost X-Forwarded-For — a client can write
+    anything there and mint itself a fresh limit bucket per request. Two
+    trustworthy ways to find the real caller:
+
+    * TRUSTED_PROXY_CIDRS — walk in from the right while the hop is one of
+      our own proxies. Strictest, needs the proxy's ranges.
+    * TRUSTED_PROXY_HOPS — count hops from the right instead. Each proxy
+      appends the address it actually saw, so with exactly one reverse proxy
+      in front (Render, and most PaaS) the rightmost entry is the one that
+      proxy wrote, and a client cannot forge it.
+
+    Defaults to 0 — trusting nothing — because a direct-to-internet
+    deployment must not let callers forge their own identity. The Dockerfile
+    sets TRUSTED_PROXY_HOPS=1, since that image only ever runs behind
+    Render's proxy, where request.remote_addr is the same edge address for
+    every visitor on earth and would otherwise put the whole internet in one
+    per-client quota.
     """
     peer = request.remote_addr or "unknown"
     networks = [ipaddress.ip_network(c.strip()) for c in
                 os.environ.get("TRUSTED_PROXY_CIDRS", "").split(",") if c.strip()]
+    chain = [v.strip() for v in request.headers.get("X-Forwarded-For", "").split(",") if v.strip()]
 
     def trusted(value):
         try:
@@ -100,18 +116,57 @@ def client_address():
         except ValueError:
             return False
 
-    if networks and trusted(peer):
-        chain = request.headers.get("X-Forwarded-For", "").split(",")
-        for value in reversed(chain):
-            if not trusted(peer):
-                break
-            peer = value.strip()
+    if networks:
+        if trusted(peer):
+            for value in reversed(chain):
+                if not trusted(peer):
+                    break
+                peer = value
+        return peer
+
+    hops = int(os.environ.get("TRUSTED_PROXY_HOPS", "0"))
+    if hops > 0 and chain:
+        # hops=1 -> chain[-1], the address our own proxy observed.
+        return chain[-min(hops, len(chain))]
     return peer
 
 
 budget = RequestBudget()
 import threading
 _in_flight = threading.BoundedSemaphore(setting("AI_MAX_CONCURRENT", 3))
+
+
+class CheapLimiter:
+    """A free-but-not-unlimited gate for routes that can be served without
+    calling a paid API (e.g. a translation already in cache).
+
+    Those must not spend the AI budget, but they still cost CPU and a SQLite
+    read, and this service runs one worker with eight threads — so left
+    completely open they are a way to starve /chat and /health. In-process
+    and approximate on purpose: it only has to stop a flood, and there is a
+    single worker.
+    """
+
+    def __init__(self, per_minute):
+        self.per_minute = per_minute
+        self._lock = threading.Lock()
+        self._buckets = {}  # client -> (minute, count)
+
+    def allow(self, client):
+        minute = int(time.time() // 60)
+        with self._lock:
+            if len(self._buckets) > 10000:  # bound memory against IP churn
+                self._buckets = {k: v for k, v in self._buckets.items() if v[0] == minute}
+            slot, count = self._buckets.get(client, (minute, 0))
+            if slot != minute:
+                slot, count = minute, 0
+            if count >= self.per_minute:
+                return False
+            self._buckets[client] = (slot, count + 1)
+            return True
+
+
+cheap_limiter = CheapLimiter(setting("CHEAP_PER_MINUTE", 60))
 
 
 def limited_ai(view):

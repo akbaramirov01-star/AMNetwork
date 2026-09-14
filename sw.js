@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v19-owner-feedback';
+const CACHE = 'amnetwork-v20-hardening';
 const STATIC = [
   '/',
   '/index.html',
@@ -54,8 +54,19 @@ const STATIC = [
 ];
 
 self.addEventListener('install', e => {
+  // Cached one by one rather than with addAll(): addAll is all-or-nothing, so
+  // a single 404 anywhere in this list (a renamed page, a stale ?v= hash)
+  // silently aborts the install and the site loses offline support entirely,
+  // with nothing to show for it. A missing entry should cost that one entry.
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(STATIC)).then(() => self.skipWaiting())
+    caches.open(CACHE)
+      .then(c => Promise.allSettled(STATIC.map(url => c.add(url))).then(results => {
+        const failed = results
+          .map((r, i) => (r.status === 'rejected' ? STATIC[i] : null))
+          .filter(Boolean);
+        if (failed.length) console.warn('[sw] not precached:', failed);
+      }))
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -78,7 +89,9 @@ self.addEventListener('fetch', e => {
       fetch(e.request)
         .then(r => {
           const copy = r.clone();
-          caches.open(CACHE).then(c => c.put(e.request, copy));
+          // Storage can be full or blocked (private mode); a failed write
+          // must not surface as an unhandled rejection.
+          caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
           return r;
         })
         .catch(() => caches.match(e.request).then(c => c || caches.match('/')))
@@ -92,7 +105,7 @@ self.addEventListener('fetch', e => {
       if (cached) return cached;
       return fetch(e.request).then(r => {
         if (r && r.status === 200 && r.type !== 'opaque') {
-          caches.open(CACHE).then(c => c.put(e.request, r.clone()));
+          caches.open(CACHE).then(c => c.put(e.request, r.clone())).catch(() => {});
         }
         return r;
       });

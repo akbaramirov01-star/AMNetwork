@@ -110,8 +110,7 @@ All of the above (`/quran/`, `/hadith/`, `/dua/`, `/tasbeeh/`, `/qibla/`, `/pray
 ⚠️ **Push notifications, sitewide:** there is no "remind me" feature left on the site (the Ayah of the Day widget, the only one that had this, was removed) and no backend scheduler or Web Push yet — nothing fires when the site is closed, and nothing fires at all right now even when it's open. Say this plainly if asked about notifications; don't imply background push already works.
 
 ### Integrations working
-- **Waitlist → Google Sheets:** `AKfycbwuptTPU4ObtwesM86tvR2wObS5sXiIkKMvpZFZr_ReV_wD8nXIkTFdnT_C_2snrHFv/exec`
-- **Apply form → Google Sheets:** `AKfycby5Fcwtu6h1nFHGr9cXG9WmYj_Cx2TDvU8P3BR7UVLGYJKZ02znbI7h8eE-lqOfYghnLw/exec`
+- **Waitlist / Apply → Google Apps Script:** deployment URLs are NOT kept in this repo. An Apps Script `/exec` URL is an unauthenticated write endpoint — anyone holding it can push rows into the spreadsheet — so treat it as a secret and read it from the Apps Script console when needed. ⚠️ The two URLs that used to be listed here were public in git history: archive those deployments and issue new ones (see docs/security-deployment.md).
 - **Email delivery:** web3forms.com (both forms)
 - **Analytics:** Google Analytics GA4 (G-G4GSRVJB5M)
 - **PWA:** manifest.json + sw.js, installable on mobile

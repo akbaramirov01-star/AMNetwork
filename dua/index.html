@@ -382,9 +382,13 @@ async function selectCategory(category){
 }
 
 function escapeDuaHtml(s){
-  const d = document.createElement('div');
-  d.textContent = s == null ? '' : String(s);
-  return d.innerHTML;
+  // Escapes quotes too: these values are interpolated into HTML attributes
+  // as well as text (e.g. data-tr="..."), and the old textContent->innerHTML
+  // trick left " and ' intact, letting remote API text break out of an
+  // attribute.
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
 // ── AI ASSISTANT WIDGET ──

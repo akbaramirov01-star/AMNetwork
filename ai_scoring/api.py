@@ -13,7 +13,7 @@ import os
 import sqlite3
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from security import limited_ai, budget, client_address, _in_flight
+from security import limited_ai, budget, client_address, _in_flight, cheap_limiter
 
 from scorer import (
     RecipientProfile, HousingStatus, EmploymentStatus,
@@ -375,6 +375,14 @@ MAX_HADITH_TEXT_LEN = 4000
 
 @app.route("/hadith/translate", methods=["POST"])
 def hadith_translate_route():
+    # Cache hits skip the paid budget below, but must not be a free way to
+    # saturate the single worker and take /chat down with it.
+    if not cheap_limiter.allow(client_address()):
+        response = jsonify(error="Too many requests. Please try again shortly.", retry_after=60)
+        response.status_code = 429
+        response.headers["Retry-After"] = "60"
+        return response
+
     payload = request.get_json(force=True, silent=True) or {}
     lang = payload.get("lang")
     if not isinstance(lang, str) or lang not in HADITH_TRANSLATE_LANGS:
