@@ -107,7 +107,11 @@ Verified local representatives who confirm recipient physical presence:
 
 All of the above (`/quran/`, `/hadith/`, `/dua/`, `/tasbeeh/`, `/qibla/`, `/prayer-times/`, `/calendar/`, `/names/`, `/live/`), plus `/zakat/`, `/apply/`, and `/academy/` (the last three only got this in September 2026 — they previously had just a single "back to main site" link, a real gap the founder caught with "go through the tabs so there are buttons between them"), cross-link to every other page via a shared "other tools" nav dropdown, and are wired into `sw.js`'s offline precache list.
 
-⚠️ **Push notifications, sitewide:** there is no "remind me" feature left on the site (the Ayah of the Day widget, the only one that had this, was removed) and no backend scheduler or Web Push yet — nothing fires when the site is closed, and nothing fires at all right now even when it's open. Say this plainly if asked about notifications; don't imply background push already works.
+**Push notifications:** real Web Push now exists — a Friday (Jumu'ah) reminder that fires with the site closed. Opt-in toggle on `/prayer-times/`. It needs three env vars on Render before it does anything: `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `PUSH_DISPATCH_TOKEN` (see docs/founder-checklist.md); until those are set, `/push/public-key` returns 503 and the toggle fails gracefully. Render's free tier has no scheduler, so the clock is external: `.github/workflows/push-reminders.yml` calls `/push/dispatch` hourly and the backend decides who is due — by the subscriber's *local* Friday, never sending twice in 12 hours.
+
+⚠️ The notification text deliberately does NOT claim a particular minute is the hour in which du'a is answered — two scholarly opinions exist, and it is not ours to settle in a push. Keep it that way.
+
+**AI assistant placement:** homepage, Academy, `/apply/` and `/zakat/` only. It was removed from the nine utility pages in September 2026 — it cost a `/health` ping per page load and shared the tight AI budget, for pages where nobody asks it anything. Don't re-add it site-wide.
 
 ### Integrations working
 - **Waitlist / Apply → Google Apps Script:** deployment URLs are NOT kept in this repo. An Apps Script `/exec` URL is an unauthenticated write endpoint — anyone holding it can push rows into the spreadsheet — so treat it as a secret and read it from the Apps Script console when needed. ⚠️ The two URLs that used to be listed here were public in git history: archive those deployments and issue new ones (see docs/security-deployment.md).
@@ -121,6 +125,12 @@ All of the above (`/quran/`, `/hadith/`, `/dua/`, `/tasbeeh/`, `/qibla/`, `/pray
 - Flask API behind a shared rate-limit budget (security.py — 6/min, 60/hour per client, 3 concurrent, 200/day global; SQLite-backed, fails closed). `/chat` (homepage assistant), `/academy/explain`, `/academy/chrome`, `/academy/apply` all share this budget.
 - `/hadith/translate` (added September 2026): on-demand hadith translation for languages the dataset doesn't cover. Deliberately NOT gated by the shared budget on a cache hit — only a genuine cache miss (a hadith+language never translated before) consumes a budget slot, so heavy browsing of already-cached content never competes with a live /chat user. Cache is `translate_cache.py`, a separate persistent SQLite file (`TRANSLATE_CACHE_DB_PATH`, defaults elsewhere in tmp) keyed by (lang, sha256(source text)) — survives worker restarts, unlike the in-memory `_explain_cache`/`_chrome_cache` dicts used by the Academy routes.
 - `/score` (rule-based, no AI, unlimited) and `/quran/reciters`, `/quran/audio/*` (no AI) are not part of that budget.
+- `/push/subscribe`, `/push/unsubscribe`, `/push/public-key`, `/push/dispatch` — the Friday reminder (`push_store.py`, `push_send.py`). `/push/dispatch` is guarded by `PUSH_DISPATCH_TOKEN` compared in constant time and is the one POST route exempt from the global JSON-body validator, since the cron sends a header and no body.
+- **`Dockerfile` copies source files by name.** Add a module without adding it there and the container dies on startup with `ModuleNotFoundError` and the Render deploy fails — this has now happened twice. `python test_dockerfile.py` checks it; run it before pushing backend changes.
+- **`TRUSTED_PROXY_HOPS=1` is set in the Dockerfile**, not in code. Behind Render's proxy every visitor otherwise shares one rate-limit bucket, because `remote_addr` is the same edge address for everyone. Must stay 0 anywhere the app is exposed directly.
+
+### Tests (ai_scoring/)
+`test_security.py` (rate limits, proxy identity, concurrency), `test_push.py` (who is due for a reminder, local-Friday logic, dispatch auth), `test_dockerfile.py` (image completeness), `test_api.py` (live HTTP). All runnable with plain `python <file>`.
 
 ### Code prototypes (not deployed)
 - `/contracts/` — Solidity smart contracts (AMZakatPool.sol), audit-ready, NOT on mainnet
