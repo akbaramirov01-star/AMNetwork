@@ -192,4 +192,146 @@ contract AMZakatPoolTest is Test {
         vm.expectRevert();
         pool.donate(recipient, 500e6, type(uint256).max);
     }
+
+    // ── Oracle staking ─────────────────────────────────────────────────────────
+    function _fundOracle(address o, uint256 amount) internal {
+        usdc.mint(o, amount);
+        vm.prank(o);
+        usdc.approve(address(pool), type(uint256).max);
+    }
+
+    function testStakeAndUnstake() public {
+        _fundOracle(oracle, 1_000e6);
+
+        vm.prank(oracle);
+        pool.stakeAsOracle(1_000e6);
+        (uint256 stake,,,,) = pool.oracleInfo(oracle);
+        assertEq(stake, 1_000e6);
+        assertEq(usdc.balanceOf(address(pool)), 1_000e6);
+
+        vm.prank(oracle);
+        pool.unstake(400e6);
+        (stake,,,,) = pool.oracleInfo(oracle);
+        assertEq(stake, 600e6);
+        assertEq(usdc.balanceOf(oracle), 400e6);
+    }
+
+    function testNonOracleCannotStake() public {
+        _fundOracle(donor, 1_000e6);
+        vm.prank(donor);
+        vm.expectRevert(bytes("not an oracle"));
+        pool.stakeAsOracle(1_000e6);
+    }
+
+    function testMinStakeBlocksUnstakedOracle() public {
+        vm.prank(admin);
+        pool.setMinOracleStake(1_000e6);
+
+        // Oracle hasn't staked yet — every gated action reverts.
+        vm.prank(oracle);
+        vm.expectRevert(bytes("oracle stake below minimum"));
+        pool.registerRecipient(recipient, 82, 1);
+
+        _fundOracle(oracle, 1_000e6);
+        vm.prank(oracle);
+        pool.stakeAsOracle(1_000e6);
+
+        // Now meets the minimum — same call succeeds.
+        vm.prank(oracle);
+        pool.registerRecipient(recipient, 82, 1);
+        (bool registered,,,,,) = pool.recipients(recipient);
+        assertTrue(registered);
+    }
+
+    // ── Per-oracle release cap ──────────────────────────────────────────────────
+    function testReleaseCapBlocksOverLimitConfirmation() public {
+        vm.prank(oracle);
+        pool.registerRecipient(recipient, 82, 1);
+        vm.prank(donor);
+        pool.donate(recipient, 500e6, type(uint256).max);
+
+        vm.prank(admin);
+        pool.setOracleReleaseCap(oracle2, 100e6); // oracle2 may only confirm up to 100 per period
+
+        vm.prank(oracle);
+        uint256 requestId = pool.requestRelease(recipient, 500e6);
+
+        vm.prank(oracle2);
+        vm.expectRevert(bytes("oracle release cap exceeded for this period"));
+        pool.confirmRelease(requestId);
+    }
+
+    function testReleaseCapAllowsWithinLimit() public {
+        vm.prank(oracle);
+        pool.registerRecipient(recipient, 82, 1);
+        vm.prank(donor);
+        pool.donate(recipient, 500e6, type(uint256).max);
+
+        vm.prank(admin);
+        pool.setOracleReleaseCap(oracle2, 500e6);
+
+        vm.prank(oracle);
+        uint256 requestId = pool.requestRelease(recipient, 500e6);
+        vm.prank(oracle2);
+        pool.confirmRelease(requestId);
+
+        assertEq(usdc.balanceOf(recipient), 500e6);
+        (, , , uint256 releasedInPeriod, ) = pool.oracleInfo(oracle2);
+        assertEq(releasedInPeriod, 500e6);
+    }
+
+    // ── Slashing ────────────────────────────────────────────────────────────────
+    function testSlashOracleMovesStakeToTreasuryAndRecordsStrike() public {
+        _fundOracle(oracle, 1_000e6);
+        vm.prank(oracle);
+        pool.stakeAsOracle(1_000e6);
+
+        vm.prank(admin);
+        pool.slashOracle(oracle, 400e6, "fabricated delivery, case #1");
+
+        (uint256 stake, uint32 strikes,,,) = pool.oracleInfo(oracle);
+        assertEq(stake, 600e6);
+        assertEq(strikes, 1);
+        assertEq(usdc.balanceOf(treasury), 400e6);
+        assertTrue(pool.hasRole(pool.ORACLE_ROLE(), oracle)); // one strike doesn't revoke
+    }
+
+    function testSlashPastMaxStrikesRevokesOracleRole() public {
+        _fundOracle(oracle, 1_000e6);
+        vm.prank(oracle);
+        pool.stakeAsOracle(1_000e6);
+
+        vm.prank(admin);
+        pool.slashOracle(oracle, 0, "strike 1"); // strikes=1
+        vm.prank(admin);
+        pool.slashOracle(oracle, 0, "strike 2"); // strikes=2 (MAX_STRIKES)
+        assertTrue(pool.hasRole(pool.ORACLE_ROLE(), oracle));
+
+        vm.prank(admin);
+        pool.slashOracle(oracle, 0, "strike 3"); // strikes=3 > MAX_STRIKES
+        assertFalse(pool.hasRole(pool.ORACLE_ROLE(), oracle));
+    }
+
+    function testOnlyAdminCanSlash() public {
+        vm.prank(oracle2);
+        vm.expectRevert();
+        pool.slashOracle(oracle, 0, "not your call");
+    }
+
+    // ── Audit flagging ──────────────────────────────────────────────────────────
+    function testFlagForAudit() public {
+        vm.prank(oracle);
+        pool.registerRecipient(recipient, 82, 1);
+        vm.prank(donor);
+        pool.donate(recipient, 500e6, type(uint256).max);
+        vm.prank(oracle);
+        uint256 requestId = pool.requestRelease(recipient, 500e6);
+        vm.prank(oracle2);
+        pool.confirmRelease(requestId);
+
+        assertFalse(pool.releaseDisputed(requestId));
+        vm.prank(admin);
+        pool.flagForAudit(requestId, "random sample audit, Q3");
+        assertTrue(pool.releaseDisputed(requestId));
+    }
 }

@@ -170,6 +170,34 @@ doesn't remove trust from the oracle network entirely. `releaseThreshold`
 itself has no timelock and is settable by a single ADMIN call, same caveat as
 the multisig note above.
 
+**4. Repeat fraud across many recipients before anyone notices — ADDRESSED
+(Sep 2026).** Two distinct oracles ruled out one bad key acting alone on a
+single case, but not the same dishonest oracle (or colluding pair) doing this
+repeatedly across many different recipients before it's caught.
+
+*Fix:* `stakeAsOracle()` / `unstake()` give every oracle a refundable bond
+(`minOracleStake`, ADMIN-set, defaults to 0 = not yet enforced); a
+per-oracle, per-30-day `releaseCap` (default set by `setDefaultReleaseCap`,
+raised per-oracle via `setOracleReleaseCap` as trust grows) bounds how much
+volume a new or unproven oracle can move before earning more trust; and
+`slashOracle()` lets ADMIN_ROLE burn a proven bad actor's stake to treasury
+and auto-revoke `ORACLE_ROLE` after `MAX_STRIKES`. `flagForAudit()` records
+an already-executed release as disputed for accountability — off-chain
+sampling of which releases to audit was a deliberate choice over on-chain
+verifiable randomness (e.g. Chainlink VRF), which isn't justified at this
+stage. This was built directly into `AMZakatPool.sol` rather than as the
+separate `OracleRegistry.sol` this doc used to suggest below — one contract
+was simpler for a prototype and avoided a cross-contract trust boundary.
+
+*Residual risk for the auditor:* this doesn't reverse a specific past
+transfer (Zakat already handed out physically can't be clawed back
+on-chain) — it makes repeat/collusive misconduct costly and bounded, not
+impossible. `minOracleStake`, `defaultReleaseCap`, and `MAX_STRIKES` are all
+prototype defaults (0 / 0 / 2) that need real numbers from the Sharia/ops
+board before a live deployment, and `slashOracle` is a single ADMIN call
+with no timelock or second sign-off — same multisig caveat as above applies
+with extra weight here, since it moves another party's staked funds.
+
 **Also note:** `test/AMZakatPool.t.sol` (Foundry) is **not** run by `npm test` —
 it needs `forge`, which isn't part of this toolchain. The 29 checks come from the
 JS suites in `scripts/`. Whoever sets up CI should wire Foundry in so that file
@@ -194,4 +222,5 @@ npx hardhat test
 
 - `AMZakatPoolGeneral.sol` — undirected donations to a general pool, distributed by score ranking.
 - `NFTCertificate.sol` — AM Academy completion certificates (ERC-721).
-- `OracleRegistry.sol` — staking / reputation for oracles to disincentivize fraud.
+- ~~`OracleRegistry.sol` — staking / reputation for oracles.~~ Built into
+  `AMZakatPool.sol` instead (Sep 2026) — see "Internal review" item 4 above.
