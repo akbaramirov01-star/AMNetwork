@@ -32,3 +32,13 @@ placeholder waiting to be filled in bulk.
 - Continuing through the remaining ~600 pages of the source book
   incrementally; see ../../../../tmp-equivalent scratchpad log
   (mukhtasar_tj/hadiths.jsonl) for the working transcription queue.
+- +27 more verified (Sep 15 session): hadithnumbers 505, 507-510, 512, 516,
+  520, 525-528, 537, 539, 540, 543, 547-548, 550, 552-557, 559 — book 8
+  tail (Sutra/prayer-obstruction hadiths) and book 9 (Times of Prayer)
+  head. Total certified so far: 41 hadiths.
+- Deliberately skipped as not-yet-confident (need closer re-verification
+  before adding): Tajik hadiths #328 (may be a continuation of #327/526
+  rather than its own English hadithnumber), #331 (Tajik text appears to
+  merge two distinct English hadiths, 531 and 532, into one), #347
+  (two plausible English candidates, 560 vs 565, differ on narration
+  chain directness — picking wrong one would misattribute the hadith).
