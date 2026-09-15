@@ -50,3 +50,10 @@ placeholder waiting to be filled in bulk.
   to pray (raising hands, recitation, bowing, tashahhud, etc.) — this
   book's own two separately-titled "Kitobi Азон" and "Kitobi Абвоби
   Сифати Намоз" both map into this single English book.
+- +4 more (Sep 15 session cont'd): 876, 886, 918, 1000 — Book 11 (Friday
+  Prayer) opening hadith, Umar's silk-cloak question, Jabir's date-palm
+  stem/pulpit hadith, and Ibn Umar praying Witr on a mount (Book 14).
+  Total: 54. Confirmed Books 11, 13, 14, 15, 16 in this source keep the
+  SAME book numbers as the site's English dataset (876-941, 948-989,
+  990-1004, ... respectively) — book-level alignment holds from Book 11
+  onward, simplifying matching for everything after.
