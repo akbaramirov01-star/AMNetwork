@@ -42,3 +42,11 @@ placeholder waiting to be filled in bulk.
   merge two distinct English hadiths, 531 and 532, into one), #347
   (two plausible English candidates, 560 vs 565, differ on narration
   chain directness — picking wrong one would misattribute the hadith).
+- +6 more verified (continuing Sep 15 session): 566, 567 (Isha delay/Abu
+  Musa boat, book 9), 660, 662, 616, 835 (Book 10: seven-shaded hadith,
+  mosque-visits reward, muddy-day pray-at-home, tashahhud). Total: 47.
+- Confirmed Book 10 in the site's dataset spans hadithnumbers 603-875 and
+  covers BOTH "Call to Prayers (Adhaan)" and the full description of how
+  to pray (raising hands, recitation, bowing, tashahhud, etc.) — this
+  book's own two separately-titled "Kitobi Азон" and "Kitobi Абвоби
+  Сифати Намоз" both map into this single English book.
