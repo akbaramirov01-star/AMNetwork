@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v27-dua-translit';
+const CACHE = 'amnetwork-v28-hero-no-glow';
 const STATIC = [
   '/',
   '/index.html',
