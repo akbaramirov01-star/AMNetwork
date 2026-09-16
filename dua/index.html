@@ -103,6 +103,7 @@ main{padding-top:64px;min-height:100vh}
 .dua-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);margin-bottom:12px}
 .dua-arabic{font-family:'Noto Naskh Arabic',sans-serif;direction:rtl;font-size:19px;line-height:2;color:var(--text);margin-bottom:12px}
 .dua-latin{font-size:12.5px;font-style:italic;color:var(--text3);line-height:1.7;margin-bottom:10px}
+.dua-latin-tj{font-style:normal}
 .dua-translation{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:10px}
 .dua-notes{display:inline-block;font-size:11px;color:var(--gold);border:1px solid rgba(201,168,76,0.3);background:var(--gold3);border-radius:6px;padding:2px 9px;margin-bottom:10px}
 .dua-fawaid{font-size:12.5px;color:var(--text2);line-height:1.7;background:var(--input-bg);border-radius:10px;padding:10px 12px;margin-bottom:10px}
@@ -259,9 +260,16 @@ const DUA_BASE = 'https://raw.githubusercontent.com/fitrahive/dua-dhikr/main/dat
 // other site language is covered by our own AI-generated translation of
 // the explanatory fields (title/translation/notes/benefits/fawaid) —
 // self-hosted under /dua/data/ai/<lang>/<category>.json, applied on top
-// of the English base (arabic/latin/source never change). Honestly
-// labeled in the UI (ai_translation_note) and swapped for a certified
-// translation once one is found, per the founder's explicit instruction.
+// of the English base (arabic/source never change). Honestly labeled in
+// the UI (ai_translation_note) and swapped for a certified translation
+// once one is found, per the founder's explicit instruction.
+//
+// Tajik additionally carries translit_tj: the Arabic read phonetically in
+// Tajik Cyrillic (e.g. "Аллоҳу акбар"), not just the dataset's own Latin
+// transliteration — Tajik readers don't read Arabic script and often
+// aren't comfortable sounding out Latin-letter transliteration either,
+// so this replaces `latin` for tj specifically rather than sitting
+// alongside it.
 const DUA_LANG = { en: 'en', id: 'id' };
 const DUA_AI_LANGS = ['ar', 'ru', 'tj', 'tr', 'zh', 'ms', 'fr', 'de'];
 
@@ -315,6 +323,7 @@ async function selectCategory(category){
           notes: aiData[i].notes || null,
           benefits: aiData[i].benefits || null,
           fawaid: aiData[i].fawaid || null,
+          translit_tj: aiData[i].translit_tj || null,
         }));
         usedAi = true;
       } else {
@@ -329,7 +338,7 @@ async function selectCategory(category){
       <div class="dua-card">
         ${d.title ? `<div class="dua-title">${escapeDuaHtml(d.title)}</div>` : ''}
         ${d.arabic ? `<div class="dua-arabic">${escapeDuaHtml(d.arabic)}</div>` : ''}
-        ${d.latin ? `<div class="dua-latin">${escapeDuaHtml(d.latin)}</div>` : ''}
+        ${d.translit_tj ? `<div class="dua-latin dua-latin-tj">${escapeDuaHtml(d.translit_tj)}</div>` : (d.latin ? `<div class="dua-latin">${escapeDuaHtml(d.latin)}</div>` : '')}
         ${d.translation ? `<div class="dua-translation">${escapeDuaHtml(d.translation)}</div>` : ''}
         ${usedFallback ? `<div class="dua-note">${t('fallback_note')}</div>` : ''}
         ${d.notes ? `<div class="dua-notes">${escapeDuaHtml(d.notes)}</div>` : ''}

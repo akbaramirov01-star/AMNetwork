@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v26-hero-fixes';
+const CACHE = 'amnetwork-v27-dua-translit';
 const STATIC = [
   '/',
   '/index.html',
