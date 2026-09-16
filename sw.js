@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v25-hadith-grades';
+const CACHE = 'amnetwork-v26-hero-fixes';
 const STATIC = [
   '/',
   '/index.html',
