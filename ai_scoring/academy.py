@@ -62,7 +62,7 @@ AUDIENCES = {
 LANG_NAMES = {
     "en": "English", "ru": "Russian", "ar": "Arabic", "tj": "Tajik (Cyrillic)",
     "id": "Indonesian", "tr": "Turkish", "zh": "Chinese (Simplified)",
-    "ms": "Malay", "de": "German",
+    "ms": "Malay", "de": "German", "fr": "French",
 }
 
 SYSTEM_PROMPT = """You re-voice a fixed lesson from AM Academy for one specific reader.

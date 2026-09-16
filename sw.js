@@ -1,4 +1,10 @@
-const CACHE = 'amnetwork-v28-hero-no-glow';
+const CACHE = 'amnetwork-v29-quran-offline';
+// Must match QURAN_OFFLINE_CACHE in quran/index.html byte-for-byte — that
+// page is the only writer of this bucket (a per-surah "save for offline"
+// button). It is user data (surahs someone explicitly chose to keep) and
+// must survive every site update, unlike the CACHE bucket above.
+const QURAN_OFFLINE_CACHE = 'amn-quran-offline-v1';
+const QURAN_OFFLINE_HOSTS = ['api.quran.com', 'everyayah.com'];
 const STATIC = [
   '/',
   '/index.html',
@@ -54,6 +60,8 @@ const STATIC = [
   '/live/index.html',
   '/names/',
   '/names/index.html',
+  '/quran/',
+  '/quran/index.html',
 ];
 
 self.addEventListener('install', e => {
@@ -76,15 +84,25 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE && k !== QURAN_OFFLINE_CACHE).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
-  // Never persist third-party API quotes or private API responses.
-  if (new URL(e.request.url).origin !== self.location.origin) return;
+  const reqUrl = new URL(e.request.url);
+  if (reqUrl.origin !== self.location.origin) {
+    if (QURAN_OFFLINE_HOSTS.includes(reqUrl.hostname)) {
+      e.respondWith(
+        caches.open(QURAN_OFFLINE_CACHE)
+          .then(c => c.match(e.request))
+          .then(hit => hit || fetch(e.request))
+      );
+    }
+    // Never persist third-party API quotes or private API responses.
+    return;
+  }
 
   // Network-first для HTML-страниц — всегда свежий контент
   if (e.request.mode === 'navigate') {

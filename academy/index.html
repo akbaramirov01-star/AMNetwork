@@ -1316,5 +1316,13 @@ document.getElementById('asstInput').addEventListener('keydown', e=>{ if(e.key==
 </script>
 <script src="/academy/progress-transfer.js?v=20260905"></script>
 <script>progressTransfer=AMProgressTransfer.init({document,storage:localStorage,curriculum:CURRICULUM,getLanguage:()=>store.lang,onImport:()=>renderMods(modTr)});</script>
+<script>
+// Registered on every page, not just the homepage: someone who lands
+// directly on /prayer-times/ should get offline support and be able to
+// turn on reminders without visiting the front page first.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+}
+</script>
 </body>
 </html>

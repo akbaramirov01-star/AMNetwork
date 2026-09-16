@@ -79,6 +79,11 @@ def health():
 
 @app.route("/quran/reciters", methods=["GET"])
 def quran_reciters():
+    # Not called by any page today (the live site streams from everyayah.com
+    # instead) but kept for whatever uses Quran Foundation's own API next —
+    # still needs a floor so an unauthenticated GET can't be hammered.
+    if not cheap_limiter.allow(client_address()):
+        return jsonify(error="Too many requests. Please try again shortly."), 429
     try:
         return jsonify(quran_get_reciters())
     except QuranAudioError as e:
@@ -88,6 +93,8 @@ def quran_reciters():
 
 @app.route("/quran/audio/<int:reciter_id>/<int:chapter_id>", methods=["GET"])
 def quran_audio(reciter_id, chapter_id):
+    if not cheap_limiter.allow(client_address()):
+        return jsonify(error="Too many requests. Please try again shortly."), 429
     if not (1 <= chapter_id <= 114):
         return jsonify({"error": "invalid_chapter"}), 400
     try:
@@ -133,7 +140,8 @@ def score():
         profile = RecipientProfile(**kwargs)
         breakdown = score_recipient(profile)
     except TypeError as e:
-        return jsonify({"error": f"invalid field in request: {e}"}), 400
+        app.logger.warning("score: rejected malformed input: %s", e)
+        return jsonify({"error": "invalid field in request"}), 400
     except (ValueError, AttributeError, ZeroDivisionError) as e:
         app.logger.warning("score: rejected malformed input: %s", e)
         return jsonify({"error": "invalid field value in request"}), 400
@@ -205,7 +213,7 @@ def chat():
 # ── AM Academy ────────────────────────────────────────────────────────────────
 MAX_CORE_LEN = 6000
 MAX_SITUATION_LEN = 1200
-VALID_LANGS = {"en", "ru", "ar", "tj", "id", "tr", "zh", "ms", "de"}
+VALID_LANGS = {"en", "ru", "ar", "tj", "id", "tr", "zh", "ms", "de", "fr"}
 
 # Adapted lessons are deterministic per (lesson, audience, language) for a given
 # canonical text, so cache them: the same reader profile shouldn't re-bill a
@@ -496,6 +504,8 @@ def push_subscribe():
 
 @app.route("/push/unsubscribe", methods=["POST"])
 def push_unsubscribe():
+    if not cheap_limiter.allow(client_address()):
+        return jsonify(error="Too many requests. Please try again shortly."), 429
     p = request.get_json(force=True, silent=True) or {}
     endpoint = p.get("endpoint")
     if not isinstance(endpoint, str) or not endpoint:

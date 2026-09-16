@@ -88,7 +88,7 @@ function validate_(e,kind) {
     d[k]=v.trim();
   });
   if (!d.name || d.name.length > 120 || d.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) throw Error('contact');
-  if (!/^(en|ru|ar|tj|id|tr|zh|ms|de)$/.test(d.lang)) throw Error('language');
+  if (!/^(en|ru|ar|tj|id|tr|zh|ms|de|fr)$/.test(d.lang)) throw Error('language');
   if (kind === 'waitlist' && !d.role) throw Error('role');
   if (kind === 'apply') {
     if (!d.country || !d.city || !d.description) throw Error('required');

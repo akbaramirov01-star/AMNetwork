@@ -17,10 +17,22 @@ from flask import jsonify, request
 
 
 def setting(name, default):
-    value = int(os.environ.get(name, default))
-    if value < 1:
-        raise ValueError(f"{name} must be positive")
-    return value
+    # A malformed env var must not take the whole app down at import time —
+    # fail back to the default (and log it) rather than crash the process
+    # over a deploy-time typo in one rate-limit knob.
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    try:
+        value = int(raw)
+        if value < 1:
+            raise ValueError(f"{name} must be positive")
+        return value
+    except ValueError:
+        import logging
+        logging.getLogger(__name__).error(
+            "invalid %s=%r, falling back to default %r", name, raw, default)
+        return default
 
 
 class RequestBudget:
@@ -119,7 +131,7 @@ def client_address():
     if networks:
         if trusted(peer):
             for value in reversed(chain):
-                if not trusted(peer):
+                if not trusted(value):
                     break
                 peer = value
         return peer
