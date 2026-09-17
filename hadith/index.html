@@ -462,6 +462,25 @@ async function loadCertifiedTajik(book){
   }
   return certifiedTjCache[book];
 }
+// Pre-baked bulk AI translation (self-hosted, /hadith/data/ai/<lang>/<book>.json)
+// for languages the dataset doesn't cover — same "AI-translated, unverified"
+// disclosure as the on-demand path, but instant and free since it never
+// touches the backend's AI budget. Coverage fills in book-by-book over time,
+// so callers must tolerate partial files: anything not in here yet still
+// falls through to the on-demand /hadith/translate path below.
+let staticAiCache = {}; // "lang:book" -> {hadithnumber: text} | null
+async function loadStaticAiTranslation(lang, book){
+  const key = lang + ':' + book;
+  if (Object.prototype.hasOwnProperty.call(staticAiCache, key)) return staticAiCache[key];
+  try {
+    const res = await fetch('/hadith/data/ai/' + lang + '/' + book + '.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    staticAiCache[key] = await res.json();
+  } catch (e) {
+    staticAiCache[key] = null;
+  }
+  return staticAiCache[key];
+}
 async function loadStaticTitles(targetLang){
   if (targetLang === 'en') return null;
   if (Object.prototype.hasOwnProperty.call(hadithTitlesCache, targetLang)) return hadithTitlesCache[targetLang];
@@ -504,11 +523,17 @@ function toggleGradeLegend(){
 
 function renderHadithList(trList, arByNum, opts){
   opts = opts || {};
+  // A pre-baked static AI file (see loadStaticAiTranslation) reads as the
+  // same finished, disclosed AI translation as a completed on-demand call —
+  // it just never needed one. Either one should show the one AI disclosure,
+  // never both at once.
+  const staticAiMap = opts.staticAiMap || {};
+  const anyStaticAi = trList.some(h => staticAiMap[h.hadithnumber]);
   // Three distinct states, not two: plain "no certified translation"
   // (nothing will change), "translating" (an AI translation is in
   // flight — the backend can be slow to wake up, so say so rather than
   // silently sitting in English), and the finished AI translation.
-  const note = opts.showAiNote ? `<div class="hadith-ai-note">${t('ai_translation_note')}</div>`
+  const note = (opts.showAiNote || anyStaticAi) ? `<div class="hadith-ai-note">${t('ai_translation_note')}</div>`
     : opts.showTranslating ? `<div class="hadith-ai-note">${t('ai_translating_note')}</div>`
     : opts.showRetryNote ? `<div class="hadith-ai-note">${t('translation_failed_note')} <button type="button" class="hadith-retry-btn" onclick="openChapter(currentChapter)">${t('retry_btn')}</button></div>`
     : '';
@@ -528,13 +553,14 @@ function renderHadithList(trList, arByNum, opts){
     const rawGrade = Array.isArray(h.grades) && h.grades.length && h.grades[0].grade ? h.grades[0].grade : '';
     const gradeInfo = classifyGrade(rawGrade, currentBook);
     const certified = certifiedMap[h.hadithnumber];
-    const translationText = certified || (opts.aiText && opts.aiText[h.hadithnumber]) || h.text;
+    const staticAi = staticAiMap[h.hadithnumber];
+    const translationText = certified || staticAi || (opts.aiText && opts.aiText[h.hadithnumber]) || h.text;
     return `
       <div class="hadith-card">
         ${renderGradeBadge(gradeInfo, 'hadith-grade-top')}
         ${ar ? `<div class="hadith-arabic">${escapeHadithHtml(ar.text)}</div>` : ''}
         ${lang !== 'ar' ? `<div class="hadith-translation">${escapeHadithHtml(translationText)}</div>` : ''}
-        ${(!certified && opts.showFallbackNote && !opts.showAiNote && !opts.showTranslating) ? `<div class="hadith-note">${t('fallback_note')}</div>` : ''}
+        ${(!certified && !staticAi && opts.showFallbackNote && !opts.showAiNote && !opts.showTranslating) ? `<div class="hadith-note">${t('fallback_note')}</div>` : ''}
         <div class="hadith-meta">
           <span>${t('hadith_word')} ${h.hadithnumber}</span>
           ${renderGradeBadge(gradeInfo)}
@@ -657,10 +683,19 @@ async function openChapter(chapterNum){
     const certifiedData = lang === 'tj' ? await loadCertifiedTajik(currentBook) : null;
     if (myToken !== hadithChapterToken) return;
     const certifiedMap = certifiedData || {};
-    const stillNeedsTranslation = trList.filter(h => !certifiedMap[h.hadithnumber]);
+
+    const staticAiData = HADITH_AI_LANGS.includes(lang) ? await loadStaticAiTranslation(lang, currentBook) : null;
+    if (myToken !== hadithChapterToken) return;
+    const staticAiMap = staticAiData || {};
+
+    // Certified (human-verified) beats our own AI output; a pre-baked static
+    // AI file beats calling the live backend at all — only what neither
+    // covers yet actually goes through the on-demand /hadith/translate call.
+    const stillNeedsTranslation = trList.filter(h => !certifiedMap[h.hadithnumber] && !staticAiMap[h.hadithnumber]);
     const canAiTranslate = usedFallback && HADITH_AI_LANGS.includes(lang) && stillNeedsTranslation.length > 0;
     content.innerHTML = renderHadithList(trList, arByNum, {
       certifiedMap,
+      staticAiMap,
       showFallbackNote: usedFallback,
       showTranslating: canAiTranslate,
     });
@@ -673,12 +708,12 @@ async function openChapter(chapterNum){
           // fired (not just slow) — say so plainly, with a way to try
           // again, instead of leaving the "translating…" note up forever
           // or silently pretending this language just isn't supported.
-          content.innerHTML = renderHadithList(trList, arByNum, { certifiedMap, showRetryNote: true });
+          content.innerHTML = renderHadithList(trList, arByNum, { certifiedMap, staticAiMap, showRetryNote: true });
           return;
         }
         const aiText = {};
         stillNeedsTranslation.forEach((h, i) => { if (translated[i]) aiText[h.hadithnumber] = translated[i]; });
-        content.innerHTML = renderHadithList(trList, arByNum, { certifiedMap, aiText, showAiNote: true });
+        content.innerHTML = renderHadithList(trList, arByNum, { certifiedMap, staticAiMap, aiText, showAiNote: true });
       });
     }
   } catch (e) {
