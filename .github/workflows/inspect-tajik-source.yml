@@ -1,4 +1,4 @@
-name: Inspect Tajik Bukhari source
+name: Generate Tajik hadith translations
 
 on:
   push:
@@ -8,42 +8,48 @@ on:
       - .github/workflows/inspect-tajik-source.yml
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  inspect:
+  generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - name: Download and inspect public Tajik Bukhari archive
+        with:
+          ref: codex/tajik-hadith-translation
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install translator dependency
+        run: pip install --quiet anthropic
+
+      - name: Generate a validation batch
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          set -euo pipefail
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq p7zip-full
-          curl -fL --retry 3 -o /tmp/bukhari-tj.rar \
-            https://github.com/SakinaDevGroup/sahih-al-bukhari-tajik-json/releases/download/v1.0/sahih-al-bukhari-tajik-json.rar
-          sha256sum /tmp/bukhari-tj.rar
-          7z l /tmp/bukhari-tj.rar
-          mkdir -p /tmp/bukhari-tj
-          7z x -y -o/tmp/bukhari-tj /tmp/bukhari-tj.rar
-          find /tmp/bukhari-tj -maxdepth 4 -type f -printf '%p %s bytes\n'
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::ANTHROPIC_API_KEY repository secret is not set."
+            exit 1
+          fi
+          python3 ai_scoring/generate_hadith_static.py --book tirmidhi --max-items 3
+
+      - name: Validate and save the batch
+        run: |
           python3 - <<'PY'
           import json
           from pathlib import Path
-          files = list(Path('/tmp/bukhari-tj').rglob('*.json'))
-          print('JSON files:', len(files))
-          for path in files:
-              if path.name not in {'bukhari_full.json', 'metadata.json'}:
-                  continue
-              data = json.loads(path.read_text(encoding='utf-8-sig'))
-              print('\nFILE', path, 'TYPE', type(data).__name__)
-              if isinstance(data, list):
-                  print('COUNT', len(data))
-                  for item in data[:2]:
-                      print(json.dumps(item, ensure_ascii=False)[:6000])
-              elif isinstance(data, dict):
-                  print('KEYS', list(data)[:30])
-                  for key, value in list(data.items())[:2]:
-                      print('ITEM', key, json.dumps(value, ensure_ascii=False)[:6000])
+          path = Path('hadith/data/ai/tj/tirmidhi.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+          assert len(data) >= 3
+          assert all(str(k).isdigit() and isinstance(v, str) and v.strip() for k, v in data.items())
+          print(f'Validated {len(data)} Tajik translations')
           PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hadith/data/ai/tj/tirmidhi.json
+          git commit -m "Add initial Tajik Tirmidhi translation batch"
+          git push origin HEAD:codex/tajik-hadith-translation
