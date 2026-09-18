@@ -13,7 +13,7 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,19 +24,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Cache translation model
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/huggingface
-          key: madlad400-3b-ct2-int8-v2
-
-      - name: Install offline translation model dependencies
-        run: pip install --quiet ctranslate2 sentencepiece huggingface_hub
-
       - name: Generate a validation batch
         run: |
           rm -f hadith/data/ai/tj/tirmidhi.json
-          python3 ai_scoring/generate_hadith_static.py --book tirmidhi --source-language ara --engine madlad --max-items 3
+          python3 ai_scoring/generate_hadith_static.py --book tirmidhi --source-language eng --engine google --max-items 5
 
       - name: Validate and save the batch
         run: |
@@ -46,13 +37,14 @@ jobs:
           from pathlib import Path
           path = Path('hadith/data/ai/tj/tirmidhi.json')
           data = json.loads(path.read_text(encoding='utf-8'))
-          assert len(data) >= 3
+          assert len(data) >= 5
           assert all(str(k).isdigit() and isinstance(v, str) and v.strip() for k, v in data.items())
           assert all(re.search(r'[А-Яа-яЁёҚқҒғӢӣҶҷҲҳӮӯ]', v) for v in data.values())
+          assert all(not re.search(r'\b(\w+)(?:\s+\1){10,}', v, re.I) for v in data.values())
           print(f'Validated {len(data)} Tajik translations')
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add hadith/data/ai/tj/tirmidhi.json
-          git commit -m "Test Arabic-source Tajik Tirmidhi translation"
+          git commit -m "Test Tajik hadith translation quality"
           git push origin HEAD:codex/tajik-hadith-translation
