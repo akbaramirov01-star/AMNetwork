@@ -217,6 +217,49 @@ def make_persian_translator(source_language: str) -> Callable[[list[str]], list[
     return lambda texts: [translate_one(text) for text in texts]
 
 
+def make_tajikgpt_translator() -> Callable[[list[str]], list[str] | None]:
+    api_key = os.environ.get("TAJIKGPT_API_KEY")
+    if not api_key:
+        raise RuntimeError("TAJIKGPT_API_KEY is required for the tajikgpt engine")
+
+    from tajikgpt import TajikGPT
+    client = TajikGPT(api_key=api_key)
+    system = (
+        "Шумо матни ҳадисро барои сомонаи исломӣ тарҷума мекунед. "
+        "Ҳар матнро аз англисӣ ба забони адабии тоҷикӣ бо хатти кириллӣ дақиқ тарҷума кунед. "
+        "Маъно, номҳо, рақамҳо, санад, дараҷа ва истинодҳоро тағйир надиҳед; "
+        "ҳеҷ шарҳ ё ҷумла илова ва ҳазф накунед. Истилоҳоти маъмули исломиро дуруст истифода баред. "
+        "Танҳо массиви хоми JSON-и сатрҳои тарҷумашударо бо ҳамон тартиб ва ҳамон миқдор баргардонед."
+    )
+
+    def translate(texts: list[str]) -> list[str] | None:
+        response = client.chat.completions.create(
+            model="tj-1.0",
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": json.dumps(texts, ensure_ascii=False)},
+            ],
+            max_tokens=8192,
+            temperature=0.1,
+        )
+        raw = response.choices[0].message.content.strip()
+        if raw.startswith("```"):
+            raw = raw.split("```", 2)[1]
+            if raw.startswith("json"):
+                raw = raw[4:]
+        try:
+            output = json.loads(raw)
+        except (ValueError, TypeError):
+            return None
+        if not isinstance(output, list) or len(output) != len(texts):
+            return None
+        if not all(isinstance(item, str) and item.strip() for item in output):
+            return None
+        return [item.strip() for item in output]
+
+    return translate
+
+
 def make_anthropic_translator() -> Callable[[list[str]], list[str] | None]:
     if not os.environ.get("ANTHROPIC_API_KEY"):
         raise RuntimeError("ANTHROPIC_API_KEY is required for the anthropic engine")
@@ -292,7 +335,7 @@ def build(
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--book", choices=BOOKS, required=True)
-    parser.add_argument("--engine", choices=("madlad", "google", "persian", "anthropic"), default="madlad")
+    parser.add_argument("--engine", choices=("madlad", "google", "persian", "tajikgpt", "anthropic"), default="madlad")
     parser.add_argument("--source-language", choices=("eng", "ara", "rus"), default="eng")
     parser.add_argument(
         "--max-items",
@@ -310,6 +353,8 @@ def main() -> int:
         translate = make_google_translator(args.source_language)
     elif args.engine == "persian":
         translate = make_persian_translator(args.source_language)
+    elif args.engine == "tajikgpt":
+        translate = make_tajikgpt_translator()
     else:
         translate = make_anthropic_translator()
     completed = build(args.book, args.source_language, args.max_items, translate)
