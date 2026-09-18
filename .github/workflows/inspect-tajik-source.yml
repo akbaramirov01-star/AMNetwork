@@ -1,0 +1,45 @@
+name: Inspect Tajik Bukhari source
+
+on:
+  push:
+    branches:
+      - codex/tajik-hadith-translation
+    paths:
+      - .github/workflows/inspect-tajik-source.yml
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and inspect public Tajik Bukhari archive
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq unar
+          curl -fL --retry 3 -o /tmp/bukhari-tj.rar \
+            https://github.com/SakinaDevGroup/sahih-al-bukhari-tajik-json/releases/download/v1.0/sahih-al-bukhari-tajik-json.rar
+          mkdir -p /tmp/bukhari-tj
+          unar -quiet -output-directory /tmp/bukhari-tj /tmp/bukhari-tj.rar
+          find /tmp/bukhari-tj -maxdepth 3 -type f -printf '%p %s bytes\n'
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          files = list(Path('/tmp/bukhari-tj').rglob('*.json'))
+          print('JSON files:', [str(p) for p in files])
+          for path in files:
+              data = json.loads(path.read_text(encoding='utf-8-sig'))
+              print('\nFILE', path, 'TYPE', type(data).__name__)
+              if isinstance(data, list):
+                  print('COUNT', len(data))
+                  for item in data[:2]:
+                      print(json.dumps(item, ensure_ascii=False)[:4000])
+              elif isinstance(data, dict):
+                  print('KEYS', list(data)[:30])
+                  for key, value in list(data.items())[:2]:
+                      print('ITEM', key, json.dumps(value, ensure_ascii=False)[:4000])
+          PY
