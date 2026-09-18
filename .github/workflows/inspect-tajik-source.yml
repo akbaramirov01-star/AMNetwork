@@ -24,10 +24,13 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install Persian to Tajik transliterator
+        run: pip install --quiet shekar
+
       - name: Generate a validation batch
         run: |
           rm -f hadith/data/ai/tj/tirmidhi.json
-          python3 ai_scoring/generate_hadith_static.py --book tirmidhi --source-language eng --engine google --max-items 5
+          python3 ai_scoring/generate_hadith_static.py --book tirmidhi --source-language eng --engine persian --max-items 5
 
       - name: Validate and save the batch
         run: |
@@ -40,11 +43,12 @@ jobs:
           assert len(data) >= 5
           assert all(str(k).isdigit() and isinstance(v, str) and v.strip() for k, v in data.items())
           assert all(re.search(r'[А-Яа-яЁёҚқҒғӢӣҶҷҲҳӮӯ]', v) for v in data.values())
+          assert all(not re.search(r'[\u0600-\u06ffњљќ]', v) for v in data.values())
           assert all(not re.search(r'\b(\w+)(?:\s+\1){10,}', v, re.I) for v in data.values())
           print(f'Validated {len(data)} Tajik translations')
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add hadith/data/ai/tj/tirmidhi.json
-          git commit -m "Test Russian-bridge Tajik translation quality"
+          git commit -m "Test Persian-bridge Tajik translation quality"
           git push origin HEAD:codex/tajik-hadith-translation
