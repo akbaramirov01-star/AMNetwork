@@ -34,7 +34,9 @@ jobs:
         run: pip install --quiet ctranslate2 sentencepiece huggingface_hub
 
       - name: Generate a validation batch
-        run: python3 ai_scoring/generate_hadith_static.py --book tirmidhi --engine madlad --max-items 3
+        run: |
+          rm -f hadith/data/ai/tj/tirmidhi.json
+          python3 ai_scoring/generate_hadith_static.py --book tirmidhi --source-language ara --engine madlad --max-items 3
 
       - name: Validate and save the batch
         run: |
@@ -52,5 +54,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add hadith/data/ai/tj/tirmidhi.json
-          git commit -m "Add initial Tajik Tirmidhi translation batch"
+          git commit -m "Test Arabic-source Tajik Tirmidhi translation"
           git push origin HEAD:codex/tajik-hadith-translation
