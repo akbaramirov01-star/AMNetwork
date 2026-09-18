@@ -22,7 +22,7 @@ BOOKS = ("tirmidhi", "muslim", "bukhari")
 SOURCE = "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/eng-{book}.json"
 OUT_DIR = ROOT / "hadith" / "data" / "ai" / "tj"
 CERTIFIED = ROOT / "hadith" / "data" / "tj-certified" / "bukhari.json"
-OPUS_MODEL = "Helsinki-NLP/opus-mt-en-ine"
+MADLAD_MODEL = "Heng666/madlad400-3b-mt-ct2-int8"
 MAX_BATCH_ITEMS = 8
 MAX_BATCH_CHARS = 10_000
 
@@ -71,8 +71,8 @@ def make_batches(items: list[tuple[str, str]]) -> list[list[tuple[str, str]]]:
     return batches
 
 
-def split_for_opus(text: str, max_words: int = 180) -> list[str]:
-    """Keep every word while staying safely below Marian's 512-token limit."""
+def split_for_model(text: str, max_words: int = 150) -> list[str]:
+    """Keep every word while staying below the translation context limit."""
     sentences = re.split(r"(?<=[.!?])\s+", text.strip())
     chunks: list[str] = []
     current: list[str] = []
@@ -100,44 +100,43 @@ def split_for_opus(text: str, max_words: int = 180) -> list[str]:
     return chunks or [text]
 
 
-def make_opus_translator() -> Callable[[list[str]], list[str]]:
-    import torch
-    from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+def make_madlad_translator() -> Callable[[list[str]], list[str]]:
+    import ctranslate2
+    from huggingface_hub import snapshot_download
+    from sentencepiece import SentencePieceProcessor
 
-    tokenizer = AutoTokenizer.from_pretrained(OPUS_MODEL)
-    model = AutoModelForSeq2SeqLM.from_pretrained(OPUS_MODEL)
-    model.eval()
+    model_path = snapshot_download(MADLAD_MODEL)
+    tokenizer = SentencePieceProcessor()
+    tokenizer.load(str(Path(model_path) / "sentencepiece.model"))
+    translator = ctranslate2.Translator(model_path, device="cpu", compute_type="int8")
 
     def translate(texts: list[str]) -> list[str]:
         pieces: list[str] = []
         owners: list[int] = []
         for index, text in enumerate(texts):
-            for piece in split_for_opus(text):
-                pieces.append(">>tgk_Cyrl<< " + piece)
+            for piece in split_for_model(text):
+                pieces.append(piece)
                 owners.append(index)
 
-        translated_pieces: list[str] = []
-        for start in range(0, len(pieces), 8):
-            encoded = tokenizer(
-                pieces[start:start + 8],
-                return_tensors="pt",
-                padding=True,
-                truncation=False,
-            )
-            with torch.inference_mode():
-                generated = model.generate(
-                    **encoded,
-                    max_new_tokens=512,
-                    num_beams=4,
-                    early_stopping=True,
-                )
-            translated_pieces.extend(
-                tokenizer.batch_decode(generated, skip_special_tokens=True)
-            )
+        source_tokens = [
+            tokenizer.encode("<2tg> " + piece, out_type=str)
+            for piece in pieces
+        ]
+        results = translator.translate_batch(
+            source_tokens,
+            batch_type="tokens",
+            max_batch_size=512,
+            beam_size=4,
+            max_decoding_length=512,
+        )
+        translated_pieces = [
+            tokenizer.decode(result.hypotheses[0]).strip()
+            for result in results
+        ]
 
         grouped: list[list[str]] = [[] for _ in texts]
         for owner, translated in zip(owners, translated_pieces):
-            grouped[owner].append(translated.strip())
+            grouped[owner].append(translated)
         return [" ".join(parts).strip() for parts in grouped]
 
     return translate
@@ -147,7 +146,6 @@ def make_anthropic_translator() -> Callable[[list[str]], list[str] | None]:
     if not os.environ.get("ANTHROPIC_API_KEY"):
         raise RuntimeError("ANTHROPIC_API_KEY is required for the anthropic engine")
     from hadith_translate import translate_hadiths
-
     return lambda texts: translate_hadiths(texts, "tj")
 
 
@@ -169,7 +167,6 @@ def translate_with_recovery(
 
     if len(batch) == 1:
         raise RuntimeError(f"translation failed for hadith {batch[0][0]}")
-
     midpoint = len(batch) // 2
     return (
         translate_with_recovery(batch[:midpoint], translate)
@@ -194,7 +191,6 @@ def build(
         if not number or not text or number in output or number in certified:
             continue
         pending.append((number, text))
-
     if max_items is not None:
         pending = pending[:max_items]
 
@@ -214,14 +210,13 @@ def build(
         completed += len(batch)
         save_json(output_path, output)
         print(f"{book}: batch {index}/{len(batches)}, saved {completed}/{len(pending)}")
-
     return completed
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--book", choices=BOOKS, required=True)
-    parser.add_argument("--engine", choices=("opus", "anthropic"), default="opus")
+    parser.add_argument("--engine", choices=("madlad", "anthropic"), default="madlad")
     parser.add_argument(
         "--max-items",
         type=int,
@@ -233,8 +228,8 @@ def main() -> int:
         parser.error("--max-items must be positive")
 
     translate = (
-        make_opus_translator()
-        if args.engine == "opus"
+        make_madlad_translator()
+        if args.engine == "madlad"
         else make_anthropic_translator()
     )
     completed = build(args.book, args.max_items, translate)
