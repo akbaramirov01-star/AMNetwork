@@ -560,7 +560,7 @@ function renderHadithList(trList, arByNum, opts){
         ${renderGradeBadge(gradeInfo, 'hadith-grade-top')}
         ${ar ? `<div class="hadith-arabic">${escapeHadithHtml(ar.text)}</div>` : ''}
         ${lang !== 'ar' ? `<div class="hadith-translation">${escapeHadithHtml(translationText)}</div>` : ''}
-        ${(!certified && !staticAi && opts.showFallbackNote && !opts.showAiNote && !opts.showTranslating) ? `<div class="hadith-note">${t('fallback_note')}</div>` : ''}
+        ${(!certified && !staticAi && h.text && opts.showFallbackNote && !opts.showAiNote && !opts.showTranslating) ? `<div class="hadith-note">${t('fallback_note')}</div>` : ''}
         <div class="hadith-meta">
           <span>${t('hadith_word')} ${h.hadithnumber}</span>
           ${renderGradeBadge(gradeInfo)}
@@ -691,7 +691,7 @@ async function openChapter(chapterNum){
     // Certified (human-verified) beats our own AI output; a pre-baked static
     // AI file beats calling the live backend at all — only what neither
     // covers yet actually goes through the on-demand /hadith/translate call.
-    const stillNeedsTranslation = trList.filter(h => !certifiedMap[h.hadithnumber] && !staticAiMap[h.hadithnumber]);
+    const stillNeedsTranslation = trList.filter(h => typeof h.text === 'string' && h.text.trim() && !certifiedMap[h.hadithnumber] && !staticAiMap[h.hadithnumber]);
     const canAiTranslate = usedFallback && HADITH_AI_LANGS.includes(lang) && stillNeedsTranslation.length > 0;
     content.innerHTML = renderHadithList(trList, arByNum, {
       certifiedMap,
