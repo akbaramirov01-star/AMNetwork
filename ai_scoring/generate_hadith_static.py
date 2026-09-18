@@ -107,7 +107,7 @@ def make_madlad_translator() -> Callable[[list[str]], list[str]]:
 
     model_path = snapshot_download(MADLAD_MODEL)
     tokenizer = SentencePieceProcessor()
-    tokenizer.load(str(Path(model_path) / "sentencepiece.model"))
+    tokenizer.load(str(Path(model_path) / "spiece.model"))
     translator = ctranslate2.Translator(model_path, device="cpu", compute_type="int8")
 
     def translate(texts: list[str]) -> list[str]:
