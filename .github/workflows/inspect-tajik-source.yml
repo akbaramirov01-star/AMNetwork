@@ -50,5 +50,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add hadith/data/ai/tj/tirmidhi.json
-          git commit -m "Test Persian-bridge Tajik translation quality"
+          git commit -m "Retest Persian-bridge Tajik translation quality"
           git push origin HEAD:codex/tajik-hadith-translation
