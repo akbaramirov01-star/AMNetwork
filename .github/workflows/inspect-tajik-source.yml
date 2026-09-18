@@ -13,7 +13,7 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,18 +24,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install translator dependency
-        run: pip install --quiet anthropic
+      - name: Install offline translation model dependencies
+        run: |
+          pip install --quiet torch --index-url https://download.pytorch.org/whl/cpu
+          pip install --quiet "transformers<5" sentencepiece sacremoses
 
       - name: Generate a validation batch
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          if [ -z "$ANTHROPIC_API_KEY" ]; then
-            echo "::error::ANTHROPIC_API_KEY repository secret is not set."
-            exit 1
-          fi
-          python3 ai_scoring/generate_hadith_static.py --book tirmidhi --max-items 3
+        run: python3 ai_scoring/generate_hadith_static.py --book tirmidhi --engine opus --max-items 3
 
       - name: Validate and save the batch
         run: |
@@ -46,6 +41,7 @@ jobs:
           data = json.loads(path.read_text(encoding='utf-8'))
           assert len(data) >= 3
           assert all(str(k).isdigit() and isinstance(v, str) and v.strip() for k, v in data.items())
+          assert all(any(ch in v for ch in 'қғӣҷҳӯҚҒӢҶҲӮ') for v in data.values())
           print(f'Validated {len(data)} Tajik translations')
           PY
           git config user.name "github-actions[bot]"
