@@ -20,26 +20,30 @@ jobs:
         run: |
           set -euo pipefail
           sudo apt-get update -qq
-          sudo apt-get install -y -qq unar
+          sudo apt-get install -y -qq p7zip-full
           curl -fL --retry 3 -o /tmp/bukhari-tj.rar \
             https://github.com/SakinaDevGroup/sahih-al-bukhari-tajik-json/releases/download/v1.0/sahih-al-bukhari-tajik-json.rar
+          sha256sum /tmp/bukhari-tj.rar
+          7z l /tmp/bukhari-tj.rar
           mkdir -p /tmp/bukhari-tj
-          unar -quiet -output-directory /tmp/bukhari-tj /tmp/bukhari-tj.rar
-          find /tmp/bukhari-tj -maxdepth 3 -type f -printf '%p %s bytes\n'
+          7z x -y -o/tmp/bukhari-tj /tmp/bukhari-tj.rar
+          find /tmp/bukhari-tj -maxdepth 4 -type f -printf '%p %s bytes\n'
           python3 - <<'PY'
           import json
           from pathlib import Path
           files = list(Path('/tmp/bukhari-tj').rglob('*.json'))
-          print('JSON files:', [str(p) for p in files])
+          print('JSON files:', len(files))
           for path in files:
+              if path.name not in {'bukhari_full.json', 'metadata.json'}:
+                  continue
               data = json.loads(path.read_text(encoding='utf-8-sig'))
               print('\nFILE', path, 'TYPE', type(data).__name__)
               if isinstance(data, list):
                   print('COUNT', len(data))
                   for item in data[:2]:
-                      print(json.dumps(item, ensure_ascii=False)[:4000])
+                      print(json.dumps(item, ensure_ascii=False)[:6000])
               elif isinstance(data, dict):
                   print('KEYS', list(data)[:30])
                   for key, value in list(data.items())[:2]:
-                      print('ITEM', key, json.dumps(value, ensure_ascii=False)[:4000])
+                      print('ITEM', key, json.dumps(value, ensure_ascii=False)[:6000])
           PY
