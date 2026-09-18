@@ -19,7 +19,7 @@ from typing import Callable
 
 ROOT = Path(__file__).resolve().parents[1]
 BOOKS = ("tirmidhi", "muslim", "bukhari")
-SOURCE = "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/eng-{book}.json"
+SOURCE = "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/{lang}-{book}.json"
 OUT_DIR = ROOT / "hadith" / "data" / "ai" / "tj"
 CERTIFIED = ROOT / "hadith" / "data" / "tj-certified" / "bukhari.json"
 MADLAD_MODEL = "Heng666/madlad400-3b-mt-ct2-int8"
@@ -44,9 +44,9 @@ def save_json(path: Path, data: dict[str, str]) -> None:
     tmp.replace(path)
 
 
-def fetch_book(book: str) -> list[dict]:
+def fetch_book(book: str, lang: str) -> list[dict]:
     req = urllib.request.Request(
-        SOURCE.format(book=book),
+        SOURCE.format(lang=lang, book=book),
         headers={"User-Agent": "AMNetwork-hadith-translation/1.0"},
     )
     with urllib.request.urlopen(req, timeout=45) as response:
@@ -176,6 +176,7 @@ def translate_with_recovery(
 
 def build(
     book: str,
+    source_language: str,
     max_items: int | None,
     translate: Callable[[list[str]], list[str] | None],
 ) -> int:
@@ -183,7 +184,7 @@ def build(
     output: dict[str, str] = load_json(output_path, {})
     certified = load_json(CERTIFIED, {}) if book == "bukhari" else {}
 
-    source = fetch_book(book)
+    source = fetch_book(book, source_language)
     pending: list[tuple[str, str]] = []
     for hadith in source:
         number = str(hadith.get("hadithnumber", ""))
@@ -217,6 +218,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--book", choices=BOOKS, required=True)
     parser.add_argument("--engine", choices=("madlad", "anthropic"), default="madlad")
+    parser.add_argument("--source-language", choices=("eng", "ara", "rus"), default="eng")
     parser.add_argument(
         "--max-items",
         type=int,
@@ -232,7 +234,7 @@ def main() -> int:
         if args.engine == "madlad"
         else make_anthropic_translator()
     )
-    completed = build(args.book, args.max_items, translate)
+    completed = build(args.book, args.source_language, args.max_items, translate)
     print(f"completed={completed}")
     return 0
 
