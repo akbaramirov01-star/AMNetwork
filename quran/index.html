@@ -174,6 +174,7 @@ main{padding-top:64px;min-height:100vh}
 [data-theme="light"] .mushaf-line{color:#1c1c1c}
 .mword{display:inline}
 .mword-deco{color:var(--gold);opacity:.9}
+.mushaf-bismillah{font-family:'Noto Naskh Arabic',serif!important;font-size:.9em;font-weight:600;white-space:nowrap;letter-spacing:0}
 .mword-end{cursor:pointer;color:var(--gold);transition:color .15s ease}
 .mword-end:hover,.mword-end:focus-visible{color:var(--gold2);outline:none}
 .mword.verse-playing{background:var(--gold3);border-radius:4px}
@@ -1185,7 +1186,17 @@ function renderMushafGlyph(word, translations){
   if (word.type === 'end') {
     return `<span class="mword mword-end" style="${style}" role="button" tabindex="0" data-verse-key="${word.verse_key}" onclick="onMushafEndTap(this)">${word.char}</span>`;
   }
-  // surah_header / bismillah / quarter markers — decorative, not interactive.
+  // The source QCF4 Bismillah is a private-use ligature. Some browser/font
+  // combinations draw that decorative glyph with a long stroke through the
+  // phrase, which readers understandably perceive as strikethrough. For this
+  // one marker, render the dataset's own readable Arabic text instead. The
+  // Quran text, page JSON, verse numbering and every other QCF4 glyph remain
+  // untouched.
+  if (word.type === 'bismillah') {
+    const readableBismillah = word.text || 'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ';
+    return `<span class="mword mword-deco mushaf-bismillah" lang="ar" aria-label="${escapeAttr(readableBismillah)}">${escapeHtml(readableBismillah)}</span>`;
+  }
+  // surah_header / quarter markers — decorative, not interactive.
   return `<span class="mword mword-deco" style="${style}">${word.char}</span>`;
 }
 
