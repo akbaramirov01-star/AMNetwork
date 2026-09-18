@@ -146,34 +146,41 @@ def make_madlad_translator() -> Callable[[list[str]], list[str]]:
 def make_google_translator(source_language: str) -> Callable[[list[str]], list[str]]:
     source_code = {"eng": "en", "ara": "ar", "rus": "ru"}[source_language]
 
+    def request_translation(text: str, source: str, target: str) -> str:
+        query = urllib.parse.urlencode({
+            "client": "gtx",
+            "sl": source,
+            "tl": target,
+            "dt": "t",
+            "q": text,
+        })
+        req = urllib.request.Request(
+            "https://translate.googleapis.com/translate_a/single?" + query,
+            headers={"User-Agent": "Mozilla/5.0 AMNetwork-translation/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=45) as response:
+            payload = json.load(response)
+        translated = "".join(
+            segment[0] for segment in payload[0]
+            if isinstance(segment, list) and segment and isinstance(segment[0], str)
+        ).strip()
+        if not translated:
+            raise RuntimeError("Google Translate returned an empty result")
+        time.sleep(0.15)
+        return translated
+
     def translate_one(text: str) -> str:
         translated_parts: list[str] = []
         for piece in split_for_model(text, max_words=80):
-            query = urllib.parse.urlencode({
-                "client": "gtx",
-                "sl": source_code,
-                "tl": "tg",
-                "dt": "t",
-                "q": piece,
-            })
-            req = urllib.request.Request(
-                "https://translate.googleapis.com/translate_a/single?" + query,
-                headers={"User-Agent": "Mozilla/5.0 AMNetwork-translation/1.0"},
-            )
-            with urllib.request.urlopen(req, timeout=45) as response:
-                payload = json.load(response)
-            translated = "".join(
-                segment[0] for segment in payload[0]
-                if isinstance(segment, list) and segment and isinstance(segment[0], str)
-            ).strip()
-            if not translated:
-                raise RuntimeError("Google Translate returned an empty result")
-            translated_parts.append(translated)
-            time.sleep(0.15)
+            intermediate = piece
+            intermediate_language = source_code
+            if source_code != "ru":
+                intermediate = request_translation(piece, source_code, "ru")
+                intermediate_language = "ru"
+            translated_parts.append(request_translation(intermediate, intermediate_language, "tg"))
         return " ".join(translated_parts)
 
     return lambda texts: [translate_one(text) for text in texts]
-
 
 def make_anthropic_translator() -> Callable[[list[str]], list[str] | None]:
     if not os.environ.get("ANTHROPIC_API_KEY"):
