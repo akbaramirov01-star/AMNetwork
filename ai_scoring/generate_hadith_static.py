@@ -10,18 +10,19 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 import time
 import urllib.request
 from pathlib import Path
-
-from hadith_translate import translate_hadiths
+from typing import Callable
 
 ROOT = Path(__file__).resolve().parents[1]
 BOOKS = ("tirmidhi", "muslim", "bukhari")
 SOURCE = "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/eng-{book}.json"
 OUT_DIR = ROOT / "hadith" / "data" / "ai" / "tj"
 CERTIFIED = ROOT / "hadith" / "data" / "tj-certified" / "bukhari.json"
+OPUS_MODEL = "Helsinki-NLP/opus-mt-en-ine"
 MAX_BATCH_ITEMS = 8
 MAX_BATCH_CHARS = 10_000
 
@@ -70,11 +71,94 @@ def make_batches(items: list[tuple[str, str]]) -> list[list[tuple[str, str]]]:
     return batches
 
 
-def translate_with_recovery(batch: list[tuple[str, str]]) -> list[str]:
+def split_for_opus(text: str, max_words: int = 180) -> list[str]:
+    """Keep every word while staying safely below Marian's 512-token limit."""
+    sentences = re.split(r"(?<=[.!?])\s+", text.strip())
+    chunks: list[str] = []
+    current: list[str] = []
+    words = 0
+
+    def flush() -> None:
+        nonlocal current, words
+        if current:
+            chunks.append(" ".join(current))
+            current = []
+            words = 0
+
+    for sentence in sentences:
+        sentence_words = sentence.split()
+        while len(sentence_words) > max_words:
+            flush()
+            chunks.append(" ".join(sentence_words[:max_words]))
+            sentence_words = sentence_words[max_words:]
+        if current and words + len(sentence_words) > max_words:
+            flush()
+        if sentence_words:
+            current.append(" ".join(sentence_words))
+            words += len(sentence_words)
+    flush()
+    return chunks or [text]
+
+
+def make_opus_translator() -> Callable[[list[str]], list[str]]:
+    import torch
+    from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+
+    tokenizer = AutoTokenizer.from_pretrained(OPUS_MODEL)
+    model = AutoModelForSeq2SeqLM.from_pretrained(OPUS_MODEL)
+    model.eval()
+
+    def translate(texts: list[str]) -> list[str]:
+        pieces: list[str] = []
+        owners: list[int] = []
+        for index, text in enumerate(texts):
+            for piece in split_for_opus(text):
+                pieces.append(">>tgk_Cyrl<< " + piece)
+                owners.append(index)
+
+        translated_pieces: list[str] = []
+        for start in range(0, len(pieces), 8):
+            encoded = tokenizer(
+                pieces[start:start + 8],
+                return_tensors="pt",
+                padding=True,
+                truncation=False,
+            )
+            with torch.inference_mode():
+                generated = model.generate(
+                    **encoded,
+                    max_new_tokens=512,
+                    num_beams=4,
+                    early_stopping=True,
+                )
+            translated_pieces.extend(
+                tokenizer.batch_decode(generated, skip_special_tokens=True)
+            )
+
+        grouped: list[list[str]] = [[] for _ in texts]
+        for owner, translated in zip(owners, translated_pieces):
+            grouped[owner].append(translated.strip())
+        return [" ".join(parts).strip() for parts in grouped]
+
+    return translate
+
+
+def make_anthropic_translator() -> Callable[[list[str]], list[str] | None]:
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        raise RuntimeError("ANTHROPIC_API_KEY is required for the anthropic engine")
+    from hadith_translate import translate_hadiths
+
+    return lambda texts: translate_hadiths(texts, "tj")
+
+
+def translate_with_recovery(
+    batch: list[tuple[str, str]],
+    translate: Callable[[list[str]], list[str] | None],
+) -> list[str]:
     texts = [text for _, text in batch]
     for attempt in range(3):
         try:
-            translated = translate_hadiths(texts, "tj")
+            translated = translate(texts)
         except Exception as exc:
             print(f"attempt {attempt + 1}/3 failed: {exc}", file=sys.stderr)
             translated = None
@@ -87,10 +171,17 @@ def translate_with_recovery(batch: list[tuple[str, str]]) -> list[str]:
         raise RuntimeError(f"translation failed for hadith {batch[0][0]}")
 
     midpoint = len(batch) // 2
-    return translate_with_recovery(batch[:midpoint]) + translate_with_recovery(batch[midpoint:])
+    return (
+        translate_with_recovery(batch[:midpoint], translate)
+        + translate_with_recovery(batch[midpoint:], translate)
+    )
 
 
-def build(book: str, max_items: int | None) -> int:
+def build(
+    book: str,
+    max_items: int | None,
+    translate: Callable[[list[str]], list[str] | None],
+) -> int:
     output_path = OUT_DIR / f"{book}.json"
     output: dict[str, str] = load_json(output_path, {})
     certified = load_json(CERTIFIED, {}) if book == "bukhari" else {}
@@ -117,7 +208,7 @@ def build(book: str, max_items: int | None) -> int:
     completed = 0
     batches = make_batches(pending)
     for index, batch in enumerate(batches, start=1):
-        translations = translate_with_recovery(batch)
+        translations = translate_with_recovery(batch, translate)
         for (number, _), translation in zip(batch, translations):
             output[number] = translation
         completed += len(batch)
@@ -130,6 +221,7 @@ def build(book: str, max_items: int | None) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--book", choices=BOOKS, required=True)
+    parser.add_argument("--engine", choices=("opus", "anthropic"), default="opus")
     parser.add_argument(
         "--max-items",
         type=int,
@@ -137,13 +229,15 @@ def main() -> int:
         help="Translate at most this many previously missing non-empty records.",
     )
     args = parser.parse_args()
-
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        parser.error("ANTHROPIC_API_KEY is required")
     if args.max_items is not None and args.max_items < 1:
         parser.error("--max-items must be positive")
 
-    completed = build(args.book, args.max_items)
+    translate = (
+        make_opus_translator()
+        if args.engine == "opus"
+        else make_anthropic_translator()
+    )
+    completed = build(args.book, args.max_items, translate)
     print(f"completed={completed}")
     return 0
 
