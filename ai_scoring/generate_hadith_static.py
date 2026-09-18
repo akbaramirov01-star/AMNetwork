@@ -190,7 +190,7 @@ def make_persian_translator(source_language: str) -> Callable[[list[str]], list[
 
     def translate_one(text: str) -> str:
         output: list[str] = []
-        for piece in split_for_model(text, max_words=80):
+        for piece in split_for_model(text, max_words=20):
             query = urllib.parse.urlencode({
                 "client": "gtx",
                 "sl": source_code,
