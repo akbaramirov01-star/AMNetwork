@@ -182,6 +182,41 @@ def make_google_translator(source_language: str) -> Callable[[list[str]], list[s
 
     return lambda texts: [translate_one(text) for text in texts]
 
+def make_persian_translator(source_language: str) -> Callable[[list[str]], list[str]]:
+    from shekar import FarsiToTajik
+
+    source_code = {"eng": "en", "ara": "ar", "rus": "ru"}[source_language]
+    transliterate = FarsiToTajik()
+
+    def translate_one(text: str) -> str:
+        output: list[str] = []
+        for piece in split_for_model(text, max_words=80):
+            query = urllib.parse.urlencode({
+                "client": "gtx",
+                "sl": source_code,
+                "tl": "fa",
+                "dt": "t",
+                "q": piece,
+            })
+            req = urllib.request.Request(
+                "https://translate.googleapis.com/translate_a/single?" + query,
+                headers={"User-Agent": "Mozilla/5.0 AMNetwork-translation/1.0"},
+            )
+            with urllib.request.urlopen(req, timeout=45) as response:
+                payload = json.load(response)
+            persian = "".join(
+                segment[0] for segment in payload[0]
+                if isinstance(segment, list) and segment and isinstance(segment[0], str)
+            ).strip()
+            if not persian:
+                raise RuntimeError("Persian translation returned an empty result")
+            output.append(str(transliterate(persian)).strip())
+            time.sleep(0.15)
+        return " ".join(output)
+
+    return lambda texts: [translate_one(text) for text in texts]
+
+
 def make_anthropic_translator() -> Callable[[list[str]], list[str] | None]:
     if not os.environ.get("ANTHROPIC_API_KEY"):
         raise RuntimeError("ANTHROPIC_API_KEY is required for the anthropic engine")
@@ -257,7 +292,7 @@ def build(
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--book", choices=BOOKS, required=True)
-    parser.add_argument("--engine", choices=("madlad", "google", "anthropic"), default="madlad")
+    parser.add_argument("--engine", choices=("madlad", "google", "persian", "anthropic"), default="madlad")
     parser.add_argument("--source-language", choices=("eng", "ara", "rus"), default="eng")
     parser.add_argument(
         "--max-items",
@@ -273,6 +308,8 @@ def main() -> int:
         translate = make_madlad_translator()
     elif args.engine == "google":
         translate = make_google_translator(args.source_language)
+    elif args.engine == "persian":
+        translate = make_persian_translator(args.source_language)
     else:
         translate = make_anthropic_translator()
     completed = build(args.book, args.source_language, args.max_items, translate)
