@@ -460,3 +460,13 @@ footer>.orn{margin-bottom:56px}
 
 .loopv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform;transform:scale(1.06);background:#0A0F18}
 .has-loop #film{display:none}
+
+/* language flags */
+.lflag{display:inline-block;width:20px;height:14px;flex-shrink:0;overflow:hidden;border-radius:2px;box-shadow:0 0 0 1px rgba(127,127,127,.28);vertical-align:middle;line-height:0}
+.lflag svg{width:100%;height:100%;display:block}
+#langBtn{gap:8px}
+#langBtn > svg{display:none}
+.langs li button{align-items:center;gap:12px}
+.langs li button span{flex:1}
+#dlangs .chip{gap:8px}
+.has-film .hero-coord{display:none}

@@ -1,0 +1,18 @@
+# Netlify: set "Base directory" to tj-trade-office — nothing to build, the folder is the site.
+[build]
+  publish = "."
+  command = ""
+
+# Preview for the trade representative: keep it out of search engines until launch
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Content-Type-Options = "nosniff"
+
+# Media never changes under the same name: cache for a year
+[[headers]]
+  for = "/media/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

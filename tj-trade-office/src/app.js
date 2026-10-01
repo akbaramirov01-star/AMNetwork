@@ -33,9 +33,9 @@ function renderChrome(){
  $("#nav").innerHTML = NAVMAIN.map(function(r){ return '<a href="#'+r+'" data-go="'+r+'">'+L.nav[r]+'</a>'; }).join("");
  $("#dnav").innerHTML = ["home"].concat(NAVMAIN,["service","dokumente"]).map(function(r,i){ return '<a href="#'+r+'" data-go="'+r+'">'+L.nav[r]+'<small>'+("0"+(i)).slice(-2)+'</small></a>'; }).join("");
  $$(".cta-partner").forEach(function(a){ a.innerHTML = L.nav.service + arrow; });
- $("#langBtn span").textContent = lang.toUpperCase();
- $("#langList").innerHTML = LANGS.map(function(c){ return '<li><button data-lang="'+c+'" class="'+(c===lang?"on":"")+'">'+C[c].name+'<small>'+c.toUpperCase()+'</small></button></li>'; }).join("");
- $("#dlangs").innerHTML = LANGS.map(function(c){ return '<button class="chip" data-lang="'+c+'">'+c.toUpperCase()+'</button>'; }).join("") + '<button class="chip" data-theme-toggle>'+L.ui.theme+'</button>';
+ $("#langBtn").innerHTML = langFlag(lang) + "<span>" + lang.toUpperCase() + "</span>"; $("#langBtn").setAttribute("aria-label", C[lang].name);
+ $("#langList").innerHTML = LANGS.map(function(c){ return '<li><button data-lang="'+c+'" class="'+(c===lang?"on":"")+'">'+langFlag(c)+'<span>'+C[c].name+'</span><small>'+c.toUpperCase()+'</small></button></li>'; }).join("");
+ $("#dlangs").innerHTML = LANGS.map(function(c){ return '<button class="chip" data-lang="'+c+'">'+langFlag(c)+c.toUpperCase()+'</button>'; }).join("") + '<button class="chip" data-theme-toggle>'+L.ui.theme+'</button>';
  $("#menuLbl").textContent = L.ui.menu; $("#closeLbl").textContent = L.ui.close;
  $$(".theme").forEach(function(b){ b.setAttribute("aria-label", L.ui.theme); });
  $("#fcols").innerHTML =
@@ -73,7 +73,7 @@ function repCard(){
 }
 function renderHero(){
  var H = L.hero;
- $("#c1").innerHTML = '<div class="in"><div class="kick">'+H.k1+'</div><h1>'+H.t1+'</h1><p class="sub">'+H.s1+'</p><div class="acts"><a class="cta" href="#investieren" data-go="investieren">'+H.b1+arrow+'</a><a class="cta ghost" href="#export" data-go="export">'+H.b2+'</a></div></div>';
+ $("#c1").innerHTML = '<div class="in"><h1>'+H.t1+'</h1><p class="sub">'+H.s1+'</p><div class="acts"><a class="cta" href="#investieren" data-go="investieren">'+H.b1+arrow+'</a><a class="cta ghost" href="#export" data-go="export">'+H.b2+'</a></div></div>';
  var srcs=[13,2,3,12];
  $("#c2").innerHTML = '<div class="in"><div class="kick">'+H.k2+'</div><h2>'+H.t2+sref(13)+'</h2><div class="figs-strip">'+H.fv.map(function(v,i){ return '<div><b>'+v+'</b><span>'+H.f[i]+' '+sref(srcs[i])+'</span></div>'; }).join("")+'</div></div>';
  $("#c3").innerHTML = '<div class="in"><div class="box"><div class="kick">'+H.k3+'</div><h2>'+H.t3+'</h2><p class="sub">'+H.s3+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+H.b3+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+H.b4+'</a></div></div></div>';
