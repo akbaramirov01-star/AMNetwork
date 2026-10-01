@@ -1,0 +1,43 @@
+<a class="sr" href="#page">Zum Inhalt</a>
+<header class="topbar" id="topbar">
+ <div class="tri"><i></i><i></i><i></i></div>
+ <div class="wrap bar">
+  <a class="brand" href="#home" data-go="home"><b id="brandB"></b><span id="brandS"></span></a>
+  <nav class="nav" id="nav" aria-label="Main"></nav>
+  <div class="tools">
+   <div class="langs" id="langs"><button class="chip" id="langBtn" aria-haspopup="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg><span>DE</span></button><ul id="langList"></ul></div>
+   <button class="chip theme" data-theme-toggle><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg></button>
+   <a class="cta cta-partner" href="#service" data-go="service"></a>
+   <button class="burger" id="burger" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg></button>
+  </div>
+ </div>
+</header>
+
+<div class="drawer" id="drawer" aria-modal="true" role="dialog">
+ <div class="drawer-head"><span id="menuLbl" class="mono" style="font-size:.72rem;letter-spacing:.2em;text-transform:uppercase"></span><button class="chip" id="dclose"><span id="closeLbl"></span> ✕</button></div>
+ <nav id="dnav"></nav>
+ <div class="drawer-foot" id="dlangs"></div>
+</div>
+
+<section class="hero" id="hero">
+ <div class="hero-stage">
+  <div class="hero-sky"></div>
+  <canvas id="terrain" aria-hidden="true"></canvas>
+  <div class="hero-grain"></div>
+  <div class="hero-coord"><span>38°33′N · 68°47′E</span><br><span id="altLbl"></span> <span class="alt">—</span></div>
+  <div class="chapter c1" id="c1"></div>
+  <div class="chapter c2" id="c2"></div>
+  <div class="chapter c3" id="c3"></div>
+  <div class="hero-meter"><span id="meterLbl"></span><span class="track"><i></i></span><span>Pamir</span></div>
+ </div>
+</section>
+
+<main id="page"></main>
+
+<footer>
+ <div class="wrap">
+  <div class="fcols" id="fcols"></div>
+  <div class="fbot" id="fbot"></div>
+ </div>
+ <span id="fBrandB" hidden></span><span id="fBrandP" hidden></span>
+</footer>
