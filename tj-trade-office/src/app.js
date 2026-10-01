@@ -28,7 +28,7 @@ var ICON = {
 /* ------------------------------------------------------------ chrome */
 function renderChrome(){
  document.documentElement.lang = {tj:"tg",de:"de",ru:"ru",en:"en"}[lang];
- $("#brandB").textContent = L.brand; $("#brandS").textContent = L.brandSub;
+ var bp = L.brand.split(" · "); $("#brandB").textContent = bp[0]; $("#brandS").textContent = bp[1] || ""; $(".brand").title = L.brand + " — " + L.brandSub;
  $("#fBrandB").textContent = L.brand; $("#fBrandP").textContent = L.foot.tag;
  $("#nav").innerHTML = NAVMAIN.map(function(r){ return '<a href="#'+r+'" data-go="'+r+'">'+L.nav[r]+'</a>'; }).join("");
  $("#dnav").innerHTML = ["home"].concat(NAVMAIN,["service","dokumente"]).map(function(r,i){ return '<a href="#'+r+'" data-go="'+r+'">'+L.nav[r]+'<small>'+("0"+(i)).slice(-2)+'</small></a>'; }).join("");
@@ -44,6 +44,7 @@ function renderChrome(){
   '<div><h4>'+L.foot.c2+'</h4><ul>'+["service","termine","aktuelles","dokumente","quellen"].map(li).join("")+'</ul></div>'+
   '<div><h4>'+L.foot.c3+'</h4><ul>'+li("kontakt")+'<li><a href="#impressum" data-go="impressum">'+L.foot.imp+'</a></li><li><a href="#datenschutz" data-go="datenschutz">'+L.foot.dat+'</a></li></ul></div>';
  $("#fbot").innerHTML = '<span>'+L.foot.rights+'</span><span>'+L.foot.demo+'</span>';
+ if(window.fitBar) setTimeout(window.fitBar, 0);
  function li(r){ return '<li><a href="#'+r+'" data-go="'+r+'">'+L.nav[r]+'</a></li>'; }
 }
 
@@ -78,12 +79,12 @@ function newsRows(filter, limit){
  }).join("");
 }
 function phead(key, h1, lead, seed){
- return '<header class="phead"><canvas class="contours" data-seed="'+seed+'"></canvas><div class="wrap"><div class="crumb"><a href="#home" data-go="home">'+L.nav.home+'</a> / '+(L.nav[key]||h1)+'</div><h1 class="rv">'+h1+'</h1><p class="lead rv">'+lead+'</p></div></header>';
+ return '<header class="phead"><div class="field"></div><div class="orn"></div><div class="wrap"><div class="crumb"><a href="#home" data-go="home">'+L.nav.home+'</a> / '+(L.nav[key]||h1)+'</div><h1 class="rv">'+h1+'</h1><p class="lead rv">'+lead+'</p></div></header>';
 }
 
 function pageHome(){
  var H = L.home;
- var door = function(k, cls, go){ var d=H[k]; return '<a class="door '+cls+' rv" href="#'+go+'" data-go="'+go+'"><span class="flagline"></span><span class="lab">'+d.lab+'</span><h3>'+d.t+'</h3><p>'+d.p+'</p><ul>'+d.li.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul><span class="go"><i>'+arrow+'</i>'+d.go+'</span></a>'; };
+ var door = function(k, cls, go){ var d=H[k]; return '<a class="door '+cls+' rv" href="#'+go+'" data-go="'+go+'"><span class="lab"><i class="flag">'+(cls==="de"?FLAG_DE:FLAG_TJ)+'</i>'+d.lab+'</span><h3>'+d.t+'</h3><p>'+d.p+'</p><ul>'+d.li.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul><span class="go"><i>'+arrow+'</i>'+d.go+'</span></a>'; };
  return ''+
  '<section class="sec flush"><div class="wrap"><div class="head"><div class="kicker">'+H.dk+'</div><h2 class="h2 rv">'+H.dt+'</h2></div><div class="doors">'+door("de","de","investieren")+door("tj","tj","export")+'</div></div></section>'+
  '<section class="sec tint"><div class="wrap"><div class="head split"><div><div class="kicker">'+H.fk+'</div><h2 class="h2 rv">'+H.ft+'</h2></div><p class="lead rv">'+H.fl+'</p></div><div class="board">'+
@@ -99,7 +100,7 @@ function pageHome(){
 }
 function band(){
  var b = L.home.band;
- return '<section class="band"><canvas class="contours" data-seed="7"></canvas><div class="tri" style="position:absolute;top:0;left:0;right:0"><i></i><i></i><i></i></div><div class="wrap"><h2 class="rv">'+b.t+'</h2><p class="rv">'+b.p+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+b.b1+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+b.b2+'</a></div></div></section>';
+ return '<section class="band"><div class="field"></div><div class="orn lg"></div><div class="wrap"><h2 class="rv">'+b.t+'</h2><p class="rv">'+b.p+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+b.b1+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+b.b2+'</a></div></div></section>';
 }
 
 function pageLand(){
@@ -272,7 +273,6 @@ function wire(root){
   if(r.top < window.innerHeight*0.98){ setTimeout(function(){ el.classList.add("in"); }, 60 + (i%6)*70); }
   else revealer.observe(el);
  });
- $$("canvas.contours", root).forEach(function(c){ requestAnimationFrame(function(){ window.drawContours && window.drawContours(c, +c.getAttribute("data-seed")); }); });
  $$(".barrow .bt i", root).forEach(function(b){ setTimeout(function(){ b.style.width = b.getAttribute("data-w")+"%"; }, 300); });
  $$("[data-sector]", root).forEach(function(b){
   b.addEventListener("click", function(){
@@ -331,7 +331,7 @@ function setLang(c){
  renderChrome(); renderHero(); show(current||"home");
 }
 function theme(){ try{ var t=localStorage.getItem(TK); if(t) return t; }catch(e){} return matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"; }
-function toggleTheme(){ var t = document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark"; document.documentElement.setAttribute("data-theme", t); try{ localStorage.setItem(TK,t); }catch(e){} $$("canvas.contours").forEach(function(c){ window.drawContours(c, +c.getAttribute("data-seed")); }); }
+function toggleTheme(){ var t = document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark"; document.documentElement.setAttribute("data-theme", t); try{ localStorage.setItem(TK,t); }catch(e){} paintOrnaments(); }
 document.documentElement.setAttribute("data-theme", theme());
 
 /* top bar becomes solid once the hero is behind us, or on inner pages */
@@ -340,7 +340,15 @@ function onScroll(){
  $("#topbar").classList.toggle("solid", solid);
 }
 window.addEventListener("scroll", onScroll, {passive:true});
-window.addEventListener("resize", function(){ $$("canvas.contours").forEach(function(c){ window.drawContours(c, +c.getAttribute("data-seed")); }); });
+window.fitBar = fitBar;
+function fitBar(){
+ var tb = $("#topbar"), bar = $(".bar");
+ tb.classList.remove("compact");
+ if(bar.scrollWidth > bar.clientWidth + 1) tb.classList.add("compact");
+}
+window.addEventListener("resize", fitBar);
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitBar);
 
-renderChrome(); renderHero(); route();
+$$(".flag-tj").forEach(function(f){ f.innerHTML = FLAG_TJ; });
+paintOrnaments(); renderChrome(); renderHero(); route();
 })();

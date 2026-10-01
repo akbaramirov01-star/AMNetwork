@@ -10,7 +10,7 @@ html = ('<title>Tadschikistan · Handel & Investitionen</title>\n'
  '<style>\n' + r('style.css') + '\n</style>\n'
  + r('body.html') +
  '\n<script>\n' + r('three.min.js') + '\n</script>\n'
- '<script>\n' + r('data.js') + '\n' + langs + fill + r('legal.js') + '\n</script>\n'
+ '<script>\n' + r('flags.js') + '\n' + r('ornament.js') + '\n' + r('data.js') + '\n' + langs + fill + r('legal.js') + '\n</script>\n'
  '<script>\n' + r('hero.js') + '\n</script>\n'
  '<script>\n' + r('app.js') + '\n</script>\n')
 open(os.path.join(d,'artifact.html'),'w',encoding='utf-8').write(html)

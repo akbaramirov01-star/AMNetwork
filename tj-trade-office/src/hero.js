@@ -183,38 +183,3 @@
   }
   requestAnimationFrame(frame);
 })();
-
-/* ===== quiet topographic contours for page headers and the closing band ===== */
-window.drawContours = function(canvas, seed){
-  if(!canvas) return;
-  var ctx = canvas.getContext("2d");
-  var dpr = Math.min(window.devicePixelRatio||1, 2);
-  var w = canvas.clientWidth, h = canvas.clientHeight;
-  if(!w || !h) return;
-  canvas.width = w*dpr; canvas.height = h*dpr; ctx.scale(dpr,dpr);
-  var s = seed || 1;
-  function f(x,y){
-    return Math.sin(x*0.006+s)*Math.cos(y*0.009-s*0.7)*1.0
-         + Math.sin(x*0.013-y*0.004+s*2.1)*0.55
-         + Math.cos(x*0.002+y*0.017+s*1.3)*0.7;
-  }
-  var gold = getComputedStyle(document.documentElement).getPropertyValue("--gold").trim() || "#b8964f";
-  var cell = 14, cols = Math.ceil(w/cell)+1, rows = Math.ceil(h/cell)+1, grid = [];
-  for(var j=0;j<rows;j++){ grid[j]=[]; for(var i=0;i<cols;i++) grid[j][i]=f(i*cell,j*cell); }
-  ctx.lineWidth = 1;
-  for(var lv=-2.0; lv<=2.0; lv+=0.22){
-    ctx.strokeStyle = gold; ctx.globalAlpha = Math.abs(lv) < 0.05 ? 0.5 : 0.22;
-    ctx.beginPath();
-    for(var y=0;y<rows-1;y++) for(var x=0;x<cols-1;x++){
-      var a=grid[y][x],b=grid[y][x+1],c=grid[y+1][x+1],d=grid[y+1][x];
-      var pts=[];
-      function edge(v1,v2,x1,y1,x2,y2){ if((v1-lv)*(v2-lv)<0){ var t=(lv-v1)/(v2-v1); pts.push([x1+(x2-x1)*t, y1+(y2-y1)*t]); } }
-      var X=x*cell,Y=y*cell;
-      edge(a,b,X,Y,X+cell,Y); edge(b,c,X+cell,Y,X+cell,Y+cell); edge(c,d,X+cell,Y+cell,X,Y+cell); edge(d,a,X,Y+cell,X,Y);
-      if(pts.length>=2){ ctx.moveTo(pts[0][0],pts[0][1]); ctx.lineTo(pts[1][0],pts[1][1]); }
-      if(pts.length===4){ ctx.moveTo(pts[2][0],pts[2][1]); ctx.lineTo(pts[3][0],pts[3][1]); }
-    }
-    ctx.stroke();
-  }
-  ctx.globalAlpha = 1;
-};

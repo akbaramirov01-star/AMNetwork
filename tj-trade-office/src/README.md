@@ -15,5 +15,7 @@ Die Dateien hier sind ihre Bausteine. Nach einer Änderung neu bauen:
 | `hero.js` | WebGL-Gebirgsflug (Rauschen auf der GPU, an das Scrollen gekoppelt) |
 | `app.js` | Routing per `#hash`, Rendering, Formulare, FWZ-Karte |
 | `style.css` | Gestaltung, helles und dunkles Thema |
+| `flags.js` | Flaggen TJ (amtliches Format 1:2) und DE, aus `flag-icons` 7.5.0 (MIT, © Panayiotis Lipiridis) |
+| `ornament.js` | Adras-/Abrbandi-Ikatmuster, als SVG erzeugt (Bänder und Flächen, beide Themen) |
 
 Neue Meldung: Eintrag in `NEWS` (`data.js`) + Text unter `news.items` in allen vier Sprachdateien + Quelle in `SRC`.

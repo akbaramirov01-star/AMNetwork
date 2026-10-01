@@ -43,23 +43,22 @@ button{font:inherit;cursor:pointer}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* tricolor hairline: red / white / green in the flag's 2:3:2 proportion */
-.tri{display:flex;height:3px;width:100%}
-.tri i{display:block;height:100%}
-.tri i:nth-child(1){flex:2;background:#CC0000}
-.tri i:nth-child(2){flex:3;background:#F4F1EA}
-.tri i:nth-child(3){flex:2;background:#006600}
-
+/* adras band: Tajik ikat lozenges in gold, red and green */
+.orn{height:14px;width:100%;background-image:var(--orn-band);background-repeat:repeat-x;background-size:auto 100%;opacity:.95}
+.orn.lg{height:22px;background-image:var(--orn-band-lg)}
+.flag{display:inline-block;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+.flag svg{display:block;width:100%;height:100%}
 /* ---------- top bar ---------- */
 .topbar{position:fixed;inset:0 0 auto 0;z-index:60;transition:background .4s ease,border-color .4s ease,color .4s ease;border-bottom:1px solid transparent;color:var(--hero-ink)}
-.topbar .tri{position:absolute;top:0;left:0;right:0;height:2px}
+.topbar .orn{position:absolute;top:0;left:0;right:0;height:6px;background-size:auto 6px;opacity:.9}
 .topbar.solid{background:color-mix(in srgb,var(--ground) 90%,transparent);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px);border-color:var(--line);color:var(--ink)}
-.bar{display:flex;align-items:center;gap:28px;height:76px}
-.brand{display:flex;flex-direction:column;text-decoration:none;line-height:1.05;margin-right:auto;flex-shrink:0;max-width:60vw}
-.brand b{font-family:var(--serif);font-weight:500;font-size:1.22rem;letter-spacing:-.01em;white-space:nowrap}
-.brand span{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;opacity:.7;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.nav{display:flex;gap:22px}
-.nav a{text-decoration:none;font-size:.86rem;font-weight:500;opacity:.78;position:relative;padding:6px 0;white-space:nowrap}
+.bar{display:flex;align-items:center;gap:22px;height:76px}
+.brand{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;text-decoration:none;line-height:1.05;margin-right:auto;flex-shrink:0;max-width:60vw}
+.brand .flag{grid-row:1/3;width:34px;height:17px}
+.brand b{font-family:var(--serif);font-weight:500;font-size:1.18rem;letter-spacing:-.01em;white-space:nowrap}
+.brand span{grid-column:2;font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav{display:flex;gap:17px}
+.nav a{text-decoration:none;font-size:.82rem;font-weight:500;opacity:.78;position:relative;padding:6px 0;white-space:nowrap}
 .nav a:hover,.nav a.on{opacity:1}
 .nav a.on::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:var(--gold)}
 .tools{display:flex;align-items:center;gap:10px}
@@ -80,9 +79,9 @@ button{font:inherit;cursor:pointer}
 .burger{display:none;width:42px;height:42px;background:none;border:1px solid color-mix(in srgb,currentColor 28%,transparent);color:inherit;align-items:center;justify-content:center}
 .burger svg{width:20px;height:20px}
 @media (max-width:1300px){.nav{display:none}.burger{display:inline-flex}}
-@media (max-width:1560px){.brand span{display:none}}
+.topbar.compact .nav{display:none}.topbar.compact .burger{display:inline-flex}
 @media (max-width:760px){.tools .cta{display:none}}
-@media (max-width:620px){.bar{gap:12px}.brand{max-width:calc(100vw - 150px);flex-shrink:1;min-width:0}.brand span{display:none}.brand b{font-size:.98rem;white-space:normal;line-height:1.18}.chip.theme{display:none}}
+@media (max-width:620px){.bar{gap:12px}.brand{max-width:calc(100vw - 150px);flex-shrink:1;min-width:0}.brand b{font-size:1.05rem}.chip.theme{display:none}}
 
 /* drawer */
 .drawer{position:fixed;inset:0;z-index:80;background:var(--ground);color:var(--ink);display:flex;flex-direction:column;padding:22px var(--pad) 30px;transform:translateY(-100%);visibility:hidden;transition:transform .55s cubic-bezier(.7,0,.2,1),visibility 0s linear .55s;overflow-y:auto}
@@ -121,6 +120,7 @@ button{font:inherit;cursor:pointer}
 .hero-meter{position:absolute;left:var(--pad);right:var(--pad);bottom:28px;display:flex;align-items:center;gap:18px;font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;opacity:.8}
 .hero-meter .track{flex:1;height:1px;background:rgba(255,255,255,.22);position:relative}
 .hero-meter .track i{position:absolute;left:0;top:0;bottom:0;background:#E2C285;width:0}
+.hero-coord .flag{width:40px;height:20px;margin:0 0 10px auto;display:block}
 .hero-coord{position:absolute;right:var(--pad);top:104px;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-align:right;opacity:.7;line-height:1.7}
 @media (max-width:720px){.hero-coord{display:none}.chapter.c3 .in{justify-content:flex-start}}
 
@@ -150,7 +150,8 @@ main{display:block}
 .phead .crumb a{text-decoration:none}
 .phead h1{font-size:clamp(2.6rem,1.2rem + 4.6vw,5.6rem);font-weight:400;max-width:16ch;letter-spacing:-.025em}
 .phead .lead{margin-top:28px}
-.phead canvas.contours{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.phead .field{position:absolute;top:0;bottom:0;right:0;width:min(46%,620px);background-image:var(--orn-field);background-size:120px 64px;opacity:.13;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 40%);mask-image:linear-gradient(90deg,transparent,#000 40%)}
+.phead .orn{position:absolute;left:0;right:0;bottom:0;height:14px;opacity:.75}
 .phead .wrap{position:relative;z-index:1}
 
 /* doors (two audiences) */
@@ -166,9 +167,9 @@ main{display:block}
 .door .go{margin-top:auto;display:flex;align-items:center;gap:12px;font-weight:600;font-size:.92rem}
 .door .go i{width:44px;height:44px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:transform .35s ease,background .35s ease,border-color .35s ease}
 .door:hover .go i{transform:translateX(6px);background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
-.door .flagline{position:absolute;top:0;left:0;width:56px;height:3px}
-.door.de .flagline{background:linear-gradient(90deg,#111 0 33.3%,#DD0000 33.3% 66.6%,#FFCE00 66.6%)}
-.door.tj .flagline{background:linear-gradient(90deg,#CC0000 0 28.6%,#F4F1EA 28.6% 71.4%,#006600 71.4%)}
+.door .lab{display:flex;align-items:center;gap:12px}
+.door .lab .flag{width:30px;height:20px}
+.door.tj .lab .flag{width:34px;height:17px}
 @media (max-width:860px){.doors{grid-template-columns:1fr}.door+.door{border-left:0;border-top:1px solid var(--line)}.door{min-height:0}}
 
 /* figure board */
@@ -368,7 +369,8 @@ form.f.on{display:block}
 
 /* closing band */
 .band{background:#0A0F18;color:var(--hero-ink);position:relative;overflow:hidden}
-.band canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.band .field{position:absolute;inset:0;background-image:var(--orn-field);background-size:150px 80px;opacity:.07;pointer-events:none}
+.band>.orn{position:absolute;top:0;left:0;right:0}
 .band .wrap{position:relative;padding-top:clamp(80px,10vw,140px);padding-bottom:clamp(80px,10vw,140px)}
 .band h2{font-size:clamp(2.2rem,1.2rem + 3.4vw,4.4rem);font-weight:400;max-width:18ch}
 .band p{opacity:.8;max-width:56ch;margin-top:22px;font-size:1.08rem}
@@ -383,7 +385,8 @@ form.f.on{display:block}
 .warn{border-left:2px solid var(--red);background:var(--surface);padding:16px 20px;font-size:.92rem;color:var(--ink-soft);margin-bottom:28px}
 
 /* footer */
-footer{background:var(--surface);border-top:1px solid var(--line);padding:64px 0 34px}
+footer{background:var(--surface);padding:0 0 34px;position:relative}
+footer>.orn{margin-bottom:56px}
 .fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
 .fcols h4{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;margin-bottom:16px}
 .fcols ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
@@ -407,9 +410,9 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding:64px 0
 
 <a class="sr" href="#page">Zum Inhalt</a>
 <header class="topbar" id="topbar">
- <div class="tri"><i></i><i></i><i></i></div>
+ <div class="orn"></div>
  <div class="wrap bar">
-  <a class="brand" href="#home" data-go="home"><b id="brandB"></b><span id="brandS"></span></a>
+  <a class="brand" href="#home" data-go="home"><i class="flag flag-tj"></i><b id="brandB"></b><span id="brandS"></span></a>
   <nav class="nav" id="nav" aria-label="Main"></nav>
   <div class="tools">
    <div class="langs" id="langs"><button class="chip" id="langBtn" aria-haspopup="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg><span>DE</span></button><ul id="langList"></ul></div>
@@ -431,7 +434,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding:64px 0
   <div class="hero-sky"></div>
   <canvas id="terrain" aria-hidden="true"></canvas>
   <div class="hero-grain"></div>
-  <div class="hero-coord"><span>38°33′N · 68°47′E</span><br><span id="altLbl"></span> <span class="alt">—</span></div>
+  <div class="hero-coord"><i class="flag flag-tj"></i><span>38°33′N · 68°47′E</span><br><span id="altLbl"></span> <span class="alt">—</span></div>
   <div class="chapter c1" id="c1"></div>
   <div class="chapter c2" id="c2"></div>
   <div class="chapter c3" id="c3"></div>
@@ -442,6 +445,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding:64px 0
 <main id="page"></main>
 
 <footer>
+ <div class="orn lg"></div>
  <div class="wrap">
   <div class="fcols" id="fcols"></div>
   <div class="fbot" id="fbot"></div>
@@ -459,6 +463,49 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding:64px 0
 
 </script>
 <script>
+/* Flags: flag-icons (MIT, © Panayiotis Lipiridis). Tajik flag widened to the official 1:2 proportion. */
+var FLAG_TJ = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 960 480"> <path fill="#060" d="M0 0h960v480H0z"/> <path fill="#fff" d="M0 0h960v342.9H0z"/> <path fill="#c00" d="M0 0h960v137.1H0z"/><g transform="translate(160 0)"> <path fill="#f8c300" d="M300.8 233.6a8.6 8.6 0 0 1 16 4V272h6.4v-34.3a8.6 8.6 0 0 1 16-4 20.2 20.2 0 1 0-38.4 0"/> <path fill="#fff" d="M305.4 224.7a14 14 0 0 1 14.6 6.5 14 14 0 0 1 14.6-6.5 14.7 14.7 0 0 0-29.2 0"/> <path id="tjA" fill="#f8c300" d="M316.8 258.3a26 26 0 0 1-43.8 16.6 27 27 0 0 1-41 12c2.5 25 40 19.9 42.8-4.4 11.7 20.7 37.6 14.7 45.2-10.6z"/> <use xlink:href="#tjA" width="100%" height="100%" fill="#f8c300" transform="matrix(-1 0 0 1 640 0)"/> <path id="tj-b" fill="#f8c300" d="M291.8 302.6c-5.3 11.3-15.7 13.2-24.8 4.1 0 0 3.6-2.6 7.6-3.3-.8-3.1.7-7.5 2.9-9.8a15 15 0 0 1 6.1 8.1c5.5-.7 8.2 1 8.2 1z"/> <use xlink:href="#tj-b" width="100%" height="100%" fill="#f8c300" transform="rotate(9.4 320 551.3)"/> <use xlink:href="#tj-b" width="100%" height="100%" fill="#f8c300" transform="rotate(18.7 320 551.3)"/> <path fill="none" stroke="#f8c300" stroke-width="11" d="M253.5 327.8a233 233 0 0 1 133 0"/> <g fill="#f8c300" transform="translate(320 164.6)scale(.68571)"> <path id="tj-c" d="m301930 415571-790463-574305h977066l-790463 574305L0-513674z" transform="scale(.00005)"/> </g> <g id="tj-d" fill="#f8c300" transform="translate(320 260.6)scale(.68571)"> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-70 -121.2)"/> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-121.2 -70)"/> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-140)"/> </g> <use xlink:href="#tj-d" width="100%" height="100%" fill="#f8c300" transform="matrix(-1 0 0 1 640 0)"/> </g></svg>';
+var FLAG_DE = '<svg xmlns="http://www.w3.org/2000/svg" id="flag-icons-de" viewBox="0 0 640 480"> <path fill="#fc0" d="M0 320h640v160H0z"/> <path fill="#000001" d="M0 0h640v160H0z"/> <path fill="red" d="M0 160h640v160H0z"/> </svg> ';
+
+/* ===== Adras / abrbandi ornament =====
+   Tajik ikat silk (адрас, атлас) is dyed thread by thread before weaving,
+   so its lozenges have stepped, slightly bleeding edges. We build the motif
+   from horizontal bars with a small alternating offset to imitate that bleed. */
+function ikatUnit(W, H, cols){
+  var rows = Math.round(H/2), c = W/2, out = [];
+  var half = rows/2;
+  for(var i=0;i<rows;i++){
+    var t = 1 - Math.abs((i+0.5) - half)/half;           /* 0 at tips, 1 at waist */
+    var bleed = (i%2 ? 1 : -1) * W*0.012;
+    var y = i*2, x;
+    var wo = t*W*0.46, wi = Math.max(0, t*W*0.46 - W*0.10), wc = Math.max(0, t*W*0.46 - W*0.22);
+    if(wi <= 0){ out.push(rect(c-wo+bleed, y, wo*2, cols[0])); }
+    else{
+      out.push(rect(c-wo+bleed, y, wo-wi, cols[0]));
+      out.push(rect(c+wi+bleed, y, wo-wi, cols[0]));
+      if(wc > 0){ out.push(rect(c-wc+bleed*1.6, y, wc*2, cols[1])); }
+      var wk = Math.max(0, t*W*0.46 - W*0.33);
+      if(wk > 0){ out.push(rect(c-wk-bleed, y, wk*2, cols[2])); }
+    }
+  }
+  /* half-lozenges at the tile edges so tiles interlock */
+  for(var j=0;j<rows;j++){
+    var tt = Math.abs((j+0.5) - half)/half, ww = tt*W*0.16;
+    if(ww>0.5){ out.push(rect(0, j*2, ww, cols[0])); out.push(rect(W-ww, j*2, ww, cols[0])); }
+  }
+  function rect(x,y,w,f){ return '<rect x="'+x.toFixed(1)+'" y="'+y+'" width="'+Math.max(0,w).toFixed(1)+'" height="2" fill="'+f+'"/>'; }
+  return '<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'">'+out.join("")+'</svg>';
+}
+function svgURL(s){ return 'url("data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s)+'")'; }
+function paintOrnaments(){
+  var cs = getComputedStyle(document.documentElement);
+  var gold = cs.getPropertyValue("--gold").trim() || "#b8964f";
+  var r = document.documentElement.style;
+  r.setProperty("--orn-band", svgURL(ikatUnit(28, 14, [gold, "#B8322A", "#1F6B45"])));
+  r.setProperty("--orn-band-lg", svgURL(ikatUnit(44, 22, [gold, "#B8322A", "#1F6B45"])));
+  r.setProperty("--orn-field", svgURL(ikatUnit(120, 64, [gold, gold, gold])));
+}
+
 /* ===== shared, language-independent data: sources, figures, zones, events ===== */
 var SRC = [
  null,
@@ -1610,41 +1657,6 @@ var LEGAL = {
   requestAnimationFrame(frame);
 })();
 
-/* ===== quiet topographic contours for page headers and the closing band ===== */
-window.drawContours = function(canvas, seed){
-  if(!canvas) return;
-  var ctx = canvas.getContext("2d");
-  var dpr = Math.min(window.devicePixelRatio||1, 2);
-  var w = canvas.clientWidth, h = canvas.clientHeight;
-  if(!w || !h) return;
-  canvas.width = w*dpr; canvas.height = h*dpr; ctx.scale(dpr,dpr);
-  var s = seed || 1;
-  function f(x,y){
-    return Math.sin(x*0.006+s)*Math.cos(y*0.009-s*0.7)*1.0
-         + Math.sin(x*0.013-y*0.004+s*2.1)*0.55
-         + Math.cos(x*0.002+y*0.017+s*1.3)*0.7;
-  }
-  var gold = getComputedStyle(document.documentElement).getPropertyValue("--gold").trim() || "#b8964f";
-  var cell = 14, cols = Math.ceil(w/cell)+1, rows = Math.ceil(h/cell)+1, grid = [];
-  for(var j=0;j<rows;j++){ grid[j]=[]; for(var i=0;i<cols;i++) grid[j][i]=f(i*cell,j*cell); }
-  ctx.lineWidth = 1;
-  for(var lv=-2.0; lv<=2.0; lv+=0.22){
-    ctx.strokeStyle = gold; ctx.globalAlpha = Math.abs(lv) < 0.05 ? 0.5 : 0.22;
-    ctx.beginPath();
-    for(var y=0;y<rows-1;y++) for(var x=0;x<cols-1;x++){
-      var a=grid[y][x],b=grid[y][x+1],c=grid[y+1][x+1],d=grid[y+1][x];
-      var pts=[];
-      function edge(v1,v2,x1,y1,x2,y2){ if((v1-lv)*(v2-lv)<0){ var t=(lv-v1)/(v2-v1); pts.push([x1+(x2-x1)*t, y1+(y2-y1)*t]); } }
-      var X=x*cell,Y=y*cell;
-      edge(a,b,X,Y,X+cell,Y); edge(b,c,X+cell,Y,X+cell,Y+cell); edge(c,d,X+cell,Y+cell,X,Y+cell); edge(d,a,X,Y+cell,X,Y);
-      if(pts.length>=2){ ctx.moveTo(pts[0][0],pts[0][1]); ctx.lineTo(pts[1][0],pts[1][1]); }
-      if(pts.length===4){ ctx.moveTo(pts[2][0],pts[2][1]); ctx.lineTo(pts[3][0],pts[3][1]); }
-    }
-    ctx.stroke();
-  }
-  ctx.globalAlpha = 1;
-};
-
 </script>
 <script>
 (function(){
@@ -1677,7 +1689,7 @@ var ICON = {
 /* ------------------------------------------------------------ chrome */
 function renderChrome(){
  document.documentElement.lang = {tj:"tg",de:"de",ru:"ru",en:"en"}[lang];
- $("#brandB").textContent = L.brand; $("#brandS").textContent = L.brandSub;
+ var bp = L.brand.split(" · "); $("#brandB").textContent = bp[0]; $("#brandS").textContent = bp[1] || ""; $(".brand").title = L.brand + " — " + L.brandSub;
  $("#fBrandB").textContent = L.brand; $("#fBrandP").textContent = L.foot.tag;
  $("#nav").innerHTML = NAVMAIN.map(function(r){ return '<a href="#'+r+'" data-go="'+r+'">'+L.nav[r]+'</a>'; }).join("");
  $("#dnav").innerHTML = ["home"].concat(NAVMAIN,["service","dokumente"]).map(function(r,i){ return '<a href="#'+r+'" data-go="'+r+'">'+L.nav[r]+'<small>'+("0"+(i)).slice(-2)+'</small></a>'; }).join("");
@@ -1693,6 +1705,7 @@ function renderChrome(){
   '<div><h4>'+L.foot.c2+'</h4><ul>'+["service","termine","aktuelles","dokumente","quellen"].map(li).join("")+'</ul></div>'+
   '<div><h4>'+L.foot.c3+'</h4><ul>'+li("kontakt")+'<li><a href="#impressum" data-go="impressum">'+L.foot.imp+'</a></li><li><a href="#datenschutz" data-go="datenschutz">'+L.foot.dat+'</a></li></ul></div>';
  $("#fbot").innerHTML = '<span>'+L.foot.rights+'</span><span>'+L.foot.demo+'</span>';
+ if(window.fitBar) setTimeout(window.fitBar, 0);
  function li(r){ return '<li><a href="#'+r+'" data-go="'+r+'">'+L.nav[r]+'</a></li>'; }
 }
 
@@ -1727,12 +1740,12 @@ function newsRows(filter, limit){
  }).join("");
 }
 function phead(key, h1, lead, seed){
- return '<header class="phead"><canvas class="contours" data-seed="'+seed+'"></canvas><div class="wrap"><div class="crumb"><a href="#home" data-go="home">'+L.nav.home+'</a> / '+(L.nav[key]||h1)+'</div><h1 class="rv">'+h1+'</h1><p class="lead rv">'+lead+'</p></div></header>';
+ return '<header class="phead"><div class="field"></div><div class="orn"></div><div class="wrap"><div class="crumb"><a href="#home" data-go="home">'+L.nav.home+'</a> / '+(L.nav[key]||h1)+'</div><h1 class="rv">'+h1+'</h1><p class="lead rv">'+lead+'</p></div></header>';
 }
 
 function pageHome(){
  var H = L.home;
- var door = function(k, cls, go){ var d=H[k]; return '<a class="door '+cls+' rv" href="#'+go+'" data-go="'+go+'"><span class="flagline"></span><span class="lab">'+d.lab+'</span><h3>'+d.t+'</h3><p>'+d.p+'</p><ul>'+d.li.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul><span class="go"><i>'+arrow+'</i>'+d.go+'</span></a>'; };
+ var door = function(k, cls, go){ var d=H[k]; return '<a class="door '+cls+' rv" href="#'+go+'" data-go="'+go+'"><span class="lab"><i class="flag">'+(cls==="de"?FLAG_DE:FLAG_TJ)+'</i>'+d.lab+'</span><h3>'+d.t+'</h3><p>'+d.p+'</p><ul>'+d.li.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul><span class="go"><i>'+arrow+'</i>'+d.go+'</span></a>'; };
  return ''+
  '<section class="sec flush"><div class="wrap"><div class="head"><div class="kicker">'+H.dk+'</div><h2 class="h2 rv">'+H.dt+'</h2></div><div class="doors">'+door("de","de","investieren")+door("tj","tj","export")+'</div></div></section>'+
  '<section class="sec tint"><div class="wrap"><div class="head split"><div><div class="kicker">'+H.fk+'</div><h2 class="h2 rv">'+H.ft+'</h2></div><p class="lead rv">'+H.fl+'</p></div><div class="board">'+
@@ -1748,7 +1761,7 @@ function pageHome(){
 }
 function band(){
  var b = L.home.band;
- return '<section class="band"><canvas class="contours" data-seed="7"></canvas><div class="tri" style="position:absolute;top:0;left:0;right:0"><i></i><i></i><i></i></div><div class="wrap"><h2 class="rv">'+b.t+'</h2><p class="rv">'+b.p+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+b.b1+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+b.b2+'</a></div></div></section>';
+ return '<section class="band"><div class="field"></div><div class="orn lg"></div><div class="wrap"><h2 class="rv">'+b.t+'</h2><p class="rv">'+b.p+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+b.b1+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+b.b2+'</a></div></div></section>';
 }
 
 function pageLand(){
@@ -1921,7 +1934,6 @@ function wire(root){
   if(r.top < window.innerHeight*0.98){ setTimeout(function(){ el.classList.add("in"); }, 60 + (i%6)*70); }
   else revealer.observe(el);
  });
- $$("canvas.contours", root).forEach(function(c){ requestAnimationFrame(function(){ window.drawContours && window.drawContours(c, +c.getAttribute("data-seed")); }); });
  $$(".barrow .bt i", root).forEach(function(b){ setTimeout(function(){ b.style.width = b.getAttribute("data-w")+"%"; }, 300); });
  $$("[data-sector]", root).forEach(function(b){
   b.addEventListener("click", function(){
@@ -1980,7 +1992,7 @@ function setLang(c){
  renderChrome(); renderHero(); show(current||"home");
 }
 function theme(){ try{ var t=localStorage.getItem(TK); if(t) return t; }catch(e){} return matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"; }
-function toggleTheme(){ var t = document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark"; document.documentElement.setAttribute("data-theme", t); try{ localStorage.setItem(TK,t); }catch(e){} $$("canvas.contours").forEach(function(c){ window.drawContours(c, +c.getAttribute("data-seed")); }); }
+function toggleTheme(){ var t = document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark"; document.documentElement.setAttribute("data-theme", t); try{ localStorage.setItem(TK,t); }catch(e){} paintOrnaments(); }
 document.documentElement.setAttribute("data-theme", theme());
 
 /* top bar becomes solid once the hero is behind us, or on inner pages */
@@ -1989,9 +2001,17 @@ function onScroll(){
  $("#topbar").classList.toggle("solid", solid);
 }
 window.addEventListener("scroll", onScroll, {passive:true});
-window.addEventListener("resize", function(){ $$("canvas.contours").forEach(function(c){ window.drawContours(c, +c.getAttribute("data-seed")); }); });
+window.fitBar = fitBar;
+function fitBar(){
+ var tb = $("#topbar"), bar = $(".bar");
+ tb.classList.remove("compact");
+ if(bar.scrollWidth > bar.clientWidth + 1) tb.classList.add("compact");
+}
+window.addEventListener("resize", fitBar);
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitBar);
 
-renderChrome(); renderHero(); route();
+$$(".flag-tj").forEach(function(f){ f.innerHTML = FLAG_TJ; });
+paintOrnaments(); renderChrome(); renderHero(); route();
 })();
 
 </script>
