@@ -8,6 +8,7 @@ unter dem angegebenen Namen, dann `python3 media.py && python3 build.py`.
 |---|---|---|---|
 | hero.mp4 | **682fe93f-87e1-47bf-b6cd-e45c752e32a9** (1080p, aus Entwurf B e3b9a173-…) | seedance_2_5 | Flug durch ein Pamir-Flusstal bei Sonnenaufgang, 12 s — **im Einsatz** |
 | — | 3b641433-6b43-4dd9-8d42-4daeb3bfa3a9 (Entwurf A, 480p) | seedance_2_5 | nicht verwendet |
+| hero_loop_s.mp4 | **936c550c-5918-431f-b97e-25a8d26b5219** (Kling 3.0 Pro, 1080×1920, 10 s, Start- = Endbild → nahtlose Schleife) | kling3_0 | Hochformat-Hero für Smartphones — **im Einsatz**; Startbild: Ausschnitt aus be225db5-… (Upload f2a63f6d-…) |
 | weave.mp4 | **919e3f5b-10a1-4194-84df-24c38a07e820** (1080p, aus Entwurf e553b9ff-…) | seedance_2_5 | Adras-Seide auf dem Webstuhl, 8 s — **im Einsatz** |
 | energy.png | fc8bec33-fecc-4bce-8a75-8600c14ef5d2 | gpt_image_2_5 | Staudamm in einer Gebirgsschlucht |
 | mining.png | 513d7563-e36d-4c31-9bd3-7f4a60b4d0da | gpt_image_2_5 | Bohrkerne und Erzproben |

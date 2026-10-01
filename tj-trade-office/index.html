@@ -7,14 +7,14 @@
 <title>Tadschikistan · Handel & Investitionen</title>
 <meta name="description" content="Masrur Kurbonalizoda, Handelsvertreter der Republik Tadschikistan in Deutschland: Handel und Investitionen zwischen Tadschikistan und Deutschland.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,400;0,500;1,400&family=Onest:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Commissioner:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --ground:#F3F0E9; --surface:#FBFAF6; --surface-2:#E9E5DB; --ink:#0E1420; --ink-soft:#4A5262;
   --ink-faint:#7C8392; --line:#D8D2C4; --gold:#9A7A36; --gold-soft:#B8964F; --red:#B0302A; --green:#2D6B47;
   --on-gold:#FFFDF6; --hero-ink:#F4F1EA;
-  --serif:'Noto Serif Display','Noto Serif',Georgia,'Times New Roman',serif;
-  --sans:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --serif:'Cormorant Garamond','Cormorant',Georgia,'Times New Roman',serif;
+  --sans:'Commissioner',system-ui,-apple-system,'Segoe UI',sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
   --maxw:1240px; --pad:clamp(20px,4vw,56px);
 }
@@ -81,7 +81,7 @@ button{font:inherit;cursor:pointer}
 @media (max-width:1300px){.nav{display:none}.burger{display:inline-flex}}
 .topbar.compact .nav{display:none}.topbar.compact .burger{display:inline-flex}
 @media (max-width:760px){.tools .cta{display:none}}
-@media (max-width:620px){.bar{gap:12px}.brand{max-width:calc(100vw - 150px);flex-shrink:1;min-width:0}.brand b{font-size:1.05rem}.chip.theme{display:none}}
+@media (max-width:620px){.bar{gap:10px}.brand{max-width:calc(100vw - 196px);flex-shrink:1;min-width:0}.brand b{font-size:1.16rem}.tools{gap:6px}.tools .chip{padding:0 10px}#langBtn span{display:none}}
 
 /* drawer */
 .drawer{position:fixed;inset:0;z-index:80;background:var(--ground);color:var(--ink);display:flex;flex-direction:column;padding:22px var(--pad) 30px;transform:translateY(-100%);visibility:hidden;transition:transform .55s cubic-bezier(.7,0,.2,1),visibility 0s linear .55s;overflow-y:auto}
@@ -482,6 +482,25 @@ footer>.orn{margin-bottom:56px}
 #dlangs .chip{gap:8px}
 .has-film .hero-coord{display:none}
 
+/* portrait loop is a bright sunrise: shade it so the headline reads */
+.has-loop .hero-grain{background:linear-gradient(180deg,rgba(6,9,15,.62) 0%,rgba(6,9,15,.38) 30%,rgba(6,9,15,.5) 60%,rgba(6,9,15,.82) 100%)}
+
+/* Cormorant Garamond: small x-height, so headings run larger and a touch bolder; the italic carries the gold accents */
+h1,h2,h3,h4{font-weight:500;letter-spacing:-.005em;line-height:1.06}
+.chapter h1,.chapter h2{font-weight:500;letter-spacing:-.012em;line-height:1.0;font-size:clamp(2.7rem,1.1rem + 4.8vw,5.9rem)}
+.chapter h1 em,.chapter h2 em,.band h2 em,.phead h1 em{font-weight:500}
+.phead h1{font-size:clamp(3rem,1.3rem + 5.2vw,6.4rem);line-height:1.0}
+.h2{font-size:clamp(2.3rem,1.3rem + 2.6vw,3.9rem);font-weight:500}
+.band h2{font-size:clamp(2.5rem,1.3rem + 3.8vw,5rem);line-height:1.02}
+.sector h3{font-size:1.75rem;font-weight:600;line-height:1.08}
+.brand b{font-weight:600;font-size:1.32rem;letter-spacing:0}
+.drawer nav a{font-weight:500;font-size:clamp(1.9rem,7vw,2.7rem)}
+.fig .v{font-family:var(--serif);font-weight:500}
+.dossier .big{font-size:clamp(1.6rem,1.1rem + 1.2vw,2.3rem);line-height:1.18}
+body{font-size:16px;line-height:1.68}
+@media (max-width:620px){.chapter.c2 h2{font-size:clamp(2rem,9vw,2.8rem)}.chapter h1,.chapter.c3 h2{font-size:clamp(2.4rem,11vw,3.3rem)}.phead h1{font-size:clamp(2.6rem,12vw,3.6rem)}}
+.fig .v{font-weight:500}
+
 </style>
 </head>
 <body>
@@ -532,7 +551,7 @@ footer>.orn{margin-bottom:56px}
  <span id="fBrandB" hidden></span><span id="fBrandP" hidden></span>
 </footer>
 
-<script>window.MEDIA = {"hero": {"n": 84, "lg": "media/hero/l/f_", "sm": "media/hero/s/f_", "ext": ".webp", "poster": "media/hero/poster.jpg"}, "band": {"webm": "media/band/weave.webm", "src": "media/band/weave.mp4", "poster": "media/band/weave.jpg"}, "s": {"energy": "media/s/energy.webp", "mining": "media/s/mining.webp", "agri": "media/s/agri.webp", "textile": "media/s/textile.webp", "tourism": "media/s/tourism.webp", "industry": "media/s/industry.webp"}, "ph": {"tadschikistan": "media/s/tourism.webp", "branchen": "media/s/textile.webp", "investieren": "media/s/industry.webp", "export": "media/s/agri.webp"}};</script>
+<script>window.MEDIA = {"hero": {"n": 84, "lg": "media/hero/l/f_", "sm": "media/hero/s/f_", "ext": ".webp", "poster": "media/hero/poster.jpg"}, "loop": {"s": {"mp4": "media/loop/s.mp4", "webm": "media/loop/s.webm", "poster": "media/loop/s.jpg"}}, "band": {"webm": "media/band/weave.webm", "src": "media/band/weave.mp4", "poster": "media/band/weave.jpg"}, "s": {"energy": "media/s/energy.webp", "mining": "media/s/mining.webp", "agri": "media/s/agri.webp", "textile": "media/s/textile.webp", "tourism": "media/s/tourism.webp", "industry": "media/s/industry.webp"}, "ph": {"tadschikistan": "media/s/tourism.webp", "branchen": "media/s/textile.webp", "investieren": "media/s/industry.webp", "export": "media/s/agri.webp"}};</script>
 <script>
 /* Flags: flag-icons (MIT, © Panayiotis Lipiridis). Tajik flag widened to the official 1:2 proportion. */
 var FLAG_TJ = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 960 480"> <path fill="#060" d="M0 0h960v480H0z"/> <path fill="#fff" d="M0 0h960v342.9H0z"/> <path fill="#c00" d="M0 0h960v137.1H0z"/><g transform="translate(160 0)"> <path fill="#f8c300" d="M300.8 233.6a8.6 8.6 0 0 1 16 4V272h6.4v-34.3a8.6 8.6 0 0 1 16-4 20.2 20.2 0 1 0-38.4 0"/> <path fill="#fff" d="M305.4 224.7a14 14 0 0 1 14.6 6.5 14 14 0 0 1 14.6-6.5 14.7 14.7 0 0 0-29.2 0"/> <path id="tjA" fill="#f8c300" d="M316.8 258.3a26 26 0 0 1-43.8 16.6 27 27 0 0 1-41 12c2.5 25 40 19.9 42.8-4.4 11.7 20.7 37.6 14.7 45.2-10.6z"/> <use xlink:href="#tjA" width="100%" height="100%" fill="#f8c300" transform="matrix(-1 0 0 1 640 0)"/> <path id="tj-b" fill="#f8c300" d="M291.8 302.6c-5.3 11.3-15.7 13.2-24.8 4.1 0 0 3.6-2.6 7.6-3.3-.8-3.1.7-7.5 2.9-9.8a15 15 0 0 1 6.1 8.1c5.5-.7 8.2 1 8.2 1z"/> <use xlink:href="#tj-b" width="100%" height="100%" fill="#f8c300" transform="rotate(9.4 320 551.3)"/> <use xlink:href="#tj-b" width="100%" height="100%" fill="#f8c300" transform="rotate(18.7 320 551.3)"/> <path fill="none" stroke="#f8c300" stroke-width="11" d="M253.5 327.8a233 233 0 0 1 133 0"/> <g fill="#f8c300" transform="translate(320 164.6)scale(.68571)"> <path id="tj-c" d="m301930 415571-790463-574305h977066l-790463 574305L0-513674z" transform="scale(.00005)"/> </g> <g id="tj-d" fill="#f8c300" transform="translate(320 260.6)scale(.68571)"> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-70 -121.2)"/> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-121.2 -70)"/> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-140)"/> </g> <use xlink:href="#tj-d" width="100%" height="100%" fill="#f8c300" transform="matrix(-1 0 0 1 640 0)"/> </g></svg>';
@@ -1583,10 +1602,11 @@ var LEGAL = {
 
   /* ---------- looping film (preferred): native playback, scroll adds only a light parallax ---------- */
   var film = null, LOOP = (window.MEDIA || {}).loop;
-  if(LOOP && (LOOP.l || LOOP.s)){
+  var portrait = window.innerHeight > window.innerWidth * 1.1;
+  /* each orientation only uses a loop filmed for it; otherwise the frame sequence below takes over */
+  var V = LOOP ? (portrait ? LOOP.s : LOOP.l) : null;
+  if(V){
     document.documentElement.classList.add("has-film", "has-loop");
-    var portrait = window.innerHeight > window.innerWidth * 1.1;
-    var V = (portrait && LOOP.s) ? LOOP.s : (LOOP.l || LOOP.s);
     var stage = document.querySelector(".hero-stage");
     var vid = document.createElement("video");
     vid.className = "loopv"; vid.muted = true; vid.defaultMuted = true; vid.loop = true; vid.playsInline = true;

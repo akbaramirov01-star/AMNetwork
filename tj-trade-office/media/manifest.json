@@ -6,6 +6,13 @@
   "ext": ".webp",
   "poster": "media/hero/poster.jpg"
  },
+ "loop": {
+  "s": {
+   "mp4": "media/loop/s.mp4",
+   "webm": "media/loop/s.webm",
+   "poster": "media/loop/s.jpg"
+  }
+ },
  "band": {
   "webm": "media/band/weave.webm",
   "src": "media/band/weave.mp4",

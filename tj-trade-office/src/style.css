@@ -2,8 +2,8 @@
   --ground:#F3F0E9; --surface:#FBFAF6; --surface-2:#E9E5DB; --ink:#0E1420; --ink-soft:#4A5262;
   --ink-faint:#7C8392; --line:#D8D2C4; --gold:#9A7A36; --gold-soft:#B8964F; --red:#B0302A; --green:#2D6B47;
   --on-gold:#FFFDF6; --hero-ink:#F4F1EA;
-  --serif:'Noto Serif Display','Noto Serif',Georgia,'Times New Roman',serif;
-  --sans:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --serif:'Cormorant Garamond','Cormorant',Georgia,'Times New Roman',serif;
+  --sans:'Commissioner',system-ui,-apple-system,'Segoe UI',sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
   --maxw:1240px; --pad:clamp(20px,4vw,56px);
 }
@@ -70,7 +70,7 @@ button{font:inherit;cursor:pointer}
 @media (max-width:1300px){.nav{display:none}.burger{display:inline-flex}}
 .topbar.compact .nav{display:none}.topbar.compact .burger{display:inline-flex}
 @media (max-width:760px){.tools .cta{display:none}}
-@media (max-width:620px){.bar{gap:12px}.brand{max-width:calc(100vw - 150px);flex-shrink:1;min-width:0}.brand b{font-size:1.05rem}.chip.theme{display:none}}
+@media (max-width:620px){.bar{gap:10px}.brand{max-width:calc(100vw - 196px);flex-shrink:1;min-width:0}.brand b{font-size:1.16rem}.tools{gap:6px}.tools .chip{padding:0 10px}#langBtn span{display:none}}
 
 /* drawer */
 .drawer{position:fixed;inset:0;z-index:80;background:var(--ground);color:var(--ink);display:flex;flex-direction:column;padding:22px var(--pad) 30px;transform:translateY(-100%);visibility:hidden;transition:transform .55s cubic-bezier(.7,0,.2,1),visibility 0s linear .55s;overflow-y:auto}
@@ -470,3 +470,22 @@ footer>.orn{margin-bottom:56px}
 .langs li button span{flex:1}
 #dlangs .chip{gap:8px}
 .has-film .hero-coord{display:none}
+
+/* portrait loop is a bright sunrise: shade it so the headline reads */
+.has-loop .hero-grain{background:linear-gradient(180deg,rgba(6,9,15,.62) 0%,rgba(6,9,15,.38) 30%,rgba(6,9,15,.5) 60%,rgba(6,9,15,.82) 100%)}
+
+/* Cormorant Garamond: small x-height, so headings run larger and a touch bolder; the italic carries the gold accents */
+h1,h2,h3,h4{font-weight:500;letter-spacing:-.005em;line-height:1.06}
+.chapter h1,.chapter h2{font-weight:500;letter-spacing:-.012em;line-height:1.0;font-size:clamp(2.7rem,1.1rem + 4.8vw,5.9rem)}
+.chapter h1 em,.chapter h2 em,.band h2 em,.phead h1 em{font-weight:500}
+.phead h1{font-size:clamp(3rem,1.3rem + 5.2vw,6.4rem);line-height:1.0}
+.h2{font-size:clamp(2.3rem,1.3rem + 2.6vw,3.9rem);font-weight:500}
+.band h2{font-size:clamp(2.5rem,1.3rem + 3.8vw,5rem);line-height:1.02}
+.sector h3{font-size:1.75rem;font-weight:600;line-height:1.08}
+.brand b{font-weight:600;font-size:1.32rem;letter-spacing:0}
+.drawer nav a{font-weight:500;font-size:clamp(1.9rem,7vw,2.7rem)}
+.fig .v{font-family:var(--serif);font-weight:500}
+.dossier .big{font-size:clamp(1.6rem,1.1rem + 1.2vw,2.3rem);line-height:1.18}
+body{font-size:16px;line-height:1.68}
+@media (max-width:620px){.chapter.c2 h2{font-size:clamp(2rem,9vw,2.8rem)}.chapter h1,.chapter.c3 h2{font-size:clamp(2.4rem,11vw,3.3rem)}.phead h1{font-size:clamp(2.6rem,12vw,3.6rem)}}
+.fig .v{font-weight:500}

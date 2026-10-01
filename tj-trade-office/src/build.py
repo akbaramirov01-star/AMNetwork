@@ -13,7 +13,7 @@ fill = "\n['ru','en','tj'].forEach(function(k){ if(!C[k]){ C[k]=JSON.parse(JSON.
 html = ('<title>Tadschikistan · Handel & Investitionen</title>\n'
  '<meta name="description" content="Masrur Kurbonalizoda, Handelsvertreter der Republik Tadschikistan in Deutschland: Handel und Investitionen zwischen Tadschikistan und Deutschland.">\n'
  '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
- '<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,400;0,500;1,400&family=Onest:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">\n'
+ '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Commissioner:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">\n'
  '<style>\n' + r('style.css') + '\n</style>\n'
  + r('body.html')
  + MEDIA_JS + (scene_js if not FILM else '') +

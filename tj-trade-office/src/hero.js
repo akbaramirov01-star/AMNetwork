@@ -33,10 +33,11 @@
 
   /* ---------- looping film (preferred): native playback, scroll adds only a light parallax ---------- */
   var film = null, LOOP = (window.MEDIA || {}).loop;
-  if(LOOP && (LOOP.l || LOOP.s)){
+  var portrait = window.innerHeight > window.innerWidth * 1.1;
+  /* each orientation only uses a loop filmed for it; otherwise the frame sequence below takes over */
+  var V = LOOP ? (portrait ? LOOP.s : LOOP.l) : null;
+  if(V){
     document.documentElement.classList.add("has-film", "has-loop");
-    var portrait = window.innerHeight > window.innerWidth * 1.1;
-    var V = (portrait && LOOP.s) ? LOOP.s : (LOOP.l || LOOP.s);
     var stage = document.querySelector(".hero-stage");
     var vid = document.createElement("video");
     vid.className = "loopv"; vid.muted = true; vid.defaultMuted = true; vid.loop = true; vid.playsInline = true;
