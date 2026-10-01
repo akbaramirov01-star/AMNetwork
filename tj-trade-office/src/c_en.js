@@ -213,6 +213,6 @@ C.en = {
   hrs:"Meetings", hrsT:"Meetings by appointment — in Berlin or by video.<br><a href='#service' data-go='service'>Request a meeting →</a>",
   note:"Embassy address and phone as listed by the German Federal Foreign Office. Office contact details will be added before launch."
  },
- foot:{tag:"The Trade and Investment Office of the Embassy of the Republic of Tajikistan in Berlin.", c1:"Sections", c2:"Services", c3:"Legal", rights:"© 2026 Embassy of the Republic of Tajikistan in the Federal Republic of Germany", demo:"Website preview. Content is approved by the embassy before launch.", imp:"Legal notice", dat:"Privacy"},
+ foot:{ai:"Images and video on this website are AI-generated visualisations (Higgsfield), not photographs of specific real places or facilities.", tag:"The Trade and Investment Office of the Embassy of the Republic of Tajikistan in Berlin.", c1:"Sections", c2:"Services", c3:"Legal", rights:"© 2026 Embassy of the Republic of Tajikistan in the Federal Republic of Germany", demo:"Website preview. Content is approved by the embassy before launch.", imp:"Legal notice", dat:"Privacy"},
  legalNote:""
 };

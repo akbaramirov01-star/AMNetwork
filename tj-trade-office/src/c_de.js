@@ -214,6 +214,6 @@ C.de = {
   hrs:"Termine", hrsT:"Gespräche nach vorheriger Vereinbarung — vor Ort in Berlin oder per Video.<br><a href='#service' data-go='service'>Termin anfragen →</a>",
   note:"Adresse und Telefon der Botschaft laut Auswärtigem Amt. Die Kontaktdaten des Handelsbüros werden vor dem Start ergänzt."
  },
- foot:{tag:"Das Handels- und Investitionsbüro der Botschaft der Republik Tadschikistan in Berlin.", c1:"Bereiche", c2:"Service", c3:"Rechtliches", rights:"© 2026 Botschaft der Republik Tadschikistan in der Bundesrepublik Deutschland", demo:"Vorschau der Website. Inhalte werden vor dem Start durch die Botschaft freigegeben.", imp:"Impressum", dat:"Datenschutz"},
+ foot:{ai:"Bilder und Video auf dieser Website sind KI-generierte Visualisierungen (Higgsfield), keine Aufnahmen bestimmter realer Orte oder Anlagen.", tag:"Das Handels- und Investitionsbüro der Botschaft der Republik Tadschikistan in Berlin.", c1:"Bereiche", c2:"Service", c3:"Rechtliches", rights:"© 2026 Botschaft der Republik Tadschikistan in der Bundesrepublik Deutschland", demo:"Vorschau der Website. Inhalte werden vor dem Start durch die Botschaft freigegeben.", imp:"Impressum", dat:"Datenschutz"},
  legalNote:""
 };

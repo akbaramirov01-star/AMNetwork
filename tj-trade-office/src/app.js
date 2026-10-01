@@ -43,7 +43,7 @@ function renderChrome(){
   '<div><h4>'+L.foot.c1+'</h4><ul>'+["tadschikistan","branchen","investieren","export"].map(li).join("")+'</ul></div>'+
   '<div><h4>'+L.foot.c2+'</h4><ul>'+["service","termine","aktuelles","dokumente","quellen"].map(li).join("")+'</ul></div>'+
   '<div><h4>'+L.foot.c3+'</h4><ul>'+li("kontakt")+'<li><a href="#impressum" data-go="impressum">'+L.foot.imp+'</a></li><li><a href="#datenschutz" data-go="datenschutz">'+L.foot.dat+'</a></li></ul></div>';
- $("#fbot").innerHTML = '<span>'+L.foot.rights+'</span><span>'+L.foot.demo+'</span>';
+ $("#fbot").innerHTML = '<span>'+L.foot.rights+'</span><span>'+L.foot.demo+(MD.s?' '+L.foot.ai:'')+'</span>';
  if(window.fitBar) setTimeout(window.fitBar, 0);
  function li(r){ return '<li><a href="#'+r+'" data-go="'+r+'">'+L.nav[r]+'</a></li>'; }
 }
@@ -60,9 +60,12 @@ function renderHero(){
 }
 
 /* ------------------------------------------------------------ pages */
+var MD = window.MEDIA || {};
 function sectorCards(limit){
  return L.sectors.slice(0,limit||6).map(function(s){
-  return '<button class="sector rv" data-sector="'+s.id+'"><span class="ico">'+ICON[s.id]+'</span><h3>'+s.n+'</h3><p>'+s.s+'</p><span class="tag">'+s.tag+'<i>→</i></span></button>';
+  var ph = MD.s && MD.s[s.id];
+  var top = ph ? '<span class="ph"><img src="'+ph+'" alt="" loading="lazy" decoding="async"><span class="ico">'+ICON[s.id]+'</span></span>' : '<span class="ico">'+ICON[s.id]+'</span>';
+  return '<button class="sector rv'+(ph?' has-ph':'')+'" data-sector="'+s.id+'">'+top+'<h3>'+s.n+'</h3><p>'+s.s+'</p><span class="tag">'+s.tag+'<i>→</i></span></button>';
  }).join("");
 }
 function eventRows(){
@@ -79,7 +82,8 @@ function newsRows(filter, limit){
  }).join("");
 }
 function phead(key, h1, lead, seed){
- return '<header class="phead"><div class="field"></div><div class="orn"></div><div class="wrap"><div class="crumb"><a href="#home" data-go="home">'+L.nav.home+'</a> / '+(L.nav[key]||h1)+'</div><h1 class="rv">'+h1+'</h1><p class="lead rv">'+lead+'</p></div></header>';
+ var pic = MD.ph && MD.ph[key];
+ return '<header class="phead'+(pic?' has-pic':'')+'">'+(pic?'<div class="pic"><img src="'+pic+'" alt="" decoding="async"></div>':'')+'<div class="field"></div><div class="orn"></div><div class="wrap"><div class="crumb"><a href="#home" data-go="home">'+L.nav.home+'</a> / '+(L.nav[key]||h1)+'</div><h1 class="rv">'+h1+'</h1><p class="lead rv">'+lead+'</p></div></header>';
 }
 
 function pageHome(){
@@ -100,7 +104,9 @@ function pageHome(){
 }
 function band(){
  var b = L.home.band;
- return '<section class="band"><div class="field"></div><div class="orn lg"></div><div class="wrap"><h2 class="rv">'+b.t+'</h2><p class="rv">'+b.p+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+b.b1+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+b.b2+'</a></div></div></section>';
+ var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+ var v = MD.band ? '<video class="vid" muted loop playsinline preload="metadata"'+(reduce?'':' autoplay')+' poster="'+MD.band.poster+'" aria-hidden="true">'+(MD.band.webm?'<source src="'+MD.band.webm+'" type="video/webm">':'')+'<source src="'+MD.band.src+'" type="video/mp4"></video>' : '';
+ return '<section class="band'+(v?' has-vid':'')+'">'+v+'<div class="field"></div><div class="orn lg"></div><div class="wrap"><h2 class="rv">'+b.t+'</h2><p class="rv">'+b.p+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+b.b1+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+b.b2+'</a></div></div></section>';
 }
 
 function pageLand(){
@@ -125,7 +131,8 @@ function pageSectors(){
  '<section class="sec flush"><div class="wrap"><div class="sectors" id="secGrid">'+sectorCards()+'</div></div></section>'+band();
 }
 function dossier(s){
- return '<div class="dossier on" id="dossier"><div><p class="big">'+s.big+' '+(s.bs?sref(s.bs):"")+'</p></div><div style="display:grid;gap:26px"><div><h4>'+L.sx.need+'</h4><ul>'+s.need.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div><div><h4>'+L.sx.de+'</h4><ul>'+s.de.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div></div></div>';
+ var ph = MD.s && MD.s[s.id];
+ return '<div class="dossier on" id="dossier"><div><p class="big">'+s.big+' '+(s.bs?sref(s.bs):"")+'</p>'+(ph?'<div class="shot"><img src="'+ph+'" alt="" decoding="async"></div>':'')+'</div><div style="display:grid;gap:26px"><div><h4>'+L.sx.need+'</h4><ul>'+s.need.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div><div><h4>'+L.sx.de+'</h4><ul>'+s.de.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div></div></div>';
 }
 
 function pageInvest(){
@@ -219,7 +226,7 @@ function pageDocs(){
 function pageSources(){
  var S = L.sources;
  return phead("quellen", S.h1, S.lead, 11)+'<section class="sec flush"><div class="wrap"><ol class="srcs">'+
-  SRC.map(function(s,i){ return s?'<li id="src-'+i+'"><b>['+i+']</b><a href="'+s.u+'" target="_blank" rel="noopener">'+s.t+'</a></li>':""; }).join("")+'</ol></div></section>';
+  SRC.map(function(s,i){ return s?'<li id="src-'+i+'"><b>['+i+']</b><a href="'+s.u+'" target="_blank" rel="noopener">'+s.t+'</a></li>':""; }).join("")+'</ol>'+(MD.s?'<p class="ainote" style="margin-top:40px;max-width:70ch">'+L.foot.ai+'</p>':'')+'</div></section>';
 }
 function pageContact(){
  var K = L.contact;
@@ -267,6 +274,7 @@ var revealer = ("IntersectionObserver" in window) ? new IntersectionObserver(fun
 },{rootMargin:"0px 0px -6% 0px", threshold:0.06}) : null;
 
 function wire(root){
+ $$(".band video[autoplay]", root).forEach(function(v){ v.muted = true; var pr = v.play(); if(pr && pr.catch) pr.catch(function(){}); });
  $$(".rv", root).forEach(function(el, i){
   if(!revealer){ el.classList.add("in"); return; }
   var r = el.getBoundingClientRect();
