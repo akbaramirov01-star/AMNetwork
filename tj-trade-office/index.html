@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#090D15">
 <title>Tadschikistan · Handel & Investitionen</title>
-<meta name="description" content="Handels- und Investitionsbüro der Botschaft der Republik Tadschikistan in Berlin.">
+<meta name="description" content="Masrur Kurbonalizoda, Handelsvertreter der Republik Tadschikistan in Deutschland: Handel und Investitionen zwischen Tadschikistan und Deutschland.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,400;0,500;1,400&family=Onest:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -431,6 +431,39 @@ footer>.orn{margin-bottom:56px}
 .chapter.c2 h2{max-width:22ch}
 @media (max-width:620px){.chapter.c2 h2{font-size:clamp(1.8rem,8vw,2.6rem);max-width:100%}.chapter h1,.chapter.c3 h2{font-size:clamp(2.1rem,9.6vw,3rem)}}
 
+/* trade representative card */
+.who{display:flex;align-items:center;gap:16px;margin-top:30px;padding:16px 18px;border:1px solid rgba(233,207,154,.28);background:rgba(8,12,20,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);max-width:520px;pointer-events:auto}
+.who .mono{flex-shrink:0;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:1.15rem;letter-spacing:.04em;color:#E9CF9A;border:1px solid rgba(233,207,154,.6);background:radial-gradient(circle at 30% 25%,rgba(233,207,154,.18),transparent 70%)}
+.who b{display:block;font-family:var(--serif);font-weight:500;font-size:1.15rem;line-height:1.2}
+.who small{display:block;font-size:.8rem;opacity:.75;margin-top:4px;line-height:1.35}
+.who a{margin-left:auto;flex-shrink:0;display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.78rem;font-weight:500;letter-spacing:.06em;color:#E9CF9A;text-decoration:none;border:1px solid rgba(233,207,154,.4);padding:8px 11px;transition:background .25s,color .25s}
+.who a:hover,.who a:focus-visible{background:#E9CF9A;color:#0A0F18}
+.who a svg{width:12px;height:12px}
+@media (max-width:620px){.who{padding:12px 14px;gap:12px}.who .mono{width:42px;height:42px;font-size:.95rem}.who b{font-size:1rem}}
+
+/* ---------- motion ---------- */
+.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:.08em 0 .16em;margin:-.08em 0 -.16em}
+.w>span{display:inline-block;transform:translateY(112%);transition:transform 1.05s cubic-bezier(.19,1,.22,1);transition-delay:calc(var(--i) * 55ms)}
+.chapter.on .w>span,.split.in .w>span{transform:none}
+.js .split.rv:not(.in){opacity:1;transform:none}
+.js .sector.rv .ph img{clip-path:inset(100% 0 0 0);transform:scale(1.16)}
+.js .sector.rv.in .ph img{clip-path:inset(0 0 0 0);transform:scale(1.001);transition:clip-path 1.25s cubic-bezier(.77,0,.18,1) .12s,transform 1.9s cubic-bezier(.19,1,.22,1) .12s,filter .6s ease}
+.js .sector.rv.in:hover .ph img,.js .sector.rv.in:focus-visible .ph img{transform:scale(1.045);transition:transform 1.4s cubic-bezier(.2,.7,.2,1),filter .6s ease}
+.dossier .shot img{animation:shotIn 1.4s cubic-bezier(.19,1,.22,1) both}
+@keyframes shotIn{from{clip-path:inset(0 100% 0 0);transform:scale(1.12)}to{clip-path:inset(0 0 0 0);transform:none}}
+.phead .pic img{animation:picIn 2.2s cubic-bezier(.19,1,.22,1) both}
+@keyframes picIn{from{opacity:0;transform:scale(1.12)}to{opacity:.92;transform:none}}
+.hero-stage::after,.band.has-vid::after{content:"";position:absolute;inset:-50%;pointer-events:none;z-index:2;background-image:var(--noise);background-size:160px 160px;opacity:.09;mix-blend-mode:overlay;animation:grain 1s steps(6) infinite}
+.band.has-vid::after{opacity:.07}
+@keyframes grain{0%{transform:translate(0,0)}17%{transform:translate(-4%,3%)}33%{transform:translate(3%,-5%)}50%{transform:translate(-6%,-2%)}67%{transform:translate(5%,4%)}83%{transform:translate(-2%,6%)}100%{transform:translate(0,0)}}
+.hero .chapter{z-index:3}.hero-meter,.hero-coord{z-index:3}
+@media (prefers-reduced-motion:reduce){
+ .w>span{transform:none!important;transition:none}
+ .js .sector.rv .ph img{clip-path:none;transform:none;transition:none}
+ .dossier .shot img,.phead .pic img{animation:none}
+ .hero-stage::after,.band.has-vid::after{animation:none}
+}
+
 </style>
 </head>
 <body>
@@ -481,7 +514,7 @@ footer>.orn{margin-bottom:56px}
  <span id="fBrandB" hidden></span><span id="fBrandP" hidden></span>
 </footer>
 
-<script>window.MEDIA = {"hero": {"n": 96, "lg": "media/hero/l/f_", "sm": "media/hero/s/f_", "ext": ".webp", "poster": "media/hero/poster.jpg"}, "band": {"webm": "media/band/weave.webm", "src": "media/band/weave.mp4", "poster": "media/band/weave.jpg"}, "s": {"energy": "media/s/energy.webp", "mining": "media/s/mining.webp", "agri": "media/s/agri.webp", "textile": "media/s/textile.webp", "tourism": "media/s/tourism.webp", "industry": "media/s/industry.webp"}, "ph": {"tadschikistan": "media/s/tourism.webp", "branchen": "media/s/textile.webp", "investieren": "media/s/industry.webp", "export": "media/s/agri.webp"}};</script>
+<script>window.MEDIA = {"hero": {"n": 84, "lg": "media/hero/l/f_", "sm": "media/hero/s/f_", "ext": ".webp", "poster": "media/hero/poster.jpg"}, "band": {"webm": "media/band/weave.webm", "src": "media/band/weave.mp4", "poster": "media/band/weave.jpg"}, "s": {"energy": "media/s/energy.webp", "mining": "media/s/mining.webp", "agri": "media/s/agri.webp", "textile": "media/s/textile.webp", "tourism": "media/s/tourism.webp", "industry": "media/s/industry.webp"}, "ph": {"tadschikistan": "media/s/tourism.webp", "branchen": "media/s/textile.webp", "investieren": "media/s/industry.webp", "export": "media/s/agri.webp"}};</script>
 <script>
 /* Flags: flag-icons (MIT, © Panayiotis Lipiridis). Tajik flag widened to the official 1:2 proportion. */
 var FLAG_TJ = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 960 480"> <path fill="#060" d="M0 0h960v480H0z"/> <path fill="#fff" d="M0 0h960v342.9H0z"/> <path fill="#c00" d="M0 0h960v137.1H0z"/><g transform="translate(160 0)"> <path fill="#f8c300" d="M300.8 233.6a8.6 8.6 0 0 1 16 4V272h6.4v-34.3a8.6 8.6 0 0 1 16-4 20.2 20.2 0 1 0-38.4 0"/> <path fill="#fff" d="M305.4 224.7a14 14 0 0 1 14.6 6.5 14 14 0 0 1 14.6-6.5 14.7 14.7 0 0 0-29.2 0"/> <path id="tjA" fill="#f8c300" d="M316.8 258.3a26 26 0 0 1-43.8 16.6 27 27 0 0 1-41 12c2.5 25 40 19.9 42.8-4.4 11.7 20.7 37.6 14.7 45.2-10.6z"/> <use xlink:href="#tjA" width="100%" height="100%" fill="#f8c300" transform="matrix(-1 0 0 1 640 0)"/> <path id="tj-b" fill="#f8c300" d="M291.8 302.6c-5.3 11.3-15.7 13.2-24.8 4.1 0 0 3.6-2.6 7.6-3.3-.8-3.1.7-7.5 2.9-9.8a15 15 0 0 1 6.1 8.1c5.5-.7 8.2 1 8.2 1z"/> <use xlink:href="#tj-b" width="100%" height="100%" fill="#f8c300" transform="rotate(9.4 320 551.3)"/> <use xlink:href="#tj-b" width="100%" height="100%" fill="#f8c300" transform="rotate(18.7 320 551.3)"/> <path fill="none" stroke="#f8c300" stroke-width="11" d="M253.5 327.8a233 233 0 0 1 133 0"/> <g fill="#f8c300" transform="translate(320 164.6)scale(.68571)"> <path id="tj-c" d="m301930 415571-790463-574305h977066l-790463 574305L0-513674z" transform="scale(.00005)"/> </g> <g id="tj-d" fill="#f8c300" transform="translate(320 260.6)scale(.68571)"> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-70 -121.2)"/> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-121.2 -70)"/> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-140)"/> </g> <use xlink:href="#tj-d" width="100%" height="100%" fill="#f8c300" transform="matrix(-1 0 0 1 640 0)"/> </g></svg>';
@@ -549,7 +582,7 @@ var SRC = [
  {t:"Germany Trade & Invest — Wirtschaft Tadschikistan", u:"https://www.gtai.de/de/trade/tadschikistan-wirtschaft"},
  {t:"Ost-Ausschuss der Deutschen Wirtschaft — Tadschikistan", u:"https://www.ost-ausschuss.de/de/tadschikistan"},
  {t:"EEAS — EU–Tajikistan relations", u:"https://www.eeas.europa.eu/eeas/eu-tajikistan-relations_en"},
- {t:"Embassy of the RT in Germany — Ambassador’s working meeting at the Federal President’s Office, 02.12.2025", u:"https://mfa.tj/de/berlin/view/17890/arbeitsgesprch-des-botschafters-im-bundesprsidialamt"},
+ null,
  {t:"EUR-Lex — Regulation (EC) No 852/2004 on the hygiene of foodstuffs", u:"https://eur-lex.europa.eu/eli/reg/2004/852/oj"},
  {t:"EUR-Lex — Regulation (EU) No 1169/2011 on food information to consumers", u:"https://eur-lex.europa.eu/eli/reg/2011/1169/oj"},
  {t:"EUR-Lex — Regulation (EU) 2023/915 on maximum levels for contaminants", u:"https://eur-lex.europa.eu/eli/reg/2023/915/oj"},
@@ -584,22 +617,26 @@ var NEWS = [
  {d:"2026-06-19", cat:"eu", src:20, id:"cc12"},
  {d:"2026-04-15", cat:"econ", src:2, id:"mpo"},
  {d:"2026-02-21", cat:"econ", src:3, id:"pop"},
- {d:"2025-12-02", cat:"emb", src:21, id:"bpa"},
  {d:"2025-07-30", cat:"econ", src:1, id:"weu"},
  {d:"2025-07-18", cat:"eu", src:7, id:"epca"}
 ];
+
+/* the trade representative: this is his own website */
+var REP = {li:"https://www.linkedin.com/in/masrur-kurbonalizoda-034483270",
+ n:{de:"Masrur Kurbonalizoda", en:"Masrur Kurbonalizoda", ru:"Масрур Курбонализода", tj:"Масрур Курбонализода"},
+ ini:{de:"MK", en:"MK", ru:"МК", tj:"МК"}};
 
 var C = {};
 C.de = {
  code:"de", name:"Deutsch",
  brand:"Tadschikistan · Handel & Investitionen",
- brandSub:"Botschaft der Republik Tadschikistan · Berlin",
+ brandSub:"Handelsvertreter der Republik Tadschikistan in Deutschland",
  nav:{tadschikistan:"Tadschikistan", branchen:"Branchen", investieren:"Investieren", export:"Export", termine:"Termine", aktuelles:"Aktuelles", kontakt:"Kontakt", service:"Partner finden", dokumente:"Dokumente", quellen:"Quellen", home:"Start"},
  ui:{menu:"Menü", close:"Schließen", theme:"Hell / Dunkel", lang:"Sprache", more:"Alle ansehen", back:"Zurück zur Startseite", src:"Quelle", open:"Öffnen", details:"Details", scroll:"Scrollen", alt:"Höhe"},
  hero:{
   k1:"Republik Tadschikistan · Berlin",
   t1:"Handel und Investitionen zwischen <em>Tadschikistan</em> und Deutschland",
-  s1:"Das Handels- und Investitionsbüro der Botschaft der Republik Tadschikistan in Berlin. Ansprechpartner für deutsche Unternehmen, die in Tadschikistan investieren oder einkaufen — und für tadschikische Unternehmen auf dem Weg in den deutschen Markt.",
+  s1:"Der Handelsvertreter der Republik Tadschikistan in Deutschland, mit Sitz in Berlin. Ansprechpartner für deutsche Unternehmen, die in Tadschikistan investieren oder einkaufen — und für tadschikische Unternehmen auf dem Weg in den deutschen Markt.",
   b1:"Für deutsche Unternehmen", b2:"Für tadschikische Exporteure",
   k2:"Ein Land aus Gebirge und Wasser",
   t2:"<em>527 Milliarden</em> Kilowattstunden Wasserkraftpotenzial im Jahr",
@@ -713,7 +750,7 @@ C.de = {
   steps:[
    {t:"Erstgespräch in Berlin", p:"Sie schildern Ihr Vorhaben. Wir klären Branche, Standortfragen und die zuständigen Stellen.", w:"Handelsbüro"},
    {t:"Kontakt zu den Behörden", p:"Wir stellen den Kontakt zum Staatskomitee für Investitionen und Verwaltung des Staatsvermögens und zu den Fachministerien her.", w:"Handelsbüro · Staatskomitee"},
-   {t:"Reise nach Tadschikistan", p:"Besuche von Standorten, Freien Wirtschaftszonen und potenziellen Partnern — auf Wunsch als Teil einer Delegation.", w:"Unternehmen · Botschaft"},
+   {t:"Reise nach Tadschikistan", p:"Besuche von Standorten, Freien Wirtschaftszonen und potenziellen Partnern — auf Wunsch als Teil einer Delegation.", w:"Unternehmen · Handelsvertreter"},
    {t:"Gründung und Registrierung", p:"Die staatliche Registrierung von Unternehmen erfolgt über das Steuerkomitee. Wir nennen Ihnen Ansprechpartner und Beratungsunternehmen vor Ort.", w:"Steuerkomitee RT"},
    {t:"Begleitung nach dem Start", p:"Wir bleiben Ihr Ansprechpartner in Berlin, wenn Fragen zu Behörden, Visa oder weiteren Projekten entstehen.", w:"Handelsbüro"}
   ],
@@ -747,25 +784,24 @@ C.de = {
  },
  events:{
   h1:"Termine",
-  lead:"Fachmessen in Deutschland, auf denen tadschikische Unternehmen Abnehmer finden — und Veranstaltungen der Botschaft.",
+  lead:"Fachmessen in Deutschland, auf denen tadschikische Unternehmen Abnehmer finden — und eigene Veranstaltungen des Handelsvertreters.",
   list:{
    igw:{n:"Internationale Grüne Woche", p:"Messe für Ernährung, Landwirtschaft und Gartenbau — Bühne für Länderpräsentationen und Agrarprodukte."},
    biofach:{n:"BIOFACH", p:"Weltleitmesse für Bio-Lebensmittel. Relevant für Trockenfrüchte, Nüsse und Kräuter mit EU-Bio-Zertifikat."},
    itb:{n:"ITB Berlin", p:"Internationale Tourismusbörse. Treffpunkt mit Reiseveranstaltern für den Pamir und die Seidenstraße."},
    anuga:{n:"Anuga", p:"Eine der größten Fachmessen für Lebensmittel und Getränke weltweit, mit Schwerpunkt Handel und Großverbraucher."}
   },
-  note:"Veranstaltungen der Botschaft, Delegationsreisen und Wirtschaftsforen werden hier veröffentlicht, sobald die Termine feststehen.",
+  note:"Eigene Veranstaltungen, Delegationsreisen und Wirtschaftsforen werden hier veröffentlicht, sobald die Termine feststehen.",
   more:"Zur Messe"
  },
  news:{
   h1:"Aktuelles",
-  lead:"Abkommen, Wirtschaftsdaten und Termine der Botschaft — jede Meldung mit Datum und Quelle.",
-  tabs:{all:"Alle", eu:"EU & Abkommen", econ:"Wirtschaft", emb:"Botschaft"},
+  lead:"Abkommen, Wirtschaftsdaten und Termine — jede Meldung mit Datum und Quelle.",
+  tabs:{all:"Alle", eu:"EU & Abkommen", econ:"Wirtschaft"},
   items:{
    cc12:{t:"12. Kooperationsausschuss EU–Tadschikistan", p:"Die Sitzung bereitet die Unterzeichnung des Erweiterten Partnerschafts- und Kooperationsabkommens vor, die für 2026 vorgesehen ist."},
    mpo:{t:"Weltbank: Wirtschaft wuchs 2025 um 8,4 %", p:"Getragen von Rücküberweisungen. Für 2026 erwartet die Weltbank 6,5 %. Die Armutsquote sank auf 14,8 %."},
    pop:{t:"Bevölkerung erreicht 10,72 Millionen", p:"Stand 1. Januar 2026, ein Plus von rund 2 % gegenüber dem Vorjahr, so die Statistikagentur."},
-   bpa:{t:"Botschafter zu Gespräch im Bundespräsidialamt", p:"Botschafter Imomudin Sattorov erörterte Stand und Perspektiven der politischen, wirtschaftlichen und kulturellen Zusammenarbeit."},
    weu:{t:"Weltbank: 8,4 % Wachstum im Jahr 2024", p:"Dienstleistungen und Industrie führten das Wachstum an; die Warenexporte gingen um 20,5 % zurück."},
    epca:{t:"EU und Tadschikistan paraphieren Partnerschaftsabkommen", p:"Mit der Paraphierung des Erweiterten Partnerschafts- und Kooperationsabkommens sind die Verhandlungen abgeschlossen."}
   },
@@ -780,7 +816,7 @@ C.de = {
    meeting:{t:"Gesprächstermin", s:"Für alle", p:"Sie möchten das Handelsbüro in Berlin persönlich oder per Video sprechen."}
   },
   f:{company:"Unternehmen", name:"Ansprechpartner", email:"E-Mail", phone:"Telefon", country:"Land", sector:"Branche", need:"Was suchen Sie?", product:"Produkte", volume:"Jahresmenge (ca.)", certs:"Vorhandene Zertifikate", date:"Wunschtermin", format:"Format", f1:"Vor Ort in Berlin", f2:"Videogespräch", topic:"Thema", send:"Anfrage senden",
-   ok:"<strong>Vielen Dank.</strong> Dies ist eine Vorschau der Website: Das Formular wird nach dem Start an das Handelsbüro übermittelt. Bis dahin erreichen Sie uns über die Botschaft.",
+   ok:"<strong>Vielen Dank.</strong> Dies ist eine Vorschau der Website: Das Formular wird nach dem Start an das Handelsbüro übermittelt. Bis dahin erreichen Sie den Handelsvertreter über <a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn</a>.",
    fine:"Ihre Angaben werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet. Siehe Datenschutzerklärung.",
    sectors:["Energie & Wasserkraft","Bergbau & Rohstoffe","Landwirtschaft & Lebensmittel","Textil","Tourismus","Industrie & Produktion","Sonstiges"]}
  },
@@ -799,25 +835,25 @@ C.de = {
  sources:{h1:"Quellen", lead:"Alle Zahlen und Aussagen dieser Website mit ihrem Nachweis. Die Nummern entsprechen den Verweisen im Text."},
  contact:{
   h1:"Kontakt",
-  lead:"Das Handelsbüro ist Teil der Botschaft der Republik Tadschikistan in Berlin.",
-  emb:"Botschaft", embT:"Botschaft der Republik Tadschikistan<br>Perleberger Straße 43<br>10559 Berlin<br>Tel. +49 30 347 93 00",
-  off:"Handels- und Investitionsbüro", offT:"<span class='ph'>[Name des Handelsvertreters]</span><br><span class='ph'>[E-Mail-Adresse]</span><br><span class='ph'>[Telefon]</span>",
+  lead:"Ihr Ansprechpartner für Handel und Investitionen zwischen Tadschikistan und Deutschland.",
+  emb:"Handelsvertreter", embT:"<b>Masrur Kurbonalizoda</b><br>Handelsvertreter der Republik Tadschikistan in Deutschland<br><a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn →</a>",
+  off:"Büro in Berlin", offT:"Perleberger Straße 43<br>10559 Berlin<br><span class='ph'>[E-Mail-Adresse]</span><br><span class='ph'>[Telefon]</span>",
   hrs:"Termine", hrsT:"Gespräche nach vorheriger Vereinbarung — vor Ort in Berlin oder per Video.<br><a href='#service' data-go='service'>Termin anfragen →</a>",
-  note:"Adresse und Telefon der Botschaft laut Auswärtigem Amt. Die Kontaktdaten des Handelsbüros werden vor dem Start ergänzt."
+  note:"Direkte E-Mail-Adresse und Telefonnummer werden vor dem Start ergänzt."
  },
- foot:{ai:"Bilder und Video auf dieser Website sind KI-generierte Visualisierungen (Higgsfield), keine Aufnahmen bestimmter realer Orte oder Anlagen.", tag:"Das Handels- und Investitionsbüro der Botschaft der Republik Tadschikistan in Berlin.", c1:"Bereiche", c2:"Service", c3:"Rechtliches", rights:"© 2026 Botschaft der Republik Tadschikistan in der Bundesrepublik Deutschland", demo:"Vorschau der Website. Inhalte werden vor dem Start durch die Botschaft freigegeben.", imp:"Impressum", dat:"Datenschutz"},
+ foot:{ai:"Bilder und Video auf dieser Website sind KI-generierte Visualisierungen (Higgsfield), keine Aufnahmen bestimmter realer Orte oder Anlagen.", tag:"Handelsvertreter der Republik Tadschikistan in Deutschland. Büro in Berlin.", c1:"Bereiche", c2:"Service", c3:"Rechtliches", rights:"© 2026 Masrur Kurbonalizoda, Handelsvertreter der Republik Tadschikistan in Deutschland", demo:"Vorschau der Website. Inhalte werden vor dem Start abschließend geprüft.", imp:"Impressum", dat:"Datenschutz"},
  legalNote:""
 };
 C.ru = {
  code:"ru", name:"Русский",
  brand:"Таджикистан · Торговля и инвестиции",
- brandSub:"Посольство Республики Таджикистан · Берлин",
+ brandSub:"Торговый представитель Республики Таджикистан в Германии",
  nav:{tadschikistan:"Таджикистан", branchen:"Отрасли", investieren:"Инвестиции", export:"Экспорт", termine:"События", aktuelles:"Новости", kontakt:"Контакты", service:"Найти партнёра", dokumente:"Документы", quellen:"Источники", home:"Главная"},
  ui:{menu:"Меню", close:"Закрыть", theme:"Светлая / тёмная", lang:"Язык", more:"Смотреть все", back:"На главную", src:"Источник", open:"Открыть", details:"Подробнее", scroll:"Прокрутка", alt:"Высота"},
  hero:{
   k1:"Республика Таджикистан · Берлин",
   t1:"Торговля и инвестиции между <em>Таджикистаном</em> и Германией",
-  s1:"Бюро по торговле и инвестициям Посольства Республики Таджикистан в Берлине. Контактное лицо для немецких компаний, которые инвестируют в Таджикистан или закупают там товары, — и для таджикских компаний на пути на немецкий рынок.",
+  s1:"Торговый представитель Республики Таджикистан в Германии, офис в Берлине. Контактное лицо для немецких компаний, которые инвестируют в Таджикистан или закупают там товары, — и для таджикских компаний на пути на немецкий рынок.",
   b1:"Немецким компаниям", b2:"Таджикским экспортёрам",
   k2:"Страна гор и воды",
   t2:"<em>527 миллиардов</em> киловатт-часов гидроэнергетического потенциала в год",
@@ -931,7 +967,7 @@ C.ru = {
   steps:[
    {t:"Первая встреча в Берлине", p:"Вы рассказываете о проекте. Мы уточняем отрасль, вопросы площадки и профильные ведомства.", w:"Бюро по торговле"},
    {t:"Контакт с ведомствами", p:"Мы связываем вас с Государственным комитетом по инвестициям и управлению государственным имуществом и отраслевыми министерствами.", w:"Бюро · Госкомитет"},
-   {t:"Поездка в Таджикистан", p:"Посещение площадок, свободных экономических зон и потенциальных партнёров — по желанию в составе делегации.", w:"Компания · Посольство"},
+   {t:"Поездка в Таджикистан", p:"Посещение площадок, свободных экономических зон и потенциальных партнёров — по желанию в составе делегации.", w:"Компания · Торговый представитель"},
    {t:"Создание и регистрация", p:"Государственная регистрация юридических лиц проводится через Налоговый комитет. Мы назовём контакты и консультантов на месте.", w:"Налоговый комитет РТ"},
    {t:"Сопровождение после старта", p:"Мы остаёмся вашим контактом в Берлине по вопросам ведомств, виз и новых проектов.", w:"Бюро по торговле"}
   ],
@@ -965,25 +1001,24 @@ C.ru = {
  },
  events:{
   h1:"События",
-  lead:"Отраслевые выставки в Германии, на которых таджикские компании находят покупателей, — и мероприятия посольства.",
+  lead:"Отраслевые выставки в Германии, на которых таджикские компании находят покупателей, — и собственные мероприятия торгового представителя.",
   list:{
    igw:{n:"Международная «Зелёная неделя»", p:"Выставка продовольствия, сельского хозяйства и садоводства — площадка для национальных экспозиций и агропродукции."},
    biofach:{n:"BIOFACH", p:"Ведущая мировая выставка органических продуктов. Важна для сухофруктов, орехов и трав с органическим сертификатом ЕС."},
    itb:{n:"ITB Berlin", p:"Международная туристическая биржа. Встреча с туроператорами по Памиру и Шёлковому пути."},
    anuga:{n:"Anuga", p:"Одна из крупнейших в мире выставок продуктов питания и напитков, ориентированная на торговлю и HoReCa."}
   },
-  note:"Мероприятия посольства, деловые миссии и экономические форумы будут публиковаться здесь, как только даты будут определены.",
+  note:"Собственные мероприятия, деловые миссии и экономические форумы будут публиковаться здесь, как только даты будут определены.",
   more:"На сайт выставки"
  },
  news:{
   h1:"Новости",
-  lead:"Соглашения, экономические данные и мероприятия посольства — каждое сообщение с датой и источником.",
-  tabs:{all:"Все", eu:"ЕС и соглашения", econ:"Экономика", emb:"Посольство"},
+  lead:"Соглашения, экономические данные и мероприятия — каждое сообщение с датой и источником.",
+  tabs:{all:"Все", eu:"ЕС и соглашения", econ:"Экономика"},
   items:{
    cc12:{t:"12-й Комитет сотрудничества ЕС–Таджикистан", p:"Заседание готовит подписание Соглашения о расширенном партнёрстве и сотрудничестве, намеченное на 2026 год."},
    mpo:{t:"Всемирный банк: в 2025 году экономика выросла на 8,4 %", p:"Рост обеспечили денежные переводы. На 2026 год банк ожидает 6,5 %. Уровень бедности снизился до 14,8 %."},
    pop:{t:"Население достигло 10,72 млн человек", p:"По данным Агентства по статистике на 1 января 2026 года — рост около 2 % за год."},
-   bpa:{t:"Встреча посла в Ведомстве Федерального президента", p:"Посол Имомуддин Сатторов обсудил состояние и перспективы политического, экономического и культурного сотрудничества."},
    weu:{t:"Всемирный банк: рост 8,4 % в 2024 году", p:"Рост обеспечили услуги и промышленность; товарный экспорт сократился на 20,5 %."},
    epca:{t:"ЕС и Таджикистан парафировали соглашение о партнёрстве", p:"Парафирование Соглашения о расширенном партнёрстве и сотрудничестве завершило переговоры."}
   },
@@ -998,7 +1033,7 @@ C.ru = {
    meeting:{t:"Встреча", s:"Для всех", p:"Вы хотите встретиться с бюро в Берлине лично или по видеосвязи."}
   },
   f:{company:"Компания", name:"Контактное лицо", email:"Эл. почта", phone:"Телефон", country:"Страна", sector:"Отрасль", need:"Что вы ищете?", product:"Продукция", volume:"Годовой объём (примерно)", certs:"Имеющиеся сертификаты", date:"Желаемая дата", format:"Формат", f1:"Лично в Берлине", f2:"Видеозвонок", topic:"Тема", send:"Отправить запрос",
-   ok:"<strong>Спасибо.</strong> Это предварительная версия сайта: после запуска форма будет передаваться в бюро по торговле. До этого с нами можно связаться через посольство.",
+   ok:"<strong>Спасибо.</strong> Это предварительная версия сайта: после запуска форма будет передаваться в бюро по торговле. До этого с торговым представителем можно связаться через <a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn</a>.",
    fine:"Ваши данные используются только для обработки запроса. См. политику конфиденциальности.",
    sectors:["Энергетика и гидроэнергетика","Горнодобыча и сырьё","Сельское хозяйство и продовольствие","Текстиль","Туризм","Промышленность и производство","Другое"]}
  },
@@ -1017,25 +1052,25 @@ C.ru = {
  sources:{h1:"Источники", lead:"Все цифры и утверждения сайта с подтверждением. Номера соответствуют ссылкам в тексте."},
  contact:{
   h1:"Контакты",
-  lead:"Бюро по торговле и инвестициям входит в структуру Посольства Республики Таджикистан в Берлине.",
-  emb:"Посольство", embT:"Посольство Республики Таджикистан<br>Perleberger Straße 43<br>10559 Berlin<br>Тел. +49 30 347 93 00",
-  off:"Бюро по торговле и инвестициям", offT:"<span class='ph'>[Имя торгового представителя]</span><br><span class='ph'>[Адрес эл. почты]</span><br><span class='ph'>[Телефон]</span>",
+  lead:"Ваш контакт по вопросам торговли и инвестиций между Таджикистаном и Германией.",
+  emb:"Торговый представитель", embT:"<b>Масрур Курбонализода</b><br>Торговый представитель Республики Таджикистан в Германии<br><a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn →</a>",
+  off:"Офис в Берлине", offT:"Perleberger Straße 43<br>10559 Berlin<br><span class='ph'>[Адрес эл. почты]</span><br><span class='ph'>[Телефон]</span>",
   hrs:"Встречи", hrsT:"Встречи по предварительной договорённости — в Берлине или по видеосвязи.<br><a href='#service' data-go='service'>Записаться →</a>",
-  note:"Адрес и телефон посольства — по данным МИД ФРГ. Контакты бюро будут добавлены перед запуском."
+  note:"Прямые e-mail и телефон будут добавлены перед запуском."
  },
- foot:{ai:"Изображения и видео на этом сайте — визуализации, созданные ИИ (Higgsfield), а не съёмка конкретных реальных мест или объектов.", tag:"Бюро по торговле и инвестициям Посольства Республики Таджикистан в Берлине.", c1:"Разделы", c2:"Сервис", c3:"Правовая информация", rights:"© 2026 Посольство Республики Таджикистан в Федеративной Республике Германия", demo:"Предварительная версия сайта. Материалы утверждаются посольством перед запуском.", imp:"Impressum", dat:"Конфиденциальность"},
+ foot:{ai:"Изображения и видео на этом сайте — визуализации, созданные ИИ (Higgsfield), а не съёмка конкретных реальных мест или объектов.", tag:"Торговый представитель Республики Таджикистан в Германии. Офис в Берлине.", c1:"Разделы", c2:"Сервис", c3:"Правовая информация", rights:"© 2026 Масрур Курбонализода, торговый представитель Республики Таджикистан в Германии", demo:"Предварительная версия сайта. Материалы проходят окончательную проверку перед запуском.", imp:"Impressum", dat:"Конфиденциальность"},
  legalNote:""
 };
 C.en = {
  code:"en", name:"English",
  brand:"Tajikistan · Trade & Investment",
- brandSub:"Embassy of the Republic of Tajikistan · Berlin",
+ brandSub:"Trade Representative of the Republic of Tajikistan in Germany",
  nav:{tadschikistan:"Tajikistan", branchen:"Sectors", investieren:"Invest", export:"Export", termine:"Events", aktuelles:"News", kontakt:"Contact", service:"Find a partner", dokumente:"Documents", quellen:"Sources", home:"Home"},
  ui:{menu:"Menu", close:"Close", theme:"Light / dark", lang:"Language", more:"View all", back:"Back to home", src:"Source", open:"Open", details:"Details", scroll:"Scroll", alt:"Altitude"},
  hero:{
   k1:"Republic of Tajikistan · Berlin",
   t1:"Trade and investment between <em>Tajikistan</em> and Germany",
-  s1:"The Trade and Investment Office of the Embassy of the Republic of Tajikistan in Berlin. Your point of contact if you are a German company investing in or sourcing from Tajikistan — or a Tajik company on its way into the German market.",
+  s1:"The Trade Representative of the Republic of Tajikistan in Germany, based in Berlin. Your point of contact if you are a German company investing in or sourcing from Tajikistan — or a Tajik company on its way into the German market.",
   b1:"For German companies", b2:"For Tajik exporters",
   k2:"A country of mountains and water",
   t2:"<em>527 billion</em> kilowatt-hours of hydropower potential a year",
@@ -1149,7 +1184,7 @@ C.en = {
   steps:[
    {t:"First meeting in Berlin", p:"You describe your project. We clarify the sector, site questions and the responsible authorities.", w:"Trade office"},
    {t:"Contact with the authorities", p:"We connect you with the State Committee on Investments and State Property Management and the line ministries.", w:"Trade office · State Committee"},
-   {t:"Visit to Tajikistan", p:"Visits to sites, free economic zones and potential partners — as part of a delegation if you wish.", w:"Company · Embassy"},
+   {t:"Visit to Tajikistan", p:"Visits to sites, free economic zones and potential partners — as part of a delegation if you wish.", w:"Company · Trade Representative"},
    {t:"Set-up and registration", p:"State registration of companies is carried out through the Tax Committee. We name contacts and local advisers.", w:"Tax Committee"},
    {t:"Support after launch", p:"We remain your contact in Berlin for questions on authorities, visas and further projects.", w:"Trade office"}
   ],
@@ -1183,25 +1218,24 @@ C.en = {
  },
  events:{
   h1:"Events",
-  lead:"Trade fairs in Germany where Tajik companies meet buyers — and events of the embassy.",
+  lead:"Trade fairs in Germany where Tajik companies meet buyers — and the Trade Representative’s own events.",
   list:{
    igw:{n:"International Green Week", p:"Fair for food, agriculture and horticulture — a stage for country presentations and farm produce."},
    biofach:{n:"BIOFACH", p:"The world’s leading trade fair for organic food. Relevant for dried fruit, nuts and herbs with EU organic certification."},
    itb:{n:"ITB Berlin", p:"International tourism trade show. Meet tour operators for the Pamirs and the Silk Road."},
    anuga:{n:"Anuga", p:"One of the world’s largest food and beverage fairs, focused on retail and food service."}
   },
-  note:"Embassy events, business missions and economic forums will be published here once dates are confirmed.",
+  note:"Our own events, business missions and economic forums will be published here once dates are confirmed.",
   more:"Fair website"
  },
  news:{
   h1:"News",
-  lead:"Agreements, economic data and embassy events — each item with date and source.",
-  tabs:{all:"All", eu:"EU & agreements", econ:"Economy", emb:"Embassy"},
+  lead:"Agreements, economic data and events — each item with date and source.",
+  tabs:{all:"All", eu:"EU & agreements", econ:"Economy"},
   items:{
    cc12:{t:"12th EU–Tajikistan Cooperation Committee", p:"The meeting prepares the signature of the Enhanced Partnership and Cooperation Agreement, scheduled for 2026."},
    mpo:{t:"World Bank: economy grew 8.4% in 2025", p:"Driven by remittances. The Bank expects 6.5% for 2026. Poverty fell to 14.8%."},
    pop:{t:"Population reaches 10.72 million", p:"As of 1 January 2026, up about 2% year on year, according to the Agency on Statistics."},
-   bpa:{t:"Ambassador meets the Office of the Federal President", p:"Ambassador Imomudin Sattorov discussed the state and prospects of political, economic and cultural cooperation."},
    weu:{t:"World Bank: 8.4% growth in 2024", p:"Services and industry led growth; goods exports fell by 20.5%."},
    epca:{t:"EU and Tajikistan initial partnership agreement", p:"Initialling the Enhanced Partnership and Cooperation Agreement concludes the negotiations."}
   },
@@ -1216,7 +1250,7 @@ C.en = {
    meeting:{t:"Meeting", s:"For everyone", p:"You would like to meet the office in Berlin in person or by video."}
   },
   f:{company:"Company", name:"Contact person", email:"Email", phone:"Phone", country:"Country", sector:"Sector", need:"What are you looking for?", product:"Products", volume:"Annual volume (approx.)", certs:"Existing certificates", date:"Preferred date", format:"Format", f1:"In person in Berlin", f2:"Video call", topic:"Topic", send:"Send request",
-   ok:"<strong>Thank you.</strong> This is a preview of the website: after launch, the form will be delivered to the trade office. Until then, please contact us through the embassy.",
+   ok:"<strong>Thank you.</strong> This is a preview of the website: after launch, the form will be delivered to the trade office. Until then, you can reach the Trade Representative on <a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn</a>.",
    fine:"Your details are used only to handle your request. See the privacy notice.",
    sectors:["Energy & hydropower","Mining & raw materials","Agriculture & food","Textiles","Tourism","Industry & production","Other"]}
  },
@@ -1235,25 +1269,25 @@ C.en = {
  sources:{h1:"Sources", lead:"Every figure and statement on this site with its evidence. Numbers match the references in the text."},
  contact:{
   h1:"Contact",
-  lead:"The Trade and Investment Office is part of the Embassy of the Republic of Tajikistan in Berlin.",
-  emb:"Embassy", embT:"Embassy of the Republic of Tajikistan<br>Perleberger Straße 43<br>10559 Berlin<br>Tel. +49 30 347 93 00",
-  off:"Trade and Investment Office", offT:"<span class='ph'>[Name of the trade representative]</span><br><span class='ph'>[Email address]</span><br><span class='ph'>[Phone]</span>",
+  lead:"Your contact for trade and investment between Tajikistan and Germany.",
+  emb:"Trade Representative", embT:"<b>Masrur Kurbonalizoda</b><br>Trade Representative of the Republic of Tajikistan in Germany<br><a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn →</a>",
+  off:"Office in Berlin", offT:"Perleberger Straße 43<br>10559 Berlin<br><span class='ph'>[Email address]</span><br><span class='ph'>[Phone]</span>",
   hrs:"Meetings", hrsT:"Meetings by appointment — in Berlin or by video.<br><a href='#service' data-go='service'>Request a meeting →</a>",
-  note:"Embassy address and phone as listed by the German Federal Foreign Office. Office contact details will be added before launch."
+  note:"Direct email and phone will be added before launch."
  },
- foot:{ai:"Images and video on this website are AI-generated visualisations (Higgsfield), not photographs of specific real places or facilities.", tag:"The Trade and Investment Office of the Embassy of the Republic of Tajikistan in Berlin.", c1:"Sections", c2:"Services", c3:"Legal", rights:"© 2026 Embassy of the Republic of Tajikistan in the Federal Republic of Germany", demo:"Website preview. Content is approved by the embassy before launch.", imp:"Legal notice", dat:"Privacy"},
+ foot:{ai:"Images and video on this website are AI-generated visualisations (Higgsfield), not photographs of specific real places or facilities.", tag:"Trade Representative of the Republic of Tajikistan in Germany. Office in Berlin.", c1:"Sections", c2:"Services", c3:"Legal", rights:"© 2026 Masrur Kurbonalizoda, Trade Representative of the Republic of Tajikistan in Germany", demo:"Website preview. Content receives a final review before launch.", imp:"Legal notice", dat:"Privacy"},
  legalNote:""
 };
 C.tj = {
  code:"tj", name:"Тоҷикӣ",
  brand:"Тоҷикистон · Савдо ва сармоягузорӣ",
- brandSub:"Сафорати Ҷумҳурии Тоҷикистон · Берлин",
+ brandSub:"Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон",
  nav:{tadschikistan:"Тоҷикистон", branchen:"Соҳаҳо", investieren:"Сармоягузорӣ", export:"Содирот", termine:"Чорабиниҳо", aktuelles:"Хабарҳо", kontakt:"Тамос", service:"Ёфтани шарик", dokumente:"Ҳуҷҷатҳо", quellen:"Манбаъҳо", home:"Асосӣ"},
  ui:{menu:"Меню", close:"Пӯшидан", theme:"Равшан / торик", lang:"Забон", more:"Ҳамаро дидан", back:"Ба саҳифаи асосӣ", src:"Манбаъ", open:"Кушодан", details:"Муфассал", scroll:"Варақ занед", alt:"Баландӣ"},
  hero:{
   k1:"Ҷумҳурии Тоҷикистон · Берлин",
   t1:"Савдо ва сармоягузорӣ байни <em>Тоҷикистон</em> ва Олмон",
-  s1:"Бюрои савдо ва сармоягузории Сафорати Ҷумҳурии Тоҷикистон дар Берлин. Шахси тамос барои ширкатҳои олмонӣ, ки дар Тоҷикистон сармоягузорӣ мекунанд ё мол мехаранд, — ва барои ширкатҳои тоҷик дар роҳ ба бозори Олмон.",
+  s1:"Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон, бо дафтар дар Берлин. Шахси тамос барои ширкатҳои олмонӣ, ки дар Тоҷикистон сармоягузорӣ мекунанд ё мол мехаранд, — ва барои ширкатҳои тоҷик дар роҳ ба бозори Олмон.",
   b1:"Барои ширкатҳои олмонӣ", b2:"Барои содиркунандагони тоҷик",
   k2:"Кишвари кӯҳу об",
   t2:"<em>527 миллиард</em> киловатт-соат иқтидори барқи обӣ дар як сол",
@@ -1367,7 +1401,7 @@ C.tj = {
   steps:[
    {t:"Мулоқоти аввал дар Берлин", p:"Шумо дар бораи лоиҳа нақл мекунед. Мо соҳа, масъалаҳои майдонча ва идораҳои дахлдорро муайян мекунем.", w:"Бюрои савдо"},
    {t:"Тамос бо идораҳо", p:"Мо шуморо бо Кумитаи давлатии сармоягузорӣ ва идораи амволи давлатӣ ва вазоратҳои соҳавӣ пайваст мекунем.", w:"Бюро · Кумитаи давлатӣ"},
-   {t:"Сафар ба Тоҷикистон", p:"Боздид аз майдончаҳо, минтақаҳои озоди иқтисодӣ ва шарикони эҳтимолӣ — бо хоҳиш дар ҳайати ҳайат.", w:"Ширкат · Сафорат"},
+   {t:"Сафар ба Тоҷикистон", p:"Боздид аз майдончаҳо, минтақаҳои озоди иқтисодӣ ва шарикони эҳтимолӣ — бо хоҳиш дар ҳайати ҳайат.", w:"Ширкат · Намояндаи савдо"},
    {t:"Таъсис ва бақайдгирӣ", p:"Бақайдгирии давлатии шахсони ҳуқуқӣ тавассути Кумитаи андоз сурат мегирад. Мо тамосҳо ва мушовирони маҳаллиро номбар мекунем.", w:"Кумитаи андози ҶТ"},
    {t:"Ҳамроҳӣ пас аз оғоз", p:"Мо дар Берлин шахси тамоси шумо мемонем — оид ба идораҳо, раводидҳо ва лоиҳаҳои нав.", w:"Бюрои савдо"}
   ],
@@ -1401,25 +1435,24 @@ C.tj = {
  },
  events:{
   h1:"Чорабиниҳо",
-  lead:"Намоишгоҳҳои соҳавӣ дар Олмон, ки дар онҳо ширкатҳои тоҷик харидор меёбанд, — ва чорабиниҳои сафорат.",
+  lead:"Намоишгоҳҳои соҳавӣ дар Олмон, ки дар онҳо ширкатҳои тоҷик харидор меёбанд, — ва чорабиниҳои худи намояндаи савдо.",
   list:{
    igw:{n:"«Ҳафтаи сабз»-и байналмилалӣ", p:"Намоишгоҳи хӯрокворӣ, кишоварзӣ ва боғдорӣ — майдон барои муаррифии кишварҳо ва маҳсулоти кишоварзӣ."},
    biofach:{n:"BIOFACH", p:"Намоишгоҳи пешбари ҷаҳонии маҳсулоти органикӣ. Барои меваи хушк, чормағз ва гиёҳҳо бо сертификати органикии ИА муҳим аст."},
    itb:{n:"ITB Berlin", p:"Биржаи байналмилалии сайёҳӣ. Мулоқот бо ширкатҳои сайёҳӣ оид ба Помир ва Роҳи Абрешим."},
    anuga:{n:"Anuga", p:"Яке аз бузургтарин намоишгоҳҳои ҷаҳонии хӯрокворӣ ва нӯшокиҳо, ба савдо ва хизматрасонии хӯрок нигаронида шудааст."}
   },
-  note:"Чорабиниҳои сафорат, сафарҳои ҳайатҳои корӣ ва форумҳои иқтисодӣ пас аз муайян шудани санаҳо дар ин ҷо нашр мешаванд.",
+  note:"Чорабиниҳои худӣ, сафарҳои ҳайатҳои корӣ ва форумҳои иқтисодӣ пас аз муайян шудани санаҳо дар ин ҷо нашр мешаванд.",
   more:"Ба сомонаи намоишгоҳ"
  },
  news:{
   h1:"Хабарҳо",
-  lead:"Созишномаҳо, маълумоти иқтисодӣ ва чорабиниҳои сафорат — ҳар хабар бо сана ва манбаъ.",
-  tabs:{all:"Ҳама", eu:"ИА ва созишномаҳо", econ:"Иқтисодиёт", emb:"Сафорат"},
+  lead:"Созишномаҳо, маълумоти иқтисодӣ ва чорабиниҳо — ҳар хабар бо сана ва манбаъ.",
+  tabs:{all:"Ҳама", eu:"ИА ва созишномаҳо", econ:"Иқтисодиёт"},
   items:{
    cc12:{t:"Ҷаласаи 12-уми Кумитаи ҳамкории ИА–Тоҷикистон", p:"Ҷаласа имзои Созишномаи шарикӣ ва ҳамкориҳои васеъро, ки барои соли 2026 пешбинӣ шудааст, омода мекунад."},
    mpo:{t:"Бонки ҷаҳонӣ: дар соли 2025 иқтисодиёт 8,4 % афзуд", p:"Афзоишро интиқоли пулӣ таъмин кард. Барои соли 2026 бонк 6,5 % интизор аст. Сатҳи камбизоатӣ то 14,8 % коҳиш ёфт."},
    pop:{t:"Шумораи аҳолӣ ба 10,72 миллион расид", p:"Тибқи маълумоти Агентии омор то 1 январи соли 2026 — афзоиши тақрибан 2 % дар як сол."},
-   bpa:{t:"Мулоқоти Сафир дар Девони Президенти федералӣ", p:"Сафир Имомуддин Сатторов вазъ ва дурнамои ҳамкориҳои сиёсӣ, иқтисодӣ ва фарҳангиро баррасӣ кард."},
    weu:{t:"Бонки ҷаҳонӣ: афзоиши 8,4 % дар соли 2024", p:"Хизматрасонӣ ва саноат дар афзоиш пешсаф буданд; содироти мол 20,5 % коҳиш ёфт."},
    epca:{t:"ИА ва Тоҷикистон созишномаи шарикиро парафировка карданд", p:"Парафировкаи Созишномаи шарикӣ ва ҳамкориҳои васеъ гуфтушунидҳоро анҷом дод."}
   },
@@ -1434,7 +1467,7 @@ C.tj = {
    meeting:{t:"Мулоқот", s:"Барои ҳама", p:"Шумо мехоҳед бо бюро дар Берлин шахсан ё тавассути видео мулоқот кунед."}
   },
   f:{company:"Ширкат", name:"Шахси тамос", email:"Почтаи электронӣ", phone:"Телефон", country:"Кишвар", sector:"Соҳа", need:"Шумо чӣ меҷӯед?", product:"Маҳсулот", volume:"Ҳаҷми солона (тахминан)", certs:"Сертификатҳои мавҷуда", date:"Санаи дилхоҳ", format:"Шакл", f1:"Шахсан дар Берлин", f2:"Занги видеоӣ", topic:"Мавзӯъ", send:"Фиристодани дархост",
-   ok:"<strong>Ташаккур.</strong> Ин версияи пешакии сомона аст: пас аз оғоз шакл ба бюрои савдо фиристода мешавад. То он вақт бо мо тавассути сафорат тамос гиред.",
+   ok:"<strong>Ташаккур.</strong> Ин версияи пешакии сомона аст: пас аз оғоз шакл ба бюрои савдо фиристода мешавад. То он вақт бо намояндаи савдо тавассути <a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn</a> тамос гиред.",
    fine:"Маълумоти шумо танҳо барои баррасии дархост истифода мешавад. Ба сиёсати махфият нигаред.",
    sectors:["Энергетика ва барқи обӣ","Истихроҷи маъдан ва ашёи хом","Кишоварзӣ ва хӯрокворӣ","Нассоҷӣ","Сайёҳӣ","Саноат ва истеҳсолот","Дигар"]}
  },
@@ -1453,13 +1486,13 @@ C.tj = {
  sources:{h1:"Манбаъҳо", lead:"Ҳамаи рақамҳо ва иддаоҳои сомона бо тасдиқи онҳо. Рақамҳо ба истинодҳои матн мувофиқанд."},
  contact:{
   h1:"Тамос",
-  lead:"Бюрои савдо ва сармоягузорӣ ҷузъи Сафорати Ҷумҳурии Тоҷикистон дар Берлин мебошад.",
-  emb:"Сафорат", embT:"Сафорати Ҷумҳурии Тоҷикистон<br>Perleberger Straße 43<br>10559 Berlin<br>Тел. +49 30 347 93 00",
-  off:"Бюрои савдо ва сармоягузорӣ", offT:"<span class='ph'>[Номи намояндаи савдо]</span><br><span class='ph'>[Почтаи электронӣ]</span><br><span class='ph'>[Телефон]</span>",
+  lead:"Шахси тамоси шумо оид ба савдо ва сармоягузорӣ байни Тоҷикистон ва Олмон.",
+  emb:"Намояндаи савдо", embT:"<b>Масрур Курбонализода</b><br>Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон<br><a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn →</a>",
+  off:"Дафтар дар Берлин", offT:"Perleberger Straße 43<br>10559 Berlin<br><span class='ph'>[Почтаи электронӣ]</span><br><span class='ph'>[Телефон]</span>",
   hrs:"Мулоқотҳо", hrsT:"Мулоқот бо таъини қаблӣ — дар Берлин ё тавассути видео.<br><a href='#service' data-go='service'>Сабти ном →</a>",
-  note:"Суроға ва телефони сафорат тибқи маълумоти ВКХ Олмон. Тамосҳои бюро пеш аз оғоз илова карда мешаванд."
+  note:"Почтаи электронӣ ва телефони мустақим пеш аз оғоз илова карда мешаванд."
  },
- foot:{ai:"Тасвирҳо ва видеои ин сомона визуализатсияҳои бо зеҳни сунъӣ сохташуда (Higgsfield) мебошанд, на аксбардории ҷойҳо ё иншооти мушаххаси воқеӣ.", tag:"Бюрои савдо ва сармоягузории Сафорати Ҷумҳурии Тоҷикистон дар Берлин.", c1:"Бахшҳо", c2:"Хизматрасонӣ", c3:"Маълумоти ҳуқуқӣ", rights:"© 2026 Сафорати Ҷумҳурии Тоҷикистон дар Ҷумҳурии Федеративии Олмон", demo:"Версияи пешакии сомона. Мавод пеш аз оғоз аз ҷониби сафорат тасдиқ карда мешавад.", imp:"Impressum", dat:"Махфият"},
+ foot:{ai:"Тасвирҳо ва видеои ин сомона визуализатсияҳои бо зеҳни сунъӣ сохташуда (Higgsfield) мебошанд, на аксбардории ҷойҳо ё иншооти мушаххаси воқеӣ.", tag:"Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон. Дафтар дар Берлин.", c1:"Бахшҳо", c2:"Хизматрасонӣ", c3:"Маълумоти ҳуқуқӣ", rights:"© 2026 Масрур Курбонализода, намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон", demo:"Версияи пешакии сомона. Мавод пеш аз оғоз бори охир санҷида мешавад.", imp:"Impressum", dat:"Махфият"},
  legalNote:""
 };
 
@@ -1472,16 +1505,15 @@ var LEGALNOTE = {
 };
 var LEGAL = {
  impressum:{h1:"Impressum", lead:"Angaben zum Anbieter dieser Website.", body:
-  '<p class="warn"><strong>Entwurf — vor Veröffentlichung durch die Botschaft abzustimmen.</strong> Felder in eckigen Klammern sind zu ergänzen. Ob und in welchem Umfang die Impressumspflicht nach § 5 DDG für eine diplomatische Vertretung gilt, sollte die Botschaft rechtlich prüfen lassen; eine vollständige Anbieterkennzeichnung ist in jedem Fall empfehlenswert.</p>'+
-  '<h2>Anbieter</h2><p>Botschaft der Republik Tadschikistan in der Bundesrepublik Deutschland<br>Handels- und Investitionsbüro<br>Perleberger Straße 43<br>10559 Berlin</p>'+
-  '<h2>Vertreten durch</h2><p>den Botschafter der Republik Tadschikistan in der Bundesrepublik Deutschland <span class="ph">[Name gemäß Akkreditierung]</span></p>'+
-  '<h2>Kontakt</h2><p>Telefon: +49 30 347 93 00<br>E-Mail: <span class="ph">[E-Mail-Adresse des Handelsbüros]</span></p>'+
-  '<h2>Inhaltlich verantwortlich</h2><p><span class="ph">[Name, Funktion]</span>, Anschrift wie oben</p>'+
+  '<p class="warn"><strong>Entwurf — vor Veröffentlichung rechtlich prüfen lassen.</strong> Felder in eckigen Klammern sind zu ergänzen. Eine vollständige Anbieterkennzeichnung nach § 5 DDG ist empfehlenswert.</p>'+
+  '<h2>Anbieter</h2><p>Masrur Kurbonalizoda<br>Handelsvertreter der Republik Tadschikistan in Deutschland<br>Perleberger Straße 43<br>10559 Berlin</p>'+
+  '<h2>Kontakt</h2><p>Telefon: <span class="ph">[Telefon]</span><br>E-Mail: <span class="ph">[E-Mail-Adresse]</span></p>'+
+  '<h2>Inhaltlich verantwortlich</h2><p>Masrur Kurbonalizoda, Anschrift wie oben</p>'+
   '<h2>Haftung für Inhalte und Links</h2><p>Die Inhalte dieser Website wurden mit Sorgfalt erstellt; Zahlen sind mit ihrer Quelle und ihrem Stand angegeben. Für die Inhalte verlinkter externer Seiten sind deren Betreiber verantwortlich. Angaben zu Steuern, Zöllen und Förderregimen sind keine Rechts- oder Steuerberatung.</p>'+
-  '<h2>Hoheitszeichen</h2><p>Die Verwendung der Staatsfarben der Republik Tadschikistan auf dieser Website erfolgt mit Genehmigung der Botschaft.</p>'},
+  '<h2>Hoheitszeichen</h2><p>Die Flagge der Republik Tadschikistan wird auf dieser Website als Staatssymbol im Rahmen der amtlichen Tätigkeit des Handelsvertreters verwendet.</p>'},
  datenschutz:{h1:"Datenschutz", lead:"Informationen zur Verarbeitung personenbezogener Daten.", body:
   '<p class="warn"><strong>Entwurf — vor Veröffentlichung abzustimmen.</strong> Die endgültige Fassung hängt vom gewählten Hosting und davon ab, wie die Formulare technisch angebunden werden.</p>'+
-  '<h2>1. Verantwortliche Stelle</h2><p>Botschaft der Republik Tadschikistan in der Bundesrepublik Deutschland, Handels- und Investitionsbüro, Perleberger Straße 43, 10559 Berlin.</p>'+
+  '<h2>1. Verantwortliche Stelle</h2><p>Masrur Kurbonalizoda, Handelsvertreter der Republik Tadschikistan in Deutschland, Perleberger Straße 43, 10559 Berlin.</p>'+
   '<h2>2. Kontaktformulare</h2><p>Angaben aus den Formularen (Unternehmen, Name, E-Mail, Telefon, Anliegen) werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und nicht an Dritte weitergegeben, es sei denn, Sie wünschen ausdrücklich die Weiterleitung an einen Partner in Tadschikistan.</p>'+
   '<h2>3. Server-Logdateien</h2><p>Beim Aufruf der Website verarbeitet der Hosting-Anbieter <span class="ph">[Anbieter]</span> technisch notwendige Daten (IP-Adresse, Zeitpunkt, aufgerufene Seite) zur Auslieferung und Sicherheit.</p>'+
   '<h2>4. Lokale Speicherung</h2><p>Ihre Sprach- und Darstellungswahl wird im lokalen Speicher Ihres Browsers abgelegt. Diese Angaben verlassen Ihr Gerät nicht.</p>'+
@@ -1497,6 +1529,14 @@ var LEGAL = {
    motion stays fluid. Without them, the WebGL terrain (terrain.js) takes over. */
 (function(){
   "use strict";
+  /* film grain: one small random tile, animated in CSS over the footage */
+  try{
+    var g = document.createElement("canvas"); g.width = g.height = 160;
+    var gx = g.getContext("2d"), d = gx.createImageData(160,160);
+    for(var k=0;k<d.data.length;k+=4){ var v = Math.random()*255|0; d.data[k]=d.data[k+1]=d.data[k+2]=v; d.data[k+3]=255; }
+    gx.putImageData(d,0,0);
+    document.documentElement.style.setProperty("--noise", "url(" + g.toDataURL("image/png") + ")");
+  }catch(e){}
   var hero = document.querySelector(".hero");
   if(!hero) return;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1522,8 +1562,9 @@ var LEGAL = {
     document.documentElement.classList.add("has-film");
     var canvas = document.getElementById("film");
     var ctx = canvas.getContext("2d", {alpha:false});
-    var small = Math.min(screen.width, screen.height) < 760;
-    var set = small && M.sm ? M.sm : M.lg;
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
+    /* portrait screens get the native-resolution vertical crops, everything else the full 1920 frames */
+    var set = (window.innerHeight > window.innerWidth * 1.1) && M.sm ? M.sm : M.lg;
     var N = M.n, imgs = new Array(N), ok = new Array(N);
     var pad = function(i){ return ("00"+i).slice(-3); };
     var load = function(i){
@@ -1544,6 +1585,7 @@ var LEGAL = {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = canvas.clientWidth; H = canvas.clientHeight;
       canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
+      ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
       dirty = true;
     };
     window.addEventListener("resize", resize); resize();
@@ -1564,7 +1606,7 @@ var LEGAL = {
       var f = p*(N-1), i0 = Math.floor(f), t = f - i0;
       var a = nearest(i0), b = ok[i0+1] ? i0+1 : -1;
       if(a < 0) return;
-      var scale = 1.02 + p*0.05; /* slow push-in on top of the filmed move */
+      var scale = 1; /* no extra zoom: every upscale costs sharpness */
       var key = a+"|"+b+"|"+t.toFixed(3)+"|"+canvas.width+"|"+scale.toFixed(4);
       if(key === lastKey && !dirty) return;
       lastKey = key; dirty = false;
@@ -1593,6 +1635,7 @@ var LEGAL = {
       chapters[i].style.opacity = c[i];
       chapters[i].style.transform = "translateY(" + ((1-c[i])*14).toFixed(1) + "px)";
       chapters[i].style.pointerEvents = c[i] > 0.6 ? "auto" : "none";
+      chapters[i].classList.toggle("on", c[i] > 0.35);
     }
     if(meter) meter.style.width = (p*100).toFixed(1) + "%";
     if(!visible) return;
@@ -1655,12 +1698,35 @@ function renderChrome(){
 }
 
 /* ------------------------------------------------------------ hero */
+/* wrap every word of a heading so it can rise out of its own mask; source links stay untouched */
+function splitWords(el){
+ if(!el || el.classList.contains("split")) return;
+ el.classList.add("split");
+ var i = 0, walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {acceptNode:function(n){
+  return n.parentNode.closest(".src") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }}), nodes = [];
+ while(walker.nextNode()) nodes.push(walker.currentNode);
+ nodes.forEach(function(n){
+  var frag = document.createDocumentFragment();
+  n.nodeValue.split(/(\s+)/).forEach(function(part){
+   if(!part) return;
+   if(/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
+   var w = document.createElement("span"); w.className = "w";
+   var s = document.createElement("span"); s.style.setProperty("--i", i++); s.textContent = part;
+   w.appendChild(s); frag.appendChild(w);
+  });
+  n.parentNode.replaceChild(frag, n);
+ });
+}
+function repCard(){
+ return '<div class="who"><span class="mono" aria-hidden="true">'+REP.ini[lang]+'</span><span><b>'+REP.n[lang]+'</b><small>'+L.brandSub+'</small></span><a href="'+REP.li+'" target="_blank" rel="noopener" aria-label="LinkedIn — '+esc(REP.n[lang])+'">in'+ext+'</a></div>';
+}
 function renderHero(){
  var H = L.hero;
  $("#c1").innerHTML = '<div class="in"><div class="kick">'+H.k1+'</div><h1>'+H.t1+'</h1><p class="sub">'+H.s1+'</p><div class="acts"><a class="cta" href="#investieren" data-go="investieren">'+H.b1+arrow+'</a><a class="cta ghost" href="#export" data-go="export">'+H.b2+'</a></div></div>';
  var srcs=[13,2,3,12];
  $("#c2").innerHTML = '<div class="in"><div class="kick">'+H.k2+'</div><h2>'+H.t2+sref(13)+'</h2><div class="figs-strip">'+H.fv.map(function(v,i){ return '<div><b>'+v+'</b><span>'+H.f[i]+' '+sref(srcs[i])+'</span></div>'; }).join("")+'</div></div>';
- $("#c3").innerHTML = '<div class="in"><div class="box"><div class="kick">'+H.k3+'</div><h2>'+H.t3+'</h2><p class="sub">'+H.s3+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+H.b3+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+H.b4+'</a></div></div></div>';
+ $("#c3").innerHTML = '<div class="in"><div class="box"><div class="kick">'+H.k3+'</div><h2>'+H.t3+'</h2><p class="sub">'+H.s3+'</p>'+repCard()+'<div class="acts"><a class="cta" href="#service" data-go="service">'+H.b3+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+H.b4+'</a></div></div></div>';
+ $$(".chapter h1, .chapter h2").forEach(splitWords);
  $("#meterLbl").textContent = L.ui.scroll;
  $("#altLbl").textContent = L.ui.alt;
 }
@@ -1805,7 +1871,7 @@ function pageEvents(){
 function pageNews(){
  var N = L.news;
  return phead("aktuelles", N.h1, N.lead, 8)+'<section class="sec flush"><div class="wrap"><div class="tabs" id="newsTabs">'+
-  ["all","eu","econ","emb"].map(function(k,i){ return '<button data-cat="'+k+'" class="'+(i===0?"on":"")+'">'+N.tabs[k]+'</button>'; }).join("")+
+  ["all","eu","econ"].map(function(k,i){ return '<button data-cat="'+k+'" class="'+(i===0?"on":"")+'">'+N.tabs[k]+'</button>'; }).join("")+
   '</div><div class="feed" id="newsFeed">'+newsRows("all")+'</div></div></section>'+band();
 }
 
@@ -1836,7 +1902,7 @@ function pageSources(){
 }
 function pageContact(){
  var K = L.contact;
- return phead("kontakt", K.h1, K.lead, 12)+'<section class="sec flush"><div class="wrap"><div class="cgrid"><div class="rv"><h3>'+K.emb+'</h3><p>'+K.embT+' '+sref(17)+'</p></div><div class="rv"><h3>'+K.off+'</h3><p>'+K.offT+'</p></div><div class="rv"><h3>'+K.hrs+'</h3><p>'+K.hrsT+'</p></div></div><p class="note rv">'+K.note+'</p></div></section>';
+ return phead("kontakt", K.h1, K.lead, 12)+'<section class="sec flush"><div class="wrap"><div class="cgrid"><div class="rv"><h3>'+K.emb+'</h3><p>'+K.embT+'</p></div><div class="rv"><h3>'+K.off+'</h3><p>'+K.offT+'</p></div><div class="rv"><h3>'+K.hrs+'</h3><p>'+K.hrsT+'</p></div></div><p class="note rv">'+K.note+'</p></div></section>';
 }
 function pageLegal(which){
  var t = LEGAL[which];
@@ -1881,6 +1947,7 @@ var revealer = ("IntersectionObserver" in window) ? new IntersectionObserver(fun
 
 function wire(root){
  $$(".band video[autoplay]", root).forEach(function(v){ v.muted = true; var pr = v.play(); if(pr && pr.catch) pr.catch(function(){}); });
+ $$(".phead h1, .h2.rv, .band h2", root).forEach(splitWords);
  $$(".rv", root).forEach(function(el, i){
   if(!revealer){ el.classList.add("in"); return; }
   var r = el.getBoundingClientRect();

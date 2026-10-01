@@ -1,13 +1,13 @@
 C.en = {
  code:"en", name:"English",
  brand:"Tajikistan · Trade & Investment",
- brandSub:"Embassy of the Republic of Tajikistan · Berlin",
+ brandSub:"Trade Representative of the Republic of Tajikistan in Germany",
  nav:{tadschikistan:"Tajikistan", branchen:"Sectors", investieren:"Invest", export:"Export", termine:"Events", aktuelles:"News", kontakt:"Contact", service:"Find a partner", dokumente:"Documents", quellen:"Sources", home:"Home"},
  ui:{menu:"Menu", close:"Close", theme:"Light / dark", lang:"Language", more:"View all", back:"Back to home", src:"Source", open:"Open", details:"Details", scroll:"Scroll", alt:"Altitude"},
  hero:{
   k1:"Republic of Tajikistan · Berlin",
   t1:"Trade and investment between <em>Tajikistan</em> and Germany",
-  s1:"The Trade and Investment Office of the Embassy of the Republic of Tajikistan in Berlin. Your point of contact if you are a German company investing in or sourcing from Tajikistan — or a Tajik company on its way into the German market.",
+  s1:"The Trade Representative of the Republic of Tajikistan in Germany, based in Berlin. Your point of contact if you are a German company investing in or sourcing from Tajikistan — or a Tajik company on its way into the German market.",
   b1:"For German companies", b2:"For Tajik exporters",
   k2:"A country of mountains and water",
   t2:"<em>527 billion</em> kilowatt-hours of hydropower potential a year",
@@ -121,7 +121,7 @@ C.en = {
   steps:[
    {t:"First meeting in Berlin", p:"You describe your project. We clarify the sector, site questions and the responsible authorities.", w:"Trade office"},
    {t:"Contact with the authorities", p:"We connect you with the State Committee on Investments and State Property Management and the line ministries.", w:"Trade office · State Committee"},
-   {t:"Visit to Tajikistan", p:"Visits to sites, free economic zones and potential partners — as part of a delegation if you wish.", w:"Company · Embassy"},
+   {t:"Visit to Tajikistan", p:"Visits to sites, free economic zones and potential partners — as part of a delegation if you wish.", w:"Company · Trade Representative"},
    {t:"Set-up and registration", p:"State registration of companies is carried out through the Tax Committee. We name contacts and local advisers.", w:"Tax Committee"},
    {t:"Support after launch", p:"We remain your contact in Berlin for questions on authorities, visas and further projects.", w:"Trade office"}
   ],
@@ -155,25 +155,24 @@ C.en = {
  },
  events:{
   h1:"Events",
-  lead:"Trade fairs in Germany where Tajik companies meet buyers — and events of the embassy.",
+  lead:"Trade fairs in Germany where Tajik companies meet buyers — and the Trade Representative’s own events.",
   list:{
    igw:{n:"International Green Week", p:"Fair for food, agriculture and horticulture — a stage for country presentations and farm produce."},
    biofach:{n:"BIOFACH", p:"The world’s leading trade fair for organic food. Relevant for dried fruit, nuts and herbs with EU organic certification."},
    itb:{n:"ITB Berlin", p:"International tourism trade show. Meet tour operators for the Pamirs and the Silk Road."},
    anuga:{n:"Anuga", p:"One of the world’s largest food and beverage fairs, focused on retail and food service."}
   },
-  note:"Embassy events, business missions and economic forums will be published here once dates are confirmed.",
+  note:"Our own events, business missions and economic forums will be published here once dates are confirmed.",
   more:"Fair website"
  },
  news:{
   h1:"News",
-  lead:"Agreements, economic data and embassy events — each item with date and source.",
-  tabs:{all:"All", eu:"EU & agreements", econ:"Economy", emb:"Embassy"},
+  lead:"Agreements, economic data and events — each item with date and source.",
+  tabs:{all:"All", eu:"EU & agreements", econ:"Economy"},
   items:{
    cc12:{t:"12th EU–Tajikistan Cooperation Committee", p:"The meeting prepares the signature of the Enhanced Partnership and Cooperation Agreement, scheduled for 2026."},
    mpo:{t:"World Bank: economy grew 8.4% in 2025", p:"Driven by remittances. The Bank expects 6.5% for 2026. Poverty fell to 14.8%."},
    pop:{t:"Population reaches 10.72 million", p:"As of 1 January 2026, up about 2% year on year, according to the Agency on Statistics."},
-   bpa:{t:"Ambassador meets the Office of the Federal President", p:"Ambassador Imomudin Sattorov discussed the state and prospects of political, economic and cultural cooperation."},
    weu:{t:"World Bank: 8.4% growth in 2024", p:"Services and industry led growth; goods exports fell by 20.5%."},
    epca:{t:"EU and Tajikistan initial partnership agreement", p:"Initialling the Enhanced Partnership and Cooperation Agreement concludes the negotiations."}
   },
@@ -188,7 +187,7 @@ C.en = {
    meeting:{t:"Meeting", s:"For everyone", p:"You would like to meet the office in Berlin in person or by video."}
   },
   f:{company:"Company", name:"Contact person", email:"Email", phone:"Phone", country:"Country", sector:"Sector", need:"What are you looking for?", product:"Products", volume:"Annual volume (approx.)", certs:"Existing certificates", date:"Preferred date", format:"Format", f1:"In person in Berlin", f2:"Video call", topic:"Topic", send:"Send request",
-   ok:"<strong>Thank you.</strong> This is a preview of the website: after launch, the form will be delivered to the trade office. Until then, please contact us through the embassy.",
+   ok:"<strong>Thank you.</strong> This is a preview of the website: after launch, the form will be delivered to the trade office. Until then, you can reach the Trade Representative on <a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn</a>.",
    fine:"Your details are used only to handle your request. See the privacy notice.",
    sectors:["Energy & hydropower","Mining & raw materials","Agriculture & food","Textiles","Tourism","Industry & production","Other"]}
  },
@@ -207,12 +206,12 @@ C.en = {
  sources:{h1:"Sources", lead:"Every figure and statement on this site with its evidence. Numbers match the references in the text."},
  contact:{
   h1:"Contact",
-  lead:"The Trade and Investment Office is part of the Embassy of the Republic of Tajikistan in Berlin.",
-  emb:"Embassy", embT:"Embassy of the Republic of Tajikistan<br>Perleberger Straße 43<br>10559 Berlin<br>Tel. +49 30 347 93 00",
-  off:"Trade and Investment Office", offT:"<span class='ph'>[Name of the trade representative]</span><br><span class='ph'>[Email address]</span><br><span class='ph'>[Phone]</span>",
+  lead:"Your contact for trade and investment between Tajikistan and Germany.",
+  emb:"Trade Representative", embT:"<b>Masrur Kurbonalizoda</b><br>Trade Representative of the Republic of Tajikistan in Germany<br><a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn →</a>",
+  off:"Office in Berlin", offT:"Perleberger Straße 43<br>10559 Berlin<br><span class='ph'>[Email address]</span><br><span class='ph'>[Phone]</span>",
   hrs:"Meetings", hrsT:"Meetings by appointment — in Berlin or by video.<br><a href='#service' data-go='service'>Request a meeting →</a>",
-  note:"Embassy address and phone as listed by the German Federal Foreign Office. Office contact details will be added before launch."
+  note:"Direct email and phone will be added before launch."
  },
- foot:{ai:"Images and video on this website are AI-generated visualisations (Higgsfield), not photographs of specific real places or facilities.", tag:"The Trade and Investment Office of the Embassy of the Republic of Tajikistan in Berlin.", c1:"Sections", c2:"Services", c3:"Legal", rights:"© 2026 Embassy of the Republic of Tajikistan in the Federal Republic of Germany", demo:"Website preview. Content is approved by the embassy before launch.", imp:"Legal notice", dat:"Privacy"},
+ foot:{ai:"Images and video on this website are AI-generated visualisations (Higgsfield), not photographs of specific real places or facilities.", tag:"Trade Representative of the Republic of Tajikistan in Germany. Office in Berlin.", c1:"Sections", c2:"Services", c3:"Legal", rights:"© 2026 Masrur Kurbonalizoda, Trade Representative of the Republic of Tajikistan in Germany", demo:"Website preview. Content receives a final review before launch.", imp:"Legal notice", dat:"Privacy"},
  legalNote:""
 };

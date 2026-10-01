@@ -4,6 +4,14 @@
    motion stays fluid. Without them, the WebGL terrain (terrain.js) takes over. */
 (function(){
   "use strict";
+  /* film grain: one small random tile, animated in CSS over the footage */
+  try{
+    var g = document.createElement("canvas"); g.width = g.height = 160;
+    var gx = g.getContext("2d"), d = gx.createImageData(160,160);
+    for(var k=0;k<d.data.length;k+=4){ var v = Math.random()*255|0; d.data[k]=d.data[k+1]=d.data[k+2]=v; d.data[k+3]=255; }
+    gx.putImageData(d,0,0);
+    document.documentElement.style.setProperty("--noise", "url(" + g.toDataURL("image/png") + ")");
+  }catch(e){}
   var hero = document.querySelector(".hero");
   if(!hero) return;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -29,8 +37,9 @@
     document.documentElement.classList.add("has-film");
     var canvas = document.getElementById("film");
     var ctx = canvas.getContext("2d", {alpha:false});
-    var small = Math.min(screen.width, screen.height) < 760;
-    var set = small && M.sm ? M.sm : M.lg;
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
+    /* portrait screens get the native-resolution vertical crops, everything else the full 1920 frames */
+    var set = (window.innerHeight > window.innerWidth * 1.1) && M.sm ? M.sm : M.lg;
     var N = M.n, imgs = new Array(N), ok = new Array(N);
     var pad = function(i){ return ("00"+i).slice(-3); };
     var load = function(i){
@@ -51,6 +60,7 @@
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = canvas.clientWidth; H = canvas.clientHeight;
       canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
+      ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
       dirty = true;
     };
     window.addEventListener("resize", resize); resize();
@@ -71,7 +81,7 @@
       var f = p*(N-1), i0 = Math.floor(f), t = f - i0;
       var a = nearest(i0), b = ok[i0+1] ? i0+1 : -1;
       if(a < 0) return;
-      var scale = 1.02 + p*0.05; /* slow push-in on top of the filmed move */
+      var scale = 1; /* no extra zoom: every upscale costs sharpness */
       var key = a+"|"+b+"|"+t.toFixed(3)+"|"+canvas.width+"|"+scale.toFixed(4);
       if(key === lastKey && !dirty) return;
       lastKey = key; dirty = false;
@@ -100,6 +110,7 @@
       chapters[i].style.opacity = c[i];
       chapters[i].style.transform = "translateY(" + ((1-c[i])*14).toFixed(1) + "px)";
       chapters[i].style.pointerEvents = c[i] > 0.6 ? "auto" : "none";
+      chapters[i].classList.toggle("on", c[i] > 0.35);
     }
     if(meter) meter.style.width = (p*100).toFixed(1) + "%";
     if(!visible) return;

@@ -11,7 +11,7 @@ scene_js = '<script>\n' + r('three.min.js') + '\n</script>\n<script>\n' + r('ter
 langs = ''.join(r(f) for f in ['c_de.js','c_ru.js','c_en.js','c_tj.js'] if os.path.exists(os.path.join(d,f)))
 fill = "\n['ru','en','tj'].forEach(function(k){ if(!C[k]){ C[k]=JSON.parse(JSON.stringify(C.de)); C[k].code=k; C[k].name={ru:'Русский',en:'English',tj:'Тоҷикӣ'}[k]; } });\n"
 html = ('<title>Tadschikistan · Handel & Investitionen</title>\n'
- '<meta name="description" content="Handels- und Investitionsbüro der Botschaft der Republik Tadschikistan in Berlin.">\n'
+ '<meta name="description" content="Masrur Kurbonalizoda, Handelsvertreter der Republik Tadschikistan in Deutschland: Handel und Investitionen zwischen Tadschikistan und Deutschland.">\n'
  '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
  '<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,400;0,500;1,400&family=Onest:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">\n'
  '<style>\n' + r('style.css') + '\n</style>\n'

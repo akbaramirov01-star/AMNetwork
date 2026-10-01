@@ -2,13 +2,13 @@ var C = {};
 C.de = {
  code:"de", name:"Deutsch",
  brand:"Tadschikistan · Handel & Investitionen",
- brandSub:"Botschaft der Republik Tadschikistan · Berlin",
+ brandSub:"Handelsvertreter der Republik Tadschikistan in Deutschland",
  nav:{tadschikistan:"Tadschikistan", branchen:"Branchen", investieren:"Investieren", export:"Export", termine:"Termine", aktuelles:"Aktuelles", kontakt:"Kontakt", service:"Partner finden", dokumente:"Dokumente", quellen:"Quellen", home:"Start"},
  ui:{menu:"Menü", close:"Schließen", theme:"Hell / Dunkel", lang:"Sprache", more:"Alle ansehen", back:"Zurück zur Startseite", src:"Quelle", open:"Öffnen", details:"Details", scroll:"Scrollen", alt:"Höhe"},
  hero:{
   k1:"Republik Tadschikistan · Berlin",
   t1:"Handel und Investitionen zwischen <em>Tadschikistan</em> und Deutschland",
-  s1:"Das Handels- und Investitionsbüro der Botschaft der Republik Tadschikistan in Berlin. Ansprechpartner für deutsche Unternehmen, die in Tadschikistan investieren oder einkaufen — und für tadschikische Unternehmen auf dem Weg in den deutschen Markt.",
+  s1:"Der Handelsvertreter der Republik Tadschikistan in Deutschland, mit Sitz in Berlin. Ansprechpartner für deutsche Unternehmen, die in Tadschikistan investieren oder einkaufen — und für tadschikische Unternehmen auf dem Weg in den deutschen Markt.",
   b1:"Für deutsche Unternehmen", b2:"Für tadschikische Exporteure",
   k2:"Ein Land aus Gebirge und Wasser",
   t2:"<em>527 Milliarden</em> Kilowattstunden Wasserkraftpotenzial im Jahr",
@@ -122,7 +122,7 @@ C.de = {
   steps:[
    {t:"Erstgespräch in Berlin", p:"Sie schildern Ihr Vorhaben. Wir klären Branche, Standortfragen und die zuständigen Stellen.", w:"Handelsbüro"},
    {t:"Kontakt zu den Behörden", p:"Wir stellen den Kontakt zum Staatskomitee für Investitionen und Verwaltung des Staatsvermögens und zu den Fachministerien her.", w:"Handelsbüro · Staatskomitee"},
-   {t:"Reise nach Tadschikistan", p:"Besuche von Standorten, Freien Wirtschaftszonen und potenziellen Partnern — auf Wunsch als Teil einer Delegation.", w:"Unternehmen · Botschaft"},
+   {t:"Reise nach Tadschikistan", p:"Besuche von Standorten, Freien Wirtschaftszonen und potenziellen Partnern — auf Wunsch als Teil einer Delegation.", w:"Unternehmen · Handelsvertreter"},
    {t:"Gründung und Registrierung", p:"Die staatliche Registrierung von Unternehmen erfolgt über das Steuerkomitee. Wir nennen Ihnen Ansprechpartner und Beratungsunternehmen vor Ort.", w:"Steuerkomitee RT"},
    {t:"Begleitung nach dem Start", p:"Wir bleiben Ihr Ansprechpartner in Berlin, wenn Fragen zu Behörden, Visa oder weiteren Projekten entstehen.", w:"Handelsbüro"}
   ],
@@ -156,25 +156,24 @@ C.de = {
  },
  events:{
   h1:"Termine",
-  lead:"Fachmessen in Deutschland, auf denen tadschikische Unternehmen Abnehmer finden — und Veranstaltungen der Botschaft.",
+  lead:"Fachmessen in Deutschland, auf denen tadschikische Unternehmen Abnehmer finden — und eigene Veranstaltungen des Handelsvertreters.",
   list:{
    igw:{n:"Internationale Grüne Woche", p:"Messe für Ernährung, Landwirtschaft und Gartenbau — Bühne für Länderpräsentationen und Agrarprodukte."},
    biofach:{n:"BIOFACH", p:"Weltleitmesse für Bio-Lebensmittel. Relevant für Trockenfrüchte, Nüsse und Kräuter mit EU-Bio-Zertifikat."},
    itb:{n:"ITB Berlin", p:"Internationale Tourismusbörse. Treffpunkt mit Reiseveranstaltern für den Pamir und die Seidenstraße."},
    anuga:{n:"Anuga", p:"Eine der größten Fachmessen für Lebensmittel und Getränke weltweit, mit Schwerpunkt Handel und Großverbraucher."}
   },
-  note:"Veranstaltungen der Botschaft, Delegationsreisen und Wirtschaftsforen werden hier veröffentlicht, sobald die Termine feststehen.",
+  note:"Eigene Veranstaltungen, Delegationsreisen und Wirtschaftsforen werden hier veröffentlicht, sobald die Termine feststehen.",
   more:"Zur Messe"
  },
  news:{
   h1:"Aktuelles",
-  lead:"Abkommen, Wirtschaftsdaten und Termine der Botschaft — jede Meldung mit Datum und Quelle.",
-  tabs:{all:"Alle", eu:"EU & Abkommen", econ:"Wirtschaft", emb:"Botschaft"},
+  lead:"Abkommen, Wirtschaftsdaten und Termine — jede Meldung mit Datum und Quelle.",
+  tabs:{all:"Alle", eu:"EU & Abkommen", econ:"Wirtschaft"},
   items:{
    cc12:{t:"12. Kooperationsausschuss EU–Tadschikistan", p:"Die Sitzung bereitet die Unterzeichnung des Erweiterten Partnerschafts- und Kooperationsabkommens vor, die für 2026 vorgesehen ist."},
    mpo:{t:"Weltbank: Wirtschaft wuchs 2025 um 8,4 %", p:"Getragen von Rücküberweisungen. Für 2026 erwartet die Weltbank 6,5 %. Die Armutsquote sank auf 14,8 %."},
    pop:{t:"Bevölkerung erreicht 10,72 Millionen", p:"Stand 1. Januar 2026, ein Plus von rund 2 % gegenüber dem Vorjahr, so die Statistikagentur."},
-   bpa:{t:"Botschafter zu Gespräch im Bundespräsidialamt", p:"Botschafter Imomudin Sattorov erörterte Stand und Perspektiven der politischen, wirtschaftlichen und kulturellen Zusammenarbeit."},
    weu:{t:"Weltbank: 8,4 % Wachstum im Jahr 2024", p:"Dienstleistungen und Industrie führten das Wachstum an; die Warenexporte gingen um 20,5 % zurück."},
    epca:{t:"EU und Tadschikistan paraphieren Partnerschaftsabkommen", p:"Mit der Paraphierung des Erweiterten Partnerschafts- und Kooperationsabkommens sind die Verhandlungen abgeschlossen."}
   },
@@ -189,7 +188,7 @@ C.de = {
    meeting:{t:"Gesprächstermin", s:"Für alle", p:"Sie möchten das Handelsbüro in Berlin persönlich oder per Video sprechen."}
   },
   f:{company:"Unternehmen", name:"Ansprechpartner", email:"E-Mail", phone:"Telefon", country:"Land", sector:"Branche", need:"Was suchen Sie?", product:"Produkte", volume:"Jahresmenge (ca.)", certs:"Vorhandene Zertifikate", date:"Wunschtermin", format:"Format", f1:"Vor Ort in Berlin", f2:"Videogespräch", topic:"Thema", send:"Anfrage senden",
-   ok:"<strong>Vielen Dank.</strong> Dies ist eine Vorschau der Website: Das Formular wird nach dem Start an das Handelsbüro übermittelt. Bis dahin erreichen Sie uns über die Botschaft.",
+   ok:"<strong>Vielen Dank.</strong> Dies ist eine Vorschau der Website: Das Formular wird nach dem Start an das Handelsbüro übermittelt. Bis dahin erreichen Sie den Handelsvertreter über <a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn</a>.",
    fine:"Ihre Angaben werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet. Siehe Datenschutzerklärung.",
    sectors:["Energie & Wasserkraft","Bergbau & Rohstoffe","Landwirtschaft & Lebensmittel","Textil","Tourismus","Industrie & Produktion","Sonstiges"]}
  },
@@ -208,12 +207,12 @@ C.de = {
  sources:{h1:"Quellen", lead:"Alle Zahlen und Aussagen dieser Website mit ihrem Nachweis. Die Nummern entsprechen den Verweisen im Text."},
  contact:{
   h1:"Kontakt",
-  lead:"Das Handelsbüro ist Teil der Botschaft der Republik Tadschikistan in Berlin.",
-  emb:"Botschaft", embT:"Botschaft der Republik Tadschikistan<br>Perleberger Straße 43<br>10559 Berlin<br>Tel. +49 30 347 93 00",
-  off:"Handels- und Investitionsbüro", offT:"<span class='ph'>[Name des Handelsvertreters]</span><br><span class='ph'>[E-Mail-Adresse]</span><br><span class='ph'>[Telefon]</span>",
+  lead:"Ihr Ansprechpartner für Handel und Investitionen zwischen Tadschikistan und Deutschland.",
+  emb:"Handelsvertreter", embT:"<b>Masrur Kurbonalizoda</b><br>Handelsvertreter der Republik Tadschikistan in Deutschland<br><a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn →</a>",
+  off:"Büro in Berlin", offT:"Perleberger Straße 43<br>10559 Berlin<br><span class='ph'>[E-Mail-Adresse]</span><br><span class='ph'>[Telefon]</span>",
   hrs:"Termine", hrsT:"Gespräche nach vorheriger Vereinbarung — vor Ort in Berlin oder per Video.<br><a href='#service' data-go='service'>Termin anfragen →</a>",
-  note:"Adresse und Telefon der Botschaft laut Auswärtigem Amt. Die Kontaktdaten des Handelsbüros werden vor dem Start ergänzt."
+  note:"Direkte E-Mail-Adresse und Telefonnummer werden vor dem Start ergänzt."
  },
- foot:{ai:"Bilder und Video auf dieser Website sind KI-generierte Visualisierungen (Higgsfield), keine Aufnahmen bestimmter realer Orte oder Anlagen.", tag:"Das Handels- und Investitionsbüro der Botschaft der Republik Tadschikistan in Berlin.", c1:"Bereiche", c2:"Service", c3:"Rechtliches", rights:"© 2026 Botschaft der Republik Tadschikistan in der Bundesrepublik Deutschland", demo:"Vorschau der Website. Inhalte werden vor dem Start durch die Botschaft freigegeben.", imp:"Impressum", dat:"Datenschutz"},
+ foot:{ai:"Bilder und Video auf dieser Website sind KI-generierte Visualisierungen (Higgsfield), keine Aufnahmen bestimmter realer Orte oder Anlagen.", tag:"Handelsvertreter der Republik Tadschikistan in Deutschland. Büro in Berlin.", c1:"Bereiche", c2:"Service", c3:"Rechtliches", rights:"© 2026 Masrur Kurbonalizoda, Handelsvertreter der Republik Tadschikistan in Deutschland", demo:"Vorschau der Website. Inhalte werden vor dem Start abschließend geprüft.", imp:"Impressum", dat:"Datenschutz"},
  legalNote:""
 };

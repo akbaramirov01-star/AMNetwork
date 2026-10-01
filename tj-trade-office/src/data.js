@@ -21,7 +21,7 @@ var SRC = [
  {t:"Germany Trade & Invest — Wirtschaft Tadschikistan", u:"https://www.gtai.de/de/trade/tadschikistan-wirtschaft"},
  {t:"Ost-Ausschuss der Deutschen Wirtschaft — Tadschikistan", u:"https://www.ost-ausschuss.de/de/tadschikistan"},
  {t:"EEAS — EU–Tajikistan relations", u:"https://www.eeas.europa.eu/eeas/eu-tajikistan-relations_en"},
- {t:"Embassy of the RT in Germany — Ambassador’s working meeting at the Federal President’s Office, 02.12.2025", u:"https://mfa.tj/de/berlin/view/17890/arbeitsgesprch-des-botschafters-im-bundesprsidialamt"},
+ null,
  {t:"EUR-Lex — Regulation (EC) No 852/2004 on the hygiene of foodstuffs", u:"https://eur-lex.europa.eu/eli/reg/2004/852/oj"},
  {t:"EUR-Lex — Regulation (EU) No 1169/2011 on food information to consumers", u:"https://eur-lex.europa.eu/eli/reg/2011/1169/oj"},
  {t:"EUR-Lex — Regulation (EU) 2023/915 on maximum levels for contaminants", u:"https://eur-lex.europa.eu/eli/reg/2023/915/oj"},
@@ -56,7 +56,11 @@ var NEWS = [
  {d:"2026-06-19", cat:"eu", src:20, id:"cc12"},
  {d:"2026-04-15", cat:"econ", src:2, id:"mpo"},
  {d:"2026-02-21", cat:"econ", src:3, id:"pop"},
- {d:"2025-12-02", cat:"emb", src:21, id:"bpa"},
  {d:"2025-07-30", cat:"econ", src:1, id:"weu"},
  {d:"2025-07-18", cat:"eu", src:7, id:"epca"}
 ];
+
+/* the trade representative: this is his own website */
+var REP = {li:"https://www.linkedin.com/in/masrur-kurbonalizoda-034483270",
+ n:{de:"Masrur Kurbonalizoda", en:"Masrur Kurbonalizoda", ru:"Масрур Курбонализода", tj:"Масрур Курбонализода"},
+ ini:{de:"MK", en:"MK", ru:"МК", tj:"МК"}};

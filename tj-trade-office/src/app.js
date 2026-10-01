@@ -49,12 +49,35 @@ function renderChrome(){
 }
 
 /* ------------------------------------------------------------ hero */
+/* wrap every word of a heading so it can rise out of its own mask; source links stay untouched */
+function splitWords(el){
+ if(!el || el.classList.contains("split")) return;
+ el.classList.add("split");
+ var i = 0, walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {acceptNode:function(n){
+  return n.parentNode.closest(".src") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }}), nodes = [];
+ while(walker.nextNode()) nodes.push(walker.currentNode);
+ nodes.forEach(function(n){
+  var frag = document.createDocumentFragment();
+  n.nodeValue.split(/(\s+)/).forEach(function(part){
+   if(!part) return;
+   if(/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
+   var w = document.createElement("span"); w.className = "w";
+   var s = document.createElement("span"); s.style.setProperty("--i", i++); s.textContent = part;
+   w.appendChild(s); frag.appendChild(w);
+  });
+  n.parentNode.replaceChild(frag, n);
+ });
+}
+function repCard(){
+ return '<div class="who"><span class="mono" aria-hidden="true">'+REP.ini[lang]+'</span><span><b>'+REP.n[lang]+'</b><small>'+L.brandSub+'</small></span><a href="'+REP.li+'" target="_blank" rel="noopener" aria-label="LinkedIn — '+esc(REP.n[lang])+'">in'+ext+'</a></div>';
+}
 function renderHero(){
  var H = L.hero;
  $("#c1").innerHTML = '<div class="in"><div class="kick">'+H.k1+'</div><h1>'+H.t1+'</h1><p class="sub">'+H.s1+'</p><div class="acts"><a class="cta" href="#investieren" data-go="investieren">'+H.b1+arrow+'</a><a class="cta ghost" href="#export" data-go="export">'+H.b2+'</a></div></div>';
  var srcs=[13,2,3,12];
  $("#c2").innerHTML = '<div class="in"><div class="kick">'+H.k2+'</div><h2>'+H.t2+sref(13)+'</h2><div class="figs-strip">'+H.fv.map(function(v,i){ return '<div><b>'+v+'</b><span>'+H.f[i]+' '+sref(srcs[i])+'</span></div>'; }).join("")+'</div></div>';
- $("#c3").innerHTML = '<div class="in"><div class="box"><div class="kick">'+H.k3+'</div><h2>'+H.t3+'</h2><p class="sub">'+H.s3+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+H.b3+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+H.b4+'</a></div></div></div>';
+ $("#c3").innerHTML = '<div class="in"><div class="box"><div class="kick">'+H.k3+'</div><h2>'+H.t3+'</h2><p class="sub">'+H.s3+'</p>'+repCard()+'<div class="acts"><a class="cta" href="#service" data-go="service">'+H.b3+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+H.b4+'</a></div></div></div>';
+ $$(".chapter h1, .chapter h2").forEach(splitWords);
  $("#meterLbl").textContent = L.ui.scroll;
  $("#altLbl").textContent = L.ui.alt;
 }
@@ -199,7 +222,7 @@ function pageEvents(){
 function pageNews(){
  var N = L.news;
  return phead("aktuelles", N.h1, N.lead, 8)+'<section class="sec flush"><div class="wrap"><div class="tabs" id="newsTabs">'+
-  ["all","eu","econ","emb"].map(function(k,i){ return '<button data-cat="'+k+'" class="'+(i===0?"on":"")+'">'+N.tabs[k]+'</button>'; }).join("")+
+  ["all","eu","econ"].map(function(k,i){ return '<button data-cat="'+k+'" class="'+(i===0?"on":"")+'">'+N.tabs[k]+'</button>'; }).join("")+
   '</div><div class="feed" id="newsFeed">'+newsRows("all")+'</div></div></section>'+band();
 }
 
@@ -230,7 +253,7 @@ function pageSources(){
 }
 function pageContact(){
  var K = L.contact;
- return phead("kontakt", K.h1, K.lead, 12)+'<section class="sec flush"><div class="wrap"><div class="cgrid"><div class="rv"><h3>'+K.emb+'</h3><p>'+K.embT+' '+sref(17)+'</p></div><div class="rv"><h3>'+K.off+'</h3><p>'+K.offT+'</p></div><div class="rv"><h3>'+K.hrs+'</h3><p>'+K.hrsT+'</p></div></div><p class="note rv">'+K.note+'</p></div></section>';
+ return phead("kontakt", K.h1, K.lead, 12)+'<section class="sec flush"><div class="wrap"><div class="cgrid"><div class="rv"><h3>'+K.emb+'</h3><p>'+K.embT+'</p></div><div class="rv"><h3>'+K.off+'</h3><p>'+K.offT+'</p></div><div class="rv"><h3>'+K.hrs+'</h3><p>'+K.hrsT+'</p></div></div><p class="note rv">'+K.note+'</p></div></section>';
 }
 function pageLegal(which){
  var t = LEGAL[which];
@@ -275,6 +298,7 @@ var revealer = ("IntersectionObserver" in window) ? new IntersectionObserver(fun
 
 function wire(root){
  $$(".band video[autoplay]", root).forEach(function(v){ v.muted = true; var pr = v.play(); if(pr && pr.catch) pr.catch(function(){}); });
+ $$(".phead h1, .h2.rv, .band h2", root).forEach(splitWords);
  $$(".rv", root).forEach(function(el, i){
   if(!revealer){ el.classList.add("in"); return; }
   var r = el.getBoundingClientRect();

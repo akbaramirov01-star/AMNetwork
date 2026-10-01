@@ -9,13 +9,15 @@ Any input that is missing is simply left out of the manifest; the site then
 falls back (WebGL terrain for the hero, icons for the sectors, ornament for the band).
 """
 import json, os, shutil, subprocess, sys, tempfile
-from PIL import Image
+from PIL import Image, ImageFilter
 import imageio_ffmpeg
 
 D = os.path.dirname(os.path.abspath(__file__))
 RAW, OUT = os.path.join(D, "raw"), os.path.join(D, "media")
 FF = imageio_ffmpeg.get_ffmpeg_exe()
-FRAMES = 96
+FRAMES = 84
+# AI video is soft even at 1080p: a gentle unsharp mask restores perceived detail without halos
+SHARP = ImageFilter.UnsharpMask(radius=1.6, percent=70, threshold=2)
 SECTORS = ["energy", "mining", "agri", "textile", "tourism", "industry"]
 PAGE_PICS = {"tadschikistan": "tourism", "branchen": "textile", "investieren": "industry", "export": "agri"}
 
@@ -48,22 +50,27 @@ def main():
         # sample exactly FRAMES frames evenly across the clip, skipping the very last (often a soft frame)
         run("-i", hero, "-vf", "fps=%f" % (FRAMES / (dur - 0.05)), "-frames:v", str(FRAMES), os.path.join(tmp, "%03d.png"))
         files = sorted(os.listdir(tmp))
-        for sub, w, q in (("l", 1600, 72), ("s", 960, 66)):
-            os.makedirs(os.path.join(OUT, "hero", sub))
-            for i, f in enumerate(files):
-                fit(Image.open(os.path.join(tmp, f)), w).save(os.path.join(OUT, "hero", sub, "f_%03d.webp" % i), "WEBP", quality=q, method=6)
-        fit(Image.open(os.path.join(tmp, files[0])), 1600).save(os.path.join(OUT, "hero", "poster.jpg"), quality=80, optimize=True, progressive=True)
+        os.makedirs(os.path.join(OUT, "hero", "l")); os.makedirs(os.path.join(OUT, "hero", "s"))
+        for i, f in enumerate(files):
+            im = Image.open(os.path.join(tmp, f)).convert("RGB").filter(SHARP)
+            # desktop: the full 1920 frame
+            fit(im, 1920).save(os.path.join(OUT, "hero", "l", "f_%03d.webp" % i), "WEBP", quality=80, method=6)
+            # phones (portrait): a native-resolution vertical crop instead of a shrunken landscape frame
+            cw = round(im.height * 0.6)
+            x0 = (im.width - cw) // 2
+            im.crop((x0, 0, x0 + cw, im.height)).save(os.path.join(OUT, "hero", "s", "f_%03d.webp" % i), "WEBP", quality=78, method=6)
+        fit(Image.open(os.path.join(tmp, files[0])).filter(SHARP), 1920).save(os.path.join(OUT, "hero", "poster.jpg"), quality=80, optimize=True, progressive=True)
         shutil.rmtree(tmp)
         man["hero"] = {"n": len(files), "lg": "media/hero/l/f_", "sm": "media/hero/s/f_", "ext": ".webp", "poster": "media/hero/poster.jpg"}
 
     weave = os.path.join(RAW, "weave.mp4")
     if os.path.exists(weave):
         os.makedirs(os.path.join(OUT, "band"))
-        run("-i", weave, "-an", "-vf", "scale=1280:-2,format=yuv420p", "-c:v", "libx264", "-preset", "slow", "-crf", "27",
+        run("-i", weave, "-an", "-vf", "scale=1920:-2:flags=lanczos,unsharp=5:5:0.7,format=yuv420p", "-c:v", "libx264", "-preset", "slow", "-crf", "25",
             "-movflags", "+faststart", os.path.join(OUT, "band", "weave.mp4"))
-        run("-i", weave, "-an", "-vf", "scale=1280:-2", "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", "38", "-row-mt", "1",
+        run("-i", weave, "-an", "-vf", "scale=1920:-2:flags=lanczos,unsharp=5:5:0.7", "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", "30", "-row-mt", "1",
             os.path.join(OUT, "band", "weave.webm"))
-        run("-i", weave, "-frames:v", "1", "-vf", "scale=1280:-2", "-q:v", "4", os.path.join(OUT, "band", "weave.jpg"))
+        run("-i", weave, "-frames:v", "1", "-vf", "scale=1920:-2:flags=lanczos,unsharp=5:5:0.7", "-q:v", "3", os.path.join(OUT, "band", "weave.jpg"))
         man["band"] = {"webm": "media/band/weave.webm", "src": "media/band/weave.mp4", "poster": "media/band/weave.jpg"}
 
     s = {}
@@ -71,7 +78,7 @@ def main():
         p = os.path.join(RAW, k + ".png")
         if os.path.exists(p):
             os.makedirs(os.path.join(OUT, "s"), exist_ok=True)
-            fit(Image.open(p), 1400).save(os.path.join(OUT, "s", k + ".webp"), "WEBP", quality=80, method=6)
+            fit(Image.open(p), 1800).filter(ImageFilter.UnsharpMask(radius=1.0, percent=40, threshold=2)).save(os.path.join(OUT, "s", k + ".webp"), "WEBP", quality=82, method=6)
             s[k] = "media/s/%s.webp" % k
     if s:
         man["s"] = s
