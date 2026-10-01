@@ -76,7 +76,7 @@ function renderHero(){
  $("#c1").innerHTML = '<div class="in"><div class="kick">'+H.k1+'</div><h1>'+H.t1+'</h1><p class="sub">'+H.s1+'</p><div class="acts"><a class="cta" href="#investieren" data-go="investieren">'+H.b1+arrow+'</a><a class="cta ghost" href="#export" data-go="export">'+H.b2+'</a></div></div>';
  var srcs=[13,2,3,12];
  $("#c2").innerHTML = '<div class="in"><div class="kick">'+H.k2+'</div><h2>'+H.t2+sref(13)+'</h2><div class="figs-strip">'+H.fv.map(function(v,i){ return '<div><b>'+v+'</b><span>'+H.f[i]+' '+sref(srcs[i])+'</span></div>'; }).join("")+'</div></div>';
- $("#c3").innerHTML = '<div class="in"><div class="box"><div class="kick">'+H.k3+'</div><h2>'+H.t3+'</h2><p class="sub">'+H.s3+'</p>'+repCard()+'<div class="acts"><a class="cta" href="#service" data-go="service">'+H.b3+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+H.b4+'</a></div></div></div>';
+ $("#c3").innerHTML = '<div class="in"><div class="box"><div class="kick">'+H.k3+'</div><h2>'+H.t3+'</h2><p class="sub">'+H.s3+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+H.b3+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+H.b4+'</a></div></div></div>';
  $$(".chapter h1, .chapter h2").forEach(splitWords);
  $("#meterLbl").textContent = L.ui.scroll;
  $("#altLbl").textContent = L.ui.alt;

@@ -4,7 +4,7 @@ r = lambda f: open(os.path.join(d,f), encoding='utf-8').read()
 import json
 mp = os.path.join(d, 'media', 'manifest.json')
 MEDIA = json.load(open(mp)) if os.path.exists(mp) else {}
-FILM = bool(MEDIA.get('hero'))
+FILM = bool(MEDIA.get('hero') or MEDIA.get('loop'))
 MEDIA_JS = '\n<script>window.MEDIA = ' + json.dumps(MEDIA) + ';</script>\n'
 # The procedural terrain (three.js + terrain.js) is only shipped when there is no filmed hero
 scene_js = '<script>\n' + r('three.min.js') + '\n</script>\n<script>\n' + r('terrain.js') + '\n</script>\n'

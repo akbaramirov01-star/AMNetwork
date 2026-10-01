@@ -442,7 +442,7 @@ footer>.orn{margin-bottom:56px}
 @keyframes shotIn{from{clip-path:inset(0 100% 0 0);transform:scale(1.12)}to{clip-path:inset(0 0 0 0);transform:none}}
 .phead .pic img{animation:picIn 2.2s cubic-bezier(.19,1,.22,1) both}
 @keyframes picIn{from{opacity:0;transform:scale(1.12)}to{opacity:.92;transform:none}}
-.hero-stage::after,.band.has-vid::after{content:"";position:absolute;inset:-50%;pointer-events:none;z-index:2;background-image:var(--noise);background-size:160px 160px;opacity:.09;mix-blend-mode:overlay;animation:grain 1s steps(6) infinite}
+.hero-stage::after,.band.has-vid::after{content:"";position:absolute;inset:-50%;pointer-events:none;z-index:2;background-image:var(--noise);background-size:160px 160px;opacity:.05;mix-blend-mode:overlay;animation:grain 1s steps(6) infinite}
 .band.has-vid::after{opacity:.07}
 @keyframes grain{0%{transform:translate(0,0)}17%{transform:translate(-4%,3%)}33%{transform:translate(3%,-5%)}50%{transform:translate(-6%,-2%)}67%{transform:translate(5%,4%)}83%{transform:translate(-2%,6%)}100%{transform:translate(0,0)}}
 .hero .chapter{z-index:3}.hero-meter,.hero-coord{z-index:3}
@@ -452,3 +452,11 @@ footer>.orn{margin-bottom:56px}
  .dossier .shot img,.phead .pic img{animation:none}
  .hero-stage::after,.band.has-vid::after{animation:none}
 }
+
+/* arrows: explicit size so iOS Safari never collapses them inside flex boxes */
+.door .go i svg{width:18px;height:18px;flex-shrink:0;display:block}
+.cta svg{width:16px;height:16px;flex-shrink:0}
+@media (max-width:760px){.hero-stage::after,.band.has-vid::after{display:none}}
+
+.loopv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform;transform:scale(1.06);background:#0A0F18}
+.has-loop #film{display:none}

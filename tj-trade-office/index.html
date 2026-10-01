@@ -453,7 +453,7 @@ footer>.orn{margin-bottom:56px}
 @keyframes shotIn{from{clip-path:inset(0 100% 0 0);transform:scale(1.12)}to{clip-path:inset(0 0 0 0);transform:none}}
 .phead .pic img{animation:picIn 2.2s cubic-bezier(.19,1,.22,1) both}
 @keyframes picIn{from{opacity:0;transform:scale(1.12)}to{opacity:.92;transform:none}}
-.hero-stage::after,.band.has-vid::after{content:"";position:absolute;inset:-50%;pointer-events:none;z-index:2;background-image:var(--noise);background-size:160px 160px;opacity:.09;mix-blend-mode:overlay;animation:grain 1s steps(6) infinite}
+.hero-stage::after,.band.has-vid::after{content:"";position:absolute;inset:-50%;pointer-events:none;z-index:2;background-image:var(--noise);background-size:160px 160px;opacity:.05;mix-blend-mode:overlay;animation:grain 1s steps(6) infinite}
 .band.has-vid::after{opacity:.07}
 @keyframes grain{0%{transform:translate(0,0)}17%{transform:translate(-4%,3%)}33%{transform:translate(3%,-5%)}50%{transform:translate(-6%,-2%)}67%{transform:translate(5%,4%)}83%{transform:translate(-2%,6%)}100%{transform:translate(0,0)}}
 .hero .chapter{z-index:3}.hero-meter,.hero-coord{z-index:3}
@@ -463,6 +463,14 @@ footer>.orn{margin-bottom:56px}
  .dossier .shot img,.phead .pic img{animation:none}
  .hero-stage::after,.band.has-vid::after{animation:none}
 }
+
+/* arrows: explicit size so iOS Safari never collapses them inside flex boxes */
+.door .go i svg{width:18px;height:18px;flex-shrink:0;display:block}
+.cta svg{width:16px;height:16px;flex-shrink:0}
+@media (max-width:760px){.hero-stage::after,.band.has-vid::after{display:none}}
+
+.loopv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform;transform:scale(1.06);background:#0A0F18}
+.has-loop #film{display:none}
 
 </style>
 </head>
@@ -623,7 +631,7 @@ var NEWS = [
 
 /* the trade representative: this is his own website */
 var REP = {li:"https://www.linkedin.com/in/masrur-kurbonalizoda-034483270",
- n:{de:"Masrur Kurbonalizoda", en:"Masrur Kurbonalizoda", ru:"Масрур Курбонализода", tj:"Масрур Курбонализода"},
+ n:{de:"Masrur Kurbonalizoda", en:"Masrur Kurbonalizoda", ru:"Масрур Курбонализода", tj:"Масрур Қурбонализода"},
  ini:{de:"MK", en:"MK", ru:"МК", tj:"МК"}};
 
 var C = {};
@@ -1487,12 +1495,12 @@ C.tj = {
  contact:{
   h1:"Тамос",
   lead:"Шахси тамоси шумо оид ба савдо ва сармоягузорӣ байни Тоҷикистон ва Олмон.",
-  emb:"Намояндаи савдо", embT:"<b>Масрур Курбонализода</b><br>Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон<br><a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn →</a>",
+  emb:"Намояндаи савдо", embT:"<b>Масрур Қурбонализода</b><br>Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон<br><a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn →</a>",
   off:"Дафтар дар Берлин", offT:"Perleberger Straße 43<br>10559 Berlin<br><span class='ph'>[Почтаи электронӣ]</span><br><span class='ph'>[Телефон]</span>",
   hrs:"Мулоқотҳо", hrsT:"Мулоқот бо таъини қаблӣ — дар Берлин ё тавассути видео.<br><a href='#service' data-go='service'>Сабти ном →</a>",
   note:"Почтаи электронӣ ва телефони мустақим пеш аз оғоз илова карда мешаванд."
  },
- foot:{ai:"Тасвирҳо ва видеои ин сомона визуализатсияҳои бо зеҳни сунъӣ сохташуда (Higgsfield) мебошанд, на аксбардории ҷойҳо ё иншооти мушаххаси воқеӣ.", tag:"Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон. Дафтар дар Берлин.", c1:"Бахшҳо", c2:"Хизматрасонӣ", c3:"Маълумоти ҳуқуқӣ", rights:"© 2026 Масрур Курбонализода, намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон", demo:"Версияи пешакии сомона. Мавод пеш аз оғоз бори охир санҷида мешавад.", imp:"Impressum", dat:"Махфият"},
+ foot:{ai:"Тасвирҳо ва видеои ин сомона визуализатсияҳои бо зеҳни сунъӣ сохташуда (Higgsfield) мебошанд, на аксбардории ҷойҳо ё иншооти мушаххаси воқеӣ.", tag:"Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон. Дафтар дар Берлин.", c1:"Бахшҳо", c2:"Хизматрасонӣ", c3:"Маълумоти ҳуқуқӣ", rights:"© 2026 Масрур Қурбонализода, намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон", demo:"Версияи пешакии сомона. Мавод пеш аз оғоз бори охир санҷида мешавад.", imp:"Impressum", dat:"Махфият"},
  legalNote:""
 };
 
@@ -1556,9 +1564,28 @@ var LEGAL = {
     return 1 - (p-c)/(d-c);
   }
 
-  /* ---------- filmed frames ---------- */
-  var film = null;
-  if(M && M.n){
+  /* ---------- looping film (preferred): native playback, scroll adds only a light parallax ---------- */
+  var film = null, LOOP = (window.MEDIA || {}).loop;
+  if(LOOP && (LOOP.l || LOOP.s)){
+    document.documentElement.classList.add("has-film", "has-loop");
+    var portrait = window.innerHeight > window.innerWidth * 1.1;
+    var V = (portrait && LOOP.s) ? LOOP.s : (LOOP.l || LOOP.s);
+    var stage = document.querySelector(".hero-stage");
+    var vid = document.createElement("video");
+    vid.className = "loopv"; vid.muted = true; vid.defaultMuted = true; vid.loop = true; vid.playsInline = true;
+    vid.setAttribute("playsinline", ""); vid.setAttribute("muted", ""); vid.setAttribute("aria-hidden", "true");
+    vid.preload = "auto"; vid.poster = V.poster;
+    vid.innerHTML = '<source src="'+V.webm+'" type="video/webm"><source src="'+V.mp4+'" type="video/mp4">';
+    stage.insertBefore(vid, stage.querySelector(".hero-grain"));
+    if(!reduce){ vid.autoplay = true; var pp = vid.play(); if(pp && pp.catch) pp.catch(function(){}); }
+    document.addEventListener("visibilitychange", function(){ if(!document.hidden && !reduce) vid.play().catch(function(){}); });
+    film = function(p){
+      vid.style.transform = "translate3d(0," + (-p*4).toFixed(2) + "%,0) scale(" + (1.06 + p*0.04).toFixed(4) + ")";
+    };
+  }
+
+  /* ---------- filmed frames (fallback) ---------- */
+  if(!film && M && M.n){
     document.documentElement.classList.add("has-film");
     var canvas = document.getElementById("film");
     var ctx = canvas.getContext("2d", {alpha:false});
@@ -1725,7 +1752,7 @@ function renderHero(){
  $("#c1").innerHTML = '<div class="in"><div class="kick">'+H.k1+'</div><h1>'+H.t1+'</h1><p class="sub">'+H.s1+'</p><div class="acts"><a class="cta" href="#investieren" data-go="investieren">'+H.b1+arrow+'</a><a class="cta ghost" href="#export" data-go="export">'+H.b2+'</a></div></div>';
  var srcs=[13,2,3,12];
  $("#c2").innerHTML = '<div class="in"><div class="kick">'+H.k2+'</div><h2>'+H.t2+sref(13)+'</h2><div class="figs-strip">'+H.fv.map(function(v,i){ return '<div><b>'+v+'</b><span>'+H.f[i]+' '+sref(srcs[i])+'</span></div>'; }).join("")+'</div></div>';
- $("#c3").innerHTML = '<div class="in"><div class="box"><div class="kick">'+H.k3+'</div><h2>'+H.t3+'</h2><p class="sub">'+H.s3+'</p>'+repCard()+'<div class="acts"><a class="cta" href="#service" data-go="service">'+H.b3+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+H.b4+'</a></div></div></div>';
+ $("#c3").innerHTML = '<div class="in"><div class="box"><div class="kick">'+H.k3+'</div><h2>'+H.t3+'</h2><p class="sub">'+H.s3+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+H.b3+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+H.b4+'</a></div></div></div>';
  $$(".chapter h1, .chapter h2").forEach(splitWords);
  $("#meterLbl").textContent = L.ui.scroll;
  $("#altLbl").textContent = L.ui.alt;

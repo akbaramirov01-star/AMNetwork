@@ -31,9 +31,28 @@
     return 1 - (p-c)/(d-c);
   }
 
-  /* ---------- filmed frames ---------- */
-  var film = null;
-  if(M && M.n){
+  /* ---------- looping film (preferred): native playback, scroll adds only a light parallax ---------- */
+  var film = null, LOOP = (window.MEDIA || {}).loop;
+  if(LOOP && (LOOP.l || LOOP.s)){
+    document.documentElement.classList.add("has-film", "has-loop");
+    var portrait = window.innerHeight > window.innerWidth * 1.1;
+    var V = (portrait && LOOP.s) ? LOOP.s : (LOOP.l || LOOP.s);
+    var stage = document.querySelector(".hero-stage");
+    var vid = document.createElement("video");
+    vid.className = "loopv"; vid.muted = true; vid.defaultMuted = true; vid.loop = true; vid.playsInline = true;
+    vid.setAttribute("playsinline", ""); vid.setAttribute("muted", ""); vid.setAttribute("aria-hidden", "true");
+    vid.preload = "auto"; vid.poster = V.poster;
+    vid.innerHTML = '<source src="'+V.webm+'" type="video/webm"><source src="'+V.mp4+'" type="video/mp4">';
+    stage.insertBefore(vid, stage.querySelector(".hero-grain"));
+    if(!reduce){ vid.autoplay = true; var pp = vid.play(); if(pp && pp.catch) pp.catch(function(){}); }
+    document.addEventListener("visibilitychange", function(){ if(!document.hidden && !reduce) vid.play().catch(function(){}); });
+    film = function(p){
+      vid.style.transform = "translate3d(0," + (-p*4).toFixed(2) + "%,0) scale(" + (1.06 + p*0.04).toFixed(4) + ")";
+    };
+  }
+
+  /* ---------- filmed frames (fallback) ---------- */
+  if(!film && M && M.n){
     document.documentElement.classList.add("has-film");
     var canvas = document.getElementById("film");
     var ctx = canvas.getContext("2d", {alpha:false});

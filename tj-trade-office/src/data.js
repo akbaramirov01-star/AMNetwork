@@ -62,5 +62,5 @@ var NEWS = [
 
 /* the trade representative: this is his own website */
 var REP = {li:"https://www.linkedin.com/in/masrur-kurbonalizoda-034483270",
- n:{de:"Masrur Kurbonalizoda", en:"Masrur Kurbonalizoda", ru:"Масрур Курбонализода", tj:"Масрур Курбонализода"},
+ n:{de:"Masrur Kurbonalizoda", en:"Masrur Kurbonalizoda", ru:"Масрур Курбонализода", tj:"Масрур Қурбонализода"},
  ini:{de:"MK", en:"MK", ru:"МК", tj:"МК"}};

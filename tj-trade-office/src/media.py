@@ -63,6 +63,22 @@ def main():
         shutil.rmtree(tmp)
         man["hero"] = {"n": len(files), "lg": "media/hero/l/f_", "sm": "media/hero/s/f_", "ext": ".webp", "poster": "media/hero/poster.jpg"}
 
+    # looping hero film: plays natively (hardware-decoded, smooth on phones); preferred over the frame sequence
+    loop = {}
+    for k, w, h, crf in (("l", 1920, 1080, 22), ("s", 1080, 1920, 23)):
+        src = os.path.join(RAW, "hero_loop_%s.mp4" % k)
+        if not os.path.exists(src):
+            continue
+        os.makedirs(os.path.join(OUT, "loop"), exist_ok=True)
+        vf = "scale=%d:%d:force_original_aspect_ratio=increase:flags=lanczos,crop=%d:%d,unsharp=5:5:0.5" % (w, h, w, h)
+        run("-i", src, "-an", "-vf", vf + ",format=yuv420p", "-c:v", "libx264", "-preset", "slow", "-crf", str(crf),
+            "-profile:v", "high", "-movflags", "+faststart", os.path.join(OUT, "loop", k + ".mp4"))
+        run("-i", src, "-an", "-vf", vf, "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", "31", "-row-mt", "1", os.path.join(OUT, "loop", k + ".webm"))
+        run("-i", src, "-frames:v", "1", "-vf", vf, "-q:v", "3", os.path.join(OUT, "loop", k + ".jpg"))
+        loop[k] = {"mp4": "media/loop/%s.mp4" % k, "webm": "media/loop/%s.webm" % k, "poster": "media/loop/%s.jpg" % k}
+    if loop:
+        man["loop"] = loop
+
     weave = os.path.join(RAW, "weave.mp4")
     if os.path.exists(weave):
         os.makedirs(os.path.join(OUT, "band"))
