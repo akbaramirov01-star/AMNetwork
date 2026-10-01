@@ -1,0 +1,28 @@
+{
+ "hero": {
+  "n": 96,
+  "lg": "media/hero/l/f_",
+  "sm": "media/hero/s/f_",
+  "ext": ".webp",
+  "poster": "media/hero/poster.jpg"
+ },
+ "band": {
+  "webm": "media/band/weave.webm",
+  "src": "media/band/weave.mp4",
+  "poster": "media/band/weave.jpg"
+ },
+ "s": {
+  "energy": "media/s/energy.webp",
+  "mining": "media/s/mining.webp",
+  "agri": "media/s/agri.webp",
+  "textile": "media/s/textile.webp",
+  "tourism": "media/s/tourism.webp",
+  "industry": "media/s/industry.webp"
+ },
+ "ph": {
+  "tadschikistan": "media/s/tourism.webp",
+  "branchen": "media/s/textile.webp",
+  "investieren": "media/s/industry.webp",
+  "export": "media/s/agri.webp"
+ }
+}
