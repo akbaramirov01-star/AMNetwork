@@ -416,3 +416,5 @@ footer>.orn{margin-bottom:56px}
 .band.has-vid .field{display:none}
 .ainote{font-size:.78rem;color:var(--ink-faint)}
 @media (prefers-reduced-motion: reduce){.sector .ph img{transition:none}}
+.chapter h1,.chapter h2{overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto}
+@media (max-width:620px){.chapter.c2 h2{font-size:clamp(1.8rem,8vw,2.6rem);max-width:100%}.chapter h1,.chapter.c3 h2{font-size:clamp(2.1rem,9.6vw,3rem)}}
