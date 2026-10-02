@@ -252,8 +252,12 @@ function exportersSection(E){
   var badges = (x.cert ? '<span class="badge gold">'+x.cert+' · '+x.cy+'</span>' : '') + (x.fair ? '<span class="badge">'+O.fair+'</span>' : '');
   var rows = '<div class="kv2"><span>'+O.pr+'</span><b>'+x.pr.map(function(p){ return O.prn[p]; }).join(", ")+'</b></div>'+
    (x.mk ? '<div class="kv2"><span>'+O.mk+'</span><b>'+x.mk.map(function(m){ return O.mkn[m]; }).join(", ")+'</b></div>' : '')+
-   (x.cap ? '<div class="kv2"><span>'+O.cap+'</span><b>'+x.cap.replace(">","> ").replace("≤","≤ ")+' '+O.t_y+'</b></div>' : '');
-  return '<article class="exco rv"><div class="badges">'+badges+'</div><h3>'+x.n+(x.f ? ' <small>'+x.f+'</small>' : '')+'</h3>'+(x.alias ? '<p class="alias">'+x.alias+'</p>' : '')+'<p class="meta">'+meta+'</p>'+rows+'<div class="srcs">'+refs(x.src)+'</div></article>';
+   (x.cap ? '<div class="kv2"><span>'+O.cap+'</span><b>'+x.cap.replace(">","> ").replace("≤","≤ ")+' '+O.t_y+'</b></div>' : '')+
+   (x.std ? '<div class="kv2"><span>'+O.lab.std+'</span><b>'+x.std+' <small>('+O.lab.own+')</small></b></div>' : '')+
+   (x.staff ? '<div class="kv2"><span>'+O.lab.staff+'</span><b>'+x.staff+'</b></div>' : '');
+  var contact = x.web ? '<div class="excontact"><a href="'+x.web+'" target="_blank" rel="noopener">'+x.web.replace(/^https?:\/\//,"")+' '+ext+'</a>'+
+   (x.mail ? '<a href="mailto:'+x.mail+'">'+x.mail+'</a>' : '')+(x.tel ? '<a href="tel:'+x.tel.replace(/\s/g,"")+'">'+x.tel+'</a>' : '')+'</div>' : '';
+  return '<article class="exco rv'+(x.feat ? ' feat' : '')+'"><div class="badges">'+badges+'</div><h3>'+x.n+(x.f ? ' <small>'+x.f+'</small>' : '')+'</h3>'+(x.alias ? '<p class="alias">'+x.alias+'</p>' : '')+'<p class="meta">'+meta+'</p>'+(x.feat ? '<div class="excols"><div>'+rows+'</div>'+contact+'</div>' : rows+contact)+'<div class="srcs">'+refs(x.src)+'</div></article>';
  };
  return '<section class="sec tint"><div class="wrap"><div class="head split"><div><div class="kicker">'+O.k+'</div><h2 class="h2 rv">'+O.t+'</h2></div><p class="lead rv">'+O.l+'</p></div>'+
   '<div class="excos">'+EXPORTERS.map(card).join("")+'</div>'+

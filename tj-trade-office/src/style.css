@@ -526,3 +526,13 @@ body{font-size:16px;line-height:1.68}
 .phead .pic{overflow:hidden}
 .split2>*{min-width:0}.finder,.finder label,.finder select{min-width:0;max-width:100%}
 @media (max-width:620px){.brand span{letter-spacing:.07em;font-size:.56rem}}
+
+.exco.feat{grid-column:1/-1;background:var(--surface)}
+.exco.feat h3{font-size:2.3rem}
+.excols{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:28px;align-items:start}
+.excontact{display:grid;gap:8px;padding:16px 18px;border:1px solid var(--line);background:var(--ground);font-size:.92rem}
+.excontact a{text-decoration:none;color:var(--ink);display:inline-flex;gap:8px;align-items:center;overflow-wrap:anywhere}
+.excontact a:first-child{color:var(--gold);font-weight:600}
+.excontact a svg{width:13px;height:13px;flex-shrink:0}
+.kv2 b small{font-weight:400;color:var(--ink-faint);font-size:.78rem}
+@media (max-width:760px){.excols{grid-template-columns:1fr;gap:16px}.exco.feat h3{font-size:1.9rem}}

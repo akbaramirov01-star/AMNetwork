@@ -35,7 +35,9 @@ var SRC = [
  {t:"Asia-Plus — Three dried fruit producers from Isfara receive FSSC 22000 certificates, 18.09.2026", u:"https://asiaplus.news/en/2026/09/18/three-dried-fruit-producers-from-isfara-received-fssc-22000-certificates/"},
  {t:"Asia-Plus — Tajik dried fruit producers achieve key international certification, 31.10.2025", u:"https://asiaplus.news/en/2025/10/31/tajik-dried-fruit-producers-achieve-key-international-certification-boosting-export-potential/"},
  {t:"FreshPlaza — Tajikistan’s dried fruit processors pitch for new buyers at Food Ingredients Europe 2025", u:"https://www.freshplaza.com/europe/article/9791442/tajikistan-s-dried-fruit-processors-pitch-for-new-buyers-at-food-ingredients-europe-2025/"},
- {t:"European Commission — Access2Markets: My Trade Assistant", u:"https://trade.ec.europa.eu/access-to-markets/en/my-trade-assistant"}
+ {t:"European Commission — Access2Markets: My Trade Assistant", u:"https://trade.ec.europa.eu/access-to-markets/en/my-trade-assistant"},
+ {t:"Barakat Isfara LLC — company website: products, quality, contacts", u:"https://barakat-isfara.com/about_company/"},
+ {t:"Barakat Isfara LLC — “Barakat-Isfara products exported to Malaysia”, 29.03.2022", u:"https://barakat-isfara.com/2022/03/29/export_barakat/"}
 ];
 function sref(n){ return '<a class="src" href="#quellen" data-src="'+n+'" title="'+(SRC[n]?SRC[n].t.replace(/"/g,"&quot;"):"")+'">['+n+']</a>'; }
 
@@ -80,10 +82,12 @@ var A2M = {
 /* Dried-fruit exporters from Sughd, only as reported by the cited sources (src).
    Vodii Mevaho is Tajik for "Valley of Fruits" — the same company that appeared at FiE 2025 as Dolina Fruktov (Russian name). */
 var EXPORTERS = [
+ {n:"Barakat Isfara", f:"LLC", city:"isfara", feat:true, pr:["apricot","prunes","raisins","compote","chopped","snacks","sweets","apple","rosehip","mulberry","walnuts","kernels","almonds"],
+  mk:["RU","CZ","TR","CA","MY"], std:"HACCP", staff:"140+", fair:true,
+  web:"https://barakat-isfara.com", mail:"info@barakat-isfara.com", tel:"+992 98 770 0565", src:[36,37,34]},
  {n:"Isfara Food", f:"LLC", city:"isfara", y:2010, pr:["apricot","apple","pear","compote"], mk:["RU","KZ","EU"], cert:"FSSC 22000", cy:2026, src:[32]},
  {n:"Oro Isfara", f:"LLC", city:"isfara", cap:">2000", pr:["fruit","nuts"], mk:["CIS","EU"], cert:"FSSC 22000", cy:2026, src:[32]},
  {n:"Vodii Mevaho", f:"LLC", alias:"Fruits Valley · Dolina Fruktov", city:"isfara", y:2017, cap:"≤1500", pr:["fruit","nuts","rosehip","kernels"], mk:["DE","PL","TR","US","CIS"], cert:"FSSC 22000", cy:2026, fair:true, src:[32,34]},
- {n:"Barakat Isfara", city:"isfara", pr:["apricot","raisins","prunes"], fair:true, src:[34]},
  {n:"Ali Apricot", city:"isfara", pr:["apricot","raisins","prunes"], fair:true, src:[34]},
  {n:"Zardolui Isfara", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]},
  {n:"Mevai Kand", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]},
