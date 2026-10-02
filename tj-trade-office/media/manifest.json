@@ -31,5 +31,15 @@
   "branchen": "media/s/textile.webp",
   "investieren": "media/s/industry.webp",
   "export": "media/s/agri.webp"
+ },
+ "gen": {
+  "econ": "media/gen/econ.webp",
+  "alu": "media/gen/alu.webp",
+  "cotton": "media/gen/cotton.webp",
+  "book": "media/gen/book.webp",
+  "fruit1": "media/gen/fruit1.webp",
+  "fruit2": "media/gen/fruit2.webp",
+  "fruit3": "media/gen/fruit3.webp",
+  "fruit4": "media/gen/fruit4.webp"
  }
 }

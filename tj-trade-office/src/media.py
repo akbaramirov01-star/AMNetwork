@@ -107,6 +107,16 @@ def main():
             fit(Image.open(os.path.join(RAW, f)), 1800).save(os.path.join(OUT, "ph", page + ".webp"), "WEBP", quality=84, method=6)
             man.setdefault("ph", {})[page] = "media/ph/%s.webp" % page
 
+    # single generated pictures for page sections: raw/gen/<key>.png -> media/gen/<key>.webp (MEDIA.gen.<key>)
+    GEN_W = {"econ": 1400, "alu": 1200, "cotton": 1200, "book": 1200, "fruit1": 1800, "fruit2": 1000, "fruit3": 1000, "fruit4": 1000}
+    gdir = os.path.join(RAW, "gen")
+    for k, w in GEN_W.items():
+        p = os.path.join(gdir, k + ".png")
+        if os.path.exists(p):
+            os.makedirs(os.path.join(OUT, "gen"), exist_ok=True)
+            fit(Image.open(p), w).filter(ImageFilter.UnsharpMask(radius=1.0, percent=35, threshold=2)).save(os.path.join(OUT, "gen", k + ".webp"), "WEBP", quality=82, method=6)
+            man.setdefault("gen", {})[k] = "media/gen/%s.webp" % k
+
     json.dump(man, open(os.path.join(OUT, "manifest.json"), "w"), indent=1)
     total = sum(os.path.getsize(os.path.join(r, f)) for r, _, fs in os.walk(OUT) for f in fs)
     print("media:", ", ".join(man) or "none", "| %.1f MB" % (total / 1e6))

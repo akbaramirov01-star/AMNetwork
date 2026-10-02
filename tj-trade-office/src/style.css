@@ -592,3 +592,12 @@ body{font-size:16px;line-height:1.68}
 .fruits img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
 .fruits figure:hover img{transform:scale(1.05)}
 @media (max-width:760px){.fruits .frow{grid-template-columns:1fr 1fr;height:auto}.fruits figure{aspect-ratio:1}.fruits figure.wide{grid-column:1/-1;aspect-ratio:16/9}}
+.book{--cx:52%;--cy:45%;--cw:44%}
+/* cover title scales with the book itself, never with the viewport */
+.book{container-type:inline-size;--cx:52%;--cy:46%;--cw:40%}
+.book .cover{gap:1.4cqw}
+.book .cover .t{font-size:4cqw;letter-spacing:.04em}
+.book .cover .s{font-size:2.1cqw;letter-spacing:.12em;line-height:1.35}
+.book .cover::before,.book .cover::after{content:"";justify-self:center;width:9cqw;height:1px;background:linear-gradient(90deg,transparent,#D9B05B,transparent);opacity:.8}
+.book .cover::before{order:-1}
+.book .cover .t{font-size:4.4cqw}.book .cover .s{font-size:2.3cqw}

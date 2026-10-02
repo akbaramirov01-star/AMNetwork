@@ -21,3 +21,15 @@ Startbilder Hero: 71994049-d017-4fe0-9960-b4c9190f823f (A), be225db5-b3e0-45bc-a
 weitere Varianten d34c1684-7fd6-4d45-a77b-50706bdcdf35, 754f5c0e-1401-448d-8147-c9cc681c067a.
 Startbild Webstuhl-Video: 3f5a3367-d5e1-457c-ba8f-d97a5406bffa.
 Die aufbereiteten Dateien liegen in `tj-trade-office/media/` (12 MB).
+
+## Einzelbilder Oktober 2026 (`raw/gen/<key>.png`, gpt_image_2_5, zusammen 9,75 Credits)
+
+| Key | Job-ID | Einsatz |
+|---|---|---|
+| econ | 94ed3ea5-5920-49c5-bd0b-64715ddd73d6 | Tadschikistan → Kennzahlen |
+| alu | 1d4fbbda-0f5f-4cdb-ae59-a4a5ebb86d47 | Kachel Aluminium |
+| cotton | d8292296-f1ea-4fc4-8dc7-dc376295fc3b | Kachel Baumwolle und Textilien |
+| book | 0258b554-1053-4ee7-acda-7bdc235b8720 | Verfassung (leerer Einband; Titel setzt die Seite je Sprache) |
+| fruit1–4 | e227e7da-…, ba72ad09-…, 534de86b-…, b7c1d879-… | Export → Galerie Trockenfrüchte |
+
+Kopfbild der Seite Tadschikistan (`raw/ph_tadschikistan.webp`): vom Auftraggeber gestelltes Foto aus Duschanbe — Nutzungsrechte vor dem Start klären.
