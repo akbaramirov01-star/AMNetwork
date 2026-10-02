@@ -60,7 +60,13 @@
 8. Refugees and displaced persons
 9. Chronically ill without healthcare access
 10. Large families with single breadwinner
-11. Those invisible to traditional charitable systems *(list will expand)*
+11. Food-insecure households
+12. New Muslim converts facing hardship
+13. Trafficking / forced-labour survivors
+14. Conflict-zone / natural-disaster victims
+15. Those invisible to traditional charitable systems *(list will expand)*
+
+This matches `ai_scoring/scorer.py` (groups A–O, each mapped to one of the 8 Quranic asnaf). The site says "15 categories" — keep the two in sync.
 
 ## Local Oracle Network
 
@@ -96,6 +102,7 @@ Verified local representatives who confirm recipient physical presence:
 - `/` — Main site (10 languages incl. French, dark/light mode, all sections complete). The "Ayah of the Day" widget that used to sit near the top was removed per founder's request (September 2026).
 - `/ai_scoring/` — AI Scoring quiz (6 steps, score 0–100, client-side)
 - `/zakat/` — Zakat Calculator (assets, nisab, 159 countries)
+- **Whitepaper:** `AM_Network_Whitepaper_v1_EN.pdf` (v1.1, October 2026) is built from `docs/whitepaper/whitepaper-en.html` — edit the HTML, then `NODE_PATH=$(npm root -g) node docs/whitepaper/build-pdf.cjs`. Never hand-edit the PDF. Russian version: `AM-Network-Whitepaper-RU.md`.
 - `/apply/` — Application form (5 steps, delivered by email via Web3Forms, live)
 - `/investors/` — Investor pitch page (noindex)
 - `/quran/` — The Noble Quran: 114 surahs, live from the Quran.com API (Quran Foundation) — Tanzil Uthmani Arabic text, certified translations, official reciter audio, word-by-word tap-to-translate, per-ayah/whole-surah repeat modes, Khatm (continuous) mode, and a Mushaf view (authentic Madinah-layout page images via the self-hosted quran-qcf4 dataset — real QCF4 Hafs font/glyphs, not our own rendering). We never store, edit or translate this content ourselves; it is always fetched live and shown exactly as published. UI chrome in 10 languages. **Offline saving (September 2026):** a "save offline" button per surah caches that surah's verse+translation JSON and the selected reciter's per-ayah audio into a dedicated Cache Storage bucket (`amn-quran-offline-v1`, separate from the app-shell precache so it survives every `sw.js` version bump); `sw.js` serves `api.quran.com`/`everyayah.com` cache-first from that bucket once saved, so a saved surah opens and plays with no network at all.
