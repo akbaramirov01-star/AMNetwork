@@ -4,7 +4,9 @@
 
 ## What We Are Building
 
-**AM Network** — the first blockchain-verified Zakat and Sadaqah platform for ~2 billion Muslims.
+**AM Network** — a blockchain-verified Zakat and Sadaqah platform for ~2 billion Muslims.
+
+⚠️ **Never call AM Network "the first"** (checked October 2026). Blockchain Zakat platforms already exist (e.g. Benevolence by IBF Net, Zakat Chain, ZakatDAO) and AI-matched verified-recipient Zakat apps too (MyZakat, Poket). Describe what we do — AI need score + in-person local verification + two-verifier on-chain release + 100% of Zakat to the recipient, no token — not a ranking.
 
 - **Website:** amnetwork.io (live, GitHub Pages)
 - **Founder:** Akbar Amirzoda — economist, diplomat (Plekhanov University Moscow)
@@ -15,7 +17,7 @@
 ## Core Products
 
 1. **AM Zakat.ai** — AI-verified recipients (score 0–100), smart contracts on Base blockchain, local oracle network (mosque imams + AM Network volunteers + partner NGOs), Sharia-certified (ujrah model)
-2. **AM Academy** — Sharia-compliant financial literacy, NFT certificates, AI tutor 24/7
+2. **AM Academy** — Sharia-compliant financial literacy, explained for 4 audiences (pre-generated, no live AI), downloadable certificate; NFT certificates planned
 
 ## Tech Stack
 

@@ -119,7 +119,7 @@
 
 Assalamu Alaikum / Hello,
 
-AM Network is building the world's first blockchain-verified Zakat platform — 
+AM Network is building a blockchain-verified Zakat platform — 
 connecting 2 billion Muslims with transparent, AI-scored charitable giving on Base blockchain.
 
 📊 Market: $600B annual Zakat + $6T Islamic Finance
@@ -173,7 +173,7 @@ Subject: CTO Co-Founder Opportunity — Islamic Fintech (Blockchain + AI)
 
 Hi [Name],
 
-I'm Akbar, founder of AM Network — the first blockchain-verified Zakat distribution platform.
+I'm Akbar, founder of AM Network — a blockchain-verified Zakat distribution platform.
 
 Quick numbers:
 • $600B annual Zakat market, <$25B formally distributed

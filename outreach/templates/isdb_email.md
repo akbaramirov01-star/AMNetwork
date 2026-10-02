@@ -38,7 +38,7 @@ As a founder from an IsDB member country, I am reaching out regarding potential
 support through the IsDB Institute's Smart Economy Grants Program.
 
 About AM Network:
-• First blockchain-verified Zakat platform with AI recipient scoring (0–100)
+• Blockchain-verified Zakat platform with AI recipient scoring (0–100) and in-person local verification
 • Revenue model: Ujrah only (1–2.5%) — strictly Sharia-compliant
 • Base blockchain (Coinbase) + Solidity smart contracts
 • Serving all 8 Asnaf categories of Zakat eligible recipients

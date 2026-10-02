@@ -56,7 +56,7 @@ AI-скоринг получателей (0-100 баллов) + смарт-ко�
 ```
 🔍 Seeking Technical Co-Founder / CTO — AM Network (Islamic Fintech)
 
-We are building the first blockchain-verified Zakat platform for 2 billion Muslims.
+We are building a blockchain-verified Zakat platform for 2 billion Muslims.
 
 The Market:
 • $600B annual Zakat obligation, <$25B formally distributed
