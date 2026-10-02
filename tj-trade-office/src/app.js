@@ -78,7 +78,6 @@ function renderHero(){
  $("#c2").innerHTML = '<div class="in"><div class="kick">'+H.k2+'</div><h2>'+H.t2+sref(13)+'</h2><div class="figs-strip">'+H.fv.map(function(v,i){ return '<div><b>'+v+'</b><span>'+H.f[i]+' '+sref(srcs[i])+'</span></div>'; }).join("")+'</div></div>';
  $("#c3").innerHTML = '<div class="in"><div class="box"><div class="kick">'+H.k3+'</div><h2>'+H.t3+'</h2><p class="sub">'+H.s3+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+H.b3+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+H.b4+'</a></div></div></div>';
  $$(".chapter h1, .chapter h2").forEach(splitWords);
- $("#meterLbl").textContent = L.ui.scroll;
  $("#altLbl").textContent = L.ui.alt;
 }
 
@@ -210,9 +209,56 @@ function pageExport(){
  '<section class="sec tint"><div class="wrap"><div class="head"><div class="kicker">'+E.rk+'</div><h2 class="h2 rv">'+E.rt+'</h2></div><div class="regs">'+
    E.regs.map(function(r){ return '<div class="reg rv"><div class="code">'+r.c+'</div><h3>'+r.t+'</h3><p>'+r.p+'</p><a href="'+SRC[r.s].u+'" target="_blank" rel="noopener">'+SRC[r.s].t.split(" — ")[0]+' ↗</a></div>'; }).join("")+
  '</div></div></section>'+
- '<section class="sec"><div class="wrap split2"><div><div class="kicker">'+E.ak+'</div><h2 class="h2 rv">'+E.at+'</h2></div><div><p class="lead rv" style="margin-top:0">'+E.ap+' '+sref(15)+'</p><p style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap"><a class="cta" href="'+SRC[15].u+'" target="_blank" rel="noopener">'+E.ab+' '+ext+'</a><a class="cta ghost" href="#service" data-go="service" data-form="exporter">'+L.service.forms.exporter.t+'</a></p></div></div></section>'+
+ a2mFinder(E)+
+ exportersSection(E)+
  '<section class="sec tint"><div class="wrap"><div class="head"><div class="kicker">'+E.mk+'</div><h2 class="h2 rv">'+E.mt+'</h2></div><div class="evts">'+eventRows()+'</div></div></section>'+
  band();
+}
+
+/* Access2Markets lookup in our own design: the official result opens on the EU portal */
+function a2mLang(){ return lang==="de" ? "de" : "en"; }
+function a2mFinder(E){
+ var F = E.fx, names;
+ try{ names = new Intl.DisplayNames([{tj:"tg",de:"de",ru:"ru",en:"en"}[lang],"en"], {type:"region"}); }catch(e){ names = null; }
+ var cname = function(c){ try{ return names ? names.of(c) : c; }catch(e){ return c; } };
+ var eu = A2M.eu.slice(1).sort(function(a,b){ return cname(a).localeCompare(cname(b)); });
+ return '<section class="sec"><div class="wrap split2"><div><div class="kicker">'+E.ak+'</div><h2 class="h2 rv">'+E.at+'</h2><p class="lead rv">'+E.ap+' '+sref(15)+'</p></div>'+
+  '<form class="finder rv" id="a2m" novalidate>'+
+   '<label><span>'+F.p+'</span><select name="hs">'+A2M.hs.map(function(h){ return '<option value="'+h+'">'+E.hs[h]+' · '+h.slice(0,4)+' '+h.slice(4)+'</option>'; }).join("")+'<option value="*">'+F.other+'</option></select></label>'+
+   '<label class="own" hidden><span>'+F.code+'</span><input name="q" autocomplete="off" inputmode="text" maxlength="60"></label>'+
+   '<label><span>'+F.d+'</span><select name="to"><option value="DE">'+cname("DE")+'</option>'+eu.map(function(c){ return '<option value="'+c+'">'+cname(c)+'</option>'; }).join("")+'</select></label>'+
+   '<div class="facts"><button class="cta" type="submit">'+F.go+' '+ext+'</button><a class="cta ghost" href="'+A2M.base+a2mLang()+'/my-trade-assistant" target="_blank" rel="noopener">'+E.ab+' '+ext+'</a></div>'+
+   '<p class="note">'+F.note+'</p>'+
+  '</form></div></section>';
+}
+function a2mGo(form){
+ var hs = form.hs.value, to = form.to.value, url;
+ if(hs === "*"){
+  var q = (form.q.value||"").trim();
+  if(!q){ form.q.focus(); return; }
+  var digits = q.replace(/[\s.]/g,"");
+  url = /^\d{4,10}$/.test(digits)
+   ? A2M.base+a2mLang()+"/results?product="+digits+"&origin=TJ&destination="+to
+   : A2M.base+a2mLang()+"/search?product="+encodeURIComponent(q)+"&origin=TJ&destination="+to;
+ } else url = A2M.base+a2mLang()+"/results?product="+hs+"&origin=TJ&destination="+to;
+ window.open(url, "_blank", "noopener");
+}
+
+/* dried-fruit exporters from Sughd, with the source for every claim */
+function exportersSection(E){
+ var O = E.co;
+ var card = function(x){
+  var meta = O.city[x.city] + (x.y ? ' · '+O.since+' '+x.y : '');
+  var badges = (x.cert ? '<span class="badge gold">'+x.cert+' · '+x.cy+'</span>' : '') + (x.fair ? '<span class="badge">'+O.fair+'</span>' : '');
+  var rows = '<div class="kv2"><span>'+O.pr+'</span><b>'+x.pr.map(function(p){ return O.prn[p]; }).join(", ")+'</b></div>'+
+   (x.mk ? '<div class="kv2"><span>'+O.mk+'</span><b>'+x.mk.map(function(m){ return O.mkn[m]; }).join(", ")+'</b></div>' : '')+
+   (x.cap ? '<div class="kv2"><span>'+O.cap+'</span><b>'+x.cap.replace(">","> ").replace("≤","≤ ")+' '+O.t_y+'</b></div>' : '');
+  return '<article class="exco rv"><div class="badges">'+badges+'</div><h3>'+x.n+(x.f ? ' <small>'+x.f+'</small>' : '')+'</h3>'+(x.alias ? '<p class="alias">'+x.alias+'</p>' : '')+'<p class="meta">'+meta+'</p>'+rows+'<div class="srcs">'+refs(x.src)+'</div></article>';
+ };
+ return '<section class="sec tint"><div class="wrap"><div class="head split"><div><div class="kicker">'+O.k+'</div><h2 class="h2 rv">'+O.t+'</h2></div><p class="lead rv">'+O.l+'</p></div>'+
+  '<div class="excos">'+EXPORTERS.map(card).join("")+'</div>'+
+  '<div class="exfoot rv"><p class="note">'+O.note+'</p><p style="display:flex;gap:12px;flex-wrap:wrap"><a class="cta" href="#service" data-go="service" data-form="partner">'+O.b1+arrow+'</a><a class="cta ghost" href="#service" data-go="service" data-form="exporter">'+O.b2+'</a></p></div>'+
+ '</div></section>';
 }
 
 function pageEvents(){
@@ -321,6 +367,11 @@ function wire(root){
   });
  });
  $$("#ftabs button", root).forEach(function(b){ b.addEventListener("click", function(){ selectForm(b.getAttribute("data-f")); }); });
+ $$("#a2m", root).forEach(function(f){
+  var own = $(".own", f);
+  f.hs.addEventListener("change", function(){ own.hidden = f.hs.value !== "*"; if(!own.hidden) f.q.focus(); });
+  f.addEventListener("submit", function(e){ e.preventDefault(); a2mGo(f); });
+ });
  $$("form.f", root).forEach(function(f){
   f.addEventListener("submit", function(e){ e.preventDefault(); var bad = $$("[required]", f).filter(function(i){ return !i.value.trim(); })[0]; if(bad){ bad.focus(); return; } $(".ok", f).classList.add("on"); f.reset(); });
  });

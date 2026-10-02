@@ -501,6 +501,43 @@ body{font-size:16px;line-height:1.68}
 @media (max-width:620px){.chapter.c2 h2{font-size:clamp(2rem,9vw,2.8rem)}.chapter h1,.chapter.c3 h2{font-size:clamp(2.4rem,11vw,3.3rem)}.phead h1{font-size:clamp(2.6rem,12vw,3.6rem)}}
 .fig .v{font-weight:500}
 
+/* hero: only the progress line remains */
+.hero-meter{justify-content:center}.hero-meter .track{max-width:220px}
+/* if the phone refuses to autoplay (data saver, low power), the poster still moves */
+.loop-still .loopv{animation:kb 18s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.06) translate3d(0,0,0)}to{transform:scale(1.16) translate3d(-2%,-3%,0)}}
+@media (prefers-reduced-motion:reduce){.loop-still .loopv{animation:none}}
+
+/* Access2Markets finder */
+.finder{display:grid;gap:16px;background:var(--surface);border:1px solid var(--line);padding:clamp(22px,3vw,34px);align-self:start}
+.finder label{display:grid;gap:7px}
+.finder label>span{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+.finder select,.finder input{width:100%;height:48px;padding:0 14px;border:1px solid var(--line);background:var(--ground);color:var(--ink);font:inherit;font-size:1rem;border-radius:0;-webkit-appearance:none;appearance:none}
+.finder select{background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 20px) 21px,calc(100% - 15px) 21px;background-size:5px 5px;background-repeat:no-repeat;padding-right:38px}
+.finder select:focus,.finder input:focus{outline:2px solid var(--gold);outline-offset:1px}
+.finder .facts{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.finder .note{margin:0;font-size:.82rem}
+@media (max-width:620px){.finder .facts .cta{width:100%;justify-content:center}}
+
+/* exporters */
+.excos{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.exco{background:var(--ground);padding:26px 26px 22px;display:flex;flex-direction:column;gap:10px}
+.exco h3{font-size:1.75rem;font-weight:600;line-height:1.05}
+.exco h3 small{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--ink-faint);font-weight:400;vertical-align:middle}
+.exco .alias{margin:-4px 0 0;font-size:.85rem;color:var(--ink-soft);font-style:italic}
+.exco .meta{margin:0;font-size:.86rem;color:var(--ink-faint)}
+.exco .badges{display:flex;gap:6px;flex-wrap:wrap;min-height:24px}
+.badge{display:inline-flex;align-items:center;height:24px;padding:0 9px;font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;border:1px solid var(--line);color:var(--ink-soft)}
+.badge.gold{border-color:color-mix(in srgb,var(--gold) 55%,transparent);color:var(--gold)}
+.kv2{display:grid;grid-template-columns:108px 1fr;gap:10px;font-size:.9rem;padding-top:8px;border-top:1px solid var(--line)}
+.kv2 span{color:var(--ink-faint);font-size:.8rem}.kv2 b{font-weight:500}
+.exco .srcs{margin-top:auto;padding-top:6px}
+.exfoot{margin-top:28px;display:grid;gap:16px}
+.exfoot .note{margin:0;max-width:72ch}
+.phead .pic{overflow:hidden}
+.split2>*{min-width:0}.finder,.finder label,.finder select{min-width:0;max-width:100%}
+@media (max-width:620px){.brand span{letter-spacing:.07em;font-size:.56rem}}
+
 </style>
 </head>
 <body>
@@ -536,7 +573,7 @@ body{font-size:16px;line-height:1.68}
   <div class="chapter c1" id="c1"></div>
   <div class="chapter c2" id="c2"></div>
   <div class="chapter c3" id="c3"></div>
-  <div class="hero-meter"><span id="meterLbl"></span><span class="track"><i></i></span><span>Pamir</span></div>
+  <div class="hero-meter"><span class="track"><i></i></span></div>
  </div>
 </section>
 
@@ -636,7 +673,11 @@ var SRC = [
  {t:"ITB Berlin", u:"https://www.itb.com"},
  {t:"Anuga — Köln", u:"https://www.anuga.de"},
  {t:"Generalzolldirektion — EORI-Nummer", u:"https://www.zoll.de/DE/Fachthemen/Zoelle/EORI-Nummer/eori-nummer_node.html"},
- {t:"UNESCO World Heritage Centre — Tajikistan", u:"https://whc.unesco.org/en/statesparties/tj"}
+ {t:"UNESCO World Heritage Centre — Tajikistan", u:"https://whc.unesco.org/en/statesparties/tj"},
+ {t:"Asia-Plus — Three dried fruit producers from Isfara receive FSSC 22000 certificates, 18.09.2026", u:"https://asiaplus.news/en/2026/09/18/three-dried-fruit-producers-from-isfara-received-fssc-22000-certificates/"},
+ {t:"Asia-Plus — Tajik dried fruit producers achieve key international certification, 31.10.2025", u:"https://asiaplus.news/en/2025/10/31/tajik-dried-fruit-producers-achieve-key-international-certification-boosting-export-potential/"},
+ {t:"FreshPlaza — Tajikistan’s dried fruit processors pitch for new buyers at Food Ingredients Europe 2025", u:"https://www.freshplaza.com/europe/article/9791442/tajikistan-s-dried-fruit-processors-pitch-for-new-buyers-at-food-ingredients-europe-2025/"},
+ {t:"European Commission — Access2Markets: My Trade Assistant", u:"https://trade.ec.europa.eu/access-to-markets/en/my-trade-assistant"}
 ];
 function sref(n){ return '<a class="src" href="#quellen" data-src="'+n+'" title="'+(SRC[n]?SRC[n].t.replace(/"/g,"&quot;"):"")+'">['+n+']</a>'; }
 
@@ -669,6 +710,27 @@ var NEWS = [
 var REP = {li:"https://www.linkedin.com/in/masrur-kurbonalizoda-034483270",
  n:{de:"Masrur Kurbonalizoda", en:"Masrur Kurbonalizoda", ru:"Масрур Курбонализода", tj:"Масрур Қурбонализода"},
  ini:{de:"MK", en:"MK", ru:"МК", tj:"МК"}};
+
+/* Access2Markets lookup: the result opens on the EU portal with Tajikistan as origin */
+var A2M = {
+ base:"https://trade.ec.europa.eu/access-to-markets/",
+ eu:["DE","AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE"],
+ /* HS codes of goods Tajikistan exports or could export to the EU */
+ hs:["081310","080620","081320","080232","080212","040900","071320","121190","520100","760110","261710","811010"]
+};
+
+/* Dried-fruit exporters from Sughd, only as reported by the cited sources (src).
+   Vodii Mevaho is Tajik for "Valley of Fruits" — the same company that appeared at FiE 2025 as Dolina Fruktov (Russian name). */
+var EXPORTERS = [
+ {n:"Isfara Food", f:"LLC", city:"isfara", y:2010, pr:["apricot","apple","pear","compote"], mk:["RU","KZ","EU"], cert:"FSSC 22000", cy:2026, src:[32]},
+ {n:"Oro Isfara", f:"LLC", city:"isfara", cap:">2000", pr:["fruit","nuts"], mk:["CIS","EU"], cert:"FSSC 22000", cy:2026, src:[32]},
+ {n:"Vodii Mevaho", f:"LLC", alias:"Fruits Valley · Dolina Fruktov", city:"isfara", y:2017, cap:"≤1500", pr:["fruit","nuts","rosehip","kernels"], mk:["DE","PL","TR","US","CIS"], cert:"FSSC 22000", cy:2026, fair:true, src:[32,34]},
+ {n:"Barakat Isfara", city:"isfara", pr:["apricot","raisins","prunes"], fair:true, src:[34]},
+ {n:"Ali Apricot", city:"isfara", pr:["apricot","raisins","prunes"], fair:true, src:[34]},
+ {n:"Zardolui Isfara", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]},
+ {n:"Mevai Kand", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]},
+ {n:"Kand K", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]}
+];
 
 var C = {};
 C.de = {
@@ -824,7 +886,7 @@ C.de = {
   ],
   ak:"Werkzeug", at:"Zollsatz für Ihr Produkt nachschlagen",
   ap:"Access2Markets ist das offizielle Portal der Europäischen Kommission. Es zeigt für jede Warennummer den Regelzoll, die Präferenz für Tadschikistan und die Einfuhranforderungen.",
-  ab:"Access2Markets öffnen", mk:"Messen", mt:"Wo Sie deutsche Abnehmer treffen"
+  ab:"Access2Markets öffnen", mk:"Messen", mt:"Wo Sie deutsche Abnehmer treffen", fx:{"p": "Produkt", "other": "Anderes Produkt oder Zolltarifnummer…", "code": "Zolltarifnummer oder Produkt, z. B. 0813 oder Aprikosen", "d": "Zielmarkt in der EU", "go": "Zoll und Anforderungen anzeigen", "note": "Öffnet das amtliche Ergebnis in Access2Markets (Europäische Kommission) mit Tadschikistan als Ursprungsland. Zölle und Regeln ändern sich; maßgeblich ist das EU-Portal.", "mta": "My Trade Assistant"}, hs:{"081310": "Aprikosen, getrocknet", "080620": "Rosinen", "081320": "Pflaumen, getrocknet", "080232": "Walnüsse, ohne Schale", "080212": "Mandeln, ohne Schale", "040900": "Natürlicher Honig", "071320": "Kichererbsen, getrocknet", "121190": "Arzneipflanzen", "520100": "Baumwolle, weder gekrempelt noch gekämmt", "760110": "Rohaluminium, nicht legiert", "261710": "Antimonerze und ihre Konzentrate", "811010": "Antimon in Rohform; Pulver"}, co:{"k": "Exporteure", "t": "Trockenfrucht-Hersteller aus Isfara und Sughd", "l": "Unternehmen aus dem Gebiet Sughd mit internationaler Lebensmittelsicherheits-Zertifizierung oder Auftritt auf europäischen Fachmessen — nach den Quellen, die auf jeder Karte genannt sind.", "city": {"isfara": "Isfara, Gebiet Sughd", "sughd": "Gebiet Sughd (Isfara / Konibodom)"}, "since": "seit", "cap": "Kapazität", "t_y": "t pro Jahr", "mk": "Exportiert nach", "fair": "Food Ingredients Europe 2025, Paris", "pr": "Produkte", "prn": {"apricot": "getrocknete Aprikosen", "apple": "getrocknete Äpfel", "pear": "Birnen", "compote": "Kompottmischungen", "fruit": "Trockenfrüchte", "nuts": "Nüsse", "rosehip": "Hagebutten", "kernels": "Aprikosenkerne", "raisins": "Rosinen", "prunes": "Trockenpflaumen"}, "mkn": {"RU": "Russland", "KZ": "Kasachstan", "EU": "EU-Länder", "CIS": "GUS", "TR": "Türkei", "DE": "Deutschland", "PL": "Polen", "US": "USA"}, "note": "Zusammengestellt aus öffentlichen Quellen. Die Aufnahme ist keine Empfehlung. Vor dem Start werden die Unternehmen kontaktiert und bestätigen ihren Eintrag.", "b1": "Kontakt anfragen", "b2": "Unternehmen eintragen lassen"}
  },
  events:{
   h1:"Termine",
@@ -1041,7 +1103,7 @@ C.ru = {
   ],
   ak:"Инструмент", at:"Узнать пошлину на ваш товар",
   ap:"Access2Markets — официальный портал Европейской комиссии. Для каждого кода товара он показывает обычную пошлину, преференцию для Таджикистана и требования к ввозу.",
-  ab:"Открыть Access2Markets", mk:"Выставки", mt:"Где встретить немецких покупателей"
+  ab:"Открыть Access2Markets", mk:"Выставки", mt:"Где встретить немецких покупателей", fx:{"p": "Товар", "other": "Другой товар или код ТН ВЭД…", "code": "Код ТН ВЭД или название товара, напр. 0813 или apricots", "d": "Рынок в ЕС", "go": "Показать пошлину и требования", "note": "Открывает официальный результат в Access2Markets (Европейская комиссия) с Таджикистаном как страной происхождения. Пошлины и правила меняются; решающим является портал ЕС.", "mta": "My Trade Assistant"}, hs:{"081310": "Курага (абрикосы сушёные)", "080620": "Изюм", "081320": "Чернослив", "080232": "Грецкий орех очищенный", "080212": "Миндаль очищенный", "040900": "Натуральный мёд", "071320": "Нут сушёный", "121190": "Лекарственные растения", "520100": "Хлопок-волокно (не кардо- и не гребнечесаное)", "760110": "Алюминий необработанный нелегированный", "261710": "Сурьмяные руды и концентраты", "811010": "Сурьма необработанная; порошки"}, co:{"k": "Экспортёры", "t": "Производители сухофруктов из Исфары и Согда", "l": "Компании Согдийской области с международной сертификацией безопасности пищевой продукции или участием в европейских отраслевых выставках — по данным источников, указанных на каждой карточке.", "city": {"isfara": "Исфара, Согдийская область", "sughd": "Согдийская область (Исфара / Канибадам)"}, "since": "с", "cap": "Мощность", "t_y": "т в год", "mk": "Экспорт в", "fair": "Food Ingredients Europe 2025, Париж", "pr": "Продукция", "prn": {"apricot": "курага", "apple": "сушёные яблоки", "pear": "груши", "compote": "компотные смеси", "fruit": "сухофрукты", "nuts": "орехи", "rosehip": "шиповник", "kernels": "абрикосовая косточка", "raisins": "изюм", "prunes": "чернослив"}, "mkn": {"RU": "Россия", "KZ": "Казахстан", "EU": "страны ЕС", "CIS": "СНГ", "TR": "Турция", "DE": "Германия", "PL": "Польша", "US": "США"}, "note": "Составлено по открытым источникам. Включение в список не является рекомендацией. Перед запуском с компаниями связываются, и они подтверждают свои данные.", "b1": "Запросить контакт", "b2": "Добавить свою компанию"}
  },
  events:{
   h1:"События",
@@ -1258,7 +1320,7 @@ C.en = {
   ],
   ak:"Tool", at:"Look up the duty for your product",
   ap:"Access2Markets is the European Commission’s official portal. For every commodity code it shows the standard duty, the preference for Tajikistan and the import requirements.",
-  ab:"Open Access2Markets", mk:"Trade fairs", mt:"Where to meet German buyers"
+  ab:"Open Access2Markets", mk:"Trade fairs", mt:"Where to meet German buyers", fx:{"p": "Product", "other": "Other product or HS code…", "code": "HS code or product name, e.g. 0813 or dried apricots", "d": "Market in the EU", "go": "Show duty and requirements", "note": "Opens the official result on Access2Markets (European Commission) with Tajikistan as country of origin. Duties and rules change; the EU portal is authoritative.", "mta": "My Trade Assistant"}, hs:{"081310": "Dried apricots", "080620": "Raisins", "081320": "Prunes", "080232": "Walnuts, shelled", "080212": "Almonds, shelled", "040900": "Natural honey", "071320": "Chickpeas, dried", "121190": "Medicinal herbs", "520100": "Raw cotton (not carded or combed)", "760110": "Aluminium, unwrought, not alloyed", "261710": "Antimony ores and concentrates", "811010": "Antimony, unwrought; powders"}, co:{"k": "Exporters", "t": "Dried-fruit producers from Isfara and Sughd", "l": "Companies from Sughd region that hold international food-safety certification or have presented at European trade fairs — as reported by the sources cited on each card.", "city": {"isfara": "Isfara, Sughd region", "sughd": "Sughd region (Isfara / Konibodom)"}, "since": "since", "cap": "Capacity", "t_y": "t per year", "mk": "Exports to", "fair": "Food Ingredients Europe 2025, Paris", "pr": "Products", "prn": {"apricot": "dried apricots", "apple": "dried apples", "pear": "pears", "compote": "compote mixes", "fruit": "dried fruits", "nuts": "nuts", "rosehip": "rosehips", "kernels": "apricot kernels", "raisins": "raisins", "prunes": "prunes"}, "mkn": {"RU": "Russia", "KZ": "Kazakhstan", "EU": "EU countries", "CIS": "CIS", "TR": "Türkiye", "DE": "Germany", "PL": "Poland", "US": "USA"}, "note": "Compiled from public sources. Inclusion is not an endorsement. Companies are contacted before launch to confirm their entry.", "b1": "Request a contact", "b2": "Get your company listed"}
  },
  events:{
   h1:"Events",
@@ -1475,7 +1537,7 @@ C.tj = {
   ],
   ak:"Абзор", at:"Боҷи моли худро муайян кунед",
   ap:"Access2Markets портали расмии Комиссияи Аврупо мебошад. Барои ҳар рамзи мол он боҷи муқаррарӣ, имтиёз барои Тоҷикистон ва талаботи воридотро нишон медиҳад.",
-  ab:"Кушодани Access2Markets", mk:"Намоишгоҳҳо", mt:"Харидорони олмониро дар куҷо дидан мумкин аст"
+  ab:"Кушодани Access2Markets", mk:"Намоишгоҳҳо", mt:"Харидорони олмониро дар куҷо дидан мумкин аст", fx:{"p": "Мол", "other": "Моли дигар ё рамзи НМ ФИХ…", "code": "Рамзи мол ё номи он, масалан 0813 ё apricots", "d": "Бозор дар ИА", "go": "Нишон додани боҷ ва талабот", "note": "Натиҷаи расмиро дар Access2Markets (Комиссияи Аврупо) бо Тоҷикистон ҳамчун кишвари пайдоиш мекушояд. Боҷҳо ва қоидаҳо тағйир меёбанд; портали ИА асосӣ мебошад.", "mta": "My Trade Assistant"}, hs:{"081310": "Қоқи зардолу", "080620": "Мавиз", "081320": "Олуи хушк", "080232": "Чормағзи пӯсткандашуда", "080212": "Бодоми пӯсткандашуда", "040900": "Асали табиӣ", "071320": "Нахӯди хушк", "121190": "Гиёҳҳои шифобахш", "520100": "Нахи пахта (шона накарда)", "760110": "Алюминийи коркарднашуда, бехӯла", "261710": "Маъдан ва консентрати сурма", "811010": "Сурмаи коркарднашуда; хока"}, co:{"k": "Содиркунандагон", "t": "Истеҳсолкунандагони меваи хушк аз Исфара ва Суғд", "l": "Ширкатҳои вилояти Суғд, ки сертификати байналмилалии бехатарии озуқаворӣ доранд ё дар намоишгоҳҳои соҳавии Аврупо иштирок кардаанд — тибқи манбаъҳое, ки дар ҳар корт зикр шудаанд.", "city": {"isfara": "Исфара, вилояти Суғд", "sughd": "Вилояти Суғд (Исфара / Конибодом)"}, "since": "аз соли", "cap": "Иқтидор", "t_y": "т дар як сол", "mk": "Содирот ба", "fair": "Food Ingredients Europe 2025, Париж", "pr": "Маҳсулот", "prn": {"apricot": "қоқи зардолу", "apple": "себи хушк", "pear": "нок", "compote": "омехтаи компот", "fruit": "меваи хушк", "nuts": "чормағз ва дигар меваҳои донадор", "rosehip": "настаранпушт", "kernels": "мағзи данакҳои зардолу", "raisins": "мавиз", "prunes": "олуи хушк"}, "mkn": {"RU": "Русия", "KZ": "Қазоқистон", "EU": "кишварҳои ИА", "CIS": "ИДМ", "TR": "Туркия", "DE": "Олмон", "PL": "Лаҳистон", "US": "ИМА"}, "note": "Аз манбаъҳои кушод тартиб дода шудааст. Ворид шудан ба рӯйхат тавсия нест. Пеш аз оғоз бо ширкатҳо тамос гирифта мешавад ва онҳо маълумоти худро тасдиқ мекунанд.", "b1": "Дархости тамос", "b2": "Илова кардани ширкати худ"}
  },
  events:{
   h1:"Чорабиниҳо",
@@ -1614,7 +1676,11 @@ var LEGAL = {
     vid.preload = "auto"; vid.poster = V.poster;
     vid.innerHTML = '<source src="'+V.webm+'" type="video/webm"><source src="'+V.mp4+'" type="video/mp4">';
     stage.insertBefore(vid, stage.querySelector(".hero-grain"));
-    if(!reduce){ vid.autoplay = true; var pp = vid.play(); if(pp && pp.catch) pp.catch(function(){}); }
+    var still = function(){ if(vid.paused) document.documentElement.classList.add("loop-still"); };
+    var kick = function(){ if(reduce) return; var pp = vid.play(); if(pp && pp.then) pp.then(function(){ document.documentElement.classList.remove("loop-still"); }).catch(still); };
+    if(!reduce){ vid.autoplay = true; kick(); setTimeout(still, 2500);
+      ["touchstart","pointerdown","scroll","keydown"].forEach(function(ev){ window.addEventListener(ev, function once(){ window.removeEventListener(ev, once); if(vid.paused) kick(); }, {passive:true}); });
+      vid.addEventListener("playing", function(){ document.documentElement.classList.remove("loop-still"); }); }
     document.addEventListener("visibilitychange", function(){ if(!document.hidden && !reduce) vid.play().catch(function(){}); });
     film = function(p){
       vid.style.transform = "translate3d(0," + (-p*4).toFixed(2) + "%,0) scale(" + (1.06 + p*0.04).toFixed(4) + ")";
@@ -1791,7 +1857,6 @@ function renderHero(){
  $("#c2").innerHTML = '<div class="in"><div class="kick">'+H.k2+'</div><h2>'+H.t2+sref(13)+'</h2><div class="figs-strip">'+H.fv.map(function(v,i){ return '<div><b>'+v+'</b><span>'+H.f[i]+' '+sref(srcs[i])+'</span></div>'; }).join("")+'</div></div>';
  $("#c3").innerHTML = '<div class="in"><div class="box"><div class="kick">'+H.k3+'</div><h2>'+H.t3+'</h2><p class="sub">'+H.s3+'</p><div class="acts"><a class="cta" href="#service" data-go="service">'+H.b3+arrow+'</a><a class="cta ghost" href="#kontakt" data-go="kontakt">'+H.b4+'</a></div></div></div>';
  $$(".chapter h1, .chapter h2").forEach(splitWords);
- $("#meterLbl").textContent = L.ui.scroll;
  $("#altLbl").textContent = L.ui.alt;
 }
 
@@ -1923,9 +1988,56 @@ function pageExport(){
  '<section class="sec tint"><div class="wrap"><div class="head"><div class="kicker">'+E.rk+'</div><h2 class="h2 rv">'+E.rt+'</h2></div><div class="regs">'+
    E.regs.map(function(r){ return '<div class="reg rv"><div class="code">'+r.c+'</div><h3>'+r.t+'</h3><p>'+r.p+'</p><a href="'+SRC[r.s].u+'" target="_blank" rel="noopener">'+SRC[r.s].t.split(" — ")[0]+' ↗</a></div>'; }).join("")+
  '</div></div></section>'+
- '<section class="sec"><div class="wrap split2"><div><div class="kicker">'+E.ak+'</div><h2 class="h2 rv">'+E.at+'</h2></div><div><p class="lead rv" style="margin-top:0">'+E.ap+' '+sref(15)+'</p><p style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap"><a class="cta" href="'+SRC[15].u+'" target="_blank" rel="noopener">'+E.ab+' '+ext+'</a><a class="cta ghost" href="#service" data-go="service" data-form="exporter">'+L.service.forms.exporter.t+'</a></p></div></div></section>'+
+ a2mFinder(E)+
+ exportersSection(E)+
  '<section class="sec tint"><div class="wrap"><div class="head"><div class="kicker">'+E.mk+'</div><h2 class="h2 rv">'+E.mt+'</h2></div><div class="evts">'+eventRows()+'</div></div></section>'+
  band();
+}
+
+/* Access2Markets lookup in our own design: the official result opens on the EU portal */
+function a2mLang(){ return lang==="de" ? "de" : "en"; }
+function a2mFinder(E){
+ var F = E.fx, names;
+ try{ names = new Intl.DisplayNames([{tj:"tg",de:"de",ru:"ru",en:"en"}[lang],"en"], {type:"region"}); }catch(e){ names = null; }
+ var cname = function(c){ try{ return names ? names.of(c) : c; }catch(e){ return c; } };
+ var eu = A2M.eu.slice(1).sort(function(a,b){ return cname(a).localeCompare(cname(b)); });
+ return '<section class="sec"><div class="wrap split2"><div><div class="kicker">'+E.ak+'</div><h2 class="h2 rv">'+E.at+'</h2><p class="lead rv">'+E.ap+' '+sref(15)+'</p></div>'+
+  '<form class="finder rv" id="a2m" novalidate>'+
+   '<label><span>'+F.p+'</span><select name="hs">'+A2M.hs.map(function(h){ return '<option value="'+h+'">'+E.hs[h]+' · '+h.slice(0,4)+' '+h.slice(4)+'</option>'; }).join("")+'<option value="*">'+F.other+'</option></select></label>'+
+   '<label class="own" hidden><span>'+F.code+'</span><input name="q" autocomplete="off" inputmode="text" maxlength="60"></label>'+
+   '<label><span>'+F.d+'</span><select name="to"><option value="DE">'+cname("DE")+'</option>'+eu.map(function(c){ return '<option value="'+c+'">'+cname(c)+'</option>'; }).join("")+'</select></label>'+
+   '<div class="facts"><button class="cta" type="submit">'+F.go+' '+ext+'</button><a class="cta ghost" href="'+A2M.base+a2mLang()+'/my-trade-assistant" target="_blank" rel="noopener">'+E.ab+' '+ext+'</a></div>'+
+   '<p class="note">'+F.note+'</p>'+
+  '</form></div></section>';
+}
+function a2mGo(form){
+ var hs = form.hs.value, to = form.to.value, url;
+ if(hs === "*"){
+  var q = (form.q.value||"").trim();
+  if(!q){ form.q.focus(); return; }
+  var digits = q.replace(/[\s.]/g,"");
+  url = /^\d{4,10}$/.test(digits)
+   ? A2M.base+a2mLang()+"/results?product="+digits+"&origin=TJ&destination="+to
+   : A2M.base+a2mLang()+"/search?product="+encodeURIComponent(q)+"&origin=TJ&destination="+to;
+ } else url = A2M.base+a2mLang()+"/results?product="+hs+"&origin=TJ&destination="+to;
+ window.open(url, "_blank", "noopener");
+}
+
+/* dried-fruit exporters from Sughd, with the source for every claim */
+function exportersSection(E){
+ var O = E.co;
+ var card = function(x){
+  var meta = O.city[x.city] + (x.y ? ' · '+O.since+' '+x.y : '');
+  var badges = (x.cert ? '<span class="badge gold">'+x.cert+' · '+x.cy+'</span>' : '') + (x.fair ? '<span class="badge">'+O.fair+'</span>' : '');
+  var rows = '<div class="kv2"><span>'+O.pr+'</span><b>'+x.pr.map(function(p){ return O.prn[p]; }).join(", ")+'</b></div>'+
+   (x.mk ? '<div class="kv2"><span>'+O.mk+'</span><b>'+x.mk.map(function(m){ return O.mkn[m]; }).join(", ")+'</b></div>' : '')+
+   (x.cap ? '<div class="kv2"><span>'+O.cap+'</span><b>'+x.cap.replace(">","> ").replace("≤","≤ ")+' '+O.t_y+'</b></div>' : '');
+  return '<article class="exco rv"><div class="badges">'+badges+'</div><h3>'+x.n+(x.f ? ' <small>'+x.f+'</small>' : '')+'</h3>'+(x.alias ? '<p class="alias">'+x.alias+'</p>' : '')+'<p class="meta">'+meta+'</p>'+rows+'<div class="srcs">'+refs(x.src)+'</div></article>';
+ };
+ return '<section class="sec tint"><div class="wrap"><div class="head split"><div><div class="kicker">'+O.k+'</div><h2 class="h2 rv">'+O.t+'</h2></div><p class="lead rv">'+O.l+'</p></div>'+
+  '<div class="excos">'+EXPORTERS.map(card).join("")+'</div>'+
+  '<div class="exfoot rv"><p class="note">'+O.note+'</p><p style="display:flex;gap:12px;flex-wrap:wrap"><a class="cta" href="#service" data-go="service" data-form="partner">'+O.b1+arrow+'</a><a class="cta ghost" href="#service" data-go="service" data-form="exporter">'+O.b2+'</a></p></div>'+
+ '</div></section>';
 }
 
 function pageEvents(){
@@ -2034,6 +2146,11 @@ function wire(root){
   });
  });
  $$("#ftabs button", root).forEach(function(b){ b.addEventListener("click", function(){ selectForm(b.getAttribute("data-f")); }); });
+ $$("#a2m", root).forEach(function(f){
+  var own = $(".own", f);
+  f.hs.addEventListener("change", function(){ own.hidden = f.hs.value !== "*"; if(!own.hidden) f.q.focus(); });
+  f.addEventListener("submit", function(e){ e.preventDefault(); a2mGo(f); });
+ });
  $$("form.f", root).forEach(function(f){
   f.addEventListener("submit", function(e){ e.preventDefault(); var bad = $$("[required]", f).filter(function(i){ return !i.value.trim(); })[0]; if(bad){ bad.focus(); return; } $(".ok", f).classList.add("on"); f.reset(); });
  });

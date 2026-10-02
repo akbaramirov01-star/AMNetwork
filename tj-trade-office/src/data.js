@@ -31,7 +31,11 @@ var SRC = [
  {t:"ITB Berlin", u:"https://www.itb.com"},
  {t:"Anuga — Köln", u:"https://www.anuga.de"},
  {t:"Generalzolldirektion — EORI-Nummer", u:"https://www.zoll.de/DE/Fachthemen/Zoelle/EORI-Nummer/eori-nummer_node.html"},
- {t:"UNESCO World Heritage Centre — Tajikistan", u:"https://whc.unesco.org/en/statesparties/tj"}
+ {t:"UNESCO World Heritage Centre — Tajikistan", u:"https://whc.unesco.org/en/statesparties/tj"},
+ {t:"Asia-Plus — Three dried fruit producers from Isfara receive FSSC 22000 certificates, 18.09.2026", u:"https://asiaplus.news/en/2026/09/18/three-dried-fruit-producers-from-isfara-received-fssc-22000-certificates/"},
+ {t:"Asia-Plus — Tajik dried fruit producers achieve key international certification, 31.10.2025", u:"https://asiaplus.news/en/2025/10/31/tajik-dried-fruit-producers-achieve-key-international-certification-boosting-export-potential/"},
+ {t:"FreshPlaza — Tajikistan’s dried fruit processors pitch for new buyers at Food Ingredients Europe 2025", u:"https://www.freshplaza.com/europe/article/9791442/tajikistan-s-dried-fruit-processors-pitch-for-new-buyers-at-food-ingredients-europe-2025/"},
+ {t:"European Commission — Access2Markets: My Trade Assistant", u:"https://trade.ec.europa.eu/access-to-markets/en/my-trade-assistant"}
 ];
 function sref(n){ return '<a class="src" href="#quellen" data-src="'+n+'" title="'+(SRC[n]?SRC[n].t.replace(/"/g,"&quot;"):"")+'">['+n+']</a>'; }
 
@@ -64,3 +68,24 @@ var NEWS = [
 var REP = {li:"https://www.linkedin.com/in/masrur-kurbonalizoda-034483270",
  n:{de:"Masrur Kurbonalizoda", en:"Masrur Kurbonalizoda", ru:"Масрур Курбонализода", tj:"Масрур Қурбонализода"},
  ini:{de:"MK", en:"MK", ru:"МК", tj:"МК"}};
+
+/* Access2Markets lookup: the result opens on the EU portal with Tajikistan as origin */
+var A2M = {
+ base:"https://trade.ec.europa.eu/access-to-markets/",
+ eu:["DE","AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE"],
+ /* HS codes of goods Tajikistan exports or could export to the EU */
+ hs:["081310","080620","081320","080232","080212","040900","071320","121190","520100","760110","261710","811010"]
+};
+
+/* Dried-fruit exporters from Sughd, only as reported by the cited sources (src).
+   Vodii Mevaho is Tajik for "Valley of Fruits" — the same company that appeared at FiE 2025 as Dolina Fruktov (Russian name). */
+var EXPORTERS = [
+ {n:"Isfara Food", f:"LLC", city:"isfara", y:2010, pr:["apricot","apple","pear","compote"], mk:["RU","KZ","EU"], cert:"FSSC 22000", cy:2026, src:[32]},
+ {n:"Oro Isfara", f:"LLC", city:"isfara", cap:">2000", pr:["fruit","nuts"], mk:["CIS","EU"], cert:"FSSC 22000", cy:2026, src:[32]},
+ {n:"Vodii Mevaho", f:"LLC", alias:"Fruits Valley · Dolina Fruktov", city:"isfara", y:2017, cap:"≤1500", pr:["fruit","nuts","rosehip","kernels"], mk:["DE","PL","TR","US","CIS"], cert:"FSSC 22000", cy:2026, fair:true, src:[32,34]},
+ {n:"Barakat Isfara", city:"isfara", pr:["apricot","raisins","prunes"], fair:true, src:[34]},
+ {n:"Ali Apricot", city:"isfara", pr:["apricot","raisins","prunes"], fair:true, src:[34]},
+ {n:"Zardolui Isfara", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]},
+ {n:"Mevai Kand", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]},
+ {n:"Kand K", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]}
+];

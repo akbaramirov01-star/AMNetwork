@@ -45,7 +45,11 @@
     vid.preload = "auto"; vid.poster = V.poster;
     vid.innerHTML = '<source src="'+V.webm+'" type="video/webm"><source src="'+V.mp4+'" type="video/mp4">';
     stage.insertBefore(vid, stage.querySelector(".hero-grain"));
-    if(!reduce){ vid.autoplay = true; var pp = vid.play(); if(pp && pp.catch) pp.catch(function(){}); }
+    var still = function(){ if(vid.paused) document.documentElement.classList.add("loop-still"); };
+    var kick = function(){ if(reduce) return; var pp = vid.play(); if(pp && pp.then) pp.then(function(){ document.documentElement.classList.remove("loop-still"); }).catch(still); };
+    if(!reduce){ vid.autoplay = true; kick(); setTimeout(still, 2500);
+      ["touchstart","pointerdown","scroll","keydown"].forEach(function(ev){ window.addEventListener(ev, function once(){ window.removeEventListener(ev, once); if(vid.paused) kick(); }, {passive:true}); });
+      vid.addEventListener("playing", function(){ document.documentElement.classList.remove("loop-still"); }); }
     document.addEventListener("visibilitychange", function(){ if(!document.hidden && !reduce) vid.play().catch(function(){}); });
     film = function(p){
       vid.style.transform = "translate3d(0," + (-p*4).toFixed(2) + "%,0) scale(" + (1.06 + p*0.04).toFixed(4) + ")";
