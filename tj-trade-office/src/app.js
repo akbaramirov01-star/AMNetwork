@@ -227,7 +227,8 @@ function a2mFinder(E){
    '<label><span>'+F.p+'</span><select name="hs">'+A2M.hs.map(function(h){ return '<option value="'+h+'">'+E.hs[h]+' · '+h.slice(0,4)+' '+h.slice(4)+'</option>'; }).join("")+'<option value="*">'+F.other+'</option></select></label>'+
    '<label class="own" hidden><span>'+F.code+'</span><input name="q" autocomplete="off" inputmode="text" maxlength="60"></label>'+
    '<label><span>'+F.d+'</span><select name="to"><option value="DE">'+cname("DE")+'</option>'+eu.map(function(c){ return '<option value="'+c+'">'+cname(c)+'</option>'; }).join("")+'</select></label>'+
-   '<div class="facts"><button class="cta" type="submit">'+F.go+' '+ext+'</button><a class="cta ghost" href="'+A2M.base+a2mLang()+'/my-trade-assistant" target="_blank" rel="noopener">'+E.ab+' '+ext+'</a></div>'+
+   '<div class="route" aria-live="polite">'+langFlag("tj")+'<b>'+cname("TJ")+'</b><span aria-hidden="true">→</span><b class="dest">'+cname("DE")+'</b></div>'+
+   '<div class="facts"><button class="cta" type="submit">'+E.ab+' '+ext+'</button></div>'+
    '<p class="note">'+F.note+'</p>'+
   '</form></div></section>';
 }
@@ -374,6 +375,7 @@ function wire(root){
  $$("#a2m", root).forEach(function(f){
   var own = $(".own", f);
   f.hs.addEventListener("change", function(){ own.hidden = f.hs.value !== "*"; if(!own.hidden) f.q.focus(); });
+  f.to.addEventListener("change", function(){ $(".route .dest", f).textContent = f.to.selectedOptions[0].text; });
   f.addEventListener("submit", function(e){ e.preventDefault(); a2mGo(f); });
  });
  $$("form.f", root).forEach(function(f){

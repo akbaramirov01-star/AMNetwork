@@ -536,3 +536,6 @@ body{font-size:16px;line-height:1.68}
 .excontact a svg{width:13px;height:13px;flex-shrink:0}
 .kv2 b small{font-weight:400;color:var(--ink-faint);font-size:.78rem}
 @media (max-width:760px){.excols{grid-template-columns:1fr;gap:16px}.exco.feat h3{font-size:1.9rem}}
+
+.finder .route{display:flex;align-items:center;gap:10px;font-size:.95rem;padding:12px 14px;background:var(--ground);border:1px dashed color-mix(in srgb,var(--gold) 45%,transparent)}
+.finder .route b{font-weight:600}.finder .route span{color:var(--gold)}
