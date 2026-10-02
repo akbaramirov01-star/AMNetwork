@@ -120,7 +120,9 @@ All of the above (`/quran/`, `/hadith/`, `/dua/`, `/tasbeeh/`, `/qibla/`, `/pray
 
 ⚠️ The notification text deliberately does NOT claim a particular minute is the hour in which du'a is answered — two scholarly opinions exist, and it is not ours to settle in a push. Keep it that way.
 
-**AI assistant placement:** homepage, Academy, `/apply/` and `/zakat/` only. It was removed from the nine utility pages in September 2026 — it cost a `/health` ping per page load and shared the tight AI budget, for pages where nobody asks it anything. Don't re-add it site-wide.
+**Assistant is now FREE and offline (October 2026).** The paid Claude chat widget was replaced by `faq-assistant.js`: pre-written answers in a keyword-matched knowledge base, tappable question chips, an honest fallback, no backend call at all. en/ru/tj are written; other languages fall back to English until filled in. Keep its facts in sync with this file. AM Academy likewise reads only `academy/content/` bundles (`ACADEMY_LIVE_AI = false`): a language without its own bundle shows English, and the live "my case" tutor is hidden. On the backend, `/chat` and `/academy/*` return 410 unless `LIVE_AI_ENABLED=1` (`live_ai_gate` in api.py) — no paid model call can happen on the default deployment.
+
+**Assistant placement (historical):** homepage, Academy, `/apply/` and `/zakat/` only. It was removed from the nine utility pages in September 2026 — it cost a `/health` ping per page load and shared the tight AI budget, for pages where nobody asks it anything. Don't re-add it site-wide.
 
 ### Integrations working
 - **Waitlist / Apply → Web3Forms only (checked October 2026):** both forms post to `api.web3forms.com` behind hCaptcha and arrive as emails. Nothing is written to Google Sheets anymore — the old Apps Script path was removed from the frontend. `apps_script_apply.gs` remains in the repo only as reference code. If a spreadsheet is wanted again, it needs a new deployment; never commit its `/exec` URL (it is an unauthenticated write endpoint — see docs/security-deployment.md). The old URLs leaked in git history must stay archived.

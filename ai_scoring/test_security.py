@@ -7,6 +7,9 @@ from unittest.mock import patch
 
 _temp = tempfile.TemporaryDirectory()
 os.environ['SECURITY_DB_PATH'] = os.path.join(_temp.name, 'initial.sqlite3')
+# These tests exercise the rate limiter behind the paid routes, which are
+# switched off by default in production (see live_ai_gate in api.py).
+os.environ['LIVE_AI_ENABLED'] = '1'
 import api
 import security
 

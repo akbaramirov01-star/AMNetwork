@@ -174,7 +174,22 @@ MAX_MESSAGE_LEN = 2000
 MAX_HISTORY_ITEMS = 20
 
 
+def live_ai_gate(fn):
+    """Paid model routes are off unless LIVE_AI_ENABLED=1 (October 2026).
+    The site now answers from static files: faq-assistant.js for the chat
+    widget, academy/content/ for lessons. Old cached copies of the pages may
+    still call these routes; this keeps them from spending anything."""
+    from functools import wraps
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        if os.environ.get("LIVE_AI_ENABLED", "") != "1":
+            return jsonify(error="Live AI is disabled on this deployment."), 410
+        return fn(*args, **kwargs)
+    return wrapper
+
+
 @app.route("/chat", methods=["POST"])
+@live_ai_gate
 @limited_ai
 def chat():
     payload = request.get_json(force=True, silent=True) or {}
@@ -255,6 +270,7 @@ def _read_lesson_request():
 
 
 @app.route("/academy/explain", methods=["POST"])
+@live_ai_gate
 @limited_ai
 def academy_explain_route():
     """Re-voice a fixed lesson for one reader. Facts/sources never change."""
@@ -289,6 +305,7 @@ _chrome_cache: dict[tuple, dict] = {}
 
 
 @app.route("/academy/chrome", methods=["POST"])
+@live_ai_gate
 @limited_ai
 def academy_chrome_route():
     """Translate a lesson's title and visual-card labels.
@@ -340,6 +357,7 @@ def academy_chrome_route():
 
 
 @app.route("/academy/apply", methods=["POST"])
+@live_ai_gate
 @limited_ai
 def academy_apply_route():
     """Apply a fixed lesson to the reader's own situation. Never cached."""
