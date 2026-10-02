@@ -38,6 +38,8 @@
 - Instagram: @amnet_io
 - Telegram: @amnetwork_global
 - Twitter/X: @amnet_io
+- YouTube: youtube.com/@amnetwork_io
+- TikTok: (account exists — handle not yet added to the site)
 - LinkedIn: linkedin.com/company/amnetwork-io
 
 ## Sharia Compliance
