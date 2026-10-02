@@ -1335,7 +1335,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;margin-bottom:8px;color:var(--text)" data-t="wl_form_h">Join the Waitlist</h3>
         <p style="font-size:13px;color:var(--text2);margin-bottom:24px;line-height:1.7" data-t="wl_sub">We will reach out personally before launch.</p>
 
-        <div class="wl-err-banner" id="wl-err-banner">Something went wrong. Please try again or email <a href="mailto:contact@amnetwork.io" style="color:#EF4444">contact@amnetwork.io</a></div>
+        <div class="wl-err-banner" id="wl-err-banner"><span id="wl-err-text" data-t="wl_err_generic">Something went wrong. Please try again or email</span> <a href="mailto:contact@amnetwork.io" style="color:#EF4444">contact@amnetwork.io</a></div>
 
         <form class="wl-form" id="wl-form" novalidate>
           <input type="hidden" name="access_key" value="e895783d-8868-41ba-8b9d-fa4aa6a47628">
@@ -1366,7 +1366,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
             <input type="text" id="wl-country" name="country" placeholder="Egypt, Malaysia, UK…" autocomplete="country-name" data-t-ph="wl_country_ph">
           </div>
 
-          <div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" data-theme="dark" style="margin-bottom:14px"></div>
+          <div class="h-captcha" id="wl-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" data-theme="dark" style="margin-bottom:14px"></div>
 
           <button type="submit" class="wl-btn" id="wl-btn">
             <span class="btn-text" data-t="submit">Reserve My Spot →</span>
@@ -1644,6 +1644,16 @@ function toggleTheme(){
   tb.textContent = theme==='dark' ? '🌙' : '☀️';
   tb.setAttribute('aria-label', theme==='dark' ? 'Switch to light mode' : 'Switch to dark mode');
   localStorage.setItem('amn_theme', theme);
+  // hCaptcha fixes its theme at render time — redraw it unless already solved.
+  const cap=document.getElementById('wl-captcha');
+  if(cap){
+    cap.setAttribute('data-theme', theme);
+    const solved=cap.querySelector('textarea[name="h-captcha-response"]');
+    if(window.hcaptcha && !(solved && solved.value)){
+      const fresh=cap.cloneNode(false); cap.replaceWith(fresh);
+      try{ hcaptcha.render(fresh,{sitekey:fresh.dataset.sitekey,theme:theme}); }catch(_){}
+    }
+  }
 }
 
 // ── LANGUAGE DROPDOWN ──
@@ -2045,6 +2055,7 @@ const savedTheme = localStorage.getItem('amn_theme') || 'dark';
 const savedLang  = localStorage.getItem('amn_lang')  || 'en';
 theme = savedTheme;
 document.documentElement.setAttribute('data-theme', savedTheme);
+{const c=document.getElementById('wl-captcha'); if(c) c.setAttribute('data-theme', savedTheme);}
 document.getElementById('themeBtn').textContent = savedTheme==='dark' ? '🌙' : '☀️';
 document.getElementById('themeBtn').setAttribute('aria-label', savedTheme==='dark' ? 'Switch to light mode' : 'Switch to dark mode');
 
@@ -2271,7 +2282,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if (!role) ok = false;
     const captcha = form.querySelector('textarea[name="h-captcha-response"]');
     if (!captcha || !captcha.value) {
-      document.getElementById('wl-err-banner').textContent = (T[lang]||T.en).wl_err_captcha || 'Please complete the captcha verification.';
+      document.getElementById('wl-err-text').textContent = (T[lang]||T.en).wl_err_captcha || 'Please complete the captcha verification.';
       document.getElementById('wl-err-banner').classList.add('show');
       ok = false;
     }
@@ -2310,14 +2321,10 @@ document.addEventListener('DOMContentLoaded',()=>{
         throw new Error(typeof json?.message === 'string' ? json.message : 'Submit failed');
       }
     } catch(err) {
+      // Provider messages are English-only; log them, show the visitor a localized one.
+      console.error('Waitlist submit failed:', err);
       const banner = document.getElementById('wl-err-banner');
-      const msg = (err && err.message) ? err.message : 'Unknown error';
-      banner.textContent = 'Error: ' + msg + '. Email us at ';
-      const contact = document.createElement('a');
-      contact.href = 'mailto:contact@amnetwork.io';
-      contact.textContent = 'contact@amnetwork.io';
-      contact.style.color = '#EF4444';
-      banner.appendChild(contact);
+      document.getElementById('wl-err-text').textContent = (T[lang]||T.en).wl_err_generic || 'Something went wrong. Please try again or email';
       banner.classList.add('show');
       btn.classList.remove('loading');
       btn.disabled = false;

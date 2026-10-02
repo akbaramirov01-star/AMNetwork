@@ -77,13 +77,14 @@ test('missing captcha blocks both submission destinations',async()=>{
   await h.context.submitApp();assert.equal(h.calls.length,0);
   assert.equal(h.get('submit-button').disabled,false);
 });
-test('provider error markup remains text',async()=>{
+test('provider error text is never shown to the visitor',async()=>{
   const payload='<img src=x onerror="alert(1)">';
-  const h=harness(JSON.stringify({success:false,message:payload}));vm.runInContext(waitlistCode,h.context);
+  const h=harness(JSON.stringify({success:false,message:payload}));
+  h.context.T={en:{wl_err_generic:'Something went wrong.'}};vm.runInContext(waitlistCode,h.context);
   await h.handlers.submit({preventDefault(){}});
-  assert.ok(h.get('wl-err-banner').textContent.includes(payload));
-  assert.equal(h.get('wl-err-banner').children.length,1);
-  assert.equal(h.get('wl-err-banner').children[0].href,'mailto:contact@amnetwork.io');
+  assert.equal(h.get('wl-err-text').textContent,'Something went wrong.');
+  assert.ok(!h.get('wl-err-banner').textContent.includes(payload));
+  assert.equal(h.get('wl-err-banner').classList.contains('show'),true);
 });
 test('duplicate submissions are ignored while pending',async()=>{
   const h=harness('{"success":true}');vm.runInContext(applyCode,h.context);

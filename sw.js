@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v31-hadith-static-ai';
+const CACHE = 'amnetwork-v32-waitlist-i18n';
 // Must match QURAN_OFFLINE_CACHE in quran/index.html byte-for-byte — that
 // page is the only writer of this bucket (a per-surah "save for offline"
 // button). It is user data (surahs someone explicitly chose to keep) and
