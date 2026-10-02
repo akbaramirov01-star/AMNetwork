@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v43-tj-tirmidhi-full';
+const CACHE = 'amnetwork-v44-waitlist-fallback';
 // Must match QURAN_OFFLINE_CACHE in quran/index.html byte-for-byte — that
 // page is the only writer of this bucket (a per-surah "save for offline"
 // button). It is user data (surahs someone explicitly chose to keep) and
@@ -10,7 +10,7 @@ const STATIC = [
   '/index.html',
   '/i18n-data.js',
   '/faq-assistant.js',
-  '/i18n-data.js?v=23b1e497b9',
+  '/i18n-data.js?v=b1cdf1c349',
   '/logo.webp',
   '/favicon.svg?v=20260914',
   '/manifest.json',

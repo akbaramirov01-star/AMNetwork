@@ -593,6 +593,8 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .wl-success p{font-size:14px;color:var(--text2);line-height:1.7}
 .wl-err-banner{display:none;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:10px 14px;font-size:13px;color:#EF4444;margin-bottom:16px;text-align:center}
 .wl-err-banner.show{display:block}
+.wl-err-mail{display:none;margin:10px auto 0;width:max-content;max-width:100%;padding:8px 14px;border-radius:8px;background:var(--gold);color:#0A1A11!important;font-weight:700;text-decoration:none}
+.wl-err-detail{display:block;margin-top:8px;font-size:11px;opacity:.75;word-break:break-word}
 
 
 .eco-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
@@ -1366,7 +1368,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;margin-bottom:8px;color:var(--text)" data-t="wl_form_h">Join the Waitlist</h3>
         <p style="font-size:13px;color:var(--text2);margin-bottom:24px;line-height:1.7" data-t="wl_sub">We will reach out personally before launch.</p>
 
-        <div class="wl-err-banner" id="wl-err-banner"><span id="wl-err-text" data-t="wl_err_generic">Something went wrong. Please try again or email</span> <a href="mailto:contact@amnetwork.io" style="color:#EF4444">contact@amnetwork.io</a></div>
+        <div class="wl-err-banner" id="wl-err-banner"><span id="wl-err-text" data-t="wl_err_generic">Something went wrong. Please try again or email</span> <a href="mailto:contact@amnetwork.io" style="color:#EF4444">contact@amnetwork.io</a><a class="wl-err-mail" id="wl-err-mail" href="mailto:contact@amnetwork.io" data-t="wl_err_mail">Send by email instead</a><small class="wl-err-detail" id="wl-err-detail"></small></div>
 
         <form class="wl-form" id="wl-form" novalidate>
           <input type="hidden" name="access_key" value="e895783d-8868-41ba-8b9d-fa4aa6a47628">
@@ -1698,7 +1700,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=23b1e497b9"></script>
+<script src="/i18n-data.js?v=b1cdf1c349"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)
@@ -2395,7 +2397,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       }
       const raw = await res.text();
       let json;
-      try { json = JSON.parse(raw); } catch(_) { throw new Error('Invalid server response. Please try again.'); }
+      try { json = JSON.parse(raw); } catch(_) { throw new Error('HTTP ' + res.status + (/just a moment|cloudflare/i.test(raw) ? ' Cloudflare check' : ' non-JSON response')); }
       if (res.ok && json?.success === true) {
         document.getElementById('wl-form-wrap').style.display = 'none';
         document.getElementById('wl-success').classList.add('show');
@@ -2404,10 +2406,24 @@ document.addEventListener('DOMContentLoaded',()=>{
         throw new Error(typeof json?.message === 'string' ? json.message : 'Submit failed');
       }
     } catch(err) {
-      // Provider messages are English-only; log them, show the visitor a localized one.
       console.error('Waitlist submit failed:', err);
       const banner = document.getElementById('wl-err-banner');
       document.getElementById('wl-err-text').textContent = (T[lang]||T.en).wl_err_generic || 'Something went wrong. Please try again or email';
+      // Show the technical reason (as plain text) so a failed signup can be
+      // diagnosed from a screenshot. A network/CORS failure usually means the
+      // provider's Cloudflare check blocked the request from this network.
+      const reason = (err && err.name === 'AbortError') ? 'timeout'
+        : (err && err.name === 'TypeError') ? 'network / blocked'
+        : String((err && err.message) || 'unknown').slice(0, 160);
+      document.getElementById('wl-err-detail').textContent = 'Code: ' + reason;
+      // Never lose a signup: offer the same details as a pre-filled email.
+      const v = id => (document.getElementById(id) || {}).value || '';
+      const body = 'Name: ' + v('wl-name') + '\nEmail: ' + v('wl-email') + '\nRole: ' + v('wl-role') + '\nCountry: ' + v('wl-country') + '\nLanguage: ' + lang;
+      const mail = document.getElementById('wl-err-mail');
+      mail.href = 'mailto:contact@amnetwork.io?subject=' + encodeURIComponent('AM Network waitlist') + '&body=' + encodeURIComponent(body);
+      mail.style.display = 'block';
+      // An hCaptcha token is single-use: without a reset, every retry fails too.
+      try { if (window.hcaptcha) hcaptcha.reset(); } catch(_) {}
       banner.classList.add('show');
       btn.classList.remove('loading');
       btn.disabled = false;
