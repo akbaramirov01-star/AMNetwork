@@ -235,6 +235,28 @@ hr.div{border:none;height:1px;background:linear-gradient(to right,transparent,va
 .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border-radius:18px;overflow:hidden;border:1px solid var(--border)}
 .step{padding:32px 24px;background:var(--step-bg);transition:background 0.3s}
 .step:hover{background:var(--card)}
+/* How-it-works flow: a gold line carries a coin across the five steps, each lighting up as it passes */
+.steps{position:relative}
+.steps-flow{position:absolute;left:0;top:0;width:100%;height:2px;z-index:2;pointer-events:none;transform:translateX(-100%);background:linear-gradient(90deg,rgba(201,168,76,0) 0%,rgba(201,168,76,.55) 60%,var(--gold) 100%)}
+.steps-flow::after{content:"";position:absolute;right:-6px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#F3DE95,var(--gold) 55%,#8A6D22);box-shadow:0 0 14px 3px rgba(201,168,76,.55);opacity:0}
+.steps.flow .steps-flow{animation:stepsFlowX 2.9s linear forwards}
+.steps.flow .steps-flow::after{animation:stepsCoin 2.9s ease forwards}
+.steps.flow .step-num{animation:stepNumLit .6s ease forwards;animation-delay:calc(var(--i) * .58s + .15s)}
+.steps.flow .step-icon{animation:stepIconLit .9s cubic-bezier(.34,1.56,.64,1) forwards;animation-delay:calc(var(--i) * .58s + .15s)}
+.steps.flow-static .step-num{color:rgba(201,168,76,.38)}
+.steps.flow-static .step-icon{border-color:rgba(201,168,76,.5)}
+@keyframes stepsFlowX{to{transform:translateX(0)}}
+@keyframes stepsCoin{0%{opacity:0}8%{opacity:1}88%{opacity:1}100%{opacity:0}}
+@keyframes stepNumLit{0%{color:rgba(201,168,76,.12)}45%{color:rgba(201,168,76,.9)}100%{color:rgba(201,168,76,.38)}}
+@keyframes stepIconLit{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(201,168,76,0)}40%{transform:scale(1.12);box-shadow:0 0 0 6px rgba(201,168,76,.18),0 0 22px rgba(201,168,76,.45);border-color:var(--gold)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(201,168,76,0);border-color:rgba(201,168,76,.5)}}
+/* Phones: the five steps stack ~1700px tall, so the line follows the scroll and each step lights as it reaches mid-screen */
+@media(max-width:768px){
+  .steps-flow{width:2px;height:100%;transform:translateY(calc((var(--p,0) - 1) * 100%));transition:transform .8s cubic-bezier(.3,.1,.3,1);background:linear-gradient(180deg,rgba(201,168,76,0) 0%,rgba(201,168,76,.55) 60%,var(--gold) 100%)}
+  .steps-flow::after{right:auto;left:50%;top:auto;bottom:-6px;margin:0 0 0 -6px;opacity:var(--coin,0);transition:opacity .4s}
+  .step.lit .step-num{animation:stepNumLit .6s ease forwards}
+  .step.lit .step-icon{animation:stepIconLit .9s cubic-bezier(.34,1.56,.64,1) forwards}
+}
+@media (prefers-reduced-motion: reduce){.steps.flow .steps-flow,.steps.flow .steps-flow::after,.steps.flow .step-num,.steps.flow .step-icon,.step.lit .step-num,.step.lit .step-icon{animation:none}.steps-flow{transition:none}}
 .step-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:rgba(201,168,76,0.12);line-height:1;margin-bottom:16px;display:block}
 .step-icon{width:44px;height:44px;border-radius:11px;background:var(--gold3);border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:20px}
 .step h3{font-size:15px;font-weight:600;margin-bottom:7px;color:var(--text)}
@@ -802,11 +824,12 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <h2 class="sec-title" data-t="how_title">Simple to give. Life-changing to receive.</h2>
   <p class="sec-body" data-t="how_body">Five transparent steps — from your donation to verified delivery.</p>
   <div class="steps">
-    <div class="step reveal"><span class="step-num">01</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="15" rx="3"/><path d="M3 9V6a2 2 0 0 1 2-2h13v2M16 12h5v5h-5a2.5 2.5 0 0 1 0-5Z"/></svg></div><h3 data-t="s1_h">You give</h3><p data-t="s1_p">Planned flow: Send zakat or sadaka in any amount. Your funds are locked immediately in a smart contract on Base blockchain — not in our bank account. Full custody to code.</p><span class="sbadge sm" data-t="step_badge_1">Zakat · Sadaqah</span></div>
-    <div class="step reveal"><span class="step-num">02</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20h16M6 16v-4m6 4V8m6 8V4"/><path d="m5 8 6-5 6 1"/></svg></div><h3 data-t="s2_h">AI scores need</h3><p data-t="s2_p">Planned flow: Recipients submit encrypted documents. Our AI model scores each case 0–100 based on family size, income level, medical conditions and regional cost of living. Personal data stays off-chain.</p><span class="sbadge sg" data-t="step_badge_2">AI-Scored</span></div>
-    <div class="step reveal"><span class="step-num">03</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></svg></div><h3 data-t="s3_h">Oracle verifies</h3><p data-t="s3_p">Planned flow: A trusted local verifier — a certified imam or licensed social worker — reviews the AI assessment and confirms eligibility. For large distributions, the DAO votes.</p><span class="sbadge se" data-t="step_badge_3">Human review</span></div>
-    <div class="step reveal"><span class="step-num">04</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 7h17m-4-4 4 4-4 4M21 17H4m4-4-4 4 4 4"/></svg></div><h3 data-t="s4_h">Automatic transfer</h3><p data-t="s4_p">Planned flow: after verification, a smart contract transfers funds from the pool to the recipient's wallet. Security and correct delivery depend on contract audits and recipient verification.</p><span class="sbadge sg" data-t="step_badge_4">Base · Solana</span></div>
-    <div class="step reveal"><span class="step-num">05</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg></div><h3 data-t="s5_h">You receive proof</h3><p data-t="s5_p">Planned flow: A permanent blockchain record is created. You receive a link showing exactly which verified profiles received your funds, in which countries, on which date — forever on-chain.</p><span class="sbadge sm" data-t="step_badge_5">On-chain forever</span></div>
+    <div class="steps-flow" aria-hidden="true"></div>
+    <div class="step reveal" style="--i:0"><span class="step-num">01</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="15" rx="3"/><path d="M3 9V6a2 2 0 0 1 2-2h13v2M16 12h5v5h-5a2.5 2.5 0 0 1 0-5Z"/></svg></div><h3 data-t="s1_h">You give</h3><p data-t="s1_p">Planned flow: Send zakat or sadaka in any amount. Your funds are locked immediately in a smart contract on Base blockchain — not in our bank account. Full custody to code.</p><span class="sbadge sm" data-t="step_badge_1">Zakat · Sadaqah</span></div>
+    <div class="step reveal" style="--i:1"><span class="step-num">02</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20h16M6 16v-4m6 4V8m6 8V4"/><path d="m5 8 6-5 6 1"/></svg></div><h3 data-t="s2_h">AI scores need</h3><p data-t="s2_p">Planned flow: Recipients submit encrypted documents. Our AI model scores each case 0–100 based on family size, income level, medical conditions and regional cost of living. Personal data stays off-chain.</p><span class="sbadge sg" data-t="step_badge_2">AI-Scored</span></div>
+    <div class="step reveal" style="--i:2"><span class="step-num">03</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></svg></div><h3 data-t="s3_h">Oracle verifies</h3><p data-t="s3_p">Planned flow: A trusted local verifier — a certified imam or licensed social worker — reviews the AI assessment and confirms eligibility. For large distributions, the DAO votes.</p><span class="sbadge se" data-t="step_badge_3">Human review</span></div>
+    <div class="step reveal" style="--i:3"><span class="step-num">04</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 7h17m-4-4 4 4-4 4M21 17H4m4-4-4 4 4 4"/></svg></div><h3 data-t="s4_h">Automatic transfer</h3><p data-t="s4_p">Planned flow: after verification, a smart contract transfers funds from the pool to the recipient's wallet. Security and correct delivery depend on contract audits and recipient verification.</p><span class="sbadge sg" data-t="step_badge_4">Base · Solana</span></div>
+    <div class="step reveal" style="--i:4"><span class="step-num">05</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg></div><h3 data-t="s5_h">You receive proof</h3><p data-t="s5_p">Planned flow: A permanent blockchain record is created. You receive a link showing exactly which verified profiles received your funds, in which countries, on which date — forever on-chain.</p><span class="sbadge sm" data-t="step_badge_5">On-chain forever</span></div>
   </div>
 </section>
 
@@ -1939,6 +1962,33 @@ const revObs = new IntersectionObserver(entries=>{
   });
 },{threshold:0.07});
 document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+// How-it-works flow plays once, when most of the steps are on screen.
+(function(){
+  const steps=document.querySelector('#how .steps');
+  if(!steps) return;
+  if(prefRM){ steps.classList.add('flow-static'); return; }
+  if(window.matchMedia('(max-width:768px)').matches){
+    const items=[...steps.querySelectorAll('.step')];
+    const so=new IntersectionObserver(es=>{
+      es.forEach(e=>{
+        if(!e.isIntersecting) return;
+        e.target.classList.add('lit'); so.unobserve(e.target);
+        const sr=steps.getBoundingClientRect(), r=e.target.getBoundingClientRect();
+        const p=Math.min(1,(r.bottom-sr.top)/sr.height);
+        if(p>(parseFloat(steps.style.getPropertyValue('--p'))||0)) steps.style.setProperty('--p',p.toFixed(3));
+        steps.style.setProperty('--coin', items.every(i=>i.classList.contains('lit')) ? '0' : '1');
+      });
+    },{rootMargin:'-35% 0px -35% 0px'});
+    items.forEach(i=>so.observe(i));
+    return;
+  }
+  const o=new IntersectionObserver(es=>{
+    if(!es[0].isIntersecting) return;
+    setTimeout(()=>steps.classList.add("flow"),900);
+    o.disconnect();
+  },{threshold:0.45});
+  o.observe(steps);
+})();
 
 // ── NAV CTA ──
 const navCta = document.querySelector('.nav-cta');
