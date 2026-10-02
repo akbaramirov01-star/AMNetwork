@@ -110,12 +110,16 @@ def main():
     # single generated pictures for page sections: raw/gen/<key>.png -> media/gen/<key>.webp (MEDIA.gen.<key>)
     GEN_W = {"econ": 1400, "alu": 1200, "cotton": 1200, "book": 1200, "fruit1": 1800, "fruit2": 1000, "fruit3": 1000, "fruit4": 1000}
     gdir = os.path.join(RAW, "gen")
+    SRC_OF = {"book": "book_red", "econ": "dushanbe"}  # replaced pictures, October 2026
     for k, w in GEN_W.items():
-        p = os.path.join(gdir, k + ".png")
+        p = os.path.join(gdir, SRC_OF.get(k, k) + ".png")
         if os.path.exists(p):
             os.makedirs(os.path.join(OUT, "gen"), exist_ok=True)
             fit(Image.open(p), w).filter(ImageFilter.UnsharpMask(radius=1.0, percent=35, threshold=2)).save(os.path.join(OUT, "gen", k + ".webp"), "WEBP", quality=82, method=6)
             man.setdefault("gen", {})[k] = "media/gen/%s.webp" % k
+    if os.path.exists(os.path.join(gdir, "emblem.svg")):  # State Emblem of Tajikistan, Wikimedia Commons, public domain
+        shutil.copy(os.path.join(gdir, "emblem.svg"), os.path.join(OUT, "gen", "emblem.svg"))
+        man.setdefault("gen", {})["emblem"] = "media/gen/emblem.svg"
 
     json.dump(man, open(os.path.join(OUT, "manifest.json"), "w"), indent=1)
     total = sum(os.path.getsize(os.path.join(r, f)) for r, _, fs in os.walk(OUT) for f in fs)

@@ -601,3 +601,21 @@ body{font-size:16px;line-height:1.68}
 .book .cover::before,.book .cover::after{content:"";justify-self:center;width:9cqw;height:1px;background:linear-gradient(90deg,transparent,#D9B05B,transparent);opacity:.8}
 .book .cover::before{order:-1}
 .book .cover .t{font-size:4.4cqw}.book .cover .s{font-size:2.3cqw}
+/* page heads with a photo: full-bleed picture, text on a soft dark veil */
+.phead.has-pic{background:#0A0F18;color:#F4F1EA;min-height:clamp(420px,58vh,620px);display:flex;align-items:flex-end}
+.phead.has-pic .pic{inset:0;width:100%;-webkit-mask-image:none;mask-image:none;opacity:1}
+.phead.has-pic .pic img{opacity:1}
+.phead.has-pic .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,12,20,.82) 0%,rgba(8,12,20,.55) 38%,rgba(8,12,20,.12) 70%,rgba(8,12,20,0) 100%),linear-gradient(0deg,rgba(8,12,20,.55) 0%,transparent 45%)}
+.phead.has-pic .wrap{width:100%}
+.phead.has-pic h1{color:#F4F1EA;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.phead.has-pic .lead{color:rgba(244,241,234,.86)}
+.phead.has-pic .crumb,.phead.has-pic .crumb a{color:rgba(244,241,234,.7)}
+@keyframes picIn{from{opacity:0;transform:scale(1.08)}to{opacity:1;transform:none}}
+@media (max-width:820px){.phead.has-pic .pic{width:100%;opacity:1;-webkit-mask-image:none;mask-image:none}.phead.has-pic .pic::after{background:linear-gradient(0deg,rgba(8,12,20,.88) 0%,rgba(8,12,20,.55) 50%,rgba(8,12,20,.25) 100%)}}
+
+/* red Constitution: real State Emblem (public domain) above the title */
+.book{--cx:50.5%;--cy:45%;--cw:44%}
+.book .cover .emb{justify-self:center;width:17cqw;height:auto;margin-bottom:2.2cqw;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
+.book .cover::before{display:none}
+.book .cover .t{font-size:4.2cqw;filter:drop-shadow(0 1px 0 rgba(60,0,0,.55))}
+.book .cover .s{color:#F2D28A}

@@ -33,3 +33,12 @@ Die aufbereiteten Dateien liegen in `tj-trade-office/media/` (12 MB).
 | fruit1–4 | e227e7da-…, ba72ad09-…, 534de86b-…, b7c1d879-… | Export → Galerie Trockenfrüchte |
 
 Kopfbild der Seite Tadschikistan (`raw/ph_tadschikistan.webp`): vom Auftraggeber gestelltes Foto aus Duschanbe — Nutzungsrechte vor dem Start klären.
+
+### Ersatz, Oktober 2026 (3,75 Credits)
+
+| Key | Job-ID | Einsatz |
+|---|---|---|
+| book (aus `book_red.png`) | 82759a7f-25fb-4bf4-b6a3-0e8c9610ef97 | Verfassung, roter Einband; Titel und Staatswappen setzt die Seite |
+| econ (aus `dushanbe.png`) | 5da789da-1329-4db3-8d46-72c97e454d5a | Kennzahlen: moderne Hauptstadt, generisch (kein bestimmtes Gebäude) |
+
+Staatswappen der Republik Tadschikistan: `raw/gen/emblem.svg`, Wikimedia Commons „Emblem of Tajikistan.svg“, gemeinfrei.

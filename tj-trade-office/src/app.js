@@ -152,7 +152,7 @@ function pageLand(){
  '</div></section>'+
  /* legal basis, with the Constitution: the cover title is set in the page language */
  '<section class="sec tint"><div class="wrap"><div class="head"><div class="kicker">'+D.ak+'</div><h2 class="h2 rv">'+D.at+'</h2></div><div class="'+(G.book ? 'lawgrid' : '')+'">'+
-  (G.book ? '<figure class="book rv"><img src="'+G.book+'" alt="" loading="lazy" decoding="async"><figcaption class="cover" aria-hidden="true"><span class="t">'+D.con.t+'</span><span class="s">'+D.con.s+'</span></figcaption></figure>' : '')+
+  (G.book ? '<figure class="book rv"><img src="'+G.book+'" alt="" loading="lazy" decoding="async"><figcaption class="cover" aria-hidden="true">'+(G.emblem ? '<img class="emb" src="'+G.emblem+'" alt="">' : '')+'<span class="t">'+D.con.t+'</span><span class="s">'+D.con.s+'</span></figcaption></figure>' : '')+
   '<div class="tl">'+D.treaties.map(function(t){ return '<div class="t rv"><div class="dt">'+t.d+'</div><div><h3>'+t.t+' '+sref(t.s)+'</h3><p>'+t.p+'</p></div></div>'; }).join("")+'</div>'+
  '</div></div></section>'+
  /* GSP: how the preference works, in three steps, with the figures from Art. 7 */
