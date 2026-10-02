@@ -12,5 +12,4 @@ edition) to a Tajik (Cyrillic) translation.
   across as written; nothing is invented to fill gaps.
 - The reader labels it "AI-translated, not yet reviewed by a scholar". A
   verified published translation must always take priority when available.
-- Coverage may be partial while translation is in progress; the reader shows
-  English for any number missing here.
+- Complete: all 3,926 non-empty hadiths of the English edition (October 2026).
