@@ -336,7 +336,8 @@ const AMN_API_BASE = 'https://amnetwork.onrender.com';
 // translation was still working, just slower than the reader's patience.
 // This used to happen implicitly via the AI-assistant widget's own
 // warm-up ping before that widget was removed from this page.
-fetch(AMN_API_BASE + '/health').catch(()=>{});
+// Live (paid) translation is switched off — see HADITH_LIVE_TRANSLATE below —
+// so this page no longer wakes the backend at all.
 const HADITH_SOURCES = [
   'https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/',
   'https://raw.githubusercontent.com/fawazahmed0/hadith-api/1/editions/',
@@ -658,7 +659,17 @@ async function translateChunk(chunk, targetLang, attempt){
     clearTimeout(timer);
   }
 }
+// Switched off October 2026. Every chapter opened in an uncovered language
+// was a large paid model call, and the backend's cache and daily cap both
+// lived on Render's ephemeral disk, so they reset on every deploy and idle
+// spin-down — the same hadiths were paid for again and again, draining the
+// API balance. Translations now ship only as static files under
+// /hadith/data/ (titles/, ai/<lang>/, tj-*); anything not covered there shows
+// the English text with the honest fallback note. Set true only together
+// with a persistent cache and a hard spend cap.
+const HADITH_LIVE_TRANSLATE = false;
 async function translateTexts(texts, targetLang, token){
+  if (!HADITH_LIVE_TRANSLATE) return null;
   const results = new Array(texts.length).fill(null);
   let anySucceeded = false;
   for (let i = 0; i < texts.length; i += HADITH_TRANSLATE_CHUNK) {
@@ -743,7 +754,7 @@ async function openChapter(chapterNum){
     // AI file beats calling the live backend at all — only what neither
     // covers yet actually goes through the on-demand /hadith/translate call.
     const stillNeedsTranslation = trList.filter(h => typeof h.text === 'string' && h.text.trim() && !certifiedMap[h.hadithnumber] && !staticAiMap[h.hadithnumber]);
-    const canAiTranslate = usedFallback && HADITH_AI_LANGS.includes(lang) && stillNeedsTranslation.length > 0;
+    const canAiTranslate = HADITH_LIVE_TRANSLATE && usedFallback && HADITH_AI_LANGS.includes(lang) && stillNeedsTranslation.length > 0;
     content.innerHTML = renderHadithList(trList, arByNum, {
       certifiedMap,
       staticAiMap,

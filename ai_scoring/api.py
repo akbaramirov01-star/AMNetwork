@@ -390,6 +390,14 @@ MAX_HADITH_TEXT_LEN = 4000
 
 @app.route("/hadith/translate", methods=["POST"])
 def hadith_translate_route():
+    # Off by default (October 2026): on Render's ephemeral disk the cache and
+    # the daily cap reset on every deploy and spin-down, so this route paid
+    # for the same hadiths over and over and drained the API balance. The
+    # site now ships translations as static files. Re-enable only with a
+    # persistent disk (TRANSLATE_CACHE_DB_PATH, SECURITY_DB_PATH) and a hard
+    # spend cap in the Anthropic console.
+    if os.environ.get("HADITH_TRANSLATE_ENABLED", "") != "1":
+        return jsonify(error="Live hadith translation is disabled."), 410
     # Cache hits skip the paid budget below, but must not be a free way to
     # saturate the single worker and take /chat down with it.
     if not cheap_limiter.allow(client_address()):
