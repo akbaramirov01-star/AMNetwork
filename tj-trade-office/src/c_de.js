@@ -95,7 +95,10 @@ C.de = {
   ],
   gk:"Zugang zum EU-Markt", gt:"Zollpräferenzen im Rahmen des EU-APS",
   gp:"Tadschikistan ist Begünstigter des Allgemeinen Präferenzsystems der EU (APS, englisch GSP). Für viele Waren gelten ermäßigte Zölle — vorausgesetzt, der Exporteur ist im REX-System registriert und erklärt den präferenziellen Ursprung. Die genaue Zollbelastung je Warennummer zeigt das Portal Access2Markets der Europäischen Kommission.",
-  gs:[14,15]
+  gs:[14,15],
+  ex:{"k": "Export in die EU", "t": "Was Tadschikistan nach Europa liefert", "l": "2025 importierte die EU Waren im Wert von 579 Mio. € aus Tadschikistan — 90 % mehr als im Vorjahr. Neun Zehntel davon sind Metalle.", "g": {"metals": "Unedle Metalle (dazu gehören Aluminium und Antimon)", "mineral": "Mineralische Stoffe: Erze und Konzentrate", "textile": "Textilien: Baumwollfasern, Garne, Gewebe", "veg": "Pflanzliche Erzeugnisse: Trockenfrüchte, Nüsse, Hülsenfrüchte", "hides": "Häute und Felle"}, "u": "Mio. €", "de": "Direkte Exporte Tadschikistans nach Deutschland 2024: rund 3 Mio. €.", "pk": "Angebot", "pt": "Was tadschikische Hersteller liefern können", "p": [{"k": "alu", "t": "Aluminium", "s": "Gehört zur Gruppe „unedle Metalle“ — 92 % der Exporte in die EU."}, {"k": "ore", "t": "Antimon und Erze", "s": "Tadschikistan ist der wichtigste Antimon-Lieferant der EU."}, {"k": "cotton", "t": "Baumwolle und Textilien", "s": "Fasern, Garne, Gewebe; Potenzial bei Fertigwaren."}, {"k": "fruit", "t": "Trockenfrüchte und Nüsse", "s": "Aprikosen, Rosinen, Nüsse — von EU-tauglich zertifizierten Betrieben."}]},
+  gsp:{"steps": [{"t": "Registrierung im REX", "p": "Der Exporteur lässt sich über die Zollbehörden Tadschikistans im System registrierter Ausführer registrieren."}, {"t": "Erklärung zum Ursprung", "p": "Im Handelsdokument zur Sendung erklärt der Exporteur den präferenziellen Ursprung der Ware."}, {"t": "Ermäßigter Zoll", "p": "Der deutsche Importeur beantragt die Präferenz bei der Einfuhr — der Zoll sinkt oder entfällt."}], "f": [{"v": "0 %", "l": "Zoll auf „nicht empfindliche“ Waren: Wertzölle vollständig ausgesetzt"}, {"v": "−3,5 Pp.", "l": "Senkung des Wertzolls auf „empfindliche“ Waren"}, {"v": "−20 %", "l": "für Textilien der Abschnitte XI(a) und XI(b)"}], "fl": "Allgemeine APS-Regelung, Art. 7 Verordnung (EU) Nr. 978/2012", "go": "Zoll für eine Ware prüfen"},
+  con:{"t": "Verfassung", "s": "der Republik Tadschikistan"}
  },
  invest:{
   h1:"Investieren in Tadschikistan",
@@ -109,7 +112,7 @@ C.de = {
   xn:"Steuersätze ändern sich. Bitte lassen Sie sich vor einer Investitionsentscheidung von einem Steuerberater in Tadschikistan beraten.",
   zk:"Freie Wirtschaftszonen", zt:"Fünf Zonen mit eigenem Steuer- und Zollregime",
   zl:"Wählen Sie eine Zone auf der Karte. Die Punkte liegen an den tatsächlichen Koordinaten der Standorte.",
-  zcap:"Schematische Darstellung nach geografischen Koordinaten, ohne Grenzverlauf.",
+  zcap:"Grenzen: Natural Earth (1:10 Mio.), vereinfacht. Punkte nach den Koordinaten der Zonen.",
   zones:{
    sughd:{n:"FWZ Sughd", f:"Industrie und Export", p:"Im südwestlichen Industriegebiet von Chudschand. Hergestellt werden Elektrokabel, Kunststoffrohre, Aluminium- und PVC-Profile, Baustoffe, Farben und Lacke, Kunststoffbehälter; dazu Montage von Solarkollektoren und Tiefbrunnenpumpen sowie Metallrecycling."},
    panj:{n:"FWZ Pandsch", f:"Handel, Transit, Industrie", p:"An der Grenze zu Afghanistan. Zwei Sektoren: 186 ha für Handel, Import, Export, Finanzen und Innovation, 215,6 ha für Industrie."},

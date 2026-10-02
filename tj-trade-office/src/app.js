@@ -132,19 +132,36 @@ function band(){
 }
 
 function pageLand(){
- var D = L.land;
+ var D = L.land, G = MD.gen || {}, X = D.ex;
+ var img = function(src, cls){ return src ? '<figure class="'+cls+'"><img src="'+src+'" alt="" loading="lazy" decoding="async"></figure>' : ''; };
+ var prodImg = {alu:G.alu, ore:MD.s&&MD.s.mining, cotton:G.cotton||(MD.s&&MD.s.textile), fruit:G.fruit1||(MD.s&&MD.s.agri)};
  return phead("tadschikistan", D.h1, D.lead, 2)+
- '<section class="sec flush"><div class="wrap split2"><div><div class="kicker">'+D.ek+'</div><h2 class="h2 rv">'+D.et+'</h2><p class="note rv">'+D.kvn+'</p></div><table class="kv rv"><tbody>'+
+ '<section class="sec flush"><div class="wrap split2"><div><div class="kicker">'+D.ek+'</div><h2 class="h2 rv">'+D.et+'</h2><p class="note rv">'+D.kvn+'</p>'+img(G.econ,'sidepic rv')+'</div><table class="kv rv"><tbody>'+
    D.kv.map(function(r){ return '<tr><td>'+r[0]+' '+sref(r[2])+'</td><td>'+r[1]+'</td></tr>'; }).join("")+
  '</tbody></table></div></section>'+
  '<section class="sec tint"><div class="wrap split2"><div><div class="kicker">'+D.tk+'</div><h2 class="h2 rv">'+D.tt+'</h2><p class="lead rv">'+D.tl+' '+sref(4)+'</p><p class="quote rv">'+D.q+'</p></div><div class="rv" style="padding-top:12px"><div class="bars">'+
    '<div class="barrow de"><div class="bl"><span>'+D.bde+'</span><b>'+D.vde+'</b></div><div class="bt"><i data-w="100"></i></div></div>'+
    '<div class="barrow tj"><div class="bl"><span>'+D.btj+'</span><b>'+D.vtj+'</b></div><div class="bt"><i data-w="6"></i></div></div>'+
  '</div><p class="note">'+D.tn+' '+sref(4)+'</p></div></div></section>'+
- '<section class="sec"><div class="wrap"><div class="head"><div class="kicker">'+D.ak+'</div><h2 class="h2 rv">'+D.at+'</h2></div><div class="tl">'+
-   D.treaties.map(function(t){ return '<div class="t rv"><div class="dt">'+t.d+'</div><div><h3>'+t.t+' '+sref(t.s)+'</h3><p>'+t.p+'</p></div></div>'; }).join("")+
+ /* what Tajikistan sells to the EU, by HS section (DG Trade, 2025) */
+ '<section class="sec"><div class="wrap"><div class="head split"><div><div class="kicker">'+X.k+'</div><h2 class="h2 rv">'+X.t+'</h2></div><p class="lead rv">'+X.l+' '+sref(38)+'</p></div>'+
+  '<div class="euimp rv">'+EUIMP.rows.map(function(r){ return '<div class="eurow"><div class="eul"><span>'+X.g[r[0]]+'</span><b>'+r[1]+' '+X.u+' <small>'+String(r[2]).replace(".", lang==="en"?".":",")+' %</small></b></div><div class="bt"><i data-w="'+Math.max(r[2],0.6)+'"></i></div></div>'; }).join("")+
+  '<p class="note">'+X.de+' '+sref(4)+'</p></div>'+
+  '<div class="head" style="margin-top:clamp(48px,6vw,80px)"><div class="kicker">'+X.pk+'</div><h3 class="h3x rv">'+X.pt+'</h3></div>'+
+  '<div class="prods">'+X.p.map(function(p){ var im = prodImg[p.k]; return '<article class="prod rv">'+(im ? '<div class="pi"><img src="'+im+'" alt="" loading="lazy" decoding="async"></div>' : '<div class="pi none"></div>')+'<h4>'+p.t+'</h4><p>'+p.s+'</p></article>'; }).join("")+'</div>'+
+ '</div></section>'+
+ /* legal basis, with the Constitution: the cover title is set in the page language */
+ '<section class="sec tint"><div class="wrap"><div class="head"><div class="kicker">'+D.ak+'</div><h2 class="h2 rv">'+D.at+'</h2></div><div class="'+(G.book ? 'lawgrid' : '')+'">'+
+  (G.book ? '<figure class="book rv"><img src="'+G.book+'" alt="" loading="lazy" decoding="async"><figcaption class="cover" aria-hidden="true"><span class="t">'+D.con.t+'</span><span class="s">'+D.con.s+'</span></figcaption></figure>' : '')+
+  '<div class="tl">'+D.treaties.map(function(t){ return '<div class="t rv"><div class="dt">'+t.d+'</div><div><h3>'+t.t+' '+sref(t.s)+'</h3><p>'+t.p+'</p></div></div>'; }).join("")+'</div>'+
  '</div></div></section>'+
- '<section class="sec tint"><div class="wrap split2"><div><div class="kicker">'+D.gk+'</div><h2 class="h2 rv">'+D.gt+'</h2></div><div><p class="lead rv" style="margin-top:0">'+D.gp+' '+refs(D.gs)+'</p><p style="margin-top:26px"><a class="cta ghost" href="'+SRC[15].u+'" target="_blank" rel="noopener">Access2Markets '+ext+'</a></p></div></div></section>'+
+ /* GSP: how the preference works, in three steps, with the figures from Art. 7 */
+ '<section class="sec"><div class="wrap"><div class="split2"><div><div class="kicker">'+D.gk+'</div><h2 class="h2 rv">'+D.gt+'</h2></div><div><p class="lead rv" style="margin-top:0">'+D.gp+' '+refs(D.gs)+'</p></div></div>'+
+  '<ol class="gspsteps">'+D.gsp.steps.map(function(s,i){ return '<li class="rv"><span class="n">'+(i+1)+'</span><h4>'+s.t+'</h4><p>'+s.p+'</p></li>'; }).join("")+'</ol>'+
+  '<div class="gspfacts rv">'+D.gsp.f.map(function(f){ return '<div><b>'+f.v+'</b><span>'+f.l+'</span></div>'; }).join("")+'</div>'+
+  '<p class="note rv">'+D.gsp.fl+' '+sref(39)+'</p>'+
+  '<p class="rv" style="margin-top:22px"><a class="cta" href="#export" data-go="export" data-anchor="a2m">'+D.gsp.go+arrow+'</a></p>'+
+ '</div></section>'+
  band();
 }
 
@@ -174,18 +191,24 @@ function pageInvest(){
 
 function fezMap(){
  var host = $("#fezmap"); if(!host) return;
- var W=640, H=480, minLon=67.6, maxLon=72.6, minLat=36.3, maxLat=40.9;
- function X(lon){ return 40 + (lon-minLon)/(maxLon-minLon)*(W-80); }
- function Y(lat){ return 50 + (maxLat-lat)/(maxLat-minLat)*(H-90); }
- var g = '';
- for(var lo=68; lo<=72; lo++) g += '<line x1="'+X(lo)+'" y1="20" x2="'+X(lo)+'" y2="'+(H-30)+'" stroke="currentColor" stroke-opacity=".08"/><text x="'+X(lo)+'" y="'+(H-14)+'" font-size="9" text-anchor="middle" fill="currentColor" opacity=".35" font-family="IBM Plex Mono,monospace">'+lo+'°E</text>';
- for(var la=37; la<=41; la++) g += '<line x1="30" y1="'+Y(la)+'" x2="'+(W-20)+'" y2="'+Y(la)+'" stroke="currentColor" stroke-opacity=".08"/><text x="8" y="'+(Y(la)+3)+'" font-size="9" fill="currentColor" opacity=".35" font-family="IBM Plex Mono,monospace">'+la+'°N</text>';
- CITIES.forEach(function(c){ if(c.n==="Khujand") return; g += '<g><rect x="'+(X(c.lon)-4)+'" y="'+(Y(c.lat)-4)+'" width="8" height="8" fill="none" stroke="currentColor" stroke-opacity=".7"/><text x="'+(X(c.lon)-10)+'" y="'+(Y(c.lat)+4)+'" text-anchor="end" font-size="11" fill="currentColor" opacity=".75" font-family="IBM Plex Mono,monospace">'+c.n+'</text></g>'; });
+ var M = TJMAP, W = M.w, H = M.h;
+ function X(lon){ return M.pad + (lon-M.minLon)*M.c*M.k; }
+ function Y(lat){ return M.pad + (M.maxLat-lat)*M.k; }
+ var names; try{ names = new Intl.DisplayNames([{tj:"tg",de:"de",ru:"ru",en:"en"}[lang],"en"], {type:"region"}); }catch(e){}
+ var cn = function(c){ try{ return names ? names.of(c) : c; }catch(e){ return c; } };
+ var g = '<defs><clipPath id="mclip"><rect x="0" y="0" width="'+W+'" height="'+H+'"/></clipPath>'+
+  '<pattern id="mhatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="currentColor" stroke-opacity=".07" stroke-width="2"/></pattern></defs>';
+ g += '<g clip-path="url(#mclip)"><path d="'+M.nb+'" fill="url(#mhatch)" stroke="currentColor" stroke-opacity=".25" stroke-width=".8" stroke-linejoin="round"/>'+
+  '<path class="tj" d="'+M.tj+'" stroke-linejoin="round"/></g>';
+ [["UZ",67.35,39.2],["KG",72.6,40.55],["AF",70.6,36.62],["CN",75.25,38.2]].forEach(function(n){
+  g += '<text class="nb" x="'+X(n[1])+'" y="'+Y(n[2])+'" text-anchor="middle">'+cn(n[0]).toUpperCase()+'</text>'; });
+ var CN = {Dushanbe:{de:"Duschanbe",en:"Dushanbe",ru:"Душанбе",tj:"Душанбе"}};
+ CITIES.forEach(function(c){ if(!CN[c.n]) return; g += '<g class="city"><rect x="'+(X(c.lon)-4)+'" y="'+(Y(c.lat)-4)+'" width="8" height="8"/><text x="'+(X(c.lon)-10)+'" y="'+(Y(c.lat)+4)+'" text-anchor="end">'+CN[c.n][lang]+'</text></g>'; });
  ZONES.forEach(function(z){
   var nm = L.invest.zones[z.id].n.replace(/^(FWZ|СЭЗ|FEZ|МОИ)\s*/,"");
   g += '<g class="pin" data-zone="'+z.id+'" tabindex="0" role="button" aria-label="'+esc(L.invest.zones[z.id].n)+'"><circle class="halo" cx="'+X(z.lon)+'" cy="'+Y(z.lat)+'" r="14"><animate attributeName="r" values="7;18;7" dur="3.2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".6;0;.6" dur="3.2s" repeatCount="indefinite"/></circle><circle class="core" cx="'+X(z.lon)+'" cy="'+Y(z.lat)+'" r="6"/><text x="'+(X(z.lon)+12)+'" y="'+(Y(z.lat)+4)+'">'+nm+'</text></g>';
  });
- host.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" style="color:var(--ink)">'+g+'</svg><div class="cap">'+L.invest.zcap+'</div>';
+ host.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" style="color:var(--ink)" role="img" aria-label="'+esc(L.invest.zcap)+'">'+g+'</svg><div class="cap">'+L.invest.zcap+'</div>';
  $$(".pin", host).forEach(function(p){
   p.addEventListener("click", function(){ fezSelect(p.getAttribute("data-zone")); });
   p.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); fezSelect(p.getAttribute("data-zone")); } });
@@ -210,6 +233,7 @@ function pageExport(){
    E.regs.map(function(r){ return '<div class="reg rv"><div class="code">'+r.c+'</div><h3>'+r.t+'</h3><p>'+r.p+'</p><a href="'+SRC[r.s].u+'" target="_blank" rel="noopener">'+SRC[r.s].t.split(" — ")[0]+' ↗</a></div>'; }).join("")+
  '</div></div></section>'+
  a2mFinder(E)+
+ fruitGallery()+
  exportersSection(E)+
  '<section class="sec tint"><div class="wrap"><div class="head"><div class="kicker">'+E.mk+'</div><h2 class="h2 rv">'+E.mt+'</h2></div><div class="evts">'+eventRows()+'</div></div></section>'+
  band();
@@ -243,6 +267,13 @@ function a2mGo(form){
    : A2M.base+a2mLang()+"/search?product="+encodeURIComponent(q)+"&origin=TJ&destination="+to;
  } else url = A2M.base+a2mLang()+"/results?product="+hs+"&origin=TJ&destination="+to;
  window.open(url, "_blank", "noopener");
+}
+
+/* photographs of Tajik dried fruit (generated, labelled as such in the footer) */
+function fruitGallery(){
+ var G = MD.gen || {}, ims = [G.fruit1, G.fruit2, G.fruit3, G.fruit4].filter(Boolean);
+ if(!ims.length) return '';
+ return '<section class="fruits" aria-hidden="true"><div class="frow">'+ims.map(function(src,i){ return '<figure class="rv'+(i===0?' wide':'')+'"><img src="'+src+'" alt="" loading="lazy" decoding="async"></figure>'; }).join("")+'</div></section>';
 }
 
 /* dried-fruit exporters from Sughd, with the source for every claim */
@@ -356,7 +387,7 @@ function wire(root){
   if(r.top < window.innerHeight*0.98){ setTimeout(function(){ el.classList.add("in"); }, 60 + (i%6)*70); }
   else revealer.observe(el);
  });
- $$(".barrow .bt i", root).forEach(function(b){ setTimeout(function(){ b.style.width = b.getAttribute("data-w")+"%"; }, 300); });
+ $$(".barrow .bt i, .eurow .bt i", root).forEach(function(b){ setTimeout(function(){ b.style.width = b.getAttribute("data-w")+"%"; }, 300); });
  $$("[data-sector]", root).forEach(function(b){
   b.addEventListener("click", function(){
    var id = b.getAttribute("data-sector");
@@ -402,7 +433,7 @@ function openSector(id){
 /* delegated navigation */
 document.addEventListener("click", function(e){
  var a = e.target.closest("[data-go]");
- if(a){ e.preventDefault(); var form = a.getAttribute("data-form"); go(a.getAttribute("data-go")); if(form) setTimeout(function(){ selectForm(form); }, 20); return; }
+ if(a){ e.preventDefault(); var form = a.getAttribute("data-form"); go(a.getAttribute("data-go"), a.getAttribute("data-anchor") || undefined); if(form) setTimeout(function(){ selectForm(form); }, 20); return; }
  var lb = e.target.closest("[data-lang]");
  if(lb){ setLang(lb.getAttribute("data-lang")); $("#langs").classList.remove("open"); return; }
  if(e.target.closest("[data-theme-toggle]")){ toggleTheme(); return; }

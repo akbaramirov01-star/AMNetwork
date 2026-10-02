@@ -94,7 +94,10 @@ C.en = {
   ],
   gk:"Access to the EU market", gt:"Tariff preferences under the EU GSP",
   gp:"Tajikistan is a beneficiary of the EU Generalised Scheme of Preferences (GSP). Many goods enter at reduced duty — provided the exporter is registered in the REX system and declares preferential origin. The exact duty for each commodity code is shown on the European Commission’s Access2Markets portal.",
-  gs:[14,15]
+  gs:[14,15],
+  ex:{"k": "Exports to the EU", "t": "What Tajikistan sells to Europe", "l": "In 2025 the EU imported €579m worth of goods from Tajikistan — 90% more than a year earlier. Nine tenths of that is metals.", "g": {"metals": "Base metals (this group includes aluminium and antimony)", "mineral": "Mineral products: ores and concentrates", "textile": "Textiles: cotton fibre, yarn, fabrics", "veg": "Vegetable products: dried fruit, nuts, pulses", "hides": "Raw hides and skins"}, "u": "€m", "de": "Tajikistan’s direct exports to Germany in 2024: about €3m.", "pk": "Supply", "pt": "What Tajik producers can deliver", "p": [{"k": "alu", "t": "Aluminium", "s": "Part of the base-metals group — 92% of exports to the EU."}, {"k": "ore", "t": "Antimony and ores", "s": "Tajikistan is the EU’s main supplier of antimony."}, {"k": "cotton", "t": "Cotton and textiles", "s": "Fibre, yarn, fabrics; potential in finished goods."}, {"k": "fruit", "t": "Dried fruit and nuts", "s": "Apricots, raisins, nuts — from plants certified for the EU."}]},
+  gsp:{"steps": [{"t": "Register in REX", "p": "The exporter registers in the Registered Exporter system through the customs authorities of Tajikistan."}, {"t": "Statement on origin", "p": "In the commercial document for the shipment, the exporter states the preferential origin of the goods."}, {"t": "Reduced duty", "p": "The German importer claims the preference at import — the duty is reduced or removed."}], "f": [{"v": "0%", "l": "duty on ‘non-sensitive’ goods: ad valorem duties fully suspended"}, {"v": "−3.5 pp", "l": "cut in the ad valorem duty on ‘sensitive’ goods"}, {"v": "−20%", "l": "for textiles of Sections XI(a) and XI(b)"}], "fl": "Standard GSP arrangement, Art. 7 of Regulation (EU) No 978/2012", "go": "Check the duty for a product"},
+  con:{"t": "Constitution", "s": "of the Republic of Tajikistan"}
  },
  invest:{
   h1:"Investing in Tajikistan",
@@ -108,7 +111,7 @@ C.en = {
   xn:"Tax rates change. Please take advice from a tax adviser in Tajikistan before making an investment decision.",
   zk:"Free economic zones", zt:"Five zones with their own tax and customs regime",
   zl:"Select a zone on the map. The points sit at the real coordinates of each site.",
-  zcap:"Schematic by geographic coordinates, without borders.",
+  zcap:"Borders: Natural Earth (1:10m), simplified. Points at the zones’ coordinates.",
   zones:{
    sughd:{n:"FEZ Sughd", f:"Industry and export", p:"In the south-western industrial district of Khujand. Producers make electric cables, plastic pipes, aluminium and PVC profiles, building materials, paints and varnishes, plastic containers; solar collectors and deep-well pumps are assembled and metal is recycled."},
    panj:{n:"FEZ Panj", f:"Trade, transit, industry", p:"On the border with Afghanistan. Two sectors: 186 ha for trade, import, export, finance and innovation, and 215.6 ha for industry."},

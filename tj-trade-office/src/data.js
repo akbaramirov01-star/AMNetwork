@@ -37,7 +37,9 @@ var SRC = [
  {t:"FreshPlaza — Tajikistan’s dried fruit processors pitch for new buyers at Food Ingredients Europe 2025", u:"https://www.freshplaza.com/europe/article/9791442/tajikistan-s-dried-fruit-processors-pitch-for-new-buyers-at-food-ingredients-europe-2025/"},
  {t:"European Commission — Access2Markets: My Trade Assistant", u:"https://trade.ec.europa.eu/access-to-markets/en/my-trade-assistant"},
  {t:"Barakat Isfara LLC — company website: products, quality, contacts", u:"https://barakat-isfara.com/about_company/"},
- {t:"Barakat Isfara LLC — “Barakat-Isfara products exported to Malaysia”, 29.03.2022", u:"https://barakat-isfara.com/2022/03/29/export_barakat/"}
+ {t:"Barakat Isfara LLC — “Barakat-Isfara products exported to Malaysia”, 29.03.2022", u:"https://barakat-isfara.com/2022/03/29/export_barakat/"},
+ {t:"European Commission, DG Trade — European Union, trade in goods with Tajikistan (factsheet, 20.05.2026)", u:"https://webgate.ec.europa.eu/isdb_results/factsheets/country/details_tadjikistan_en.pdf"},
+ {t:"Regulation (EU) No 978/2012 applying a scheme of generalised tariff preferences (GSP), Art. 7", u:"https://eur-lex.europa.eu/eli/reg/2012/978/oj"}
 ];
 function sref(n){ return '<a class="src" href="#quellen" data-src="'+n+'" title="'+(SRC[n]?SRC[n].t.replace(/"/g,"&quot;"):"")+'">['+n+']</a>'; }
 
@@ -93,3 +95,6 @@ var EXPORTERS = [
  {n:"Mevai Kand", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]},
  {n:"Kand K", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]}
 ];
+
+/* EU imports from Tajikistan by HS section, 2025, million EUR (DG Trade factsheet, src 38); total 579 */
+var EUIMP = {total:579, growth:90.4, rows:[["metals",533,92.0],["mineral",19,3.2],["textile",14,2.4],["veg",10,1.8],["hides",1,0.2]]};

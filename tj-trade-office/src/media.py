@@ -99,6 +99,13 @@ def main():
     if s:
         man["s"] = s
         man["ph"] = {page: s[k] for page, k in PAGE_PICS.items() if k in s}
+    # page heads can also take their own picture: raw/ph_<page>.(webp|jpg|png) overrides the sector photo
+    for f in sorted(os.listdir(RAW)) if os.path.isdir(RAW) else []:
+        if f.startswith("ph_") and f.rsplit(".", 1)[-1] in ("webp", "jpg", "jpeg", "png"):
+            page = f[3:].rsplit(".", 1)[0]
+            os.makedirs(os.path.join(OUT, "ph"), exist_ok=True)
+            fit(Image.open(os.path.join(RAW, f)), 1800).save(os.path.join(OUT, "ph", page + ".webp"), "WEBP", quality=84, method=6)
+            man.setdefault("ph", {})[page] = "media/ph/%s.webp" % page
 
     json.dump(man, open(os.path.join(OUT, "manifest.json"), "w"), indent=1)
     total = sum(os.path.getsize(os.path.join(r, f)) for r, _, fs in os.walk(OUT) for f in fs)

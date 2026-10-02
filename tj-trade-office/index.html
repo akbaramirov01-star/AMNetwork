@@ -551,6 +551,59 @@ body{font-size:16px;line-height:1.68}
 .finder .route{display:flex;align-items:center;gap:10px;font-size:.95rem;padding:12px 14px;background:var(--ground);border:1px dashed color-mix(in srgb,var(--gold) 45%,transparent)}
 .finder .route b{font-weight:600}.finder .route span{color:var(--gold)}
 
+/* FEZ map: real borders */
+.fezmap svg .tj{fill:color-mix(in srgb,var(--gold) 9%,var(--surface));stroke:var(--gold);stroke-width:1.4}
+.fezmap svg .nb{font-family:var(--mono);font-size:10px;letter-spacing:.18em;fill:currentColor;opacity:.4}
+.fezmap svg .city rect{fill:var(--ground);stroke:currentColor;stroke-opacity:.7}
+.fezmap svg .city text{font-family:var(--mono);font-size:10px;fill:currentColor;opacity:.75}
+.fezmap svg .pin text{paint-order:stroke;stroke:var(--surface);stroke-width:3px}
+.fezmap .cap{top:auto;bottom:12px}
+
+/* Tajikistan page: pictures, EU exports, Constitution, GSP */
+.sidepic{margin:28px 0 0;aspect-ratio:4/3;overflow:hidden}
+.sidepic img{width:100%;height:100%;object-fit:cover;display:block}
+.euimp{display:grid;gap:18px;max-width:980px}
+.eurow{display:grid;gap:8px}
+.eul{display:flex;justify-content:space-between;gap:16px;align-items:baseline;font-size:.95rem}
+.eul b{font-family:var(--mono);font-weight:500;white-space:nowrap}.eul b small{color:var(--ink-faint);margin-left:6px}
+.eurow .bt{height:8px;background:var(--line);position:relative;overflow:hidden}
+.eurow .bt i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gold);transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+.h3x{font-size:clamp(1.8rem,1.2rem + 1.6vw,2.6rem);font-weight:500}
+.prods{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.prod{background:var(--ground);display:flex;flex-direction:column}
+.prod .pi{aspect-ratio:4/3;overflow:hidden;background:var(--surface)}
+.prod .pi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.prod:hover .pi img{transform:scale(1.05)}
+.prod .pi.none{background-image:var(--orn-field);background-size:120px 64px;opacity:.35}
+.prod h4{font-family:var(--serif);font-size:1.5rem;font-weight:600;margin:18px 20px 6px}
+.prod p{margin:0 20px 22px;color:var(--ink-soft);font-size:.92rem}
+@media (max-width:980px){.prods{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.prods{grid-template-columns:1fr}}
+.lawgrid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,4vw,64px);align-items:start}
+.book{position:relative;margin:0;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.55)}
+.book img{width:100%;display:block}
+.book .cover{position:absolute;left:var(--cx,50%);top:var(--cy,47%);transform:translate(-50%,-50%);width:var(--cw,42%);text-align:center;display:grid;gap:.35em;pointer-events:none}
+.book .cover .t{font-family:var(--serif);font-weight:600;font-size:clamp(1.1rem,.6rem + 1.6vw,2.1rem);letter-spacing:.06em;text-transform:uppercase;line-height:1.05;
+ background:linear-gradient(180deg,#F7E3A6 0%,#D9B05B 45%,#9C7330 70%,#E8C677 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 1px 0 rgba(0,0,0,.45))}
+.book .cover .s{font-family:var(--serif);font-size:clamp(.7rem,.45rem + .7vw,1.05rem);letter-spacing:.14em;text-transform:uppercase;color:#E6C985;opacity:.92}
+@media (max-width:900px){.lawgrid{grid-template-columns:1fr}.book{max-width:520px}}
+.gspsteps{list-style:none;margin:clamp(36px,5vw,60px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gspsteps li{background:var(--ground);padding:26px 24px;display:grid;gap:8px;align-content:start}
+.gspsteps .n{font-family:var(--serif);font-size:2.6rem;line-height:1;color:var(--gold)}
+.gspsteps h4{font-family:var(--serif);font-size:1.45rem;font-weight:600}
+.gspsteps p{margin:0;color:var(--ink-soft);font-size:.93rem}
+.gspfacts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:34px}
+.gspfacts div{display:grid;gap:6px;border-top:1px solid var(--gold);padding-top:14px}
+.gspfacts b{font-family:var(--serif);font-size:clamp(2.2rem,1.4rem + 2vw,3.2rem);font-weight:500;line-height:1}
+.gspfacts span{color:var(--ink-soft);font-size:.9rem}
+@media (max-width:760px){.gspsteps,.gspfacts{grid-template-columns:1fr}}
+
+.fruits .frow{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4px;height:clamp(220px,28vw,420px)}
+.fruits figure{margin:0;overflow:hidden}
+.fruits img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
+.fruits figure:hover img{transform:scale(1.05)}
+@media (max-width:760px){.fruits .frow{grid-template-columns:1fr 1fr;height:auto}.fruits figure{aspect-ratio:1}.fruits figure.wide{grid-column:1/-1;aspect-ratio:16/9}}
+
 </style>
 </head>
 <body>
@@ -601,7 +654,7 @@ body{font-size:16px;line-height:1.68}
  <span id="fBrandB" hidden></span><span id="fBrandP" hidden></span>
 </footer>
 
-<script>window.MEDIA = {"hero": {"n": 84, "lg": "media/hero/l/f_", "sm": "media/hero/s/f_", "ext": ".webp", "poster": "media/hero/poster.jpg"}, "loop": {"s": {"mp4": "media/loop/s.mp4", "webm": "media/loop/s.webm", "poster": "media/loop/s.jpg"}}, "band": {"webm": "media/band/weave.webm", "src": "media/band/weave.mp4", "poster": "media/band/weave.jpg"}, "s": {"energy": "media/s/energy.webp", "mining": "media/s/mining.webp", "agri": "media/s/agri.webp", "textile": "media/s/textile.webp", "tourism": "media/s/tourism.webp", "industry": "media/s/industry.webp"}, "ph": {"tadschikistan": "media/s/tourism.webp", "branchen": "media/s/textile.webp", "investieren": "media/s/industry.webp", "export": "media/s/agri.webp"}};</script>
+<script>window.MEDIA = {"hero": {"n": 84, "lg": "media/hero/l/f_", "sm": "media/hero/s/f_", "ext": ".webp", "poster": "media/hero/poster.jpg"}, "loop": {"s": {"mp4": "media/loop/s.mp4", "webm": "media/loop/s.webm", "poster": "media/loop/s.jpg"}}, "band": {"webm": "media/band/weave.webm", "src": "media/band/weave.mp4", "poster": "media/band/weave.jpg"}, "s": {"energy": "media/s/energy.webp", "mining": "media/s/mining.webp", "agri": "media/s/agri.webp", "textile": "media/s/textile.webp", "tourism": "media/s/tourism.webp", "industry": "media/s/industry.webp"}, "ph": {"tadschikistan": "media/ph/tadschikistan.webp", "branchen": "media/s/textile.webp", "investieren": "media/s/industry.webp", "export": "media/s/agri.webp"}};</script>
 <script>
 /* Flags: flag-icons (MIT, © Panayiotis Lipiridis). Tajik flag widened to the official 1:2 proportion. */
 var FLAG_TJ = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 960 480"> <path fill="#060" d="M0 0h960v480H0z"/> <path fill="#fff" d="M0 0h960v342.9H0z"/> <path fill="#c00" d="M0 0h960v137.1H0z"/><g transform="translate(160 0)"> <path fill="#f8c300" d="M300.8 233.6a8.6 8.6 0 0 1 16 4V272h6.4v-34.3a8.6 8.6 0 0 1 16-4 20.2 20.2 0 1 0-38.4 0"/> <path fill="#fff" d="M305.4 224.7a14 14 0 0 1 14.6 6.5 14 14 0 0 1 14.6-6.5 14.7 14.7 0 0 0-29.2 0"/> <path id="tjA" fill="#f8c300" d="M316.8 258.3a26 26 0 0 1-43.8 16.6 27 27 0 0 1-41 12c2.5 25 40 19.9 42.8-4.4 11.7 20.7 37.6 14.7 45.2-10.6z"/> <use xlink:href="#tjA" width="100%" height="100%" fill="#f8c300" transform="matrix(-1 0 0 1 640 0)"/> <path id="tj-b" fill="#f8c300" d="M291.8 302.6c-5.3 11.3-15.7 13.2-24.8 4.1 0 0 3.6-2.6 7.6-3.3-.8-3.1.7-7.5 2.9-9.8a15 15 0 0 1 6.1 8.1c5.5-.7 8.2 1 8.2 1z"/> <use xlink:href="#tj-b" width="100%" height="100%" fill="#f8c300" transform="rotate(9.4 320 551.3)"/> <use xlink:href="#tj-b" width="100%" height="100%" fill="#f8c300" transform="rotate(18.7 320 551.3)"/> <path fill="none" stroke="#f8c300" stroke-width="11" d="M253.5 327.8a233 233 0 0 1 133 0"/> <g fill="#f8c300" transform="translate(320 164.6)scale(.68571)"> <path id="tj-c" d="m301930 415571-790463-574305h977066l-790463 574305L0-513674z" transform="scale(.00005)"/> </g> <g id="tj-d" fill="#f8c300" transform="translate(320 260.6)scale(.68571)"> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-70 -121.2)"/> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-121.2 -70)"/> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-140)"/> </g> <use xlink:href="#tj-d" width="100%" height="100%" fill="#f8c300" transform="matrix(-1 0 0 1 640 0)"/> </g></svg>';
@@ -653,6 +706,9 @@ function paintOrnaments(){
   r.setProperty("--orn-field", svgURL(ikatUnit(120, 64, [gold, gold, gold])));
 }
 
+/* Borders: Natural Earth 1:10m via world-atlas 2.0.2 (public domain), simplified and pre-projected */
+var TJMAP = {"w":640,"h":474,"minLon":66.9,"maxLat":41.25,"k":88.4924,"c":0.77934,"pad":20,"tj":"M272.8 40.5L274.8 41.3L277.3 44.2L278.3 47.9L276.8 47.6L271.6 40.9L272.8 40.5ZM299.9 109.6L301.4 111.7L300.1 113.8L297.9 115.6L295.7 116.2L292.2 115.4L289.4 116.7L288.5 116.3L285.0 119.3L279.8 121.4L277.8 123.0L277.6 128.1L276.1 132.7L273.6 134.9L269.1 135.4L266.6 139.3L265.2 138.8L264.9 136.2L266.4 133.2L268.6 132.0L270.8 129.2L270.1 127.7L266.6 126.0L256.2 123.8L253.7 121.9L252.0 119.6L250.5 118.8L244.1 118.6L234.1 112.1L231.6 111.9L204.6 121.4L202.3 121.5L200.6 119.6L199.9 121.9L197.1 126.2L196.8 128.4L199.3 137.5L192.9 139.7L189.4 134.2L186.4 131.7L181.4 145.7L180.5 152.7L181.0 154.2L184.2 157.7L184.7 159.2L184.4 171.3L185.4 173.5L188.1 172.4L189.7 170.3L193.1 172.6L197.9 172.2L200.3 171.6L205.0 168.3L213.7 168.3L222.2 171.6L227.4 170.5L232.3 171.8L235.1 168.8L236.6 168.3L239.6 168.8L243.0 170.4L244.1 170.1L247.5 164.2L248.5 166.8L248.0 172.8L249.2 173.3L257.4 168.0L260.4 168.6L262.1 167.1L266.6 165.9L270.1 168.1L275.1 168.0L276.8 169.2L279.0 175.5L282.0 177.3L282.6 178.5L282.0 182.0L283.0 183.9L287.0 185.3L291.7 183.5L293.4 183.7L296.2 181.9L301.2 184.2L303.4 183.1L307.1 175.2L309.3 173.8L315.3 172.8L320.0 173.5L323.7 169.8L327.7 167.1L334.4 164.9L337.9 167.4L339.4 170.1L336.6 175.5L338.1 178.5L341.1 179.8L344.3 180.0L351.3 178.5L352.8 178.5L353.8 179.4L354.6 181.5L354.3 185.5L352.6 187.7L351.8 190.7L352.3 192.5L354.6 194.9L358.5 194.9L367.7 189.1L375.1 186.5L376.3 187.4L378.3 194.8L382.6 195.8L385.8 197.8L386.1 199.8L387.5 202.4L388.3 202.2L393.5 190.0L399.0 188.0L404.7 188.5L407.4 185.8L411.4 187.3L415.4 184.2L429.2 187.6L433.4 186.8L441.4 188.3L445.7 186.3L450.1 187.9L452.3 187.7L463.2 184.4L464.3 181.0L466.0 179.8L475.9 177.7L482.4 178.5L484.3 179.4L485.1 188.0L482.1 198.2L482.6 200.7L484.1 203.5L487.9 207.8L489.6 213.3L493.8 216.5L497.8 221.2L497.5 224.1L496.6 225.1L490.1 226.3L488.1 228.7L487.6 230.3L488.6 233.3L491.3 236.7L491.6 243.8L494.1 248.0L495.8 254.2L497.0 255.7L500.8 257.5L505.0 260.8L511.7 261.0L513.7 259.2L512.2 256.4L512.2 254.7L515.4 253.4L516.1 250.5L518.1 248.4L524.8 250.1L532.8 248.6L542.5 253.4L554.1 258.0L557.6 261.2L562.1 261.6L566.6 266.0L567.8 270.7L567.5 274.0L563.8 278.8L562.8 281.8L562.8 290.3L564.1 300.4L565.6 302.9L570.3 305.7L571.2 308.1L571.0 316.7L572.8 318.2L570.6 321.5L570.8 322.6L571.5 323.7L575.2 325.7L576.2 328.2L572.5 336.0L570.8 338.2L571.2 343.2L574.8 347.6L581.2 351.2L587.7 359.1L589.9 360.6L584.9 362.6L583.4 368.6L574.0 371.9L572.5 374.9L571.2 375.7L569.0 374.5L564.1 366.7L555.1 361.2L553.2 362.4L545.0 362.7L541.0 361.2L538.5 361.7L535.0 361.0L534.0 359.3L532.6 358.8L531.8 359.5L531.5 358.4L530.6 360.6L525.1 360.4L524.1 361.5L523.9 364.7L522.6 366.2L513.2 368.4L502.8 372.6L498.3 373.4L494.8 376.2L492.1 375.7L489.6 376.9L487.6 374.7L483.4 375.4L482.1 374.9L481.9 372.9L484.1 369.9L488.3 369.1L491.6 366.2L492.6 358.2L487.1 358.0L474.2 353.6L471.0 353.6L466.8 356.0L464.5 354.9L461.0 354.9L458.6 356.3L455.3 360.0L452.3 360.0L448.6 363.4L447.7 366.0L445.4 368.2L440.4 368.7L435.4 371.8L434.0 373.6L429.0 374.9L426.3 376.6L417.1 393.5L406.9 395.1L404.4 396.4L399.7 395.5L396.8 396.0L389.5 399.0L380.3 407.4L360.5 422.8L354.3 424.6L347.8 423.8L344.8 422.2L341.6 418.1L339.9 410.5L334.7 400.7L334.4 395.1L332.4 390.2L333.9 376.9L336.4 372.5L336.9 368.8L336.4 359.9L338.1 353.2L337.2 346.0L337.4 342.1L338.9 339.7L340.1 333.3L339.4 328.8L339.9 327.2L342.3 325.5L343.4 323.9L343.9 322.4L343.4 317.2L344.1 316.5L339.9 312.5L337.4 312.4L326.2 317.0L322.3 314.3L320.5 314.1L321.5 307.7L323.7 303.8L327.4 291.3L327.9 289.4L327.4 285.3L325.7 282.7L317.8 278.8L310.8 272.3L308.8 271.2L306.1 271.4L304.1 267.9L301.9 265.9L299.4 265.7L299.2 268.4L298.4 269.3L293.9 267.5L291.9 268.8L287.5 268.1L286.3 268.4L285.0 270.5L279.5 271.7L281.0 273.4L280.6 274.4L277.3 276.6L275.1 277.0L274.1 283.2L271.6 284.4L265.7 297.7L262.4 299.2L256.2 306.7L254.0 307.9L253.4 309.2L251.2 310.0L251.0 311.5L251.7 312.9L248.5 313.9L245.8 312.4L244.8 314.6L247.2 321.8L250.5 322.8L251.0 324.9L252.8 327.6L252.5 329.8L253.2 332.4L253.2 334.5L251.2 338.2L251.0 340.9L250.5 341.5L248.8 341.5L247.5 344.8L244.8 348.2L242.8 348.9L236.6 347.5L237.1 348.2L234.8 347.8L233.1 345.8L230.6 345.2L228.1 341.5L226.6 341.3L220.2 344.6L216.7 343.3L210.8 345.1L201.3 344.1L199.9 344.9L198.6 348.5L194.1 352.4L190.9 357.3L190.9 362.7L191.9 363.4L191.4 365.8L193.7 372.5L193.1 374.3L195.6 375.1L192.9 380.3L187.2 385.4L181.7 386.9L173.2 381.0L171.5 377.2L167.3 373.8L166.3 370.6L162.3 366.9L157.1 366.2L157.7 368.1L159.1 369.3L159.4 370.6L158.3 371.7L154.9 367.3L153.4 366.9L151.9 367.5L151.7 368.6L152.7 371.0L152.4 373.9L148.2 371.7L142.0 371.5L141.2 372.5L142.2 374.2L140.5 374.5L139.0 377.8L133.8 379.0L132.1 381.6L123.6 382.7L124.6 384.7L124.1 386.0L122.9 386.8L117.2 386.0L115.7 386.9L115.2 388.4L115.7 394.0L114.9 395.1L108.7 394.5L99.0 402.3L97.5 402.7L96.6 402.2L93.3 396.9L90.3 394.9L87.4 390.3L82.6 388.7L80.1 386.4L80.1 384.9L80.7 379.5L83.2 372.5L83.2 365.6L81.9 358.6L82.1 354.8L84.1 349.5L87.1 344.1L94.3 336.0L99.3 328.8L104.3 315.7L105.5 314.4L111.0 313.3L113.0 312.0L115.2 306.4L117.9 302.4L120.6 292.2L120.4 288.8L118.6 286.1L113.2 281.1L109.7 279.2L106.0 273.2L103.2 270.5L102.5 269.3L102.3 265.3L99.8 260.2L99.8 253.2L98.6 246.5L99.0 245.1L101.0 243.4L100.6 238.0L105.2 236.5L107.2 234.2L107.7 230.9L101.8 219.7L100.6 219.4L97.3 220.9L96.1 220.8L94.6 219.4L92.3 218.9L83.4 221.5L74.5 220.0L73.2 218.8L73.7 209.7L73.0 207.4L71.2 207.6L69.7 205.7L67.0 204.6L61.3 204.5L52.8 201.5L51.1 199.7L50.6 194.9L51.9 193.3L53.6 193.1L55.1 187.2L56.3 177.0L57.1 176.1L60.8 175.7L60.6 171.4L61.8 170.3L67.5 169.4L73.7 164.7L79.7 164.0L103.2 170.1L113.4 170.4L119.2 172.4L125.9 172.4L131.6 170.5L130.8 168.9L134.8 165.7L137.2 162.2L138.3 145.9L139.0 144.0L140.8 144.4L143.2 142.3L147.0 146.6L148.2 143.2L149.4 142.7L150.2 141.1L150.2 139.7L147.9 134.7L148.2 132.3L149.7 133.4L153.7 142.7L156.6 141.4L156.4 139.5L150.2 131.1L149.7 126.9L148.4 126.0L149.2 123.4L151.9 127.3L156.6 124.4L161.6 125.1L163.3 124.9L163.9 123.8L163.3 119.9L160.1 117.7L143.2 120.8L137.8 118.0L136.0 116.0L144.0 113.4L151.2 113.8L154.9 111.9L166.1 110.0L178.5 114.3L181.9 114.5L184.4 113.4L184.4 111.2L179.4 106.9L179.2 104.2L185.9 104.7L186.4 100.4L182.7 91.9L181.2 86.9L178.5 82.2L178.5 80.4L181.0 78.8L186.2 77.9L186.4 66.1L189.4 61.6L191.4 60.1L194.9 59.6L197.9 61.9L199.9 62.0L209.5 73.3L212.5 75.0L214.2 74.3L219.0 69.2L221.7 67.4L234.3 63.5L241.0 58.7L248.3 55.9L253.2 52.9L257.0 48.6L259.0 39.2L261.4 38.6L264.6 39.8L282.6 59.2L282.3 60.9L278.6 58.3L277.0 58.5L276.6 61.1L277.8 62.4L284.0 63.9L286.8 65.4L286.0 69.1L284.8 69.6L284.3 70.9L281.5 72.2L276.3 76.4L273.1 80.2L270.1 81.3L266.6 85.8L261.4 87.2L259.2 88.5L258.2 90.4L258.2 92.1L260.4 95.2L259.4 98.4L264.4 100.2L268.3 99.6L269.9 100.2L271.9 103.2L273.9 111.0L276.8 113.0L282.6 112.8L292.5 109.9L299.9 109.6ZM268.1 141.1L276.6 143.8L279.0 144.0L281.0 142.9L282.0 143.2L282.6 146.4L277.6 148.4L273.9 151.2L271.6 147.7L267.7 143.8L267.1 141.1L268.1 141.1Z","nb":"M357.0 131.6L355.8 138.1L355.0 139.2L352.1 138.8L349.3 137.3L348.6 135.9L349.8 134.5L351.5 134.5L357.0 131.6ZM299.9 109.6L292.5 109.9L282.6 112.8L276.8 113.0L273.9 111.0L271.9 103.2L269.9 100.2L268.3 99.6L264.4 100.2L259.4 98.4L260.4 95.2L258.2 92.1L258.2 90.4L259.2 88.5L261.4 87.2L266.6 85.8L270.1 81.3L273.1 80.2L276.3 76.4L281.5 72.2L284.3 70.9L284.8 69.6L286.0 69.1L286.8 65.4L284.0 63.9L277.8 62.4L276.6 61.1L277.0 58.5L278.6 58.3L282.3 60.9L282.6 59.2L264.6 39.8L261.4 38.6L259.0 39.2L257.0 48.6L253.2 52.9L248.3 55.9L241.0 58.7L234.3 63.5L221.7 67.4L219.0 69.2L214.2 74.3L212.5 75.0L209.5 73.3L199.9 62.0L197.9 61.9L194.9 59.6L193.7 59.4L190.4 60.7L186.4 66.1L186.2 77.9L181.0 78.8L178.5 80.4L178.5 82.2L181.2 86.9L182.7 91.9L186.4 100.4L185.9 104.7L179.2 104.2L179.4 106.9L184.4 111.2L184.4 113.4L181.9 114.5L178.5 114.3L166.1 110.0L154.9 111.9L151.2 113.8L144.0 113.4L136.0 116.0L137.8 118.0L143.2 120.8L160.1 117.7L163.3 119.9L163.9 123.8L163.3 124.9L161.6 125.1L156.6 124.4L151.9 127.3L149.2 123.4L148.4 126.0L149.7 126.9L150.2 131.1L156.4 139.5L156.6 141.4L153.7 142.7L149.7 133.4L148.2 132.3L147.9 134.7L150.2 139.7L150.2 141.1L149.4 142.7L148.2 143.2L147.0 146.6L143.2 142.3L140.8 144.4L139.0 144.0L138.3 145.9L137.2 162.2L134.8 165.7L130.8 168.9L131.6 170.5L125.9 172.4L119.2 172.4L113.4 170.4L103.2 170.1L79.7 164.0L76.4 164.0L73.7 164.7L67.5 169.4L61.8 170.3L60.6 171.4L60.8 175.7L57.1 176.1L56.3 177.0L55.1 187.2L53.6 193.1L51.9 193.3L50.6 194.9L51.1 199.7L52.8 201.5L61.3 204.5L67.0 204.6L69.7 205.7L71.2 207.6L73.0 207.4L73.7 209.7L73.2 218.8L74.5 220.0L83.4 221.5L93.3 218.9L96.1 220.8L97.3 220.9L100.6 219.4L102.8 220.9L107.2 229.1L107.7 232.8L105.2 236.5L100.6 238.0L101.0 243.4L99.0 245.1L98.6 246.5L99.8 253.2L99.8 260.2L102.3 265.3L102.5 269.3L106.0 273.2L108.5 277.9L118.6 286.1L120.4 288.8L120.6 292.2L119.7 297.4L117.9 302.4L115.2 306.4L113.0 312.0L111.0 313.3L105.5 314.4L104.3 315.7L99.3 328.8L94.3 336.0L87.1 344.1L84.1 349.5L82.1 354.8L81.9 358.6L83.2 365.6L83.2 372.5L80.7 379.5L80.4 377.7L78.4 375.8L73.7 375.4L70.5 373.6L67.7 374.2L65.5 376.6L63.3 371.9L61.5 371.0L60.1 371.5L53.9 376.6L48.9 377.7L46.4 379.5L44.7 379.7L43.2 379.0L39.9 373.2L35.4 371.0L32.8 365.1L27.3 362.1L24.1 361.9L17.6 363.6L8.7 363.9L5.7 365.7L-1.5 363.4L-6.2 363.9L-8.0 362.6L-7.7 361.0L-4.5 356.1L-8.0 349.9L-6.2 340.8L-6.2 326.9L-4.0 322.6L-0.0 317.4L2.5 312.4L1.0 308.1L-1.2 306.4L-6.5 304.4L-13.9 303.8L-20.9 300.5L-21.4 296.4L-21.4 -33.1L-6.2 -33.1L-5.0 -23.4L5.4 24.6L8.4 28.1L14.1 29.6L78.4 25.9L84.4 28.3L91.6 24.4L92.3 27.0L96.1 31.9L97.3 37.0L98.3 38.3L100.0 37.3L101.5 38.3L102.5 36.4L104.0 36.2L104.0 39.0L105.0 39.5L102.8 40.9L104.3 42.7L104.3 45.2L101.5 53.4L98.6 56.5L96.1 57.6L95.3 58.8L100.6 60.9L111.4 70.6L127.6 78.9L131.3 75.8L136.8 77.6L138.3 76.7L138.8 75.5L137.2 75.0L139.0 71.6L137.8 67.3L135.0 65.8L134.1 60.4L133.8 56.1L135.3 53.5L135.3 49.8L136.6 50.4L137.2 48.3L144.2 44.4L147.2 36.5L149.2 34.4L153.9 32.3L156.6 28.3L162.1 27.0L167.0 23.6L168.6 14.2L168.6 12.1L167.0 10.4L167.0 9.3L172.3 6.6L173.8 7.3L174.3 5.3L179.7 1.4L183.4 1.9L187.7 -0.3L191.7 0.5L192.6 0.1L191.2 -3.4L191.9 -6.1L193.9 -7.4L197.9 -8.6L207.8 -17.0L217.2 -19.6L224.9 -19.8L227.7 -21.0L230.9 -24.8L235.9 -26.8L243.3 -33.0L320.3 -33.1L278.6 -33.1L271.9 -30.7L268.6 -27.4L265.2 -20.9L245.5 -9.0L244.1 -6.8L245.3 -4.0L247.8 -2.7L257.7 -1.6L261.4 1.0L263.9 5.3L266.4 6.4L277.6 0.8L279.8 0.4L281.3 1.2L286.3 9.2L287.0 12.9L286.0 19.8L287.0 21.0L291.0 20.1L293.4 21.4L296.9 25.0L301.2 24.7L306.1 26.0L308.6 27.9L311.3 28.1L314.1 31.9L315.3 32.5L315.5 26.2L317.0 25.5L318.6 25.6L319.5 26.6L320.3 29.9L321.7 32.2L322.8 32.0L325.2 28.1L329.9 32.2L331.4 30.8L331.9 27.9L331.2 12.5L331.7 11.4L338.9 15.9L341.4 15.5L343.1 13.5L346.8 4.0L346.6 2.3L343.9 -1.6L345.1 -5.0L347.6 -6.5L349.0 -6.4L350.1 -5.1L350.3 -3.4L349.0 4.5L349.8 4.7L350.8 2.6L352.6 4.5L353.0 2.1L354.3 2.0L361.2 11.9L362.7 17.3L363.0 24.9L364.7 25.8L370.1 24.9L374.1 28.3L379.1 24.7L380.8 24.6L382.6 25.5L383.8 29.6L384.6 36.8L383.1 42.2L391.8 40.1L393.0 37.3L394.8 35.6L397.4 39.4L404.9 41.3L405.2 44.7L409.4 45.9L414.3 52.8L420.1 54.3L429.0 53.4L431.7 54.2L431.7 58.1L440.9 53.5L444.4 56.5L450.6 56.8L450.8 58.7L448.9 61.3L445.7 63.1L439.2 65.5L433.2 69.1L425.8 71.3L424.1 73.9L423.3 79.7L421.3 80.6L417.6 79.6L416.6 83.6L414.8 85.4L412.1 85.5L407.2 82.4L402.7 81.1L398.0 76.4L396.0 77.3L395.7 78.8L397.2 81.2L396.8 85.2L400.5 88.2L401.2 90.0L400.2 94.3L399.0 96.1L397.2 96.5L390.3 93.2L386.3 93.0L386.6 92.1L389.5 91.5L390.0 90.6L389.3 90.0L383.1 90.4L378.6 92.8L376.6 98.0L374.6 99.7L368.7 102.7L368.9 105.2L373.2 107.8L373.2 109.5L360.5 108.6L358.3 110.6L355.2 115.7L350.6 118.1L349.0 117.5L348.3 110.8L346.1 107.6L344.8 108.8L343.6 113.0L338.6 112.6L335.7 111.1L333.2 107.5L330.2 106.6L327.9 104.7L323.2 104.7L320.3 101.9L319.2 102.3L316.6 107.2L314.6 107.5L306.3 106.3L302.4 107.1L299.9 109.6ZM272.8 40.5L271.6 40.9L272.6 42.7L276.8 47.6L278.3 47.9L276.3 42.7L272.8 40.5ZM315.0 126.9L318.3 125.4L319.5 126.5L319.0 127.8L314.8 131.1L315.0 133.5L318.0 136.6L317.0 140.5L309.6 141.6L308.3 139.2L306.8 139.2L304.3 141.1L303.4 140.7L303.4 138.4L306.3 134.0L305.9 131.2L302.4 129.7L299.4 123.6L301.2 117.8L303.4 116.6L304.9 117.7L308.1 123.6L315.0 126.9ZM661.4 -33.1L661.4 100.2L661.4 91.5L660.4 96.5L657.9 98.1L654.2 96.3L651.2 96.1L645.0 98.9L642.3 103.3L640.8 104.2L631.9 103.2L625.7 104.8L624.4 103.6L622.7 98.1L623.2 94.8L624.9 92.4L624.6 90.8L621.2 86.9L620.4 80.3L619.2 76.4L617.2 74.6L614.7 74.6L611.7 76.3L596.8 88.1L594.3 88.9L593.4 91.2L591.9 91.5L588.1 89.6L581.2 91.7L576.2 90.0L568.8 85.2L567.3 85.4L564.1 93.4L564.6 94.8L568.6 98.8L569.0 101.9L567.0 102.3L561.1 100.8L558.3 101.3L554.9 104.8L548.7 108.8L542.5 115.4L535.2 121.2L532.8 122.3L528.3 122.3L523.6 121.0L521.1 121.2L514.4 124.7L509.9 125.3L507.9 126.8L506.7 128.7L505.7 133.2L502.3 137.8L501.5 142.7L498.0 146.2L497.0 149.5L497.8 153.1L500.0 153.8L502.3 156.2L503.0 161.9L504.8 166.6L501.5 169.5L499.2 175.7L497.3 177.7L484.3 179.4L482.4 178.5L475.9 177.7L473.7 178.0L466.0 179.8L464.3 181.0L463.2 184.4L452.3 187.7L450.1 187.9L445.7 186.3L441.4 188.3L433.4 186.8L429.2 187.6L415.4 184.2L411.4 187.3L407.4 185.8L404.7 188.5L399.0 188.0L393.5 190.0L388.3 202.2L387.5 202.4L386.1 199.8L385.8 197.8L382.6 195.8L378.3 194.8L376.3 187.4L375.1 186.5L367.7 189.1L358.5 194.9L354.6 194.9L352.3 192.5L351.8 190.7L352.6 187.7L354.3 185.5L354.6 181.5L353.8 179.4L352.8 178.5L351.3 178.5L344.3 180.0L341.1 179.8L338.1 178.5L336.6 175.5L339.4 170.1L337.9 167.4L334.4 164.9L327.7 167.1L323.7 169.8L320.0 173.5L315.3 172.8L309.3 173.8L307.1 175.2L303.4 183.1L301.2 184.2L296.2 181.9L293.4 183.7L291.7 183.5L287.0 185.3L283.0 183.9L282.0 182.0L282.6 178.5L282.0 177.3L279.0 175.5L276.8 169.2L275.1 168.0L270.1 168.1L266.6 165.9L262.1 167.1L260.4 168.6L257.4 168.0L249.2 173.3L248.0 172.8L248.5 166.8L247.5 164.2L244.1 170.1L243.0 170.4L239.6 168.8L236.6 168.3L235.1 168.8L232.3 171.8L227.4 170.5L222.2 171.6L213.7 168.3L205.0 168.3L200.3 171.6L197.9 172.2L193.1 172.6L189.7 170.3L188.1 172.4L185.4 173.5L184.4 171.3L184.7 159.2L184.2 157.7L181.0 154.2L180.5 152.7L181.4 145.7L186.4 131.7L189.4 134.2L192.9 139.7L199.3 137.5L196.8 128.4L197.1 126.2L199.9 121.9L200.6 119.6L202.3 121.5L204.6 121.4L231.6 111.9L234.1 112.1L244.1 118.6L250.5 118.8L252.0 119.6L253.7 121.9L256.2 123.8L266.6 126.0L270.1 127.7L270.8 129.2L268.6 132.0L266.4 133.2L264.9 136.2L265.2 138.8L266.6 139.3L269.1 135.4L273.6 134.9L276.1 132.7L277.6 128.1L277.8 123.0L279.8 121.4L285.0 119.3L288.5 116.3L289.4 116.7L292.2 115.4L295.7 116.2L297.9 115.6L300.1 113.8L301.4 111.7L299.9 109.6L302.4 107.1L306.3 106.3L314.6 107.5L316.6 107.2L319.2 102.3L320.3 101.9L323.2 104.7L327.9 104.7L330.2 106.6L333.2 107.5L335.7 111.1L338.6 112.6L343.6 113.0L344.8 108.8L346.1 107.6L348.3 110.8L349.0 117.5L350.6 118.1L355.2 115.7L358.3 110.6L360.5 108.6L373.2 109.5L373.2 107.8L368.9 105.2L368.7 102.7L374.6 99.7L376.6 98.0L378.6 92.8L383.1 90.4L389.3 90.0L390.0 90.6L389.5 91.5L386.6 92.1L386.3 93.0L390.3 93.2L397.2 96.5L399.0 96.1L400.2 94.3L401.2 90.0L400.5 88.2L396.8 85.2L397.2 81.2L395.7 78.8L396.0 77.3L398.0 76.4L402.7 81.1L407.2 82.4L412.1 85.5L414.8 85.4L416.6 83.6L417.6 79.6L421.3 80.6L423.3 79.7L424.1 73.9L425.8 71.3L433.2 69.1L439.2 65.5L448.9 61.3L450.8 58.7L450.6 56.8L444.4 56.5L440.9 53.5L431.7 58.1L431.7 54.2L429.0 53.4L420.1 54.3L414.3 52.8L409.4 45.9L405.2 44.7L404.9 41.3L397.4 39.4L394.8 35.6L393.0 37.3L391.8 40.1L383.1 42.2L384.6 36.8L383.8 29.6L382.6 25.5L380.8 24.6L379.1 24.7L374.1 28.3L370.1 24.9L364.7 25.8L363.0 24.9L362.7 17.3L361.2 11.9L354.3 2.0L353.0 2.1L352.6 4.5L350.8 2.6L349.8 4.7L349.0 4.5L350.3 -1.6L350.1 -5.1L349.0 -6.4L347.6 -6.5L345.1 -5.0L343.9 -1.6L346.6 2.3L346.8 4.0L343.1 13.5L341.4 15.5L338.9 15.9L331.7 11.4L331.2 12.5L331.9 27.9L331.4 30.8L329.9 32.2L325.2 28.1L322.8 32.0L321.7 32.2L320.3 29.9L319.5 26.6L318.6 25.6L317.0 25.5L315.5 26.2L315.3 32.5L314.1 31.9L311.3 28.1L308.6 27.9L306.1 26.0L301.2 24.7L296.9 25.0L293.4 21.4L291.0 20.1L287.0 21.0L286.0 19.8L287.0 12.9L286.3 9.2L281.3 1.2L279.8 0.4L277.6 0.8L269.1 5.4L266.6 6.4L265.2 6.2L260.2 -0.1L257.7 -1.6L247.8 -2.7L245.3 -4.0L244.1 -6.8L245.5 -9.0L265.2 -20.9L268.6 -27.4L271.9 -30.7L278.6 -33.1L661.4 -33.1ZM357.0 131.6L351.5 134.5L349.8 134.5L348.6 135.9L350.8 138.3L354.0 139.5L355.0 139.2L355.8 138.1L357.0 131.6ZM315.0 126.9L308.1 123.6L304.9 117.7L303.4 116.6L301.2 117.8L299.4 123.6L302.4 129.7L305.9 131.2L306.3 134.0L303.4 138.4L303.4 140.7L304.3 141.1L305.4 140.5L306.8 139.2L308.3 139.2L309.6 141.6L317.0 140.5L318.0 136.6L315.0 133.5L314.8 131.1L319.0 127.8L319.5 126.5L318.3 125.4L315.0 126.9ZM268.1 141.1L267.1 141.1L267.7 143.8L271.6 147.7L273.9 151.2L277.6 148.4L282.6 146.4L282.0 143.2L281.0 142.9L279.0 144.0L276.6 143.8L268.1 141.1ZM547.2 394.2L546.7 399.5L545.7 399.8L542.7 396.4L541.2 395.7L536.8 396.6L525.9 404.7L524.3 405.3L518.6 405.1L517.7 405.9L516.9 410.1L516.1 411.0L512.2 412.5L506.0 411.1L500.3 407.4L494.1 405.6L484.9 405.3L475.9 406.8L471.4 406.2L463.5 406.5L460.1 407.9L453.9 407.0L443.7 408.1L439.9 410.1L437.0 409.2L431.5 411.1L415.1 410.9L410.6 412.0L407.4 413.7L403.0 417.5L392.5 418.9L383.3 421.6L382.1 423.5L383.6 426.8L376.6 428.6L375.1 429.8L375.7 432.2L370.1 434.8L363.0 440.4L357.5 441.1L356.0 442.0L357.5 448.5L356.8 449.5L353.5 449.5L347.6 444.4L344.8 444.0L342.8 448.9L340.1 453.1L341.4 455.5L336.9 457.2L329.2 465.2L324.8 466.9L323.5 470.2L318.0 473.4L317.0 476.9L314.8 479.1L314.6 482.3L320.5 487.1L326.2 489.3L327.4 490.5L328.5 494.8L331.4 497.1L334.9 502.7L335.2 506.4L346.8 506.7L-21.4 506.7L-21.4 344.9L-21.4 366.7L-19.9 366.9L-13.4 365.1L-11.0 367.5L-5.0 363.4L-1.5 363.4L5.7 365.7L8.7 363.9L17.6 363.6L24.1 361.9L27.3 362.1L32.8 365.1L35.4 371.0L39.9 373.2L43.2 379.0L44.7 379.7L46.4 379.5L48.9 377.7L53.9 376.6L60.1 371.5L61.5 371.0L63.3 371.9L65.5 376.6L67.7 374.2L70.5 373.6L73.7 375.4L77.0 375.4L79.7 376.6L80.4 377.7L80.1 386.4L82.6 388.7L87.4 390.3L90.3 394.9L93.3 396.9L96.6 402.2L97.5 402.7L99.0 402.3L108.7 394.5L114.9 395.1L115.7 394.0L115.2 390.2L115.7 386.9L117.2 386.0L122.9 386.8L124.1 386.0L124.6 384.7L123.6 382.7L132.1 381.6L133.8 379.0L139.0 377.8L140.5 374.5L142.2 374.2L141.2 372.5L142.0 371.5L148.2 371.7L152.4 373.9L152.7 371.0L151.7 368.6L151.9 367.5L153.4 366.9L154.9 367.3L157.4 371.0L159.1 371.4L159.1 369.3L157.7 368.1L157.1 366.2L162.3 366.9L163.9 367.8L166.3 370.6L167.3 373.8L171.5 377.2L173.2 381.0L181.7 386.9L183.2 386.8L187.2 385.4L188.9 383.3L191.9 381.6L195.4 376.3L195.6 375.1L193.1 374.3L193.7 372.5L191.4 365.8L191.9 363.4L190.9 362.7L190.9 357.3L194.1 352.4L198.6 348.5L199.9 344.9L201.3 344.1L210.8 345.1L216.7 343.3L220.2 344.6L226.6 341.3L228.1 341.5L230.6 345.2L233.1 345.8L234.8 347.8L237.1 348.2L236.6 347.5L242.8 348.9L244.8 348.2L247.5 344.8L248.8 341.5L250.5 341.5L251.0 340.9L251.2 338.2L253.2 334.5L252.8 327.6L251.0 324.9L250.5 322.8L247.2 321.8L245.3 317.2L244.8 314.6L245.8 312.4L248.5 313.9L251.7 312.9L251.0 311.5L251.2 310.0L253.4 309.2L254.0 307.9L256.2 306.7L262.4 299.2L265.7 297.7L271.6 284.4L274.1 283.2L275.1 277.0L277.3 276.6L280.6 274.4L281.0 273.4L279.5 271.7L285.0 270.5L286.3 268.4L287.5 268.1L291.9 268.8L293.9 267.5L298.4 269.3L299.2 268.4L299.4 265.7L302.6 266.4L306.1 271.4L308.8 271.2L310.8 272.3L317.8 278.8L325.7 282.7L327.4 285.3L327.9 289.4L323.7 303.8L321.5 307.7L320.5 314.1L322.3 314.3L326.2 317.0L337.4 312.4L339.9 312.5L344.1 316.5L343.4 317.2L343.9 320.3L343.4 323.9L342.3 325.5L339.9 327.2L339.4 328.8L340.1 333.3L338.9 339.7L337.4 342.1L337.2 346.0L338.1 353.2L336.4 359.9L336.9 368.8L336.4 372.5L333.9 376.9L332.4 390.2L334.4 395.1L334.7 400.7L339.9 410.5L341.6 418.1L344.8 422.2L347.8 423.8L354.3 424.6L360.5 422.8L380.3 407.4L389.5 399.0L396.8 396.0L399.7 395.5L404.4 396.4L406.9 395.1L417.1 393.5L426.3 376.6L429.0 374.9L434.0 373.6L435.4 371.8L440.4 368.7L445.4 368.2L447.7 366.0L448.6 363.4L452.3 360.0L455.3 360.0L458.6 356.3L461.0 354.9L464.5 354.9L466.8 356.0L471.0 353.6L474.2 353.6L487.1 358.0L492.6 358.2L491.6 366.2L488.3 369.1L484.1 369.9L481.9 372.9L482.1 374.9L483.4 375.4L487.6 374.7L489.6 376.9L492.1 375.7L494.8 376.2L498.3 373.4L502.8 372.6L513.2 368.4L522.6 366.2L523.9 364.7L524.1 361.5L525.1 360.4L530.6 360.6L531.5 358.4L531.8 359.5L532.6 358.8L534.0 359.3L535.0 361.0L538.5 361.7L541.0 361.2L545.0 362.7L553.2 362.4L555.1 361.2L564.1 366.7L569.0 374.5L571.2 375.7L564.3 377.2L561.1 370.6L559.4 369.7L556.3 372.7L554.1 373.4L552.6 375.7L551.7 375.7L550.4 374.5L544.2 375.6L543.2 376.2L541.2 380.3L538.8 381.2L535.0 381.2L535.0 383.0L536.0 384.9L542.5 388.7L545.4 393.3L547.2 394.2ZM661.4 506.7L661.4 506.7L661.4 506.7Z"};
+
 /* ===== shared, language-independent data: sources, figures, zones, events ===== */
 var SRC = [
  null,
@@ -692,7 +748,9 @@ var SRC = [
  {t:"FreshPlaza — Tajikistan’s dried fruit processors pitch for new buyers at Food Ingredients Europe 2025", u:"https://www.freshplaza.com/europe/article/9791442/tajikistan-s-dried-fruit-processors-pitch-for-new-buyers-at-food-ingredients-europe-2025/"},
  {t:"European Commission — Access2Markets: My Trade Assistant", u:"https://trade.ec.europa.eu/access-to-markets/en/my-trade-assistant"},
  {t:"Barakat Isfara LLC — company website: products, quality, contacts", u:"https://barakat-isfara.com/about_company/"},
- {t:"Barakat Isfara LLC — “Barakat-Isfara products exported to Malaysia”, 29.03.2022", u:"https://barakat-isfara.com/2022/03/29/export_barakat/"}
+ {t:"Barakat Isfara LLC — “Barakat-Isfara products exported to Malaysia”, 29.03.2022", u:"https://barakat-isfara.com/2022/03/29/export_barakat/"},
+ {t:"European Commission, DG Trade — European Union, trade in goods with Tajikistan (factsheet, 20.05.2026)", u:"https://webgate.ec.europa.eu/isdb_results/factsheets/country/details_tadjikistan_en.pdf"},
+ {t:"Regulation (EU) No 978/2012 applying a scheme of generalised tariff preferences (GSP), Art. 7", u:"https://eur-lex.europa.eu/eli/reg/2012/978/oj"}
 ];
 function sref(n){ return '<a class="src" href="#quellen" data-src="'+n+'" title="'+(SRC[n]?SRC[n].t.replace(/"/g,"&quot;"):"")+'">['+n+']</a>'; }
 
@@ -748,6 +806,9 @@ var EXPORTERS = [
  {n:"Mevai Kand", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]},
  {n:"Kand K", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]}
 ];
+
+/* EU imports from Tajikistan by HS section, 2025, million EUR (DG Trade factsheet, src 38); total 579 */
+var EUIMP = {total:579, growth:90.4, rows:[["metals",533,92.0],["mineral",19,3.2],["textile",14,2.4],["veg",10,1.8],["hides",1,0.2]]};
 
 var C = {};
 C.de = {
@@ -846,7 +907,10 @@ C.de = {
   ],
   gk:"Zugang zum EU-Markt", gt:"Zollpräferenzen im Rahmen des EU-APS",
   gp:"Tadschikistan ist Begünstigter des Allgemeinen Präferenzsystems der EU (APS, englisch GSP). Für viele Waren gelten ermäßigte Zölle — vorausgesetzt, der Exporteur ist im REX-System registriert und erklärt den präferenziellen Ursprung. Die genaue Zollbelastung je Warennummer zeigt das Portal Access2Markets der Europäischen Kommission.",
-  gs:[14,15]
+  gs:[14,15],
+  ex:{"k": "Export in die EU", "t": "Was Tadschikistan nach Europa liefert", "l": "2025 importierte die EU Waren im Wert von 579 Mio. € aus Tadschikistan — 90 % mehr als im Vorjahr. Neun Zehntel davon sind Metalle.", "g": {"metals": "Unedle Metalle (dazu gehören Aluminium und Antimon)", "mineral": "Mineralische Stoffe: Erze und Konzentrate", "textile": "Textilien: Baumwollfasern, Garne, Gewebe", "veg": "Pflanzliche Erzeugnisse: Trockenfrüchte, Nüsse, Hülsenfrüchte", "hides": "Häute und Felle"}, "u": "Mio. €", "de": "Direkte Exporte Tadschikistans nach Deutschland 2024: rund 3 Mio. €.", "pk": "Angebot", "pt": "Was tadschikische Hersteller liefern können", "p": [{"k": "alu", "t": "Aluminium", "s": "Gehört zur Gruppe „unedle Metalle“ — 92 % der Exporte in die EU."}, {"k": "ore", "t": "Antimon und Erze", "s": "Tadschikistan ist der wichtigste Antimon-Lieferant der EU."}, {"k": "cotton", "t": "Baumwolle und Textilien", "s": "Fasern, Garne, Gewebe; Potenzial bei Fertigwaren."}, {"k": "fruit", "t": "Trockenfrüchte und Nüsse", "s": "Aprikosen, Rosinen, Nüsse — von EU-tauglich zertifizierten Betrieben."}]},
+  gsp:{"steps": [{"t": "Registrierung im REX", "p": "Der Exporteur lässt sich über die Zollbehörden Tadschikistans im System registrierter Ausführer registrieren."}, {"t": "Erklärung zum Ursprung", "p": "Im Handelsdokument zur Sendung erklärt der Exporteur den präferenziellen Ursprung der Ware."}, {"t": "Ermäßigter Zoll", "p": "Der deutsche Importeur beantragt die Präferenz bei der Einfuhr — der Zoll sinkt oder entfällt."}], "f": [{"v": "0 %", "l": "Zoll auf „nicht empfindliche“ Waren: Wertzölle vollständig ausgesetzt"}, {"v": "−3,5 Pp.", "l": "Senkung des Wertzolls auf „empfindliche“ Waren"}, {"v": "−20 %", "l": "für Textilien der Abschnitte XI(a) und XI(b)"}], "fl": "Allgemeine APS-Regelung, Art. 7 Verordnung (EU) Nr. 978/2012", "go": "Zoll für eine Ware prüfen"},
+  con:{"t": "Verfassung", "s": "der Republik Tadschikistan"}
  },
  invest:{
   h1:"Investieren in Tadschikistan",
@@ -860,7 +924,7 @@ C.de = {
   xn:"Steuersätze ändern sich. Bitte lassen Sie sich vor einer Investitionsentscheidung von einem Steuerberater in Tadschikistan beraten.",
   zk:"Freie Wirtschaftszonen", zt:"Fünf Zonen mit eigenem Steuer- und Zollregime",
   zl:"Wählen Sie eine Zone auf der Karte. Die Punkte liegen an den tatsächlichen Koordinaten der Standorte.",
-  zcap:"Schematische Darstellung nach geografischen Koordinaten, ohne Grenzverlauf.",
+  zcap:"Grenzen: Natural Earth (1:10 Mio.), vereinfacht. Punkte nach den Koordinaten der Zonen.",
   zones:{
    sughd:{n:"FWZ Sughd", f:"Industrie und Export", p:"Im südwestlichen Industriegebiet von Chudschand. Hergestellt werden Elektrokabel, Kunststoffrohre, Aluminium- und PVC-Profile, Baustoffe, Farben und Lacke, Kunststoffbehälter; dazu Montage von Solarkollektoren und Tiefbrunnenpumpen sowie Metallrecycling."},
    panj:{n:"FWZ Pandsch", f:"Handel, Transit, Industrie", p:"An der Grenze zu Afghanistan. Zwei Sektoren: 186 ha für Handel, Import, Export, Finanzen und Innovation, 215,6 ha für Industrie."},
@@ -1063,7 +1127,10 @@ C.ru = {
   ],
   gk:"Доступ на рынок ЕС", gt:"Таможенные преференции по схеме ВСП ЕС",
   gp:"Таджикистан — бенефициар Всеобщей системы преференций ЕС (ВСП, англ. GSP). Для многих товаров действуют пониженные пошлины — при условии, что экспортёр зарегистрирован в системе REX и заявляет преференциальное происхождение. Точную пошлину по каждому коду товара показывает портал Еврокомиссии Access2Markets.",
-  gs:[14,15]
+  gs:[14,15],
+  ex:{"k": "Экспорт в ЕС", "t": "Что Таджикистан продаёт в Европу", "l": "В 2025 году ЕС импортировал из Таджикистана товаров на 579 млн € — на 90 % больше, чем годом ранее. Девять десятых этой суммы — металлы.", "g": {"metals": "Неблагородные металлы (в эту группу входят алюминий и сурьма)", "mineral": "Минеральные продукты: руды и концентраты", "textile": "Текстиль: хлопковое волокно, пряжа, ткани", "veg": "Растительная продукция: сухофрукты, орехи, бобовые", "hides": "Кожевенное сырьё"}, "u": "млн €", "de": "Прямой экспорт Таджикистана в Германию в 2024 году — около 3 млн €.", "pk": "Предложение", "pt": "Что таджикские производители готовы поставлять", "p": [{"k": "alu", "t": "Алюминий", "s": "Входит в группу «неблагородные металлы» — 92 % экспорта в ЕС."}, {"k": "ore", "t": "Сурьма и руды", "s": "Таджикистан — главный поставщик сурьмы в ЕС."}, {"k": "cotton", "t": "Хлопок и текстиль", "s": "Волокно, пряжа, ткани; потенциал — готовые изделия."}, {"k": "fruit", "t": "Сухофрукты и орехи", "s": "Курага, изюм, орехи — продукция с сертификацией для ЕС."}]},
+  gsp:{"steps": [{"t": "Регистрация в REX", "p": "Экспортёр регистрируется в системе зарегистрированных экспортёров через таможенные органы Таджикистана."}, {"t": "Заявление о происхождении", "p": "В коммерческом документе к партии экспортёр заявляет преференциальное происхождение товара."}, {"t": "Пониженная пошлина", "p": "Немецкий импортёр заявляет преференцию при ввозе — пошлина снижается или отменяется."}], "f": [{"v": "0 %", "l": "пошлина на «нечувствительные» товары: адвалорные ставки полностью отменены"}, {"v": "−3,5 п. п.", "l": "снижение адвалорной ставки на «чувствительные» товары"}, {"v": "−20 %", "l": "для текстиля разделов XI(a) и XI(b)"}], "fl": "Стандартный режим ВСП, ст. 7 Регламента (ЕС) № 978/2012", "go": "Проверить пошлину на товар"},
+  con:{"t": "Конституция", "s": "Республики Таджикистан"}
  },
  invest:{
   h1:"Инвестиции в Таджикистан",
@@ -1077,7 +1144,7 @@ C.ru = {
   xn:"Налоговые ставки меняются. Перед инвестиционным решением проконсультируйтесь с налоговым консультантом в Таджикистане.",
   zk:"Свободные экономические зоны", zt:"Пять зон с собственным налоговым и таможенным режимом",
   zl:"Выберите зону на карте. Точки стоят по реальным координатам.",
-  zcap:"Схема по географическим координатам, без линии границы.",
+  zcap:"Границы — Natural Earth (1:10 млн), упрощённо. Точки — по координатам зон.",
   zones:{
    sughd:{n:"СЭЗ «Согд»", f:"Промышленность и экспорт", p:"В юго-западной промышленной части Худжанда. Здесь производят электрокабели, полимерные трубы, алюминиевые и ПВХ-профили, стройматериалы, лакокрасочные материалы, пластиковую тару; собирают солнечные коллекторы и глубинные насосы, перерабатывают металлолом."},
    panj:{n:"СЭЗ «Пяндж»", f:"Торговля, транзит, промышленность", p:"На границе с Афганистаном. Два сектора: 186 га — для торговли, импорта, экспорта, финансов и инноваций, 215,6 га — для промышленности."},
@@ -1280,7 +1347,10 @@ C.en = {
   ],
   gk:"Access to the EU market", gt:"Tariff preferences under the EU GSP",
   gp:"Tajikistan is a beneficiary of the EU Generalised Scheme of Preferences (GSP). Many goods enter at reduced duty — provided the exporter is registered in the REX system and declares preferential origin. The exact duty for each commodity code is shown on the European Commission’s Access2Markets portal.",
-  gs:[14,15]
+  gs:[14,15],
+  ex:{"k": "Exports to the EU", "t": "What Tajikistan sells to Europe", "l": "In 2025 the EU imported €579m worth of goods from Tajikistan — 90% more than a year earlier. Nine tenths of that is metals.", "g": {"metals": "Base metals (this group includes aluminium and antimony)", "mineral": "Mineral products: ores and concentrates", "textile": "Textiles: cotton fibre, yarn, fabrics", "veg": "Vegetable products: dried fruit, nuts, pulses", "hides": "Raw hides and skins"}, "u": "€m", "de": "Tajikistan’s direct exports to Germany in 2024: about €3m.", "pk": "Supply", "pt": "What Tajik producers can deliver", "p": [{"k": "alu", "t": "Aluminium", "s": "Part of the base-metals group — 92% of exports to the EU."}, {"k": "ore", "t": "Antimony and ores", "s": "Tajikistan is the EU’s main supplier of antimony."}, {"k": "cotton", "t": "Cotton and textiles", "s": "Fibre, yarn, fabrics; potential in finished goods."}, {"k": "fruit", "t": "Dried fruit and nuts", "s": "Apricots, raisins, nuts — from plants certified for the EU."}]},
+  gsp:{"steps": [{"t": "Register in REX", "p": "The exporter registers in the Registered Exporter system through the customs authorities of Tajikistan."}, {"t": "Statement on origin", "p": "In the commercial document for the shipment, the exporter states the preferential origin of the goods."}, {"t": "Reduced duty", "p": "The German importer claims the preference at import — the duty is reduced or removed."}], "f": [{"v": "0%", "l": "duty on ‘non-sensitive’ goods: ad valorem duties fully suspended"}, {"v": "−3.5 pp", "l": "cut in the ad valorem duty on ‘sensitive’ goods"}, {"v": "−20%", "l": "for textiles of Sections XI(a) and XI(b)"}], "fl": "Standard GSP arrangement, Art. 7 of Regulation (EU) No 978/2012", "go": "Check the duty for a product"},
+  con:{"t": "Constitution", "s": "of the Republic of Tajikistan"}
  },
  invest:{
   h1:"Investing in Tajikistan",
@@ -1294,7 +1364,7 @@ C.en = {
   xn:"Tax rates change. Please take advice from a tax adviser in Tajikistan before making an investment decision.",
   zk:"Free economic zones", zt:"Five zones with their own tax and customs regime",
   zl:"Select a zone on the map. The points sit at the real coordinates of each site.",
-  zcap:"Schematic by geographic coordinates, without borders.",
+  zcap:"Borders: Natural Earth (1:10m), simplified. Points at the zones’ coordinates.",
   zones:{
    sughd:{n:"FEZ Sughd", f:"Industry and export", p:"In the south-western industrial district of Khujand. Producers make electric cables, plastic pipes, aluminium and PVC profiles, building materials, paints and varnishes, plastic containers; solar collectors and deep-well pumps are assembled and metal is recycled."},
    panj:{n:"FEZ Panj", f:"Trade, transit, industry", p:"On the border with Afghanistan. Two sectors: 186 ha for trade, import, export, finance and innovation, and 215.6 ha for industry."},
@@ -1497,7 +1567,10 @@ C.tj = {
   ],
   gk:"Дастрасӣ ба бозори ИА", gt:"Имтиёзҳои гумрукӣ дар доираи НУИ-и ИА",
   gp:"Тоҷикистон баҳрабардори Низоми умумии имтиёзҳои ИА (НУИ, ба англисӣ GSP) мебошад. Барои бисёр молҳо боҷҳои пасткардашуда амал мекунанд — ба шарте ки содиркунанда дар системаи REX ба қайд гирифта шуда, пайдоиши имтиёзнокро эълон кунад. Боҷи дақиқро барои ҳар рамзи мол портали Комиссияи Аврупо Access2Markets нишон медиҳад.",
-  gs:[14,15]
+  gs:[14,15],
+  ex:{"k": "Содирот ба ИА", "t": "Тоҷикистон ба Аврупо чӣ мефурӯшад", "l": "Дар соли 2025 ИА аз Тоҷикистон ба маблағи 579 млн € мол ворид кард — 90 % бештар аз соли гузашта. Нӯҳ ҳиссаи даҳи ин маблағ металлҳо мебошанд.", "g": {"metals": "Металлҳои асл нест (ба ин гурӯҳ алюминий ва сурма дохил мешаванд)", "mineral": "Маҳсулоти маъданӣ: маъдан ва консентратҳо", "textile": "Нассоҷӣ: нахи пахта, ресмон, матоъ", "veg": "Маҳсулоти растанӣ: меваи хушк, чормағз, лӯбиёгиҳо", "hides": "Пӯсти хом"}, "u": "млн €", "de": "Содироти мустақими Тоҷикистон ба Олмон дар соли 2024 — тақрибан 3 млн €.", "pk": "Пешниҳод", "pt": "Истеҳсолкунандагони тоҷик чӣ таъмин карда метавонанд", "p": [{"k": "alu", "t": "Алюминий", "s": "Ба гурӯҳи «металлҳои асл нест» дохил аст — 92 % содирот ба ИА."}, {"k": "ore", "t": "Сурма ва маъданҳо", "s": "Тоҷикистон таъминкунандаи асосии сурма барои ИА мебошад."}, {"k": "cotton", "t": "Пахта ва нассоҷӣ", "s": "Нах, ресмон, матоъ; имконият — маҳсулоти тайёр."}, {"k": "fruit", "t": "Меваи хушк ва чормағз", "s": "Қоқ, мавиз, чормағз — аз корхонаҳои сертификатсияшуда барои ИА."}]},
+  gsp:{"steps": [{"t": "Бақайдгирӣ дар REX", "p": "Содиркунанда тавассути мақомоти гумруки Тоҷикистон дар системаи содиркунандагони бақайдгирифташуда ба қайд гирифта мешавад."}, {"t": "Изҳорот дар бораи пайдоиш", "p": "Дар ҳуҷҷати тиҷоратии бор содиркунанда пайдоиши имтиёзноки молро эълон мекунад."}, {"t": "Боҷи камшуда", "p": "Воридкунандаи олмонӣ ҳангоми воридот имтиёзро талаб мекунад — боҷ кам ё бекор мешавад."}], "f": [{"v": "0 %", "l": "боҷ барои молҳои «ғайриҳассос»: боҷҳои адвалорӣ пурра бекор шудаанд"}, {"v": "−3,5 б. ф.", "l": "кам кардани боҷи адвалорӣ барои молҳои «ҳассос»"}, {"v": "−20 %", "l": "барои нассоҷии бахшҳои XI(a) ва XI(b)"}], "fl": "Низоми стандартии НУИ, моддаи 7 Низомномаи (ИА) № 978/2012", "go": "Санҷиши боҷ барои мол"},
+  con:{"t": "Конститутсияи", "s": "Ҷумҳурии Тоҷикистон"}
  },
  invest:{
   h1:"Сармоягузорӣ дар Тоҷикистон",
@@ -1511,7 +1584,7 @@ C.tj = {
   xn:"Меъёрҳои андоз тағйир меёбанд. Пеш аз қабули қарори сармоягузорӣ бо мушовири андози Тоҷикистон машварат кунед.",
   zk:"Минтақаҳои озоди иқтисодӣ", zt:"Панҷ минтақа бо низоми андозӣ ва гумрукии худ",
   zl:"Минтақаро дар харита интихоб кунед. Нуқтаҳо дар координатаҳои воқеӣ ҷойгиранд.",
-  zcap:"Нақша аз рӯи координатаҳои ҷуғрофӣ, бе хати сарҳад.",
+  zcap:"Сарҳадҳо: Natural Earth (1:10 млн), соддакардашуда. Нуқтаҳо тибқи координатаҳои минтақаҳо.",
   zones:{
    sughd:{n:"МОИ «Суғд»", f:"Саноат ва содирот", p:"Дар қисми ҷанубу ғарбии саноатии Хуҷанд. Дар ин ҷо кабели барқӣ, қубурҳои полимерӣ, профилҳои алюминий ва ПВХ, маводи сохтмонӣ, ранг ва лок, зарфҳои пластикӣ истеҳсол мешаванд; коллекторҳои офтобӣ ва насосҳои чуқур васл карда, металлпорча коркард мешавад."},
    panj:{n:"МОИ «Панҷ»", f:"Савдо, транзит, саноат", p:"Дар сарҳад бо Афғонистон. Ду бахш: 186 га — барои савдо, воридот, содирот, молия ва инноватсия, 215,6 га — барои саноат."},
@@ -1928,19 +2001,36 @@ function band(){
 }
 
 function pageLand(){
- var D = L.land;
+ var D = L.land, G = MD.gen || {}, X = D.ex;
+ var img = function(src, cls){ return src ? '<figure class="'+cls+'"><img src="'+src+'" alt="" loading="lazy" decoding="async"></figure>' : ''; };
+ var prodImg = {alu:G.alu, ore:MD.s&&MD.s.mining, cotton:G.cotton||(MD.s&&MD.s.textile), fruit:G.fruit1||(MD.s&&MD.s.agri)};
  return phead("tadschikistan", D.h1, D.lead, 2)+
- '<section class="sec flush"><div class="wrap split2"><div><div class="kicker">'+D.ek+'</div><h2 class="h2 rv">'+D.et+'</h2><p class="note rv">'+D.kvn+'</p></div><table class="kv rv"><tbody>'+
+ '<section class="sec flush"><div class="wrap split2"><div><div class="kicker">'+D.ek+'</div><h2 class="h2 rv">'+D.et+'</h2><p class="note rv">'+D.kvn+'</p>'+img(G.econ,'sidepic rv')+'</div><table class="kv rv"><tbody>'+
    D.kv.map(function(r){ return '<tr><td>'+r[0]+' '+sref(r[2])+'</td><td>'+r[1]+'</td></tr>'; }).join("")+
  '</tbody></table></div></section>'+
  '<section class="sec tint"><div class="wrap split2"><div><div class="kicker">'+D.tk+'</div><h2 class="h2 rv">'+D.tt+'</h2><p class="lead rv">'+D.tl+' '+sref(4)+'</p><p class="quote rv">'+D.q+'</p></div><div class="rv" style="padding-top:12px"><div class="bars">'+
    '<div class="barrow de"><div class="bl"><span>'+D.bde+'</span><b>'+D.vde+'</b></div><div class="bt"><i data-w="100"></i></div></div>'+
    '<div class="barrow tj"><div class="bl"><span>'+D.btj+'</span><b>'+D.vtj+'</b></div><div class="bt"><i data-w="6"></i></div></div>'+
  '</div><p class="note">'+D.tn+' '+sref(4)+'</p></div></div></section>'+
- '<section class="sec"><div class="wrap"><div class="head"><div class="kicker">'+D.ak+'</div><h2 class="h2 rv">'+D.at+'</h2></div><div class="tl">'+
-   D.treaties.map(function(t){ return '<div class="t rv"><div class="dt">'+t.d+'</div><div><h3>'+t.t+' '+sref(t.s)+'</h3><p>'+t.p+'</p></div></div>'; }).join("")+
+ /* what Tajikistan sells to the EU, by HS section (DG Trade, 2025) */
+ '<section class="sec"><div class="wrap"><div class="head split"><div><div class="kicker">'+X.k+'</div><h2 class="h2 rv">'+X.t+'</h2></div><p class="lead rv">'+X.l+' '+sref(38)+'</p></div>'+
+  '<div class="euimp rv">'+EUIMP.rows.map(function(r){ return '<div class="eurow"><div class="eul"><span>'+X.g[r[0]]+'</span><b>'+r[1]+' '+X.u+' <small>'+String(r[2]).replace(".", lang==="en"?".":",")+' %</small></b></div><div class="bt"><i data-w="'+Math.max(r[2],0.6)+'"></i></div></div>'; }).join("")+
+  '<p class="note">'+X.de+' '+sref(4)+'</p></div>'+
+  '<div class="head" style="margin-top:clamp(48px,6vw,80px)"><div class="kicker">'+X.pk+'</div><h3 class="h3x rv">'+X.pt+'</h3></div>'+
+  '<div class="prods">'+X.p.map(function(p){ var im = prodImg[p.k]; return '<article class="prod rv">'+(im ? '<div class="pi"><img src="'+im+'" alt="" loading="lazy" decoding="async"></div>' : '<div class="pi none"></div>')+'<h4>'+p.t+'</h4><p>'+p.s+'</p></article>'; }).join("")+'</div>'+
+ '</div></section>'+
+ /* legal basis, with the Constitution: the cover title is set in the page language */
+ '<section class="sec tint"><div class="wrap"><div class="head"><div class="kicker">'+D.ak+'</div><h2 class="h2 rv">'+D.at+'</h2></div><div class="'+(G.book ? 'lawgrid' : '')+'">'+
+  (G.book ? '<figure class="book rv"><img src="'+G.book+'" alt="" loading="lazy" decoding="async"><figcaption class="cover" aria-hidden="true"><span class="t">'+D.con.t+'</span><span class="s">'+D.con.s+'</span></figcaption></figure>' : '')+
+  '<div class="tl">'+D.treaties.map(function(t){ return '<div class="t rv"><div class="dt">'+t.d+'</div><div><h3>'+t.t+' '+sref(t.s)+'</h3><p>'+t.p+'</p></div></div>'; }).join("")+'</div>'+
  '</div></div></section>'+
- '<section class="sec tint"><div class="wrap split2"><div><div class="kicker">'+D.gk+'</div><h2 class="h2 rv">'+D.gt+'</h2></div><div><p class="lead rv" style="margin-top:0">'+D.gp+' '+refs(D.gs)+'</p><p style="margin-top:26px"><a class="cta ghost" href="'+SRC[15].u+'" target="_blank" rel="noopener">Access2Markets '+ext+'</a></p></div></div></section>'+
+ /* GSP: how the preference works, in three steps, with the figures from Art. 7 */
+ '<section class="sec"><div class="wrap"><div class="split2"><div><div class="kicker">'+D.gk+'</div><h2 class="h2 rv">'+D.gt+'</h2></div><div><p class="lead rv" style="margin-top:0">'+D.gp+' '+refs(D.gs)+'</p></div></div>'+
+  '<ol class="gspsteps">'+D.gsp.steps.map(function(s,i){ return '<li class="rv"><span class="n">'+(i+1)+'</span><h4>'+s.t+'</h4><p>'+s.p+'</p></li>'; }).join("")+'</ol>'+
+  '<div class="gspfacts rv">'+D.gsp.f.map(function(f){ return '<div><b>'+f.v+'</b><span>'+f.l+'</span></div>'; }).join("")+'</div>'+
+  '<p class="note rv">'+D.gsp.fl+' '+sref(39)+'</p>'+
+  '<p class="rv" style="margin-top:22px"><a class="cta" href="#export" data-go="export" data-anchor="a2m">'+D.gsp.go+arrow+'</a></p>'+
+ '</div></section>'+
  band();
 }
 
@@ -1970,18 +2060,24 @@ function pageInvest(){
 
 function fezMap(){
  var host = $("#fezmap"); if(!host) return;
- var W=640, H=480, minLon=67.6, maxLon=72.6, minLat=36.3, maxLat=40.9;
- function X(lon){ return 40 + (lon-minLon)/(maxLon-minLon)*(W-80); }
- function Y(lat){ return 50 + (maxLat-lat)/(maxLat-minLat)*(H-90); }
- var g = '';
- for(var lo=68; lo<=72; lo++) g += '<line x1="'+X(lo)+'" y1="20" x2="'+X(lo)+'" y2="'+(H-30)+'" stroke="currentColor" stroke-opacity=".08"/><text x="'+X(lo)+'" y="'+(H-14)+'" font-size="9" text-anchor="middle" fill="currentColor" opacity=".35" font-family="IBM Plex Mono,monospace">'+lo+'°E</text>';
- for(var la=37; la<=41; la++) g += '<line x1="30" y1="'+Y(la)+'" x2="'+(W-20)+'" y2="'+Y(la)+'" stroke="currentColor" stroke-opacity=".08"/><text x="8" y="'+(Y(la)+3)+'" font-size="9" fill="currentColor" opacity=".35" font-family="IBM Plex Mono,monospace">'+la+'°N</text>';
- CITIES.forEach(function(c){ if(c.n==="Khujand") return; g += '<g><rect x="'+(X(c.lon)-4)+'" y="'+(Y(c.lat)-4)+'" width="8" height="8" fill="none" stroke="currentColor" stroke-opacity=".7"/><text x="'+(X(c.lon)-10)+'" y="'+(Y(c.lat)+4)+'" text-anchor="end" font-size="11" fill="currentColor" opacity=".75" font-family="IBM Plex Mono,monospace">'+c.n+'</text></g>'; });
+ var M = TJMAP, W = M.w, H = M.h;
+ function X(lon){ return M.pad + (lon-M.minLon)*M.c*M.k; }
+ function Y(lat){ return M.pad + (M.maxLat-lat)*M.k; }
+ var names; try{ names = new Intl.DisplayNames([{tj:"tg",de:"de",ru:"ru",en:"en"}[lang],"en"], {type:"region"}); }catch(e){}
+ var cn = function(c){ try{ return names ? names.of(c) : c; }catch(e){ return c; } };
+ var g = '<defs><clipPath id="mclip"><rect x="0" y="0" width="'+W+'" height="'+H+'"/></clipPath>'+
+  '<pattern id="mhatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="currentColor" stroke-opacity=".07" stroke-width="2"/></pattern></defs>';
+ g += '<g clip-path="url(#mclip)"><path d="'+M.nb+'" fill="url(#mhatch)" stroke="currentColor" stroke-opacity=".25" stroke-width=".8" stroke-linejoin="round"/>'+
+  '<path class="tj" d="'+M.tj+'" stroke-linejoin="round"/></g>';
+ [["UZ",67.35,39.2],["KG",72.6,40.55],["AF",70.6,36.62],["CN",75.25,38.2]].forEach(function(n){
+  g += '<text class="nb" x="'+X(n[1])+'" y="'+Y(n[2])+'" text-anchor="middle">'+cn(n[0]).toUpperCase()+'</text>'; });
+ var CN = {Dushanbe:{de:"Duschanbe",en:"Dushanbe",ru:"Душанбе",tj:"Душанбе"}};
+ CITIES.forEach(function(c){ if(!CN[c.n]) return; g += '<g class="city"><rect x="'+(X(c.lon)-4)+'" y="'+(Y(c.lat)-4)+'" width="8" height="8"/><text x="'+(X(c.lon)-10)+'" y="'+(Y(c.lat)+4)+'" text-anchor="end">'+CN[c.n][lang]+'</text></g>'; });
  ZONES.forEach(function(z){
   var nm = L.invest.zones[z.id].n.replace(/^(FWZ|СЭЗ|FEZ|МОИ)\s*/,"");
   g += '<g class="pin" data-zone="'+z.id+'" tabindex="0" role="button" aria-label="'+esc(L.invest.zones[z.id].n)+'"><circle class="halo" cx="'+X(z.lon)+'" cy="'+Y(z.lat)+'" r="14"><animate attributeName="r" values="7;18;7" dur="3.2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".6;0;.6" dur="3.2s" repeatCount="indefinite"/></circle><circle class="core" cx="'+X(z.lon)+'" cy="'+Y(z.lat)+'" r="6"/><text x="'+(X(z.lon)+12)+'" y="'+(Y(z.lat)+4)+'">'+nm+'</text></g>';
  });
- host.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" style="color:var(--ink)">'+g+'</svg><div class="cap">'+L.invest.zcap+'</div>';
+ host.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" style="color:var(--ink)" role="img" aria-label="'+esc(L.invest.zcap)+'">'+g+'</svg><div class="cap">'+L.invest.zcap+'</div>';
  $$(".pin", host).forEach(function(p){
   p.addEventListener("click", function(){ fezSelect(p.getAttribute("data-zone")); });
   p.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); fezSelect(p.getAttribute("data-zone")); } });
@@ -2006,6 +2102,7 @@ function pageExport(){
    E.regs.map(function(r){ return '<div class="reg rv"><div class="code">'+r.c+'</div><h3>'+r.t+'</h3><p>'+r.p+'</p><a href="'+SRC[r.s].u+'" target="_blank" rel="noopener">'+SRC[r.s].t.split(" — ")[0]+' ↗</a></div>'; }).join("")+
  '</div></div></section>'+
  a2mFinder(E)+
+ fruitGallery()+
  exportersSection(E)+
  '<section class="sec tint"><div class="wrap"><div class="head"><div class="kicker">'+E.mk+'</div><h2 class="h2 rv">'+E.mt+'</h2></div><div class="evts">'+eventRows()+'</div></div></section>'+
  band();
@@ -2039,6 +2136,13 @@ function a2mGo(form){
    : A2M.base+a2mLang()+"/search?product="+encodeURIComponent(q)+"&origin=TJ&destination="+to;
  } else url = A2M.base+a2mLang()+"/results?product="+hs+"&origin=TJ&destination="+to;
  window.open(url, "_blank", "noopener");
+}
+
+/* photographs of Tajik dried fruit (generated, labelled as such in the footer) */
+function fruitGallery(){
+ var G = MD.gen || {}, ims = [G.fruit1, G.fruit2, G.fruit3, G.fruit4].filter(Boolean);
+ if(!ims.length) return '';
+ return '<section class="fruits" aria-hidden="true"><div class="frow">'+ims.map(function(src,i){ return '<figure class="rv'+(i===0?' wide':'')+'"><img src="'+src+'" alt="" loading="lazy" decoding="async"></figure>'; }).join("")+'</div></section>';
 }
 
 /* dried-fruit exporters from Sughd, with the source for every claim */
@@ -2152,7 +2256,7 @@ function wire(root){
   if(r.top < window.innerHeight*0.98){ setTimeout(function(){ el.classList.add("in"); }, 60 + (i%6)*70); }
   else revealer.observe(el);
  });
- $$(".barrow .bt i", root).forEach(function(b){ setTimeout(function(){ b.style.width = b.getAttribute("data-w")+"%"; }, 300); });
+ $$(".barrow .bt i, .eurow .bt i", root).forEach(function(b){ setTimeout(function(){ b.style.width = b.getAttribute("data-w")+"%"; }, 300); });
  $$("[data-sector]", root).forEach(function(b){
   b.addEventListener("click", function(){
    var id = b.getAttribute("data-sector");
@@ -2198,7 +2302,7 @@ function openSector(id){
 /* delegated navigation */
 document.addEventListener("click", function(e){
  var a = e.target.closest("[data-go]");
- if(a){ e.preventDefault(); var form = a.getAttribute("data-form"); go(a.getAttribute("data-go")); if(form) setTimeout(function(){ selectForm(form); }, 20); return; }
+ if(a){ e.preventDefault(); var form = a.getAttribute("data-form"); go(a.getAttribute("data-go"), a.getAttribute("data-anchor") || undefined); if(form) setTimeout(function(){ selectForm(form); }, 20); return; }
  var lb = e.target.closest("[data-lang]");
  if(lb){ setLang(lb.getAttribute("data-lang")); $("#langs").classList.remove("open"); return; }
  if(e.target.closest("[data-theme-toggle]")){ toggleTheme(); return; }
