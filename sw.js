@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v45-home-v2-films';
+const CACHE = 'amnetwork-v46-films-autoplay';
 // Must match QURAN_OFFLINE_CACHE in quran/index.html byte-for-byte — that
 // page is the only writer of this bucket (a per-surah "save for offline"
 // button). It is user data (surahs someone explicitly chose to keep) and

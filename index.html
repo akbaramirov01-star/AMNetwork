@@ -788,17 +788,9 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .cm-row svg{width:16px;height:16px}
 
 
-/* Product card films (Higgsfield, approved Oct 2026): short muted loop in the card, full film in a dialog */
+/* Product card films (Higgsfield, approved Oct 2026): the whole film plays muted and loops */
 .pfilm{position:relative;display:block;width:calc(100% + 68px);margin:-34px -34px 24px;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--border);background:#0A1A11}
 .pfilm-v{display:block;width:100%;height:100%;object-fit:cover}
-.pfilm-play{position:absolute;left:16px;bottom:14px;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;border:1px solid rgba(232,200,122,.55);background:rgba(10,26,17,.72);color:#F6E3A1;font:600 13px 'DM Sans',sans-serif;cursor:pointer;backdrop-filter:blur(6px);transition:background .2s}
-.pfilm-play:hover{background:rgba(201,168,76,.25)}
-.pfilm-play:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.film-dlg{border:none;padding:0;background:transparent;max-width:min(1100px,94vw);width:100%}
-.film-dlg::backdrop{background:rgba(4,10,7,.86)}
-.film-dlg video{display:block;width:100%;border-radius:14px;background:#000}
-.film-dlg{position:fixed;margin:auto;inset:0;height:fit-content}
-.film-dlg .film-x{position:absolute;top:10px;right:10px;z-index:2;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(10,26,17,.8);color:#fff;font-size:20px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -932,13 +924,11 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <section class="section" id="products">
   <h2 class="sec-title" data-t="prod_title">Two products. One mission.</h2>
   <div class="products">
-    <div class="pcard reveal"><div class="pfilm" data-film="/media/site/path-of-light.mp4">
-  <video class="pfilm-v" muted loop playsinline preload="none" poster="/media/site/zakat-poster.webp" aria-hidden="true"><source src="/media/site/zakat-loop.webm" type="video/webm"><source src="/media/site/zakat-loop.mp4" type="video/mp4"></video>
-  <button type="button" class="pfilm-play" data-film="/media/site/path-of-light.mp4" aria-label="Path of Light — AM Zakat.ai film"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><span data-t="film_watch">Watch the film</span></button>
+    <div class="pcard reveal"><div class="pfilm">
+  <video class="pfilm-v" muted loop playsinline preload="none" poster="/media/site/zakat-poster.webp" aria-label="Path of Light — AM Zakat.ai film"><source src="/media/site/path-of-light.webm" type="video/webm"><source src="/media/site/path-of-light.mp4" type="video/mp4"></video>
 </div><div class="plabel" data-t="p1_title">AM Zakat.ai</div><h3 data-t="p1_h">Transparent giving</h3><p data-t="p1_p">Zakat and Sadaqah distribution where AI scores need, local verifiers confirm each recipient in person, and every transfer is recorded on a public blockchain.</p><ul class="pfeats"><li data-t="p1_f1">AI recipient verification</li><li data-t="p1_f2">Full on-chain transparency</li><li data-t="p1_f3">DAO governance</li><li data-t="p1_f4">Sharia review not started</li></ul><a class="pdemo-btn" href="/ai_scoring/" target="_blank">⚡ <span data-t="p1_demo">Try AI Demo</span> →</a></div>
-    <div class="pcard reveal"><div class="pfilm" data-film="/media/site/knowledge-grows.mp4">
-  <video class="pfilm-v" muted loop playsinline preload="none" poster="/media/site/academy-poster.webp" aria-hidden="true"><source src="/media/site/academy-loop.webm" type="video/webm"><source src="/media/site/academy-loop.mp4" type="video/mp4"></video>
-  <button type="button" class="pfilm-play" data-film="/media/site/knowledge-grows.mp4" aria-label="Knowledge Grows — AM Academy film"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><span data-t="film_watch">Watch the film</span></button>
+    <div class="pcard reveal"><div class="pfilm">
+  <video class="pfilm-v" muted loop playsinline preload="none" poster="/media/site/academy-poster.webp" aria-label="Knowledge Grows — AM Academy film"><source src="/media/site/knowledge-grows.webm" type="video/webm"><source src="/media/site/knowledge-grows.mp4" type="video/mp4"></video>
 </div><div class="plabel" data-t="p2_title">AM Academy</div><h3 data-t="p2_h">Financial freedom</h3><p data-t="p2_p">Sharia-compliant financial literacy for ~2 billion Muslims. Learn, earn, and grow without riba.</p><ul class="pfeats"><li data-t="p2_f1">5 free courses</li><li data-t="p2_f2">Certificate after passing at 85%</li><li data-t="p2_f3">Explained for your level — 4 audiences</li><li data-t="p2_f4">Halal investment screening</li></ul><a class="pdemo-btn" href="/academy/" target="_blank">🎓 <span data-t="p2_demo">Start learning free</span> →</a></div>
   </div>
 </section>
@@ -1195,34 +1185,17 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 </div>
 
 
-<dialog class="film-dlg" id="filmDlg" aria-label="Film"><button type="button" class="film-x" id="filmX" aria-label="Close">×</button><video id="filmV" controls playsinline preload="none"></video></dialog>
 <script>
-// Product films: play the muted card loop only while on screen (and never
-// with reduced motion); the full film loads only when someone asks for it.
+// Product films play whole, muted and looping, while their card is on
+// screen; paused off-screen to save battery. Reduced motion: poster only.
 (function(){
-  const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const loops = document.querySelectorAll('.pfilm-v');
-  if (!rm && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver(es => es.forEach(e => {
-      const v = e.target;
-      if (e.isIntersecting) { if (v.preload === 'none') v.preload = 'auto'; v.play().catch(()=>{}); }
-      else v.pause();
-    }), {threshold: 0.35});
-    loops.forEach(v => io.observe(v));
-  }
-  const dlg = document.getElementById('filmDlg'), fv = document.getElementById('filmV');
-  function open(src){
-    if (!dlg || typeof dlg.showModal !== 'function') { location.href = src; return; }
-    // MP4 (H.264) for Safari/most browsers; WebM for builds without H.264.
-    if (!fv.canPlayType('video/mp4; codecs="avc1.4D401E"')) src = src.replace(/\.mp4$/, '.webm');
-    fv.src = src; dlg.showModal(); fv.play().catch(()=>{});
-  }
-  document.querySelectorAll('.pfilm-play').forEach(b => b.addEventListener('click', () => open(b.dataset.film)));
-  document.querySelectorAll('.pfilm-v').forEach(v => v.addEventListener('click', () => open(v.closest('.pfilm').dataset.film)));
-  function close(){ fv.pause(); fv.removeAttribute('src'); fv.load(); dlg.close(); }
-  document.getElementById('filmX').addEventListener('click', close);
-  dlg.addEventListener('click', e => { if (e.target === dlg) close(); });
-  dlg.addEventListener('cancel', () => { fv.pause(); });
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    const v = e.target;
+    if (e.isIntersecting) { if (v.preload === 'none') v.preload = 'auto'; v.play().catch(()=>{}); }
+    else v.pause();
+  }), {threshold: 0.35});
+  document.querySelectorAll('.pfilm-v').forEach(v => io.observe(v));
 })();
 </script>
 <script src="/faq-assistant.js"></script>
