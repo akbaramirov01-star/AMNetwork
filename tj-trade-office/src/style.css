@@ -630,3 +630,91 @@ body{font-size:16px;line-height:1.68}
 .finder .tjproc svg{width:13px;height:13px;margin-left:auto}
 .gspsteps .more{font-size:.85rem;color:var(--gold);text-decoration:none;font-weight:500;display:inline-flex;gap:6px;align-items:center;margin-top:4px}
 .gspsteps .more svg{width:12px;height:12px}
+
+/* ---------- October 2026: checked stamp, investor questions, trade representative, assistant ---------- */
+.phead .checked{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.phead.has-pic .checked{color:#E9CF9A}
+.phead .checked svg{flex-shrink:0}
+
+.faq{border-top:1px solid var(--ink);max-width:980px}
+.qa{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;display:flex;align-items:flex-start;gap:20px;padding:22px 0;cursor:pointer;font-family:var(--serif);font-size:clamp(1.18rem,1.05rem + .5vw,1.45rem);font-weight:500;line-height:1.3;text-wrap:balance}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary span{flex:1}
+.qa summary i{position:relative;flex-shrink:0;width:22px;height:22px;margin-top:5px;border:1px solid color-mix(in srgb,var(--gold) 55%,transparent)}
+.qa summary i::before,.qa summary i::after{content:"";position:absolute;left:5px;right:5px;top:50%;height:1px;background:var(--gold);transition:transform .25s ease}
+.qa summary i::after{transform:rotate(90deg)}
+.qa[open] summary i::after{transform:rotate(0)}
+.qa summary:hover span{color:var(--gold)}
+.qa .ans{padding:0 42px 26px 0;max-width:72ch;color:var(--ink-soft);line-height:1.75}
+.qfoot{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:14px;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em}
+.qfoot .qs{color:var(--ink-faint);text-transform:uppercase;letter-spacing:.12em}
+.qfoot .qs .src{font-size:.72rem;vertical-align:baseline;line-height:1;margin-left:4px}
+.qgo{display:inline-flex;align-items:center;gap:8px;color:var(--gold);text-decoration:none;background:none;border:0;padding:0;font:inherit;letter-spacing:.06em;text-transform:uppercase}
+.qgo svg{width:14px;height:14px;flex-shrink:0}
+.qgo:hover{text-decoration:underline;text-underline-offset:4px}
+.faqmore{margin-top:30px}
+.faqmore .cta{gap:10px}
+
+.repcard{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(24px,3.5vw,44px);background:var(--surface);border:1px solid var(--line);max-width:980px}
+.repcard .rp{margin:0;width:clamp(120px,14vw,168px);aspect-ratio:1;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px var(--gold),0 0 0 7px var(--surface),0 0 0 8px color-mix(in srgb,var(--gold) 40%,transparent)}
+.repcard .rp img{width:100%;height:100%;object-fit:cover;transform:scale(1.045)}
+.repcard .kicker{margin-bottom:12px}
+.repcard h2{font-size:clamp(1.8rem,1.4rem + 1.4vw,2.6rem)}
+.repcard .role{margin-top:8px;color:var(--ink-soft);font-size:.98rem}
+.repcard ul{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:6px;color:var(--ink-soft);font-size:.95rem;line-height:1.6}
+.repcard li{padding-left:18px;position:relative}
+.repcard li::before{content:"";position:absolute;left:0;top:.72em;width:7px;height:7px;transform:rotate(45deg);border:1px solid var(--gold)}
+.repcard .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+@media (max-width:620px){.repcard{grid-template-columns:1fr;justify-items:start}.repcard .acts .cta{white-space:normal;height:auto;min-height:42px;padding:10px 18px}}
+.cgrid.two{grid-template-columns:repeat(2,1fr)}
+@media (max-width:860px){.cgrid.two{grid-template-columns:1fr}}
+
+.who .mono.pic{padding:0;overflow:hidden;border-color:rgba(233,207,154,.75)}
+.who .mono.pic img{width:100%;height:100%;object-fit:cover;transform:scale(1.05)}
+
+/* assistant */
+.askfab{position:fixed;right:clamp(14px,2.4vw,28px);bottom:calc(clamp(14px,2.4vw,28px) + env(safe-area-inset-bottom));z-index:70;display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 20px 0 16px;background:var(--gold);color:var(--on-gold);border:0;font-weight:600;font-size:.9rem;letter-spacing:.01em;box-shadow:0 14px 34px -14px rgba(0,0,0,.55),0 0 0 1px color-mix(in srgb,var(--on-gold) 18%,transparent) inset;transition:transform .2s ease,opacity .25s ease}
+.askfab:hover{transform:translateY(-2px)}
+.askfab svg{flex-shrink:0}
+.ask-open .askfab{opacity:0;pointer-events:none;transform:translateY(8px)}
+.askp{position:fixed;right:clamp(14px,2.4vw,28px);bottom:calc(clamp(14px,2.4vw,28px) + env(safe-area-inset-bottom));z-index:80;width:min(410px,calc(100vw - 28px));height:min(640px,calc(100vh - 120px));height:min(640px,calc(100dvh - 120px));display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:0 30px 70px -24px rgba(0,0,0,.5);opacity:0;transform:translateY(14px);transition:opacity .25s ease,transform .25s ease}
+.askp.on{opacity:1;transform:none}
+.askp[hidden]{display:none}
+.askp header{display:flex;align-items:flex-start;gap:12px;padding:18px 18px 14px;border-bottom:1px solid var(--line);position:relative}
+.askp header::before{content:"";position:absolute;left:0;right:0;top:-1px;height:5px;background-image:var(--orn-band);background-size:auto 5px;background-repeat:repeat-x}
+.askp header div{flex:1;min-width:0}
+.askp header b{display:block;font-family:var(--serif);font-weight:500;font-size:1.35rem;line-height:1.15}
+.askp header small{display:block;margin-top:4px;font-size:.78rem;color:var(--ink-faint);line-height:1.4}
+.askp .ax{flex-shrink:0;width:36px;height:36px;display:grid;place-items:center;background:none;border:1px solid var(--line);color:var(--ink)}
+.askp .ax:hover{border-color:var(--ink)}
+.askp .log{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:18px;display:flex;flex-direction:column;gap:16px;scroll-behavior:smooth}
+.msg{font-size:.93rem;line-height:1.65;max-width:100%}
+.msg.me{align-self:flex-end;max-width:86%;background:var(--surface-2);padding:9px 14px;color:var(--ink)}
+.msg.bot{color:var(--ink-soft)}
+.msg.bot p+p{margin-top:8px}
+.msg .aq{font-family:var(--serif);font-size:1.15rem;line-height:1.3;color:var(--ink)}
+.msg .aq small{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.msg .qfoot{margin-top:10px;font-size:.68rem}
+.msg .chips,.msg .also{display:flex;flex-direction:column;align-items:stretch;gap:6px;margin-top:14px}
+.msg .cl{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:2px}
+.qchip{text-align:left;background:none;border:1px solid var(--line);color:var(--ink);padding:9px 12px;font-size:.86rem;line-height:1.4;transition:border-color .2s,background .2s}
+.qchip:hover{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 7%,transparent)}
+.qchip small{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-right:4px}
+.msg.typing{display:flex;gap:5px;padding:6px 0}
+.msg.typing span{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.35;animation:askdot 1s infinite}
+.msg.typing span:nth-child(2){animation-delay:.15s}.msg.typing span:nth-child(3){animation-delay:.3s}
+@keyframes askdot{50%{opacity:1}}
+.askp form{display:flex;gap:8px;padding:12px 14px 6px;border-top:1px solid var(--line)}
+.askp input{flex:1;min-width:0;height:46px;padding:0 14px;background:var(--ground);border:1px solid var(--line);color:var(--ink);font:inherit;font-size:16px}
+.askp input:focus{outline:none;border-color:var(--gold)}
+.askp form button{flex-shrink:0;width:46px;height:46px;display:grid;place-items:center;background:var(--gold);color:var(--on-gold);border:0}
+.askp .priv{padding:2px 16px 12px;font-size:.7rem;line-height:1.45;color:var(--ink-faint)}
+@media (max-width:699px){
+ .askfab{height:46px;padding:0 16px 0 13px;font-size:.86rem}
+ .askp{inset:0;width:auto;height:auto;border:0;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+ .ask-open body{overflow:hidden}
+}
+@media (prefers-reduced-motion:reduce){.askp,.askfab{transition:none}.msg.typing span{animation:none}}
+@media print{.askfab,.askp{display:none!important}}
+.askp .log{position:relative}

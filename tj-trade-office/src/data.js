@@ -40,7 +40,11 @@ var SRC = [
  {t:"Barakat Isfara LLC — “Barakat-Isfara products exported to Malaysia”, 29.03.2022", u:"https://barakat-isfara.com/2022/03/29/export_barakat/"},
  {t:"European Commission, DG Trade — European Union, trade in goods with Tajikistan (factsheet, 20.05.2026)", u:"https://webgate.ec.europa.eu/isdb_results/factsheets/country/details_tadjikistan_en.pdf"},
  {t:"Regulation (EU) No 978/2012 applying a scheme of generalised tariff preferences (GSP), Art. 7", u:"https://eur-lex.europa.eu/eli/reg/2012/978/oj"},
- {t:"Ministry of Economic Development and Trade of the RT — Tajikistan Trade Portal (UNCTAD eRegulations)", u:"https://tajtrade.tj/"}
+ {t:"Ministry of Economic Development and Trade of the RT — Tajikistan Trade Portal (UNCTAD eRegulations)", u:"https://tajtrade.tj/"},
+ {t:"Auswärtiges Amt — Tadschikistan: Reise- und Sicherheitshinweise, Einreise und Zoll (Stand 03.10.2026)", u:"https://www.auswaertiges-amt.de/de/service/laender/tadschikistan-node/tadschikistansicherheit-206756"},
+ {t:"Vertrag zwischen der Bundesrepublik Deutschland und der Republik Tadschikistan über die Förderung und den gegenseitigen Schutz von Kapitalanlagen, 27.03.2003 — BGBl. 2005 II S. 538", u:"https://edit.wti.org/wti-filesystem/20220210/aa204993-6df2-4424-81dc-6ca6a4cbf977/Germany%20-%20Tajikistan.pdf"},
+ {t:"U.S. Department of State — 2024 Investment Climate Statements: Tajikistan", u:"https://www.state.gov/reports/2024-investment-climate-statements/tajikistan/"},
+ {t:"AHK Zentralasien — Delegationsreise nach Duschanbe, 03.–06.11.2026", u:"https://zentralasien.ahk.de/de/veranstaltungen/events-2026/delegationsreise-nach-duschanbe"}
 ];
 function sref(n){ return '<a class="src" href="#quellen" data-src="'+n+'" title="'+(SRC[n]?SRC[n].t.replace(/"/g,"&quot;"):"")+'">['+n+']</a>'; }
 
@@ -55,6 +59,7 @@ var ZONES = [
 var CITIES = [{n:"Dushanbe", lat:38.56, lon:68.78}, {n:"Khujand", lat:40.28, lon:69.62}];
 
 var EVENTS = [
+ {d1:"2026-11-03", d2:"2026-11-06", id:"ahk", city:"Duschanbe", cityL:{de:"Duschanbe",ru:"Душанбе",en:"Dushanbe",tj:"Душанбе"}, src:44, url:"https://zentralasien.ahk.de/de/veranstaltungen/events-2026/delegationsreise-nach-duschanbe", urlRu:"https://zentralasien.ahk.de/ru/meropriyatiya/events-2026/delegacionnaya-poezdka-v-dushanbe"},
  {d1:"2027-01-15", d2:"2027-01-24", id:"igw", city:"Berlin", src:16, url:"https://www.gruenewoche.de"},
  {d1:"2027-02-16", d2:"2027-02-19", id:"biofach", city:"Nürnberg", src:27, url:"https://www.biofach.de"},
  {d1:"2027-03-16", d2:"2027-03-18", id:"itb", city:"Berlin", src:28, url:"https://www.itb.com"},
@@ -72,7 +77,9 @@ var NEWS = [
 /* the trade representative: this is his own website */
 var REP = {li:"https://www.linkedin.com/in/masrur-kurbonalizoda-034483270",
  n:{de:"Masrur Kurbonalizoda", en:"Masrur Kurbonalizoda", ru:"Масрур Курбонализода", tj:"Масрур Қурбонализода"},
- ini:{de:"MK", en:"MK", ru:"МК", tj:"МК"}};
+ ini:{de:"MK", en:"MK", ru:"МК", tj:"МК"},
+ /* public LinkedIn profile picture, shared by his office */
+ photo:"media/rep.jpg"};
 
 /* Access2Markets lookup: the result opens on the EU portal with Tajikistan as origin */
 var A2M = {

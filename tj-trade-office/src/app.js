@@ -5,7 +5,7 @@ var ROUTES = ["home","tadschikistan","branchen","investieren","export","termine"
 var NAVMAIN = ["tadschikistan","branchen","investieren","export","termine","aktuelles","kontakt"];
 var LANGS = ["tj","de","ru","en"];
 var LK = "tjtrade_lang", TK = "tjtrade_theme";
-var lang = (function(){ try{ var s = localStorage.getItem(LK); if(s && C[s]) return s; }catch(e){} var n=(navigator.language||"de").slice(0,2); return C[n]?n:"de"; })();
+var lang = (function(){ var f = window.FORCE_LANG || (location.search.match(/[?&]lang=(\w\w)/)||[])[1]; if(f && C[f]){ try{ localStorage.setItem(LK, f); }catch(e){} return f; } try{ var s = localStorage.getItem(LK); if(s && C[s]) return s; }catch(e){} var n=(navigator.language||"de").slice(0,2); return C[n]?n:"de"; })();
 var L = C[lang];
 var $ = function(s,r){ return (r||document).querySelector(s); };
 var $$ = function(s,r){ return [].slice.call((r||document).querySelectorAll(s)); };
@@ -69,7 +69,7 @@ function splitWords(el){
  });
 }
 function repCard(){
- return '<div class="who"><span class="mono" aria-hidden="true">'+REP.ini[lang]+'</span><span><b>'+REP.n[lang]+'</b><small>'+L.brandSub+'</small></span><a href="'+REP.li+'" target="_blank" rel="noopener" aria-label="LinkedIn — '+esc(REP.n[lang])+'">in'+ext+'</a></div>';
+ return '<div class="who">'+(REP.photo ? '<span class="mono pic" aria-hidden="true"><img src="'+REP.photo+'" alt="" decoding="async"></span>' : '<span class="mono" aria-hidden="true">'+REP.ini[lang]+'</span>')+'<span><b>'+REP.n[lang]+'</b><small>'+L.brandSub+'</small></span><a href="'+REP.li+'" target="_blank" rel="noopener" aria-label="LinkedIn — '+esc(REP.n[lang])+'">in'+ext+'</a></div>';
 }
 function renderHero(){
  var H = L.hero;
@@ -93,8 +93,8 @@ function sectorCards(limit){
 function eventRows(){
  return EVENTS.map(function(e){
   var t = L.events.list[e.id];
-  var y = e.d1.slice(0,4);
-  return '<div class="evt rv"><div class="date">'+dm(e.d1)+'–'+dm(e.d2)+'<small>'+y+'</small></div><div><h3><a href="'+e.url+'" target="_blank" rel="noopener" style="text-decoration:none">'+t.n+'</a></h3><p>'+t.p+'</p></div><div class="where">'+e.city+' '+sref(e.src)+'</div><a class="arr" href="'+e.url+'" target="_blank" rel="noopener" aria-label="'+esc(t.n)+'">'+ext+'</a></div>';
+  var y = e.d1.slice(0,4), url = (e.urlRu && (lang==="ru"||lang==="tj")) ? e.urlRu : e.url, city = e.cityL ? e.cityL[lang] : e.city;
+  return '<div class="evt rv"><div class="date">'+dm(e.d1)+'–'+dm(e.d2)+'<small>'+y+'</small></div><div><h3><a href="'+url+'" target="_blank" rel="noopener" style="text-decoration:none">'+t.n+'</a></h3><p>'+t.p+'</p></div><div class="where">'+city+' '+sref(e.src)+'</div><a class="arr" href="'+url+'" target="_blank" rel="noopener" aria-label="'+esc(t.n)+'">'+ext+'</a></div>';
  }).join("");
 }
 function newsRows(filter, limit){
@@ -103,9 +103,10 @@ function newsRows(filter, limit){
   return '<article class="item rv"><div class="when"><small>'+L.news.tabs[n.cat]+'</small>'+fmtDate(n.d)+'</div><div><h3>'+t.t+'</h3><p>'+t.p+'</p></div><a class="s" href="'+SRC[n.src].u+'" target="_blank" rel="noopener">'+L.news.src+' ['+n.src+']</a></article>';
  }).join("");
 }
+var CHECKED = {tadschikistan:1, investieren:1, export:1};
 function phead(key, h1, lead, seed){
  var pic = MD.ph && MD.ph[key];
- return '<header class="phead'+(pic?' has-pic':'')+'">'+(pic?'<div class="pic"><img src="'+pic+'" alt="" decoding="async"></div>':'')+'<div class="field"></div><div class="orn"></div><div class="wrap"><div class="crumb"><a href="#home" data-go="home">'+L.nav.home+'</a> / '+(L.nav[key]||h1)+'</div><h1 class="rv">'+h1+'</h1><p class="lead rv">'+lead+'</p></div></header>';
+ return '<header class="phead'+(pic?' has-pic':'')+'">'+(pic?'<div class="pic"><img src="'+pic+'" alt="" decoding="async"></div>':'')+'<div class="field"></div><div class="orn"></div><div class="wrap"><div class="crumb"><a href="#home" data-go="home">'+L.nav.home+'</a> / '+(L.nav[key]||h1)+'</div><h1 class="rv">'+h1+'</h1><p class="lead rv">'+lead+'</p>'+(CHECKED[key] ? '<p class="checked rv"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>'+L.ui.checked+'</p>' : '')+'</div></header>';
 }
 
 function pageHome(){
@@ -185,8 +186,22 @@ function pageInvest(){
  '<section class="sec"><div class="wrap"><div class="head"><div class="kicker">'+I.sk+'</div><h2 class="h2 rv">'+I.stt+'</h2></div><div class="steps" style="--n:'+I.steps.length+'">'+
    I.steps.map(function(s,i){ return '<div class="step rv"><div class="sn">'+(i+1)+'</div><h3>'+s.t+'</h3><p>'+s.p+'</p><div class="who">'+s.w+'</div></div>'; }).join("")+
  '</div></div></section>'+
- '<section class="sec tint"><div class="wrap split2"><div><div class="kicker">'+I.pk+'</div><h2 class="h2 rv">'+I.pt+'</h2></div><div><p class="lead rv" style="margin-top:0">'+I.pp+'</p><p style="margin-top:28px"><a class="cta" href="#service" data-go="service" data-form="partner">'+I.pb+arrow+'</a></p></div></div></section>'+
+ faqSection()+
+ '<section class="sec"><div class="wrap split2"><div><div class="kicker">'+I.pk+'</div><h2 class="h2 rv">'+I.pt+'</h2></div><div><p class="lead rv" style="margin-top:0">'+I.pp+'</p><p style="margin-top:28px"><a class="cta" href="#service" data-go="service" data-form="partner">'+I.pb+arrow+'</a></p></div></div></section>'+
  band();
+}
+
+/* investor questions: native disclosure widgets, each with its sources and a link to the section */
+function faqSection(){
+ var F = L.faq;
+ return '<section class="sec tint" id="faq"><div class="wrap"><div class="head split"><div><div class="kicker">'+F.k+'</div><h2 class="h2 rv">'+F.t+'</h2></div><p class="lead rv">'+F.l+'</p></div>'+
+  '<div class="faq">'+FAQ_META.map(function(m){ var it = F.items[m.id];
+   return '<details class="qa rv" id="faq-'+m.id+'"><summary><span>'+it.q+'</span><i aria-hidden="true"></i></summary><div class="ans"><p>'+it.a+'</p>'+faqFoot(m, "investieren")+'</div></details>'; }).join("")+
+  '</div><p class="rv faqmore"><button class="cta ghost" type="button" data-ask>'+ASK_ICON+L.ask.btn+'</button></p></div></section>';
+}
+function faqFoot(m, here){
+ return '<div class="qfoot">'+(m.s.length ? '<span class="qs">'+L.ask.src+' '+refs(m.s)+'</span>' : '')+
+  (m.go && m.go!==here ? '<a class="qgo" href="#'+m.go+'" data-go="'+m.go+'"'+(m.anchor?' data-anchor="'+m.anchor+'"':'')+'>'+L.nav[m.go]+arrow+'</a>' : '')+'</div>';
 }
 
 function fezMap(){
@@ -298,7 +313,7 @@ function exportersSection(E){
    (x.mail ? '<a href="mailto:'+x.mail+'">'+x.mail+'</a>' : '')+(x.tel ? '<a href="tel:'+x.tel.replace(/\s/g,"")+'">'+x.tel+'</a>' : '')+'</div>' : '';
   return '<article class="exco rv'+(x.feat ? ' feat' : '')+'"><div class="badges">'+badges+'</div><h3>'+x.n+(x.f ? ' <small>'+x.f+'</small>' : '')+'</h3>'+(x.alias ? '<p class="alias">'+x.alias+'</p>' : '')+'<p class="meta">'+meta+'</p>'+(x.feat ? '<div class="excols"><div>'+rows+'</div>'+contact+'</div>' : rows+contact)+'<div class="srcs">'+refs(x.src)+'</div></article>';
  };
- return '<section class="sec tint"><div class="wrap"><div class="head split"><div><div class="kicker">'+O.k+'</div><h2 class="h2 rv">'+O.t+'</h2></div><p class="lead rv">'+O.l+'</p></div>'+
+ return '<section class="sec tint" id="exporters"><div class="wrap"><div class="head split"><div><div class="kicker">'+O.k+'</div><h2 class="h2 rv">'+O.t+'</h2></div><p class="lead rv">'+O.l+'</p></div>'+
   '<div class="excos">'+EXPORTERS.map(card).join("")+'</div>'+
   '<div class="exfoot rv"><p class="note">'+O.note+'</p><p style="display:flex;gap:12px;flex-wrap:wrap"><a class="cta" href="#service" data-go="service" data-form="partner">'+O.b1+arrow+'</a><a class="cta ghost" href="#service" data-go="service" data-form="exporter">'+O.b2+'</a></p></div>'+
  '</div></section>';
@@ -340,9 +355,18 @@ function pageSources(){
  return phead("quellen", S.h1, S.lead, 11)+'<section class="sec flush"><div class="wrap"><ol class="srcs">'+
   SRC.map(function(s,i){ return s?'<li id="src-'+i+'"><b>['+i+']</b><a href="'+s.u+'" target="_blank" rel="noopener">'+s.t+'</a></li>':""; }).join("")+'</ol>'+(MD.s?'<p class="ainote" style="margin-top:40px;max-width:70ch">'+L.foot.ai+'</p>':'')+'</div></section>';
 }
+function repProfile(){
+ var R = L.rep;
+ return '<section class="sec flush"><div class="wrap"><article class="repcard rv">'+
+  (REP.photo ? '<figure class="rp"><img src="'+REP.photo+'" alt="'+esc(REP.n[lang])+'" width="200" height="200" decoding="async"></figure>' : '')+
+  '<div class="rb"><div class="kicker">'+R.k+'</div><h2>'+REP.n[lang]+'</h2><p class="role">'+R.role+' · '+R.city+'</p>'+
+  '<ul>'+R.bio.map(function(b){ return '<li>'+b+'</li>'; }).join("")+'</ul>'+
+  '<p class="acts"><a class="cta" href="#service" data-go="service" data-form="meeting">'+R.meet+arrow+'</a><a class="cta ghost" href="'+REP.li+'" target="_blank" rel="noopener">'+R.li+' '+ext+'</a></p></div>'+
+ '</article></div></section>';
+}
 function pageContact(){
  var K = L.contact;
- return phead("kontakt", K.h1, K.lead, 12)+'<section class="sec flush"><div class="wrap"><div class="cgrid"><div class="rv"><h3>'+K.emb+'</h3><p>'+K.embT+'</p></div><div class="rv"><h3>'+K.off+'</h3><p>'+K.offT+'</p></div><div class="rv"><h3>'+K.hrs+'</h3><p>'+K.hrsT+'</p></div></div><p class="note rv">'+K.note+'</p></div></section>';
+ return phead("kontakt", K.h1, K.lead, 12)+repProfile()+'<section class="sec"><div class="wrap"><div class="cgrid two"><div class="rv"><h3>'+K.off+'</h3><p>'+K.offT+'</p></div><div class="rv"><h3>'+K.hrs+'</h3><p>'+K.hrsT+'</p></div></div><p class="note rv">'+K.note+'</p></div></section>';
 }
 function pageLegal(which){
  var t = LEGAL[which];
@@ -374,7 +398,7 @@ function show(r, anchor){
  $$("#nav a, #dnav a").forEach(function(a){ a.classList.toggle("on", a.getAttribute("data-go")===r); });
  document.title = (isHome ? L.brand : (L.nav[r]||(LEGAL[r]&&LEGAL[r].h1)||"")+" · "+L.brand);
  closeDrawer();
- if(anchor){ var el = document.getElementById(anchor); if(el){ el.scrollIntoView({block:"center"}); el.style.color="var(--gold)"; return; } }
+ if(anchor){ var el = document.getElementById(anchor); if(el){ if(el.tagName==="DETAILS") el.open = true; else if(/^src-/.test(anchor)) el.style.color="var(--gold)"; el.scrollIntoView({block: el.offsetHeight > window.innerHeight*0.7 ? "start" : "center"}); return; } }
  window.scrollTo(0, 0);
  onScroll();
 }
@@ -438,6 +462,144 @@ function openSector(id){
  $("#dossier").scrollIntoView({behavior:"smooth", block:"nearest"});
 }
 
+/* ------------------------------------------------------------ assistant
+   A question box that answers only from this site: the investor questions first,
+   then sectors, free zones, exporters, events and rules. Nothing leaves the browser. */
+var ASK_ICON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 9.5h7M8.5 12.5h4.5"/></svg>';
+var STOP = {
+ de:"der die das ein eine einen einem einer und oder ist sind wie was wo wer wann gibt es kann können ich wir sie mit für von in im an am auf nach zu zum zur bei ob man mein meine unser sich auch nicht",
+ ru:"и в во на с со к ко по о об от для из у а но или ли же как что где когда кто это есть ли можно нужно нужна нужен мне нам я мы вы ваш наш свой какие какой какая каков при до",
+ en:"the a an and or is are how what where who when can do does i we you my our to for of in on at by with there it be need",
+ tj:"ва дар ба аз бо барои чӣ куҷо кай кӣ оё ман мо шумо ин он аст мебошад мумкин лозим чӣ гуна кадом"
+};
+function normT(s){ return String(s).toLowerCase().replace(/<[^>]+>/g," ").replace(/ё/g,"е").replace(/[^0-9a-zа-яәөүҳҷӣӯқғäöüßЀ-ӿ]+/g," ").trim(); }
+function toks(s){ var st = " "+STOP[lang]+" "; return normT(s).split(/\s+/).filter(function(t){ return t.length>1 && st.indexOf(" "+t+" ")<0; }); }
+/* tolerant word match: 1 for the same word or the same stem with a short inflected ending,
+   0.6 for a longer shared stem (налоги ~ налогообложение), otherwise 0 */
+function tmatch(a, b){
+ if(a===b) return 1;
+ var n = Math.min(a.length, b.length), d = Math.abs(a.length-b.length), p = 0;
+ while(p<n && a[p]===b[p]) p++;
+ if(p>=3 && p>=n-2 && d<=3) return 1;
+ return p>=5 ? 0.6 : 0;
+}
+var askIdx = null, askLang = null;
+function askIndex(){
+ if(askIdx && askLang===lang) return askIdx;
+ var X = [], E = L.exp;
+ var add = function(o){ o.tq = toks(o.t); o.tt = toks(o.k||""); o.bt = toks(o.b||""); X.push(o); };
+ FAQ_META.forEach(function(m){ var it = L.faq.items[m.id]; add({type:"faq", m:m, t:it.q, k:it.k, b:it.a}); });
+ L.sectors.forEach(function(s){ add({type:"sector", t:s.n, k:s.tag, b:s.s+" "+(s.big||"")+" "+(s.need||[]).join(" "), go:"branchen", sector:s.id}); });
+ ZONES.forEach(function(z){ var t = L.invest.zones[z.id]; add({type:"zone", t:t.n, k:t.f, b:t.p, go:"investieren", anchor:"fezmap", zone:z.id}); });
+ EXPORTERS.forEach(function(x){ add({type:"exp", t:x.n, k:(x.alias||"")+" "+E.co.city[x.city], b:x.pr.map(function(p){ return E.co.prn[p]; }).join(", "), go:"export", anchor:"exporters"}); });
+ EVENTS.forEach(function(e){ var t = L.events.list[e.id]; if(t) add({type:"evt", t:t.n, k:(e.cityL ? e.cityL[lang] : e.city), b:t.p, go:"termine"}); });
+ L.invest.tax.forEach(function(r){ add({type:"tax", t:r[0], b:r[1], go:"investieren"}); });
+ E.regs.forEach(function(r){ add({type:"page", t:r.t, k:r.c, b:r.p, go:"export"}); });
+ E.steps.concat(L.invest.steps).forEach(function(s, i){ add({type:"page", t:s.t, b:s.p, go: i<E.steps.length ? "export" : "investieren"}); });
+ askLang = lang; askIdx = X; return X;
+}
+function askSearch(q){
+ var qt = toks(q); if(!qt.length) return [];
+ return askIndex().map(function(o){
+  var sc = 0, hit = 0;
+  qt.forEach(function(w){
+   var bt = function(list){ var m = 0; list.forEach(function(t){ m = Math.max(m, tmatch(w,t)); }); return m; };
+   var v = Math.max(3.3*bt(o.tq), 3*bt(o.tt), bt(o.bt)); /* the question itself counts a little more than its keywords */
+   sc += v; if(v>=1.8) hit++;
+  });
+  if(o.type==="faq") sc += 0.5;
+  return {o:o, sc:sc, hit:hit};
+ }).filter(function(r){ return r.hit>0 && r.sc>=1.8; }).sort(function(a,b){ return b.sc-a.sc; });
+}
+function askTypeLbl(o){ var A = L.ask; return {sector:A.sector, zone:A.zone, exp:A.exp, evt:A.evt, tax:A.tax, page:A.page}[o.type] || ""; }
+function askGoAttrs(o){
+ if(o.type==="faq") return o.m.go ? ' data-ago="'+o.m.go+'"'+(o.m.anchor?' data-aanchor="'+o.m.anchor+'"':'') : '';
+ return ' data-ago="'+o.go+'"'+(o.anchor?' data-aanchor="'+o.anchor+'"':'')+(o.zone?' data-azone="'+o.zone+'"':'')+(o.sector?' data-asector="'+o.sector+'"':'');
+}
+function askAnswer(o){
+ var A = L.ask;
+ if(o.type==="faq"){
+  var m = o.m;
+  return '<p class="aq">'+o.t+'</p><p>'+L.faq.items[m.id].a+'</p><div class="qfoot">'+(m.s.length ? '<span class="qs">'+A.src+' '+refs(m.s)+'</span>' : '')+
+   (m.go ? '<button class="qgo" type="button"'+askGoAttrs(o)+'>'+L.nav[m.go]+arrow+'</button>' : '')+'</div>';
+ }
+ return '<p class="aq"><small>'+askTypeLbl(o)+'</small>'+o.t+'</p><p>'+esc(o.b).slice(0,260)+(o.b.length>260?'…':'')+'</p><div class="qfoot"><button class="qgo" type="button"'+askGoAttrs(o)+'>'+A.open+' · '+L.nav[o.go]+arrow+'</button></div>';
+}
+function askPush(cls, html){
+ var log = $("#askLog"), d = document.createElement("div");
+ d.className = "msg "+cls; d.innerHTML = html; log.appendChild(d);
+ /* a new answer is read from its first line, everything else just follows the bottom */
+ log.scrollTop = (cls==="bot" && d.offsetHeight > log.clientHeight*0.6) ? d.offsetTop - 12 : log.scrollHeight;
+ return d;
+}
+function askHello(){
+ var A = L.ask;
+ $("#askLog").innerHTML = "";
+ askPush("bot", '<p>'+A.hello+'</p><div class="chips"><span class="cl">'+A.pop+'</span>'+ASK_POP.map(function(id){ return '<button type="button" class="qchip" data-faq="'+id+'">'+L.faq.items[id].q+'</button>'; }).join("")+'</div>');
+}
+function askReply(q, faqId){
+ var A = L.ask, reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+ askPush("me", '<p>'+esc(q)+'</p>');
+ var res = faqId ? [{o:askIndex().filter(function(o){ return o.type==="faq" && o.m.id===faqId; })[0]}] : askSearch(q);
+ var wait = askPush("bot typing", '<span></span><span></span><span></span>');
+ setTimeout(function(){
+  wait.remove();
+  if(!res.length){
+   askPush("bot", '<p>'+A.none+'</p><div class="qfoot"><button class="qgo" type="button" data-awrite>'+A.write+arrow+'</button></div>').setAttribute("data-q", q);
+   return;
+  }
+  var more = faqId ? [] : res.slice(1,4);
+  askPush("bot", askAnswer(res[0].o)+(more.length ? '<div class="also"><span class="cl">'+A.also+'</span>'+more.map(function(r){
+   return r.o.type==="faq" ? '<button type="button" class="qchip" data-faq="'+r.o.m.id+'">'+r.o.t+'</button>' : '<button type="button" class="qchip"'+askGoAttrs(r.o)+'><small>'+askTypeLbl(r.o)+'</small> '+r.o.t+'</button>';
+  }).join("")+'</div>' : ''));
+ }, reduce ? 0 : 380);
+}
+function askOpen(){
+ var p = $("#askP"); p.hidden = false;
+ requestAnimationFrame(function(){ p.classList.add("on"); });
+ document.documentElement.classList.add("ask-open");
+ if(!$("#askLog").children.length) askHello();
+ setTimeout(function(){ $("#askF").q.focus({preventScroll:true}); }, 60);
+}
+function askClose(){
+ var p = $("#askP"); p.classList.remove("on"); document.documentElement.classList.remove("ask-open");
+ setTimeout(function(){ if(!p.classList.contains("on")) p.hidden = true; }, 260);
+ $("#askFab").focus({preventScroll:true});
+}
+/* leave the panel for a page: on phones the panel covers the screen, so it closes */
+function askNav(b){
+ var r = b.getAttribute("data-ago"), an = b.getAttribute("data-aanchor"), z = b.getAttribute("data-azone"), sc = b.getAttribute("data-asector");
+ if(window.innerWidth < 700) askClose();
+ go(r, an || undefined);
+ if(z) setTimeout(function(){ fezSelect(z); }, 30);
+ if(sc) setTimeout(function(){ openSector(sc); }, 30);
+}
+function renderAsk(){
+ var A = L.ask;
+ if(!$("#askP")){
+  document.body.insertAdjacentHTML("beforeend",
+   '<button class="askfab" id="askFab" type="button" data-ask aria-haspopup="dialog" aria-controls="askP">'+ASK_ICON+'<span></span></button>'+
+   '<section class="askp" id="askP" role="dialog" aria-labelledby="askT" hidden><header><div><b id="askT"></b><small id="askS"></small></div><button class="ax" type="button" id="askX"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>'+
+   '<div class="log" id="askLog" aria-live="polite"></div>'+
+   '<form id="askF" autocomplete="off"><input name="q" maxlength="200" enterkeyhint="send"><button type="submit" id="askGo"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>'+
+   '<p class="priv" id="askPriv"></p></section>');
+  $("#askX").addEventListener("click", askClose);
+  $("#askF").addEventListener("submit", function(e){ e.preventDefault(); var q = this.q.value.trim(); if(!q) return; this.q.value = ""; askReply(q); });
+  $("#askLog").addEventListener("click", function(e){
+   var c = e.target.closest("[data-faq]"); if(c){ askReply(c.textContent, c.getAttribute("data-faq")); return; }
+   var sr = e.target.closest(".src"); if(sr){ e.preventDefault(); if(window.innerWidth < 700) askClose(); go("quellen", "src-"+sr.getAttribute("data-src")); return; }
+   var g = e.target.closest("[data-ago]"); if(g){ askNav(g); return; }
+   var w = e.target.closest("[data-awrite]");
+   if(w){ var q = w.closest(".msg").getAttribute("data-q"); if(window.innerWidth < 700) askClose(); go("service"); setTimeout(function(){ selectForm("partner"); var t = $("#aneed"); if(t){ t.value = q; t.focus({preventScroll:true}); } }, 30); }
+  });
+ }
+ $("#askFab span").textContent = A.btn; $("#askFab").setAttribute("aria-label", A.t);
+ $("#askT").textContent = A.t; $("#askS").textContent = A.sub; $("#askPriv").textContent = A.privacy;
+ $("#askX").setAttribute("aria-label", A.close); $("#askGo").setAttribute("aria-label", A.send);
+ $("#askF").q.placeholder = A.ph; $("#askF").q.setAttribute("aria-label", A.ph);
+ askIdx = null; $("#askLog").innerHTML = "";
+}
+
 /* delegated navigation */
 document.addEventListener("click", function(e){
  var a = e.target.closest("[data-go]");
@@ -445,18 +607,19 @@ document.addEventListener("click", function(e){
  var lb = e.target.closest("[data-lang]");
  if(lb){ setLang(lb.getAttribute("data-lang")); $("#langs").classList.remove("open"); return; }
  if(e.target.closest("[data-theme-toggle]")){ toggleTheme(); return; }
+ if(e.target.closest("[data-ask]")){ e.preventDefault(); if($("#askP").classList.contains("on")) askClose(); else askOpen(); return; }
  if(!e.target.closest("#langs")) $("#langs").classList.remove("open");
 });
 $("#langBtn").addEventListener("click", function(e){ e.stopPropagation(); $("#langs").classList.toggle("open"); });
 $("#burger").addEventListener("click", function(){ $("#drawer").classList.add("open"); document.body.style.overflow="hidden"; });
 $("#dclose").addEventListener("click", closeDrawer);
 function closeDrawer(){ $("#drawer").classList.remove("open"); document.body.style.overflow=""; }
-document.addEventListener("keydown", function(e){ if(e.key==="Escape"){ closeDrawer(); $("#langs").classList.remove("open"); } });
+document.addEventListener("keydown", function(e){ if(e.key==="Escape"){ closeDrawer(); $("#langs").classList.remove("open"); if($("#askP") && $("#askP").classList.contains("on")) askClose(); } });
 
 function setLang(c){
  if(!C[c]) return; lang = c; L = C[c];
  try{ localStorage.setItem(LK, c); }catch(e){}
- renderChrome(); renderHero(); show(current||"home");
+ renderChrome(); renderHero(); renderAsk(); show(current||"home");
 }
 function theme(){ try{ var t=localStorage.getItem(TK); if(t) return t; }catch(e){} return matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"; }
 function toggleTheme(){ var t = document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark"; document.documentElement.setAttribute("data-theme", t); try{ localStorage.setItem(TK,t); }catch(e){} paintOrnaments(); }
@@ -478,5 +641,5 @@ window.addEventListener("resize", fitBar);
 if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitBar);
 
 $$(".flag-tj").forEach(function(f){ f.innerHTML = FLAG_TJ; });
-paintOrnaments(); renderChrome(); renderHero(); route();
+paintOrnaments(); renderChrome(); renderHero(); renderAsk(); route();
 })();

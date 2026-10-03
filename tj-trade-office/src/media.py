@@ -121,6 +121,10 @@ def main():
         shutil.copy(os.path.join(gdir, "emblem.svg"), os.path.join(OUT, "gen", "emblem.svg"))
         man.setdefault("gen", {})["emblem"] = "media/gen/emblem.svg"
 
+    # the trade representative's portrait (his public LinkedIn picture), copied as is
+    if os.path.exists(os.path.join(RAW, "rep.jpg")):
+        shutil.copy(os.path.join(RAW, "rep.jpg"), os.path.join(OUT, "rep.jpg"))
+
     json.dump(man, open(os.path.join(OUT, "manifest.json"), "w"), indent=1)
     total = sum(os.path.getsize(os.path.join(r, f)) for r, _, fs in os.walk(OUT) for f in fs)
     print("media:", ", ".join(man) or "none", "| %.1f MB" % (total / 1e6))
