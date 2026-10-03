@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v44-waitlist-fallback';
+const CACHE = 'amnetwork-v45-home-v2-films';
 // Must match QURAN_OFFLINE_CACHE in quran/index.html byte-for-byte — that
 // page is the only writer of this bucket (a per-surah "save for offline"
 // button). It is user data (surahs someone explicitly chose to keep) and
@@ -10,7 +10,7 @@ const STATIC = [
   '/index.html',
   '/i18n-data.js',
   '/faq-assistant.js',
-  '/i18n-data.js?v=83a36d538c',
+  '/i18n-data.js?v=28daeb0561',
   '/logo.webp',
   '/favicon.svg?v=20260914',
   '/manifest.json',
@@ -106,6 +106,11 @@ self.addEventListener('fetch', e => {
     // Never persist third-party API quotes or private API responses.
     return;
   }
+
+  // Video goes straight to the network: Safari plays <video> through Range
+  // requests (206) that a cache-first reply would break, and the films are
+  // megabytes that should not fill the offline cache.
+  if (reqUrl.pathname.startsWith('/media/') || e.request.headers.has('range')) return;
 
   // Network-first для HTML-страниц — всегда свежий контент
   if (e.request.mode === 'navigate') {

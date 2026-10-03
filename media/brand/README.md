@@ -7,3 +7,7 @@
 - `am-ident-poster.jpg` — last frame (the finished emblem), for posters/fallbacks
 
 `path-of-light-22s-*.mp4` — "Path of Light" (AM Zakat.ai), 22.5 s, approved by the founder (October 2026). A sphere of light carrying the AM emblem leaves an open palm, passes a mosque, enters a family home, rises into the night sky and becomes the constellation of the emblem. Kling 3.0 Pro scenes assembled with ffmpeg; the emblem in the sphere was composited from the official logo (not AI-drawn). Illustration only — no real recipients are shown.
+
+`knowledge-grows-10s-*.mp4` — "Knowledge Grows" (AM Academy), 10.5 s, approved by the founder (October 2026). Morning study desk with books, tea and a laptop showing an AM Academy lecture ("Financial Literacy: Building a Halal Budget"); the camera pushes in to the all-gold certificate seal. The laptop screen and seal were composited from our own HTML layout and the official logo, so the text and emblem are exact.
+
+Site copies used on the homepage live in `media/site/` (short muted loops + posters + the full films).
