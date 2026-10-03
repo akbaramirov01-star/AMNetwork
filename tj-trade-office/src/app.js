@@ -157,7 +157,7 @@ function pageLand(){
  '</div></div></section>'+
  /* GSP: how the preference works, in three steps, with the figures from Art. 7 */
  '<section class="sec"><div class="wrap"><div class="split2"><div><div class="kicker">'+D.gk+'</div><h2 class="h2 rv">'+D.gt+'</h2></div><div><p class="lead rv" style="margin-top:0">'+D.gp+' '+refs(D.gs)+'</p></div></div>'+
-  '<ol class="gspsteps">'+D.gsp.steps.map(function(s,i){ return '<li class="rv"><span class="n">'+(i+1)+'</span><h4>'+s.t+'</h4><p>'+s.p+'</p></li>'; }).join("")+'</ol>'+
+  '<ol class="gspsteps">'+D.gsp.steps.map(function(s,i){ return '<li class="rv"><span class="n">'+(i+1)+'</span><h4>'+s.t+'</h4><p>'+s.p+'</p>'+(i===0 ? '<a class="more" href="'+TJTRADE.base+TJTRADE.rex+'?l='+tjLang()+'" target="_blank" rel="noopener">'+L.exp.fx.tjr.rex+' '+ext+'</a> '+sref(40) : '')+'</li>'; }).join("")+'</ol>'+
   '<div class="gspfacts rv">'+D.gsp.f.map(function(f){ return '<div><b>'+f.v+'</b><span>'+f.l+'</span></div>'; }).join("")+'</div>'+
   '<p class="note rv">'+D.gsp.fl+' '+sref(39)+'</p>'+
   '<p class="rv" style="margin-top:22px"><a class="cta" href="#export" data-go="export" data-anchor="a2m">'+D.gsp.go+arrow+'</a></p>'+
@@ -252,9 +252,16 @@ function a2mFinder(E){
    '<label class="own" hidden><span>'+F.code+'</span><input name="q" autocomplete="off" inputmode="text" maxlength="60"></label>'+
    '<label><span>'+F.d+'</span><select name="to"><option value="DE">'+cname("DE")+'</option>'+eu.map(function(c){ return '<option value="'+c+'">'+cname(c)+'</option>'; }).join("")+'</select></label>'+
    '<div class="route" aria-live="polite">'+langFlag("tj")+'<b>'+cname("TJ")+'</b><span aria-hidden="true">→</span><b class="dest">'+cname("DE")+'</b></div>'+
-   '<div class="facts"><button class="cta" type="submit">'+E.ab+' '+ext+'</button></div>'+
+   '<ol class="legs"><li><span class="k">1 · '+F.tjr.s1+'</span><a class="tjproc" target="_blank" rel="noopener"></a></li>'+
+   '<li><span class="k">2 · '+F.tjr.s2+'</span><div class="facts"><button class="cta" type="submit">'+E.ab+' '+ext+'</button></div></li></ol>'+
    '<p class="note">'+F.note+'</p>'+
   '</form></div></section>';
+}
+function tjLang(){ return (lang==="ru"||lang==="tj") ? "ru" : "en"; }
+function tjProc(form){
+ var F = L.exp.fx, a = $(".tjproc", form), id = TJTRADE.proc[form.hs.value];
+ a.href = TJTRADE.base + (id ? "procedure/"+id : TJTRADE.all) + "?l=" + tjLang();
+ a.innerHTML = (id ? TJTRADE.name[id][tjLang()] : F.tjr.all) + ' <small>'+F.tjr.portal+'</small> ' + ext;
 }
 function a2mGo(form){
  var hs = form.hs.value, to = form.to.value, url;
@@ -405,7 +412,8 @@ function wire(root){
  $$("#ftabs button", root).forEach(function(b){ b.addEventListener("click", function(){ selectForm(b.getAttribute("data-f")); }); });
  $$("#a2m", root).forEach(function(f){
   var own = $(".own", f);
-  f.hs.addEventListener("change", function(){ own.hidden = f.hs.value !== "*"; if(!own.hidden) f.q.focus(); });
+  f.hs.addEventListener("change", function(){ own.hidden = f.hs.value !== "*"; if(!own.hidden) f.q.focus(); tjProc(f); });
+  tjProc(f);
   f.to.addEventListener("change", function(){ $(".route .dest", f).textContent = f.to.selectedOptions[0].text; });
   f.addEventListener("submit", function(e){ e.preventDefault(); a2mGo(f); });
  });

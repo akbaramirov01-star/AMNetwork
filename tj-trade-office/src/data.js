@@ -39,7 +39,8 @@ var SRC = [
  {t:"Barakat Isfara LLC — company website: products, quality, contacts", u:"https://barakat-isfara.com/about_company/"},
  {t:"Barakat Isfara LLC — “Barakat-Isfara products exported to Malaysia”, 29.03.2022", u:"https://barakat-isfara.com/2022/03/29/export_barakat/"},
  {t:"European Commission, DG Trade — European Union, trade in goods with Tajikistan (factsheet, 20.05.2026)", u:"https://webgate.ec.europa.eu/isdb_results/factsheets/country/details_tadjikistan_en.pdf"},
- {t:"Regulation (EU) No 978/2012 applying a scheme of generalised tariff preferences (GSP), Art. 7", u:"https://eur-lex.europa.eu/eli/reg/2012/978/oj"}
+ {t:"Regulation (EU) No 978/2012 applying a scheme of generalised tariff preferences (GSP), Art. 7", u:"https://eur-lex.europa.eu/eli/reg/2012/978/oj"},
+ {t:"Ministry of Economic Development and Trade of the RT — Tajikistan Trade Portal (UNCTAD eRegulations)", u:"https://tajtrade.tj/"}
 ];
 function sref(n){ return '<a class="src" href="#quellen" data-src="'+n+'" title="'+(SRC[n]?SRC[n].t.replace(/"/g,"&quot;"):"")+'">['+n+']</a>'; }
 
@@ -98,3 +99,9 @@ var EXPORTERS = [
 
 /* EU imports from Tajikistan by HS section, 2025, million EUR (DG Trade factsheet, src 38); total 579 */
 var EUIMP = {total:579, growth:90.4, rows:[["metals",533,92.0],["mineral",19,3.2],["textile",14,2.4],["veg",10,1.8],["hides",1,0.2]]};
+
+/* Tajikistan Trade Portal (MEDT, eRegulations): step-by-step export procedures on the Tajik side.
+   HS code -> procedure id, only where the portal has a procedure for that product (src 40) */
+var TJTRADE = {base:"https://tajtrade.tj/", rex:"menu/47", all:"objective/20", producers:"menu/40",
+ proc:{"081310":7,"080620":7,"081320":7,"040900":27,"520100":6,"760110":638},
+ name:{7:{ru:"Экспорт сушёных фруктов автотранспортом",en:"Export of dried fruit by road"},27:{ru:"Экспорт мёда автотранспортом",en:"Export of honey by road"},6:{ru:"Экспорт хлопка железнодорожным транспортом",en:"Export of cotton by railway"},638:{ru:"Экспорт алюминиевых изделий железнодорожным транспортом",en:"Export of aluminium products by railway"}}};
