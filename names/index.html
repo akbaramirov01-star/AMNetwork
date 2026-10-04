@@ -112,6 +112,62 @@ main{padding-top:64px;min-height:100vh}
 
 .source-note{font-size:11px;color:var(--text3);text-align:center;margin-top:24px;line-height:1.7}
 
+/* v2 — name of the day, card grid, detail sheet, study mode */
+.hero{padding:26px 5vw 14px}
+.hero p{font-size:13px}
+.nod{position:relative;overflow:hidden;text-align:center;border-radius:22px;padding:22px 18px 20px;margin-bottom:18px;border:1px solid rgba(201,168,76,.35);background:radial-gradient(120% 100% at 50% 0%,rgba(201,168,76,.18),transparent 65%),var(--card);cursor:pointer}
+.nod-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.nod-ar{font-family:'Noto Naskh Arabic',serif;font-size:52px;line-height:1.5;color:var(--gold2);margin-top:4px}
+.nod-tr{font-size:13px;color:var(--text3);font-style:italic}
+.nod-mean{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--text);margin-top:2px}
+.nod-pattern{position:absolute;inset:0;opacity:.07;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M24 4l5.9 14.1L44 24l-14.1 5.9L24 44l-5.9-14.1L4 24l14.1-5.9z' fill='none' stroke='%23C9A84C' stroke-width='1'/%3E%3C/svg%3E")}
+.tabs{display:flex;gap:6px;padding:4px;border-radius:14px;background:var(--input-bg);border:1px solid var(--border);margin-bottom:14px}
+.tab{flex:1;min-height:42px;border:none;border-radius:10px;background:transparent;color:var(--text2);font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer}
+.tab.active{background:var(--gold);color:#1a1a1a}
+.names-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.name-card{position:relative;padding:14px 12px 14px;text-align:center;cursor:pointer;transition:border-color .2s,transform .2s;font-family:inherit;color:inherit;width:100%}
+.name-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.name-card:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.oct{position:relative;width:34px;height:34px;margin:0 auto 4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold)}
+.oct svg{position:absolute;inset:0}
+.name-card .name-arabic{text-align:center;font-size:28px;margin:2px 0 0;line-height:1.6}
+.name-card .name-translit{margin-bottom:4px}
+.name-card .name-meaning{font-size:15px;margin:0;line-height:1.3}
+.about{margin-top:22px;border:1px solid var(--border);border-radius:14px;background:var(--card)}
+.about summary{list-style:none;cursor:pointer;padding:14px 18px;font-size:13px;color:var(--text2);min-height:46px;display:flex;align-items:center}
+.about summary::-webkit-details-marker{display:none}
+.about summary::after{content:'+';margin-inline-start:auto;color:var(--gold);font-size:18px}
+.about[open] summary::after{content:'−'}
+.about .citation-box{margin:0 14px 10px}
+.about .source-note{margin:0 14px 14px}
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .25s;z-index:300}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:301;max-height:86vh;overflow-y:auto;background:var(--bg2);border-top:1px solid rgba(201,168,76,.35);border-radius:22px 22px 0 0;padding:10px 22px calc(26px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .3s cubic-bezier(.22,1,.36,1);text-align:center;max-width:640px;margin:0 auto}
+.sheet.open{transform:none}
+.sheet-bg.open{opacity:1;pointer-events:auto}
+.sheet-grip{width:44px;height:5px;border-radius:3px;background:var(--input-border);margin:0 auto 14px}
+.sheet .nod-ar{font-size:56px}
+.sheet-desc{font-size:14px;color:var(--text2);line-height:1.75;margin-top:12px;text-align:start}
+.sheet-found{font-size:12px;color:var(--text3);margin-top:12px}
+.sheet-found b{color:var(--gold)}
+.sheet-nav{display:flex;gap:10px;justify-content:center;margin-top:18px}
+.sheet-btn{min-height:44px;padding:10px 18px;border-radius:12px;border:1px solid var(--input-border);background:transparent;color:var(--text2);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer}
+.sheet-btn:hover{border-color:var(--gold);color:var(--gold)}
+.study{text-align:center}
+.study-progress{font-size:12.5px;color:var(--text2);margin-bottom:8px}
+.study-bar{height:6px;border-radius:6px;background:var(--input-bg);overflow:hidden;margin-bottom:16px}
+.study-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:6px;transition:width .4s}
+.flash{perspective:1000px;cursor:pointer;min-height:300px}
+.flash-in{position:relative;min-height:300px;transition:transform .55s cubic-bezier(.22,1,.36,1);transform-style:preserve-3d}
+.flash.flipped .flash-in{transform:rotateY(180deg)}
+.flash-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;border:1px solid rgba(201,168,76,.35);background:radial-gradient(120% 100% at 50% 0%,rgba(201,168,76,.14),transparent 65%),var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px}
+.flash-back{transform:rotateY(180deg)}
+.flash-hint{font-size:12px;color:var(--text3);margin-top:12px}
+.study-actions{display:flex;gap:10px;margin-top:14px}
+.study-actions button{flex:1;min-height:50px;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer}
+.btn-know{background:var(--gold);border:none;color:#1a1a1a}
+.btn-again{background:transparent;border:1px solid var(--input-border);color:var(--text2)}
+@media (prefers-reduced-motion:reduce){.flash-in,.sheet{transition:none}}
+
 </style>
 </head>
 <body>
@@ -164,31 +220,45 @@ main{padding-top:64px;min-height:100vh}
 
 <main>
   <section class="hero">
-    <div class="badge">✨ <span data-t="hero_badge">99 Names · From the Qur'an</span></div>
     <h1 data-t="hero_h1">The 99 Names of Allah</h1>
     <p data-t="hero_p">Al-Asma al-Husna — the Most Beautiful Names, each traced to where it appears in the Qur'an.</p>
   </section>
 
   <div class="wrap">
-    <div class="citation-box" data-t="citation_note">The Prophet ﷺ said Allah has 99 Names, and whoever preserves them will enter Paradise (Sahih al-Bukhari 2736, Sahih Muslim 2677). The specific enumerated list below comes from an addition narrated in Jami' at-Tirmidhi 3507 — scholars note this addition has a weaker chain of transmission than the core hadith, and its exact wording/order varies slightly between sources. Shown here as commonly known, not as a claim of absolute certainty.</div>
+    <div class="nod" id="nameOfDay" style="display:none"></div>
 
-    <div class="search-row">
-      <input type="text" id="searchInput" data-t-ph="search_ph" placeholder="Search by name or meaning…" oninput="renderNames()">
+    <div class="tabs" role="tablist">
+      <button class="tab active" id="tabAll" role="tab" aria-selected="true" onclick="setMode('all')" data-t="tab_all">All names</button>
+      <button class="tab" id="tabStudy" role="tab" aria-selected="false" onclick="setMode('study')" data-t="tab_study">Study</button>
     </div>
 
-    <div id="content">
-      <div class="state-msg" data-t="loading_msg">Loading…</div>
+    <div id="allView">
+      <div class="search-row">
+        <input type="text" id="searchInput" data-t-ph="search_ph" placeholder="Search by name or meaning…" oninput="renderNames()">
+      </div>
+      <div id="content">
+        <div class="state-msg" data-t="loading_msg">Loading…</div>
+      </div>
     </div>
 
-    <p class="source-note" data-t="source_note">Names, meanings and Qur'an references: the open KabDeveloper/99-Names-Of-Allah dataset. AM Network does not edit or modify this content.</p>
+    <div id="studyView" style="display:none"></div>
+
+    <details class="about">
+      <summary data-t="about_list">About this list</summary>
+      <div class="citation-box" data-t="citation_note">The Prophet ﷺ said Allah has 99 Names, and whoever preserves them will enter Paradise (Sahih al-Bukhari 2736, Sahih Muslim 2677). The specific enumerated list below comes from an addition narrated in Jami' at-Tirmidhi 3507 — scholars note this addition has a weaker chain of transmission than the core hadith, and its exact wording/order varies slightly between sources. Shown here as commonly known, not as a claim of absolute certainty.</div>
+      <p class="source-note" data-t="source_note">Names, meanings and Qur'an references: the open KabDeveloper/99-Names-Of-Allah dataset. AM Network does not edit or modify this content.</p>
+    </details>
   </div>
+
+  <div class="sheet-bg" id="sheetBg" onclick="closeSheet()"></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"></div>
 </main>
 
 <script>
 /* ═══════════════════════════════════════════════════════
    I18N
 ═══════════════════════════════════════════════════════ */
-const translations = {"en": {"nav_back": "← Main site", "hero_badge": "99 Names · From the Qur'an", "hero_h1": "The 99 Names of Allah", "hero_p": "Al-Asma al-Husna — the Most Beautiful Names, each traced to where it appears in the Qur'an.", "search_ph": "Search by name or meaning…", "found_label": "Found in Qur'an", "fallback_note": "No certified translation in this language yet — showing English.", "citation_note": "The Prophet ﷺ said Allah has 99 Names, and whoever preserves them will enter Paradise (Sahih al-Bukhari 2736, Sahih Muslim 2677). The specific enumerated list below comes from an addition narrated in Jami' at-Tirmidhi 3507 — scholars note this addition has a weaker chain of transmission than the core hadith, and its exact wording/order varies slightly between sources. Shown here as commonly known, not as a claim of absolute certainty.", "source_note": "Names, meanings and Qur'an references: the open KabDeveloper/99-Names-Of-Allah dataset. AM Network does not edit or modify this content.", "loading_msg": "Loading…", "error_generic": "Could not load this right now. Please try again.", "no_results": "No names match your search.", "label_home": "Main site", "label_quran": "The Holy Quran", "label_hadith": "Hadith Collection", "label_dua": "Dua & Dhikr", "label_live": "Live: Makkah & Madinah", "label_prayertimes": "Prayer Times", "label_qibla": "Qibla Direction", "label_tasbeeh": "Count Your Dhikr", "label_academy": "AM Academy", "label_calc": "Zakat Calculator", "label_apply": "Apply for Assistance", "label_join": "Join Waitlist", "label_calendar": "Islamic Calendar", "aria_tools": "Other tools", "aria_language": "Select language", "aria_theme": "Toggle theme", "ai_names_note": "This translation was generated by AI and has not yet been reviewed by a scholar. It will be replaced with a verified translation once one is confirmed."}, "ar": {"nav_back": "← الموقع الرئيسي", "hero_badge": "99 اسماً · من القرآن الكريم", "hero_h1": "أسماء الله الحسنى", "hero_p": "الأسماء الحسنى — كل اسم موثّق بمواضع ذكره في القرآن الكريم.", "search_ph": "ابحث بالاسم أو المعنى…", "found_label": "وارد في القرآن", "fallback_note": "لا توجد ترجمة معتمدة بهذه اللغة حتى الآن — يُعرض النص الإنجليزي.", "citation_note": "قال النبي ﷺ إن لله تسعة وتسعين اسماً، من حفظها دخل الجنة (صحيح البخاري 2736، صحيح مسلم 2677). أما القائمة المُعدَّدة أدناه فهي من زيادة رواها الترمذي (3507)، وقد نبّه العلماء إلى أن هذه الزيادة أضعف سنداً من الحديث الأصلي، وأن ترتيب الأسماء وصياغتها يختلف قليلاً بين المصادر. نعرضها كما هي معروفة شائعاً، لا على سبيل التأكيد المطلق.", "source_note": "الأسماء والمعاني والمواضع القرآنية: من مجموعة بيانات KabDeveloper/99-Names-Of-Allah المفتوحة. AM Network لا تحرر أو تعدّل هذا المحتوى.", "loading_msg": "جارٍ التحميل…", "error_generic": "تعذّر تحميل هذا الآن. حاول مرة أخرى.", "no_results": "لا توجد أسماء مطابقة لبحثك.", "label_home": "الموقع الرئيسي", "label_quran": "القرآن الكريم", "label_hadith": "مجموعة الأحاديث", "label_dua": "الدعاء والذكر", "label_live": "مباشر: مكة والمدينة", "label_prayertimes": "مواقيت الصلاة", "label_qibla": "اتجاه القبلة", "label_tasbeeh": "عدّ أذكارك", "label_academy": "AM Academy", "label_calc": "حاسبة الزكاة", "label_apply": "تقدم بطلب للحصول على المساعدة", "label_join": "انضم لقائمة الانتظار", "label_calendar": "التقويم الإسلامي", "aria_tools": "أدوات أخرى", "aria_language": "اختر اللغة", "aria_theme": "تبديل المظهر", "ai_names_note": "تمت ترجمة هذا النص بواسطة الذكاء الاصطناعي ولم تتم مراجعته من قبل عالم شرعي بعد. سيتم استبداله بترجمة موثقة عند توفرها."}, "ru": {"nav_back": "← Главный сайт", "hero_badge": "99 имён · Из Корана", "hero_h1": "99 имён Аллаха", "hero_p": "Асма аль-Хусна — Прекраснейшие Имена, каждое со ссылкой на аяты Корана, где оно упомянуто.", "search_ph": "Поиск по имени или значению…", "found_label": "Встречается в Коране", "fallback_note": "Сертифицированного перевода на этот язык пока нет — показан английский.", "citation_note": "Пророк ﷺ сказал, что у Аллаха 99 имён, и тот, кто их сохранит, войдёт в Рай (Сахих аль-Бухари 2736, Сахих Муслим 2677). Конкретный перечисленный список ниже происходит из добавления, переданного в Джами ат-Тирмизи (3507) — учёные отмечают, что это добавление имеет более слабую цепочку передачи, чем основной хадис, а формулировка и порядок немного различаются между источниками. Показан так, как он общеизвестен, а не как утверждение абсолютной достоверности.", "source_note": "Имена, значения и коранические ссылки: открытый набор данных KabDeveloper/99-Names-Of-Allah. AM Network не редактирует и не изменяет этот контент.", "loading_msg": "Загрузка…", "error_generic": "Не удалось загрузить это сейчас. Попробуйте ещё раз.", "no_results": "Нет имён, соответствующих вашему поиску.", "label_home": "Главный сайт", "label_quran": "Священный Коран", "label_hadith": "Сборник хадисов", "label_dua": "Дуа и Зикр", "label_live": "Прямой эфир: Мекка и Медина", "label_prayertimes": "Время намаза", "label_qibla": "Направление на Киблу", "label_tasbeeh": "Считайте свои зикры", "label_academy": "AM Academy", "label_calc": "Калькулятор закята", "label_apply": "Подать заявку на помощь", "label_join": "Присоединиться", "label_calendar": "Исламский календарь", "aria_tools": "Другие разделы", "aria_language": "Выбрать язык", "aria_theme": "Сменить тему", "ai_names_note": "Этот перевод сгенерирован ИИ и пока не проверен богословом. Он будет заменён проверенным переводом, как только он будет найден."}, "tj": {"nav_back": "← Сайти асосӣ", "hero_badge": "99 ном · Аз Қуръон", "hero_h1": "99 номи Аллоҳ", "hero_p": "Асмо-ул-Ҳусно — Номҳои беҳтарин, ҳар кадом бо ишора ба ояти Қуръон, ки дар он зикр шудааст.", "search_ph": "Бо ном ё маъно ҷустуҷӯ кунед…", "found_label": "Дар Қуръон омадааст", "fallback_note": "Тарҷумаи тасдиқшуда ба ин забон ҳанӯз мавҷуд нест — забони англисӣ намоиш дода мешавад.", "citation_note": "Пайғамбар ﷺ гуфт, ки Аллоҳ 99 ном дорад ва ҳар кӣ онҳоро ҳифз кунад, ба биҳишт медарояд (Саҳиҳи Бухорӣ 2736, Саҳиҳи Муслим 2677). Рӯйхати мушаххаси зерин аз иловае, ки дар Ҷомиъи Тирмизӣ (3507) ривоят шудааст, гирифта шудааст — олимон қайд кардаанд, ки ин илова санади заифтар аз ҳадиси асосӣ дорад ва тартиб/ибораи он андаке дар манбаъҳо фарқ мекунад. Он тавре ки маъмул аст, намоиш дода мешавад, на ба унвони даъвои қатъӣ.", "source_note": "Номҳо, маъноҳо ва ишораҳои қуръонӣ: маҷмӯаи кушодаи KabDeveloper/99-Names-Of-Allah. AM Network ин мӯҳтаворо таҳрир ё тағйир намедиҳад.", "loading_msg": "Боркунӣ…", "error_generic": "Ин ҳоло бор нашуд. Лутфан дубора кӯшиш кунед.", "no_results": "Ба ҳамин ҷустуҷӯ ном мувофиқат намекунад.", "label_home": "Сайти асосӣ", "label_quran": "Қуръони Карим", "label_hadith": "Маҷмӯаи ҳадисҳо", "label_dua": "Дуо ва Зикр", "label_live": "Пахши Зинда: Макка ва Мадина", "label_prayertimes": "Вақти намоз", "label_qibla": "Самти Қибла", "label_tasbeeh": "Зикрҳои худро шуморед", "label_academy": "AM Academy", "label_calc": "Ҳисобкунаки закот", "label_apply": "Барои кӯмак аризадиҳӣ", "label_join": "Ба рӯйхат шомил шав", "label_calendar": "Тақвими исломӣ", "aria_tools": "Бахшҳои дигар", "aria_language": "Интихоби забон", "aria_theme": "Иваз кардани мавзӯъ", "ai_names_note": "Ин тарҷума бо ёрии зеҳни сунъӣ таҳия шудааст ва ҳанӯз аз ҷониби олими динӣ тасдиқ нашудааст. Пас аз ёфтани тарҷумаи тасдиқшуда, он иваз карда мешавад."}, "id": {"nav_back": "← Situs utama", "hero_badge": "99 Nama · Dari Al-Qur'an", "hero_h1": "99 Nama Allah", "hero_p": "Asmaul Husna — Nama-nama Terbaik, masing-masing dengan rujukan ayat Al-Qur'an tempat nama itu disebutkan.", "search_ph": "Cari berdasarkan nama atau arti…", "found_label": "Terdapat dalam Al-Qur'an", "fallback_note": "Belum ada terjemahan bersertifikat dalam bahasa ini — menampilkan bahasa Inggris.", "citation_note": "Nabi ﷺ bersabda bahwa Allah memiliki 99 nama, dan siapa yang menjaganya akan masuk Surga (Shahih al-Bukhari 2736, Shahih Muslim 2677). Daftar terperinci di bawah berasal dari tambahan yang diriwayatkan dalam Jami' at-Tirmidzi (3507) — para ulama mencatat bahwa tambahan ini memiliki sanad yang lebih lemah daripada hadits inti, dan susunan/redaksinya sedikit berbeda antar sumber. Ditampilkan sebagaimana yang umum dikenal, bukan sebagai klaim kepastian mutlak.", "source_note": "Nama, arti, dan rujukan Al-Qur'an: dataset terbuka KabDeveloper/99-Names-Of-Allah. AM Network tidak mengedit atau mengubah konten ini.", "loading_msg": "Memuat…", "error_generic": "Tidak dapat memuat ini sekarang. Silakan coba lagi.", "no_results": "Tidak ada nama yang cocok dengan pencarian Anda.", "label_home": "Situs utama", "label_quran": "Al-Qur'an Al-Karim", "label_hadith": "Koleksi Hadits", "label_dua": "Doa & Dzikir", "label_live": "Langsung: Makkah & Madinah", "label_prayertimes": "Waktu Sholat", "label_qibla": "Arah Kiblat", "label_tasbeeh": "Hitung Dzikir Anda", "label_academy": "AM Academy", "label_calc": "Kalkulator Zakat", "label_apply": "Ajukan Bantuan", "label_join": "Daftar Sekarang", "label_calendar": "Kalender Islam", "aria_tools": "Alat lainnya", "aria_language": "Pilih bahasa", "aria_theme": "Ganti tema", "ai_names_note": "Terjemahan ini dihasilkan oleh AI dan belum ditinjau oleh ulama. Terjemahan ini akan diganti dengan terjemahan resmi setelah ditemukan."}, "tr": {"nav_back": "← Ana site", "hero_badge": "99 İsim · Kur'an'dan", "hero_h1": "Allah'ın 99 İsmi", "hero_p": "Esma-ül Hüsna — En Güzel İsimler, her biri Kur'an'da geçtiği ayete atıfla.", "search_ph": "İsme veya anlama göre ara…", "found_label": "Kur'an'da geçtiği yer", "fallback_note": "Bu dilde henüz onaylı bir çeviri yok — İngilizce gösteriliyor.", "citation_note": "Peygamber ﷺ, Allah'ın 99 ismi olduğunu ve onları koruyanın Cennet'e gireceğini buyurmuştur (Sahih-i Buhari 2736, Sahih-i Müslim 2677). Aşağıdaki belirli liste, Camiu't-Tirmizi'de (3507) rivayet edilen bir ekten gelmektedir — âlimler bu eklemenin ana hadisten daha zayıf bir senede sahip olduğunu ve ifadesinin/sıralamasının kaynaklar arasında biraz farklılık gösterdiğini belirtmişlerdir. Burada yaygın olarak bilindiği şekliyle gösterilmektedir, kesin bir iddia olarak değil.", "source_note": "İsimler, anlamlar ve Kur'an referansları: açık KabDeveloper/99-Names-Of-Allah veri kümesi. AM Network bu içeriği düzenlemez veya değiştirmez.", "loading_msg": "Yükleniyor…", "error_generic": "Bu şu anda yüklenemedi. Lütfen tekrar deneyin.", "no_results": "Aramanızla eşleşen isim yok.", "label_home": "Ana site", "label_quran": "Kur'an-ı Kerim", "label_hadith": "Hadis Koleksiyonu", "label_dua": "Dua & Zikir", "label_live": "Canlı: Mekke ve Medine", "label_prayertimes": "Namaz Vakitleri", "label_qibla": "Kıble Yönü", "label_tasbeeh": "Zikrinizi Sayın", "label_academy": "AM Academy", "label_calc": "Zekât Hesaplayıcı", "label_apply": "Yardım Başvurusu Yapın", "label_join": "Listeye Katıl", "label_calendar": "İslami Takvim", "aria_tools": "Diğer araçlar", "aria_language": "Dil seçin", "aria_theme": "Temayı değiştir", "ai_names_note": "Bu çeviri yapay zeka tarafından oluşturulmuştur ve henüz bir âlim tarafından incelenmemiştir. Onaylı bir çeviri bulunduğunda bu çeviriyle değiştirilecektir."}, "zh": {"nav_back": "← 主站", "hero_badge": "99个尊名 · 源自古兰经", "hero_h1": "安拉的99个尊名", "hero_p": "至美尊名——每一个都标注了它在古兰经中出现的经文位置。", "search_ph": "按名称或含义搜索…", "found_label": "见于古兰经", "fallback_note": "该语言暂无认证翻译——显示英文版本。", "citation_note": "先知（愿主福安之）说，安拉有99个尊名，谁能保持它们，谁就能进入天堂（布哈里圣训实录2736，穆斯林圣训实录2677）。下面列出的具体清单来自提尔米济圣训集（3507）中的一段附加叙述——学者指出，这段附加内容的传述链比核心圣训更弱，其措辞/顺序在不同来源中略有差异。此处按通常已知的方式展示，并非绝对确定性的断言。", "source_note": "名称、含义及古兰经出处：来自开放数据集 KabDeveloper/99-Names-Of-Allah。AM Network 不编辑或修改此内容。", "loading_msg": "正在加载…", "error_generic": "目前无法加载。请重试。", "no_results": "没有与您的搜索匹配的名称。", "label_home": "主站", "label_quran": "尊贵的古兰经", "label_hadith": "圣训集", "label_dua": "祈祷与赞念", "label_live": "直播：麦加与麦地那", "label_prayertimes": "礼拜时间", "label_qibla": "朝拜方向", "label_tasbeeh": "记录您的赞念", "label_academy": "AM Academy", "label_calc": "天课计算器", "label_apply": "申请援助", "label_join": "加入候补名单", "label_calendar": "伊斯兰历法", "aria_tools": "其他工具", "aria_language": "选择语言", "aria_theme": "切换主题", "ai_names_note": "此翻译由人工智能生成，尚未经过学者审核。一旦找到经核实的翻译，将会替换此内容。"}, "ms": {"nav_back": "← Laman utama", "hero_badge": "99 Nama · Daripada Al-Quran", "hero_h1": "99 Nama Allah", "hero_p": "Asmaul Husna — Nama-nama Terbaik, setiap satu dengan rujukan ayat Al-Quran tempat ia disebutkan.", "search_ph": "Cari mengikut nama atau makna…", "found_label": "Terdapat dalam Al-Quran", "fallback_note": "Belum ada terjemahan bertauliah dalam bahasa ini — memaparkan Bahasa Inggeris.", "citation_note": "Nabi ﷺ bersabda bahawa Allah mempunyai 99 nama, dan sesiapa yang menjaganya akan masuk Syurga (Sahih al-Bukhari 2736, Sahih Muslim 2677). Senarai terperinci di bawah berasal daripada tambahan yang diriwayatkan dalam Jami' at-Tirmidzi (3507) — para ulama menyatakan bahawa tambahan ini mempunyai sanad yang lebih lemah berbanding hadis utama, dan susunan/perkataannya sedikit berbeza antara sumber. Dipaparkan sebagaimana yang lazim diketahui, bukan sebagai dakwaan kepastian mutlak.", "source_note": "Nama, makna dan rujukan Al-Quran: set data terbuka KabDeveloper/99-Names-Of-Allah. AM Network tidak menyunting atau mengubah kandungan ini.", "loading_msg": "Memuatkan…", "error_generic": "Tidak dapat memuatkan ini sekarang. Sila cuba lagi.", "no_results": "Tiada nama sepadan dengan carian anda.", "label_home": "Laman utama", "label_quran": "Al-Quran Al-Karim", "label_hadith": "Koleksi Hadis", "label_dua": "Doa & Zikir", "label_live": "Langsung: Makkah & Madinah", "label_prayertimes": "Waktu Solat", "label_qibla": "Arah Kiblat", "label_tasbeeh": "Kira Zikir Anda", "label_academy": "AM Academy", "label_calc": "Kalkulator Zakat", "label_apply": "Mohon Bantuan", "label_join": "Sertai Senarai Tunggu", "label_calendar": "Kalendar Islam", "aria_tools": "Alat lain", "aria_language": "Pilih bahasa", "aria_theme": "Tukar tema", "ai_names_note": "Terjemahan ini dijana oleh AI dan belum disemak oleh ulama. Ia akan digantikan dengan terjemahan yang disahkan sebaik sahaja terjemahan tersebut ditemui."}, "fr": {"nav_back": "← Site principal", "hero_badge": "99 Noms · Du Coran", "hero_h1": "Les 99 Noms d'Allah", "hero_p": "Al-Asma al-Husna — les Plus Beaux Noms, chacun rattaché au(x) verset(s) du Coran où il apparaît.", "search_ph": "Rechercher par nom ou signification…", "found_label": "Mentionné dans le Coran", "fallback_note": "Aucune traduction certifiée dans cette langue pour l'instant — affichage en anglais.", "citation_note": "Le Prophète ﷺ a dit qu'Allah a 99 Noms, et que celui qui les préserve entrera au Paradis (Sahih al-Boukhari 2736, Sahih Mouslim 2677). La liste précise ci-dessous provient d'un ajout rapporté dans Jami' at-Tirmidhi (3507) — les savants notent que cet ajout a une chaîne de transmission plus faible que le hadith principal, et que sa formulation/son ordre varie légèrement selon les sources. Présentée ici telle qu'elle est communément connue, non comme une affirmation de certitude absolue.", "source_note": "Noms, significations et références coraniques : jeu de données ouvert KabDeveloper/99-Names-Of-Allah. AM Network n'édite ni ne modifie ce contenu.", "loading_msg": "Chargement…", "error_generic": "Impossible de charger ceci pour l'instant. Veuillez réessayer.", "no_results": "Aucun nom ne correspond à votre recherche.", "label_home": "Site principal", "label_quran": "Le Noble Coran", "label_hadith": "Recueil de Hadiths", "label_dua": "Dua & Dhikr", "label_live": "Direct : La Mecque et Médine", "label_prayertimes": "Heures de prière", "label_qibla": "Direction de la Qibla", "label_tasbeeh": "Comptez votre dhikr", "label_academy": "AM Academy", "label_calc": "Calculateur de Zakat", "label_apply": "Demander une aide", "label_join": "Rejoindre la liste", "label_calendar": "Calendrier islamique", "aria_tools": "Autres outils", "aria_language": "Choisir la langue", "aria_theme": "Changer de thème", "ai_names_note": "Cette traduction a été générée par IA et n'a pas encore été vérifiée par un érudit. Elle sera remplacée par une traduction certifiée dès qu'elle sera trouvée."}, "de": {"nav_back": "← Zur Hauptseite", "hero_badge": "99 Namen · Aus dem Koran", "hero_h1": "Die 99 Namen Allahs", "hero_p": "Al-Asma al-Husna — die Schönsten Namen, jeder mit Verweis auf die Koranverse, in denen er vorkommt.", "search_ph": "Nach Name oder Bedeutung suchen…", "found_label": "Im Koran zu finden", "fallback_note": "Noch keine zertifizierte Übersetzung in dieser Sprache — Englisch wird angezeigt.", "citation_note": "Der Prophet ﷺ sagte, Allah habe 99 Namen, und wer sie bewahrt, werde ins Paradies eingehen (Sahih al-Bukhari 2736, Sahih Muslim 2677). Die untenstehende konkrete Liste stammt aus einem in Jami' at-Tirmidhi (3507) überlieferten Zusatz — Gelehrte weisen darauf hin, dass dieser Zusatz eine schwächere Überlieferungskette hat als der Kernhadith, und dass Wortlaut/Reihenfolge zwischen den Quellen leicht variieren. Hier wie allgemein bekannt dargestellt, nicht als Behauptung absoluter Gewissheit.", "source_note": "Namen, Bedeutungen und Koranverweise: der offene Datensatz KabDeveloper/99-Names-Of-Allah. AM Network bearbeitet oder verändert diesen Inhalt nicht.", "loading_msg": "Wird geladen…", "error_generic": "Dies konnte gerade nicht geladen werden. Bitte versuchen Sie es erneut.", "no_results": "Keine Namen entsprechen Ihrer Suche.", "label_home": "Hauptseite", "label_quran": "Der Edle Koran", "label_hadith": "Hadith-Sammlung", "label_dua": "Dua & Dhikr", "label_live": "Live: Mekka & Medina", "label_prayertimes": "Gebetszeiten", "label_qibla": "Qibla-Richtung", "label_tasbeeh": "Zählen Sie Ihr Dhikr", "label_academy": "AM Academy", "label_calc": "Zakat-Rechner", "label_apply": "Unterstützung beantragen", "label_join": "Warteliste beitreten", "label_calendar": "Islamischer Kalender", "aria_tools": "Weitere Tools", "aria_language": "Sprache wählen", "aria_theme": "Design wechseln", "ai_names_note": "Diese Übersetzung wurde von einer KI erstellt und wurde noch nicht von einem Gelehrten überprüft. Sie wird durch eine geprüfte Übersetzung ersetzt, sobald eine gefunden wird."}};
+const translations = {"en": {"nav_back": "← Main site", "hero_badge": "99 Names · From the Qur'an", "hero_h1": "The 99 Names of Allah", "hero_p": "Al-Asma al-Husna — the Most Beautiful Names, each traced to where it appears in the Qur'an.", "search_ph": "Search by name or meaning…", "found_label": "Found in Qur'an", "fallback_note": "No certified translation in this language yet — showing English.", "citation_note": "The Prophet ﷺ said Allah has 99 Names, and whoever preserves them will enter Paradise (Sahih al-Bukhari 2736, Sahih Muslim 2677). The specific enumerated list below comes from an addition narrated in Jami' at-Tirmidhi 3507 — scholars note this addition has a weaker chain of transmission than the core hadith, and its exact wording/order varies slightly between sources. Shown here as commonly known, not as a claim of absolute certainty.", "source_note": "Names, meanings and Qur'an references: the open KabDeveloper/99-Names-Of-Allah dataset. AM Network does not edit or modify this content.", "loading_msg": "Loading…", "error_generic": "Could not load this right now. Please try again.", "no_results": "No names match your search.", "label_home": "Main site", "label_quran": "The Holy Quran", "label_hadith": "Hadith Collection", "label_dua": "Dua & Dhikr", "label_live": "Live: Makkah & Madinah", "label_prayertimes": "Prayer Times", "label_qibla": "Qibla Direction", "label_tasbeeh": "Count Your Dhikr", "label_academy": "AM Academy", "label_calc": "Zakat Calculator", "label_apply": "Apply for Assistance", "label_join": "Join Waitlist", "label_calendar": "Islamic Calendar", "aria_tools": "Other tools", "aria_language": "Select language", "aria_theme": "Toggle theme", "ai_names_note": "This translation was generated by AI and has not yet been reviewed by a scholar. It will be replaced with a verified translation once one is confirmed.", "name_of_day": "Name of the day", "about_list": "About this list", "tab_all": "All names", "tab_study": "Study", "show_meaning": "Tap to see the meaning", "know_it": "I know it", "repeat": "Repeat later", "learned": "Learned: {n} of 99", "close": "Close", "all_learned": "You've marked all 99 names as learned. Masha'Allah!", "reset_study": "Start over"}, "ar": {"nav_back": "← الموقع الرئيسي", "hero_badge": "99 اسماً · من القرآن الكريم", "hero_h1": "أسماء الله الحسنى", "hero_p": "الأسماء الحسنى — كل اسم موثّق بمواضع ذكره في القرآن الكريم.", "search_ph": "ابحث بالاسم أو المعنى…", "found_label": "وارد في القرآن", "fallback_note": "لا توجد ترجمة معتمدة بهذه اللغة حتى الآن — يُعرض النص الإنجليزي.", "citation_note": "قال النبي ﷺ إن لله تسعة وتسعين اسماً، من حفظها دخل الجنة (صحيح البخاري 2736، صحيح مسلم 2677). أما القائمة المُعدَّدة أدناه فهي من زيادة رواها الترمذي (3507)، وقد نبّه العلماء إلى أن هذه الزيادة أضعف سنداً من الحديث الأصلي، وأن ترتيب الأسماء وصياغتها يختلف قليلاً بين المصادر. نعرضها كما هي معروفة شائعاً، لا على سبيل التأكيد المطلق.", "source_note": "الأسماء والمعاني والمواضع القرآنية: من مجموعة بيانات KabDeveloper/99-Names-Of-Allah المفتوحة. AM Network لا تحرر أو تعدّل هذا المحتوى.", "loading_msg": "جارٍ التحميل…", "error_generic": "تعذّر تحميل هذا الآن. حاول مرة أخرى.", "no_results": "لا توجد أسماء مطابقة لبحثك.", "label_home": "الموقع الرئيسي", "label_quran": "القرآن الكريم", "label_hadith": "مجموعة الأحاديث", "label_dua": "الدعاء والذكر", "label_live": "مباشر: مكة والمدينة", "label_prayertimes": "مواقيت الصلاة", "label_qibla": "اتجاه القبلة", "label_tasbeeh": "عدّ أذكارك", "label_academy": "AM Academy", "label_calc": "حاسبة الزكاة", "label_apply": "تقدم بطلب للحصول على المساعدة", "label_join": "انضم لقائمة الانتظار", "label_calendar": "التقويم الإسلامي", "aria_tools": "أدوات أخرى", "aria_language": "اختر اللغة", "aria_theme": "تبديل المظهر", "ai_names_note": "تمت ترجمة هذا النص بواسطة الذكاء الاصطناعي ولم تتم مراجعته من قبل عالم شرعي بعد. سيتم استبداله بترجمة موثقة عند توفرها.", "name_of_day": "اسم اليوم", "about_list": "عن هذه القائمة", "tab_all": "كل الأسماء", "tab_study": "تعلّم", "show_meaning": "اضغط لرؤية المعنى", "know_it": "أعرفه", "repeat": "أعِده لاحقاً", "learned": "تمّ حفظ {n} من 99", "close": "إغلاق", "all_learned": "لقد حفظت الأسماء التسعة والتسعين. ما شاء الله!", "reset_study": "ابدأ من جديد"}, "ru": {"nav_back": "← Главный сайт", "hero_badge": "99 имён · Из Корана", "hero_h1": "99 имён Аллаха", "hero_p": "Асма аль-Хусна — Прекраснейшие Имена, каждое со ссылкой на аяты Корана, где оно упомянуто.", "search_ph": "Поиск по имени или значению…", "found_label": "Встречается в Коране", "fallback_note": "Сертифицированного перевода на этот язык пока нет — показан английский.", "citation_note": "Пророк ﷺ сказал, что у Аллаха 99 имён, и тот, кто их сохранит, войдёт в Рай (Сахих аль-Бухари 2736, Сахих Муслим 2677). Конкретный перечисленный список ниже происходит из добавления, переданного в Джами ат-Тирмизи (3507) — учёные отмечают, что это добавление имеет более слабую цепочку передачи, чем основной хадис, а формулировка и порядок немного различаются между источниками. Показан так, как он общеизвестен, а не как утверждение абсолютной достоверности.", "source_note": "Имена, значения и коранические ссылки: открытый набор данных KabDeveloper/99-Names-Of-Allah. AM Network не редактирует и не изменяет этот контент.", "loading_msg": "Загрузка…", "error_generic": "Не удалось загрузить это сейчас. Попробуйте ещё раз.", "no_results": "Нет имён, соответствующих вашему поиску.", "label_home": "Главный сайт", "label_quran": "Священный Коран", "label_hadith": "Сборник хадисов", "label_dua": "Дуа и Зикр", "label_live": "Прямой эфир: Мекка и Медина", "label_prayertimes": "Время намаза", "label_qibla": "Направление на Киблу", "label_tasbeeh": "Считайте свои зикры", "label_academy": "AM Academy", "label_calc": "Калькулятор закята", "label_apply": "Подать заявку на помощь", "label_join": "Присоединиться", "label_calendar": "Исламский календарь", "aria_tools": "Другие разделы", "aria_language": "Выбрать язык", "aria_theme": "Сменить тему", "ai_names_note": "Этот перевод сгенерирован ИИ и пока не проверен богословом. Он будет заменён проверенным переводом, как только он будет найден.", "name_of_day": "Имя дня", "about_list": "Об этом списке", "tab_all": "Все имена", "tab_study": "Учить", "show_meaning": "Нажмите, чтобы увидеть значение", "know_it": "Знаю", "repeat": "Повторить", "learned": "Выучено: {n} из 99", "close": "Закрыть", "all_learned": "Вы отметили все 99 имён как выученные. Ма шаа Аллах!", "reset_study": "Начать заново"}, "tj": {"nav_back": "← Сайти асосӣ", "hero_badge": "99 ном · Аз Қуръон", "hero_h1": "99 номи Аллоҳ", "hero_p": "Асмо-ул-Ҳусно — Номҳои беҳтарин, ҳар кадом бо ишора ба ояти Қуръон, ки дар он зикр шудааст.", "search_ph": "Бо ном ё маъно ҷустуҷӯ кунед…", "found_label": "Дар Қуръон омадааст", "fallback_note": "Тарҷумаи тасдиқшуда ба ин забон ҳанӯз мавҷуд нест — забони англисӣ намоиш дода мешавад.", "citation_note": "Пайғамбар ﷺ гуфт, ки Аллоҳ 99 ном дорад ва ҳар кӣ онҳоро ҳифз кунад, ба биҳишт медарояд (Саҳиҳи Бухорӣ 2736, Саҳиҳи Муслим 2677). Рӯйхати мушаххаси зерин аз иловае, ки дар Ҷомиъи Тирмизӣ (3507) ривоят шудааст, гирифта шудааст — олимон қайд кардаанд, ки ин илова санади заифтар аз ҳадиси асосӣ дорад ва тартиб/ибораи он андаке дар манбаъҳо фарқ мекунад. Он тавре ки маъмул аст, намоиш дода мешавад, на ба унвони даъвои қатъӣ.", "source_note": "Номҳо, маъноҳо ва ишораҳои қуръонӣ: маҷмӯаи кушодаи KabDeveloper/99-Names-Of-Allah. AM Network ин мӯҳтаворо таҳрир ё тағйир намедиҳад.", "loading_msg": "Боркунӣ…", "error_generic": "Ин ҳоло бор нашуд. Лутфан дубора кӯшиш кунед.", "no_results": "Ба ҳамин ҷустуҷӯ ном мувофиқат намекунад.", "label_home": "Сайти асосӣ", "label_quran": "Қуръони Карим", "label_hadith": "Маҷмӯаи ҳадисҳо", "label_dua": "Дуо ва Зикр", "label_live": "Пахши Зинда: Макка ва Мадина", "label_prayertimes": "Вақти намоз", "label_qibla": "Самти Қибла", "label_tasbeeh": "Зикрҳои худро шуморед", "label_academy": "AM Academy", "label_calc": "Ҳисобкунаки закот", "label_apply": "Барои кӯмак аризадиҳӣ", "label_join": "Ба рӯйхат шомил шав", "label_calendar": "Тақвими исломӣ", "aria_tools": "Бахшҳои дигар", "aria_language": "Интихоби забон", "aria_theme": "Иваз кардани мавзӯъ", "ai_names_note": "Ин тарҷума бо ёрии зеҳни сунъӣ таҳия шудааст ва ҳанӯз аз ҷониби олими динӣ тасдиқ нашудааст. Пас аз ёфтани тарҷумаи тасдиқшуда, он иваз карда мешавад.", "name_of_day": "Номи рӯз", "about_list": "Дар бораи ин рӯйхат", "tab_all": "Ҳамаи номҳо", "tab_study": "Омӯзиш", "show_meaning": "Барои дидани маъно пахш кунед", "know_it": "Медонам", "repeat": "Такрор", "learned": "Омӯхта шуд: {n} аз 99", "close": "Пӯшидан", "all_learned": "Шумо ҳамаи 99 номро омӯхтед. Мошоаллоҳ!", "reset_study": "Аз нав оғоз"}, "id": {"nav_back": "← Situs utama", "hero_badge": "99 Nama · Dari Al-Qur'an", "hero_h1": "99 Nama Allah", "hero_p": "Asmaul Husna — Nama-nama Terbaik, masing-masing dengan rujukan ayat Al-Qur'an tempat nama itu disebutkan.", "search_ph": "Cari berdasarkan nama atau arti…", "found_label": "Terdapat dalam Al-Qur'an", "fallback_note": "Belum ada terjemahan bersertifikat dalam bahasa ini — menampilkan bahasa Inggris.", "citation_note": "Nabi ﷺ bersabda bahwa Allah memiliki 99 nama, dan siapa yang menjaganya akan masuk Surga (Shahih al-Bukhari 2736, Shahih Muslim 2677). Daftar terperinci di bawah berasal dari tambahan yang diriwayatkan dalam Jami' at-Tirmidzi (3507) — para ulama mencatat bahwa tambahan ini memiliki sanad yang lebih lemah daripada hadits inti, dan susunan/redaksinya sedikit berbeda antar sumber. Ditampilkan sebagaimana yang umum dikenal, bukan sebagai klaim kepastian mutlak.", "source_note": "Nama, arti, dan rujukan Al-Qur'an: dataset terbuka KabDeveloper/99-Names-Of-Allah. AM Network tidak mengedit atau mengubah konten ini.", "loading_msg": "Memuat…", "error_generic": "Tidak dapat memuat ini sekarang. Silakan coba lagi.", "no_results": "Tidak ada nama yang cocok dengan pencarian Anda.", "label_home": "Situs utama", "label_quran": "Al-Qur'an Al-Karim", "label_hadith": "Koleksi Hadits", "label_dua": "Doa & Dzikir", "label_live": "Langsung: Makkah & Madinah", "label_prayertimes": "Waktu Sholat", "label_qibla": "Arah Kiblat", "label_tasbeeh": "Hitung Dzikir Anda", "label_academy": "AM Academy", "label_calc": "Kalkulator Zakat", "label_apply": "Ajukan Bantuan", "label_join": "Daftar Sekarang", "label_calendar": "Kalender Islam", "aria_tools": "Alat lainnya", "aria_language": "Pilih bahasa", "aria_theme": "Ganti tema", "ai_names_note": "Terjemahan ini dihasilkan oleh AI dan belum ditinjau oleh ulama. Terjemahan ini akan diganti dengan terjemahan resmi setelah ditemukan.", "name_of_day": "Nama hari ini", "about_list": "Tentang daftar ini", "tab_all": "Semua nama", "tab_study": "Belajar", "show_meaning": "Ketuk untuk melihat artinya", "know_it": "Saya tahu", "repeat": "Ulangi nanti", "learned": "Dihafal: {n} dari 99", "close": "Tutup", "all_learned": "Anda telah menandai ke-99 nama sebagai hafal. Masya Allah!", "reset_study": "Mulai lagi"}, "tr": {"nav_back": "← Ana site", "hero_badge": "99 İsim · Kur'an'dan", "hero_h1": "Allah'ın 99 İsmi", "hero_p": "Esma-ül Hüsna — En Güzel İsimler, her biri Kur'an'da geçtiği ayete atıfla.", "search_ph": "İsme veya anlama göre ara…", "found_label": "Kur'an'da geçtiği yer", "fallback_note": "Bu dilde henüz onaylı bir çeviri yok — İngilizce gösteriliyor.", "citation_note": "Peygamber ﷺ, Allah'ın 99 ismi olduğunu ve onları koruyanın Cennet'e gireceğini buyurmuştur (Sahih-i Buhari 2736, Sahih-i Müslim 2677). Aşağıdaki belirli liste, Camiu't-Tirmizi'de (3507) rivayet edilen bir ekten gelmektedir — âlimler bu eklemenin ana hadisten daha zayıf bir senede sahip olduğunu ve ifadesinin/sıralamasının kaynaklar arasında biraz farklılık gösterdiğini belirtmişlerdir. Burada yaygın olarak bilindiği şekliyle gösterilmektedir, kesin bir iddia olarak değil.", "source_note": "İsimler, anlamlar ve Kur'an referansları: açık KabDeveloper/99-Names-Of-Allah veri kümesi. AM Network bu içeriği düzenlemez veya değiştirmez.", "loading_msg": "Yükleniyor…", "error_generic": "Bu şu anda yüklenemedi. Lütfen tekrar deneyin.", "no_results": "Aramanızla eşleşen isim yok.", "label_home": "Ana site", "label_quran": "Kur'an-ı Kerim", "label_hadith": "Hadis Koleksiyonu", "label_dua": "Dua & Zikir", "label_live": "Canlı: Mekke ve Medine", "label_prayertimes": "Namaz Vakitleri", "label_qibla": "Kıble Yönü", "label_tasbeeh": "Zikrinizi Sayın", "label_academy": "AM Academy", "label_calc": "Zekât Hesaplayıcı", "label_apply": "Yardım Başvurusu Yapın", "label_join": "Listeye Katıl", "label_calendar": "İslami Takvim", "aria_tools": "Diğer araçlar", "aria_language": "Dil seçin", "aria_theme": "Temayı değiştir", "ai_names_note": "Bu çeviri yapay zeka tarafından oluşturulmuştur ve henüz bir âlim tarafından incelenmemiştir. Onaylı bir çeviri bulunduğunda bu çeviriyle değiştirilecektir.", "name_of_day": "Günün ismi", "about_list": "Bu liste hakkında", "tab_all": "Tüm isimler", "tab_study": "Öğren", "show_meaning": "Anlamını görmek için dokunun", "know_it": "Biliyorum", "repeat": "Sonra tekrar", "learned": "Öğrenilen: {n}/99", "close": "Kapat", "all_learned": "99 ismin hepsini öğrendiniz. Maşallah!", "reset_study": "Baştan başla"}, "zh": {"nav_back": "← 主站", "hero_badge": "99个尊名 · 源自古兰经", "hero_h1": "安拉的99个尊名", "hero_p": "至美尊名——每一个都标注了它在古兰经中出现的经文位置。", "search_ph": "按名称或含义搜索…", "found_label": "见于古兰经", "fallback_note": "该语言暂无认证翻译——显示英文版本。", "citation_note": "先知（愿主福安之）说，安拉有99个尊名，谁能保持它们，谁就能进入天堂（布哈里圣训实录2736，穆斯林圣训实录2677）。下面列出的具体清单来自提尔米济圣训集（3507）中的一段附加叙述——学者指出，这段附加内容的传述链比核心圣训更弱，其措辞/顺序在不同来源中略有差异。此处按通常已知的方式展示，并非绝对确定性的断言。", "source_note": "名称、含义及古兰经出处：来自开放数据集 KabDeveloper/99-Names-Of-Allah。AM Network 不编辑或修改此内容。", "loading_msg": "正在加载…", "error_generic": "目前无法加载。请重试。", "no_results": "没有与您的搜索匹配的名称。", "label_home": "主站", "label_quran": "尊贵的古兰经", "label_hadith": "圣训集", "label_dua": "祈祷与赞念", "label_live": "直播：麦加与麦地那", "label_prayertimes": "礼拜时间", "label_qibla": "朝拜方向", "label_tasbeeh": "记录您的赞念", "label_academy": "AM Academy", "label_calc": "天课计算器", "label_apply": "申请援助", "label_join": "加入候补名单", "label_calendar": "伊斯兰历法", "aria_tools": "其他工具", "aria_language": "选择语言", "aria_theme": "切换主题", "ai_names_note": "此翻译由人工智能生成，尚未经过学者审核。一旦找到经核实的翻译，将会替换此内容。", "name_of_day": "今日尊名", "about_list": "关于此列表", "tab_all": "全部尊名", "tab_study": "学习", "show_meaning": "点击查看含义", "know_it": "我记住了", "repeat": "稍后复习", "learned": "已掌握：{n}/99", "close": "关闭", "all_learned": "您已掌握全部99个尊名。玛莎安拉！", "reset_study": "重新开始"}, "ms": {"nav_back": "← Laman utama", "hero_badge": "99 Nama · Daripada Al-Quran", "hero_h1": "99 Nama Allah", "hero_p": "Asmaul Husna — Nama-nama Terbaik, setiap satu dengan rujukan ayat Al-Quran tempat ia disebutkan.", "search_ph": "Cari mengikut nama atau makna…", "found_label": "Terdapat dalam Al-Quran", "fallback_note": "Belum ada terjemahan bertauliah dalam bahasa ini — memaparkan Bahasa Inggeris.", "citation_note": "Nabi ﷺ bersabda bahawa Allah mempunyai 99 nama, dan sesiapa yang menjaganya akan masuk Syurga (Sahih al-Bukhari 2736, Sahih Muslim 2677). Senarai terperinci di bawah berasal daripada tambahan yang diriwayatkan dalam Jami' at-Tirmidzi (3507) — para ulama menyatakan bahawa tambahan ini mempunyai sanad yang lebih lemah berbanding hadis utama, dan susunan/perkataannya sedikit berbeza antara sumber. Dipaparkan sebagaimana yang lazim diketahui, bukan sebagai dakwaan kepastian mutlak.", "source_note": "Nama, makna dan rujukan Al-Quran: set data terbuka KabDeveloper/99-Names-Of-Allah. AM Network tidak menyunting atau mengubah kandungan ini.", "loading_msg": "Memuatkan…", "error_generic": "Tidak dapat memuatkan ini sekarang. Sila cuba lagi.", "no_results": "Tiada nama sepadan dengan carian anda.", "label_home": "Laman utama", "label_quran": "Al-Quran Al-Karim", "label_hadith": "Koleksi Hadis", "label_dua": "Doa & Zikir", "label_live": "Langsung: Makkah & Madinah", "label_prayertimes": "Waktu Solat", "label_qibla": "Arah Kiblat", "label_tasbeeh": "Kira Zikir Anda", "label_academy": "AM Academy", "label_calc": "Kalkulator Zakat", "label_apply": "Mohon Bantuan", "label_join": "Sertai Senarai Tunggu", "label_calendar": "Kalendar Islam", "aria_tools": "Alat lain", "aria_language": "Pilih bahasa", "aria_theme": "Tukar tema", "ai_names_note": "Terjemahan ini dijana oleh AI dan belum disemak oleh ulama. Ia akan digantikan dengan terjemahan yang disahkan sebaik sahaja terjemahan tersebut ditemui.", "name_of_day": "Nama hari ini", "about_list": "Tentang senarai ini", "tab_all": "Semua nama", "tab_study": "Belajar", "show_meaning": "Ketik untuk melihat maksud", "know_it": "Saya tahu", "repeat": "Ulang nanti", "learned": "Dihafal: {n} daripada 99", "close": "Tutup", "all_learned": "Anda telah menanda kesemua 99 nama sebagai dihafal. Masya-Allah!", "reset_study": "Mula semula"}, "fr": {"nav_back": "← Site principal", "hero_badge": "99 Noms · Du Coran", "hero_h1": "Les 99 Noms d'Allah", "hero_p": "Al-Asma al-Husna — les Plus Beaux Noms, chacun rattaché au(x) verset(s) du Coran où il apparaît.", "search_ph": "Rechercher par nom ou signification…", "found_label": "Mentionné dans le Coran", "fallback_note": "Aucune traduction certifiée dans cette langue pour l'instant — affichage en anglais.", "citation_note": "Le Prophète ﷺ a dit qu'Allah a 99 Noms, et que celui qui les préserve entrera au Paradis (Sahih al-Boukhari 2736, Sahih Mouslim 2677). La liste précise ci-dessous provient d'un ajout rapporté dans Jami' at-Tirmidhi (3507) — les savants notent que cet ajout a une chaîne de transmission plus faible que le hadith principal, et que sa formulation/son ordre varie légèrement selon les sources. Présentée ici telle qu'elle est communément connue, non comme une affirmation de certitude absolue.", "source_note": "Noms, significations et références coraniques : jeu de données ouvert KabDeveloper/99-Names-Of-Allah. AM Network n'édite ni ne modifie ce contenu.", "loading_msg": "Chargement…", "error_generic": "Impossible de charger ceci pour l'instant. Veuillez réessayer.", "no_results": "Aucun nom ne correspond à votre recherche.", "label_home": "Site principal", "label_quran": "Le Noble Coran", "label_hadith": "Recueil de Hadiths", "label_dua": "Dua & Dhikr", "label_live": "Direct : La Mecque et Médine", "label_prayertimes": "Heures de prière", "label_qibla": "Direction de la Qibla", "label_tasbeeh": "Comptez votre dhikr", "label_academy": "AM Academy", "label_calc": "Calculateur de Zakat", "label_apply": "Demander une aide", "label_join": "Rejoindre la liste", "label_calendar": "Calendrier islamique", "aria_tools": "Autres outils", "aria_language": "Choisir la langue", "aria_theme": "Changer de thème", "ai_names_note": "Cette traduction a été générée par IA et n'a pas encore été vérifiée par un érudit. Elle sera remplacée par une traduction certifiée dès qu'elle sera trouvée.", "name_of_day": "Nom du jour", "about_list": "À propos de cette liste", "tab_all": "Tous les noms", "tab_study": "Apprendre", "show_meaning": "Touchez pour voir le sens", "know_it": "Je le connais", "repeat": "À revoir", "learned": "Appris : {n} sur 99", "close": "Fermer", "all_learned": "Vous avez appris les 99 noms. Macha'Allah !", "reset_study": "Recommencer"}, "de": {"nav_back": "← Zur Hauptseite", "hero_badge": "99 Namen · Aus dem Koran", "hero_h1": "Die 99 Namen Allahs", "hero_p": "Al-Asma al-Husna — die Schönsten Namen, jeder mit Verweis auf die Koranverse, in denen er vorkommt.", "search_ph": "Nach Name oder Bedeutung suchen…", "found_label": "Im Koran zu finden", "fallback_note": "Noch keine zertifizierte Übersetzung in dieser Sprache — Englisch wird angezeigt.", "citation_note": "Der Prophet ﷺ sagte, Allah habe 99 Namen, und wer sie bewahrt, werde ins Paradies eingehen (Sahih al-Bukhari 2736, Sahih Muslim 2677). Die untenstehende konkrete Liste stammt aus einem in Jami' at-Tirmidhi (3507) überlieferten Zusatz — Gelehrte weisen darauf hin, dass dieser Zusatz eine schwächere Überlieferungskette hat als der Kernhadith, und dass Wortlaut/Reihenfolge zwischen den Quellen leicht variieren. Hier wie allgemein bekannt dargestellt, nicht als Behauptung absoluter Gewissheit.", "source_note": "Namen, Bedeutungen und Koranverweise: der offene Datensatz KabDeveloper/99-Names-Of-Allah. AM Network bearbeitet oder verändert diesen Inhalt nicht.", "loading_msg": "Wird geladen…", "error_generic": "Dies konnte gerade nicht geladen werden. Bitte versuchen Sie es erneut.", "no_results": "Keine Namen entsprechen Ihrer Suche.", "label_home": "Hauptseite", "label_quran": "Der Edle Koran", "label_hadith": "Hadith-Sammlung", "label_dua": "Dua & Dhikr", "label_live": "Live: Mekka & Medina", "label_prayertimes": "Gebetszeiten", "label_qibla": "Qibla-Richtung", "label_tasbeeh": "Zählen Sie Ihr Dhikr", "label_academy": "AM Academy", "label_calc": "Zakat-Rechner", "label_apply": "Unterstützung beantragen", "label_join": "Warteliste beitreten", "label_calendar": "Islamischer Kalender", "aria_tools": "Weitere Tools", "aria_language": "Sprache wählen", "aria_theme": "Design wechseln", "ai_names_note": "Diese Übersetzung wurde von einer KI erstellt und wurde noch nicht von einem Gelehrten überprüft. Sie wird durch eine geprüfte Übersetzung ersetzt, sobald eine gefunden wird.", "name_of_day": "Name des Tages", "about_list": "Über diese Liste", "tab_all": "Alle Namen", "tab_study": "Lernen", "show_meaning": "Tippen, um die Bedeutung zu sehen", "know_it": "Kenne ich", "repeat": "Später wiederholen", "learned": "Gelernt: {n} von 99", "close": "Schließen", "all_learned": "Sie haben alle 99 Namen gelernt. Masha'Allah!", "reset_study": "Neu beginnen"}};
 
 let lang = 'en';
 function t(key){
@@ -298,54 +368,151 @@ function escapeNamesHtml(s){
   d.textContent = s == null ? '' : String(s);
   return d.innerHTML;
 }
+// The French entries in the dataset carry literal "é"-style escapes; decode them for display only.
+function fixEsc(s){ return String(s || '').replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16))); }
+
+let NAMES = [], getMetaFn = item => item.en || {}, usedFallbackG = false, aiMapG = null;
+async function loadNames(){
+  const data = await fetchNames();
+  const langKey = NAMES_LANG[lang];
+  let usedFallback = !langKey, aiMap = null;
+  if (usedFallback && AI_NAMES_LANGS.includes(lang)) {
+    aiMap = await fetchStaticNames(lang);
+    if (aiMap) usedFallback = false;
+  }
+  const effectiveKey = langKey || 'en';
+  getMetaFn = item => {
+    const m = (aiMap && aiMap[item.number]) || item[effectiveKey] || item.en || {};
+    return { meaning: fixEsc(m.meaning), desc: fixEsc(m.desc) };
+  };
+  usedFallbackG = usedFallback; aiMapG = aiMap; NAMES = data;
+  return data;
+}
+
+const OCT = '<svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 1.5l4.6 4.3 6.3.2.2 6.3 4.4 4.7-4.4 4.6-.2 6.3-6.3.2L17 32.5l-4.6-4.4-6.3-.2-.2-6.3L1.5 17l4.4-4.7.2-6.3 6.3-.2z" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".8"/></svg>';
+
+function dayIndex(){ const d = new Date(); return Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5) % 99; }
+
+function renderNameOfDay(){
+  const el = document.getElementById('nameOfDay');
+  if (!NAMES.length) return;
+  const item = NAMES[dayIndex()];
+  const meta = getMetaFn(item);
+  el.style.display = '';
+  el.onclick = () => openSheet(item.number);
+  el.innerHTML = '<div class="nod-pattern"></div><div class="nod-label">' + t('name_of_day') + ' · ' + item.number + '</div>' +
+    '<div class="nod-ar" lang="ar">' + escapeNamesHtml(item.name) + '</div>' +
+    '<div class="nod-tr">' + escapeNamesHtml(item.transliteration) + '</div>' +
+    '<div class="nod-mean">' + escapeNamesHtml(meta.meaning) + '</div>';
+}
 
 async function renderNames(){
   const content = document.getElementById('content');
   try {
-    const data = await fetchNames();
-    const langKey = NAMES_LANG[lang];
-    let usedFallback = !langKey;
-    let aiMap = null;
-    if (usedFallback && AI_NAMES_LANGS.includes(lang)) {
-      aiMap = await fetchStaticNames(lang);
-      if (aiMap) usedFallback = false;
-    }
-    const effectiveKey = langKey || 'en';
-    const getMeta = item => {
-      if (aiMap && aiMap[item.number]) return aiMap[item.number];
-      return item[effectiveKey] || item.en || {};
-    };
-
+    await loadNames();
+    renderNameOfDay();
     const query = (document.getElementById('searchInput').value || '').trim().toLowerCase();
-    const filtered = data.filter(item => {
+    const filtered = NAMES.filter(item => {
       if (!query) return true;
-      const meta = getMeta(item);
+      const meta = getMetaFn(item);
       return (item.transliteration || '').toLowerCase().includes(query) ||
         (meta.meaning || '').toLowerCase().includes(query) ||
-        (item.name || '').includes(query);
+        (item.name || '').includes(query) || String(item.number) === query;
     });
-
     if (!filtered.length) { content.innerHTML = '<div class="state-msg">' + t('no_results') + '</div>'; return; }
-
     content.innerHTML = '<div class="names-grid">' + filtered.map(item => {
-      const meta = getMeta(item);
-      return `
-        <div class="name-card">
-          <div class="name-head"><span class="name-num">#${item.number}</span></div>
-          <div class="name-arabic">${escapeNamesHtml(item.name)}</div>
-          <div class="name-translit">${escapeNamesHtml(item.transliteration)}</div>
-          <div class="name-meaning">${escapeNamesHtml(meta.meaning || '')}</div>
-          ${usedFallback ? `<div class="name-note">${t('fallback_note')}</div>` : ''}
-          ${aiMap ? `<div class="name-note">${t('ai_names_note')}</div>` : ''}
-          ${meta.desc ? `<div class="name-desc">${escapeNamesHtml(meta.desc)}</div>` : ''}
-          ${item.found ? `<div class="name-found"><b>${t('found_label')}:</b> ${escapeNamesHtml(item.found)}</div>` : ''}
-        </div>
-      `;
+      const meta = getMetaFn(item);
+      return '<button type="button" class="name-card" onclick="openSheet(' + item.number + ')">' +
+        '<div class="oct">' + OCT + '<span>' + item.number + '</span></div>' +
+        '<div class="name-arabic" lang="ar">' + escapeNamesHtml(item.name) + '</div>' +
+        '<div class="name-translit">' + escapeNamesHtml(item.transliteration) + '</div>' +
+        '<div class="name-meaning">' + escapeNamesHtml(meta.meaning) + '</div></button>';
     }).join('') + '</div>';
+    if (studyMode) renderStudy();
   } catch (e) {
     console.error('[99 Names] failed to load:', e);
     content.innerHTML = '<div class="state-msg">' + t('error_generic') + '</div>';
   }
+}
+
+let sheetNum = null, lastFocus = null;
+function openSheet(num){
+  const item = NAMES.find(x => x.number === num);
+  if (!item) return;
+  sheetNum = num;
+  const meta = getMetaFn(item);
+  const sh = document.getElementById('sheet');
+  sh.innerHTML = '<div class="sheet-grip"></div>' +
+    '<div class="oct" style="width:44px;height:44px;font-size:13px">' + OCT + '<span>' + item.number + '</span></div>' +
+    '<div class="nod-ar" lang="ar" id="sheetTitle">' + escapeNamesHtml(item.name) + '</div>' +
+    '<div class="nod-tr">' + escapeNamesHtml(item.transliteration) + '</div>' +
+    '<div class="nod-mean">' + escapeNamesHtml(meta.meaning) + '</div>' +
+    (meta.desc ? '<div class="sheet-desc">' + escapeNamesHtml(meta.desc) + '</div>' : '') +
+    (item.found ? '<div class="sheet-found"><b>' + t('found_label') + ':</b> ' + escapeNamesHtml(item.found) + '</div>' : '') +
+    (usedFallbackG ? '<div class="name-note" style="margin-top:10px">' + t('fallback_note') + '</div>' : '') +
+    (aiMapG ? '<div class="name-note" style="margin-top:10px">' + t('ai_names_note') + '</div>' : '') +
+    '<div class="sheet-nav"><button class="sheet-btn" onclick="stepSheet(-1)" aria-label="‹">‹</button><button class="sheet-btn" onclick="closeSheet()">' + t('close') + '</button><button class="sheet-btn" onclick="stepSheet(1)" aria-label="›">›</button></div>';
+  if (!sh.classList.contains('open')) lastFocus = document.activeElement;
+  sh.classList.add('open'); document.getElementById('sheetBg').classList.add('open');
+  sh.setAttribute('tabindex', '-1'); sh.focus({ preventScroll: true });
+}
+function stepSheet(d){ if (sheetNum) openSheet(((sheetNum - 1 + d + 99) % 99) + 1); }
+function closeSheet(){
+  document.getElementById('sheet').classList.remove('open');
+  document.getElementById('sheetBg').classList.remove('open');
+  if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+}
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('sheet').classList.contains('open')) return;
+  if (e.key === 'Escape') closeSheet();
+  if (e.key === 'ArrowRight') stepSheet(document.documentElement.dir === 'rtl' ? -1 : 1);
+  if (e.key === 'ArrowLeft') stepSheet(document.documentElement.dir === 'rtl' ? 1 : -1);
+});
+
+/* Study mode — flashcards; what you know is remembered on this device. */
+const KNOWN_KEY = 'amn_names_known';
+let studyMode = false, studyNum = null;
+function getKnown(){ try { return JSON.parse(localStorage.getItem(KNOWN_KEY) || '[]'); } catch (e) { return []; } }
+function setKnown(arr){ try { localStorage.setItem(KNOWN_KEY, JSON.stringify(arr)); } catch (e) {} }
+function setMode(m){
+  studyMode = m === 'study';
+  document.getElementById('tabAll').classList.toggle('active', !studyMode);
+  document.getElementById('tabStudy').classList.toggle('active', studyMode);
+  document.getElementById('tabAll').setAttribute('aria-selected', !studyMode);
+  document.getElementById('tabStudy').setAttribute('aria-selected', studyMode);
+  document.getElementById('allView').style.display = studyMode ? 'none' : '';
+  document.getElementById('studyView').style.display = studyMode ? '' : 'none';
+  if (studyMode) { studyNum = null; renderStudy(); }
+}
+function pickNext(){
+  const known = getKnown();
+  const left = NAMES.filter(x => !known.includes(x.number));
+  if (!left.length) return null;
+  const pool = left.length > 1 ? left.filter(x => x.number !== studyNum) : left;
+  return pool[Math.floor(Math.random() * pool.length)].number;
+}
+function renderStudy(){
+  const el = document.getElementById('studyView');
+  if (!NAMES.length) { el.innerHTML = '<div class="state-msg">' + t('loading_msg') + '</div>'; return; }
+  const known = getKnown();
+  const n = known.length;
+  let h = '<div class="study"><div class="study-progress">' + t('learned').replace('{n}', n) + '</div><div class="study-bar"><i style="width:' + (n / 99 * 100).toFixed(1) + '%"></i></div>';
+  if (studyNum === null) studyNum = pickNext();
+  if (studyNum === null) {
+    h += '<div class="flash-face" style="position:relative;min-height:220px"><div class="nod-mean">' + t('all_learned') + '</div></div><div class="study-actions"><button class="btn-again" onclick="setKnown([]);studyNum=null;renderStudy()">' + t('reset_study') + '</button></div></div>';
+    el.innerHTML = h; return;
+  }
+  const item = NAMES.find(x => x.number === studyNum), meta = getMetaFn(item);
+  h += '<div class="flash" id="flash" role="button" tabindex="0" onclick="this.classList.toggle(\'flipped\')" onkeydown="if(event.key===\' \'||event.key===\'Enter\'){event.preventDefault();this.classList.toggle(\'flipped\')}"><div class="flash-in">' +
+    '<div class="flash-face"><div class="oct">' + OCT + '<span>' + item.number + '</span></div><div class="nod-ar" lang="ar">' + escapeNamesHtml(item.name) + '</div><div class="nod-tr">' + escapeNamesHtml(item.transliteration) + '</div><div class="flash-hint">' + t('show_meaning') + '</div></div>' +
+    '<div class="flash-face flash-back"><div class="nod-mean">' + escapeNamesHtml(meta.meaning) + '</div>' + (meta.desc ? '<div class="sheet-desc" style="text-align:center">' + escapeNamesHtml(meta.desc) + '</div>' : '') + '</div>' +
+    '</div></div><div class="study-actions"><button class="btn-again" onclick="studyAnswer(false)">' + t('repeat') + '</button><button class="btn-know" onclick="studyAnswer(true)">' + t('know_it') + '</button></div></div>';
+  el.innerHTML = h;
+}
+function studyAnswer(knew){
+  if (knew) { const k = getKnown(); if (!k.includes(studyNum)) { k.push(studyNum); setKnown(k); } }
+  studyNum = pickNext();
+  renderStudy();
 }
 
 

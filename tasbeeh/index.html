@@ -135,6 +135,56 @@ main{padding-top:64px;min-height:100vh}
 .hadith-source{font-size:12px;color:var(--gold)}
 .hadith-disclaimer{font-size:11px;color:var(--text3);text-align:center;margin-top:6px;line-height:1.6}
 
+/* v2 — bead ring, tap zone, sequence, night mode */
+.hero{padding:26px 5vw 6px}
+.hero h1{margin-bottom:6px}
+.phrase-select{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;margin:0 -5vw 18px;padding:4px 5vw;-webkit-overflow-scrolling:touch}
+.phrase-select::-webkit-scrollbar{display:none}
+.phrase-btn{white-space:nowrap;flex-shrink:0;min-height:40px}
+.phrase-btn.seq{border-color:rgba(201,168,76,.5);color:var(--gold)}
+.phrase-btn.seq.active{color:#1a1a1a}
+.counter-card{padding:18px 16px 20px}
+.tap-zone{position:relative;border-radius:20px;padding:14px 8px 10px;cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;outline:none}
+.tap-zone:focus-visible{box-shadow:0 0 0 2px var(--gold)}
+.counter-phrase-ar{font-size:32px;margin-bottom:2px}
+.counter-phrase-name{margin-bottom:10px}
+.ring-wrap{position:relative;width:min(78vw,300px);aspect-ratio:1;margin:0 auto;transition:transform .12s ease}
+.ring-wrap.tap{transform:scale(.97)}
+.beads{position:absolute;inset:0;width:100%;height:100%}
+.beads .b{fill:var(--input-border);transition:fill .2s,r .2s}
+.beads .b.on{fill:var(--gold)}
+.beads .b.cur{fill:var(--gold2)}
+.beads .track{fill:none;stroke:var(--border);stroke-width:1}
+.ring-center{position:absolute;inset:18%;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,var(--gold3),transparent 70%),var(--input-bg);border:1px solid var(--border)}
+.ring-wrap.complete .ring-center{animation:pulseGold .6s ease}
+.ring-wrap.complete .ring-center{border-color:var(--gold)}
+.counter-value{font-family:'DM Sans',sans-serif;font-variant-numeric:tabular-nums;font-size:72px;font-weight:300;color:var(--text)}
+.counter-target{font-size:15px}
+.tap-hint{margin-top:12px}
+.steps{display:flex;justify-content:center;gap:6px;margin-bottom:6px;flex-wrap:wrap}
+.steps:empty{display:none}
+.step{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;border:1px solid var(--border);font-size:11px;color:var(--text3)}
+.step.cur{border-color:var(--gold);color:var(--gold);font-weight:600}
+.step.done{color:var(--text2)}
+.step.done::before{content:'✓';color:var(--gold)}
+.seq-done{margin:12px auto 0;max-width:300px;padding:10px 14px;border-radius:12px;background:var(--gold3);border:1px solid rgba(201,168,76,.35);color:var(--gold);font-size:13px;font-weight:600}
+.counter-actions{margin-top:14px;flex-wrap:wrap}
+.ctr-btn{display:inline-flex;align-items:center;gap:6px;min-height:42px}
+.stats{display:flex;justify-content:center;gap:14px;font-size:12px;color:var(--text3);margin-top:12px;flex-wrap:wrap}
+.stats b{color:var(--text2);font-weight:600}
+.focus-exit{display:none}
+@media (min-width:600px){.phrase-select{flex-wrap:wrap;justify-content:center;margin:0 0 18px;padding:0;overflow:visible}}
+body.focus{overflow:hidden}
+body.focus .tap-zone{position:fixed;inset:0;z-index:500;border-radius:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+body.focus .counter-phrase-ar{color:#8a7434}
+body.focus .counter-phrase-name,body.focus .tap-hint{color:#555}
+body.focus .ring-center{background:#000;border-color:#222}
+body.focus .counter-value{color:#b9a15a}
+body.focus .beads .b{fill:#1d1d1d}
+body.focus .beads .b.on{fill:#7d6a30}
+body.focus .beads .b.cur{fill:#b9a15a}
+body.focus .focus-exit{display:block;position:absolute;top:max(16px,env(safe-area-inset-top));inset-inline-end:16px;padding:10px 16px;border-radius:999px;border:1px solid #333;background:transparent;color:#777;font-size:13px;font-family:'DM Sans',sans-serif;min-height:44px}
+
 </style>
 </head>
 <body>
@@ -187,13 +237,13 @@ main{padding-top:64px;min-height:100vh}
 
 <main>
   <section class="hero">
-    <div class="badge">📿 <span data-t="hero_badge">Tap to Count · Saves Automatically</span></div>
     <h1 data-t="hero_h1">Count Your Dhikr</h1>
-    <p data-t="hero_p">A simple digital tasbeeh — tap to count, choose a target, and let your remembrance of Allah flow without distraction.</p>
   </section>
 
   <div class="wrap">
     <div class="phrase-select" id="phraseSelect">
+      <button class="phrase-btn seq" data-key="sequence" data-target="0" onclick="selectPhrase(this)">
+        <span data-t="seq_after_prayer">After prayer · 33·33·33+1</span></button>
       <button class="phrase-btn" data-key="subhanallah" data-target="33" onclick="selectPhrase(this)">
         <span data-t="phrase_subhanallah">SubhanAllah</span></button>
       <button class="phrase-btn" data-key="alhamdulillah" data-target="33" onclick="selectPhrase(this)">
@@ -213,20 +263,29 @@ main{padding-top:64px;min-height:100vh}
       <input type="number" id="customTarget" min="0" value="100" oninput="setCustomTarget(this.value)">
     </div>
 
-    <div class="counter-card">
-      <div class="counter-phrase-ar" id="phraseAr">سُبْحَانَ اللَّٰهِ</div>
-      <div class="counter-phrase-name" id="phraseName">SubhanAllah</div>
-      <button class="counter-circle" id="counterBtn" onclick="incrementCount()" aria-label="Count" data-t-aria="aria_count">
-        <span class="counter-value" id="counterValue">0</span>
-        <span class="counter-target" id="counterTargetLbl">/ 33</span>
-      </button>
-      <div class="counter-progress-bar"><div class="counter-progress-fill" id="progressFill"></div></div>
-      <div class="counter-actions">
-        <button class="ctr-btn" onclick="decrementCount()">−1</button>
-        <button class="ctr-btn" onclick="resetCount()" data-t="reset_btn">Reset</button>
+    <div class="counter-card" id="counterCard">
+      <div class="steps" id="steps"></div>
+      <div class="tap-zone" id="tapZone" role="button" tabindex="0" aria-label="Count" data-t-aria="aria_count">
+        <div class="counter-phrase-ar" id="phraseAr" lang="ar" dir="rtl">سُبْحَانَ اللَّٰهِ</div>
+        <div class="counter-phrase-name" id="phraseName">SubhanAllah</div>
+        <div class="ring-wrap" id="counterBtn">
+          <svg class="beads" id="beads" viewBox="0 0 240 240" aria-hidden="true"></svg>
+          <div class="ring-center">
+            <span class="counter-value" id="counterValue">0</span>
+            <span class="counter-target" id="counterTargetLbl">/ 33</span>
+          </div>
+        </div>
+        <div class="seq-done" id="seqDone" style="display:none"></div>
+        <div class="tap-hint" data-t="tap_anywhere">Tap anywhere in this area to count</div>
+        <button class="focus-exit" id="focusExit" type="button" onclick="setFocus(false,event)" data-t="exit_focus">Exit</button>
       </div>
+      <div class="counter-actions">
+        <button class="ctr-btn" onclick="decrementCount()" aria-label="−1">−1</button>
+        <button class="ctr-btn" onclick="resetCount()" data-t="reset_btn">Reset</button>
+        <button class="ctr-btn" onclick="setFocus(true,event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span data-t="focus_btn">Night mode</span></button>
+      </div>
+      <div class="stats" id="stats"></div>
       <div class="lap-info" id="lapInfo"></div>
-      <div class="tap-hint" data-t="tap_hint">Tap the circle to count</div>
     </div>
 
     <div class="hadith-section">
@@ -250,7 +309,7 @@ main{padding-top:64px;min-height:100vh}
 /* ═══════════════════════════════════════════════════════
    I18N
 ═══════════════════════════════════════════════════════ */
-const translations = {"en": {"nav_back": "← Main site", "hero_badge": "Tap to Count · Saves Automatically", "hero_h1": "Count Your Dhikr", "hero_p": "A simple digital tasbeeh — tap to count, choose a target, and let your remembrance of Allah flow without distraction.", "phrase_subhanallah": "SubhanAllah", "phrase_alhamdulillah": "Alhamdulillah", "phrase_allahuakbar": "Allahu Akbar", "phrase_astaghfirullah": "Astaghfirullah", "phrase_lailaha": "La ilaha illallah", "phrase_custom": "Free Count", "custom_target_lbl": "Custom target", "reset_btn": "Reset", "tap_hint": "Tap the circle to count", "lap_label": "Cycles completed: ", "hadith_title": "A Reminder", "hadith_disclaimer": "Arabic is the original hadith wording; English follows the standard translation on Sunnah.com. This is not a fatwa — for religious rulings, consult a qualified scholar.", "hadith_muslim_text": "\"Whoever glorifies Allah (SubhanAllah) after every prayer thirty-three times, praises Allah (Alhamdulillah) thirty-three times, and magnifies Allah (Allahu Akbar) thirty-three times — that is ninety-nine — then completes a hundred by saying: 'La ilaha illallah, wahdahu la sharika lahu, lahul-mulku wa lahul-hamd, wa huwa 'ala kulli shay'in qadir' — his sins will be forgiven, even if they are like the foam of the sea.\"", "hadith_bukhari_text": "\"…When you go to bed, recite 'Subhan Allah' thirty-three times, 'Al-hamdu lillah' thirty-three times, and 'Allahu Akbar' thirty-four times.\" ‘Ali (his son-in-law) said: \"I have never failed to recite it ever since.\"", "hadith_muslim_source": "— Narrated by Abu Hurairah · Sahih Muslim", "hadith_bukhari_source": "— Narrated by 'Ali ibn Abi Talib · Sahih al-Bukhari 5362", "label_home": "Main site", "label_quran": "The Holy Quran", "label_prayertimes": "Prayer Times", "label_qibla": "Qibla Direction", "label_academy": "AM Academy", "label_calc": "Zakat Calculator", "label_apply": "Apply for Assistance", "label_join": "Join Waitlist", "label_calendar": "Islamic Calendar", "label_hadith": "Hadith Collection", "label_dua": "Dua & Dhikr", "label_live": "Live: Makkah & Madinah", "label_names": "99 Names of Allah", "aria_tools": "Other tools", "aria_count": "Count", "aria_language": "Select language", "aria_theme": "Toggle theme"}, "ar": {"nav_back": "← الموقع الرئيسي", "hero_badge": "اضغط للعد · يُحفظ تلقائياً", "hero_h1": "عدّ أذكارك", "hero_p": "سبحة رقمية بسيطة — اضغط للعد، اختر هدفاً، ودع ذكرك لله يتدفق دون تشتيت.", "phrase_subhanallah": "سبحان الله", "phrase_alhamdulillah": "الحمد لله", "phrase_allahuakbar": "الله أكبر", "phrase_astaghfirullah": "أستغفر الله", "phrase_lailaha": "لا إله إلا الله", "phrase_custom": "عدّ حر", "custom_target_lbl": "هدف مخصص", "reset_btn": "إعادة تعيين", "tap_hint": "اضغط على الدائرة للعد", "lap_label": "الدورات المكتملة: ", "hadith_title": "تذكير", "hadith_disclaimer": "النص العربي هو أصل الحديث؛ والترجمة الإنجليزية تتبع الترجمة المعتمدة على Sunnah.com. هذه ليست فتوى — للأحكام الشرعية، استشر عالماً مؤهلاً.", "hadith_muslim_source": "— روى أبو هريرة · صحيح مسلم", "hadith_bukhari_source": "— روى علي بن أبي طالب · صحيح البخاري 5362", "label_home": "الموقع الرئيسي", "label_quran": "القرآن الكريم", "label_prayertimes": "مواقيت الصلاة", "label_qibla": "اتجاه القبلة", "label_academy": "AM Academy", "label_calc": "حاسبة الزكاة", "label_apply": "تقدم بطلب للحصول على المساعدة", "label_join": "انضم لقائمة الانتظار", "label_calendar": "التقويم الإسلامي", "label_hadith": "مجموعة الأحاديث", "label_dua": "الدعاء والذكر", "label_live": "مباشر: مكة والمدينة", "label_names": "أسماء الله الحسنى", "aria_tools": "أدوات أخرى", "aria_count": "عدّ", "aria_language": "اختر اللغة", "aria_theme": "تبديل المظهر"}, "ru": {"nav_back": "← Главный сайт", "hero_badge": "Нажимайте для счёта · Сохраняется автоматически", "hero_h1": "Считайте свои зикры", "hero_p": "Простые цифровые чётки — нажимайте, чтобы считать, выберите цель и пусть ваше поминание Аллаха течёт без помех.", "phrase_subhanallah": "СубханаЛлах", "phrase_alhamdulillah": "Альхамдулиллях", "phrase_allahuakbar": "Аллаху Акбар", "phrase_astaghfirullah": "АстагфируЛлах", "phrase_lailaha": "Ля иляха илля Ллах", "phrase_custom": "Свободный счёт", "custom_target_lbl": "Своя цель", "reset_btn": "Сбросить", "tap_hint": "Нажмите на круг, чтобы считать", "lap_label": "Завершено циклов: ", "hadith_title": "Напоминание", "hadith_disclaimer": "Арабский текст — оригинальная формулировка хадиса. Переводы приведены по признанным исламским справочным источникам на каждом языке (полный список — по запросу). Это не фетва — по религиозным вопросам обращайтесь к квалифицированному учёному.", "hadith_muslim_text": "«Тому, кто скажет после каждой молитвы по тридцать три раза “Пречист Аллах” (Субхана-Ллах), “Хвала Аллаху” (Аль-хамду ли-Ллях), “Аллах Велик” (Аллаху Акбар), а на сотый раз скажет: “Нет божества, кроме одного лишь Аллаха, у Которого нет сотоварища. Ему принадлежит владычество, и Ему хвала, и Он способен на всё” — будут прощены его грехи, даже если они подобны морской пене».", "hadith_bukhari_text": "«Разве не научить вас тому, что лучше того, о чём вы просили? Когда вы легли в постель, произносите “Аллаху Акбар” тридцать четыре раза, “Субхана-Ллах” и “Аль-хамду ли-Ллях” по тридцать три раза каждое — это будет для вас лучше, чем слуга». Али сказал: «Я не оставлял этого зикра с тех пор, как услышал его от Посланника Аллаха».", "hadith_muslim_source": "— Передал Абу Хурайра · Сахих Муслим", "hadith_bukhari_source": "— Передал Али ибн Абу Талиб · Сахих аль-Бухари 5362", "label_home": "Главный сайт", "label_quran": "Священный Коран", "label_prayertimes": "Время намаза", "label_qibla": "Направление на Киблу", "label_academy": "AM Academy", "label_calc": "Калькулятор закята", "label_apply": "Подать заявку на помощь", "label_join": "Присоединиться", "label_calendar": "Исламский календарь", "label_hadith": "Сборник хадисов", "label_dua": "Дуа и Зикр", "label_live": "Прямой эфир: Мекка и Медина", "label_names": "99 имён Аллаха", "aria_tools": "Другие разделы", "aria_count": "Счёт", "aria_language": "Выбрать язык", "aria_theme": "Сменить тему"}, "tj": {"nav_back": "← Сайти асосӣ", "hero_badge": "Барои шумориш зер кунед · Худкор захира мешавад", "hero_h1": "Зикрҳои худро шуморед", "hero_p": "Тасбеҳи рақамии сода — барои шумориш зер кунед, ҳадаф интихоб кунед ва зикри Аллоҳ бидуни халал ҷараён ёбад.", "phrase_subhanallah": "Субҳоналлоҳ", "phrase_alhamdulillah": "Алҳамдулиллоҳ", "phrase_allahuakbar": "Аллоҳу акбар", "phrase_astaghfirullah": "Астағфируллоҳ", "phrase_lailaha": "Ла илаҳа иллаллоҳ", "phrase_custom": "Шумориши озод", "custom_target_lbl": "Ҳадафи шахсӣ", "reset_btn": "Аз нав", "tap_hint": "Барои шумориш ба доира зер кунед", "lap_label": "Даврҳои анҷомёфта: ", "hadith_title": "Ёдоварӣ", "hadith_disclaimer": "Матни арабӣ — нусхаи аслии ҳадис. Тарҷумаҳо тибқи манбаъҳои эътирофшудаи исломӣ дар ҳар забон оварда шудаанд. Ин фатво нест — барои масъалаҳои шариат ба олими соҳибтахассус муроҷиат кунед.", "hadith_muslim_text": "«Ҳар касе, ки пас аз ҳар намоз 33 маротиба Аллоҳро пок ва беайб хонад (Субҳоналлоҳ), 33 маротиба Аллоҳро ситоиш кунад (Алҳамдулиллоҳ) ва 33 маротиба Аллоҳро бузург шуморад (Аллоҳу Акбар) — ки ин наваду нуҳ мешавад — ва сипас бо гуфтани ин дуо онро ба сад бирасонад: \"Ло илоҳа иллаллоҳу ваҳдаҳу ло шарика лаҳ, лаҳул-мулку ва лаҳул-ҳамд, ва ҳува ъало кулли шай-ин қадир\" (Ҳеҷ маъбуде ба ҳақ ҷуз Аллоҳи ягона нест, ки шарике надорад; подшоҳӣ ва ситоиш танҳо аз они Ӯст ва Ӯ бар ҳар чизе тавоност), гуноҳонаш бахшида мешаванд, ҳатто агар монанди кафи баҳр (зиёд) бошанд».", "hadith_bukhari_text": "«...Вақте ки ба бистари хоб меравед, 33 маротиба \"Субҳоналлоҳ\", 33 маротиба \"Алҳамдулиллоҳ\" ва 34 маротиба \"Аллоҳу Акбар\" бигӯед». Алӣ (р) гуфт: «Аз он вақт инҷониб ман ҳеҷ гоҳ хондани ин зикрҳоро тарк накардаам (ҳамеша мехондам)».", "hadith_muslim_source": "— Ривояти Абӯҳурайра · Саҳеҳи Муслим", "hadith_bukhari_source": "— Ривояти Алӣ ибни Абӯтолиб · Саҳеҳи Бухорӣ 5362", "label_home": "Сайти асосӣ", "label_quran": "Қуръони Карим", "label_prayertimes": "Вақти намоз", "label_qibla": "Самти Қибла", "label_academy": "AM Academy", "label_calc": "Ҳисобкунаки закот", "label_apply": "Барои кӯмак аризадиҳӣ", "label_join": "Ба рӯйхат шомил шав", "label_calendar": "Тақвими исломӣ", "label_hadith": "Маҷмӯаи ҳадисҳо", "label_dua": "Дуо ва Зикр", "label_live": "Пахши Зинда: Макка ва Мадина", "label_names": "99 номи Аллоҳ", "aria_tools": "Бахшҳои дигар", "aria_count": "Ҳисоб", "aria_language": "Интихоби забон", "aria_theme": "Иваз кардани мавзӯъ"}, "id": {"nav_back": "← Situs utama", "hero_badge": "Ketuk untuk Menghitung · Tersimpan Otomatis", "hero_h1": "Hitung Dzikir Anda", "hero_p": "Tasbih digital sederhana — ketuk untuk menghitung, pilih target, dan biarkan zikir Anda mengalir tanpa gangguan.", "phrase_subhanallah": "Subhanallah", "phrase_alhamdulillah": "Alhamdulillah", "phrase_allahuakbar": "Allahu Akbar", "phrase_astaghfirullah": "Astaghfirullah", "phrase_lailaha": "La ilaha illallah", "phrase_custom": "Hitungan Bebas", "custom_target_lbl": "Target khusus", "reset_btn": "Atur Ulang", "tap_hint": "Ketuk lingkaran untuk menghitung", "lap_label": "Siklus selesai: ", "hadith_title": "Pengingat", "hadith_disclaimer": "Teks Arab adalah redaksi asli hadis. Terjemahan mengikuti sumber rujukan Islam yang diakui pada setiap bahasa. Ini bukan fatwa — untuk hukum keagamaan, konsultasikan dengan ulama yang berkompeten.", "hadith_muslim_text": "\"Barangsiapa yang bertasbih kepada Allah setiap selesai salat sebanyak tiga puluh tiga kali, bertahmid tiga puluh tiga kali, dan bertakbir tiga puluh tiga kali — jumlahnya sembilan puluh sembilan — kemudian menyempurnakan hingga seratus dengan membaca 'Lā ilāha illallāhu waḥdahu lā syarīka lah, lahul-mulku wa lahul-ḥamdu wa huwa 'alā kulli syai'in qadīr', maka akan diampuni dosa-dosanya, sekalipun sebanyak buih di lautan.\" (HR. Muslim)", "hadith_bukhari_text": "\"Maukah aku ajarkan kepada kalian sesuatu yang lebih baik daripada yang kalian minta? Apabila kalian hendak tidur, ucapkanlah 'Allahu Akbar' tiga puluh empat kali, 'Subhanallah' dan 'Alhamdulillah' masing-masing tiga puluh tiga kali; itu lebih baik bagi kalian daripada seorang pembantu.\" Ali berkata, \"Aku tidak pernah meninggalkannya sejak mendengarnya dari Rasulullah.\"", "hadith_muslim_source": "— Diriwayatkan oleh Abu Hurairah · Sahih Muslim", "hadith_bukhari_source": "— Diriwayatkan oleh 'Ali bin Abi Thalib · Sahih al-Bukhari 5362", "label_home": "Situs utama", "label_quran": "Al-Qur'an Al-Karim", "label_prayertimes": "Waktu Sholat", "label_qibla": "Arah Kiblat", "label_academy": "AM Academy", "label_calc": "Kalkulator Zakat", "label_apply": "Ajukan Bantuan", "label_join": "Daftar Sekarang", "label_calendar": "Kalender Islam", "label_hadith": "Koleksi Hadits", "label_dua": "Doa & Dzikir", "label_live": "Langsung: Makkah & Madinah", "label_names": "99 Nama Allah", "aria_tools": "Alat lainnya", "aria_count": "Hitung", "aria_language": "Pilih bahasa", "aria_theme": "Ganti tema"}, "tr": {"nav_back": "← Ana site", "hero_badge": "Saymak İçin Dokun · Otomatik Kaydedilir", "hero_h1": "Zikrinizi Sayın", "hero_p": "Basit bir dijital tesbih — saymak için dokunun, bir hedef seçin ve Allah'ı zikrinizin dikkatiniz dağılmadan aksın.", "phrase_subhanallah": "Sübhanallah", "phrase_alhamdulillah": "Elhamdülillah", "phrase_allahuakbar": "Allahu Ekber", "phrase_astaghfirullah": "Estağfirullah", "phrase_lailaha": "La ilahe illallah", "phrase_custom": "Özgür Sayım", "custom_target_lbl": "Özel hedef", "reset_btn": "Sıfırla", "tap_hint": "Saymak için daireye dokunun", "lap_label": "Tamamlanan tur: ", "hadith_title": "Bir Hatırlatma", "hadith_disclaimer": "Arapça metin hadisin orijinal ifadesidir. Çeviriler her dildeki tanınmış İslami kaynaklara göredir. Bu bir fetva değildir — dinî hükümler için yetkin bir âlime danışın.", "hadith_muslim_text": "\"Bir kimse her namazın arkasından otuz üç defa 'Sübhânallâh', otuz üç defa 'Elhamdülillâh', otuz üç defa 'Allahü ekber' der ve 'Lâ ilâhe illallâhu vahdehû lâ şerîke leh, lehü'l-mülkü ve lehü'l-hamdü ve hüve alâ külli şey'in kadîr' diyerek yüze tamamlarsa, denizin köpükleri kadar çok olsa bile hataları bağışlanır.\"", "hadith_bukhari_text": "\"Sizi istediğinizden daha hayırlı bir şeye yönlendireyim mi? Yatağınıza girdiğinizde otuz dört defa 'Allahu Ekber', otuz üçer defa 'Sübhanallah' ve 'Elhamdülillah' deyiniz; bu sizin için bir hizmetçiden daha hayırlıdır.\" Hz. Ali: \"Bunu işittiğimden beri hiç terk etmedim,\" demiştir.", "hadith_muslim_source": "— Ebu Hureyre'den rivayet edilmiştir · Sahih Müslim", "hadith_bukhari_source": "— Ali bin Ebu Talib'ten rivayet edilmiştir · Sahih Buhari 5362", "label_home": "Ana site", "label_quran": "Kur'an-ı Kerim", "label_prayertimes": "Namaz Vakitleri", "label_qibla": "Kıble Yönü", "label_academy": "AM Academy", "label_calc": "Zekât Hesaplayıcı", "label_apply": "Yardım Başvurusu Yapın", "label_join": "Listeye Katıl", "label_calendar": "İslami Takvim", "label_hadith": "Hadis Koleksiyonu", "label_dua": "Dua & Zikir", "label_live": "Canlı: Mekke ve Medine", "label_names": "Allah'ın 99 İsmi", "aria_tools": "Diğer araçlar", "aria_count": "Say", "aria_language": "Dil seçin", "aria_theme": "Temayı değiştir"}, "zh": {"nav_back": "← 主站", "hero_badge": "点击计数 · 自动保存", "hero_h1": "记录您的赞念", "hero_p": "简单的电子念珠——点击计数，选择目标，让您对真主的赞念顺畅进行，不受干扰。", "phrase_subhanallah": "苏布哈纳拉", "phrase_alhamdulillah": "阿兰杜里拉", "phrase_allahuakbar": "真主至大", "phrase_astaghfirullah": "求真主饶恕", "phrase_lailaha": "万物非主唯有真主", "phrase_custom": "自由计数", "custom_target_lbl": "自定义目标", "reset_btn": "重置", "tap_hint": "点击圆圈计数", "lap_label": "已完成轮次：", "hadith_title": "提醒", "hadith_disclaimer": "阿拉伯文是圣训的原始措辞；英文采用 Sunnah.com 上的标准译本。这不是教法裁决——宗教裁决请咨询合格学者。", "hadith_muslim_source": "— 艾布·胡莱勒传述 · 穆斯林圣训实录", "hadith_bukhari_source": "— 阿里·本·艾布·塔利卜传述 · 布哈里圣训实录 5362", "label_home": "主站", "label_quran": "尊贵的古兰经", "label_prayertimes": "礼拜时间", "label_qibla": "朝拜方向", "label_academy": "AM Academy", "label_calc": "天课计算器", "label_apply": "申请援助", "label_join": "加入候补名单", "label_calendar": "伊斯兰历法", "label_hadith": "圣训集", "label_dua": "祈祷与赞念", "label_live": "直播：麦加与麦地那", "label_names": "安拉的99个尊名", "hadith_muslim_text": "凡在每次礼拜后念'苏布哈纳拉'（赞颂真主超绝万物）三十三次，念'阿兰杜里拉'（赞美真主）三十三次，念'真主至大'三十三次——合计九十九次——然后满一百次，念：'万物非主，唯有真主，独一无二，无所匹敌；国权归于他，赞颂归于他，他对万事全能'——他的罪过将被饶恕，即使多如海洋的泡沫。", "hadith_bukhari_text": "……你们上床睡觉时，念'苏布哈纳拉'三十三次，念'阿兰杜里拉'三十三次，念'真主至大'三十四次。\"阿里（他的女婿）说：\"自从我听闻此言以来，从未停止念诵过。", "aria_tools": "其他工具", "aria_count": "计数", "aria_language": "选择语言", "aria_theme": "切换主题"}, "ms": {"nav_back": "← Laman utama", "hero_badge": "Ketik untuk Mengira · Disimpan Secara Automatik", "hero_h1": "Kira Zikir Anda", "hero_p": "Tasbih digital yang ringkas — ketik untuk mengira, pilih sasaran, dan biarkan zikir anda mengalir tanpa gangguan.", "phrase_subhanallah": "Subhanallah", "phrase_alhamdulillah": "Alhamdulillah", "phrase_allahuakbar": "Allahu Akbar", "phrase_astaghfirullah": "Astaghfirullah", "phrase_lailaha": "La ilaha illallah", "phrase_custom": "Kiraan Bebas", "custom_target_lbl": "Sasaran tersuai", "reset_btn": "Tetapkan Semula", "tap_hint": "Ketik bulatan untuk mengira", "lap_label": "Kitaran selesai: ", "hadith_title": "Peringatan", "hadith_disclaimer": "Teks Arab ialah kata-kata asal hadis. Terjemahan mengikut sumber rujukan Islam yang diiktiraf pada setiap bahasa. Ini bukan fatwa — untuk hukum agama, rujuk kepada ulama yang bertauliah.", "hadith_muslim_text": "\"Sesiapa bertasbih kepada Allah selepas solat sebanyak 33 kali, bertahmid 33 kali, dan bertakbir 33 kali sehingga semuanya berjumlah 99, lalu menyempurnakannya menjadi 100 dengan membaca 'Lā ilāha illallāhu waḥdahu lā syarīka lah, lahul-mulku wa lahul-ḥamdu wa huwa 'alā kulli syai'in qadīr', maka akan diampunkan kesalahannya walaupun sebanyak buih di lautan.\" (Hadis riwayat Muslim, no. 597)", "hadith_bukhari_text": "\"Mahukah aku ajarkan kepada kamu berdua sesuatu yang lebih baik daripada yang kamu minta? Apabila kamu hendak tidur, ucapkanlah 'Allahu Akbar' sebanyak tiga puluh empat kali, 'Subhanallah' dan 'Alhamdulillah' masing-masing tiga puluh tiga kali; itu lebih baik bagi kamu berdua daripada seorang khadam.\" Ali berkata, \"Aku tidak pernah meninggalkannya sejak mendengarnya daripada Rasulullah.\"", "hadith_muslim_source": "— Diriwayatkan oleh Abu Hurairah · Sahih Muslim", "hadith_bukhari_source": "— Diriwayatkan oleh Ali bin Abi Talib · Sahih al-Bukhari 5362", "label_home": "Laman utama", "label_quran": "Al-Quran Al-Karim", "label_prayertimes": "Waktu Solat", "label_qibla": "Arah Kiblat", "label_academy": "AM Academy", "label_calc": "Kalkulator Zakat", "label_apply": "Mohon Bantuan", "label_join": "Sertai Senarai Tunggu", "label_calendar": "Kalendar Islam", "label_hadith": "Koleksi Hadis", "label_dua": "Doa & Zikir", "label_live": "Langsung: Makkah & Madinah", "label_names": "99 Nama Allah", "aria_tools": "Alat lain", "aria_count": "Kira", "aria_language": "Pilih bahasa", "aria_theme": "Tukar tema"}, "fr": {"nav_back": "← Site principal", "hero_badge": "Appuyez pour compter · Enregistrement automatique", "hero_h1": "Comptez votre dhikr", "hero_p": "Un chapelet numérique simple — appuyez pour compter, choisissez un objectif, et laissez votre invocation d'Allah s'écouler sans distraction.", "phrase_subhanallah": "SubhanAllah", "phrase_alhamdulillah": "Alhamdulillah", "phrase_allahuakbar": "Allahu Akbar", "phrase_astaghfirullah": "Astaghfirullah", "phrase_lailaha": "La ilaha illallah", "phrase_custom": "Comptage libre", "custom_target_lbl": "Objectif personnalisé", "reset_btn": "Réinitialiser", "tap_hint": "Appuyez sur le cercle pour compter", "lap_label": "Cycles terminés : ", "hadith_title": "Un rappel", "hadith_disclaimer": "Le texte arabe est la formulation originale du hadith. Les traductions suivent des sources islamiques reconnues dans chaque langue. Ceci n'est pas une fatwa — pour les questions religieuses, consultez un érudit qualifié.", "hadith_muslim_text": "« Quiconque, après chaque prière, dit «Gloire à Allah» trente-trois fois, «Louange à Allah» trente-trois fois, «Allah est le plus grand» trente-trois fois, puis complète le tout à cent en disant : «Il n'y a de divinité qu'Allah, Unique et sans associé ; à Lui la royauté et la louange, et Il est capable de toute chose», verra ses péchés effacés, quand bien même ils seraient comme l'écume de la mer. »", "hadith_bukhari_text": "« Ne vous enseignerai-je pas quelque chose de meilleur que ce que vous m'avez demandé ? Lorsque vous vous coucherez, dites trente-quatre fois «Allahu Akbar», puis trente-trois fois «Subhanallah» et trente-trois fois «Al-hamdu lillah» ; cela vous sera meilleur qu'un serviteur. » ‘Ali ajouta : « Je n'ai jamais manqué de le réciter depuis que je l'ai entendu du Messager d'Allah. »", "hadith_muslim_source": "— Rapporté par Abou Hourayra · Sahih Mouslim", "hadith_bukhari_source": "— Rapporté par 'Ali ibn Abi Talib · Sahih al-Boukhari 5362", "label_home": "Site principal", "label_quran": "Le Noble Coran", "label_prayertimes": "Heures de prière", "label_qibla": "Direction de la Qibla", "label_academy": "AM Academy", "label_calc": "Calculateur de Zakat", "label_apply": "Demander une aide", "label_join": "Rejoindre la liste", "label_calendar": "Calendrier islamique", "label_hadith": "Recueil de Hadiths", "label_dua": "Dua & Dhikr", "label_live": "Direct : La Mecque et Médine", "label_names": "Les 99 Noms d'Allah", "aria_tools": "Autres outils", "aria_count": "Compter", "aria_language": "Choisir la langue", "aria_theme": "Changer de thème"}, "de": {"nav_back": "← Zur Hauptseite", "hero_badge": "Zum Zählen tippen · Speichert automatisch", "hero_h1": "Zählen Sie Ihr Dhikr", "hero_p": "Ein einfacher digitaler Tasbih — tippen Sie zum Zählen, wählen Sie ein Ziel, und lassen Sie Ihr Gedenken an Allah ungestört fließen.", "phrase_subhanallah": "SubhanAllah", "phrase_alhamdulillah": "Alhamdulillah", "phrase_allahuakbar": "Allahu Akbar", "phrase_astaghfirullah": "Astaghfirullah", "phrase_lailaha": "La ilaha illallah", "phrase_custom": "Freies Zählen", "custom_target_lbl": "Eigenes Ziel", "reset_btn": "Zurücksetzen", "tap_hint": "Tippen Sie auf den Kreis, um zu zählen", "lap_label": "Abgeschlossene Zyklen: ", "hadith_title": "Eine Erinnerung", "hadith_disclaimer": "Der arabische Text ist der ursprüngliche Wortlaut des Hadith. Die Übersetzungen folgen anerkannten islamischen Quellen in jeder Sprache. Dies ist keine Fatwa — für religiöse Urteile konsultieren Sie einen qualifizierten Gelehrten.", "hadith_muslim_text": "„Wer nach jedem Gebet 'Subhanallah' dreiunddreißig Mal, 'Al-hamdu lillah' dreiunddreißig Mal und 'Allahu Akbar' dreiunddreißig Mal sagt und dies auf hundert vervollständigt mit: 'La ilaha illallahu wahdahu la sharika lahu, lahu-l-mulku wa lahu-l-hamdu wa huwa 'ala kulli shay'in qadir' — dem werden seine Sünden vergeben, selbst wenn sie so zahlreich wären wie der Schaum des Meeres.“", "hadith_bukhari_text": "„Soll ich euch nicht etwas Besseres lehren als das, worum ihr gebeten habt? Wenn ihr euch schlafen legt, sprecht vierunddreißig Mal 'Allahu Akbar', dann jeweils dreiunddreißig Mal 'Subhanallah' und 'Al-hamdu lillah' — das ist besser für euch als ein Diener.“ ‘Ali sagte: „Ich habe es nie versäumt, seit ich es vom Gesandten Allahs gehört habe.“", "hadith_muslim_source": "— Überliefert von Abu Huraira · Sahih Muslim", "hadith_bukhari_source": "— Überliefert von 'Ali ibn Abi Talib · Sahih al-Bukhari 5362", "label_home": "Hauptseite", "label_quran": "Der Edle Koran", "label_prayertimes": "Gebetszeiten", "label_qibla": "Qibla-Richtung", "label_academy": "AM Academy", "label_calc": "Zakat-Rechner", "label_apply": "Unterstützung beantragen", "label_join": "Warteliste beitreten", "label_calendar": "Islamischer Kalender", "label_hadith": "Hadith-Sammlung", "label_dua": "Dua & Dhikr", "label_live": "Live: Mekka & Medina", "label_names": "Die 99 Namen Allahs", "aria_tools": "Weitere Tools", "aria_count": "Zählen", "aria_language": "Sprache wählen", "aria_theme": "Design wechseln"}};
+const translations = {"en": {"nav_back": "← Main site", "hero_badge": "Tap to Count · Saves Automatically", "hero_h1": "Count Your Dhikr", "hero_p": "A simple digital tasbeeh — tap to count, choose a target, and let your remembrance of Allah flow without distraction.", "phrase_subhanallah": "SubhanAllah", "phrase_alhamdulillah": "Alhamdulillah", "phrase_allahuakbar": "Allahu Akbar", "phrase_astaghfirullah": "Astaghfirullah", "phrase_lailaha": "La ilaha illallah", "phrase_custom": "Free Count", "custom_target_lbl": "Custom target", "reset_btn": "Reset", "tap_hint": "Tap the circle to count", "lap_label": "Cycles completed: ", "hadith_title": "A Reminder", "hadith_disclaimer": "Arabic is the original hadith wording; English follows the standard translation on Sunnah.com. This is not a fatwa — for religious rulings, consult a qualified scholar.", "hadith_muslim_text": "\"Whoever glorifies Allah (SubhanAllah) after every prayer thirty-three times, praises Allah (Alhamdulillah) thirty-three times, and magnifies Allah (Allahu Akbar) thirty-three times — that is ninety-nine — then completes a hundred by saying: 'La ilaha illallah, wahdahu la sharika lahu, lahul-mulku wa lahul-hamd, wa huwa 'ala kulli shay'in qadir' — his sins will be forgiven, even if they are like the foam of the sea.\"", "hadith_bukhari_text": "\"…When you go to bed, recite 'Subhan Allah' thirty-three times, 'Al-hamdu lillah' thirty-three times, and 'Allahu Akbar' thirty-four times.\" ‘Ali (his son-in-law) said: \"I have never failed to recite it ever since.\"", "hadith_muslim_source": "— Narrated by Abu Hurairah · Sahih Muslim", "hadith_bukhari_source": "— Narrated by 'Ali ibn Abi Talib · Sahih al-Bukhari 5362", "label_home": "Main site", "label_quran": "The Holy Quran", "label_prayertimes": "Prayer Times", "label_qibla": "Qibla Direction", "label_academy": "AM Academy", "label_calc": "Zakat Calculator", "label_apply": "Apply for Assistance", "label_join": "Join Waitlist", "label_calendar": "Islamic Calendar", "label_hadith": "Hadith Collection", "label_dua": "Dua & Dhikr", "label_live": "Live: Makkah & Madinah", "label_names": "99 Names of Allah", "aria_tools": "Other tools", "aria_count": "Count", "aria_language": "Select language", "aria_theme": "Toggle theme", "seq_after_prayer": "After prayer · 33·33·33+1", "phrase_tahlil": "La ilaha illallahu wahdahu la sharika lah…", "seq_done": "Completed. May Allah accept it.", "today_total": "Today: {n}", "week_total": "Last 7 days: {n}", "focus_btn": "Night mode", "exit_focus": "Exit", "tap_anywhere": "Tap anywhere in this area to count"}, "ar": {"nav_back": "← الموقع الرئيسي", "hero_badge": "اضغط للعد · يُحفظ تلقائياً", "hero_h1": "عدّ أذكارك", "hero_p": "سبحة رقمية بسيطة — اضغط للعد، اختر هدفاً، ودع ذكرك لله يتدفق دون تشتيت.", "phrase_subhanallah": "سبحان الله", "phrase_alhamdulillah": "الحمد لله", "phrase_allahuakbar": "الله أكبر", "phrase_astaghfirullah": "أستغفر الله", "phrase_lailaha": "لا إله إلا الله", "phrase_custom": "عدّ حر", "custom_target_lbl": "هدف مخصص", "reset_btn": "إعادة تعيين", "tap_hint": "اضغط على الدائرة للعد", "lap_label": "الدورات المكتملة: ", "hadith_title": "تذكير", "hadith_disclaimer": "النص العربي هو أصل الحديث؛ والترجمة الإنجليزية تتبع الترجمة المعتمدة على Sunnah.com. هذه ليست فتوى — للأحكام الشرعية، استشر عالماً مؤهلاً.", "hadith_muslim_source": "— روى أبو هريرة · صحيح مسلم", "hadith_bukhari_source": "— روى علي بن أبي طالب · صحيح البخاري 5362", "label_home": "الموقع الرئيسي", "label_quran": "القرآن الكريم", "label_prayertimes": "مواقيت الصلاة", "label_qibla": "اتجاه القبلة", "label_academy": "AM Academy", "label_calc": "حاسبة الزكاة", "label_apply": "تقدم بطلب للحصول على المساعدة", "label_join": "انضم لقائمة الانتظار", "label_calendar": "التقويم الإسلامي", "label_hadith": "مجموعة الأحاديث", "label_dua": "الدعاء والذكر", "label_live": "مباشر: مكة والمدينة", "label_names": "أسماء الله الحسنى", "aria_tools": "أدوات أخرى", "aria_count": "عدّ", "aria_language": "اختر اللغة", "aria_theme": "تبديل المظهر", "seq_after_prayer": "بعد الصلاة · 33·33·33+1", "phrase_tahlil": "لا إله إلا الله وحده لا شريك له…", "seq_done": "اكتمل. تقبّل الله.", "today_total": "اليوم: {n}", "week_total": "آخر 7 أيام: {n}", "focus_btn": "الوضع الليلي", "exit_focus": "خروج", "tap_anywhere": "اضغط في أي مكان داخل هذا المربع للعدّ"}, "ru": {"nav_back": "← Главный сайт", "hero_badge": "Нажимайте для счёта · Сохраняется автоматически", "hero_h1": "Считайте свои зикры", "hero_p": "Простые цифровые чётки — нажимайте, чтобы считать, выберите цель и пусть ваше поминание Аллаха течёт без помех.", "phrase_subhanallah": "СубханаЛлах", "phrase_alhamdulillah": "Альхамдулиллях", "phrase_allahuakbar": "Аллаху Акбар", "phrase_astaghfirullah": "АстагфируЛлах", "phrase_lailaha": "Ля иляха илля Ллах", "phrase_custom": "Свободный счёт", "custom_target_lbl": "Своя цель", "reset_btn": "Сбросить", "tap_hint": "Нажмите на круг, чтобы считать", "lap_label": "Завершено циклов: ", "hadith_title": "Напоминание", "hadith_disclaimer": "Арабский текст — оригинальная формулировка хадиса. Переводы приведены по признанным исламским справочным источникам на каждом языке (полный список — по запросу). Это не фетва — по религиозным вопросам обращайтесь к квалифицированному учёному.", "hadith_muslim_text": "«Тому, кто скажет после каждой молитвы по тридцать три раза “Пречист Аллах” (Субхана-Ллах), “Хвала Аллаху” (Аль-хамду ли-Ллях), “Аллах Велик” (Аллаху Акбар), а на сотый раз скажет: “Нет божества, кроме одного лишь Аллаха, у Которого нет сотоварища. Ему принадлежит владычество, и Ему хвала, и Он способен на всё” — будут прощены его грехи, даже если они подобны морской пене».", "hadith_bukhari_text": "«Разве не научить вас тому, что лучше того, о чём вы просили? Когда вы легли в постель, произносите “Аллаху Акбар” тридцать четыре раза, “Субхана-Ллах” и “Аль-хамду ли-Ллях” по тридцать три раза каждое — это будет для вас лучше, чем слуга». Али сказал: «Я не оставлял этого зикра с тех пор, как услышал его от Посланника Аллаха».", "hadith_muslim_source": "— Передал Абу Хурайра · Сахих Муслим", "hadith_bukhari_source": "— Передал Али ибн Абу Талиб · Сахих аль-Бухари 5362", "label_home": "Главный сайт", "label_quran": "Священный Коран", "label_prayertimes": "Время намаза", "label_qibla": "Направление на Киблу", "label_academy": "AM Academy", "label_calc": "Калькулятор закята", "label_apply": "Подать заявку на помощь", "label_join": "Присоединиться", "label_calendar": "Исламский календарь", "label_hadith": "Сборник хадисов", "label_dua": "Дуа и Зикр", "label_live": "Прямой эфир: Мекка и Медина", "label_names": "99 имён Аллаха", "aria_tools": "Другие разделы", "aria_count": "Счёт", "aria_language": "Выбрать язык", "aria_theme": "Сменить тему", "seq_after_prayer": "После намаза · 33·33·33+1", "phrase_tahlil": "Ля иляха илляЛлаху вахдаху ля шарика лях…", "seq_done": "Завершено. Пусть Аллах примет.", "today_total": "Сегодня: {n}", "week_total": "За 7 дней: {n}", "focus_btn": "Ночной режим", "exit_focus": "Выйти", "tap_anywhere": "Нажимайте в любом месте этого блока"}, "tj": {"nav_back": "← Сайти асосӣ", "hero_badge": "Барои шумориш зер кунед · Худкор захира мешавад", "hero_h1": "Зикрҳои худро шуморед", "hero_p": "Тасбеҳи рақамии сода — барои шумориш зер кунед, ҳадаф интихоб кунед ва зикри Аллоҳ бидуни халал ҷараён ёбад.", "phrase_subhanallah": "Субҳоналлоҳ", "phrase_alhamdulillah": "Алҳамдулиллоҳ", "phrase_allahuakbar": "Аллоҳу акбар", "phrase_astaghfirullah": "Астағфируллоҳ", "phrase_lailaha": "Ла илаҳа иллаллоҳ", "phrase_custom": "Шумориши озод", "custom_target_lbl": "Ҳадафи шахсӣ", "reset_btn": "Аз нав", "tap_hint": "Барои шумориш ба доира зер кунед", "lap_label": "Даврҳои анҷомёфта: ", "hadith_title": "Ёдоварӣ", "hadith_disclaimer": "Матни арабӣ — нусхаи аслии ҳадис. Тарҷумаҳо тибқи манбаъҳои эътирофшудаи исломӣ дар ҳар забон оварда шудаанд. Ин фатво нест — барои масъалаҳои шариат ба олими соҳибтахассус муроҷиат кунед.", "hadith_muslim_text": "«Ҳар касе, ки пас аз ҳар намоз 33 маротиба Аллоҳро пок ва беайб хонад (Субҳоналлоҳ), 33 маротиба Аллоҳро ситоиш кунад (Алҳамдулиллоҳ) ва 33 маротиба Аллоҳро бузург шуморад (Аллоҳу Акбар) — ки ин наваду нуҳ мешавад — ва сипас бо гуфтани ин дуо онро ба сад бирасонад: \"Ло илоҳа иллаллоҳу ваҳдаҳу ло шарика лаҳ, лаҳул-мулку ва лаҳул-ҳамд, ва ҳува ъало кулли шай-ин қадир\" (Ҳеҷ маъбуде ба ҳақ ҷуз Аллоҳи ягона нест, ки шарике надорад; подшоҳӣ ва ситоиш танҳо аз они Ӯст ва Ӯ бар ҳар чизе тавоност), гуноҳонаш бахшида мешаванд, ҳатто агар монанди кафи баҳр (зиёд) бошанд».", "hadith_bukhari_text": "«...Вақте ки ба бистари хоб меравед, 33 маротиба \"Субҳоналлоҳ\", 33 маротиба \"Алҳамдулиллоҳ\" ва 34 маротиба \"Аллоҳу Акбар\" бигӯед». Алӣ (р) гуфт: «Аз он вақт инҷониб ман ҳеҷ гоҳ хондани ин зикрҳоро тарк накардаам (ҳамеша мехондам)».", "hadith_muslim_source": "— Ривояти Абӯҳурайра · Саҳеҳи Муслим", "hadith_bukhari_source": "— Ривояти Алӣ ибни Абӯтолиб · Саҳеҳи Бухорӣ 5362", "label_home": "Сайти асосӣ", "label_quran": "Қуръони Карим", "label_prayertimes": "Вақти намоз", "label_qibla": "Самти Қибла", "label_academy": "AM Academy", "label_calc": "Ҳисобкунаки закот", "label_apply": "Барои кӯмак аризадиҳӣ", "label_join": "Ба рӯйхат шомил шав", "label_calendar": "Тақвими исломӣ", "label_hadith": "Маҷмӯаи ҳадисҳо", "label_dua": "Дуо ва Зикр", "label_live": "Пахши Зинда: Макка ва Мадина", "label_names": "99 номи Аллоҳ", "aria_tools": "Бахшҳои дигар", "aria_count": "Ҳисоб", "aria_language": "Интихоби забон", "aria_theme": "Иваз кардани мавзӯъ", "seq_after_prayer": "Баъд аз намоз · 33·33·33+1", "phrase_tahlil": "Ло илоҳа иллаллоҳу ваҳдаҳу ло шарика лаҳ…", "seq_done": "Анҷом ёфт. Аллоҳ қабул кунад.", "today_total": "Имрӯз: {n}", "week_total": "Дар 7 рӯз: {n}", "focus_btn": "Реҷаи шабона", "exit_focus": "Баромадан", "tap_anywhere": "Дар ҳар ҷои ин блок пахш кунед"}, "id": {"nav_back": "← Situs utama", "hero_badge": "Ketuk untuk Menghitung · Tersimpan Otomatis", "hero_h1": "Hitung Dzikir Anda", "hero_p": "Tasbih digital sederhana — ketuk untuk menghitung, pilih target, dan biarkan zikir Anda mengalir tanpa gangguan.", "phrase_subhanallah": "Subhanallah", "phrase_alhamdulillah": "Alhamdulillah", "phrase_allahuakbar": "Allahu Akbar", "phrase_astaghfirullah": "Astaghfirullah", "phrase_lailaha": "La ilaha illallah", "phrase_custom": "Hitungan Bebas", "custom_target_lbl": "Target khusus", "reset_btn": "Atur Ulang", "tap_hint": "Ketuk lingkaran untuk menghitung", "lap_label": "Siklus selesai: ", "hadith_title": "Pengingat", "hadith_disclaimer": "Teks Arab adalah redaksi asli hadis. Terjemahan mengikuti sumber rujukan Islam yang diakui pada setiap bahasa. Ini bukan fatwa — untuk hukum keagamaan, konsultasikan dengan ulama yang berkompeten.", "hadith_muslim_text": "\"Barangsiapa yang bertasbih kepada Allah setiap selesai salat sebanyak tiga puluh tiga kali, bertahmid tiga puluh tiga kali, dan bertakbir tiga puluh tiga kali — jumlahnya sembilan puluh sembilan — kemudian menyempurnakan hingga seratus dengan membaca 'Lā ilāha illallāhu waḥdahu lā syarīka lah, lahul-mulku wa lahul-ḥamdu wa huwa 'alā kulli syai'in qadīr', maka akan diampuni dosa-dosanya, sekalipun sebanyak buih di lautan.\" (HR. Muslim)", "hadith_bukhari_text": "\"Maukah aku ajarkan kepada kalian sesuatu yang lebih baik daripada yang kalian minta? Apabila kalian hendak tidur, ucapkanlah 'Allahu Akbar' tiga puluh empat kali, 'Subhanallah' dan 'Alhamdulillah' masing-masing tiga puluh tiga kali; itu lebih baik bagi kalian daripada seorang pembantu.\" Ali berkata, \"Aku tidak pernah meninggalkannya sejak mendengarnya dari Rasulullah.\"", "hadith_muslim_source": "— Diriwayatkan oleh Abu Hurairah · Sahih Muslim", "hadith_bukhari_source": "— Diriwayatkan oleh 'Ali bin Abi Thalib · Sahih al-Bukhari 5362", "label_home": "Situs utama", "label_quran": "Al-Qur'an Al-Karim", "label_prayertimes": "Waktu Sholat", "label_qibla": "Arah Kiblat", "label_academy": "AM Academy", "label_calc": "Kalkulator Zakat", "label_apply": "Ajukan Bantuan", "label_join": "Daftar Sekarang", "label_calendar": "Kalender Islam", "label_hadith": "Koleksi Hadits", "label_dua": "Doa & Dzikir", "label_live": "Langsung: Makkah & Madinah", "label_names": "99 Nama Allah", "aria_tools": "Alat lainnya", "aria_count": "Hitung", "aria_language": "Pilih bahasa", "aria_theme": "Ganti tema", "seq_after_prayer": "Setelah sholat · 33·33·33+1", "phrase_tahlil": "La ilaha illallahu wahdahu la syarika lah…", "seq_done": "Selesai. Semoga Allah menerimanya.", "today_total": "Hari ini: {n}", "week_total": "7 hari terakhir: {n}", "focus_btn": "Mode malam", "exit_focus": "Keluar", "tap_anywhere": "Ketuk di mana saja di area ini untuk menghitung"}, "tr": {"nav_back": "← Ana site", "hero_badge": "Saymak İçin Dokun · Otomatik Kaydedilir", "hero_h1": "Zikrinizi Sayın", "hero_p": "Basit bir dijital tesbih — saymak için dokunun, bir hedef seçin ve Allah'ı zikrinizin dikkatiniz dağılmadan aksın.", "phrase_subhanallah": "Sübhanallah", "phrase_alhamdulillah": "Elhamdülillah", "phrase_allahuakbar": "Allahu Ekber", "phrase_astaghfirullah": "Estağfirullah", "phrase_lailaha": "La ilahe illallah", "phrase_custom": "Özgür Sayım", "custom_target_lbl": "Özel hedef", "reset_btn": "Sıfırla", "tap_hint": "Saymak için daireye dokunun", "lap_label": "Tamamlanan tur: ", "hadith_title": "Bir Hatırlatma", "hadith_disclaimer": "Arapça metin hadisin orijinal ifadesidir. Çeviriler her dildeki tanınmış İslami kaynaklara göredir. Bu bir fetva değildir — dinî hükümler için yetkin bir âlime danışın.", "hadith_muslim_text": "\"Bir kimse her namazın arkasından otuz üç defa 'Sübhânallâh', otuz üç defa 'Elhamdülillâh', otuz üç defa 'Allahü ekber' der ve 'Lâ ilâhe illallâhu vahdehû lâ şerîke leh, lehü'l-mülkü ve lehü'l-hamdü ve hüve alâ külli şey'in kadîr' diyerek yüze tamamlarsa, denizin köpükleri kadar çok olsa bile hataları bağışlanır.\"", "hadith_bukhari_text": "\"Sizi istediğinizden daha hayırlı bir şeye yönlendireyim mi? Yatağınıza girdiğinizde otuz dört defa 'Allahu Ekber', otuz üçer defa 'Sübhanallah' ve 'Elhamdülillah' deyiniz; bu sizin için bir hizmetçiden daha hayırlıdır.\" Hz. Ali: \"Bunu işittiğimden beri hiç terk etmedim,\" demiştir.", "hadith_muslim_source": "— Ebu Hureyre'den rivayet edilmiştir · Sahih Müslim", "hadith_bukhari_source": "— Ali bin Ebu Talib'ten rivayet edilmiştir · Sahih Buhari 5362", "label_home": "Ana site", "label_quran": "Kur'an-ı Kerim", "label_prayertimes": "Namaz Vakitleri", "label_qibla": "Kıble Yönü", "label_academy": "AM Academy", "label_calc": "Zekât Hesaplayıcı", "label_apply": "Yardım Başvurusu Yapın", "label_join": "Listeye Katıl", "label_calendar": "İslami Takvim", "label_hadith": "Hadis Koleksiyonu", "label_dua": "Dua & Zikir", "label_live": "Canlı: Mekke ve Medine", "label_names": "Allah'ın 99 İsmi", "aria_tools": "Diğer araçlar", "aria_count": "Say", "aria_language": "Dil seçin", "aria_theme": "Temayı değiştir", "seq_after_prayer": "Namazdan sonra · 33·33·33+1", "phrase_tahlil": "Lâ ilâhe illallâhu vahdehû lâ şerîke leh…", "seq_done": "Tamamlandı. Allah kabul etsin.", "today_total": "Bugün: {n}", "week_total": "Son 7 gün: {n}", "focus_btn": "Gece modu", "exit_focus": "Çık", "tap_anywhere": "Saymak için bu alanda herhangi bir yere dokunun"}, "zh": {"nav_back": "← 主站", "hero_badge": "点击计数 · 自动保存", "hero_h1": "记录您的赞念", "hero_p": "简单的电子念珠——点击计数，选择目标，让您对真主的赞念顺畅进行，不受干扰。", "phrase_subhanallah": "苏布哈纳拉", "phrase_alhamdulillah": "阿兰杜里拉", "phrase_allahuakbar": "真主至大", "phrase_astaghfirullah": "求真主饶恕", "phrase_lailaha": "万物非主唯有真主", "phrase_custom": "自由计数", "custom_target_lbl": "自定义目标", "reset_btn": "重置", "tap_hint": "点击圆圈计数", "lap_label": "已完成轮次：", "hadith_title": "提醒", "hadith_disclaimer": "阿拉伯文是圣训的原始措辞；英文采用 Sunnah.com 上的标准译本。这不是教法裁决——宗教裁决请咨询合格学者。", "hadith_muslim_source": "— 艾布·胡莱勒传述 · 穆斯林圣训实录", "hadith_bukhari_source": "— 阿里·本·艾布·塔利卜传述 · 布哈里圣训实录 5362", "label_home": "主站", "label_quran": "尊贵的古兰经", "label_prayertimes": "礼拜时间", "label_qibla": "朝拜方向", "label_academy": "AM Academy", "label_calc": "天课计算器", "label_apply": "申请援助", "label_join": "加入候补名单", "label_calendar": "伊斯兰历法", "label_hadith": "圣训集", "label_dua": "祈祷与赞念", "label_live": "直播：麦加与麦地那", "label_names": "安拉的99个尊名", "hadith_muslim_text": "凡在每次礼拜后念'苏布哈纳拉'（赞颂真主超绝万物）三十三次，念'阿兰杜里拉'（赞美真主）三十三次，念'真主至大'三十三次——合计九十九次——然后满一百次，念：'万物非主，唯有真主，独一无二，无所匹敌；国权归于他，赞颂归于他，他对万事全能'——他的罪过将被饶恕，即使多如海洋的泡沫。", "hadith_bukhari_text": "……你们上床睡觉时，念'苏布哈纳拉'三十三次，念'阿兰杜里拉'三十三次，念'真主至大'三十四次。\"阿里（他的女婿）说：\"自从我听闻此言以来，从未停止念诵过。", "aria_tools": "其他工具", "aria_count": "计数", "aria_language": "选择语言", "aria_theme": "切换主题", "seq_after_prayer": "礼拜后 · 33·33·33+1", "phrase_tahlil": "La ilaha illallahu wahdahu la sharika lah…", "seq_done": "已完成。愿安拉接受。", "today_total": "今天：{n}", "week_total": "近7天：{n}", "focus_btn": "夜间模式", "exit_focus": "退出", "tap_anywhere": "点击此区域任意位置计数"}, "ms": {"nav_back": "← Laman utama", "hero_badge": "Ketik untuk Mengira · Disimpan Secara Automatik", "hero_h1": "Kira Zikir Anda", "hero_p": "Tasbih digital yang ringkas — ketik untuk mengira, pilih sasaran, dan biarkan zikir anda mengalir tanpa gangguan.", "phrase_subhanallah": "Subhanallah", "phrase_alhamdulillah": "Alhamdulillah", "phrase_allahuakbar": "Allahu Akbar", "phrase_astaghfirullah": "Astaghfirullah", "phrase_lailaha": "La ilaha illallah", "phrase_custom": "Kiraan Bebas", "custom_target_lbl": "Sasaran tersuai", "reset_btn": "Tetapkan Semula", "tap_hint": "Ketik bulatan untuk mengira", "lap_label": "Kitaran selesai: ", "hadith_title": "Peringatan", "hadith_disclaimer": "Teks Arab ialah kata-kata asal hadis. Terjemahan mengikut sumber rujukan Islam yang diiktiraf pada setiap bahasa. Ini bukan fatwa — untuk hukum agama, rujuk kepada ulama yang bertauliah.", "hadith_muslim_text": "\"Sesiapa bertasbih kepada Allah selepas solat sebanyak 33 kali, bertahmid 33 kali, dan bertakbir 33 kali sehingga semuanya berjumlah 99, lalu menyempurnakannya menjadi 100 dengan membaca 'Lā ilāha illallāhu waḥdahu lā syarīka lah, lahul-mulku wa lahul-ḥamdu wa huwa 'alā kulli syai'in qadīr', maka akan diampunkan kesalahannya walaupun sebanyak buih di lautan.\" (Hadis riwayat Muslim, no. 597)", "hadith_bukhari_text": "\"Mahukah aku ajarkan kepada kamu berdua sesuatu yang lebih baik daripada yang kamu minta? Apabila kamu hendak tidur, ucapkanlah 'Allahu Akbar' sebanyak tiga puluh empat kali, 'Subhanallah' dan 'Alhamdulillah' masing-masing tiga puluh tiga kali; itu lebih baik bagi kamu berdua daripada seorang khadam.\" Ali berkata, \"Aku tidak pernah meninggalkannya sejak mendengarnya daripada Rasulullah.\"", "hadith_muslim_source": "— Diriwayatkan oleh Abu Hurairah · Sahih Muslim", "hadith_bukhari_source": "— Diriwayatkan oleh Ali bin Abi Talib · Sahih al-Bukhari 5362", "label_home": "Laman utama", "label_quran": "Al-Quran Al-Karim", "label_prayertimes": "Waktu Solat", "label_qibla": "Arah Kiblat", "label_academy": "AM Academy", "label_calc": "Kalkulator Zakat", "label_apply": "Mohon Bantuan", "label_join": "Sertai Senarai Tunggu", "label_calendar": "Kalendar Islam", "label_hadith": "Koleksi Hadis", "label_dua": "Doa & Zikir", "label_live": "Langsung: Makkah & Madinah", "label_names": "99 Nama Allah", "aria_tools": "Alat lain", "aria_count": "Kira", "aria_language": "Pilih bahasa", "aria_theme": "Tukar tema", "seq_after_prayer": "Selepas solat · 33·33·33+1", "phrase_tahlil": "La ilaha illallahu wahdahu la syarika lah…", "seq_done": "Selesai. Semoga Allah menerimanya.", "today_total": "Hari ini: {n}", "week_total": "7 hari lepas: {n}", "focus_btn": "Mod malam", "exit_focus": "Keluar", "tap_anywhere": "Ketik di mana-mana dalam ruang ini untuk mengira"}, "fr": {"nav_back": "← Site principal", "hero_badge": "Appuyez pour compter · Enregistrement automatique", "hero_h1": "Comptez votre dhikr", "hero_p": "Un chapelet numérique simple — appuyez pour compter, choisissez un objectif, et laissez votre invocation d'Allah s'écouler sans distraction.", "phrase_subhanallah": "SubhanAllah", "phrase_alhamdulillah": "Alhamdulillah", "phrase_allahuakbar": "Allahu Akbar", "phrase_astaghfirullah": "Astaghfirullah", "phrase_lailaha": "La ilaha illallah", "phrase_custom": "Comptage libre", "custom_target_lbl": "Objectif personnalisé", "reset_btn": "Réinitialiser", "tap_hint": "Appuyez sur le cercle pour compter", "lap_label": "Cycles terminés : ", "hadith_title": "Un rappel", "hadith_disclaimer": "Le texte arabe est la formulation originale du hadith. Les traductions suivent des sources islamiques reconnues dans chaque langue. Ceci n'est pas une fatwa — pour les questions religieuses, consultez un érudit qualifié.", "hadith_muslim_text": "« Quiconque, après chaque prière, dit «Gloire à Allah» trente-trois fois, «Louange à Allah» trente-trois fois, «Allah est le plus grand» trente-trois fois, puis complète le tout à cent en disant : «Il n'y a de divinité qu'Allah, Unique et sans associé ; à Lui la royauté et la louange, et Il est capable de toute chose», verra ses péchés effacés, quand bien même ils seraient comme l'écume de la mer. »", "hadith_bukhari_text": "« Ne vous enseignerai-je pas quelque chose de meilleur que ce que vous m'avez demandé ? Lorsque vous vous coucherez, dites trente-quatre fois «Allahu Akbar», puis trente-trois fois «Subhanallah» et trente-trois fois «Al-hamdu lillah» ; cela vous sera meilleur qu'un serviteur. » ‘Ali ajouta : « Je n'ai jamais manqué de le réciter depuis que je l'ai entendu du Messager d'Allah. »", "hadith_muslim_source": "— Rapporté par Abou Hourayra · Sahih Mouslim", "hadith_bukhari_source": "— Rapporté par 'Ali ibn Abi Talib · Sahih al-Boukhari 5362", "label_home": "Site principal", "label_quran": "Le Noble Coran", "label_prayertimes": "Heures de prière", "label_qibla": "Direction de la Qibla", "label_academy": "AM Academy", "label_calc": "Calculateur de Zakat", "label_apply": "Demander une aide", "label_join": "Rejoindre la liste", "label_calendar": "Calendrier islamique", "label_hadith": "Recueil de Hadiths", "label_dua": "Dua & Dhikr", "label_live": "Direct : La Mecque et Médine", "label_names": "Les 99 Noms d'Allah", "aria_tools": "Autres outils", "aria_count": "Compter", "aria_language": "Choisir la langue", "aria_theme": "Changer de thème", "seq_after_prayer": "Après la prière · 33·33·33+1", "phrase_tahlil": "La ilaha illallahu wahdahu la sharika lah…", "seq_done": "Terminé. Qu'Allah l'accepte.", "today_total": "Aujourd'hui : {n}", "week_total": "7 derniers jours : {n}", "focus_btn": "Mode nuit", "exit_focus": "Quitter", "tap_anywhere": "Touchez n'importe où dans cette zone pour compter"}, "de": {"nav_back": "← Zur Hauptseite", "hero_badge": "Zum Zählen tippen · Speichert automatisch", "hero_h1": "Zählen Sie Ihr Dhikr", "hero_p": "Ein einfacher digitaler Tasbih — tippen Sie zum Zählen, wählen Sie ein Ziel, und lassen Sie Ihr Gedenken an Allah ungestört fließen.", "phrase_subhanallah": "SubhanAllah", "phrase_alhamdulillah": "Alhamdulillah", "phrase_allahuakbar": "Allahu Akbar", "phrase_astaghfirullah": "Astaghfirullah", "phrase_lailaha": "La ilaha illallah", "phrase_custom": "Freies Zählen", "custom_target_lbl": "Eigenes Ziel", "reset_btn": "Zurücksetzen", "tap_hint": "Tippen Sie auf den Kreis, um zu zählen", "lap_label": "Abgeschlossene Zyklen: ", "hadith_title": "Eine Erinnerung", "hadith_disclaimer": "Der arabische Text ist der ursprüngliche Wortlaut des Hadith. Die Übersetzungen folgen anerkannten islamischen Quellen in jeder Sprache. Dies ist keine Fatwa — für religiöse Urteile konsultieren Sie einen qualifizierten Gelehrten.", "hadith_muslim_text": "„Wer nach jedem Gebet 'Subhanallah' dreiunddreißig Mal, 'Al-hamdu lillah' dreiunddreißig Mal und 'Allahu Akbar' dreiunddreißig Mal sagt und dies auf hundert vervollständigt mit: 'La ilaha illallahu wahdahu la sharika lahu, lahu-l-mulku wa lahu-l-hamdu wa huwa 'ala kulli shay'in qadir' — dem werden seine Sünden vergeben, selbst wenn sie so zahlreich wären wie der Schaum des Meeres.“", "hadith_bukhari_text": "„Soll ich euch nicht etwas Besseres lehren als das, worum ihr gebeten habt? Wenn ihr euch schlafen legt, sprecht vierunddreißig Mal 'Allahu Akbar', dann jeweils dreiunddreißig Mal 'Subhanallah' und 'Al-hamdu lillah' — das ist besser für euch als ein Diener.“ ‘Ali sagte: „Ich habe es nie versäumt, seit ich es vom Gesandten Allahs gehört habe.“", "hadith_muslim_source": "— Überliefert von Abu Huraira · Sahih Muslim", "hadith_bukhari_source": "— Überliefert von 'Ali ibn Abi Talib · Sahih al-Bukhari 5362", "label_home": "Hauptseite", "label_quran": "Der Edle Koran", "label_prayertimes": "Gebetszeiten", "label_qibla": "Qibla-Richtung", "label_academy": "AM Academy", "label_calc": "Zakat-Rechner", "label_apply": "Unterstützung beantragen", "label_join": "Warteliste beitreten", "label_calendar": "Islamischer Kalender", "label_hadith": "Hadith-Sammlung", "label_dua": "Dua & Dhikr", "label_live": "Live: Mekka & Medina", "label_names": "Die 99 Namen Allahs", "aria_tools": "Weitere Tools", "aria_count": "Zählen", "aria_language": "Sprache wählen", "aria_theme": "Design wechseln", "seq_after_prayer": "Nach dem Gebet · 33·33·33+1", "phrase_tahlil": "La ilaha illallahu wahdahu la sharika lah…", "seq_done": "Abgeschlossen. Möge Allah es annehmen.", "today_total": "Heute: {n}", "week_total": "Letzte 7 Tage: {n}", "focus_btn": "Nachtmodus", "exit_focus": "Beenden", "tap_anywhere": "Tippen Sie irgendwo in diesen Bereich, um zu zählen"}};
 
 let currentLang = 'en';
 function t(key){
@@ -281,8 +340,7 @@ function setLang(l){
     const k = el.getAttribute('data-t');
     el.textContent = t(k);
   });
-  document.getElementById('phraseName').textContent = t('phrase_' + state.phraseKey);
-  renderLapInfo();
+  if (typeof render === 'function' && document.getElementById('beads')) render();
   localStorage.setItem('amn_lang', l);
 }
 function toggleLangDrop(){
@@ -322,8 +380,17 @@ document.addEventListener('click', function(e){
 /* ═══════════════════════════════════════════════════════
    TASBEEH COUNTER — state persisted in localStorage
 ═══════════════════════════════════════════════════════ */
-const STORAGE_KEY = 'amn_tasbeeh_state';
-let state = { count: 0, target: 33, phraseKey: 'subhanallah', laps: 0, customTarget: 100 };
+const STORAGE_KEY = 'amn_tasbeeh_state', DAYS_KEY = 'amn_tasbeeh_days';
+// Dhikr after the obligatory prayer, as in Sahih Muslim 597: 33 + 33 + 33,
+// completing the hundred with the full tahlil.
+const SEQUENCE = [
+  { key: 'subhanallah', n: 33 },
+  { key: 'alhamdulillah', n: 33 },
+  { key: 'allahuakbar', n: 33 },
+  { key: 'tahlil', n: 1 },
+];
+PHRASES_AR.tahlil = 'لَا إِلٰهَ إِلَّا اللَّٰهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ';
+let state = { count: 0, target: 33, phraseKey: 'sequence', laps: 0, customTarget: 100, step: 0, done: false };
 try {
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
   if (saved) state = Object.assign(state, saved);
@@ -335,53 +402,111 @@ function saveState(){
 function vibrate(pattern){
   if (navigator.vibrate) { try { navigator.vibrate(pattern); } catch (e) {} }
 }
+function dayKey(d){ return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function getDays(){ try { return JSON.parse(localStorage.getItem(DAYS_KEY) || '{}'); } catch (e) { return {}; } }
+function bumpDay(delta){
+  const days = getDays(), k = dayKey(new Date());
+  days[k] = Math.max(0, (days[k] || 0) + delta);
+  // keep ~two months, enough for the weekly total
+  Object.keys(days).sort().slice(0, -60).forEach(x => delete days[x]);
+  try { localStorage.setItem(DAYS_KEY, JSON.stringify(days)); } catch (e) {}
+}
+function renderStats(){
+  const days = getDays(), d = new Date();
+  const today = days[dayKey(d)] || 0;
+  let week = 0;
+  for (let i = 0; i < 7; i++) { const x = new Date(d); x.setDate(d.getDate() - i); week += days[dayKey(x)] || 0; }
+  const fmt = n => n.toLocaleString(currentLang === 'tj' ? 'ru' : currentLang);
+  document.getElementById('stats').innerHTML = '<span>' + t('today_total').replace('{n}', '<b>' + fmt(today) + '</b>') + '</span><span>' + t('week_total').replace('{n}', '<b>' + fmt(week) + '</b>') + '</span>';
+}
+
+function current(){
+  if (state.phraseKey === 'sequence') { const st = SEQUENCE[Math.min(state.step, SEQUENCE.length - 1)]; return { key: st.key, target: st.n }; }
+  return { key: state.phraseKey, target: state.target };
+}
+
+function renderBeads(){
+  const { target } = current();
+  const n = target > 0 ? Math.min(target, 100) : 33;
+  const filled = target > 0 ? Math.min(state.count, n) : state.count % 33;
+  const r = 108, size = n > 40 ? 2.6 : n === 1 ? 7 : 4.6;
+  let h = '<circle class="track" cx="120" cy="120" r="' + r + '"/>';
+  for (let i = 0; i < n; i++) {
+    const a = -Math.PI / 2 + (i / n) * Math.PI * 2;
+    const cls = i < filled ? (i === filled - 1 ? 'b on cur' : 'b on') : 'b';
+    h += '<circle class="' + cls + '" cx="' + (120 + r * Math.cos(a)).toFixed(1) + '" cy="' + (120 + r * Math.sin(a)).toFixed(1) + '" r="' + size + '"/>';
+  }
+  document.getElementById('beads').innerHTML = h;
+}
+function renderSteps(){
+  const el = document.getElementById('steps');
+  if (state.phraseKey !== 'sequence') { el.innerHTML = ''; return; }
+  el.innerHTML = SEQUENCE.map((st, i) => '<span class="step' + (state.done || i < state.step ? ' done' : i === state.step ? ' cur' : '') + '">' + (st.n > 1 ? st.n + ' · ' + t('phrase_' + st.key) : '1 · ' + t('phrase_lailaha')) + '</span>').join('');
+}
+
 function render(){
+  const { key, target } = current();
   document.getElementById('counterValue').textContent = state.count;
-  document.getElementById('counterTargetLbl').textContent = state.target > 0 ? ('/ ' + state.target) : '';
-  document.getElementById('phraseAr').textContent = PHRASES_AR[state.phraseKey] || '';
-  document.getElementById('phraseAr').style.display = PHRASES_AR[state.phraseKey] ? '' : 'none';
-  document.getElementById('phraseName').textContent = t('phrase_' + state.phraseKey);
-  const pct = state.target > 0 ? Math.min(100, (state.count / state.target) * 100) : 0;
-  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('counterTargetLbl').textContent = target > 0 ? ('/ ' + target) : '';
+  const ar = PHRASES_AR[key] || '';
+  const arEl = document.getElementById('phraseAr');
+  arEl.textContent = ar;
+  arEl.style.display = ar ? '' : 'none';
+  arEl.style.fontSize = ar.length > 40 ? '20px' : '';
+  document.getElementById('phraseName').textContent = t('phrase_' + key);
   document.querySelectorAll('.phrase-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.key === state.phraseKey);
   });
   document.getElementById('customRow').style.display = state.phraseKey === 'custom' ? 'flex' : 'none';
   if (state.phraseKey === 'custom') document.getElementById('customTarget').value = state.customTarget;
+  const doneEl = document.getElementById('seqDone');
+  doneEl.style.display = state.phraseKey === 'sequence' && state.done ? '' : 'none';
+  doneEl.textContent = t('seq_done');
+  renderBeads();
+  renderSteps();
+  renderStats();
   renderLapInfo();
 }
 function renderLapInfo(){
   const el = document.getElementById('lapInfo');
   el.textContent = state.laps > 0 ? (t('lap_label') + state.laps) : '';
 }
+function pulse(cls){
+  const w = document.getElementById('counterBtn');
+  w.classList.remove(cls); void w.offsetWidth; w.classList.add(cls);
+  setTimeout(() => w.classList.remove(cls), cls === 'tap' ? 120 : 600);
+}
 function incrementCount(){
+  if (state.phraseKey === 'sequence' && state.done) { state.done = false; state.step = 0; state.count = 0; }
   state.count++;
+  bumpDay(1);
   vibrate(10);
-  const btn = document.getElementById('counterBtn');
-  // Restart the tap-pulse animation on every press, even in rapid
-  // succession — removing the class and forcing a reflow before
-  // re-adding it is what lets it replay instead of no-op.
-  btn.classList.remove('tap-pulse');
-  void btn.offsetWidth;
-  btn.classList.add('tap-pulse');
-  if (state.target > 0 && state.count >= state.target) {
-    state.laps++;
-    state.count = 0;
+  pulse('tap');
+  const { target } = current();
+  if (target > 0 && state.count >= target) {
     vibrate([40, 30, 40]);
-    btn.classList.add('complete');
-    setTimeout(() => btn.classList.remove('complete'), 500);
+    pulse('complete');
+    if (state.phraseKey === 'sequence') {
+      if (state.step < SEQUENCE.length - 1) { state.step++; state.count = 0; }
+      else { state.done = true; state.laps++; vibrate([60, 40, 60, 40, 120]); }
+    } else {
+      state.laps++;
+      state.count = 0;
+    }
   }
   saveState();
   render();
 }
 function decrementCount(){
-  state.count = Math.max(0, state.count - 1);
+  if (state.count > 0) { state.count--; bumpDay(-1); }
   saveState();
   render();
 }
 function resetCount(){
   state.count = 0;
   state.laps = 0;
+  state.step = 0;
+  state.done = false;
   saveState();
   render();
 }
@@ -391,6 +516,8 @@ function selectPhrase(btn){
   state.target = key === 'custom' ? Number(state.customTarget) || 0 : Number(btn.dataset.target);
   state.count = 0;
   state.laps = 0;
+  state.step = 0;
+  state.done = false;
   saveState();
   render();
 }
@@ -401,6 +528,27 @@ function setCustomTarget(val){
   saveState();
   render();
 }
+function setFocus(on, e){
+  if (e) e.stopPropagation();
+  document.body.classList.toggle('focus', on);
+  if (on && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
+  if (!on && document.fullscreenElement) document.exitFullscreen().catch(()=>{});
+}
+document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement) document.body.classList.remove('focus'); });
+
+// The whole block counts, not just the circle — easier one-handed, eyes off the screen.
+(function(){
+  const zone = document.getElementById('tapZone');
+  zone.addEventListener('pointerdown', e => {
+    if (e.button !== 0 || e.target.closest('.focus-exit')) return;
+    e.preventDefault();
+    incrementCount();
+  });
+  zone.addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); incrementCount(); }
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setFocus(false); });
+})();
 
 
 /* ── INIT ── */

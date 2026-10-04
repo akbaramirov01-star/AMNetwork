@@ -126,6 +126,38 @@ main{padding-top:64px;min-height:100vh}
 
 .compass-note{font-size:11px;color:var(--text3);margin-top:16px;line-height:1.6}
 
+/* v2 — rotating dial compass */
+.hero{padding:26px 5vw 6px}
+.hero h1{margin-bottom:4px}
+.start-icon{width:72px;height:72px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;background:var(--gold3);border:1px solid rgba(201,168,76,.3)}
+.btn-big{width:100%;max-width:320px;min-height:52px;font-size:15px;border-radius:14px}
+.loc-note{font-size:11.5px;color:var(--text3);line-height:1.6;margin:4px auto 0;max-width:360px}
+.q-card{padding:22px 16px 20px}
+.q-status{min-height:44px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:var(--text);transition:color .3s}
+.q-status.ok{color:#5ED39A}
+.q-compass{position:relative;width:min(84vw,320px);aspect-ratio:1;margin:6px auto 4px}
+.q-dial{position:absolute;inset:0;width:100%;height:100%;transition:transform .25s linear;will-change:transform}
+.q-dial .ring{fill:var(--input-bg);stroke:var(--input-border);stroke-width:1.5}
+.q-dial .ring2{fill:none;stroke:var(--border);stroke-width:1}
+.q-dial .tick{stroke:var(--text3);stroke-width:1}
+.q-dial .tick.major{stroke:var(--text2);stroke-width:2}
+.q-dial .card-n{fill:#E06A5A;font-weight:800}
+.q-dial text{fill:var(--text2);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+.q-dial text.deg{font-size:9px;font-weight:500;fill:var(--text3)}
+.q-dial .qline{stroke:var(--gold);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:2 6}
+.q-pointer{position:absolute;left:50%;top:-6px;width:0;height:0;margin-left:-11px;border-left:11px solid transparent;border-right:11px solid transparent;border-top:18px solid var(--gold);z-index:2;filter:drop-shadow(0 2px 6px rgba(201,168,76,.5));transition:border-top-color .3s}
+.q-compass.ok .q-pointer{border-top-color:#5ED39A}
+.q-compass::after{content:'';position:absolute;inset:-6px;border-radius:50%;box-shadow:0 0 0 0 rgba(94,211,154,0);transition:box-shadow .35s;pointer-events:none}
+.q-compass.ok::after{box-shadow:0 0 0 4px rgba(94,211,154,.55),0 0 40px 6px rgba(94,211,154,.35)}
+.q-center{position:absolute;inset:32%;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg1);border:1px solid var(--border);box-shadow:inset 0 0 24px rgba(0,0,0,.25)}
+.q-deg{font-family:'DM Sans',sans-serif;font-variant-numeric:tabular-nums;font-size:32px;font-weight:300;color:var(--gold2);line-height:1}
+.q-deg-label{font-size:9.5px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;max-width:90%}
+.q-chips{display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap}
+.q-chip{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:999px;background:var(--gold3);border:1px solid rgba(201,168,76,.3);color:var(--gold);font-size:13px;font-weight:600}
+.q-chip:empty{display:none}
+.q-hint{font-size:11.5px;color:var(--text3);margin-top:12px;line-height:1.6}
+@media (prefers-reduced-motion:reduce){.q-dial{transition:none}}
+
 </style>
 </head>
 <body>
@@ -178,53 +210,40 @@ main{padding-top:64px;min-height:100vh}
 
 <main>
   <section class="hero">
-    <div class="badge">🕋 <span data-t="hero_badge">Location-based · Works Offline</span></div>
     <h1 data-t="hero_h1">Qibla Direction</h1>
-    <p data-t="hero_p">Find the direction to the Kaaba in Makkah from wherever you are, using your device's location and compass.</p>
   </section>
 
   <div class="wrap">
-    <div class="card">
-      <div id="startState">
-        <p class="location-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-t="location_note">We'll ask your browser for permission to use your location — only to work out the Qibla direction from where you are. Your location is never stored or shared.</span></p>
-        <button class="btn-gold" onclick="findQibla()" data-t="find_btn">Find My Qibla</button>
-        <div class="status-msg" id="startStatus"></div>
-      </div>
-
-      <div id="resultState" style="display:none">
-        <div class="compass-wrap" id="compassWrap">
-          <div class="compass-dial">
-            <div class="compass-mark n" data-t="dir_n">N</div>
-            <div class="compass-mark e" data-t="dir_e">E</div>
-            <div class="compass-mark s" data-t="dir_s">S</div>
-            <div class="compass-mark w" data-t="dir_w">W</div>
-          </div>
-          <div class="compass-arrow" id="compassArrow">
-            <span class="kaaba">🕋</span>
-            <div class="shaft"></div>
-          </div>
-          <div class="compass-center-dot"></div>
-        </div>
-        <div class="readout">
-          <div class="readout-item">
-            <div class="readout-value" id="bearingValue">—°</div>
-            <div class="readout-label" data-t="bearing_label">Qibla Bearing</div>
-          </div>
-          <div class="readout-item">
-            <div class="readout-value" id="distanceValue">—</div>
-            <div class="readout-label" data-t="distance_label">Distance to Kaaba</div>
-          </div>
-        </div>
-        <button class="btn-outline" id="enableCompassBtn" onclick="enableCompass()" data-t="enable_compass_btn" style="margin-top:16px">Enable Compass</button>
-        <div class="compass-note" id="compassNote"></div>
-      </div>
-
+    <div class="card" id="startState">
+      <div class="start-icon" aria-hidden="true"><svg width="38" height="38" viewBox="0 0 40 40"><path d="M8 14l12-6 12 6v14l-12 6-12-6z" fill="#14100c" stroke="#C9A84C" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 14l12 6 12-6M20 20v14" fill="none" stroke="#C9A84C" stroke-width="1.1" opacity=".6"/><path d="M8 17.5l12 6 12-6" fill="none" stroke="#E8C87A" stroke-width="1.8"/></svg></div>
+      <button class="btn-gold btn-big" onclick="findQibla()" data-t="find_btn">Find My Qibla</button>
+      <div class="status-msg" id="startStatus" role="status"></div>
+      <p class="loc-note" data-t="loc_note2">Your location is used only to work out the direction and is remembered on this device only — AM Network never receives it.</p>
       <button class="manual-toggle-link" onclick="toggleManualForm()" data-t="manual_toggle">Enter location manually</button>
       <div class="manual-form" id="manualForm">
         <input type="number" id="manualLat" step="any" data-t-ph="manual_lat_ph" placeholder="Latitude">
         <input type="number" id="manualLng" step="any" data-t-ph="manual_lng_ph" placeholder="Longitude">
         <button class="btn-outline" onclick="useManualLocation()" data-t="manual_btn">Calculate</button>
       </div>
+    </div>
+
+    <div class="card q-card" id="resultState" style="display:none">
+      <div class="q-status" id="qStatus" aria-live="polite"></div>
+      <div class="q-compass" id="qCompass">
+        <div class="q-pointer" aria-hidden="true"></div>
+        <svg class="q-dial" id="qDial" viewBox="-160 -160 320 320" aria-hidden="true"></svg>
+        <div class="q-center">
+          <div class="q-deg" id="bearingValue">—°</div>
+          <div class="q-deg-label" data-t="bearing_label">Qibla Bearing</div>
+        </div>
+      </div>
+      <div class="q-chips">
+        <span class="q-chip" id="distanceValue"></span>
+      </div>
+      <button class="btn-gold" id="enableCompassBtn" onclick="enableCompass()" data-t="enable_compass_btn" style="display:none;margin-top:14px">Enable Compass</button>
+      <div class="compass-note" id="compassNote"></div>
+      <p class="q-hint" data-t="hold_flat">Hold your phone flat, away from metal and magnets.</p>
+      <button class="manual-toggle-link" onclick="relocate()" data-t="change_loc">Update location</button>
     </div>
   </div>
 </main>
@@ -233,7 +252,7 @@ main{padding-top:64px;min-height:100vh}
 /* ═══════════════════════════════════════════════════════
    I18N
 ═══════════════════════════════════════════════════════ */
-const translations = {"en": {"nav_back": "← Main site", "hero_badge": "Location-based · Works Offline", "hero_h1": "Qibla Direction", "hero_p": "Find the direction to the Kaaba in Makkah from wherever you are, using your device's location and compass.", "location_note": "We'll ask your browser for permission to use your location — only to work out the Qibla direction from where you are. Your location is never stored or shared.", "find_btn": "Find My Qibla", "locating_msg": "Locating…", "loc_error": "Could not access your location. Please allow location access, or enter your coordinates manually below.", "bearing_label": "Qibla Bearing", "distance_label": "Distance to Kaaba", "enable_compass_btn": "Enable Compass", "compass_permission_denied": "Compass access was denied. You can still use the bearing above with a separate compass.", "no_compass_msg": "Your device doesn't support a live compass. Use the bearing above with a separate compass, or align it with true North.", "compass_active_msg": "Point the top of your phone toward the Kaaba icon.", "manual_toggle": "Enter location manually", "manual_lat_ph": "Latitude", "manual_lng_ph": "Longitude", "manual_btn": "Calculate", "dir_n": "N", "dir_e": "E", "dir_s": "S", "dir_w": "W", "label_home": "Main site", "label_quran": "The Holy Quran", "label_prayertimes": "Prayer Times", "label_tasbeeh": "Count Your Dhikr", "label_academy": "AM Academy", "label_calc": "Zakat Calculator", "label_apply": "Apply for Assistance", "label_join": "Join Waitlist", "label_calendar": "Islamic Calendar", "label_hadith": "Hadith Collection", "label_dua": "Dua & Dhikr", "label_live": "Live: Makkah & Madinah", "label_names": "99 Names of Allah", "aria_tools": "Other tools", "aria_language": "Select language", "aria_theme": "Toggle theme"}, "ar": {"nav_back": "← الموقع الرئيسي", "hero_badge": "حسب الموقع · يعمل دون إنترنت", "hero_h1": "اتجاه القبلة", "hero_p": "اعرف اتجاه الكعبة في مكة من أي مكان، باستخدام موقع جهازك وبوصلته.", "location_note": "سنطلب من متصفحك إذناً لاستخدام موقعك — فقط لتحديد اتجاه القبلة من مكانك. موقعك لا يُخزَّن ولا يُشارَك أبداً.", "find_btn": "حدد قبلتي", "locating_msg": "جارٍ تحديد الموقع…", "loc_error": "تعذّر الوصول إلى موقعك. يرجى السماح بالوصول إلى الموقع، أو إدخال الإحداثيات يدوياً أدناه.", "bearing_label": "اتجاه القبلة", "distance_label": "المسافة إلى الكعبة", "enable_compass_btn": "تفعيل البوصلة", "compass_permission_denied": "تم رفض الوصول إلى البوصلة. لا يزال يمكنك استخدام الاتجاه أعلاه ببوصلة أخرى.", "no_compass_msg": "جهازك لا يدعم بوصلة مباشرة. استخدم الاتجاه أعلاه ببوصلة أخرى، أو وجّهه نحو الشمال الحقيقي.", "compass_active_msg": "وجّه أعلى هاتفك نحو أيقونة الكعبة.", "manual_toggle": "أدخل الموقع يدوياً", "manual_lat_ph": "خط العرض", "manual_lng_ph": "خط الطول", "manual_btn": "احسب", "dir_n": "ش", "dir_e": "ق", "dir_s": "ج", "dir_w": "غ", "label_home": "الموقع الرئيسي", "label_quran": "القرآن الكريم", "label_prayertimes": "مواقيت الصلاة", "label_tasbeeh": "عدّ أذكارك", "label_academy": "AM Academy", "label_calc": "حاسبة الزكاة", "label_apply": "تقدم بطلب للحصول على المساعدة", "label_join": "انضم لقائمة الانتظار", "label_calendar": "التقويم الإسلامي", "label_hadith": "مجموعة الأحاديث", "label_dua": "الدعاء والذكر", "label_live": "مباشر: مكة والمدينة", "label_names": "أسماء الله الحسنى", "aria_tools": "أدوات أخرى", "aria_language": "اختر اللغة", "aria_theme": "تبديل المظهر"}, "ru": {"nav_back": "← Главный сайт", "hero_badge": "По геолокации · Работает офлайн", "hero_h1": "Направление на Киблу", "hero_p": "Узнайте направление на Каабу в Мекке из любой точки — по геолокации и компасу вашего устройства.", "location_note": "Мы запросим у браузера разрешение на использование вашей геолокации — только чтобы определить направление Киблы там, где вы находитесь. Ваше местоположение никогда не сохраняется и не передаётся третьим лицам.", "find_btn": "Найти мою Киблу", "locating_msg": "Определение местоположения…", "loc_error": "Не удалось получить доступ к вашему местоположению. Разрешите доступ к геолокации или введите координаты вручную ниже.", "bearing_label": "Азимут на Киблу", "distance_label": "Расстояние до Каабы", "enable_compass_btn": "Включить компас", "compass_permission_denied": "Доступ к компасу отклонён. Вы всё равно можете использовать азимут выше с обычным компасом.", "no_compass_msg": "Ваше устройство не поддерживает компас. Используйте азимут выше с обычным компасом или ориентируйтесь на истинный север.", "compass_active_msg": "Направьте верх телефона на значок Каабы.", "manual_toggle": "Ввести координаты вручную", "manual_lat_ph": "Широта", "manual_lng_ph": "Долгота", "manual_btn": "Рассчитать", "dir_n": "С", "dir_e": "В", "dir_s": "Ю", "dir_w": "З", "label_home": "Главный сайт", "label_quran": "Священный Коран", "label_prayertimes": "Время намаза", "label_tasbeeh": "Считайте свои зикры", "label_academy": "AM Academy", "label_calc": "Калькулятор закята", "label_apply": "Подать заявку на помощь", "label_join": "Присоединиться", "label_calendar": "Исламский календарь", "label_hadith": "Сборник хадисов", "label_dua": "Дуа и Зикр", "label_live": "Прямой эфир: Мекка и Медина", "label_names": "99 имён Аллаха", "aria_tools": "Другие разделы", "aria_language": "Выбрать язык", "aria_theme": "Сменить тему"}, "tj": {"nav_back": "← Сайти асосӣ", "hero_badge": "Тибқи ҷойгиршавӣ · Бе интернет кор мекунад", "hero_h1": "Самти Қибла", "hero_p": "Самти Каъбаро дар Макка аз ҳар ҷое, ки ҳастед, тавассути ҷойгиршавӣ ва қутбнамои дастгоҳатон биёбед.", "location_note": "Мо аз браузери шумо барои истифодаи ҷойгиршавӣ иҷозат мепурсем — танҳо барои муайян кардани самти Қибла аз ҷои шумо. Ҷойгиршавии шумо ҳеҷ гоҳ нигоҳ дошта намешавад ва мубодила намешавад.", "find_btn": "Қибларо ёфтан", "locating_msg": "Муайян намудани ҷойгиршавӣ…", "loc_error": "Дастрасӣ ба ҷойгиршавии шумо номумкин шуд. Лутфан дастрасиро иҷозат диҳед ё координатаҳоро дастӣ дар поён ворид кунед.", "bearing_label": "Самти Қибла", "distance_label": "Масофа то Каъба", "enable_compass_btn": "Фаъол кардани қутбнамо", "compass_permission_denied": "Дастрасӣ ба қутбнамо рад шуд. Шумо метавонед самти болоро бо қутбнамои алоҳида истифода баред.", "no_compass_msg": "Дастгоҳи шумо қутбнамои зиндаро дастгирӣ намекунад. Самти болоро бо қутбнамои алоҳида истифода баред ё ба шимоли ҳақиқӣ рост кунед.", "compass_active_msg": "Болои телефонатонро ба нишони Каъба нигаронед.", "manual_toggle": "Ҷойгиршавиро дастӣ ворид кунед", "manual_lat_ph": "Арз", "manual_lng_ph": "Тул", "manual_btn": "Ҳисоб кун", "dir_n": "Ш", "dir_e": "Ш.Ш", "dir_s": "Ҷ", "dir_w": "Ғ", "label_home": "Сайти асосӣ", "label_quran": "Қуръони Карим", "label_prayertimes": "Вақти намоз", "label_tasbeeh": "Зикрҳои худро шуморед", "label_academy": "AM Academy", "label_calc": "Ҳисобкунаки закот", "label_apply": "Барои кӯмак аризадиҳӣ", "label_join": "Ба рӯйхат шомил шав", "label_calendar": "Тақвими исломӣ", "label_hadith": "Маҷмӯаи ҳадисҳо", "label_dua": "Дуо ва Зикр", "label_live": "Пахши Зинда: Макка ва Мадина", "label_names": "99 номи Аллоҳ", "aria_tools": "Бахшҳои дигар", "aria_language": "Интихоби забон", "aria_theme": "Иваз кардани мавзӯъ"}, "id": {"nav_back": "← Situs utama", "hero_badge": "Berbasis Lokasi · Berfungsi Offline", "hero_h1": "Arah Kiblat", "hero_p": "Temukan arah ke Ka'bah di Makkah dari mana pun Anda berada, menggunakan lokasi dan kompas perangkat Anda.", "location_note": "Kami akan meminta izin browser Anda untuk menggunakan lokasi — hanya untuk menentukan arah Kiblat dari tempat Anda. Lokasi Anda tidak pernah disimpan atau dibagikan.", "find_btn": "Temukan Kiblat Saya", "locating_msg": "Mencari lokasi…", "loc_error": "Tidak dapat mengakses lokasi Anda. Izinkan akses lokasi, atau masukkan koordinat secara manual di bawah.", "bearing_label": "Arah Kiblat", "distance_label": "Jarak ke Ka'bah", "enable_compass_btn": "Aktifkan Kompas", "compass_permission_denied": "Akses kompas ditolak. Anda tetap bisa menggunakan arah di atas dengan kompas terpisah.", "no_compass_msg": "Perangkat Anda tidak mendukung kompas langsung. Gunakan arah di atas dengan kompas terpisah, atau sejajarkan dengan Utara sejati.", "compass_active_msg": "Arahkan bagian atas ponsel Anda ke ikon Ka'bah.", "manual_toggle": "Masukkan lokasi secara manual", "manual_lat_ph": "Lintang", "manual_lng_ph": "Bujur", "manual_btn": "Hitung", "dir_n": "U", "dir_e": "T", "dir_s": "S", "dir_w": "B", "label_home": "Situs utama", "label_quran": "Al-Qur'an Al-Karim", "label_prayertimes": "Waktu Sholat", "label_tasbeeh": "Hitung Dzikir Anda", "label_academy": "AM Academy", "label_calc": "Kalkulator Zakat", "label_apply": "Ajukan Bantuan", "label_join": "Daftar Sekarang", "label_calendar": "Kalender Islam", "label_hadith": "Koleksi Hadits", "label_dua": "Doa & Dzikir", "label_live": "Langsung: Makkah & Madinah", "label_names": "99 Nama Allah", "aria_tools": "Alat lainnya", "aria_language": "Pilih bahasa", "aria_theme": "Ganti tema"}, "tr": {"nav_back": "← Ana site", "hero_badge": "Konum Tabanlı · Çevrimdışı Çalışır", "hero_h1": "Kıble Yönü", "hero_p": "Cihazınızın konumunu ve pusulasını kullanarak, bulunduğunuz her yerden Mekke'deki Kâbe'nin yönünü bulun.", "location_note": "Konumunuzu kullanmak için tarayıcınızdan izin isteyeceğiz — sadece bulunduğunuz yerden kıble yönünü hesaplamak amacıyla. Konumunuz asla saklanmaz veya paylaşılmaz.", "find_btn": "Kıblemi Bul", "locating_msg": "Konum belirleniyor…", "loc_error": "Konumunuza erişilemedi. Lütfen konum erişimine izin verin veya koordinatlarınızı aşağıya manuel olarak girin.", "bearing_label": "Kıble Yönü", "distance_label": "Kâbe'ye Uzaklık", "enable_compass_btn": "Pusulayı Etkinleştir", "compass_permission_denied": "Pusula erişimi reddedildi. Yukarıdaki yönü ayrı bir pusula ile kullanabilirsiniz.", "no_compass_msg": "Cihazınız canlı pusulayı desteklemiyor. Yukarıdaki yönü ayrı bir pusula ile kullanın veya gerçek Kuzey'e hizalayın.", "compass_active_msg": "Telefonunuzun üstünü Kâbe simgesine doğrultun.", "manual_toggle": "Konumu manuel olarak girin", "manual_lat_ph": "Enlem", "manual_lng_ph": "Boylam", "manual_btn": "Hesapla", "dir_n": "K", "dir_e": "D", "dir_s": "G", "dir_w": "B", "label_home": "Ana site", "label_quran": "Kur'an-ı Kerim", "label_prayertimes": "Namaz Vakitleri", "label_tasbeeh": "Zikrinizi Sayın", "label_academy": "AM Academy", "label_calc": "Zekât Hesaplayıcı", "label_apply": "Yardım Başvurusu Yapın", "label_join": "Listeye Katıl", "label_calendar": "İslami Takvim", "label_hadith": "Hadis Koleksiyonu", "label_dua": "Dua & Zikir", "label_live": "Canlı: Mekke ve Medine", "label_names": "Allah'ın 99 İsmi", "aria_tools": "Diğer araçlar", "aria_language": "Dil seçin", "aria_theme": "Temayı değiştir"}, "zh": {"nav_back": "← 主站", "hero_badge": "基于位置 · 离线可用", "hero_h1": "朝拜方向", "hero_p": "使用您设备的定位和指南针，从任何地方找到麦加天房的方向。", "location_note": "我们会请求浏览器授权使用您的位置信息——仅用于确定您所在位置的朝拜方向（朝向克尔白）。您的位置信息绝不会被存储或分享。", "find_btn": "查找我的朝向", "locating_msg": "正在定位…", "loc_error": "无法访问您的位置。请允许位置访问，或在下方手动输入坐标。", "bearing_label": "朝拜方位角", "distance_label": "到天房的距离", "enable_compass_btn": "启用指南针", "compass_permission_denied": "指南针访问被拒绝。您仍可以使用上方的方位角配合另一个指南针。", "no_compass_msg": "您的设备不支持实时指南针。请使用上方的方位角配合另一个指南针，或对准真北。", "compass_active_msg": "将手机顶部指向天房图标。", "manual_toggle": "手动输入位置", "manual_lat_ph": "纬度", "manual_lng_ph": "经度", "manual_btn": "计算", "dir_n": "北", "dir_e": "东", "dir_s": "南", "dir_w": "西", "label_home": "主站", "label_quran": "尊贵的古兰经", "label_prayertimes": "礼拜时间", "label_tasbeeh": "记录您的赞念", "label_academy": "AM Academy", "label_calc": "天课计算器", "label_apply": "申请援助", "label_join": "加入候补名单", "label_calendar": "伊斯兰历法", "label_hadith": "圣训集", "label_dua": "祈祷与赞念", "label_live": "直播：麦加与麦地那", "label_names": "安拉的99个尊名", "aria_tools": "其他工具", "aria_language": "选择语言", "aria_theme": "切换主题"}, "ms": {"nav_back": "← Laman utama", "hero_badge": "Berasaskan Lokasi · Berfungsi Luar Talian", "hero_h1": "Arah Kiblat", "hero_p": "Cari arah ke Kaabah di Makkah dari mana-mana sahaja anda berada, menggunakan lokasi dan kompas peranti anda.", "location_note": "Kami akan meminta kebenaran pelayar anda untuk menggunakan lokasi — hanya untuk menentukan arah Kiblat dari tempat anda. Lokasi anda tidak pernah disimpan atau dikongsi.", "find_btn": "Cari Kiblat Saya", "locating_msg": "Mengesan lokasi…", "loc_error": "Tidak dapat mengakses lokasi anda. Sila benarkan akses lokasi, atau masukkan koordinat secara manual di bawah.", "bearing_label": "Arah Kiblat", "distance_label": "Jarak ke Kaabah", "enable_compass_btn": "Dayakan Kompas", "compass_permission_denied": "Akses kompas ditolak. Anda masih boleh menggunakan arah di atas dengan kompas berasingan.", "no_compass_msg": "Peranti anda tidak menyokong kompas langsung. Gunakan arah di atas dengan kompas berasingan, atau jajarkan dengan Utara sebenar.", "compass_active_msg": "Arahkan bahagian atas telefon anda ke ikon Kaabah.", "manual_toggle": "Masukkan lokasi secara manual", "manual_lat_ph": "Latitud", "manual_lng_ph": "Longitud", "manual_btn": "Kira", "dir_n": "U", "dir_e": "T", "dir_s": "S", "dir_w": "B", "label_home": "Laman utama", "label_quran": "Al-Quran Al-Karim", "label_prayertimes": "Waktu Solat", "label_tasbeeh": "Kira Zikir Anda", "label_academy": "AM Academy", "label_calc": "Kalkulator Zakat", "label_apply": "Mohon Bantuan", "label_join": "Sertai Senarai Tunggu", "label_calendar": "Kalendar Islam", "label_hadith": "Koleksi Hadis", "label_dua": "Doa & Zikir", "label_live": "Langsung: Makkah & Madinah", "label_names": "99 Nama Allah", "aria_tools": "Alat lain", "aria_language": "Pilih bahasa", "aria_theme": "Tukar tema"}, "fr": {"nav_back": "← Site principal", "hero_badge": "Basé sur la position · Fonctionne hors ligne", "hero_h1": "Direction de la Qibla", "hero_p": "Trouvez la direction de la Kaaba à La Mecque depuis n'importe où, grâce à la position et à la boussole de votre appareil.", "location_note": "Nous demanderons à votre navigateur l'autorisation d'utiliser votre position — uniquement pour déterminer la direction de la Qibla depuis où vous êtes. Votre position n'est jamais stockée ni partagée.", "find_btn": "Trouver ma Qibla", "locating_msg": "Localisation en cours…", "loc_error": "Impossible d'accéder à votre position. Veuillez autoriser l'accès à la position, ou saisissez vos coordonnées manuellement ci-dessous.", "bearing_label": "Cap vers la Qibla", "distance_label": "Distance jusqu'à la Kaaba", "enable_compass_btn": "Activer la boussole", "compass_permission_denied": "L'accès à la boussole a été refusé. Vous pouvez toujours utiliser le cap ci-dessus avec une boussole séparée.", "no_compass_msg": "Votre appareil ne prend pas en charge une boussole en direct. Utilisez le cap ci-dessus avec une boussole séparée, ou alignez-le sur le Nord réel.", "compass_active_msg": "Orientez le haut de votre téléphone vers l'icône de la Kaaba.", "manual_toggle": "Saisir la position manuellement", "manual_lat_ph": "Latitude", "manual_lng_ph": "Longitude", "manual_btn": "Calculer", "dir_n": "N", "dir_e": "E", "dir_s": "S", "dir_w": "O", "label_home": "Site principal", "label_quran": "Le Noble Coran", "label_prayertimes": "Heures de prière", "label_tasbeeh": "Comptez votre dhikr", "label_academy": "AM Academy", "label_calc": "Calculateur de Zakat", "label_apply": "Demander une aide", "label_join": "Rejoindre la liste", "label_calendar": "Calendrier islamique", "label_hadith": "Recueil de Hadiths", "label_dua": "Dua & Dhikr", "label_live": "Direct : La Mecque et Médine", "label_names": "Les 99 Noms d'Allah", "aria_tools": "Autres outils", "aria_language": "Choisir la langue", "aria_theme": "Changer de thème"}, "de": {"nav_back": "← Zur Hauptseite", "hero_badge": "Standortbasiert · Funktioniert offline", "hero_h1": "Qibla-Richtung", "hero_p": "Finden Sie die Richtung zur Kaaba in Mekka von überall aus, mithilfe des Standorts und Kompasses Ihres Geräts.", "location_note": "Wir bitten Ihren Browser um die Erlaubnis, Ihren Standort zu verwenden — nur um die Qibla-Richtung von Ihrem Standort aus zu bestimmen. Ihr Standort wird niemals gespeichert oder weitergegeben.", "find_btn": "Meine Qibla finden", "locating_msg": "Standort wird ermittelt…", "loc_error": "Auf Ihren Standort konnte nicht zugegriffen werden. Bitte erlauben Sie den Standortzugriff oder geben Sie Ihre Koordinaten unten manuell ein.", "bearing_label": "Qibla-Richtung", "distance_label": "Entfernung zur Kaaba", "enable_compass_btn": "Kompass aktivieren", "compass_permission_denied": "Der Kompasszugriff wurde verweigert. Sie können die obige Richtung weiterhin mit einem separaten Kompass verwenden.", "no_compass_msg": "Ihr Gerät unterstützt keinen Live-Kompass. Verwenden Sie die obige Richtung mit einem separaten Kompass oder richten Sie sich nach echtem Norden aus.", "compass_active_msg": "Richten Sie die Oberseite Ihres Telefons auf das Kaaba-Symbol.", "manual_toggle": "Standort manuell eingeben", "manual_lat_ph": "Breitengrad", "manual_lng_ph": "Längengrad", "manual_btn": "Berechnen", "dir_n": "N", "dir_e": "O", "dir_s": "S", "dir_w": "W", "label_home": "Hauptseite", "label_quran": "Der Edle Koran", "label_prayertimes": "Gebetszeiten", "label_tasbeeh": "Zählen Sie Ihr Dhikr", "label_academy": "AM Academy", "label_calc": "Zakat-Rechner", "label_apply": "Unterstützung beantragen", "label_join": "Warteliste beitreten", "label_calendar": "Islamischer Kalender", "label_hadith": "Hadith-Sammlung", "label_dua": "Dua & Dhikr", "label_live": "Live: Mekka & Medina", "label_names": "Die 99 Namen Allahs", "aria_tools": "Weitere Tools", "aria_language": "Sprache wählen", "aria_theme": "Design wechseln"}};
+const translations = {"en": {"nav_back": "← Main site", "hero_badge": "Location-based · Works Offline", "hero_h1": "Qibla Direction", "hero_p": "Find the direction to the Kaaba in Makkah from wherever you are, using your device's location and compass.", "location_note": "We'll ask your browser for permission to use your location — only to work out the Qibla direction from where you are. Your location is never stored or shared.", "find_btn": "Find My Qibla", "locating_msg": "Locating…", "loc_error": "Could not access your location. Please allow location access, or enter your coordinates manually below.", "bearing_label": "Qibla Bearing", "distance_label": "Distance to Kaaba", "enable_compass_btn": "Enable Compass", "compass_permission_denied": "Compass access was denied. You can still use the bearing above with a separate compass.", "no_compass_msg": "Your device doesn't support a live compass. Use the bearing above with a separate compass, or align it with true North.", "compass_active_msg": "Turn until the Kaaba reaches the gold mark at the top.", "manual_toggle": "Enter location manually", "manual_lat_ph": "Latitude", "manual_lng_ph": "Longitude", "manual_btn": "Calculate", "dir_n": "N", "dir_e": "E", "dir_s": "S", "dir_w": "W", "label_home": "Main site", "label_quran": "The Holy Quran", "label_prayertimes": "Prayer Times", "label_tasbeeh": "Count Your Dhikr", "label_academy": "AM Academy", "label_calc": "Zakat Calculator", "label_apply": "Apply for Assistance", "label_join": "Join Waitlist", "label_calendar": "Islamic Calendar", "label_hadith": "Hadith Collection", "label_dua": "Dua & Dhikr", "label_live": "Live: Makkah & Madinah", "label_names": "99 Names of Allah", "aria_tools": "Other tools", "aria_language": "Select language", "aria_theme": "Toggle theme", "loc_note2": "Your location is used only to work out the direction and is remembered on this device only — AM Network never receives it.", "facing": "You are facing the Qibla", "turn_right": "Turn right {d}°", "turn_left": "Turn left {d}°", "hold_flat": "Hold your phone flat, away from metal and magnets.", "km_to_kaaba": "{d} km to the Kaaba", "change_loc": "Update location"}, "ar": {"nav_back": "← الموقع الرئيسي", "hero_badge": "حسب الموقع · يعمل دون إنترنت", "hero_h1": "اتجاه القبلة", "hero_p": "اعرف اتجاه الكعبة في مكة من أي مكان، باستخدام موقع جهازك وبوصلته.", "location_note": "سنطلب من متصفحك إذناً لاستخدام موقعك — فقط لتحديد اتجاه القبلة من مكانك. موقعك لا يُخزَّن ولا يُشارَك أبداً.", "find_btn": "حدد قبلتي", "locating_msg": "جارٍ تحديد الموقع…", "loc_error": "تعذّر الوصول إلى موقعك. يرجى السماح بالوصول إلى الموقع، أو إدخال الإحداثيات يدوياً أدناه.", "bearing_label": "اتجاه القبلة", "distance_label": "المسافة إلى الكعبة", "enable_compass_btn": "تفعيل البوصلة", "compass_permission_denied": "تم رفض الوصول إلى البوصلة. لا يزال يمكنك استخدام الاتجاه أعلاه ببوصلة أخرى.", "no_compass_msg": "جهازك لا يدعم بوصلة مباشرة. استخدم الاتجاه أعلاه ببوصلة أخرى، أو وجّهه نحو الشمال الحقيقي.", "compass_active_msg": "استدر حتى تصل الكعبة إلى العلامة الذهبية في الأعلى.", "manual_toggle": "أدخل الموقع يدوياً", "manual_lat_ph": "خط العرض", "manual_lng_ph": "خط الطول", "manual_btn": "احسب", "dir_n": "ش", "dir_e": "ق", "dir_s": "ج", "dir_w": "غ", "label_home": "الموقع الرئيسي", "label_quran": "القرآن الكريم", "label_prayertimes": "مواقيت الصلاة", "label_tasbeeh": "عدّ أذكارك", "label_academy": "AM Academy", "label_calc": "حاسبة الزكاة", "label_apply": "تقدم بطلب للحصول على المساعدة", "label_join": "انضم لقائمة الانتظار", "label_calendar": "التقويم الإسلامي", "label_hadith": "مجموعة الأحاديث", "label_dua": "الدعاء والذكر", "label_live": "مباشر: مكة والمدينة", "label_names": "أسماء الله الحسنى", "aria_tools": "أدوات أخرى", "aria_language": "اختر اللغة", "aria_theme": "تبديل المظهر", "loc_note2": "يُستخدم موقعك فقط لحساب الاتجاه ويُحفظ على هذا الجهاز فقط — لا يصل إلى AM Network أبداً.", "facing": "أنت متجه إلى القبلة", "turn_right": "استدر يميناً {d}°", "turn_left": "استدر يساراً {d}°", "hold_flat": "أمسك هاتفك بشكل مستوٍ وبعيداً عن المعادن والمغناطيس.", "km_to_kaaba": "{d} كم إلى الكعبة", "change_loc": "تحديث الموقع"}, "ru": {"nav_back": "← Главный сайт", "hero_badge": "По геолокации · Работает офлайн", "hero_h1": "Направление на Киблу", "hero_p": "Узнайте направление на Каабу в Мекке из любой точки — по геолокации и компасу вашего устройства.", "location_note": "Мы запросим у браузера разрешение на использование вашей геолокации — только чтобы определить направление Киблы там, где вы находитесь. Ваше местоположение никогда не сохраняется и не передаётся третьим лицам.", "find_btn": "Найти мою Киблу", "locating_msg": "Определение местоположения…", "loc_error": "Не удалось получить доступ к вашему местоположению. Разрешите доступ к геолокации или введите координаты вручную ниже.", "bearing_label": "Азимут на Киблу", "distance_label": "Расстояние до Каабы", "enable_compass_btn": "Включить компас", "compass_permission_denied": "Доступ к компасу отклонён. Вы всё равно можете использовать азимут выше с обычным компасом.", "no_compass_msg": "Ваше устройство не поддерживает компас. Используйте азимут выше с обычным компасом или ориентируйтесь на истинный север.", "compass_active_msg": "Поворачивайтесь, пока Кааба не окажется под золотой меткой сверху.", "manual_toggle": "Ввести координаты вручную", "manual_lat_ph": "Широта", "manual_lng_ph": "Долгота", "manual_btn": "Рассчитать", "dir_n": "С", "dir_e": "В", "dir_s": "Ю", "dir_w": "З", "label_home": "Главный сайт", "label_quran": "Священный Коран", "label_prayertimes": "Время намаза", "label_tasbeeh": "Считайте свои зикры", "label_academy": "AM Academy", "label_calc": "Калькулятор закята", "label_apply": "Подать заявку на помощь", "label_join": "Присоединиться", "label_calendar": "Исламский календарь", "label_hadith": "Сборник хадисов", "label_dua": "Дуа и Зикр", "label_live": "Прямой эфир: Мекка и Медина", "label_names": "99 имён Аллаха", "aria_tools": "Другие разделы", "aria_language": "Выбрать язык", "aria_theme": "Сменить тему", "loc_note2": "Местоположение используется только для расчёта направления и запоминается только на этом устройстве — AM Network его не получает.", "facing": "Вы смотрите на Киблу", "turn_right": "Повернитесь вправо на {d}°", "turn_left": "Повернитесь влево на {d}°", "hold_flat": "Держите телефон ровно, подальше от металла и магнитов.", "km_to_kaaba": "{d} км до Каабы", "change_loc": "Обновить местоположение"}, "tj": {"nav_back": "← Сайти асосӣ", "hero_badge": "Тибқи ҷойгиршавӣ · Бе интернет кор мекунад", "hero_h1": "Самти Қибла", "hero_p": "Самти Каъбаро дар Макка аз ҳар ҷое, ки ҳастед, тавассути ҷойгиршавӣ ва қутбнамои дастгоҳатон биёбед.", "location_note": "Мо аз браузери шумо барои истифодаи ҷойгиршавӣ иҷозат мепурсем — танҳо барои муайян кардани самти Қибла аз ҷои шумо. Ҷойгиршавии шумо ҳеҷ гоҳ нигоҳ дошта намешавад ва мубодила намешавад.", "find_btn": "Қибларо ёфтан", "locating_msg": "Муайян намудани ҷойгиршавӣ…", "loc_error": "Дастрасӣ ба ҷойгиршавии шумо номумкин шуд. Лутфан дастрасиро иҷозат диҳед ё координатаҳоро дастӣ дар поён ворид кунед.", "bearing_label": "Самти Қибла", "distance_label": "Масофа то Каъба", "enable_compass_btn": "Фаъол кардани қутбнамо", "compass_permission_denied": "Дастрасӣ ба қутбнамо рад шуд. Шумо метавонед самти болоро бо қутбнамои алоҳида истифода баред.", "no_compass_msg": "Дастгоҳи шумо қутбнамои зиндаро дастгирӣ намекунад. Самти болоро бо қутбнамои алоҳида истифода баред ё ба шимоли ҳақиқӣ рост кунед.", "compass_active_msg": "Гардед, то Каъба ба нишони тиллоии боло расад.", "manual_toggle": "Ҷойгиршавиро дастӣ ворид кунед", "manual_lat_ph": "Арз", "manual_lng_ph": "Тул", "manual_btn": "Ҳисоб кун", "dir_n": "Ш", "dir_e": "Ш.Ш", "dir_s": "Ҷ", "dir_w": "Ғ", "label_home": "Сайти асосӣ", "label_quran": "Қуръони Карим", "label_prayertimes": "Вақти намоз", "label_tasbeeh": "Зикрҳои худро шуморед", "label_academy": "AM Academy", "label_calc": "Ҳисобкунаки закот", "label_apply": "Барои кӯмак аризадиҳӣ", "label_join": "Ба рӯйхат шомил шав", "label_calendar": "Тақвими исломӣ", "label_hadith": "Маҷмӯаи ҳадисҳо", "label_dua": "Дуо ва Зикр", "label_live": "Пахши Зинда: Макка ва Мадина", "label_names": "99 номи Аллоҳ", "aria_tools": "Бахшҳои дигар", "aria_language": "Интихоби забон", "aria_theme": "Иваз кардани мавзӯъ", "loc_note2": "Ҷойгиршавӣ танҳо барои ҳисоби самт истифода мешавад ва фақат дар ҳамин дастгоҳ нигоҳ дошта мешавад — AM Network онро намегирад.", "facing": "Шумо рӯ ба Қибла ҳастед", "turn_right": "Ба рост {d}° гардед", "turn_left": "Ба чап {d}° гардед", "hold_flat": "Телефонро ҳамвор нигоҳ доред, дур аз металл ва магнит.", "km_to_kaaba": "{d} км то Каъба", "change_loc": "Навсозии ҷойгиршавӣ"}, "id": {"nav_back": "← Situs utama", "hero_badge": "Berbasis Lokasi · Berfungsi Offline", "hero_h1": "Arah Kiblat", "hero_p": "Temukan arah ke Ka'bah di Makkah dari mana pun Anda berada, menggunakan lokasi dan kompas perangkat Anda.", "location_note": "Kami akan meminta izin browser Anda untuk menggunakan lokasi — hanya untuk menentukan arah Kiblat dari tempat Anda. Lokasi Anda tidak pernah disimpan atau dibagikan.", "find_btn": "Temukan Kiblat Saya", "locating_msg": "Mencari lokasi…", "loc_error": "Tidak dapat mengakses lokasi Anda. Izinkan akses lokasi, atau masukkan koordinat secara manual di bawah.", "bearing_label": "Arah Kiblat", "distance_label": "Jarak ke Ka'bah", "enable_compass_btn": "Aktifkan Kompas", "compass_permission_denied": "Akses kompas ditolak. Anda tetap bisa menggunakan arah di atas dengan kompas terpisah.", "no_compass_msg": "Perangkat Anda tidak mendukung kompas langsung. Gunakan arah di atas dengan kompas terpisah, atau sejajarkan dengan Utara sejati.", "compass_active_msg": "Putar hingga Ka’bah tepat di tanda emas di atas.", "manual_toggle": "Masukkan lokasi secara manual", "manual_lat_ph": "Lintang", "manual_lng_ph": "Bujur", "manual_btn": "Hitung", "dir_n": "U", "dir_e": "T", "dir_s": "S", "dir_w": "B", "label_home": "Situs utama", "label_quran": "Al-Qur'an Al-Karim", "label_prayertimes": "Waktu Sholat", "label_tasbeeh": "Hitung Dzikir Anda", "label_academy": "AM Academy", "label_calc": "Kalkulator Zakat", "label_apply": "Ajukan Bantuan", "label_join": "Daftar Sekarang", "label_calendar": "Kalender Islam", "label_hadith": "Koleksi Hadits", "label_dua": "Doa & Dzikir", "label_live": "Langsung: Makkah & Madinah", "label_names": "99 Nama Allah", "aria_tools": "Alat lainnya", "aria_language": "Pilih bahasa", "aria_theme": "Ganti tema", "loc_note2": "Lokasi Anda hanya dipakai untuk menghitung arah dan disimpan di perangkat ini saja — AM Network tidak pernah menerimanya.", "facing": "Anda menghadap kiblat", "turn_right": "Putar ke kanan {d}°", "turn_left": "Putar ke kiri {d}°", "hold_flat": "Pegang ponsel mendatar, jauh dari logam dan magnet.", "km_to_kaaba": "{d} km ke Ka’bah", "change_loc": "Perbarui lokasi"}, "tr": {"nav_back": "← Ana site", "hero_badge": "Konum Tabanlı · Çevrimdışı Çalışır", "hero_h1": "Kıble Yönü", "hero_p": "Cihazınızın konumunu ve pusulasını kullanarak, bulunduğunuz her yerden Mekke'deki Kâbe'nin yönünü bulun.", "location_note": "Konumunuzu kullanmak için tarayıcınızdan izin isteyeceğiz — sadece bulunduğunuz yerden kıble yönünü hesaplamak amacıyla. Konumunuz asla saklanmaz veya paylaşılmaz.", "find_btn": "Kıblemi Bul", "locating_msg": "Konum belirleniyor…", "loc_error": "Konumunuza erişilemedi. Lütfen konum erişimine izin verin veya koordinatlarınızı aşağıya manuel olarak girin.", "bearing_label": "Kıble Yönü", "distance_label": "Kâbe'ye Uzaklık", "enable_compass_btn": "Pusulayı Etkinleştir", "compass_permission_denied": "Pusula erişimi reddedildi. Yukarıdaki yönü ayrı bir pusula ile kullanabilirsiniz.", "no_compass_msg": "Cihazınız canlı pusulayı desteklemiyor. Yukarıdaki yönü ayrı bir pusula ile kullanın veya gerçek Kuzey'e hizalayın.", "compass_active_msg": "Kâbe üstteki altın işarete gelene kadar dönün.", "manual_toggle": "Konumu manuel olarak girin", "manual_lat_ph": "Enlem", "manual_lng_ph": "Boylam", "manual_btn": "Hesapla", "dir_n": "K", "dir_e": "D", "dir_s": "G", "dir_w": "B", "label_home": "Ana site", "label_quran": "Kur'an-ı Kerim", "label_prayertimes": "Namaz Vakitleri", "label_tasbeeh": "Zikrinizi Sayın", "label_academy": "AM Academy", "label_calc": "Zekât Hesaplayıcı", "label_apply": "Yardım Başvurusu Yapın", "label_join": "Listeye Katıl", "label_calendar": "İslami Takvim", "label_hadith": "Hadis Koleksiyonu", "label_dua": "Dua & Zikir", "label_live": "Canlı: Mekke ve Medine", "label_names": "Allah'ın 99 İsmi", "aria_tools": "Diğer araçlar", "aria_language": "Dil seçin", "aria_theme": "Temayı değiştir", "loc_note2": "Konumunuz yalnızca yönü hesaplamak için kullanılır ve sadece bu cihazda hatırlanır — AM Network'e asla ulaşmaz.", "facing": "Kıbleye dönüksünüz", "turn_right": "Sağa {d}° dönün", "turn_left": "Sola {d}° dönün", "hold_flat": "Telefonunuzu düz tutun, metal ve mıknatıslardan uzak durun.", "km_to_kaaba": "Kâbe'ye {d} km", "change_loc": "Konumu güncelle"}, "zh": {"nav_back": "← 主站", "hero_badge": "基于位置 · 离线可用", "hero_h1": "朝拜方向", "hero_p": "使用您设备的定位和指南针，从任何地方找到麦加天房的方向。", "location_note": "我们会请求浏览器授权使用您的位置信息——仅用于确定您所在位置的朝拜方向（朝向克尔白）。您的位置信息绝不会被存储或分享。", "find_btn": "查找我的朝向", "locating_msg": "正在定位…", "loc_error": "无法访问您的位置。请允许位置访问，或在下方手动输入坐标。", "bearing_label": "朝拜方位角", "distance_label": "到天房的距离", "enable_compass_btn": "启用指南针", "compass_permission_denied": "指南针访问被拒绝。您仍可以使用上方的方位角配合另一个指南针。", "no_compass_msg": "您的设备不支持实时指南针。请使用上方的方位角配合另一个指南针，或对准真北。", "compass_active_msg": "转动手机，直到克尔白对准顶部的金色标记。", "manual_toggle": "手动输入位置", "manual_lat_ph": "纬度", "manual_lng_ph": "经度", "manual_btn": "计算", "dir_n": "北", "dir_e": "东", "dir_s": "南", "dir_w": "西", "label_home": "主站", "label_quran": "尊贵的古兰经", "label_prayertimes": "礼拜时间", "label_tasbeeh": "记录您的赞念", "label_academy": "AM Academy", "label_calc": "天课计算器", "label_apply": "申请援助", "label_join": "加入候补名单", "label_calendar": "伊斯兰历法", "label_hadith": "圣训集", "label_dua": "祈祷与赞念", "label_live": "直播：麦加与麦地那", "label_names": "安拉的99个尊名", "aria_tools": "其他工具", "aria_language": "选择语言", "aria_theme": "切换主题", "loc_note2": "您的位置仅用于计算方向，并只保存在本设备上——AM Network 从不接收。", "facing": "您正朝向朝拜方向", "turn_right": "向右转 {d}°", "turn_left": "向左转 {d}°", "hold_flat": "请将手机放平，远离金属和磁铁。", "km_to_kaaba": "距克尔白 {d} 公里", "change_loc": "更新位置"}, "ms": {"nav_back": "← Laman utama", "hero_badge": "Berasaskan Lokasi · Berfungsi Luar Talian", "hero_h1": "Arah Kiblat", "hero_p": "Cari arah ke Kaabah di Makkah dari mana-mana sahaja anda berada, menggunakan lokasi dan kompas peranti anda.", "location_note": "Kami akan meminta kebenaran pelayar anda untuk menggunakan lokasi — hanya untuk menentukan arah Kiblat dari tempat anda. Lokasi anda tidak pernah disimpan atau dikongsi.", "find_btn": "Cari Kiblat Saya", "locating_msg": "Mengesan lokasi…", "loc_error": "Tidak dapat mengakses lokasi anda. Sila benarkan akses lokasi, atau masukkan koordinat secara manual di bawah.", "bearing_label": "Arah Kiblat", "distance_label": "Jarak ke Kaabah", "enable_compass_btn": "Dayakan Kompas", "compass_permission_denied": "Akses kompas ditolak. Anda masih boleh menggunakan arah di atas dengan kompas berasingan.", "no_compass_msg": "Peranti anda tidak menyokong kompas langsung. Gunakan arah di atas dengan kompas berasingan, atau jajarkan dengan Utara sebenar.", "compass_active_msg": "Pusing sehingga Kaabah tiba di tanda emas di atas.", "manual_toggle": "Masukkan lokasi secara manual", "manual_lat_ph": "Latitud", "manual_lng_ph": "Longitud", "manual_btn": "Kira", "dir_n": "U", "dir_e": "T", "dir_s": "S", "dir_w": "B", "label_home": "Laman utama", "label_quran": "Al-Quran Al-Karim", "label_prayertimes": "Waktu Solat", "label_tasbeeh": "Kira Zikir Anda", "label_academy": "AM Academy", "label_calc": "Kalkulator Zakat", "label_apply": "Mohon Bantuan", "label_join": "Sertai Senarai Tunggu", "label_calendar": "Kalendar Islam", "label_hadith": "Koleksi Hadis", "label_dua": "Doa & Zikir", "label_live": "Langsung: Makkah & Madinah", "label_names": "99 Nama Allah", "aria_tools": "Alat lain", "aria_language": "Pilih bahasa", "aria_theme": "Tukar tema", "loc_note2": "Lokasi anda hanya digunakan untuk mengira arah dan diingati pada peranti ini sahaja — AM Network tidak pernah menerimanya.", "facing": "Anda sedang menghadap kiblat", "turn_right": "Pusing ke kanan {d}°", "turn_left": "Pusing ke kiri {d}°", "hold_flat": "Pegang telefon secara mendatar, jauh dari logam dan magnet.", "km_to_kaaba": "{d} km ke Kaabah", "change_loc": "Kemas kini lokasi"}, "fr": {"nav_back": "← Site principal", "hero_badge": "Basé sur la position · Fonctionne hors ligne", "hero_h1": "Direction de la Qibla", "hero_p": "Trouvez la direction de la Kaaba à La Mecque depuis n'importe où, grâce à la position et à la boussole de votre appareil.", "location_note": "Nous demanderons à votre navigateur l'autorisation d'utiliser votre position — uniquement pour déterminer la direction de la Qibla depuis où vous êtes. Votre position n'est jamais stockée ni partagée.", "find_btn": "Trouver ma Qibla", "locating_msg": "Localisation en cours…", "loc_error": "Impossible d'accéder à votre position. Veuillez autoriser l'accès à la position, ou saisissez vos coordonnées manuellement ci-dessous.", "bearing_label": "Cap vers la Qibla", "distance_label": "Distance jusqu'à la Kaaba", "enable_compass_btn": "Activer la boussole", "compass_permission_denied": "L'accès à la boussole a été refusé. Vous pouvez toujours utiliser le cap ci-dessus avec une boussole séparée.", "no_compass_msg": "Votre appareil ne prend pas en charge une boussole en direct. Utilisez le cap ci-dessus avec une boussole séparée, ou alignez-le sur le Nord réel.", "compass_active_msg": "Tournez jusqu'à ce que la Kaaba atteigne le repère doré en haut.", "manual_toggle": "Saisir la position manuellement", "manual_lat_ph": "Latitude", "manual_lng_ph": "Longitude", "manual_btn": "Calculer", "dir_n": "N", "dir_e": "E", "dir_s": "S", "dir_w": "O", "label_home": "Site principal", "label_quran": "Le Noble Coran", "label_prayertimes": "Heures de prière", "label_tasbeeh": "Comptez votre dhikr", "label_academy": "AM Academy", "label_calc": "Calculateur de Zakat", "label_apply": "Demander une aide", "label_join": "Rejoindre la liste", "label_calendar": "Calendrier islamique", "label_hadith": "Recueil de Hadiths", "label_dua": "Dua & Dhikr", "label_live": "Direct : La Mecque et Médine", "label_names": "Les 99 Noms d'Allah", "aria_tools": "Autres outils", "aria_language": "Choisir la langue", "aria_theme": "Changer de thème", "loc_note2": "Votre position sert uniquement à calculer la direction et reste mémorisée sur cet appareil — AM Network ne la reçoit jamais.", "facing": "Vous faites face à la Qibla", "turn_right": "Tournez à droite de {d}°", "turn_left": "Tournez à gauche de {d}°", "hold_flat": "Tenez votre téléphone à plat, loin du métal et des aimants.", "km_to_kaaba": "{d} km jusqu’à la Kaaba", "change_loc": "Mettre à jour la position"}, "de": {"nav_back": "← Zur Hauptseite", "hero_badge": "Standortbasiert · Funktioniert offline", "hero_h1": "Qibla-Richtung", "hero_p": "Finden Sie die Richtung zur Kaaba in Mekka von überall aus, mithilfe des Standorts und Kompasses Ihres Geräts.", "location_note": "Wir bitten Ihren Browser um die Erlaubnis, Ihren Standort zu verwenden — nur um die Qibla-Richtung von Ihrem Standort aus zu bestimmen. Ihr Standort wird niemals gespeichert oder weitergegeben.", "find_btn": "Meine Qibla finden", "locating_msg": "Standort wird ermittelt…", "loc_error": "Auf Ihren Standort konnte nicht zugegriffen werden. Bitte erlauben Sie den Standortzugriff oder geben Sie Ihre Koordinaten unten manuell ein.", "bearing_label": "Qibla-Richtung", "distance_label": "Entfernung zur Kaaba", "enable_compass_btn": "Kompass aktivieren", "compass_permission_denied": "Der Kompasszugriff wurde verweigert. Sie können die obige Richtung weiterhin mit einem separaten Kompass verwenden.", "no_compass_msg": "Ihr Gerät unterstützt keinen Live-Kompass. Verwenden Sie die obige Richtung mit einem separaten Kompass oder richten Sie sich nach echtem Norden aus.", "compass_active_msg": "Drehen Sie sich, bis die Kaaba die goldene Markierung oben erreicht.", "manual_toggle": "Standort manuell eingeben", "manual_lat_ph": "Breitengrad", "manual_lng_ph": "Längengrad", "manual_btn": "Berechnen", "dir_n": "N", "dir_e": "O", "dir_s": "S", "dir_w": "W", "label_home": "Hauptseite", "label_quran": "Der Edle Koran", "label_prayertimes": "Gebetszeiten", "label_tasbeeh": "Zählen Sie Ihr Dhikr", "label_academy": "AM Academy", "label_calc": "Zakat-Rechner", "label_apply": "Unterstützung beantragen", "label_join": "Warteliste beitreten", "label_calendar": "Islamischer Kalender", "label_hadith": "Hadith-Sammlung", "label_dua": "Dua & Dhikr", "label_live": "Live: Mekka & Medina", "label_names": "Die 99 Namen Allahs", "aria_tools": "Weitere Tools", "aria_language": "Sprache wählen", "aria_theme": "Design wechseln", "loc_note2": "Ihr Standort wird nur zur Berechnung der Richtung genutzt und nur auf diesem Gerät gespeichert — AM Network erhält ihn nie.", "facing": "Sie sind zur Qibla ausgerichtet", "turn_right": "{d}° nach rechts drehen", "turn_left": "{d}° nach links drehen", "hold_flat": "Halten Sie das Handy flach, fern von Metall und Magneten.", "km_to_kaaba": "{d} km bis zur Kaaba", "change_loc": "Standort aktualisieren"}};
 
 let currentLang = 'en';
 function t(key){
@@ -253,6 +272,7 @@ function setLang(l){
   document.querySelectorAll('[data-t]').forEach(el => { el.textContent = t(el.getAttribute('data-t')); });
   document.querySelectorAll('[data-t-ph]').forEach(el => { el.placeholder = t(el.getAttribute('data-t-ph')); });
   localStorage.setItem('amn_lang', l);
+  if (typeof qiblaBearing !== 'undefined' && qiblaBearing !== null) { renderDial(); renderReadout(); updateDial(); }
 }
 function toggleLangDrop(){
   const d = document.getElementById('langDrop');
@@ -314,7 +334,33 @@ function calcDistanceKm(lat1, lng1, lat2, lng2){
   return EARTH_RADIUS_KM * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
+const LOC_KEY = 'amn_qibla_loc';
+function saveLoc(v){ try { localStorage.setItem(LOC_KEY, JSON.stringify(v)); } catch(e){} }
+function loadLoc(){ try { return JSON.parse(localStorage.getItem(LOC_KEY) || 'null'); } catch(e){ return null; } }
+
+// iOS only lets a page read the compass after a tap, and the request has to
+// happen inside that tap — so the one "Find my Qibla" button asks for both.
+let compassStarted = false;
+function requestCompass(){
+  if (compassStarted) return;
+  if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+    DeviceOrientationEvent.requestPermission().then(st => {
+      if (st === 'granted') startCompass();
+      else document.getElementById('compassNote').textContent = t('compass_permission_denied');
+    }).catch(() => { document.getElementById('enableCompassBtn').style.display = ''; });
+  } else if (typeof DeviceOrientationEvent !== 'undefined') {
+    startCompass();
+  }
+}
+function startCompass(){
+  compassStarted = true;
+  window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+  window.addEventListener('deviceorientation', handleOrientation, true);
+  document.getElementById('enableCompassBtn').style.display = 'none';
+}
+
 function findQibla(){
+  requestCompass();
   const statusEl = document.getElementById('startStatus');
   statusEl.className = 'status-msg';
   statusEl.textContent = t('locating_msg');
@@ -337,49 +383,91 @@ function useManualLocation(){
   const lat = Number(document.getElementById('manualLat').value);
   const lng = Number(document.getElementById('manualLng').value);
   if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180) return;
+  requestCompass();
   showResult(lat, lng);
 }
 
 function toggleManualForm(){
   document.getElementById('manualForm').classList.toggle('visible');
 }
+function relocate(){
+  document.getElementById('resultState').style.display = 'none';
+  document.getElementById('startState').style.display = '';
+}
 
+let distanceKm = null;
 function showResult(lat, lng){
   qiblaBearing = calcBearing(lat, lng, KAABA_LAT, KAABA_LNG);
-  const distanceKm = calcDistanceKm(lat, lng, KAABA_LAT, KAABA_LNG);
+  distanceKm = calcDistanceKm(lat, lng, KAABA_LAT, KAABA_LNG);
+  saveLoc({ lat, lng });
   document.getElementById('startState').style.display = 'none';
   document.getElementById('resultState').style.display = 'block';
-  document.getElementById('bearingValue').textContent = Math.round(qiblaBearing) + '°';
-  document.getElementById('distanceValue').textContent = Math.round(distanceKm).toLocaleString() + ' km';
-  updateArrowRotation();
-  const supported = typeof DeviceOrientationEvent !== 'undefined';
-  document.getElementById('enableCompassBtn').style.display = supported ? '' : 'none';
-  document.getElementById('compassNote').textContent = supported ? '' : t('no_compass_msg');
-}
-
-function updateArrowRotation(){
-  if (qiblaBearing === null) return;
-  const heading = deviceHeading !== null ? deviceHeading : 0;
-  const rotation = (qiblaBearing - heading + 360) % 360;
-  document.getElementById('compassArrow').style.transform = 'rotate(' + rotation + 'deg)';
-}
-
-function enableCompass(){
-  const noteEl = document.getElementById('compassNote');
-  const start = () => {
-    window.addEventListener('deviceorientationabsolute', handleOrientation, true);
-    window.addEventListener('deviceorientation', handleOrientation, true);
-    noteEl.textContent = t('compass_active_msg');
-  };
-  if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-    DeviceOrientationEvent.requestPermission().then(state => {
-      if (state === 'granted') start();
-      else { noteEl.textContent = t('compass_permission_denied'); }
-    }).catch(() => { noteEl.textContent = t('compass_permission_denied'); });
-  } else {
-    start();
+  document.getElementById('startStatus').textContent = '';
+  renderDial();
+  renderReadout();
+  updateDial();
+  if (!compassStarted) {
+    const iosNeedsTap = typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function';
+    if (iosNeedsTap) document.getElementById('enableCompassBtn').style.display = '';
+    else if (typeof DeviceOrientationEvent === 'undefined') document.getElementById('compassNote').textContent = t('no_compass_msg');
   }
 }
+
+function renderReadout(){
+  if (qiblaBearing === null) return;
+  document.getElementById('bearingValue').textContent = Math.round(qiblaBearing) + '°';
+  document.getElementById('distanceValue').textContent = t('km_to_kaaba').replace('{d}', Math.round(distanceKm).toLocaleString(currentLang === 'tj' ? 'ru' : currentLang));
+}
+
+// The dial is drawn once, North up; it then turns with the phone so the
+// Kaaba marker swings toward the fixed pointer at the top.
+const KAABA_SVG = '<g><rect x="-11" y="-11" width="22" height="22" rx="2.5" fill="#14100c" stroke="#C9A84C" stroke-width="1.3"/><rect x="-11" y="-6" width="22" height="3.6" fill="#E8C87A"/><rect x="2.5" y="1" width="4.5" height="7" rx="1" fill="#C9A84C" opacity=".85"/></g>';
+function renderDial(){
+  const svg = document.getElementById('qDial');
+  let h = '<circle class="ring" r="152"/><circle class="ring2" r="112"/>';
+  for (let d = 0; d < 360; d += 5) {
+    const major = d % 30 === 0, r1 = 152, r2 = major ? 136 : 144, a = (d - 90) * Math.PI / 180;
+    h += '<line class="tick' + (major ? ' major' : '') + '" x1="' + (r1 * Math.cos(a)).toFixed(1) + '" y1="' + (r1 * Math.sin(a)).toFixed(1) + '" x2="' + (r2 * Math.cos(a)).toFixed(1) + '" y2="' + (r2 * Math.sin(a)).toFixed(1) + '"/>';
+    if (major && d % 90 !== 0) h += '<text class="deg" x="' + (124 * Math.cos(a)).toFixed(1) + '" y="' + (124 * Math.sin(a)).toFixed(1) + '" transform="rotate(' + d + ' ' + (124 * Math.cos(a)).toFixed(1) + ' ' + (124 * Math.sin(a)).toFixed(1) + ')">' + d + '</text>';
+  }
+  [['dir_n', 0], ['dir_e', 90], ['dir_s', 180], ['dir_w', 270]].forEach(([k, d]) => {
+    const a = (d - 90) * Math.PI / 180, x = (122 * Math.cos(a)).toFixed(1), y = (122 * Math.sin(a)).toFixed(1);
+    h += '<text' + (d === 0 ? ' class="card-n"' : '') + ' x="' + x + '" y="' + y + '" transform="rotate(' + d + ' ' + x + ' ' + y + ')">' + t(k) + '</text>';
+  });
+  if (qiblaBearing !== null) {
+    const a = (qiblaBearing - 90) * Math.PI / 180;
+    h += '<line class="qline" x1="' + (52 * Math.cos(a)).toFixed(1) + '" y1="' + (52 * Math.sin(a)).toFixed(1) + '" x2="' + (90 * Math.cos(a)).toFixed(1) + '" y2="' + (90 * Math.sin(a)).toFixed(1) + '"/>';
+    h += '<g transform="translate(' + (101 * Math.cos(a)).toFixed(1) + ' ' + (101 * Math.sin(a)).toFixed(1) + ') rotate(' + qiblaBearing.toFixed(1) + ')">' + KAABA_SVG + '</g>';
+  }
+  svg.innerHTML = h;
+}
+
+let dialAngle = 0, wasAligned = false;
+function updateDial(){
+  if (qiblaBearing === null) return;
+  const heading = deviceHeading !== null ? deviceHeading : 0;
+  // keep the rotation continuous so the dial never spins the long way round at 359°→0°
+  const target = -heading;
+  let delta = ((target - dialAngle) % 360 + 540) % 360 - 180;
+  dialAngle += delta;
+  document.getElementById('qDial').style.transform = 'rotate(' + dialAngle.toFixed(1) + 'deg)';
+  const st = document.getElementById('qStatus'), box = document.getElementById('qCompass');
+  if (deviceHeading === null) {
+    st.textContent = t('compass_active_msg');
+    st.classList.remove('ok'); box.classList.remove('ok');
+    return;
+  }
+  const off = ((qiblaBearing - heading) % 360 + 540) % 360 - 180;   // + means turn right
+  const aligned = Math.abs(off) <= 4;
+  box.classList.toggle('ok', aligned);
+  st.classList.toggle('ok', aligned);
+  st.textContent = aligned ? t('facing') : t(off > 0 ? 'turn_right' : 'turn_left').replace('{d}', Math.round(Math.abs(off)));
+  if (aligned && !wasAligned && navigator.vibrate) { try { navigator.vibrate([30, 40, 30]); } catch(e){} }
+  wasAligned = aligned;
+}
+function updateArrowRotation(){ updateDial(); }
+
+function enableCompass(){ requestCompass(); }
 
 function handleOrientation(e){
   let heading = null;
@@ -390,7 +478,7 @@ function handleOrientation(e){
   }
   if (heading === null) return;
   deviceHeading = heading;
-  updateArrowRotation();
+  updateDial();
 }
 
 
@@ -406,6 +494,8 @@ function handleOrientation(e){
   document.getElementById('langFlag').src = 'https://flagcdn.com/w20/' + (flagMap[l] || 'gb') + '.png';
   document.getElementById('langName').textContent = nameMap[l] || 'English';
   setLang(l);
+  const loc = loadLoc();
+  if (loc && Number.isFinite(loc.lat) && Number.isFinite(loc.lng)) showResult(loc.lat, loc.lng);
 })();
 </script>
 <script>
