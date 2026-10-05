@@ -169,7 +169,9 @@ main{padding-top:64px;min-height:100vh}
 /* MUSHAF VIEW */
 #mushafPages{display:flex;flex-direction:column;gap:24px;align-items:center}
 .mushaf-page{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 20px 34px;max-width:520px;width:100%;position:relative}
-.mushaf-line{direction:rtl;unicode-bidi:bidi-override;text-align:justify;text-align-last:center;line-height:2.7;font-size:26px}
+.mushaf-line{direction:rtl;unicode-bidi:bidi-override;text-align:justify;text-align-last:center;line-height:2.7;font-size:26px;white-space:nowrap}
+/* fitMushafPage() measures each line at its natural width with this class on */
+.mushaf-page.measuring .mushaf-line{display:inline-block;width:max-content;font-size:26px}
 .mushaf-line-deco{text-align:center}
 [data-theme="light"] .mushaf-line{color:#1c1c1c}
 .mword{display:inline}
@@ -1207,6 +1209,39 @@ function onMushafEndTap(el){
   playVerse(chId, vNum);
 }
 
+
+/* A printed Mushaf line has a fixed length, so on a narrow phone (360px
+   wide, e.g. Samsung A-series) the QCF glyph lines ran past the page edge
+   and were cut off. Measure every line at a reference size and shrink the
+   whole page's text just enough that its longest line fits — same layout
+   on every screen, just scaled. */
+const MUSHAF_REF_PX = 26;
+function fitMushafPage(pageEl){
+  const lines = pageEl.querySelectorAll('.mushaf-line');
+  if (!lines.length) return;
+  lines.forEach(l => { l.style.fontSize = ''; });
+  pageEl.classList.add('measuring');
+  let maxW = 0;
+  lines.forEach(l => { maxW = Math.max(maxW, l.getBoundingClientRect().width); });
+  pageEl.classList.remove('measuring');
+  const cs = getComputedStyle(pageEl);
+  const avail = pageEl.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  if (!maxW || avail <= 0) return;
+  // never larger than the CSS size for this screen, never so small it's unreadable
+  const cssPx = parseFloat(getComputedStyle(lines[0]).fontSize) || MUSHAF_REF_PX;
+  const px = Math.max(12, Math.min(cssPx, MUSHAF_REF_PX * (avail / maxW) * 0.985));
+  lines.forEach(l => { l.style.fontSize = px.toFixed(2) + 'px'; });
+}
+let mushafFitTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(mushafFitTimer);
+  mushafFitTimer = setTimeout(() => document.querySelectorAll('.mushaf-page').forEach(fitMushafPage), 150);
+});
+// The Bismillah line uses a web font that may arrive after the page is built.
+if (document.fonts && document.fonts.addEventListener) {
+  document.fonts.addEventListener('loadingdone', () => document.querySelectorAll('.mushaf-page').forEach(fitMushafPage));
+}
+
 async function renderMushafView(chapterId, verses){
   const versesList = document.getElementById('versesList');
   const t = T[lang];
@@ -1262,6 +1297,7 @@ async function renderMushafView(chapterId, verses){
     pageEl.className = 'mushaf-page';
     pageEl.innerHTML = linesHtml + `<div class="mushaf-page-num">${page}</div>`;
     container.appendChild(pageEl);
+    fitMushafPage(pageEl);
   }
   reapplyVersePlaying();
   updatePlayButtonIcons();
