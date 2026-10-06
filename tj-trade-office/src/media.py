@@ -61,7 +61,8 @@ def main():
             im.crop((x0, 0, x0 + cw, im.height)).save(os.path.join(OUT, "hero", "s", "f_%03d.webp" % i), "WEBP", quality=78, method=6)
         fit(Image.open(os.path.join(tmp, files[0])).filter(SHARP), 1920).save(os.path.join(OUT, "hero", "poster.jpg"), quality=80, optimize=True, progressive=True)
         shutil.rmtree(tmp)
-        man["hero"] = {"n": len(files), "lg": "media/hero/l/f_", "sm": "media/hero/s/f_", "ext": ".webp", "poster": "media/hero/poster.jpg"}
+        # phones play the portrait loop film, so the portrait frames are not shipped
+        man["hero"] = {"n": len(files), "lg": "media/hero/l/f_", "ext": ".webp", "poster": "media/hero/poster.jpg"}
 
     # looping hero film: plays natively (hardware-decoded, smooth on phones); preferred over the frame sequence
     loop = {}
