@@ -68,9 +68,6 @@ function splitWords(el){
   n.parentNode.replaceChild(frag, n);
  });
 }
-function repCard(){
- return '<div class="who">'+(REP.photo ? '<span class="mono pic" aria-hidden="true"><img src="'+REP.photo+'" alt="" decoding="async"></span>' : '<span class="mono" aria-hidden="true">'+REP.ini[lang]+'</span>')+'<span><b>'+REP.n[lang]+'</b><small>'+L.brandSub+'</small></span><a href="'+REP.li+'" target="_blank" rel="noopener" aria-label="LinkedIn — '+esc(REP.n[lang])+'">in'+ext+'</a></div>';
-}
 function renderHero(){
  var H = L.hero;
  $("#c1").innerHTML = '<div class="in"><h1>'+H.t1+'</h1><p class="sub">'+H.s1+'</p><div class="acts"><a class="cta" href="#investieren" data-go="investieren">'+H.b1+arrow+'</a><a class="cta ghost" href="#export" data-go="export">'+H.b2+'</a></div></div>';
@@ -114,6 +111,7 @@ function pageHome(){
  var door = function(k, cls, go){ var d=H[k]; return '<a class="door '+cls+' rv" href="#'+go+'" data-go="'+go+'"><span class="lab"><i class="flag">'+(cls==="de"?FLAG_DE:FLAG_TJ)+'</i>'+d.lab+'</span><h3>'+d.t+'</h3><p>'+d.p+'</p><ul>'+d.li.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul><span class="go"><i>'+arrow+'</i>'+d.go+'</span></a>'; };
  return ''+
  '<section class="sec flush"><div class="wrap"><div class="head"><div class="kicker">'+H.dk+'</div><h2 class="h2 rv">'+H.dt+'</h2></div><div class="doors">'+door("de","de","investieren")+door("tj","tj","export")+'</div></div></section>'+
+ deImports(true)+
  '<section class="sec tint"><div class="wrap"><div class="head split"><div><div class="kicker">'+H.fk+'</div><h2 class="h2 rv">'+H.ft+'</h2></div><p class="lead rv">'+H.fl+'</p></div><div class="board">'+
    H.figs.map(function(f){ return '<div class="fig rv"><div class="v"><span class="count" data-to="'+f.v+'">'+f.v+'</span><small>'+f.u+'</small></div><div class="l">'+f.l+' '+sref(f.s)+'</div><div class="d">'+f.d+'</div></div>'; }).join("")+
  '</div></div></section>'+
@@ -240,7 +238,7 @@ function fezSelect(id){
 
 function pageExport(){
  var E = L.exp;
- return phead("export", E.h1, E.lead, 5)+
+ return phead("export", E.h1, E.lead, 5)+deImports(false)+exportersSection(E)+
  '<section class="sec flush"><div class="wrap"><div class="head"><div class="kicker">'+E.sk+'</div><h2 class="h2 rv">'+E.stt+'</h2></div><div class="steps" style="--n:'+E.steps.length+'">'+
    E.steps.map(function(s,i){ return '<div class="step rv"><div class="sn">'+(i+1)+'</div><h3>'+s.t+'</h3><p>'+s.p+'</p><div class="who">'+s.w+'</div></div>'; }).join("")+
  '</div></div></section>'+
@@ -248,8 +246,6 @@ function pageExport(){
    E.regs.map(function(r){ return '<div class="reg rv"><div class="code">'+r.c+'</div><h3>'+r.t+'</h3><p>'+r.p+'</p><a href="'+SRC[r.s].u+'" target="_blank" rel="noopener">'+SRC[r.s].t.split(" — ")[0]+' ↗</a></div>'; }).join("")+
  '</div></div></section>'+
  a2mFinder(E)+
- fruitGallery()+
- exportersSection(E)+
  '<section class="sec tint"><div class="wrap"><div class="head"><div class="kicker">'+E.mk+'</div><h2 class="h2 rv">'+E.mt+'</h2></div><div class="evts">'+eventRows()+'</div></div></section>'+
  band();
 }
@@ -291,31 +287,63 @@ function a2mGo(form){
  window.open(url, "_blank", "noopener");
 }
 
-/* photographs of Tajik dried fruit (generated, labelled as such in the footer) */
-function fruitGallery(){
- var G = MD.gen || {}, ims = [G.fruit1, G.fruit2, G.fruit3, G.fruit4].filter(Boolean);
- if(!ims.length) return '';
- return '<section class="fruits" aria-hidden="true"><div class="frow">'+ims.map(function(src,i){ return '<figure class="rv'+(i===0?' wide':'')+'"><img src="'+src+'" alt="" loading="lazy" decoding="async"></figure>'; }).join("")+'</div></section>';
-}
 
 /* dried-fruit exporters from Sughd, with the source for every claim */
+function coImg(k){ return (MD.co && MD.co[k]) || ""; }
+function exMedia(x, i){
+ var O = L.exp.co, G = MD.gen || {};
+ var logo = x.logo && coImg(x.logo) ? '<span class="exlogo"><img src="'+coImg(x.logo)+'" alt="'+esc(x.n)+'" loading="lazy" decoding="async"></span>' : '';
+ if(x.pics){
+  return '<div class="exmedia gal">'+x.pics.map(function(k){ var pk = k.replace("p_",""), lab = {apricot:"apricot",kernels:"kernels",apple:"apple",walnut:"walnuts",rosehip:"rosehip",mulberry:"mulberry"}[pk];
+   return '<figure><img src="'+coImg(k)+'" alt="'+esc(O.prn[lab]||"")+'" loading="lazy" decoding="async"><figcaption>'+(O.prn[lab]||"")+'</figcaption></figure>'; }).join("")+'</div>';
+ }
+ if(x.pic) return '<div class="exmedia one"><img class="ph" src="'+coImg(x.pic)+'" alt="" loading="lazy" decoding="async">'+logo+'</div>';
+ if(logo) return '<div class="exmedia lo">'+logo+'</div>';
+ var ill = [G.fruit2, G.fruit3, G.fruit4, G.fruit1].filter(Boolean);
+ return ill.length ? '<div class="exmedia ill"><img src="'+ill[i % ill.length]+'" alt="" loading="lazy" decoding="async"><span class="tag">'+O.lab.illus+'</span></div>' : '';
+}
 function exportersSection(E){
  var O = E.co;
- var card = function(x){
+ var card = function(x, i){
   var meta = O.city[x.city] + (x.y ? ' · '+O.since+' '+x.y : '');
-  var badges = (x.cert ? '<span class="badge gold">'+x.cert+' · '+x.cy+'</span>' : '') + (x.fair ? '<span class="badge">'+O.fair+'</span>' : '');
+  var badges = (x.cert ? '<span class="badge gold">'+x.cert+' · '+x.cy+'</span>' : '') + (x.gf ? '<span class="badge">'+O.lab.gf+'</span>' : '') + (x.fair ? '<span class="badge">'+O.fair+'</span>' : '');
   var rows = '<div class="kv2"><span>'+O.pr+'</span><b>'+x.pr.map(function(p){ return O.prn[p]; }).join(", ")+'</b></div>'+
    (x.mk ? '<div class="kv2"><span>'+O.mk+'</span><b>'+x.mk.map(function(m){ return O.mkn[m]; }).join(", ")+'</b></div>' : '')+
    (x.cap ? '<div class="kv2"><span>'+O.cap+'</span><b>'+x.cap.replace(">","> ").replace("≤","≤ ")+' '+O.t_y+'</b></div>' : '')+
    (x.std ? '<div class="kv2"><span>'+O.lab.std+'</span><b>'+x.std+' <small>('+O.lab.own+')</small></b></div>' : '')+
    (x.staff ? '<div class="kv2"><span>'+O.lab.staff+'</span><b>'+x.staff+'</b></div>' : '');
   var contact = x.web ? '<div class="excontact"><a href="'+x.web+'" target="_blank" rel="noopener">'+x.web.replace(/^https?:\/\//,"")+' '+ext+'</a>'+
-   (x.mail ? '<a href="mailto:'+x.mail+'">'+x.mail+'</a>' : '')+(x.tel ? '<a href="tel:'+x.tel.replace(/\s/g,"")+'">'+x.tel+'</a>' : '')+'</div>' : '';
-  return '<article class="exco rv'+(x.feat ? ' feat' : '')+'"><div class="badges">'+badges+'</div><h3>'+x.n+(x.f ? ' <small>'+x.f+'</small>' : '')+'</h3>'+(x.alias ? '<p class="alias">'+x.alias+'</p>' : '')+'<p class="meta">'+meta+'</p>'+(x.feat ? '<div class="excols"><div>'+rows+'</div>'+contact+'</div>' : rows+contact)+'<div class="srcs">'+refs(x.src)+'</div></article>';
+   (x.mail ? '<a href="mailto:'+x.mail+'">'+x.mail+'</a>' : '')+(x.tel ? '<a href="tel:'+x.tel.replace(/\s/g,"")+'">'+x.tel+'</a>' : '')+
+   (x.ig ? '<a href="'+x.ig+'" target="_blank" rel="noopener">'+O.lab.ig+' '+ext+'</a>' : '')+
+   (x.yt ? '<a href="'+x.yt+'" target="_blank" rel="noopener">'+O.lab.yt+' '+ext+'</a>' : '')+'</div>' : '';
+  var shots = x.shots ? '<div class="exshots">'+x.shots.map(function(k){ return '<figure><img src="'+coImg(k)+'" alt="" loading="lazy" decoding="async"></figure>'; }).join("")+'</div>' : '';
+  var body = (x.pics && x.logo ? '<img class="exlogo-in" src="'+coImg(x.logo)+'" alt="'+esc(x.n)+'" loading="lazy" decoding="async">' : '')+'<div class="badges">'+badges+'</div><h3>'+x.n+(x.f ? ' <small>'+x.f+'</small>' : '')+'</h3>'+(x.alias ? '<p class="alias">'+x.alias+'</p>' : '')+'<p class="meta">'+meta+'</p>';
+  return '<article class="exco rv'+(x.feat ? ' feat' : '')+'">'+exMedia(x, i)+'<div class="exbody">'+body+
+   (x.feat ? '<div class="excols"><div>'+rows+shots+'</div>'+contact+'</div>' : rows+contact)+'<div class="srcs">'+refs(x.src)+'</div></div></article>';
  };
  return '<section class="sec tint" id="exporters"><div class="wrap"><div class="head split"><div><div class="kicker">'+O.k+'</div><h2 class="h2 rv">'+O.t+'</h2></div><p class="lead rv">'+O.l+'</p></div>'+
   '<div class="excos">'+EXPORTERS.map(card).join("")+'</div>'+
-  '<div class="exfoot rv"><p class="note">'+O.note+'</p><p style="display:flex;gap:12px;flex-wrap:wrap"><a class="cta" href="#service" data-go="service" data-form="partner">'+O.b1+arrow+'</a><a class="cta ghost" href="#service" data-go="service" data-form="exporter">'+O.b2+'</a></p></div>'+
+  '<div class="exfoot rv"><p class="note">'+O.note+' '+O.lab.credit+'.</p><p style="display:flex;gap:12px;flex-wrap:wrap"><a class="cta" href="#service" data-go="service" data-form="partner">'+O.b1+arrow+'</a><a class="cta ghost" href="#service" data-go="service" data-form="exporter">'+O.b2+'</a></p></div>'+
+ '</div></section>';
+}
+
+/* what Germany already buys from Tajikistan (Eurostat Comext): the export story in three products */
+function nfmt(v, d){ var loc = {de:"de-DE",ru:"ru-RU",en:"en-GB",tj:"ru-RU"}[lang]; try{ return v.toLocaleString(loc, {minimumFractionDigits:d||0, maximumFractionDigits:d||0}); }catch(e){ return String(v); } }
+function deImports(compact){
+ var D = L.deimp, X = DEIMP, ys = X.years, tmax = Math.max.apply(null, X.total);
+ var totals = '<div class="detot rv"><span class="dl">'+D.total+', '+D.m+'</span><div class="dcols">'+X.total.map(function(v,i){
+   return '<div class="dc'+(i===ys.length-1?' last':'')+'"><b>'+nfmt(v/1e6,1)+'</b><i style="--h:'+(v/tmax*100).toFixed(1)+'%"></i><span>'+ys[i]+'</span></div>'; }).join("")+'</div></div>';
+ var cards = X.items.map(function(it){
+  var m = Math.max.apply(null, it.t), last = it.t[it.t.length-1];
+  return '<article class="deprod rv"><figure><img src="'+coImg(it.img)+'" alt="'+esc(D.n[it.k])+'" loading="lazy" decoding="async"></figure>'+
+   '<div class="dpb"><span class="cn">'+D.cn+' '+it.cn+'</span><h3>'+D.n[it.k]+'</h3><p class="big"><b>'+nfmt(Math.round(last))+'</b> '+D.u+' <small>'+ys[ys.length-1]+'</small></p><p class="dd">'+D.d[it.k]+'</p>'+
+   '<div class="spark" role="img" aria-label="'+esc(D.yl+': '+it.t.map(function(t,i){ return ys[i]+' '+nfmt(Math.round(t))+' '+D.u; }).join(", "))+'">'+it.t.map(function(t,i){
+     return '<div><i style="--h:'+(m ? Math.max(t/m*100, t>0?3:0) : 0).toFixed(1)+'%"></i><span>'+ys[i]+'</span><em>'+nfmt(Math.round(t))+'</em></div>'; }).join("")+'</div></div></article>';
+ }).join("");
+ return '<section class="sec'+(compact?' tint':' flush')+' deimp" id="deimp"><div class="wrap"><div class="head split"><div><div class="kicker">'+D.k+'</div><h2 class="h2 rv">'+D.t+'</h2></div><p class="lead rv">'+D.l+' '+sref(X.src)+'</p></div>'+
+  '<div class="degrid">'+cards+totals+'</div>'+
+  '<p class="note rv">'+D.other+' '+D.note+' '+D.photo+'.</p>'+
+  '<p class="rv deacts"><a class="cta" href="#export" data-go="export" data-anchor="exporters">'+D.cta1+arrow+'</a><a class="cta ghost" href="#export" data-go="export" data-anchor="a2m">'+D.cta2+'</a></p>'+
  '</div></section>';
 }
 
@@ -355,18 +383,13 @@ function pageSources(){
  return phead("quellen", S.h1, S.lead, 11)+'<section class="sec flush"><div class="wrap"><ol class="srcs">'+
   SRC.map(function(s,i){ return s?'<li id="src-'+i+'"><b>['+i+']</b><a href="'+s.u+'" target="_blank" rel="noopener">'+s.t+'</a></li>':""; }).join("")+'</ol>'+(MD.s?'<p class="ainote" style="margin-top:40px;max-width:70ch">'+L.foot.ai+'</p>':'')+'</div></section>';
 }
-function repProfile(){
- var R = L.rep;
- return '<section class="sec flush"><div class="wrap"><article class="repcard rv">'+
-  (REP.photo ? '<figure class="rp"><img src="'+REP.photo+'" alt="'+esc(REP.n[lang])+'" width="200" height="200" decoding="async"></figure>' : '')+
-  '<div class="rb"><div class="kicker">'+R.k+'</div><h2>'+REP.n[lang]+'</h2><p class="role">'+R.role+' · '+R.city+'</p>'+
-  '<ul>'+R.bio.map(function(b){ return '<li>'+b+'</li>'; }).join("")+'</ul>'+
-  '<p class="acts"><a class="cta" href="#service" data-go="service" data-form="meeting">'+R.meet+arrow+'</a><a class="cta ghost" href="'+REP.li+'" target="_blank" rel="noopener">'+R.li+' '+ext+'</a></p></div>'+
- '</article></div></section>';
+function teamBlock(){
+ var T = L.team;
+ return '<section class="sec flush"><div class="wrap"><div class="team rv"><div class="kicker">'+T.k+'</div><div class="tm"><h2>'+REP.n[lang]+'</h2><p class="role">'+T.role+'</p><a class="qgo" href="'+REP.li+'" target="_blank" rel="noopener">'+T.li+' '+ext+'</a></div></div></div></section>';
 }
 function pageContact(){
  var K = L.contact;
- return phead("kontakt", K.h1, K.lead, 12)+repProfile()+'<section class="sec"><div class="wrap"><div class="cgrid two"><div class="rv"><h3>'+K.off+'</h3><p>'+K.offT+'</p></div><div class="rv"><h3>'+K.hrs+'</h3><p>'+K.hrsT+'</p></div></div><p class="note rv">'+K.note+'</p></div></section>';
+ return phead("kontakt", K.h1, K.lead, 12)+teamBlock()+'<section class="sec"><div class="wrap"><div class="cgrid two"><div class="rv"><h3>'+K.off+'</h3><p>'+K.offT+'</p></div><div class="rv"><h3>'+K.hrs+'</h3><p>'+K.hrsT+'</p></div></div><p class="note rv">'+K.note+'</p></div></section>';
 }
 function pageLegal(which){
  var t = LEGAL[which];
@@ -465,6 +488,7 @@ function openSector(id){
 /* ------------------------------------------------------------ assistant
    A question box that answers only from this site: the investor questions first,
    then sectors, free zones, exporters, events and rules. Nothing leaves the browser. */
+var ASK_SMILE = '<svg viewBox="0 0 32 32" width="30" height="30" fill="none" aria-hidden="true"><path d="M16 4.5c-6.9 0-12.5 4.9-12.5 11 0 3.2 1.5 6 4 8l-1.3 4.6 5.1-2.6c1.5.5 3 .8 4.7.8 6.9 0 12.5-4.9 12.5-11S22.9 4.5 16 4.5z" fill="currentColor"/><circle cx="11.6" cy="14.2" r="1.7" fill="var(--sm-eye)"/><circle cx="20.4" cy="14.2" r="1.7" fill="var(--sm-eye)"/><path d="M11 18.6c1.3 1.8 3 2.7 5 2.7s3.7-.9 5-2.7" stroke="var(--sm-eye)" stroke-width="1.8" stroke-linecap="round"/></svg>';
 var ASK_ICON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 9.5h7M8.5 12.5h4.5"/></svg>';
 var STOP = {
  de:"der die das ein eine einen einem einer und oder ist sind wie was wo wer wann gibt es kann können ich wir sie mit für von in im an am auf nach zu zum zur bei ob man mein meine unser sich auch nicht",
@@ -554,7 +578,25 @@ function askReply(q, faqId){
   }).join("")+'</div>' : ''));
  }, reduce ? 0 : 380);
 }
+/* the nudge: a speech bubble next to the button, first after 15 s, then every two minutes,
+   until the visitor has opened the assistant or dismissed the bubble */
+var askNudgeOff = false, askNudgeT = null, askNudgeHide = null, askNudgeN = 0;
+function askNudge(on){
+ var n = $("#askNudge"); if(!n) return;
+ clearTimeout(askNudgeHide);
+ if(on){ n.hidden = false; requestAnimationFrame(function(){ n.classList.add("on"); }); $("#askFab").classList.add("pulse"); setTimeout(function(){ $("#askFab").classList.remove("pulse"); }, 1400); askNudgeHide = setTimeout(function(){ askNudge(false); }, 9000); }
+ else { n.classList.remove("on"); setTimeout(function(){ if(!n.classList.contains("on")) n.hidden = true; }, 300); }
+}
+function askNudgeLoop(){
+ clearTimeout(askNudgeT);
+ askNudgeT = setTimeout(function(){
+  if(askNudgeOff) return;
+  if(!document.hidden && !document.documentElement.classList.contains("ask-open")){ askNudge(true); askNudgeN++; }
+  askNudgeLoop();
+ }, askNudgeN === 0 ? 15000 : 120000);
+}
 function askOpen(){
+ askNudgeOff = true; askNudge(false);
  var p = $("#askP"); p.hidden = false;
  requestAnimationFrame(function(){ p.classList.add("on"); });
  document.documentElement.classList.add("ask-open");
@@ -578,12 +620,14 @@ function renderAsk(){
  var A = L.ask;
  if(!$("#askP")){
   document.body.insertAdjacentHTML("beforeend",
-   '<button class="askfab" id="askFab" type="button" data-ask aria-haspopup="dialog" aria-controls="askP">'+ASK_ICON+'<span></span></button>'+
-   '<section class="askp" id="askP" role="dialog" aria-labelledby="askT" hidden><header><div><b id="askT"></b><small id="askS"></small></div><button class="ax" type="button" id="askX"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>'+
+   '<button class="askfab" id="askFab" type="button" data-ask aria-haspopup="dialog" aria-controls="askP">'+ASK_SMILE+'<span class="sr"></span></button>'+
+   '<div class="asknudge" id="askNudge" hidden><button type="button" class="nt" data-ask></button><button type="button" class="nx" id="askNx">×</button></div>'+
+   '<section class="askp" id="askP" role="dialog" aria-labelledby="askT" hidden><header><span class="av">'+ASK_SMILE+'</span><div><b id="askT"></b><small id="askS"></small></div><button class="ax" type="button" id="askX"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>'+
    '<div class="log" id="askLog" aria-live="polite"></div>'+
-   '<form id="askF" autocomplete="off"><input name="q" maxlength="200" enterkeyhint="send"><button type="submit" id="askGo"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>'+
+   '<form id="askF" autocomplete="off"><input name="q" maxlength="200" enterkeyhint="send"><button type="submit" id="askGo"><svg viewBox="0 0 24 24" width="17" height="17" fill="none"><path d="M3 11 21 3l-8 18-2-8-8-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button></form>'+
    '<p class="priv" id="askPriv"></p></section>');
   $("#askX").addEventListener("click", askClose);
+  $("#askNx").addEventListener("click", function(e){ e.stopPropagation(); askNudge(false); askNudgeOff = true; });
   $("#askF").addEventListener("submit", function(e){ e.preventDefault(); var q = this.q.value.trim(); if(!q) return; this.q.value = ""; askReply(q); });
   $("#askLog").addEventListener("click", function(e){
    var c = e.target.closest("[data-faq]"); if(c){ askReply(c.textContent, c.getAttribute("data-faq")); return; }
@@ -593,7 +637,8 @@ function renderAsk(){
    if(w){ var q = w.closest(".msg").getAttribute("data-q"); if(window.innerWidth < 700) askClose(); go("service"); setTimeout(function(){ selectForm("partner"); var t = $("#aneed"); if(t){ t.value = q; t.focus({preventScroll:true}); } }, 30); }
   });
  }
- $("#askFab span").textContent = A.btn; $("#askFab").setAttribute("aria-label", A.t);
+ $("#askFab span").textContent = A.t; $("#askFab").setAttribute("aria-label", A.t); $("#askFab").title = A.t;
+ $("#askNudge .nt").textContent = "👋 " + A.nudge; $("#askNx").setAttribute("aria-label", A.nudgeX);
  $("#askT").textContent = A.t; $("#askS").textContent = A.sub; $("#askPriv").textContent = A.privacy;
  $("#askX").setAttribute("aria-label", A.close); $("#askGo").setAttribute("aria-label", A.send);
  $("#askF").q.placeholder = A.ph; $("#askF").q.setAttribute("aria-label", A.ph);
@@ -641,5 +686,5 @@ window.addEventListener("resize", fitBar);
 if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitBar);
 
 $$(".flag-tj").forEach(function(f){ f.innerHTML = FLAG_TJ; });
-paintOrnaments(); renderChrome(); renderHero(); renderAsk(); route();
+paintOrnaments(); renderChrome(); renderHero(); renderAsk(); route(); askNudgeLoop();
 })();

@@ -42,5 +42,23 @@
   "fruit3": "media/gen/fruit3.webp",
   "fruit4": "media/gen/fruit4.webp",
   "emblem": "media/gen/emblem.svg"
+ },
+ "co": {
+  "bk_factory": "media/co/bk_factory.webp",
+  "bk_line": "media/co/bk_line.webp",
+  "l_barakat": "media/co/l_barakat.webp",
+  "l_isfarafood": "media/co/l_isfarafood.webp",
+  "l_oro": "media/co/l_oro.webp",
+  "l_vodiizarrin": "media/co/l_vodiizarrin.webp",
+  "l_zardolu": "media/co/l_zardolu.webp",
+  "oro_photo": "media/co/oro_photo.webp",
+  "p_almond": "media/co/p_almond.webp",
+  "p_apple": "media/co/p_apple.webp",
+  "p_apricot": "media/co/p_apricot.webp",
+  "p_kernels": "media/co/p_kernels.webp",
+  "p_mulberry": "media/co/p_mulberry.webp",
+  "p_raisins": "media/co/p_raisins.webp",
+  "p_rosehip": "media/co/p_rosehip.webp",
+  "p_walnut": "media/co/p_walnut.webp"
  }
 }

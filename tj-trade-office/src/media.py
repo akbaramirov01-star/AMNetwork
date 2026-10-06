@@ -121,9 +121,14 @@ def main():
         shutil.copy(os.path.join(gdir, "emblem.svg"), os.path.join(OUT, "gen", "emblem.svg"))
         man.setdefault("gen", {})["emblem"] = "media/gen/emblem.svg"
 
-    # the trade representative's portrait (his public LinkedIn picture), copied as is
-    if os.path.exists(os.path.join(RAW, "rep.jpg")):
-        shutil.copy(os.path.join(RAW, "rep.jpg"), os.path.join(OUT, "rep.jpg"))
+    # company logos and product photos from the exporters' own material (raw/co/*.jpg -> MEDIA.co)
+    cdir = os.path.join(RAW, "co")
+    for f in sorted(os.listdir(cdir)) if os.path.isdir(cdir) else []:
+        if f.endswith(".jpg"):
+            os.makedirs(os.path.join(OUT, "co"), exist_ok=True)
+            k = f[:-4]
+            fit(Image.open(os.path.join(cdir, f)), 900).save(os.path.join(OUT, "co", k + ".webp"), "WEBP", quality=84, method=6)
+            man.setdefault("co", {})[k] = "media/co/%s.webp" % k
 
     json.dump(man, open(os.path.join(OUT, "manifest.json"), "w"), indent=1)
     total = sum(os.path.getsize(os.path.join(r, f)) for r, _, fs in os.walk(OUT) for f in fs)

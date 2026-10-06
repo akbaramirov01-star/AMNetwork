@@ -701,51 +701,131 @@ body{font-size:16px;line-height:1.68}
 .who .mono.pic{padding:0;overflow:hidden;border-color:rgba(233,207,154,.75)}
 .who .mono.pic img{width:100%;height:100%;object-fit:cover;transform:scale(1.05)}
 
-/* assistant */
-.askfab{position:fixed;right:clamp(14px,2.4vw,28px);bottom:calc(clamp(14px,2.4vw,28px) + env(safe-area-inset-bottom));z-index:70;display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 20px 0 16px;background:var(--gold);color:var(--on-gold);border:0;font-weight:600;font-size:.9rem;letter-spacing:.01em;box-shadow:0 14px 34px -14px rgba(0,0,0,.55),0 0 0 1px color-mix(in srgb,var(--on-gold) 18%,transparent) inset;transition:transform .2s ease,opacity .25s ease}
-.askfab:hover{transform:translateY(-2px)}
-.askfab svg{flex-shrink:0}
-.ask-open .askfab{opacity:0;pointer-events:none;transform:translateY(8px)}
-.askp{position:fixed;right:clamp(14px,2.4vw,28px);bottom:calc(clamp(14px,2.4vw,28px) + env(safe-area-inset-bottom));z-index:80;width:min(410px,calc(100vw - 28px));height:min(640px,calc(100vh - 120px));height:min(640px,calc(100dvh - 120px));display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:0 30px 70px -24px rgba(0,0,0,.5);opacity:0;transform:translateY(14px);transition:opacity .25s ease,transform .25s ease}
+/* assistant: a round messenger sticker, chat bubbles, a nudge every two minutes */
+:root{--sm-eye:#14100A}
+.askfab{position:fixed;right:clamp(14px,2.4vw,26px);bottom:calc(clamp(14px,2.4vw,26px) + env(safe-area-inset-bottom));z-index:70;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#FFF6DF;border:0;box-shadow:0 12px 30px -8px color-mix(in srgb,var(--gold) 70%,transparent),0 2px 6px rgba(0,0,0,.18);transition:transform .25s cubic-bezier(.3,1.4,.5,1),opacity .25s ease}
+.askfab svg{width:32px;height:32px;--sm-eye:var(--gold)}
+.askfab:hover{transform:scale(1.07) rotate(-4deg)}
+.askfab.pulse{animation:askpulse .7s ease 2}
+@keyframes askpulse{50%{transform:scale(1.13) rotate(-6deg)}}
+.ask-open .askfab{opacity:0;pointer-events:none;transform:scale(.6)}
+.asknudge{position:fixed;right:clamp(14px,2.4vw,26px);bottom:calc(clamp(14px,2.4vw,26px) + 74px + env(safe-area-inset-bottom));z-index:69;display:flex;align-items:flex-start;max-width:min(290px,calc(100vw - 32px));background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px 18px 4px 18px;box-shadow:0 16px 40px -12px rgba(0,0,0,.35);opacity:0;transform:translateY(8px) scale(.94);transform-origin:100% 100%;transition:opacity .3s ease,transform .3s cubic-bezier(.3,1.3,.5,1)}
+.asknudge.on{opacity:1;transform:none}
+.asknudge[hidden]{display:none}
+.asknudge .nt{flex:1;text-align:left;background:none;border:0;color:inherit;padding:13px 4px 13px 16px;font-size:.92rem;line-height:1.45}
+.asknudge .nx{flex-shrink:0;width:30px;height:30px;margin:6px 6px 0 0;border-radius:50%;background:none;border:0;color:var(--ink-faint);font-size:1.15rem;line-height:1}
+.asknudge .nx:hover{background:var(--surface-2);color:var(--ink)}
+.askp{position:fixed;right:clamp(14px,2.4vw,26px);bottom:calc(clamp(14px,2.4vw,26px) + env(safe-area-inset-bottom));z-index:80;width:min(400px,calc(100vw - 28px));height:min(620px,calc(100vh - 110px));height:min(620px,calc(100dvh - 110px));display:flex;flex-direction:column;overflow:hidden;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:20px;box-shadow:0 30px 70px -24px rgba(0,0,0,.5);opacity:0;transform:translateY(14px) scale(.97);transform-origin:100% 100%;transition:opacity .25s ease,transform .25s ease}
 .askp.on{opacity:1;transform:none}
 .askp[hidden]{display:none}
-.askp header{display:flex;align-items:flex-start;gap:12px;padding:18px 18px 14px;border-bottom:1px solid var(--line);position:relative}
-.askp header::before{content:"";position:absolute;left:0;right:0;top:-1px;height:5px;background-image:var(--orn-band);background-size:auto 5px;background-repeat:repeat-x}
+.askp header{display:flex;align-items:center;gap:12px;padding:14px 14px 12px 16px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.askp header .av{flex-shrink:0;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#FFF6DF}
+.askp header .av svg{width:24px;height:24px;--sm-eye:var(--gold)}
 .askp header div{flex:1;min-width:0}
-.askp header b{display:block;font-family:var(--serif);font-weight:500;font-size:1.35rem;line-height:1.15}
-.askp header small{display:block;margin-top:4px;font-size:.78rem;color:var(--ink-faint);line-height:1.4}
-.askp .ax{flex-shrink:0;width:36px;height:36px;display:grid;place-items:center;background:none;border:1px solid var(--line);color:var(--ink)}
-.askp .ax:hover{border-color:var(--ink)}
-.askp .log{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:18px;display:flex;flex-direction:column;gap:16px;scroll-behavior:smooth}
-.msg{font-size:.93rem;line-height:1.65;max-width:100%}
-.msg.me{align-self:flex-end;max-width:86%;background:var(--surface-2);padding:9px 14px;color:var(--ink)}
-.msg.bot{color:var(--ink-soft)}
-.msg.bot p+p{margin-top:8px}
-.msg .aq{font-family:var(--serif);font-size:1.15rem;line-height:1.3;color:var(--ink)}
-.msg .aq small{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
-.msg .qfoot{margin-top:10px;font-size:.68rem}
-.msg .chips,.msg .also{display:flex;flex-direction:column;align-items:stretch;gap:6px;margin-top:14px}
-.msg .cl{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:2px}
-.qchip{text-align:left;background:none;border:1px solid var(--line);color:var(--ink);padding:9px 12px;font-size:.86rem;line-height:1.4;transition:border-color .2s,background .2s}
-.qchip:hover{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 7%,transparent)}
-.qchip small{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-right:4px}
-.msg.typing{display:flex;gap:5px;padding:6px 0}
-.msg.typing span{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.35;animation:askdot 1s infinite}
+.askp header b{display:block;font-weight:600;font-size:1rem;line-height:1.2}
+.askp header small{display:block;margin-top:2px;font-size:.74rem;color:var(--ink-faint);line-height:1.35}
+.askp .ax{flex-shrink:0;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:none;border:0;color:var(--ink-soft)}
+.askp .ax:hover{background:var(--surface);color:var(--ink)}
+.askp .log{position:relative;flex:1;overflow-y:auto;overscroll-behavior:contain;padding:16px 14px;display:flex;flex-direction:column;gap:10px}
+.msg{font-size:.92rem;line-height:1.6;max-width:88%;padding:10px 14px;border-radius:16px}
+.msg.me{align-self:flex-end;background:var(--gold);color:var(--on-gold);border-bottom-right-radius:4px}
+.msg.bot{align-self:flex-start;background:var(--surface-2);color:var(--ink);border-bottom-left-radius:4px}
+.msg.bot p+p{margin-top:6px}
+.msg .aq{font-weight:600;font-size:.95rem;line-height:1.35;color:var(--ink)}
+.msg .aq small{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;font-weight:400}
+.msg .qfoot{margin-top:8px;font-size:.66rem}
+.msg .chips,.msg .also{display:flex;flex-direction:column;align-items:stretch;gap:6px;margin-top:12px}
+.msg .cl{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:1px}
+.qchip{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:8px 12px;font-size:.85rem;line-height:1.4;transition:border-color .2s,background .2s}
+.qchip:hover{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 8%,var(--surface))}
+.qchip small{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-right:4px}
+.msg.typing{display:flex;gap:5px;padding:14px 16px}
+.msg.typing span{width:7px;height:7px;border-radius:50%;background:var(--ink-faint);animation:askdot 1.1s infinite}
 .msg.typing span:nth-child(2){animation-delay:.15s}.msg.typing span:nth-child(3){animation-delay:.3s}
-@keyframes askdot{50%{opacity:1}}
-.askp form{display:flex;gap:8px;padding:12px 14px 6px;border-top:1px solid var(--line)}
-.askp input{flex:1;min-width:0;height:46px;padding:0 14px;background:var(--ground);border:1px solid var(--line);color:var(--ink);font:inherit;font-size:16px}
+@keyframes askdot{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-4px);opacity:1}}
+.askp form{display:flex;gap:8px;padding:10px 12px 4px;border-top:1px solid var(--line)}
+.askp input{flex:1;min-width:0;height:44px;padding:0 16px;background:var(--ground);border:1px solid var(--line);border-radius:22px;color:var(--ink);font:inherit;font-size:16px}
 .askp input:focus{outline:none;border-color:var(--gold)}
-.askp form button{flex-shrink:0;width:46px;height:46px;display:grid;place-items:center;background:var(--gold);color:var(--on-gold);border:0}
-.askp .priv{padding:2px 16px 12px;font-size:.7rem;line-height:1.45;color:var(--ink-faint)}
+.askp form button{flex-shrink:0;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:var(--on-gold);border:0}
+.askp .priv{padding:2px 16px 10px;font-size:.68rem;line-height:1.4;color:var(--ink-faint)}
 @media (max-width:699px){
- .askfab{height:46px;padding:0 16px 0 13px;font-size:.86rem}
- .askp{inset:0;width:auto;height:auto;border:0;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+ .askfab{width:56px;height:56px}
+ .askp{inset:0;width:auto;height:auto;border:0;border-radius:0;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+ .asknudge{bottom:calc(14px + 68px + env(safe-area-inset-bottom))}
  .ask-open body{overflow:hidden}
 }
-@media (prefers-reduced-motion:reduce){.askp,.askfab{transition:none}.msg.typing span{animation:none}}
+@media (prefers-reduced-motion:reduce){.askp,.askfab,.asknudge{transition:none}.askfab.pulse,.msg.typing span{animation:none}}
+@media print{.asknudge{display:none!important}}
 @media print{.askfab,.askp{display:none!important}}
 .askp .log{position:relative}
+
+/* what Germany buys from Tajikistan: product photographs on white, like a trade catalogue */
+.degrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,.8fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.deprod{background:var(--ground);display:flex;flex-direction:column}
+.deprod figure{margin:0;aspect-ratio:4/3;background:#fff;display:grid;place-items:center;overflow:hidden}
+.deprod figure img{width:86%;height:86%;object-fit:contain;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.deprod:hover figure img{transform:scale(1.05)}
+.dpb{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.dpb .cn{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;color:var(--ink-faint)}
+.dpb h3{font-size:1.55rem;line-height:1.1}
+.dpb .big{margin-top:4px;font-family:var(--mono);font-size:.8rem;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.dpb .big b{font-family:var(--serif);font-size:2.5rem;font-weight:500;color:var(--gold);letter-spacing:-.02em;line-height:1}
+.dpb .big small{font-size:.72rem;color:var(--ink-faint);margin-left:4px}
+.dpb .dd{font-size:.9rem;color:var(--ink-soft);line-height:1.55}
+.spark{margin-top:auto;padding-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;height:96px;align-items:end}
+.spark div{height:100%;display:grid;grid-template-rows:1fr auto auto;justify-items:center;gap:3px}
+.spark i{align-self:end;width:100%;max-width:46px;height:var(--h);min-height:1px;background:color-mix(in srgb,var(--gold) 35%,transparent);border-top:2px solid var(--gold)}
+.spark div:last-child i{background:var(--gold)}
+.spark span{font-family:var(--mono);font-size:.6rem;color:var(--ink-faint)}
+.spark em{font-style:normal;font-family:var(--mono);font-size:.62rem;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.detot{background:var(--surface);padding:22px;display:flex;flex-direction:column;gap:14px}
+.detot .dl{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);line-height:1.5}
+.dcols{flex:1;min-height:200px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:end}
+.dc{height:100%;display:grid;grid-template-rows:1fr auto auto;justify-items:center;gap:6px}
+.dc i{align-self:end;width:100%;height:var(--h);background:color-mix(in srgb,var(--ink) 14%,transparent)}
+.dc.last i{background:var(--gold)}
+.dc b{order:-1;align-self:end;font-family:var(--serif);font-size:1.5rem;font-weight:500;font-variant-numeric:tabular-nums}
+.dc.last b{color:var(--gold)}
+.dc span{font-family:var(--mono);font-size:.66rem;color:var(--ink-faint)}
+.dc{grid-template-rows:auto 1fr auto}
+.deacts{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.deimp .note{max-width:90ch}
+@media (max-width:1080px){.degrid{grid-template-columns:repeat(2,minmax(0,1fr))}.detot{grid-column:1/-1}.dcols{min-height:150px}}
+@media (max-width:620px){.degrid{grid-template-columns:1fr}.dpb h3{font-size:1.4rem}}
+
+/* exporters: logo and product pictures on every card */
+.exco{padding:0;gap:0}
+.exbody{padding:22px 24px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.exmedia{position:relative;background:#fff;border-bottom:1px solid var(--line)}
+.exmedia.lo{display:grid;place-items:center;height:150px}
+.exmedia.lo .exlogo{position:static;box-shadow:none;background:none;height:auto;padding:0}
+.exmedia.lo .exlogo img{max-height:96px;max-width:220px}
+.exmedia.one{height:200px;display:grid;place-items:center;overflow:hidden}
+.exmedia.one .ph{width:100%;height:100%;object-fit:cover}
+.exmedia.ill{height:150px;overflow:hidden;background:var(--surface-2)}
+.exmedia.ill img{width:100%;height:100%;object-fit:cover;opacity:.9}
+.exmedia .tag{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.45);padding:3px 7px}
+.exlogo{position:absolute;left:12px;bottom:12px;z-index:1;height:52px;padding:6px 10px;background:#fff;display:grid;place-items:center;box-shadow:0 4px 16px -6px rgba(0,0,0,.35)}
+.exlogo img{max-height:40px;max-width:140px;width:auto;object-fit:contain}
+.exmedia.gal{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line)}
+.exmedia.gal figure{margin:0;background:#fff;aspect-ratio:1;display:grid;grid-template-rows:1fr auto;overflow:hidden}
+.exmedia.gal img{width:100%;height:100%;object-fit:contain;padding:10px 10px 0;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.exmedia.gal figure:hover img{transform:scale(1.07)}
+.exmedia.gal figcaption{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;color:#4A5262;text-align:center;padding:4px 4px 8px;line-height:1.25}
+.exmedia.gal .exlogo{left:auto;right:12px;top:12px;bottom:auto}
+.exshots{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.exshots figure{margin:0;aspect-ratio:16/10;overflow:hidden;background:var(--surface-2)}
+.exshots img{width:100%;height:100%;object-fit:cover}
+@media (max-width:760px){.exmedia.gal{grid-template-columns:repeat(3,1fr)}.exmedia.gal .exlogo{top:auto;bottom:12px;right:12px}}
+
+/* contact: the team */
+.team{display:grid;grid-template-columns:auto 1fr;gap:12px 40px;align-items:baseline;padding:30px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.team .kicker{margin:0}
+.team h2{font-size:clamp(1.7rem,1.3rem + 1.4vw,2.4rem)}
+.team .role{margin-top:6px;color:var(--ink-soft)}
+.team .qgo{margin-top:12px;font-family:var(--mono);font-size:.74rem}
+@media (max-width:620px){.team{grid-template-columns:1fr}}
+.exlogo-in{height:46px;width:auto;align-self:flex-start;background:#fff;padding:6px 10px;margin-bottom:4px}
 
 </style>
 </head>
@@ -797,7 +877,7 @@ body{font-size:16px;line-height:1.68}
  <span id="fBrandB" hidden></span><span id="fBrandP" hidden></span>
 </footer>
 
-<script>window.MEDIA = {"hero": {"n": 84, "lg": "media/hero/l/f_", "sm": "media/hero/s/f_", "ext": ".webp", "poster": "media/hero/poster.jpg"}, "loop": {"s": {"mp4": "media/loop/s.mp4", "webm": "media/loop/s.webm", "poster": "media/loop/s.jpg"}}, "band": {"webm": "media/band/weave.webm", "src": "media/band/weave.mp4", "poster": "media/band/weave.jpg"}, "s": {"energy": "media/s/energy.webp", "mining": "media/s/mining.webp", "agri": "media/s/agri.webp", "textile": "media/s/textile.webp", "tourism": "media/s/tourism.webp", "industry": "media/s/industry.webp"}, "ph": {"tadschikistan": "media/ph/tadschikistan.webp", "branchen": "media/s/textile.webp", "investieren": "media/s/industry.webp", "export": "media/s/agri.webp"}, "gen": {"econ": "media/gen/econ.webp", "alu": "media/gen/alu.webp", "cotton": "media/gen/cotton.webp", "book": "media/gen/book.webp", "fruit1": "media/gen/fruit1.webp", "fruit2": "media/gen/fruit2.webp", "fruit3": "media/gen/fruit3.webp", "fruit4": "media/gen/fruit4.webp", "emblem": "media/gen/emblem.svg"}};</script>
+<script>window.MEDIA = {"hero": {"n": 84, "lg": "media/hero/l/f_", "sm": "media/hero/s/f_", "ext": ".webp", "poster": "media/hero/poster.jpg"}, "loop": {"s": {"mp4": "media/loop/s.mp4", "webm": "media/loop/s.webm", "poster": "media/loop/s.jpg"}}, "band": {"webm": "media/band/weave.webm", "src": "media/band/weave.mp4", "poster": "media/band/weave.jpg"}, "s": {"energy": "media/s/energy.webp", "mining": "media/s/mining.webp", "agri": "media/s/agri.webp", "textile": "media/s/textile.webp", "tourism": "media/s/tourism.webp", "industry": "media/s/industry.webp"}, "ph": {"tadschikistan": "media/ph/tadschikistan.webp", "branchen": "media/s/textile.webp", "investieren": "media/s/industry.webp", "export": "media/s/agri.webp"}, "gen": {"econ": "media/gen/econ.webp", "alu": "media/gen/alu.webp", "cotton": "media/gen/cotton.webp", "book": "media/gen/book.webp", "fruit1": "media/gen/fruit1.webp", "fruit2": "media/gen/fruit2.webp", "fruit3": "media/gen/fruit3.webp", "fruit4": "media/gen/fruit4.webp", "emblem": "media/gen/emblem.svg"}, "co": {"bk_factory": "media/co/bk_factory.webp", "bk_line": "media/co/bk_line.webp", "l_barakat": "media/co/l_barakat.webp", "l_isfarafood": "media/co/l_isfarafood.webp", "l_oro": "media/co/l_oro.webp", "l_vodiizarrin": "media/co/l_vodiizarrin.webp", "l_zardolu": "media/co/l_zardolu.webp", "oro_photo": "media/co/oro_photo.webp", "p_almond": "media/co/p_almond.webp", "p_apple": "media/co/p_apple.webp", "p_apricot": "media/co/p_apricot.webp", "p_kernels": "media/co/p_kernels.webp", "p_mulberry": "media/co/p_mulberry.webp", "p_raisins": "media/co/p_raisins.webp", "p_rosehip": "media/co/p_rosehip.webp", "p_walnut": "media/co/p_walnut.webp"}};</script>
 <script>
 /* Flags: flag-icons (MIT, © Panayiotis Lipiridis). Tajik flag widened to the official 1:2 proportion. */
 var FLAG_TJ = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 960 480"> <path fill="#060" d="M0 0h960v480H0z"/> <path fill="#fff" d="M0 0h960v342.9H0z"/> <path fill="#c00" d="M0 0h960v137.1H0z"/><g transform="translate(160 0)"> <path fill="#f8c300" d="M300.8 233.6a8.6 8.6 0 0 1 16 4V272h6.4v-34.3a8.6 8.6 0 0 1 16-4 20.2 20.2 0 1 0-38.4 0"/> <path fill="#fff" d="M305.4 224.7a14 14 0 0 1 14.6 6.5 14 14 0 0 1 14.6-6.5 14.7 14.7 0 0 0-29.2 0"/> <path id="tjA" fill="#f8c300" d="M316.8 258.3a26 26 0 0 1-43.8 16.6 27 27 0 0 1-41 12c2.5 25 40 19.9 42.8-4.4 11.7 20.7 37.6 14.7 45.2-10.6z"/> <use xlink:href="#tjA" width="100%" height="100%" fill="#f8c300" transform="matrix(-1 0 0 1 640 0)"/> <path id="tj-b" fill="#f8c300" d="M291.8 302.6c-5.3 11.3-15.7 13.2-24.8 4.1 0 0 3.6-2.6 7.6-3.3-.8-3.1.7-7.5 2.9-9.8a15 15 0 0 1 6.1 8.1c5.5-.7 8.2 1 8.2 1z"/> <use xlink:href="#tj-b" width="100%" height="100%" fill="#f8c300" transform="rotate(9.4 320 551.3)"/> <use xlink:href="#tj-b" width="100%" height="100%" fill="#f8c300" transform="rotate(18.7 320 551.3)"/> <path fill="none" stroke="#f8c300" stroke-width="11" d="M253.5 327.8a233 233 0 0 1 133 0"/> <g fill="#f8c300" transform="translate(320 164.6)scale(.68571)"> <path id="tj-c" d="m301930 415571-790463-574305h977066l-790463 574305L0-513674z" transform="scale(.00005)"/> </g> <g id="tj-d" fill="#f8c300" transform="translate(320 260.6)scale(.68571)"> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-70 -121.2)"/> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-121.2 -70)"/> <use xlink:href="#tj-c" width="100%" height="100%" transform="translate(-140)"/> </g> <use xlink:href="#tj-d" width="100%" height="100%" fill="#f8c300" transform="matrix(-1 0 0 1 640 0)"/> </g></svg>';
@@ -898,7 +978,13 @@ var SRC = [
  {t:"Auswärtiges Amt — Tadschikistan: Reise- und Sicherheitshinweise, Einreise und Zoll (Stand 03.10.2026)", u:"https://www.auswaertiges-amt.de/de/service/laender/tadschikistan-node/tadschikistansicherheit-206756"},
  {t:"Vertrag zwischen der Bundesrepublik Deutschland und der Republik Tadschikistan über die Förderung und den gegenseitigen Schutz von Kapitalanlagen, 27.03.2003 — BGBl. 2005 II S. 538", u:"https://edit.wti.org/wti-filesystem/20220210/aa204993-6df2-4424-81dc-6ca6a4cbf977/Germany%20-%20Tajikistan.pdf"},
  {t:"U.S. Department of State — 2024 Investment Climate Statements: Tajikistan", u:"https://www.state.gov/reports/2024-investment-climate-statements/tajikistan/"},
- {t:"AHK Zentralasien — Delegationsreise nach Duschanbe, 03.–06.11.2026", u:"https://zentralasien.ahk.de/de/veranstaltungen/events-2026/delegationsreise-nach-duschanbe"}
+ {t:"AHK Zentralasien — Delegationsreise nach Duschanbe, 03.–06.11.2026", u:"https://zentralasien.ahk.de/de/veranstaltungen/events-2026/delegationsreise-nach-duschanbe"},
+ {t:"Eurostat — Comext DS-045409, EU trade by HS2-4-6 and CN8: imports of Germany from Tajikistan (country of origin), 2023–2025, data as of 15.09.2026", u:"https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?format=JSON&freq=A&reporter=DE&partner=TJ&flow=1&indicators=VALUE_IN_EUROS&product=TOTAL&time=2023&time=2024&time=2025"},
+ {t:"Gulfood 2026, Dubai — exhibitor brand profile: Barakat Isfara", u:"https://www.gulfood.com/gulfood-2026-brands/barakat-isfara"},
+ {t:"Gulfood 2026, Dubai — exhibitor profile: Isfarafood LLC", u:"https://www.gulfood.com/exhibitors/isfarafood-llc"},
+ {t:"Gulfood 2026, Dubai — exhibitor profile and press release: Oro Isfara LLC", u:"https://www.gulfood.com/exhibitors/oro-isfara-llc"},
+ {t:"Gulfood 2026, Dubai — exhibitor profile: Zardolui Isfara LLC (Zardolu)", u:"https://www.gulfood.com/exhibitors/zardolui-isfara-llc"},
+ {t:"Gulfood 2026, Dubai — exhibitor profile: Visol Isfara LLC (brand Vodii Zarrin)", u:"https://www.gulfood.com/exhibitors/visol-isfara-llc"}
 ];
 function sref(n){ return '<a class="src" href="#quellen" data-src="'+n+'" title="'+(SRC[n]?SRC[n].t.replace(/"/g,"&quot;"):"")+'">['+n+']</a>'; }
 
@@ -931,9 +1017,7 @@ var NEWS = [
 /* the trade representative: this is his own website */
 var REP = {li:"https://www.linkedin.com/in/masrur-kurbonalizoda-034483270",
  n:{de:"Masrur Kurbonalizoda", en:"Masrur Kurbonalizoda", ru:"Масрур Курбонализода", tj:"Масрур Қурбонализода"},
- ini:{de:"MK", en:"MK", ru:"МК", tj:"МК"},
- /* public LinkedIn profile picture, shared by his office */
- photo:"media/rep.jpg"};
+ ini:{de:"MK", en:"MK", ru:"МК", tj:"МК"}};
 
 /* Access2Markets lookup: the result opens on the EU portal with Tajikistan as origin */
 var A2M = {
@@ -945,15 +1029,31 @@ var A2M = {
 
 /* Dried-fruit exporters from Sughd, only as reported by the cited sources (src).
    Vodii Mevaho is Tajik for "Valley of Fruits" — the same company that appeared at FiE 2025 as Dolina Fruktov (Russian name). */
+/* What Germany imported from Tajikistan (country of origin), Eurostat Comext DS-045409, CN8 lines.
+   Tonnes from QUANTITY_IN_100KG / 10, euros from VALUE_IN_EUROS. */
+var DEIMP = {src:45, years:[2023,2024,2025], total:[2803511,2184084,5283454],
+ items:[
+  {k:"kernels", cn:"1212 99 95", t:[889.0,741.3,1385.2], v:[2528292,1692446,3671120], img:"p_kernels"},
+  {k:"apple",   cn:"0813 30 00", t:[107.5,322.5,511.6],  v:[139816,419250,715569],  img:"p_apple"},
+  {k:"apricot", cn:"0813 10 00", t:[0,0.3,116.6],        v:[0,255,479149],          img:"p_apricot"}
+ ],
+ /* other lines worth naming, euros */
+ other:[{k:"pharma", y:2025, v:256070},{k:"carpets", y:2023, v:16400},{k:"denim", y:2023, v:28088},{k:"rice", y:2023, v:19030}]
+};
+
 var EXPORTERS = [
- {n:"Barakat Isfara", f:"LLC", city:"isfara", feat:true, pr:["apricot","prunes","raisins","compote","chopped","snacks","sweets","apple","rosehip","mulberry","walnuts","kernels","almonds"],
+ {n:"Barakat Isfara", gf:true, f:"LLC", city:"isfara", y:2008, feat:true, logo:"l_barakat",
+  pics:["p_apricot","p_kernels","p_apple","p_walnut","p_rosehip","p_mulberry"], shots:["bk_factory","bk_line"],
+  pr:["apricot","prunes","raisins","compote","chopped","snacks","sweets","apple","rosehip","mulberry","walnuts","kernels","almonds"],
   mk:["RU","CZ","TR","CA","MY"], std:"HACCP", staff:"140+", fair:true,
-  web:"https://barakat-isfara.com", mail:"info@barakat-isfara.com", tel:"+992 98 770 0565", src:[36,37,34]},
- {n:"Isfara Food", f:"LLC", city:"isfara", y:2010, pr:["apricot","apple","pear","compote"], mk:["RU","KZ","EU"], cert:"FSSC 22000", cy:2026, src:[32]},
- {n:"Oro Isfara", f:"LLC", city:"isfara", cap:">2000", pr:["fruit","nuts"], mk:["CIS","EU"], cert:"FSSC 22000", cy:2026, src:[32]},
+  web:"https://barakat-isfara.com", mail:"info@barakat-isfara.com", tel:"+992 98 770 0565",
+  ig:"https://www.instagram.com/barakatisfara/", yt:"https://www.youtube.com/watch?v=LVxMKZkdVLg", src:[36,37,34,46]},
+ {n:"Isfarafood", gf:true, f:"LLC", city:"isfara", y:2010, logo:"l_isfarafood", pr:["apricot","apple","pear","compote","chopped"], mk:["RU","KZ","EU"], cert:"FSSC 22000", cy:2026, src:[32,47]},
+ {n:"Oro Isfara", gf:true, f:"LLC", city:"isfara", logo:"l_oro", pic:"oro_photo", cap:">2000", pr:["apricot","raisins","prunes","nuts"], mk:["CIS","EU"], cert:"FSSC 22000", cy:2026, src:[32,48]},
+ {n:"Zardolu", gf:true, f:"LLC «Zardolui Isfara»", city:"isfara", logo:"l_zardolu", pr:["apricot"], mk:["RU","EU","US","ME"], cert:"FSSC 22000", cy:2025, std:"ISO 22000:2018", src:[33,49]},
+ {n:"Vodii Zarrin", gf:true, f:"LLC «Visol Isfara»", city:"isfara", logo:"l_vodiizarrin", pr:["apricot","prunes","mulberry","canned"], mk:["CIS"], src:[50]},
  {n:"Vodii Mevaho", f:"LLC", alias:"Fruits Valley · Dolina Fruktov", city:"isfara", y:2017, cap:"≤1500", pr:["fruit","nuts","rosehip","kernels"], mk:["DE","PL","TR","US","CIS"], cert:"FSSC 22000", cy:2026, fair:true, src:[32,34]},
  {n:"Ali Apricot", city:"isfara", pr:["apricot","raisins","prunes"], fair:true, src:[34]},
- {n:"Zardolui Isfara", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]},
  {n:"Mevai Kand", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]},
  {n:"Kand K", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]}
 ];
@@ -1631,13 +1731,13 @@ C.en = {
 C.tj = {
  code:"tj", name:"Тоҷикӣ",
  brand:"Тоҷикистон · Савдо ва сармоягузорӣ",
- brandSub:"Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон",
+ brandSub:"Намояндаи тиҷоратии Ҷумҳурии Тоҷикистон дар Олмон",
  nav:{tadschikistan:"Тоҷикистон", branchen:"Соҳаҳо", investieren:"Сармоягузорӣ", export:"Содирот", termine:"Чорабиниҳо", aktuelles:"Хабарҳо", kontakt:"Тамос", service:"Ёфтани шарик", dokumente:"Ҳуҷҷатҳо", quellen:"Манбаъҳо", home:"Асосӣ"},
  ui:{menu:"Меню", close:"Пӯшидан", theme:"Равшан / торик", lang:"Забон", more:"Ҳамаро дидан", back:"Ба саҳифаи асосӣ", src:"Манбаъ", open:"Кушодан", details:"Муфассал", scroll:"Варақ занед", alt:"Баландӣ"},
  hero:{
   k1:"Ҷумҳурии Тоҷикистон · Берлин",
   t1:"Савдо ва сармоягузорӣ байни <em>Тоҷикистон</em> ва Олмон",
-  s1:"Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон, бо дафтар дар Берлин. Шахси тамос барои ширкатҳои олмонӣ, ки дар Тоҷикистон сармоягузорӣ мекунанд ё мол мехаранд, — ва барои ширкатҳои тоҷик дар роҳ ба бозори Олмон.",
+  s1:"Намояндаи тиҷоратии Ҷумҳурии Тоҷикистон дар Олмон, бо дафтар дар Берлин. Шахси тамос барои ширкатҳои олмонӣ, ки дар Тоҷикистон сармоягузорӣ мекунанд ё мол мехаранд, — ва барои ширкатҳои тоҷик дар роҳ ба бозори Олмон.",
   b1:"Барои ширкатҳои олмонӣ", b2:"Барои содиркунандагони тоҷик",
   k2:"Кишвари кӯҳу об",
   t2:"<em>527 миллиард</em> киловатт-соат иқтидори барқи обӣ дар як сол",
@@ -1754,7 +1854,7 @@ C.tj = {
   steps:[
    {t:"Мулоқоти аввал дар Берлин", p:"Шумо дар бораи лоиҳа нақл мекунед. Мо соҳа, масъалаҳои майдонча ва идораҳои дахлдорро муайян мекунем.", w:"Бюрои савдо"},
    {t:"Тамос бо идораҳо", p:"Мо шуморо бо Кумитаи давлатии сармоягузорӣ ва идораи амволи давлатӣ ва вазоратҳои соҳавӣ пайваст мекунем.", w:"Бюро · Кумитаи давлатӣ"},
-   {t:"Сафар ба Тоҷикистон", p:"Боздид аз майдончаҳо, минтақаҳои озоди иқтисодӣ ва шарикони эҳтимолӣ — бо хоҳиш дар ҳайати ҳайат.", w:"Ширкат · Намояндаи савдо"},
+   {t:"Сафар ба Тоҷикистон", p:"Боздид аз майдончаҳо, минтақаҳои озоди иқтисодӣ ва шарикони эҳтимолӣ — бо хоҳиш дар ҳайати ҳайат.", w:"Ширкат · Намояндаи тиҷоратӣ"},
    {t:"Таъсис ва бақайдгирӣ", p:"Бақайдгирии давлатии шахсони ҳуқуқӣ тавассути Кумитаи андоз сурат мегирад. Мо тамосҳо ва мушовирони маҳаллиро номбар мекунем.", w:"Кумитаи андози ҶТ"},
    {t:"Ҳамроҳӣ пас аз оғоз", p:"Мо дар Берлин шахси тамоси шумо мемонем — оид ба идораҳо, раводидҳо ва лоиҳаҳои нав.", w:"Бюрои савдо"}
   ],
@@ -1788,7 +1888,7 @@ C.tj = {
  },
  events:{
   h1:"Чорабиниҳо",
-  lead:"Намоишгоҳҳои соҳавӣ дар Олмон, ки дар онҳо ширкатҳои тоҷик харидор меёбанд, — ва чорабиниҳои худи намояндаи савдо.",
+  lead:"Намоишгоҳҳои соҳавӣ дар Олмон, ки дар онҳо ширкатҳои тоҷик харидор меёбанд, — ва чорабиниҳои худи намояндаи тиҷоратӣ.",
   list:{
    igw:{n:"«Ҳафтаи сабз»-и байналмилалӣ", p:"Намоишгоҳи хӯрокворӣ, кишоварзӣ ва боғдорӣ — майдон барои муаррифии кишварҳо ва маҳсулоти кишоварзӣ."},
    biofach:{n:"BIOFACH", p:"Намоишгоҳи пешбари ҷаҳонии маҳсулоти органикӣ. Барои меваи хушк, чормағз ва гиёҳҳо бо сертификати органикии ИА муҳим аст."},
@@ -1820,7 +1920,7 @@ C.tj = {
    meeting:{t:"Мулоқот", s:"Барои ҳама", p:"Шумо мехоҳед бо бюро дар Берлин шахсан ё тавассути видео мулоқот кунед."}
   },
   f:{company:"Ширкат", name:"Шахси тамос", email:"Почтаи электронӣ", phone:"Телефон", country:"Кишвар", sector:"Соҳа", need:"Шумо чӣ меҷӯед?", product:"Маҳсулот", volume:"Ҳаҷми солона (тахминан)", certs:"Сертификатҳои мавҷуда", date:"Санаи дилхоҳ", format:"Шакл", f1:"Шахсан дар Берлин", f2:"Занги видеоӣ", topic:"Мавзӯъ", send:"Фиристодани дархост",
-   ok:"<strong>Ташаккур.</strong> Ин версияи пешакии сомона аст: пас аз оғоз шакл ба бюрои савдо фиристода мешавад. То он вақт бо намояндаи савдо тавассути <a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn</a> тамос гиред.",
+   ok:"<strong>Ташаккур.</strong> Ин версияи пешакии сомона аст: пас аз оғоз шакл ба бюрои савдо фиристода мешавад. То он вақт бо намояндаи тиҷоратӣ тавассути <a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn</a> тамос гиред.",
    fine:"Маълумоти шумо танҳо барои баррасии дархост истифода мешавад. Ба сиёсати махфият нигаред.",
    sectors:["Энергетика ва барқи обӣ","Истихроҷи маъдан ва ашёи хом","Кишоварзӣ ва хӯрокворӣ","Нассоҷӣ","Сайёҳӣ","Саноат ва истеҳсолот","Дигар"]}
  },
@@ -1840,12 +1940,12 @@ C.tj = {
  contact:{
   h1:"Тамос",
   lead:"Шахси тамоси шумо оид ба савдо ва сармоягузорӣ байни Тоҷикистон ва Олмон.",
-  emb:"Намояндаи савдо", embT:"<b>Масрур Қурбонализода</b><br>Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон<br><a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn →</a>",
+  emb:"Намояндаи тиҷоратӣ", embT:"<b>Масрур Қурбонализода</b><br>Намояндаи тиҷоратии Ҷумҳурии Тоҷикистон дар Олмон<br><a href='https://www.linkedin.com/in/masrur-kurbonalizoda-034483270' target='_blank' rel='noopener'>LinkedIn →</a>",
   off:"Дафтар дар Берлин", offT:"Perleberger Straße 43<br>10559 Berlin<br><span class='ph'>[Почтаи электронӣ]</span><br><span class='ph'>[Телефон]</span>",
   hrs:"Мулоқотҳо", hrsT:"Мулоқот бо таъини қаблӣ — дар Берлин ё тавассути видео.<br><a href='#service' data-go='service'>Сабти ном →</a>",
   note:"Почтаи электронӣ ва телефони мустақим пеш аз оғоз илова карда мешаванд."
  },
- foot:{ai:"Тасвирҳо ва видеои ин сомона визуализатсияҳои бо зеҳни сунъӣ сохташуда (Higgsfield) мебошанд, на аксбардории ҷойҳо ё иншооти мушаххаси воқеӣ.", tag:"Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон. Дафтар дар Берлин.", c1:"Бахшҳо", c2:"Хизматрасонӣ", c3:"Маълумоти ҳуқуқӣ", rights:"© 2026 Масрур Қурбонализода, намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон", demo:"Версияи пешакии сомона. Мавод пеш аз оғоз бори охир санҷида мешавад.", imp:"Impressum", dat:"Махфият"},
+ foot:{ai:"Тасвирҳо ва видеои ин сомона визуализатсияҳои бо зеҳни сунъӣ сохташуда (Higgsfield) мебошанд, на аксбардории ҷойҳо ё иншооти мушаххаси воқеӣ.", tag:"Намояндаи тиҷоратии Ҷумҳурии Тоҷикистон дар Олмон. Дафтар дар Берлин.", c1:"Бахшҳо", c2:"Хизматрасонӣ", c3:"Маълумоти ҳуқуқӣ", rights:"© 2026 Масрур Қурбонализода, намояндаи тиҷоратии Ҷумҳурии Тоҷикистон дар Олмон", demo:"Версияи пешакии сомона. Мавод пеш аз оғоз бори охир санҷида мешавад.", imp:"Impressum", dat:"Махфият"},
  legalNote:""
 };
 /* Investor questions, the site assistant and the trade representative's profile, in all four languages.
@@ -1944,18 +2044,18 @@ tj:{
   transfer:{q:"Оё фоидаро ба Олмон интиқол додан мумкин аст?", a:"Бале. Шартнома интиқоли озоди ҳамаи пардохтҳои марбут ба сармоягузориро кафолат медиҳад — сармоя, даромад, бозпардохти қарз ва маблағ аз фурӯш (моддаи 5). Қонунгузории Тоҷикистон интиқолҳоро маҳдуд намекунад; амалиёти асъорӣ тавассути бонкҳои тиҷоратӣ анҷом дода мешавад.", k:"фоида интиқол дивиденд асъор сомонӣ бонк"},
   dta:{q:"Оё созишнома оид ба пешгирии андозбандии дукарата вуҷуд дорад?", a:"Бале. Созишномаи байни Олмон ва Тоҷикистон оид ба пешгирии андозбандии дукаратаи даромад ва молу мулк 27 марти соли 2003 имзо шуда, аз 21 сентябри соли 2004 эътибор дорад.", k:"андозбандии дукарата дукарата созишнома"},
   land:{q:"Оё ширкати хориҷӣ замин харида метавонад?", a:"Не: замин дар Тоҷикистон моликияти истисноии давлат аст ва фурӯши он тибқи қонун пешбинӣ нашудааст. Сармоягузорони хориҷӣ ҳуқуқи истифодаи заминро то 50 сол мегиранд ё заминро аз истифодабарандагони тоҷик то 20 сол иҷора мегиранд. Биноҳо дар замин метавонанд моликияти хусусӣ бошанд.", k:"замин қитъа моликият харидан иҷора амволи ғайриманқул"},
-  reg:{q:"Ширкатро чӣ гуна ба қайд гирифтан мумкин аст?", a:"Аз соли 2019 бақайдгирии давлатӣ бо принсипи «равзанаи ягона» дар Кумитаи андоз сурат мегирад. Баъд аз он ширкат дар Агентии суғуртаи иҷтимоӣ ва нафақа ва мақомоти омор ба қайд гирифта мешавад. Портали ҳукумат барои сармоягузорон — investcom.tj. Намояндаи савдо тамосҳо ва мушовиронро пешниҳод мекунад.", k:"бақайдгирӣ ширкат таъсис равзанаи ягона кумитаи андоз"},
+  reg:{q:"Ширкатро чӣ гуна ба қайд гирифтан мумкин аст?", a:"Аз соли 2019 бақайдгирии давлатӣ бо принсипи «равзанаи ягона» дар Кумитаи андоз сурат мегирад. Баъд аз он ширкат дар Агентии суғуртаи иҷтимоӣ ва нафақа ва мақомоти омор ба қайд гирифта мешавад. Портали ҳукумат барои сармоягузорон — investcom.tj. Намояндаи тиҷоратӣ тамосҳо ва мушовиронро пешниҳод мекунад.", k:"бақайдгирӣ ширкат таъсис равзанаи ягона кумитаи андоз"},
   disputes:{q:"Баҳсҳо чӣ гуна ҳал мешаванд?", a:"Тибқи Шартнома баҳси байни сармоягузор ва давлат, ки дар давоми шаш моҳ бо роҳи осоишта ҳал нашудааст, бо талаби сармоягузор ба арбитраж супурда мешавад (моддаи 11). Аз 14 августи соли 2012 Тоҷикистон узви Конвенсияи Ню-Йорк дар бораи эътироф ва иҷрои қарорҳои арбитражии хориҷӣ мебошад.", k:"баҳс баҳсҳо арбитраж суд конвенсия"},
   taxes:{q:"Ширкат кадом андозҳоро месупорад?", a:"Андоз аз фоида — 13 % барои истеҳсоли мол ва 18 % барои дигар намудҳои фаъолият. Андоз аз арзиши иловашуда — 14 % дар солҳои 2024–2026 ва 13 % аз 1 январи соли 2027; барои баъзе соҳаҳо меъёрҳои пасткардашуда амал мекунанд. Ҷадвали пурра — дар бахши «Сармоягузорӣ».", k:"андоз андозҳо ааи фоида меъёр"},
   fez:{q:"Минтақаҳои озоди иқтисодӣ чӣ медиҳанд?", a:"Дар Тоҷикистон панҷ минтақаи озоди иқтисодӣ ҳаст — «Суғд», «Панҷ», «Данғара», «Ишкошим» ва «Кӯлоб» — бо низоми хоси андоз ва гумрук. Харита ва тавсифи ҳар минтақа — дар бахши «Сармоягузорӣ».", k:"мои минтақа минтақаҳои озоди иқтисодӣ имтиёз суғд панҷ данғара ишкошим кӯлоб"},
-  trip:{q:"Чӣ гуна бо ҳайати тиҷоратӣ ба Тоҷикистон сафар кардан мумкин аст?", a:"Наздиктарин имконият — сафари ҳайати тиҷоратии AHK Осиёи Марказӣ ба Душанбе аз 3 то 6 ноябри соли 2026: вохӯриҳо дар вазоратҳо, бо ширкатҳо ва лоиҳаҳо. Бақайдгирӣ то 9 октябри соли 2026. Намояндаи савдо дар сафарҳои инфиродӣ низ кӯмак мекунад.", k:"сафар ҳайат делегатсия миссия душанбе ташриф ahk"},
-  help:{q:"Намояндаи савдо чӣ кӯмак мекунад?", a:"Вохӯрии аввал дар Берлин ё тавассути видео, тамос бо Кумитаи давлатии сармоягузорӣ ва идораи амволи давлатӣ ва идораҳои соҳавӣ, омодасозии сафар ва ҳамроҳӣ пас аз оғози лоиҳа.", k:"кӯмак намояндаи савдо вохӯрӣ тамос дастгирӣ машварат"},
+  trip:{q:"Чӣ гуна бо ҳайати тиҷоратӣ ба Тоҷикистон сафар кардан мумкин аст?", a:"Наздиктарин имконият — сафари ҳайати тиҷоратии AHK Осиёи Марказӣ ба Душанбе аз 3 то 6 ноябри соли 2026: вохӯриҳо дар вазоратҳо, бо ширкатҳо ва лоиҳаҳо. Бақайдгирӣ то 9 октябри соли 2026. Намояндаи тиҷоратӣ дар сафарҳои инфиродӣ низ кӯмак мекунад.", k:"сафар ҳайат делегатсия миссия душанбе ташриф ahk"},
+  help:{q:"Намояндаи тиҷоратӣ чӣ кӯмак мекунад?", a:"Вохӯрии аввал дар Берлин ё тавассути видео, тамос бо Кумитаи давлатии сармоягузорӣ ва идораи амволи давлатӣ ва идораҳои соҳавӣ, омодасозии сафар ва ҳамроҳӣ пас аз оғози лоиҳа.", k:"кӯмак намояндаи тиҷоратӣ вохӯрӣ тамос дастгирӣ машварат"},
   eu:{q:"Тоҷикистон ба ИА чӣ мефурӯшад?", a:"Дар соли 2025 ИА аз Тоҷикистон ба маблағи 579 млн евро мол ворид кардааст (+90,4 %). 92 %-и он металлҳои ғайриқиматбаҳо буда, баъд маҳсулоти минералӣ, нассоҷӣ ва маҳсулоти растанигӣ меоянд.", k:"содирот воридот савдо иа мол металл алюминий омор"},
   gsp:{q:"Барои молҳои тоҷикӣ кадом боҷҳои ИА амал мекунанд?", a:"Тоҷикистон аз Низоми умумии афзалиятҳои ИА (GSP) истифода мебарад: молҳои «ғайриҳассос» бе боҷ ворид мешаванд, барои молҳои «ҳассос» боҷ 3,5 банди фоизӣ кам карда шудааст. Меъёри дақиқро аз рӯи рамзи мол ҷустуҷӯи Access2Markets дар бахши «Содирот» нишон медиҳад.", k:"боҷ гумрук gsp афзалият тариф воридот"},
   exporters:{q:"Таъминкунандагони тоҷикии меваи хушкро аз куҷо ёфтан мумкин аст?", a:"Дар бахши «Содирот» истеҳсолкунандагони санҷидашудаи Исфара бо маҳсулот, сертификатҳо ва тамосҳо оварда шудаанд, масалан Barakat Isfara.", k:"харидан хариди таъминкунанда меваи хушк зардолу исфара содиркунанда истеҳсолкунанда barakat"}
  }},
- ask:{btn:"Пурсидан", t:"Саволҳо дар бораи кишвар", sub:"Ҷавобҳо аз маводи сомона — бо манбаъ", hello:"Салом! Дар бораи савдо ва сармоягузорӣ савол диҳед — масалан, дар бораи раводид, андозҳо ё минтақаҳои озод.", ph:"Саволи шумо…", send:"Фиристодан", pop:"Саволҳои маъмул", open:"Кушодан", src:"Манбаъҳо", also:"Боз дар ин мавзӯъ", none:"Дар сомона ҷавоби дақиқ нест. Саволро ба намояндаи савдо диҳед — ӯ шахсан ҷавоб медиҳад.", write:"Навиштан ба намояндаи савдо", close:"Пӯшидан", privacy:"Ёрдамчӣ танҳо дар маводи ҳамин сомона ҷустуҷӯ мекунад. Саволи шумо нигоҳ дошта ва ба ҷое фиристода намешавад.", page:"Бахш", zone:"Минтақаи озоди иқтисодӣ", exp:"Содиркунанда", evt:"Чорабинӣ", sector:"Соҳа", tax:"Андозҳо"},
- rep:{k:"Шахси тамос", role:"Намояндаи савдои Ҷумҳурии Тоҷикистон дар Олмон", city:"Берлин", bio:["Иқтисодчӣ, тахассус — бонкҳо ва молия.","Дар Ritsumeikan Asia Pacific University, Ҷопон (2019–2021) таҳсил кардааст.","Муаллифи мақолаҳои илмӣ дар бораи назорати бонкӣ ва устувории молиявии бонкҳо."], li:"Профил дар LinkedIn", meet:"Вохӯрӣ таъин кардан"},
+ ask:{btn:"Пурсидан", t:"Саволҳо дар бораи кишвар", sub:"Ҷавобҳо аз маводи сомона — бо манбаъ", hello:"Салом! Дар бораи савдо ва сармоягузорӣ савол диҳед — масалан, дар бораи раводид, андозҳо ё минтақаҳои озод.", ph:"Саволи шумо…", send:"Фиристодан", pop:"Саволҳои маъмул", open:"Кушодан", src:"Манбаъҳо", also:"Боз дар ин мавзӯъ", none:"Дар сомона ҷавоби дақиқ нест. Саволро ба намояндаи тиҷоратӣ диҳед — ӯ шахсан ҷавоб медиҳад.", write:"Навиштан ба намояндаи тиҷоратӣ", close:"Пӯшидан", privacy:"Ёрдамчӣ танҳо дар маводи ҳамин сомона ҷустуҷӯ мекунад. Саволи шумо нигоҳ дошта ва ба ҷое фиристода намешавад.", page:"Бахш", zone:"Минтақаи озоди иқтисодӣ", exp:"Содиркунанда", evt:"Чорабинӣ", sector:"Соҳа", tax:"Андозҳо"},
+ rep:{k:"Шахси тамос", role:"Намояндаи тиҷоратии Ҷумҳурии Тоҷикистон дар Олмон", city:"Берлин", bio:["Иқтисодчӣ, тахассус — бонкҳо ва молия.","Дар Ritsumeikan Asia Pacific University, Ҷопон (2019–2021) таҳсил кардааст.","Муаллифи мақолаҳои илмӣ дар бораи назорати бонкӣ ва устувории молиявии бонкҳо."], li:"Профил дар LinkedIn", meet:"Вохӯрӣ таъин кардан"},
  ahk:{n:"Ҳайати тиҷоратии AHK Осиёи Марказӣ ба Душанбе", p:"Вохӯриҳо бо вазоратҳо ва муассисаҳои давлатӣ, ширкатҳо ва лоиҳаҳои тоҷикӣ дар ҷой. Бақайдгирӣ то 9 октябри соли 2026."},
  checked:"Санҷида шуд: октябри 2026"
 }};
@@ -1963,6 +2063,77 @@ Object.keys(M).forEach(function(l){
  var c = C[l]; if(!c) return; var m = M[l];
  c.faq = m.faq; c.ask = m.ask; c.rep = m.rep; c.ui.checked = m.checked;
  c.events.list.ahk = m.ahk;
+});
+})();
+
+/* October 2026, second round: what Germany buys from Tajikistan, exporter media, the team block,
+   the assistant's greeting bubble. */
+FAQ_META.unshift({id:"de", s:[45], go:"export", anchor:"deimp"});
+ASK_POP.unshift("de"); ASK_POP.pop();
+(function(){
+var M = {
+de:{
+ faq:{q:"Was liefert Tadschikistan nach Deutschland?", a:"2025 führte Deutschland Waren tadschikischen Ursprungs im Wert von 5,3 Mio. Euro ein, 2,4-mal so viel wie 2024. Vor allem Fruchtkerne (1.385 t), getrocknete Äpfel (512 t) und getrocknete Aprikosen (117 t) – zusammen 92 % der Einfuhren.", k:"deutschland liefert lieferung einfuhr einfuhren import waren produkte fruchtkerne kerne äpfel aprikosen trockenfrüchte"},
+ deimp:{k:"Aus Tadschikistan nach Deutschland", t:"Was Deutschland bereits aus Tadschikistan kauft", l:"2025 führte Deutschland Waren tadschikischen Ursprungs im Wert von 5,3 Mio. Euro ein – 2,4-mal so viel wie 2024. 92 % davon sind Fruchtkerne und Trockenfrüchte.",
+  n:{kernels:"Fruchtkerne", apple:"Getrocknete Äpfel", apricot:"Getrocknete Aprikosen"},
+  d:{kernels:"Wichtigste Position: fast 70 % aller deutschen Einfuhren aus Tadschikistan im Jahr 2025.", apple:"Fast fünfmal so viel wie zwei Jahre zuvor.", apricot:"2025 erstmals in nennenswerter Menge: 117 t."},
+  u:"t", yl:"Einfuhrmenge in Tonnen", total:"Deutsche Einfuhren aus Tadschikistan", m:"Mio. €", cn:"KN",
+  other:"Außerdem in der Statistik: pharmazeutische Erzeugnisse (2025), Jeanshosen, Teppiche und Reis (2023).",
+  photo:"Produktfotos: Barakat Isfara",
+  note:"Eurostat (Comext): deutsche Einfuhren nach Ursprungsland Tadschikistan, KN-Codes. Waren, die zuerst in einem anderen EU-Land in den freien Verkehr gelangen, erscheinen hier nicht.",
+  cta1:"Lieferanten dieser Waren", cta2:"Zoll prüfen"},
+ co:{canned:"Gemüsekonserven", ME:"Naher Osten", ig:"Instagram", yt:"Video aus der Produktion", illus:"Illustration", credit:"Fotos und Logos: Material der Unternehmen (Website, Gulfood 2026)", gf:"Gulfood 2026, Dubai"},
+ team:{k:"Team", role:"Handelsvertreter der Republik Tadschikistan in Deutschland", li:"Profil auf LinkedIn"},
+ ask:{t:"Website-Assistent", nudge:"Ich bin der Website-Assistent. Kann ich Ihnen helfen?", nudgeX:"Hinweis schließen"}
+},
+ru:{
+ faq:{q:"Что Таджикистан поставляет в Германию?", a:"В 2025 году Германия ввезла товаров таджикского происхождения на 5,3 млн евро — в 2,4 раза больше, чем в 2024-м. Прежде всего это ядра фруктовых косточек (1 385 т), сушёные яблоки (512 т) и курага (117 т): вместе 92 % ввоза.", k:"германия германию поставки поставляет продаёт продает импорт ввоз товары продукция ядра косточки яблоки курага сухофрукты"},
+ deimp:{k:"Из Таджикистана — в Германию", t:"Что Германия уже покупает у Таджикистана", l:"В 2025 году Германия ввезла товаров таджикского происхождения на 5,3 млн евро — в 2,4 раза больше, чем в 2024-м. 92 % из них — ядра фруктовых косточек и сухофрукты.",
+  n:{kernels:"Ядра фруктовых косточек", apple:"Сушёные яблоки", apricot:"Курага"},
+  d:{kernels:"Главная позиция: почти 70 % всего ввоза Германии из Таджикистана в 2025 году.", apple:"Почти в пять раз больше, чем двумя годами раньше.", apricot:"Впервые в заметном объёме — 117 т в 2025 году."},
+  u:"т", yl:"Объём ввоза, тонн", total:"Импорт Германии из Таджикистана", m:"млн €", cn:"CN",
+  other:"Также в статистике: фармацевтическая продукция (2025), джинсовые брюки, ковры и рис (2023).",
+  photo:"Фото продукции: Barakat Isfara",
+  note:"Eurostat (Comext): импорт Германии по стране происхождения «Таджикистан», коды CN. Товары, впервые выпущенные в свободное обращение в другой стране ЕС, здесь не учтены.",
+  cta1:"Поставщики этих товаров", cta2:"Проверить пошлину"},
+ co:{canned:"овощные консервы", ME:"Ближний Восток", ig:"Instagram", yt:"Видео с производства", illus:"иллюстрация", credit:"Фото и логотипы: материалы компаний (сайт, Gulfood 2026)", gf:"Gulfood 2026, Дубай"},
+ team:{k:"Команда", role:"Торговый представитель Республики Таджикистан в Германии", li:"Профиль в LinkedIn"},
+ ask:{t:"Помощник по сайту", nudge:"Я помощник по сайту. Помочь вам чем-нибудь?", nudgeX:"Закрыть подсказку"}
+},
+en:{
+ faq:{q:"What does Tajikistan supply to Germany?", a:"In 2025 Germany imported goods of Tajik origin worth €5.3 million, 2.4 times as much as in 2024 – mainly fruit kernels (1,385 t), dried apples (512 t) and dried apricots (117 t), together 92 % of the total.", k:"germany supply supplies imports imported goods products kernels apples apricots dried fruit"},
+ deimp:{k:"From Tajikistan to Germany", t:"What Germany already buys from Tajikistan", l:"In 2025 Germany imported goods of Tajik origin worth €5.3 million – 2.4 times as much as in 2024. 92 % of it was fruit kernels and dried fruit.",
+  n:{kernels:"Fruit kernels", apple:"Dried apples", apricot:"Dried apricots"},
+  d:{kernels:"The leading item: almost 70 % of all German imports from Tajikistan in 2025.", apple:"Almost five times the volume of two years earlier.", apricot:"First significant volume in 2025: 117 t."},
+  u:"t", yl:"Import volume, tonnes", total:"German imports from Tajikistan", m:"€ m", cn:"CN",
+  other:"Also in the statistics: pharmaceutical products (2025), denim trousers, carpets and rice (2023).",
+  photo:"Product photos: Barakat Isfara",
+  note:"Eurostat (Comext): German imports by country of origin Tajikistan, CN codes. Goods first released for free circulation in another EU country do not appear here.",
+  cta1:"Suppliers of these goods", cta2:"Check the duty"},
+ co:{canned:"canned vegetables", ME:"Middle East", ig:"Instagram", yt:"Production video", illus:"illustration", credit:"Photos and logos: company material (website, Gulfood 2026)", gf:"Gulfood 2026, Dubai"},
+ team:{k:"Team", role:"Trade Representative of the Republic of Tajikistan in Germany", li:"Profile on LinkedIn"},
+ ask:{t:"Site assistant", nudge:"I’m the site assistant. Can I help you with anything?", nudgeX:"Dismiss"}
+},
+tj:{
+ faq:{q:"Тоҷикистон ба Олмон чӣ мефиристад?", a:"Дар соли 2025 Олмон ба маблағи 5,3 млн евро моли истеҳсоли Тоҷикистон ворид кард — 2,4 баробар зиёдтар аз соли 2024. Пеш аз ҳама мағзи донаки мева (1 385 т), себи хушк (512 т) ва курага (117 т) — якҷоя 92 %-и воридот.", k:"олмон содирот воридот мол маҳсулот мағз донак себ курага меваи хушк"},
+ deimp:{k:"Аз Тоҷикистон — ба Олмон", t:"Олмон аллакай аз Тоҷикистон чӣ мехарад", l:"Дар соли 2025 Олмон ба маблағи 5,3 млн евро моли истеҳсоли Тоҷикистон ворид кард — 2,4 баробар зиёдтар аз соли 2024. 92 %-и он мағзи донаки мева ва меваи хушк аст.",
+  n:{kernels:"Мағзи донаки мева", apple:"Себи хушк", apricot:"Курага"},
+  d:{kernels:"Мавқеи асосӣ: қариб 70 %-и тамоми воридоти Олмон аз Тоҷикистон дар соли 2025.", apple:"Нисбат ба ду сол пеш қариб панҷ баробар зиёд.", apricot:"Бори аввал ба ҳаҷми назаррас — 117 т дар соли 2025."},
+  u:"т", yl:"Ҳаҷми воридот, тонна", total:"Воридоти Олмон аз Тоҷикистон", m:"млн €", cn:"CN",
+  other:"Инчунин дар омор: маҳсулоти дорусозӣ (2025), шими ҷинсӣ, қолин ва биринҷ (2023).",
+  photo:"Акси маҳсулот: Barakat Isfara",
+  note:"Eurostat (Comext): воридоти Олмон аз рӯи кишвари пайдоиш — Тоҷикистон, рамзҳои CN. Молҳое, ки аввал дар дигар кишвари ИА ба муомилоти озод бароварда шудаанд, дар ин ҷо ба ҳисоб гирифта нашудаанд.",
+  cta1:"Таъминкунандагони ин молҳо", cta2:"Санҷиши боҷ"},
+ co:{canned:"консерваҳои сабзавотӣ", ME:"Шарқи Наздик", ig:"Instagram", yt:"Видео аз истеҳсолот", illus:"тасвир", credit:"Акс ва логотипҳо: маводи ширкатҳо (сомона, Gulfood 2026)", gf:"Gulfood 2026, Дубай"},
+ team:{k:"Гурӯҳ", role:"Намояндаи тиҷоратии Ҷумҳурии Тоҷикистон дар Олмон", li:"Профил дар LinkedIn"},
+ ask:{t:"Ёрдамчии сомона", nudge:"Ман ёрдамчии сомона ҳастам. Ба шумо кӯмак лозим аст?", nudgeX:"Пӯшидан"}
+}};
+Object.keys(M).forEach(function(l){
+ var c = C[l]; if(!c) return; var m = M[l], co = c.exp.co;
+ c.faq.items.de = m.faq; c.deimp = m.deimp; c.team = m.team;
+ c.ask.t = m.ask.t; c.ask.nudge = m.ask.nudge; c.ask.nudgeX = m.ask.nudgeX;
+ co.prn.canned = m.co.canned; co.mkn.ME = m.co.ME;
+ co.lab.ig = m.co.ig; co.lab.yt = m.co.yt; co.lab.illus = m.co.illus; co.lab.credit = m.co.credit; co.lab.gf = m.co.gf;
 });
 })();
 
@@ -2211,9 +2382,6 @@ function splitWords(el){
   n.parentNode.replaceChild(frag, n);
  });
 }
-function repCard(){
- return '<div class="who">'+(REP.photo ? '<span class="mono pic" aria-hidden="true"><img src="'+REP.photo+'" alt="" decoding="async"></span>' : '<span class="mono" aria-hidden="true">'+REP.ini[lang]+'</span>')+'<span><b>'+REP.n[lang]+'</b><small>'+L.brandSub+'</small></span><a href="'+REP.li+'" target="_blank" rel="noopener" aria-label="LinkedIn — '+esc(REP.n[lang])+'">in'+ext+'</a></div>';
-}
 function renderHero(){
  var H = L.hero;
  $("#c1").innerHTML = '<div class="in"><h1>'+H.t1+'</h1><p class="sub">'+H.s1+'</p><div class="acts"><a class="cta" href="#investieren" data-go="investieren">'+H.b1+arrow+'</a><a class="cta ghost" href="#export" data-go="export">'+H.b2+'</a></div></div>';
@@ -2257,6 +2425,7 @@ function pageHome(){
  var door = function(k, cls, go){ var d=H[k]; return '<a class="door '+cls+' rv" href="#'+go+'" data-go="'+go+'"><span class="lab"><i class="flag">'+(cls==="de"?FLAG_DE:FLAG_TJ)+'</i>'+d.lab+'</span><h3>'+d.t+'</h3><p>'+d.p+'</p><ul>'+d.li.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul><span class="go"><i>'+arrow+'</i>'+d.go+'</span></a>'; };
  return ''+
  '<section class="sec flush"><div class="wrap"><div class="head"><div class="kicker">'+H.dk+'</div><h2 class="h2 rv">'+H.dt+'</h2></div><div class="doors">'+door("de","de","investieren")+door("tj","tj","export")+'</div></div></section>'+
+ deImports(true)+
  '<section class="sec tint"><div class="wrap"><div class="head split"><div><div class="kicker">'+H.fk+'</div><h2 class="h2 rv">'+H.ft+'</h2></div><p class="lead rv">'+H.fl+'</p></div><div class="board">'+
    H.figs.map(function(f){ return '<div class="fig rv"><div class="v"><span class="count" data-to="'+f.v+'">'+f.v+'</span><small>'+f.u+'</small></div><div class="l">'+f.l+' '+sref(f.s)+'</div><div class="d">'+f.d+'</div></div>'; }).join("")+
  '</div></div></section>'+
@@ -2383,7 +2552,7 @@ function fezSelect(id){
 
 function pageExport(){
  var E = L.exp;
- return phead("export", E.h1, E.lead, 5)+
+ return phead("export", E.h1, E.lead, 5)+deImports(false)+exportersSection(E)+
  '<section class="sec flush"><div class="wrap"><div class="head"><div class="kicker">'+E.sk+'</div><h2 class="h2 rv">'+E.stt+'</h2></div><div class="steps" style="--n:'+E.steps.length+'">'+
    E.steps.map(function(s,i){ return '<div class="step rv"><div class="sn">'+(i+1)+'</div><h3>'+s.t+'</h3><p>'+s.p+'</p><div class="who">'+s.w+'</div></div>'; }).join("")+
  '</div></div></section>'+
@@ -2391,8 +2560,6 @@ function pageExport(){
    E.regs.map(function(r){ return '<div class="reg rv"><div class="code">'+r.c+'</div><h3>'+r.t+'</h3><p>'+r.p+'</p><a href="'+SRC[r.s].u+'" target="_blank" rel="noopener">'+SRC[r.s].t.split(" — ")[0]+' ↗</a></div>'; }).join("")+
  '</div></div></section>'+
  a2mFinder(E)+
- fruitGallery()+
- exportersSection(E)+
  '<section class="sec tint"><div class="wrap"><div class="head"><div class="kicker">'+E.mk+'</div><h2 class="h2 rv">'+E.mt+'</h2></div><div class="evts">'+eventRows()+'</div></div></section>'+
  band();
 }
@@ -2434,31 +2601,63 @@ function a2mGo(form){
  window.open(url, "_blank", "noopener");
 }
 
-/* photographs of Tajik dried fruit (generated, labelled as such in the footer) */
-function fruitGallery(){
- var G = MD.gen || {}, ims = [G.fruit1, G.fruit2, G.fruit3, G.fruit4].filter(Boolean);
- if(!ims.length) return '';
- return '<section class="fruits" aria-hidden="true"><div class="frow">'+ims.map(function(src,i){ return '<figure class="rv'+(i===0?' wide':'')+'"><img src="'+src+'" alt="" loading="lazy" decoding="async"></figure>'; }).join("")+'</div></section>';
-}
 
 /* dried-fruit exporters from Sughd, with the source for every claim */
+function coImg(k){ return (MD.co && MD.co[k]) || ""; }
+function exMedia(x, i){
+ var O = L.exp.co, G = MD.gen || {};
+ var logo = x.logo && coImg(x.logo) ? '<span class="exlogo"><img src="'+coImg(x.logo)+'" alt="'+esc(x.n)+'" loading="lazy" decoding="async"></span>' : '';
+ if(x.pics){
+  return '<div class="exmedia gal">'+x.pics.map(function(k){ var pk = k.replace("p_",""), lab = {apricot:"apricot",kernels:"kernels",apple:"apple",walnut:"walnuts",rosehip:"rosehip",mulberry:"mulberry"}[pk];
+   return '<figure><img src="'+coImg(k)+'" alt="'+esc(O.prn[lab]||"")+'" loading="lazy" decoding="async"><figcaption>'+(O.prn[lab]||"")+'</figcaption></figure>'; }).join("")+'</div>';
+ }
+ if(x.pic) return '<div class="exmedia one"><img class="ph" src="'+coImg(x.pic)+'" alt="" loading="lazy" decoding="async">'+logo+'</div>';
+ if(logo) return '<div class="exmedia lo">'+logo+'</div>';
+ var ill = [G.fruit2, G.fruit3, G.fruit4, G.fruit1].filter(Boolean);
+ return ill.length ? '<div class="exmedia ill"><img src="'+ill[i % ill.length]+'" alt="" loading="lazy" decoding="async"><span class="tag">'+O.lab.illus+'</span></div>' : '';
+}
 function exportersSection(E){
  var O = E.co;
- var card = function(x){
+ var card = function(x, i){
   var meta = O.city[x.city] + (x.y ? ' · '+O.since+' '+x.y : '');
-  var badges = (x.cert ? '<span class="badge gold">'+x.cert+' · '+x.cy+'</span>' : '') + (x.fair ? '<span class="badge">'+O.fair+'</span>' : '');
+  var badges = (x.cert ? '<span class="badge gold">'+x.cert+' · '+x.cy+'</span>' : '') + (x.gf ? '<span class="badge">'+O.lab.gf+'</span>' : '') + (x.fair ? '<span class="badge">'+O.fair+'</span>' : '');
   var rows = '<div class="kv2"><span>'+O.pr+'</span><b>'+x.pr.map(function(p){ return O.prn[p]; }).join(", ")+'</b></div>'+
    (x.mk ? '<div class="kv2"><span>'+O.mk+'</span><b>'+x.mk.map(function(m){ return O.mkn[m]; }).join(", ")+'</b></div>' : '')+
    (x.cap ? '<div class="kv2"><span>'+O.cap+'</span><b>'+x.cap.replace(">","> ").replace("≤","≤ ")+' '+O.t_y+'</b></div>' : '')+
    (x.std ? '<div class="kv2"><span>'+O.lab.std+'</span><b>'+x.std+' <small>('+O.lab.own+')</small></b></div>' : '')+
    (x.staff ? '<div class="kv2"><span>'+O.lab.staff+'</span><b>'+x.staff+'</b></div>' : '');
   var contact = x.web ? '<div class="excontact"><a href="'+x.web+'" target="_blank" rel="noopener">'+x.web.replace(/^https?:\/\//,"")+' '+ext+'</a>'+
-   (x.mail ? '<a href="mailto:'+x.mail+'">'+x.mail+'</a>' : '')+(x.tel ? '<a href="tel:'+x.tel.replace(/\s/g,"")+'">'+x.tel+'</a>' : '')+'</div>' : '';
-  return '<article class="exco rv'+(x.feat ? ' feat' : '')+'"><div class="badges">'+badges+'</div><h3>'+x.n+(x.f ? ' <small>'+x.f+'</small>' : '')+'</h3>'+(x.alias ? '<p class="alias">'+x.alias+'</p>' : '')+'<p class="meta">'+meta+'</p>'+(x.feat ? '<div class="excols"><div>'+rows+'</div>'+contact+'</div>' : rows+contact)+'<div class="srcs">'+refs(x.src)+'</div></article>';
+   (x.mail ? '<a href="mailto:'+x.mail+'">'+x.mail+'</a>' : '')+(x.tel ? '<a href="tel:'+x.tel.replace(/\s/g,"")+'">'+x.tel+'</a>' : '')+
+   (x.ig ? '<a href="'+x.ig+'" target="_blank" rel="noopener">'+O.lab.ig+' '+ext+'</a>' : '')+
+   (x.yt ? '<a href="'+x.yt+'" target="_blank" rel="noopener">'+O.lab.yt+' '+ext+'</a>' : '')+'</div>' : '';
+  var shots = x.shots ? '<div class="exshots">'+x.shots.map(function(k){ return '<figure><img src="'+coImg(k)+'" alt="" loading="lazy" decoding="async"></figure>'; }).join("")+'</div>' : '';
+  var body = (x.pics && x.logo ? '<img class="exlogo-in" src="'+coImg(x.logo)+'" alt="'+esc(x.n)+'" loading="lazy" decoding="async">' : '')+'<div class="badges">'+badges+'</div><h3>'+x.n+(x.f ? ' <small>'+x.f+'</small>' : '')+'</h3>'+(x.alias ? '<p class="alias">'+x.alias+'</p>' : '')+'<p class="meta">'+meta+'</p>';
+  return '<article class="exco rv'+(x.feat ? ' feat' : '')+'">'+exMedia(x, i)+'<div class="exbody">'+body+
+   (x.feat ? '<div class="excols"><div>'+rows+shots+'</div>'+contact+'</div>' : rows+contact)+'<div class="srcs">'+refs(x.src)+'</div></div></article>';
  };
  return '<section class="sec tint" id="exporters"><div class="wrap"><div class="head split"><div><div class="kicker">'+O.k+'</div><h2 class="h2 rv">'+O.t+'</h2></div><p class="lead rv">'+O.l+'</p></div>'+
   '<div class="excos">'+EXPORTERS.map(card).join("")+'</div>'+
-  '<div class="exfoot rv"><p class="note">'+O.note+'</p><p style="display:flex;gap:12px;flex-wrap:wrap"><a class="cta" href="#service" data-go="service" data-form="partner">'+O.b1+arrow+'</a><a class="cta ghost" href="#service" data-go="service" data-form="exporter">'+O.b2+'</a></p></div>'+
+  '<div class="exfoot rv"><p class="note">'+O.note+' '+O.lab.credit+'.</p><p style="display:flex;gap:12px;flex-wrap:wrap"><a class="cta" href="#service" data-go="service" data-form="partner">'+O.b1+arrow+'</a><a class="cta ghost" href="#service" data-go="service" data-form="exporter">'+O.b2+'</a></p></div>'+
+ '</div></section>';
+}
+
+/* what Germany already buys from Tajikistan (Eurostat Comext): the export story in three products */
+function nfmt(v, d){ var loc = {de:"de-DE",ru:"ru-RU",en:"en-GB",tj:"ru-RU"}[lang]; try{ return v.toLocaleString(loc, {minimumFractionDigits:d||0, maximumFractionDigits:d||0}); }catch(e){ return String(v); } }
+function deImports(compact){
+ var D = L.deimp, X = DEIMP, ys = X.years, tmax = Math.max.apply(null, X.total);
+ var totals = '<div class="detot rv"><span class="dl">'+D.total+', '+D.m+'</span><div class="dcols">'+X.total.map(function(v,i){
+   return '<div class="dc'+(i===ys.length-1?' last':'')+'"><b>'+nfmt(v/1e6,1)+'</b><i style="--h:'+(v/tmax*100).toFixed(1)+'%"></i><span>'+ys[i]+'</span></div>'; }).join("")+'</div></div>';
+ var cards = X.items.map(function(it){
+  var m = Math.max.apply(null, it.t), last = it.t[it.t.length-1];
+  return '<article class="deprod rv"><figure><img src="'+coImg(it.img)+'" alt="'+esc(D.n[it.k])+'" loading="lazy" decoding="async"></figure>'+
+   '<div class="dpb"><span class="cn">'+D.cn+' '+it.cn+'</span><h3>'+D.n[it.k]+'</h3><p class="big"><b>'+nfmt(Math.round(last))+'</b> '+D.u+' <small>'+ys[ys.length-1]+'</small></p><p class="dd">'+D.d[it.k]+'</p>'+
+   '<div class="spark" role="img" aria-label="'+esc(D.yl+': '+it.t.map(function(t,i){ return ys[i]+' '+nfmt(Math.round(t))+' '+D.u; }).join(", "))+'">'+it.t.map(function(t,i){
+     return '<div><i style="--h:'+(m ? Math.max(t/m*100, t>0?3:0) : 0).toFixed(1)+'%"></i><span>'+ys[i]+'</span><em>'+nfmt(Math.round(t))+'</em></div>'; }).join("")+'</div></div></article>';
+ }).join("");
+ return '<section class="sec'+(compact?' tint':' flush')+' deimp" id="deimp"><div class="wrap"><div class="head split"><div><div class="kicker">'+D.k+'</div><h2 class="h2 rv">'+D.t+'</h2></div><p class="lead rv">'+D.l+' '+sref(X.src)+'</p></div>'+
+  '<div class="degrid">'+cards+totals+'</div>'+
+  '<p class="note rv">'+D.other+' '+D.note+' '+D.photo+'.</p>'+
+  '<p class="rv deacts"><a class="cta" href="#export" data-go="export" data-anchor="exporters">'+D.cta1+arrow+'</a><a class="cta ghost" href="#export" data-go="export" data-anchor="a2m">'+D.cta2+'</a></p>'+
  '</div></section>';
 }
 
@@ -2498,18 +2697,13 @@ function pageSources(){
  return phead("quellen", S.h1, S.lead, 11)+'<section class="sec flush"><div class="wrap"><ol class="srcs">'+
   SRC.map(function(s,i){ return s?'<li id="src-'+i+'"><b>['+i+']</b><a href="'+s.u+'" target="_blank" rel="noopener">'+s.t+'</a></li>':""; }).join("")+'</ol>'+(MD.s?'<p class="ainote" style="margin-top:40px;max-width:70ch">'+L.foot.ai+'</p>':'')+'</div></section>';
 }
-function repProfile(){
- var R = L.rep;
- return '<section class="sec flush"><div class="wrap"><article class="repcard rv">'+
-  (REP.photo ? '<figure class="rp"><img src="'+REP.photo+'" alt="'+esc(REP.n[lang])+'" width="200" height="200" decoding="async"></figure>' : '')+
-  '<div class="rb"><div class="kicker">'+R.k+'</div><h2>'+REP.n[lang]+'</h2><p class="role">'+R.role+' · '+R.city+'</p>'+
-  '<ul>'+R.bio.map(function(b){ return '<li>'+b+'</li>'; }).join("")+'</ul>'+
-  '<p class="acts"><a class="cta" href="#service" data-go="service" data-form="meeting">'+R.meet+arrow+'</a><a class="cta ghost" href="'+REP.li+'" target="_blank" rel="noopener">'+R.li+' '+ext+'</a></p></div>'+
- '</article></div></section>';
+function teamBlock(){
+ var T = L.team;
+ return '<section class="sec flush"><div class="wrap"><div class="team rv"><div class="kicker">'+T.k+'</div><div class="tm"><h2>'+REP.n[lang]+'</h2><p class="role">'+T.role+'</p><a class="qgo" href="'+REP.li+'" target="_blank" rel="noopener">'+T.li+' '+ext+'</a></div></div></div></section>';
 }
 function pageContact(){
  var K = L.contact;
- return phead("kontakt", K.h1, K.lead, 12)+repProfile()+'<section class="sec"><div class="wrap"><div class="cgrid two"><div class="rv"><h3>'+K.off+'</h3><p>'+K.offT+'</p></div><div class="rv"><h3>'+K.hrs+'</h3><p>'+K.hrsT+'</p></div></div><p class="note rv">'+K.note+'</p></div></section>';
+ return phead("kontakt", K.h1, K.lead, 12)+teamBlock()+'<section class="sec"><div class="wrap"><div class="cgrid two"><div class="rv"><h3>'+K.off+'</h3><p>'+K.offT+'</p></div><div class="rv"><h3>'+K.hrs+'</h3><p>'+K.hrsT+'</p></div></div><p class="note rv">'+K.note+'</p></div></section>';
 }
 function pageLegal(which){
  var t = LEGAL[which];
@@ -2608,6 +2802,7 @@ function openSector(id){
 /* ------------------------------------------------------------ assistant
    A question box that answers only from this site: the investor questions first,
    then sectors, free zones, exporters, events and rules. Nothing leaves the browser. */
+var ASK_SMILE = '<svg viewBox="0 0 32 32" width="30" height="30" fill="none" aria-hidden="true"><path d="M16 4.5c-6.9 0-12.5 4.9-12.5 11 0 3.2 1.5 6 4 8l-1.3 4.6 5.1-2.6c1.5.5 3 .8 4.7.8 6.9 0 12.5-4.9 12.5-11S22.9 4.5 16 4.5z" fill="currentColor"/><circle cx="11.6" cy="14.2" r="1.7" fill="var(--sm-eye)"/><circle cx="20.4" cy="14.2" r="1.7" fill="var(--sm-eye)"/><path d="M11 18.6c1.3 1.8 3 2.7 5 2.7s3.7-.9 5-2.7" stroke="var(--sm-eye)" stroke-width="1.8" stroke-linecap="round"/></svg>';
 var ASK_ICON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 9.5h7M8.5 12.5h4.5"/></svg>';
 var STOP = {
  de:"der die das ein eine einen einem einer und oder ist sind wie was wo wer wann gibt es kann können ich wir sie mit für von in im an am auf nach zu zum zur bei ob man mein meine unser sich auch nicht",
@@ -2697,7 +2892,25 @@ function askReply(q, faqId){
   }).join("")+'</div>' : ''));
  }, reduce ? 0 : 380);
 }
+/* the nudge: a speech bubble next to the button, first after 15 s, then every two minutes,
+   until the visitor has opened the assistant or dismissed the bubble */
+var askNudgeOff = false, askNudgeT = null, askNudgeHide = null, askNudgeN = 0;
+function askNudge(on){
+ var n = $("#askNudge"); if(!n) return;
+ clearTimeout(askNudgeHide);
+ if(on){ n.hidden = false; requestAnimationFrame(function(){ n.classList.add("on"); }); $("#askFab").classList.add("pulse"); setTimeout(function(){ $("#askFab").classList.remove("pulse"); }, 1400); askNudgeHide = setTimeout(function(){ askNudge(false); }, 9000); }
+ else { n.classList.remove("on"); setTimeout(function(){ if(!n.classList.contains("on")) n.hidden = true; }, 300); }
+}
+function askNudgeLoop(){
+ clearTimeout(askNudgeT);
+ askNudgeT = setTimeout(function(){
+  if(askNudgeOff) return;
+  if(!document.hidden && !document.documentElement.classList.contains("ask-open")){ askNudge(true); askNudgeN++; }
+  askNudgeLoop();
+ }, askNudgeN === 0 ? 15000 : 120000);
+}
 function askOpen(){
+ askNudgeOff = true; askNudge(false);
  var p = $("#askP"); p.hidden = false;
  requestAnimationFrame(function(){ p.classList.add("on"); });
  document.documentElement.classList.add("ask-open");
@@ -2721,12 +2934,14 @@ function renderAsk(){
  var A = L.ask;
  if(!$("#askP")){
   document.body.insertAdjacentHTML("beforeend",
-   '<button class="askfab" id="askFab" type="button" data-ask aria-haspopup="dialog" aria-controls="askP">'+ASK_ICON+'<span></span></button>'+
-   '<section class="askp" id="askP" role="dialog" aria-labelledby="askT" hidden><header><div><b id="askT"></b><small id="askS"></small></div><button class="ax" type="button" id="askX"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>'+
+   '<button class="askfab" id="askFab" type="button" data-ask aria-haspopup="dialog" aria-controls="askP">'+ASK_SMILE+'<span class="sr"></span></button>'+
+   '<div class="asknudge" id="askNudge" hidden><button type="button" class="nt" data-ask></button><button type="button" class="nx" id="askNx">×</button></div>'+
+   '<section class="askp" id="askP" role="dialog" aria-labelledby="askT" hidden><header><span class="av">'+ASK_SMILE+'</span><div><b id="askT"></b><small id="askS"></small></div><button class="ax" type="button" id="askX"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>'+
    '<div class="log" id="askLog" aria-live="polite"></div>'+
-   '<form id="askF" autocomplete="off"><input name="q" maxlength="200" enterkeyhint="send"><button type="submit" id="askGo"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>'+
+   '<form id="askF" autocomplete="off"><input name="q" maxlength="200" enterkeyhint="send"><button type="submit" id="askGo"><svg viewBox="0 0 24 24" width="17" height="17" fill="none"><path d="M3 11 21 3l-8 18-2-8-8-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button></form>'+
    '<p class="priv" id="askPriv"></p></section>');
   $("#askX").addEventListener("click", askClose);
+  $("#askNx").addEventListener("click", function(e){ e.stopPropagation(); askNudge(false); askNudgeOff = true; });
   $("#askF").addEventListener("submit", function(e){ e.preventDefault(); var q = this.q.value.trim(); if(!q) return; this.q.value = ""; askReply(q); });
   $("#askLog").addEventListener("click", function(e){
    var c = e.target.closest("[data-faq]"); if(c){ askReply(c.textContent, c.getAttribute("data-faq")); return; }
@@ -2736,7 +2951,8 @@ function renderAsk(){
    if(w){ var q = w.closest(".msg").getAttribute("data-q"); if(window.innerWidth < 700) askClose(); go("service"); setTimeout(function(){ selectForm("partner"); var t = $("#aneed"); if(t){ t.value = q; t.focus({preventScroll:true}); } }, 30); }
   });
  }
- $("#askFab span").textContent = A.btn; $("#askFab").setAttribute("aria-label", A.t);
+ $("#askFab span").textContent = A.t; $("#askFab").setAttribute("aria-label", A.t); $("#askFab").title = A.t;
+ $("#askNudge .nt").textContent = "👋 " + A.nudge; $("#askNx").setAttribute("aria-label", A.nudgeX);
  $("#askT").textContent = A.t; $("#askS").textContent = A.sub; $("#askPriv").textContent = A.privacy;
  $("#askX").setAttribute("aria-label", A.close); $("#askGo").setAttribute("aria-label", A.send);
  $("#askF").q.placeholder = A.ph; $("#askF").q.setAttribute("aria-label", A.ph);
@@ -2784,7 +3000,7 @@ window.addEventListener("resize", fitBar);
 if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitBar);
 
 $$(".flag-tj").forEach(function(f){ f.innerHTML = FLAG_TJ; });
-paintOrnaments(); renderChrome(); renderHero(); renderAsk(); route();
+paintOrnaments(); renderChrome(); renderHero(); renderAsk(); route(); askNudgeLoop();
 })();
 
 </script>

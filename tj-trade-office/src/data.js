@@ -44,7 +44,13 @@ var SRC = [
  {t:"Auswärtiges Amt — Tadschikistan: Reise- und Sicherheitshinweise, Einreise und Zoll (Stand 03.10.2026)", u:"https://www.auswaertiges-amt.de/de/service/laender/tadschikistan-node/tadschikistansicherheit-206756"},
  {t:"Vertrag zwischen der Bundesrepublik Deutschland und der Republik Tadschikistan über die Förderung und den gegenseitigen Schutz von Kapitalanlagen, 27.03.2003 — BGBl. 2005 II S. 538", u:"https://edit.wti.org/wti-filesystem/20220210/aa204993-6df2-4424-81dc-6ca6a4cbf977/Germany%20-%20Tajikistan.pdf"},
  {t:"U.S. Department of State — 2024 Investment Climate Statements: Tajikistan", u:"https://www.state.gov/reports/2024-investment-climate-statements/tajikistan/"},
- {t:"AHK Zentralasien — Delegationsreise nach Duschanbe, 03.–06.11.2026", u:"https://zentralasien.ahk.de/de/veranstaltungen/events-2026/delegationsreise-nach-duschanbe"}
+ {t:"AHK Zentralasien — Delegationsreise nach Duschanbe, 03.–06.11.2026", u:"https://zentralasien.ahk.de/de/veranstaltungen/events-2026/delegationsreise-nach-duschanbe"},
+ {t:"Eurostat — Comext DS-045409, EU trade by HS2-4-6 and CN8: imports of Germany from Tajikistan (country of origin), 2023–2025, data as of 15.09.2026", u:"https://ec.europa.eu/eurostat/api/comext/dissemination/statistics/1.0/data/DS-045409?format=JSON&freq=A&reporter=DE&partner=TJ&flow=1&indicators=VALUE_IN_EUROS&product=TOTAL&time=2023&time=2024&time=2025"},
+ {t:"Gulfood 2026, Dubai — exhibitor brand profile: Barakat Isfara", u:"https://www.gulfood.com/gulfood-2026-brands/barakat-isfara"},
+ {t:"Gulfood 2026, Dubai — exhibitor profile: Isfarafood LLC", u:"https://www.gulfood.com/exhibitors/isfarafood-llc"},
+ {t:"Gulfood 2026, Dubai — exhibitor profile and press release: Oro Isfara LLC", u:"https://www.gulfood.com/exhibitors/oro-isfara-llc"},
+ {t:"Gulfood 2026, Dubai — exhibitor profile: Zardolui Isfara LLC (Zardolu)", u:"https://www.gulfood.com/exhibitors/zardolui-isfara-llc"},
+ {t:"Gulfood 2026, Dubai — exhibitor profile: Visol Isfara LLC (brand Vodii Zarrin)", u:"https://www.gulfood.com/exhibitors/visol-isfara-llc"}
 ];
 function sref(n){ return '<a class="src" href="#quellen" data-src="'+n+'" title="'+(SRC[n]?SRC[n].t.replace(/"/g,"&quot;"):"")+'">['+n+']</a>'; }
 
@@ -77,9 +83,7 @@ var NEWS = [
 /* the trade representative: this is his own website */
 var REP = {li:"https://www.linkedin.com/in/masrur-kurbonalizoda-034483270",
  n:{de:"Masrur Kurbonalizoda", en:"Masrur Kurbonalizoda", ru:"Масрур Курбонализода", tj:"Масрур Қурбонализода"},
- ini:{de:"MK", en:"MK", ru:"МК", tj:"МК"},
- /* public LinkedIn profile picture, shared by his office */
- photo:"media/rep.jpg"};
+ ini:{de:"MK", en:"MK", ru:"МК", tj:"МК"}};
 
 /* Access2Markets lookup: the result opens on the EU portal with Tajikistan as origin */
 var A2M = {
@@ -91,15 +95,31 @@ var A2M = {
 
 /* Dried-fruit exporters from Sughd, only as reported by the cited sources (src).
    Vodii Mevaho is Tajik for "Valley of Fruits" — the same company that appeared at FiE 2025 as Dolina Fruktov (Russian name). */
+/* What Germany imported from Tajikistan (country of origin), Eurostat Comext DS-045409, CN8 lines.
+   Tonnes from QUANTITY_IN_100KG / 10, euros from VALUE_IN_EUROS. */
+var DEIMP = {src:45, years:[2023,2024,2025], total:[2803511,2184084,5283454],
+ items:[
+  {k:"kernels", cn:"1212 99 95", t:[889.0,741.3,1385.2], v:[2528292,1692446,3671120], img:"p_kernels"},
+  {k:"apple",   cn:"0813 30 00", t:[107.5,322.5,511.6],  v:[139816,419250,715569],  img:"p_apple"},
+  {k:"apricot", cn:"0813 10 00", t:[0,0.3,116.6],        v:[0,255,479149],          img:"p_apricot"}
+ ],
+ /* other lines worth naming, euros */
+ other:[{k:"pharma", y:2025, v:256070},{k:"carpets", y:2023, v:16400},{k:"denim", y:2023, v:28088},{k:"rice", y:2023, v:19030}]
+};
+
 var EXPORTERS = [
- {n:"Barakat Isfara", f:"LLC", city:"isfara", feat:true, pr:["apricot","prunes","raisins","compote","chopped","snacks","sweets","apple","rosehip","mulberry","walnuts","kernels","almonds"],
+ {n:"Barakat Isfara", gf:true, f:"LLC", city:"isfara", y:2008, feat:true, logo:"l_barakat",
+  pics:["p_apricot","p_kernels","p_apple","p_walnut","p_rosehip","p_mulberry"], shots:["bk_factory","bk_line"],
+  pr:["apricot","prunes","raisins","compote","chopped","snacks","sweets","apple","rosehip","mulberry","walnuts","kernels","almonds"],
   mk:["RU","CZ","TR","CA","MY"], std:"HACCP", staff:"140+", fair:true,
-  web:"https://barakat-isfara.com", mail:"info@barakat-isfara.com", tel:"+992 98 770 0565", src:[36,37,34]},
- {n:"Isfara Food", f:"LLC", city:"isfara", y:2010, pr:["apricot","apple","pear","compote"], mk:["RU","KZ","EU"], cert:"FSSC 22000", cy:2026, src:[32]},
- {n:"Oro Isfara", f:"LLC", city:"isfara", cap:">2000", pr:["fruit","nuts"], mk:["CIS","EU"], cert:"FSSC 22000", cy:2026, src:[32]},
+  web:"https://barakat-isfara.com", mail:"info@barakat-isfara.com", tel:"+992 98 770 0565",
+  ig:"https://www.instagram.com/barakatisfara/", yt:"https://www.youtube.com/watch?v=LVxMKZkdVLg", src:[36,37,34,46]},
+ {n:"Isfarafood", gf:true, f:"LLC", city:"isfara", y:2010, logo:"l_isfarafood", pr:["apricot","apple","pear","compote","chopped"], mk:["RU","KZ","EU"], cert:"FSSC 22000", cy:2026, src:[32,47]},
+ {n:"Oro Isfara", gf:true, f:"LLC", city:"isfara", logo:"l_oro", pic:"oro_photo", cap:">2000", pr:["apricot","raisins","prunes","nuts"], mk:["CIS","EU"], cert:"FSSC 22000", cy:2026, src:[32,48]},
+ {n:"Zardolu", gf:true, f:"LLC «Zardolui Isfara»", city:"isfara", logo:"l_zardolu", pr:["apricot"], mk:["RU","EU","US","ME"], cert:"FSSC 22000", cy:2025, std:"ISO 22000:2018", src:[33,49]},
+ {n:"Vodii Zarrin", gf:true, f:"LLC «Visol Isfara»", city:"isfara", logo:"l_vodiizarrin", pr:["apricot","prunes","mulberry","canned"], mk:["CIS"], src:[50]},
  {n:"Vodii Mevaho", f:"LLC", alias:"Fruits Valley · Dolina Fruktov", city:"isfara", y:2017, cap:"≤1500", pr:["fruit","nuts","rosehip","kernels"], mk:["DE","PL","TR","US","CIS"], cert:"FSSC 22000", cy:2026, fair:true, src:[32,34]},
  {n:"Ali Apricot", city:"isfara", pr:["apricot","raisins","prunes"], fair:true, src:[34]},
- {n:"Zardolui Isfara", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]},
  {n:"Mevai Kand", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]},
  {n:"Kand K", city:"sughd", pr:["fruit"], cert:"FSSC 22000", cy:2025, src:[33]}
 ];
