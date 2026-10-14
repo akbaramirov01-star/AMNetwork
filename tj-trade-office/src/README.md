@@ -1,11 +1,11 @@
 # Handels- und Investitionsbüro — Quellen der Website
 
-`index.html` eine Ebene höher ist die fertige, eigenständige Seite (three.js r128 eingebettet).
-Die Dateien hier sind ihre Bausteine. Nach einer Änderung neu bauen:
+`index.html`, `ru.html`, `en.html`, `tj.html` eine Ebene höher sind die fertigen Seiten.
+Die Dateien hier sind ihre Bausteine. Nach einer Änderung neu bauen (vom Wurzelordner aus):
 
-    cd tj-trade-office/src
-    # three.min.js (r128) daneben ablegen: npm pack three@0.128.0, build/three.min.js
-    python3 build.py      # schreibt index.html und artifact.html in diesen Ordner
+    python3 src/build.py   # schreibt index.html, ru.html, en.html, tj.html in den Wurzelordner
+
+Regeln für Inhalte und Arbeitsablauf: `CLAUDE.md` im Wurzelordner.
 
 | Datei | Inhalt |
 |---|---|

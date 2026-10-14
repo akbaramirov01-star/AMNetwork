@@ -13,7 +13,9 @@ from PIL import Image, ImageFilter
 import imageio_ffmpeg
 
 D = os.path.dirname(os.path.abspath(__file__))
-RAW, OUT = os.path.join(D, "raw"), os.path.join(D, "media")
+# repository layout: src/ next to media/ and raw/ at the site root; flat working copy: all in one folder
+ROOT = os.path.dirname(D) if os.path.isdir(os.path.join(os.path.dirname(D), "media")) else D
+RAW, OUT = os.path.join(ROOT, "raw"), os.path.join(ROOT, "media")
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 FRAMES = 84
 # AI video is soft even at 1080p: a gentle unsharp mask restores perceived detail without halos
@@ -38,6 +40,10 @@ def fit(im, w):
 
 
 def main():
+    # media/ is rebuilt from scratch, so never run without the source material in raw/
+    if not os.path.isdir(RAW):
+        sys.exit("raw/ not found: the original pictures and films are not in this repository. "
+                 "Add a single picture by hand to media/ and media/manifest.json instead.")
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
     os.makedirs(OUT)
