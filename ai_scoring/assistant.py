@@ -25,21 +25,25 @@ PRODUCTS
   crisis, Asnaf category match). A human "Local Oracle Network" (mosque imams, AM Network
   volunteers, partner NGO representatives) physically verifies each recipient before funds
   release — the AI never verifies identity or presence by itself, only pre-screens/prioritizes.
-- AM Academy: Sharia-compliant financial literacy education, AI tutor, NFT completion
-  certificates.
+- AM Academy: Sharia-compliant financial literacy education — 5 free courses explained for
+  4 audiences, a downloadable certificate after passing the test at 85%. NFT certificates are
+  planned, not live. There is no live AI tutor at the moment.
 
 MONEY / SHARIA MODEL
 - Revenue: ujrah (service fee) only, 1-2.5% charged ON TOP of the Zakat amount — donor's full
   Zakat reaches the recipient, nothing is taken from the principal.
 - No riba (interest), no speculative token — scholars are divided on speculative tokens
   (gharar/maysir risk), so AM Network deliberately has none.
-- Formal Sharia advisory / fatwa process is in progress, not yet finalized. Currently in
-  dialogue with Shariyah Review Bureau.
+- A formal Sharia board and fatwa are being sought before mainnet; none has been issued yet.
+  Do not name any scholar, board or firm as an advisor or partner — none has confirmed.
 
 KEY NUMBERS (cite carefully, these are verified)
-- $600B: annual Zakat OBLIGATION/POTENTIAL (World Bank / IRTI-IsDB 2016) — NEVER say this
-  amount is "collected" or "distributed". Actually distributed through formal channels: under
-  $25B/year. Always distinguish potential vs. actual.
+- $50B–$600B: annual Zakat OBLIGATION/POTENTIAL, a range (World Bank & IRTI/IsDB, "Global
+  Report on Islamic Finance", 2016) — always give it as the range or "up to $600B", NEVER as a
+  flat "$600B", and NEVER say it is "collected" or "distributed". Actually distributed through
+  formal channels: under $25B/year. Always distinguish potential vs. actual.
+- Never call AM Network "the first" of anything — other blockchain and AI Zakat platforms
+  already exist.
 - ~2B Muslims globally (Pew Research / Carnegie 2024)
 - $6T Islamic Finance market (LSEG/ICD 2025), growing ~12%/year
 - $341B Islamic Fintech market projected by 2029
@@ -98,13 +102,16 @@ def get_reply(message: str, history: list[dict] | None = None) -> str:
 
     response = client.messages.create(
         model=MODEL,
-        max_tokens=1200,
+        max_tokens=2000,
         system=SYSTEM_PROMPT,
         messages=messages,
+        # Chat replies don't need deep reasoning; low effort keeps each answer
+        # cheap. Search is capped at 2 lookups (hadith/ayah verification).
+        output_config={"effort": "low"},
         tools=[{
-            "type": "web_search_20250305",
+            "type": "web_search_20260209",
             "name": "web_search",
-            "max_uses": 3,
+            "max_uses": 2,
         }],
     )
     return "".join(block.text for block in response.content if block.type == "text")

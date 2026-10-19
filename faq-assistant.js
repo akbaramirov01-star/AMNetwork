@@ -9,9 +9,20 @@
  * its answer); the best entry wins. No match → an honest fallback with links.
  *
  * Keep the facts in sync with CLAUDE.md (launch status, fees, figures).
+ *
+ * Hybrid mode (October 2026): tapping a ready-made question chip is still
+ * answered here, free. A question the visitor TYPES goes to the live AI
+ * assistant (/chat on the backend) when LIVE_AI is true; if that call fails
+ * for any reason — backend asleep, daily budget used up, LIVE_AI_ENABLED off
+ * on Render (410) — the visitor silently gets the offline answer instead.
+ * Only the assistant spends AI credits; nothing else on the site does.
  */
 (function(){
   const LANGS = ['en','ru','tj','ar','id','tr','zh','ms','fr','de'];
+  const LIVE_AI = true;
+  const API = 'https://amnetwork.onrender.com/chat';
+  const LIVE_TIMEOUT_MS = 40000;   // Render's free tier can take ~30 s to wake up
+  const history = [];              // [{role, content}] for the live assistant, this page view only
 
   const UI = {
     en:{title:'Assistant', more:'Other questions', open:'Open'},
@@ -372,9 +383,40 @@
   css.textContent = '.asst-chips{display:flex;flex-wrap:wrap;gap:6px;align-self:stretch}' +
     '.asst-chip{font:inherit;font-size:13px;line-height:1.3;padding:7px 11px;border-radius:999px;border:1px solid rgba(201,168,76,.45);background:transparent;color:var(--text,#eee);cursor:pointer;text-align:left;text-decoration:none}' +
     '.asst-chip:hover{background:rgba(201,168,76,.12)}.asst-chip:disabled{opacity:.45;cursor:default}' +
-    '.asst-chip-link{background:var(--gold,#C9A84C);color:#0A1A11;border-color:transparent;font-weight:700}';
+    '.asst-chip-link{background:var(--gold,#C9A84C);color:#0A1A11;border-color:transparent;font-weight:700}' +
+    '.asst-msg.bot{white-space:pre-wrap}';
   (document.head || document.documentElement).appendChild(css);
 
-  window.AMN_FAQ = { KB, UI, FALLBACK, LANGS, reply, renderChips,
+  // A chip's text is exactly one of the KB questions — answer those offline.
+  function isChip(text, lang){
+    const n = norm(text);
+    return KB.some(e => norm(pick(e.q, lang)) === n || norm(e.q.en) === n);
+  }
+  function plain(md){
+    return String(md || '').replace(/\*\*(.+?)\*\*/g, '$1').replace(/^#{1,6}\s+/gm, '').replace(/\[(.+?)\]\((https?:[^)]+)\)/g, '$1 ($2)').trim();
+  }
+  // Resolves to {text, entry, live}. Never rejects.
+  async function answer(text, lang){
+    const offline = reply(text, lang);
+    if (!LIVE_AI || isChip(text, lang)) return Object.assign({ live: false }, offline);
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), LIVE_TIMEOUT_MS);
+    try {
+      const res = await fetch(API, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctrl.signal,
+        body: JSON.stringify({ message: text.slice(0, 2000), history: history.slice(-10), lang }),
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const j = await res.json();
+      const out = plain(j.reply);
+      if (!out) throw new Error('empty reply');
+      history.push({ role: 'user', content: text.slice(0, 2000) }, { role: 'assistant', content: out.slice(0, 2000) });
+      return { text: out, entry: null, live: true };
+    } catch (e) {
+      return Object.assign({ live: false }, offline);
+    } finally { clearTimeout(timer); }
+  }
+
+  window.AMN_FAQ = { KB, UI, FALLBACK, LANGS, reply, answer, renderChips,
     title: lang => (UI[lang] || UI.en).title };
 })();

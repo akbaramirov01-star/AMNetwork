@@ -956,7 +956,7 @@ function toggleAssistant(){
     setTimeout(()=>document.getElementById('asstInput').focus(),100);
   }
 }
-// Free, offline answers (faq-assistant.js) — no backend, no per-question cost.
+// Chips are answered offline for free; typed questions go to the live AI (faq-assistant.js).
 function sendAssistantMessage(preset){
   const input = document.getElementById('asstInput');
   const msg = (typeof preset === 'string' ? preset : input.value).trim();
@@ -971,12 +971,13 @@ function sendAssistantMessage(preset){
   typing.innerHTML = '<span></span><span></span><span></span>';
   box.appendChild(typing);
   box.scrollTop = box.scrollHeight;
-  setTimeout(() => {
+  const minWait = new Promise(res => setTimeout(res, 450));
+  const ask = window.AMN_FAQ ? AMN_FAQ.answer(msg, L) : Promise.resolve({text: asstT().error, entry: null});
+  Promise.all([ask, minWait]).then(([r]) => {
     typing.remove();
-    const r = window.AMN_FAQ ? AMN_FAQ.reply(msg, L) : {text: asstT().error, entry: null};
     asstAddMsg('bot', r.text);
     if(window.AMN_FAQ) AMN_FAQ.renderChips(box, L, sendAssistantMessage, r.entry);
-  }, 450);
+  });
 }
 document.getElementById('asstCloseBtn').addEventListener('click', toggleAssistant);
 document.getElementById('asstSendBtn').addEventListener('click', sendAssistantMessage);
