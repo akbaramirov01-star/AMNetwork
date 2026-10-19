@@ -10,4 +10,4 @@
 
 `knowledge-grows-10s-*.mp4` — "Knowledge Grows" (AM Academy), 10 s, approved by the founder (October 2026). Morning study desk with books, tea and a laptop showing an AM Academy lecture ("Financial Literacy: Building a Halal Budget"); the camera pushes in to the all-gold certificate seal in one straight move at a single constant speed (exponential zoom anchored on the seal, rendered procedurally from the Kling stills — no cuts, no sideways drift, per founder). The laptop screen and seal were composited from our own HTML layout and the official logo, so the text and emblem are exact.
 
-Site copies used on the homepage live in `media/site/` (short muted loops + posters + the full films).
+These films are no longer shown on the site (removed from the homepage product cards at the founder's request, October 2026). They are kept here for social media and ads.
