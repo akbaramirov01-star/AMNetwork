@@ -1,4 +1,12 @@
-# AM Academy content — "Stories of the Prophets" (state as of 19 Oct 2026)
+# AM Academy content — "Stories of the Prophets"
+
+**Current source of truth: `AM_Academy_handoff_19oct-17nov.pdf` in this folder** (state on 17 Nov 2026:
+episodes 8–13 done, Musa part 1 ready, new daily short-part format, all rules, character sheet and
+voice job ids, production recipe, metrics). Read it before any new episode. The notes below are the
+older 19 Oct snapshot, kept for history.
+
+---
+
 
 Moved here from a claude.ai chat (shared 17 Nov 2026) so Claude Code sessions keep the context.
 The working files of that chat (`claude/season2-plan.md`, `claude/publish-pack-15-18-oct.md`,
