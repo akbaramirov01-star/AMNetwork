@@ -2,7 +2,26 @@
   "mcpServers": {
     "ruflo": {
       "command": "npx",
-      "args": ["ruflo@latest", "mcp", "start"]
+      "args": [
+        "ruflo@latest",
+        "mcp",
+        "start"
+      ]
     }
+  },
+  "permissions": {
+    "allow": [
+      "mcp__Higgsfield_ai__sandbox_exec",
+      "mcp__Higgsfield_ai__jobs_wait",
+      "mcp__Higgsfield_ai__balance",
+      "mcp__Higgsfield_ai__transactions",
+      "mcp__Higgsfield_ai__media_upload",
+      "mcp__Higgsfield_ai__media_confirm",
+      "mcp__Higgsfield_ai__show_generations",
+      "mcp__Higgsfield_ai__show_generation_by_ids",
+      "mcp__Higgsfield_ai__estimate_video_cost",
+      "mcp__Higgsfield_ai__estimate_audio_cost",
+      "mcp__Higgsfield_ai__estimate_image_cost"
+    ]
   }
 }
