@@ -53,3 +53,12 @@ The working files of that chat (`claude/season2-plan.md`, `claude/publish-pack-1
   planned 20–31 Oct for TikTok, Shorts, Reels. Before posting, check on sunnah.com the hadith numbers
   flagged in that pack: Bukhari 3191 and 433, Tirmidhi 2955 and 3368, Muslim 2980.
 - Telegram and X: project news only, no more videos there. Posting rhythm: teaser 08:00, full 20:00 Berlin.
+
+## Musa part 2 — done 18 Nov 2026 (Claude Code session)
+- Video 1:26: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/d85d6f5a-38ac-40e7-a651-fdd67e9d8772.mp4
+- Cover: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/bdf74480-471b-497b-8619-2a203ca39ed0.jpg
+- Sources Quran 28:9–13 (Sahih International, checked via api.quran.com). Hook "DON'T KILL HIM!". Card "WHY DID HE RUN AWAY? · Part 3 tomorrow".
+- Cost 108.6 cr (2180.35 → 2071.75). Lessons: seed_audio flagged "nsfw" on a line with both "Do not kill him" and "adopt him as a son" — rephrased "take him as a son" passed;
+  the single-call generate_audio tool dropped the voice reference (wrong voice) — use generate_audio_batch with role audio_references;
+  seedance changed "Musa, peace be upon him" to "Moses… spied upon him" — line 04 uses the recorded audio (build.py rec mode).
+- Sandbox: ~/m2 (copy of ~/m1 recipe, cfg.json for part 2).
