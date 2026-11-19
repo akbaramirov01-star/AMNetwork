@@ -11,6 +11,8 @@
   },
   "permissions": {
     "allow": [
+      "mcp__Higgsfield_ai__*",
+      "mcp__Higgsfield_ai",
       "mcp__Higgsfield_ai__sandbox_exec",
       "mcp__Higgsfield_ai__jobs_wait",
       "mcp__Higgsfield_ai__balance",
