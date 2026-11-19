@@ -62,3 +62,13 @@ The working files of that chat (`claude/season2-plan.md`, `claude/publish-pack-1
   the single-call generate_audio tool dropped the voice reference (wrong voice) — use generate_audio_batch with role audio_references;
   seedance changed "Musa, peace be upon him" to "Moses… spied upon him" — line 04 uses the recorded audio (build.py rec mode).
 - Sandbox: ~/m2 (copy of ~/m1 recipe, cfg.json for part 2).
+
+## Musa part 3 — done 19 Nov 2026
+- Video 1:29: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/c18108f1-1e61-4d15-97b9-6ba013fc6e15.mp4
+- Cover: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/02cb1544-08ef-4cb8-9ca8-4af9e8e0604c.jpg
+- Story 28:15–24: accidental killing, repentance (28:16), warning (28:20), flight (28:21), well of Madyan (28:23–24),
+  dua 28:24 recited in Arabic — Wikimedia Commons "Chapter 28, Al-Qasas (Murattal)", Atcovi, CC0, ayah at 616.8–628.0 s;
+  Arabic text with word-by-word gold highlight (sandbox ~/m3/dua.py, Amiri Quran font). Card: "WHO CAME TO THE WELL? · Part 4 tomorrow".
+- Cost 106.8 cr (2071.75 → 1964.95). Lessons: a scene prompt drifted into a modern asphalt road — say "only ancient things, no roads";
+  seedance dropped "peace be upon him" in a dialogue clip (03) and doubled a word (08) — both use the recorded audio.
+- Next: Musa part 4 (28:25–28 the father of the women, marriage, 10 years; then the fire at Tur 28:29) and part 5 (the sea, 26:63).
