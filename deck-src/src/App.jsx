@@ -189,8 +189,9 @@ function Stat({n,l}) {
 function Scene({children}) {
   return (
     <motion.div variants={sceneIn} initial="initial" animate="animate" exit="exit"
-      style={{position:'absolute',inset:0,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',padding:'76px 44px 56px',overflowY:'auto',background:'transparent'}}>
-      {children}
+      style={{position:'absolute',inset:0,display:'flex',flexDirection:'column',alignItems:'center',padding:'76px 44px 56px',overflowY:'auto',background:'transparent'}}>
+      {/* margin:auto centres the slide when it fits and lets it scroll from the top when it does not */}
+      <div style={{margin:'auto 0',width:'100%',display:'flex',flexDirection:'column',alignItems:'center'}}>{children}</div>
     </motion.div>
   )
 }
@@ -355,7 +356,7 @@ function S3({t}) {
 function Step({n,title,body}) {
   return (
     <motion.div variants={itemAnim}
-      style={{background:'rgba(5,11,24,.80)',backdropFilter:'blur(12px)',border:'1px solid rgba(201,168,76,.16)',borderRadius:14,padding:'14px 13px',flex:1,minWidth:150,maxWidth:176,textAlign:'left'}}>
+      style={{background:'rgba(5,11,24,.80)',backdropFilter:'blur(12px)',border:'1px solid rgba(201,168,76,.16)',borderRadius:14,padding:'14px 13px',flex:1,minWidth:136,maxWidth:176,textAlign:'left'}}>
       <div style={{width:26,height:26,borderRadius:'50%',background:'rgba(201,168,76,.14)',border:'1px solid rgba(201,168,76,.4)',color:'var(--gold)',fontWeight:800,fontSize:'.8rem',display:'flex',alignItems:'center',justifyContent:'center',marginBottom:8}}>{n}</div>
       <div style={{fontWeight:700,fontSize:'.86rem',marginBottom:5}}>{title}</div>
       <div style={{fontSize:'.74rem',color:'var(--dim)',lineHeight:1.45}}>{body}</div>
