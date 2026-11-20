@@ -1,3 +1,5 @@
+> ⚠️ ARCHIVED (November 2026): written for the old blockchain/token model — do not send. See docs/messaging-2026-11.md.
+
 # Письмо: Shariyah Review Bureau (Бахрейн)
 
 **Кому:** hashim@shariyah.com (ИСПРАВЛЕНО — правильный домен .com, не .net; info@shariyah.net не принимает почту, письмо отклонено дважды)

@@ -1,3 +1,5 @@
+> ⚠️ ARCHIVED (November 2026): written for the old blockchain/token model — do not send. See docs/messaging-2026-11.md.
+
 # Заявка: Qatar FinTech Hub (QFTH) Wave 9
 
 **Статус:** Wave 8 закрыта (31 мая 2026). Wave 9 ожидается **октябрь 2026**.

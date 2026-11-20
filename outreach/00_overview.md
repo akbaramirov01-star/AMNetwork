@@ -1,3 +1,5 @@
+> ⚠️ ARCHIVED (November 2026): written for the old blockchain/token model — do not send. See docs/messaging-2026-11.md.
+
 # AM Network — Центр аутрич-активности
 
 **Основатель:** Акбар Амирзода | **Стадия:** Pre-seed | **Дата:** Июнь 2026

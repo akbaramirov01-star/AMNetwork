@@ -107,17 +107,18 @@ alerts to your phone.
 
 ---
 
-## 7. Legal and Sharia, before a single real dinar
+## 7. Legal and Sharia, before the pilot
 
-Not a website task, but the one that decides whether this can exist:
+Not a website task, but the one that decides whether the pilot can start:
 
-- **Legal entity and licence.** Accepting and forwarding other people's Zakat
-  is regulated money transmission in most jurisdictions. ADGM or Labuan, as
-  planned — but this is not a "when we get round to it" item, it gates
-  taking money at all.
-- **Sharia review and fatwa.** The site claims Sharia compliance with no named
-  advisor. Until someone signs it, say "under review" rather than "certified".
-- **Security audit of the contracts** before mainnet.
+- **Lawyer consultation in Tajikistan.** Under the November 2026 model AM
+  Network never holds or forwards money — the donor gives to the family
+  directly — so no money-transfer licence should be needed. Confirm that with
+  a Tajik lawyer before the pilot, together with the rules for processing
+  families' personal data and photos.
+- **Hanafi scholar's review.** Ask a Hanafi scholar to review the model
+  (AM Network as the donor's agent, taking nothing from Zakat). Until someone
+  has reviewed it, say "we are seeking review" — never "certified".
 
 ---
 
@@ -139,10 +140,12 @@ Written down so it is not forgotten:
   The other 7 languages fall back to translating live through the backend on
   every view — it works, but it is slow on a cold start and costs per view.
   Running `ai_scoring/pregenerate.py` with an API key would fix that.
-- **A working demo of the actual product.** Still the biggest gap between what
-  the site promises and what it shows: pick a recipient, see the score
-  breakdown, send a test Zakat on Base testnet, see the transaction. One
-  clickable end-to-end flow is worth more to an investor than any page here.
+- **A trial run of the actual product.** Still the biggest gap between what
+  the site describes and what it shows: application → in-person check →
+  approval → payout → entry in the open report (`/cabinet/`,
+  `/transparency/`), run end to end on 2–3 families from the founder's own
+  Zakat. One real run is worth more than any page here.
 - **The Zakat calculator is a dead end.** Someone works out they owe $400 and
-  then leaves. The next screen should invite them to reserve that Zakat
-  through AM Network.
+  then leaves. The next screen could explain how AM Network checks families
+  in person and link to the open report — without ever collecting the Zakat
+  itself (the donor gives to the family directly).

@@ -1,3 +1,5 @@
+> ⚠️ ARCHIVED (November 2026): written for the old blockchain/token model — do not send. See docs/messaging-2026-11.md.
+
 # Грант: Algorand Foundation
 
 **Email:** НЕ РАБОТАЕТ — grants@algorand.foundation и haichao@algorand.foundation оба отклонены (550 не существует). Не пытаться писать на @algorand.foundation.

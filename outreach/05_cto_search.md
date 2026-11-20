@@ -1,3 +1,5 @@
+> ⚠️ ARCHIVED (November 2026): written for the old blockchain/token model — do not send. See docs/messaging-2026-11.md.
+
 # Поиск CTO — Полный гайд
 
 > CTO — самый важный шаг сейчас. Без него заблокированы: смарт-контракты, AI API, все инвесторы класса A.

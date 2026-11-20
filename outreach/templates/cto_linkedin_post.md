@@ -1,3 +1,5 @@
+> ⚠️ ARCHIVED (November 2026): written for the old blockchain/token model — do not send. See docs/messaging-2026-11.md.
+
 # Посты для поиска CTO
 
 **Когда публиковать:** 12 июня 2026 (вечер, 20:00)

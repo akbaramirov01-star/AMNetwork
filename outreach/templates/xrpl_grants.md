@@ -1,3 +1,5 @@
+> ⚠️ ARCHIVED (November 2026): written for the old blockchain/token model — do not send. See docs/messaging-2026-11.md.
+
 # Заявка: XRPL Grants (Ripple Foundation)
 
 **Сайт:** xrplgrants.org → кнопка "Apply for a Grant"

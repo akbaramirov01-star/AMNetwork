@@ -1,3 +1,5 @@
+> ⚠️ ARCHIVED (November 2026): written for the old blockchain/token model — do not send. See docs/messaging-2026-11.md.
+
 # Расписание действий — с 12 июня 2026
 
 > Приоритет: **CTO > Шариа-советник > Гранты (без equity) > Акселераторы**

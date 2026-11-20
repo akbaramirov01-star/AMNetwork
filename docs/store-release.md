@@ -90,8 +90,9 @@ Apple rejects apps that are only a website in a wrapper (guideline 4.2,
 "minimum functionality"). A TWA-equivalent alone will very likely be
 refused. Realistic options:
 
-1. **Wait.** Publish on Play first, and submit to Apple once the Zakat flow
-   itself exists in-app — at that point there is a native reason to exist.
+1. **Wait.** Publish on Play first, and submit to Apple once the
+   verification flow itself (cabinet, open report) is part of the app — at
+   that point there is a native reason to exist.
 2. **Ship a thin native shell** that adds something the web cannot do on
    iOS: local prayer-time notifications (iOS Safari still has no usable Web
    Push outside an installed PWA), a home-screen widget, offline Quran
@@ -100,10 +101,11 @@ refused. Realistic options:
 Either way the $99/year Apple Developer Program fee is only worth paying
 once you have picked one of those. Do not pay it to find out.
 
-Note for whoever builds the shell: Apple will also ask about the donation
-flow. Charitable donations may not go through in-app purchase, so they must
-be a web view or an external link — that is allowed, but get it right or it
-is an automatic rejection.
+Note for whoever builds the shell: Apple will also ask about donations.
+AM Network takes no donations in the app — the donor gives to the family
+directly — so say so in the review notes. If a registered partner charity's
+donation link is ever added, it must be a web view or an external link, never
+in-app purchase, or it is an automatic rejection.
 
 ---
 
@@ -131,7 +133,7 @@ Free Islamic tools in 10 languages, with nothing invented and every source named
 
 We never write, edit or paraphrase religious text ourselves. The Quran comes from Tanzil, translations from certified scholars, recitations from licensed reciters, hadith from an open published dataset — each shown exactly as published, with its source. Where a translation was produced by AI because no certified one exists, it says so on the page.
 
-AM Network is also building blockchain-verified Zakat distribution with AI-assisted, human-verified recipients. That part is pre-launch: no payments are being taken, and the app says so plainly wherever it comes up.
+AM Network is also preparing a verification and transparency service for Zakat: a volunteer checks each family in person, the donor gives directly to the family, and every payout appears in an open report without personal data. AM Network never holds the money. A small pilot in Dushanbe is in preparation; no payments are taken through the app.
 
 No ads. No tracking for advertising. No account required.
 
@@ -155,7 +157,7 @@ No ads. No tracking for advertising. No account required.
 
 Мы никогда сами не пишем, не редактируем и не пересказываем религиозные тексты. Коран — из проекта Tanzil, переводы — от сертифицированных учёных, чтения — от лицензированных чтецов, хадисы — из открытого опубликованного датасета. Всё показано ровно так, как опубликовано, с указанием источника. Если перевод сделан ИИ, потому что сертифицированного не существует, на странице об этом прямо написано.
 
-AM Network также строит распределение закята с проверкой на блокчейне и получателями, которых оценивает ИИ, а подтверждает человек. Эта часть ещё не запущена: платежи не принимаются, и приложение честно об этом сообщает.
+AM Network также готовит сервис проверки и прозрачности для закята: волонтёр лично проверяет каждую семью, донор передаёт помощь семье напрямую, а каждая выплата попадает в открытый отчёт без персональных данных. Деньги через AM Network не проходят. Готовится небольшой пилот в Душанбе; через приложение платежи не принимаются.
 
 Без рекламы. Без слежки в рекламных целях. Без регистрации.
 
@@ -179,7 +181,7 @@ AM Network также строит распределение закята с п
 
 نحن لا نكتب ولا نحرّر ولا نعيد صياغة النصوص الشرعية أبداً. القرآن من مشروع تنزيل، والترجمات من علماء معتمدين، والتلاوات من قرّاء مرخّصين، والأحاديث من مجموعة بيانات منشورة ومفتوحة — كل ذلك كما نُشر تماماً مع مصدره. وحين تكون الترجمة بالذكاء الاصطناعي لعدم وجود ترجمة معتمدة، فذلك مذكور بوضوح في الصفحة.
 
-تعمل AM Network أيضاً على توزيع الزكاة موثقاً بالبلوك تشين، بترشيح من الذكاء الاصطناعي وتحقق بشري. هذا الجزء لم يُطلق بعد: لا تُقبل أي مدفوعات، والتطبيق يوضح ذلك صراحة.
+تُعِدّ AM Network أيضاً خدمة للتحقق والشفافية في الزكاة: يزور متطوع كل أسرة شخصياً للتحقق من حالها، ويعطي المزكّي الأسرة مباشرة، وتظهر كل دفعة في تقرير مفتوح بلا بيانات شخصية. لا تمر الأموال عبر AM Network أبداً. يجري التحضير لتجربة صغيرة في دوشنبه، ولا تُقبل أي مدفوعات عبر التطبيق.
 
 بدون إعلانات. بدون تتبع إعلاني. بدون تسجيل.
 
@@ -203,7 +205,7 @@ AM Network также строит распределение закята с п
 
 Мо ҳеҷ гоҳ матнҳои диниро худамон наменависем, таҳрир намекунем ва аз нав нақл намекунем. Қуръон аз лоиҳаи Tanzil, тарҷумаҳо аз олимони тасдиқшуда, тиловатҳо аз қориёни иҷозатдор, ҳадисҳо аз маҷмӯаи кушоди нашршуда — ҳама маҳз ҳамон тавре ки нашр шудаанд, бо манбаъ. Агар тарҷума бо зеҳни сунъӣ таҳия шуда бошад, зеро тарҷумаи тасдиқшуда вуҷуд надорад, дар саҳифа ин ошкоро навишта шудааст.
 
-AM Network инчунин тақсимоти закотро бо тасдиқи блокчейн месозад, ки дар он гирандагонро зеҳни сунъӣ баҳо медиҳад ва инсон тасдиқ мекунад. Ин қисм ҳанӯз оғоз нашудааст: пардохтҳо қабул намешаванд ва барнома инро ошкоро мегӯяд.
+AM Network инчунин хидмати санҷиш ва шаффофиятро барои закот омода мекунад: ихтиёрӣ ҳар оиларо шахсан месанҷад, донор кумакро бевосита ба оила медиҳад ва ҳар пардохт бе маълумоти шахсӣ дар ҳисоботи кушод сабт мешавад. Пул аз AM Network намегузарад. Озмоиши хурд дар Душанбе омода мешавад; тавассути барнома пардохт қабул намешавад.
 
 Бе реклама. Бе пайгирии таблиғотӣ. Бе бақайдгирӣ.
 
@@ -227,7 +229,7 @@ Perangkat Islami gratis dalam 10 bahasa. Tidak ada yang kami karang, dan setiap 
 
 Kami tidak pernah menulis, menyunting, atau memparafrasakan teks agama sendiri. Al-Quran dari proyek Tanzil, terjemahan dari ulama bersertifikat, bacaan dari qari berlisensi, hadits dari kumpulan data terbuka yang diterbitkan — semuanya ditampilkan persis sebagaimana diterbitkan, beserta sumbernya. Bila sebuah terjemahan dihasilkan AI karena belum ada terjemahan resmi, hal itu dinyatakan jelas di halamannya.
 
-AM Network juga membangun penyaluran zakat terverifikasi blockchain dengan penerima yang dinilai AI dan diverifikasi manusia. Bagian itu belum diluncurkan: tidak ada pembayaran yang diterima, dan aplikasi menyatakannya secara terbuka.
+AM Network juga sedang menyiapkan layanan verifikasi dan transparansi zakat: relawan memeriksa setiap keluarga secara langsung, donatur memberikan zakat langsung kepada keluarga, dan setiap penyaluran dicatat dalam laporan terbuka tanpa data pribadi. Uang tidak pernah melewati AM Network. Uji coba kecil di Dushanbe sedang disiapkan; tidak ada pembayaran yang diterima melalui aplikasi.
 
 Tanpa iklan. Tanpa pelacakan iklan. Tanpa registrasi.
 
@@ -251,7 +253,7 @@ Tanpa iklan. Tanpa pelacakan iklan. Tanpa registrasi.
 
 Dinî metinleri asla kendimiz yazmaz, düzenlemez veya yeniden ifade etmeyiz. Kur'an Tanzil projesinden, mealler onaylı âlimlerden, tilavetler lisanslı hafızlardan, hadisler açık ve yayımlanmış bir veri kümesinden gelir — hepsi yayımlandığı şekliyle, kaynağıyla birlikte gösterilir. Onaylı bir çeviri bulunmadığı için yapay zekâ çevirisi kullanıldığında, sayfada bu açıkça belirtilir.
 
-AM Network ayrıca blokzincirle doğrulanan zekât dağıtımı geliştiriyor; alıcıları yapay zekâ sıralar, insan doğrular. Bu kısım henüz yayında değil: hiçbir ödeme alınmıyor ve uygulama bunu açıkça söylüyor.
+AM Network ayrıca zekât için bir doğrulama ve şeffaflık hizmeti hazırlıyor: bir gönüllü her aileyi yerinde ziyaret ederek kontrol eder, bağışçı zekâtı doğrudan aileye verir ve her ödeme kişisel veri içermeyen açık bir rapora kaydedilir. Para hiçbir zaman AM Network'ten geçmez. Duşanbe'de küçük bir pilot hazırlanıyor; uygulama üzerinden hiçbir ödeme alınmıyor.
 
 Reklam yok. Reklam amaçlı takip yok. Kayıt gerekmez.
 
@@ -275,7 +277,7 @@ Reklam yok. Reklam amaçlı takip yok. Kayıt gerekmez.
 
 我们从不自行撰写、编辑或转述宗教经文。古兰经文本来自 Tanzil 项目，译文出自经认证的学者，诵读来自持证诵读者，圣训取自公开发布的开放数据集——全部按原样呈现并注明来源。若因尚无认证译文而采用人工智能翻译，页面会明确说明。
 
-AM Network 也在构建以区块链核验的天课分配，受助人由人工智能排序、由人工核实。该部分尚未上线：不接受任何支付，应用中也已如实说明。
+AM Network 还在筹备一项天课核实与透明服务：志愿者亲自上门核实每个家庭，捐赠者直接把天课交给家庭，每笔发放都记录在不含个人信息的公开报告中。资金从不经过 AM Network。杜尚别的小规模试点正在筹备中；应用内不接受任何支付。
 
 无广告。无广告追踪。无需注册。
 
@@ -299,7 +301,7 @@ Alat Islamik percuma dalam 10 bahasa. Tiada apa yang kami reka, dan setiap sumbe
 
 Kami tidak pernah menulis, menyunting atau memparafrasa teks agama sendiri. Al-Quran daripada projek Tanzil, terjemahan daripada ulama bertauliah, bacaan daripada qari berlesen, hadis daripada set data terbuka yang diterbitkan — semuanya dipaparkan tepat seperti diterbitkan, bersama sumbernya. Jika sesuatu terjemahan dihasilkan AI kerana tiada terjemahan disahkan, ia dinyatakan dengan jelas pada halaman berkenaan.
 
-AM Network turut membina pengagihan zakat yang disahkan blockchain, dengan penerima dinilai AI dan disahkan manusia. Bahagian itu belum dilancarkan: tiada pembayaran diterima, dan aplikasi menyatakannya secara terbuka.
+AM Network juga sedang menyediakan perkhidmatan pengesahan dan ketelusan zakat: sukarelawan menyemak setiap keluarga secara bersemuka, penderma memberi zakat terus kepada keluarga, dan setiap bayaran direkodkan dalam laporan terbuka tanpa data peribadi. Wang tidak pernah melalui AM Network. Perintis kecil di Dushanbe sedang disediakan; tiada bayaran diterima melalui aplikasi.
 
 Tiada iklan. Tiada penjejakan iklan. Tiada pendaftaran.
 
@@ -323,7 +325,7 @@ Des outils islamiques gratuits en 10 langues. Rien n'est inventé par nous, et c
 
 Nous n'écrivons, ne modifions ni ne reformulons jamais nous-mêmes les textes religieux. Le Coran vient du projet Tanzil, les traductions d'érudits certifiés, les récitations de récitateurs agréés, les hadiths d'un jeu de données ouvert publié — le tout affiché exactement tel que publié, avec sa source. Lorsqu'une traduction est produite par IA faute de traduction certifiée, la page le dit clairement.
 
-AM Network développe aussi une distribution de la zakat vérifiée par blockchain, où l'IA classe les bénéficiaires et un humain les vérifie. Cette partie n'est pas lancée : aucun paiement n'est accepté, et l'application le dit franchement.
+AM Network prépare aussi un service de vérification et de transparence pour la zakat : un bénévole vérifie chaque famille en personne, le donateur donne directement à la famille, et chaque versement figure dans un rapport public sans données personnelles. L'argent ne passe jamais par AM Network. Un petit pilote se prépare à Douchanbé ; aucun paiement n'est accepté dans l'application.
 
 Sans publicité. Sans pistage publicitaire. Sans inscription.
 
@@ -347,6 +349,6 @@ Kostenlose islamische Werkzeuge in 10 Sprachen. Nichts davon stammt aus unserer 
 
 Wir schreiben, bearbeiten oder paraphrasieren religiöse Texte niemals selbst. Der Koran stammt aus dem Tanzil-Projekt, Übersetzungen von zertifizierten Gelehrten, Rezitationen von lizenzierten Rezitatoren, Hadithe aus einem offenen, veröffentlichten Datensatz — alles genau so dargestellt, wie es veröffentlicht wurde, mit Quellenangabe. Wo eine Übersetzung von einer KI erstellt wurde, weil keine geprüfte existiert, steht das deutlich auf der Seite.
 
-AM Network baut außerdem eine per Blockchain verifizierte Zakat-Verteilung auf, bei der eine KI Empfänger einordnet und ein Mensch sie prüft. Dieser Teil ist noch nicht gestartet: Es werden keine Zahlungen angenommen, und die App sagt das offen.
+AM Network bereitet außerdem einen Prüf- und Transparenzdienst für die Zakat vor: Ein Freiwilliger besucht jede Familie persönlich, der Spender gibt direkt an die Familie, und jede Auszahlung erscheint in einem offenen Bericht ohne persönliche Daten. Das Geld läuft nie über AM Network. Ein kleines Pilotprojekt in Duschanbe wird vorbereitet; in der App werden keine Zahlungen angenommen.
 
 Keine Werbung. Kein Werbetracking. Keine Registrierung.

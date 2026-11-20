@@ -1,3 +1,5 @@
+> ⚠️ ARCHIVED (November 2026): written for the old blockchain/token model — do not send. See docs/messaging-2026-11.md.
+
 # Питч: Shorooq Partners (Венчурный капитал, Абу-Даби)
 
 **Email:** НЕ РАБОТАЕТ — pitch@shorooq.com отклонён (550 не существует). Не писать на этот адрес.

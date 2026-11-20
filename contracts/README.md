@@ -1,3 +1,10 @@
+> ⚠️ **ARCHIVED PROTOTYPE (November 2026) — not used, not deployed, kept for reference only.**
+> These contracts belong to AM Network's old blockchain model, which the founder dropped on
+> 20 November 2026. AM Network is now a verification and transparency service: money never passes
+> through us, there is no smart contract, token, escrow or fee. Nothing here is on any network or
+> handles any funds, and nothing below describes the current product.
+> See `docs/messaging-2026-11.md` and `docs/strategy-2026-11.md`.
+
 # AM Network — Smart Contracts
 
 Prototype Solidity contracts for the blockchain-verified Zakat & Sadaqah platform.
