@@ -791,6 +791,74 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 
 /* Product card films (Higgsfield, approved Oct 2026): the whole film plays muted and loops */
 .picon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--gold);background:var(--gold3);border:1px solid rgba(201,168,76,.3)}
+
+/* ===== v3 design (Nov 2026): clearer hero, compact steps, example record, nothing hidden ===== */
+[data-theme="dark"]{--text2:rgba(255,255,255,0.74);--text3:rgba(255,255,255,0.6)}
+[data-theme="light"]{--text2:rgba(28,46,31,0.8);--text3:rgba(28,46,31,0.66)}
+.reveal{opacity:1!important;filter:none!important;transform:none!important}
+@media (prefers-reduced-motion:no-preference){.reveal:not(.visible){animation:none}.reveal.visible{animation:v3up .5s ease both}}
+@keyframes v3up{from{transform:translateY(14px)}to{transform:none}}
+.hero{min-height:auto;padding:110px 5vw 64px}
+.hero-logo-wrap{display:none}
+.hero h1{font-size:clamp(34px,6.4vw,72px);line-height:1.08;max-width:980px}
+.hero h1 .line2{display:block}
+.hero-sub{font-size:clamp(15px,1.9vw,18px);color:var(--text);max-width:620px;line-height:1.65;background:rgba(10,26,17,.5);margin-bottom:26px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+.hero-cta .hbtn{min-height:52px;padding:0 26px;font-size:15px;display:inline-flex;align-items:center}
+.hero-calc{color:var(--gold2);font-size:14px;font-weight:600;text-decoration:none;margin-bottom:26px;display:inline-block;padding:8px}
+.hero-calc:hover{text-decoration:underline}
+.hero-trust{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:920px;width:100%;margin:0 auto}
+.hero-trust li{display:flex;align-items:center;gap:10px;text-align:start;padding:12px 14px;border-radius:14px;background:rgba(10,26,17,.55);backdrop-filter:blur(8px);border:1px solid rgba(201,168,76,.28);font-size:13.5px;font-weight:600;color:var(--text);line-height:1.3}
+.hero-trust svg{flex:none;color:var(--gold);width:22px;height:22px;padding:6px;box-sizing:content-box;border-radius:9px;background:rgba(201,168,76,.14)}
+[data-theme="light"] .hero-sub,[data-theme="light"] .hero-trust li{background:rgba(255,255,255,.72)}
+.section{padding:64px 5vw}
+.sec-body{margin-bottom:26px}
+/* steps: readable cards instead of a long empty column */
+.steps{gap:12px;background:transparent;border:0;border-radius:0;overflow:visible}
+.steps-flow{display:none}
+.step{border:1px solid var(--border);border-radius:16px;padding:22px 18px;background:var(--card)}
+.step-num{font-size:14px!important;letter-spacing:.08em;opacity:1!important;color:var(--gold)!important;margin-bottom:10px;display:inline-block}
+.step h3{font-size:16px}
+.step p{font-size:13.5px;line-height:1.6}
+@media (max-width:900px){
+  .steps{grid-template-columns:1fr}
+  .step{display:grid;grid-template-columns:48px 1fr;column-gap:14px;align-items:start;padding:16px}
+  .step-num{grid-column:2;grid-row:1;margin:0 0 2px}
+  .step-icon{grid-column:1;grid-row:1/span 4;margin:0!important}
+  .step h3,.step p,.step .step-tag,.step>span:not(.step-num){grid-column:2}
+  .hero-trust{grid-template-columns:1fr 1fr}
+}
+@media (max-width:420px){.hero{padding-top:96px}.hero-trust li{font-size:12.5px;padding:10px}.hero-cta .hbtn{width:100%;justify-content:center}}
+/* example record */
+.ex-rec{margin:26px 0 8px;display:grid;gap:10px}
+.ex-rec figcaption{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.ex-rec figcaption b{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--text)}
+.ex-rec figcaption span{font-size:13px;color:var(--text3)}
+.ex-card{border:1px solid rgba(201,168,76,.45);border-radius:18px;padding:18px 20px;background:linear-gradient(160deg,rgba(201,168,76,.12),rgba(201,168,76,.02) 60%),var(--card);box-shadow:0 18px 40px rgba(0,0,0,.18);max-width:620px}
+.ex-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:12.5px;color:var(--text3)}
+.ex-ok{color:#5FD39A;font-weight:600}
+[data-theme="light"] .ex-ok{color:#1E7A4C}
+.ex-amt{font:700 34px/1.1 'Cormorant Garamond',serif;color:var(--gold2);margin:8px 0 10px}
+.ex-amt small{font:600 14px 'DM Sans',sans-serif;color:var(--text2);margin-inline-start:6px}
+.ex-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.ex-tags span{font-size:12.5px;padding:4px 10px;border-radius:20px;background:rgba(201,168,76,.12);color:var(--text);border:1px solid rgba(201,168,76,.25)}
+.ex-hash{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;font-size:12.5px;color:var(--text3)}
+.ex-hash code{font:12.5px ui-monospace,Menlo,monospace;color:var(--text2);background:var(--input-bg);padding:3px 8px;border-radius:6px}
+.ex-chain{font-size:12.5px;color:var(--text3);margin-top:8px;line-height:1.5}
+.how-cta{margin-top:22px}
+.step .sbadge{justify-self:start;width:auto;margin-top:10px}
+.st-cols{gap:12px;border-top:0}
+.st-col,.st-col+.st-col{padding:18px 18px 10px;border:1px solid var(--border);border-radius:16px;background:var(--card);border-left:1px solid var(--border)}
+.st-col.st-live{border-top:3px solid #5FD39A}.st-col.st-build{border-top:3px solid var(--gold)}.st-col.st-pilot{border-top:3px solid var(--gold2)}.st-col.st-after{border-top:3px solid var(--text3)}
+.st-col li{margin-bottom:8px}
+@media (max-width:900px){.st-cols{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.st-cols{grid-template-columns:1fr}}
+.pb-lbl b{unicode-bidi:isolate}
+[dir="rtl"] .hero-calc .arr{display:inline-block;transform:scaleX(-1)}
+/* products: always visible, a bit livelier */
+.pcard{padding:26px}
+.pcard:hover{border-color:rgba(201,168,76,.5)}
+@media (max-width:600px){.pcard{padding:20px}.section{padding:52px 5vw}}
 </style>
 </head>
 <body>
@@ -875,9 +943,16 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <p class="hero-sub" data-t="hero_sub">A verification and transparency service for Zakat and Sadaqah: we check each family in person, publish an open, tamper-evident report of every payout, and never hold the money — the donor gives directly to the family.</p>
 
   <div class="hero-cta">
-    <a class="hbtn hbtn-gold" href="#waitlist" data-t="nav_cta">Join Waitlist</a>
-    <a class="hbtn hbtn-ghost" href="/zakat/" data-t="start_calc">Calculate Zakat</a>
+    <a class="hbtn hbtn-gold" href="#waitlist" data-t="how_cta_give">I want to give Zakat</a>
+    <a class="hbtn hbtn-ghost" href="/apply/" data-t="how_cta_help">I need help — apply</a>
   </div>
+  <a class="hero-calc" href="/zakat/"><span data-t="start_calc">Calculate Zakat</span> <span class="arr" aria-hidden="true">→</span></a>
+  <ul class="hero-trust">
+    <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h18M15 6l6 6-6 6"/><path d="M3 5v14"/></svg><span data-t="tr_1">Money never passes through us</span></li>
+    <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="m9 15 2 2 4-4"/></svg><span data-t="tr_2">Every family checked in person</span></li>
+    <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg><span data-t="tr_3">Open report of every payout</span></li>
+    <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span data-t="tr_4">Nothing taken from Zakat</span></li>
+  </ul>
 </section>
 
 <!-- PROBLEM -->
@@ -912,6 +987,16 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <div class="step reveal" style="--i:3"><span class="step-num">04</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 7h17m-4-4 4 4-4 4M21 17H4m4-4-4 4 4 4"/></svg></div><h3 data-t="s4_h">Directly to the family</h3><p data-t="s4_p">The donor gives the Zakat or Sadaqah to the family directly — cash, Alif, Korti Milli or a bank transfer. The money never passes through AM Network. Later: also through a registered partner charity.</p><span class="sbadge sg" data-t="step_badge_4">100% to the family</span></div>
     <div class="step reveal" style="--i:4"><span class="step-num">05</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg></div><h3 data-t="s5_h">An open record</h3><p data-t="s5_p">The payout goes into the open report: amount, date, city or district, situation category and number of checks — no names, phones or addresses. Each entry carries a SHA-256 fingerprint linked to the previous one, so any quiet change breaks the chain. The report is in preparation for the pilot.</p><span class="sbadge sm" data-t="step_badge_5">SHA-256 chain</span></div>
   </div>
+  <figure class="ex-rec" aria-labelledby="exT">
+    <figcaption><b id="exT" data-t="ex_title">What a record in the open report looks like</b><span data-t="ex_note">Example. Real records will appear during the pilot.</span></figcaption>
+    <div class="ex-card">
+      <div class="ex-top"><span class="ex-num" dir="ltr">#12 · 2027-03-14</span><span class="ex-ok">✓ <span data-t="ex_noname">No name, phone or address</span></span></div>
+      <div class="ex-amt" dir="ltr">1 500 TJS <small data-t="ex_kind">Zakat</small></div>
+      <div class="ex-tags"><span data-t="ex_region">Dushanbe</span><span data-t="ex_cat">Widow with children</span><span data-t="ex_checks">In-person checks: 2</span><span data-t="ex_receipt">Receipt: fingerprint kept</span></div>
+      <div class="ex-hash"><span data-t="ex_hash">Record fingerprint</span><code dir="ltr">3f9a7c…e21b04</code></div>
+      <p class="ex-chain" data-t="ex_chain">Linked to the previous record — any quiet change breaks the chain.</p>
+    </div>
+  </figure>
   <div class="how-cta">
     <a class="hbtn hbtn-gold" href="#waitlist" data-t="how_cta_give">I want to give Zakat</a>
     <a class="hbtn hbtn-ghost" href="/apply/" data-t="how_cta_help">I need help — apply</a>
@@ -1211,7 +1296,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=70d931d350"></script>
+<script src="/i18n-data.js?v=21c24ea2e3"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)

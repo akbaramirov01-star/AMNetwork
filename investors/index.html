@@ -163,6 +163,8 @@ footer a{color:var(--gold)}
 .card-no ul li::before{content:"×";color:#E0803A}
 .t-card.later .t-status{color:var(--text3)}
 .m-num.sm{font-size:30px;line-height:1.2}
+/* keep figures like "<$25B" and "~2B" in reading order on the Arabic (RTL) page */
+.stat-num,.m-num:not(.sm){direction:ltr;unicode-bidi:isolate}
 </style>
 </head>
 <body>
@@ -195,7 +197,7 @@ footer a{color:var(--gold)}
       </div>
     </div>
     <a class="nav-back" href="/" data-t="inv_nav_back">← Main site</a>
-    <a class="nav-cta-link" href="mailto:contact@amnetwork.io" data-t="inv_nav_cta">{{Contact us}}</a>
+    <a class="nav-cta-link" href="mailto:contact@amnetwork.io" data-t="inv_nav_cta">Contact us</a>
   </div>
 </nav>
 

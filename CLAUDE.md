@@ -4,13 +4,13 @@
 
 ## What We Are Building
 
-**AM Network** — a blockchain-verified Zakat and Sadaqah platform for ~2 billion Muslims.
+**AM Network** — a verification and transparency service for Zakat and Sadaqah: families checked in person, an open SHA-256 hash-chained payout report, money never passes through us. Wording rules: `docs/messaging-2026-11.md`.
 
-⚠️ **Never call AM Network "the first"** (checked October 2026). Blockchain Zakat platforms already exist (e.g. Benevolence by IBF Net, Zakat Chain, ZakatDAO) and AI-matched verified-recipient Zakat apps too (MyZakat, Poket). Describe what we do — AI need score + in-person local verification + two-verifier on-chain release + 100% of Zakat to the recipient, no token — not a ranking.
+⚠️ **Never call AM Network "the first"** (checked October 2026). Blockchain Zakat platforms already exist (e.g. Benevolence by IBF Net, Zakat Chain, ZakatDAO) and AI-matched verified-recipient Zakat apps too (MyZakat, Poket). Describe what we do — in-person verification by trained volunteers, a transparent need checklist (a person decides), donor gives directly, open hash-chained report, nothing taken from Zakat — not a ranking.
 
 - **Website:** amnetwork.io (live, GitHub Pages)
 - **Founder:** Akbar Amirzoda — economist, diplomat (Plekhanov University Moscow)
-- **Stage:** Pre-launch. Beta target Q4 2026
+- **Stage:** Pilot in preparation — Dushanbe, 10–20 families, Ramadan 2027 (~Feb–Mar). No "beta Q4 2026".
 - **Email:** contact@amnetwork.io
 - **LinkedIn:** linkedin.com/company/amnetwork-io
 
@@ -20,10 +20,10 @@ Founder chose: **verification & transparency service, money never passes through
 
 ## Core Products
 
-1. **AM Zakat.ai** — AI-verified recipients (score 0–100), smart contracts on Base blockchain, local oracle network (mosque imams + AM Network volunteers + partner NGOs), Sharia-certified (ujrah model)
-2. **AM Academy** — Sharia-compliant financial literacy, explained for 4 audiences (pre-generated, no live AI), downloadable certificate; NFT certificates planned
+1. **AM Zakat** — verification & transparency service (see the model decision above). The old "Zakat.ai / Base blockchain / oracle network / ujrah" description is retired.
+2. **AM Academy** — Sharia-compliant financial literacy, explained for 4 audiences (pre-generated, no live AI), downloadable certificate (no NFT)
 
-## Tech Stack
+## Tech Stack (historical — see model decision)
 
 - **Blockchain:** Base (primary), Solana (backup), LayerZero cross-chain
 - **Revenue:** 1–2.5% ujrah on transactions — NO speculative token
@@ -41,14 +41,14 @@ Founder chose: **verification & transparency service, money never passes through
 
 ## Socials
 
-- Instagram: @amnet_io
+- Instagram: @amnetwork.io (https://www.instagram.com/amnetwork.io — changed November 2026; X stays @amnet_io)
 - Telegram: @amnetwork_global
 - Twitter/X: @amnet_io
 - YouTube: youtube.com/@amnetwork_io
 - TikTok: @amnetwork.io (tiktok.com/@amnetwork.io)
 - LinkedIn: linkedin.com/company/amnetwork-io
 
-## Sharia Compliance
+## Sharia Compliance (historical — now: no fee from Zakat, seeking a Hanafi scholar's review, not certified)
 
 - **Model:** Ujrah only (service fee) — NO riba, NO speculative token
 - **Why no token:** Gharar/maysir risk — scholars divided on speculative tokens
@@ -74,7 +74,7 @@ Founder chose: **verification & transparency service, money never passes through
 
 This matches `ai_scoring/scorer.py` (groups A–O, each mapped to one of the 8 Quranic asnaf). The site says "15 categories" — keep the two in sync.
 
-## Local Oracle Network
+## Local Oracle Network (retired — verifiers are trained AM Network volunteers)
 
 Verified local representatives who confirm recipient physical presence:
 - Mosque imams
@@ -91,7 +91,7 @@ Verified local representatives who confirm recipient physical presence:
 
 ⚠️ None of the above have confirmed partnership yet. Do NOT show them as partners on the site.
 
-## Seed Funding
+## Seed Funding (on hold — not raising now)
 
 - **Target:** $150,000–$500,000 (ideal $300K)
 - **Use of funds:**
@@ -139,6 +139,8 @@ All of the above (`/quran/`, `/hadith/`, `/dua/`, `/tasbeeh/`, `/qibla/`, `/pray
 - **Need score** in the verifier form is a visible checklist (points listed next to each item, capped at 100), described as a hint — a person decides. Keep it that way.
 - **Email:** Supabase's built-in mailer only sends to the org's own team members and a few per hour. Before verifiers/donors register, set up custom SMTP (e.g. Resend) in Auth settings.
 - First admin: the founder registers in `/cabinet/`, then runs in SQL Editor `update public.profiles set role='admin' where email='<his email>';` — the email is never written into the repo.
+
+- **Site rewrite to the new model (20 November 2026):** every page, the assistant (offline KB + `/chat` prompt), Academy, whitepaper v2.0 (EN+RU, PDF rebuilt; header in `build-pdf.cjs`), deck (rebuilt from `deck-src`), investors page (now "partners & supporters", not raising), privacy and terms (cabinet data, Supabase EU). Old outreach drafts are marked ARCHIVED. Homepage v3 design: clear hero ("Your Zakat goes to a family we checked in person"), 4 trust chips, compact step cards, an example open-report record, status as cards; `.reveal` no longer hides content (it caused large empty areas on phones). Cabinet and open report are in all 10 languages (Arabic RTL).
 
 ### Integrations working
 - **Waitlist / Apply → Web3Forms only (checked October 2026):** both forms post to `api.web3forms.com` behind hCaptcha and arrive as emails. Nothing is written to Google Sheets anymore — the old Apps Script path was removed from the frontend. `apps_script_apply.gs` remains in the repo only as reference code. If a spreadsheet is wanted again, it needs a new deployment; never commit its `/exec` URL (it is an unauthenticated write endpoint — see docs/security-deployment.md). The old URLs leaked in git history must stay archived.
