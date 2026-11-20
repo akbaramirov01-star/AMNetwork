@@ -44,6 +44,10 @@ begin
 end $$;
 create trigger amn_on_auth_user_created after insert on auth.users
   for each row execute function public.amn_handle_new_user();
+-- Re-run safety: give every existing account a profile again.
+insert into public.profiles (id, email, full_name)
+  select id, email, left(coalesce(raw_user_meta_data->>'full_name', ''), 120) from auth.users
+  on conflict (id) do nothing;
 
 -- Only an admin changes roles.
 create function public.set_role(target uuid, new_role text) returns void

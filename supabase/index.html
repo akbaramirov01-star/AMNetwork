@@ -40,6 +40,12 @@ input{font:16px system-ui,sans-serif;min-height:48px}
 <button id="c2">Скопировать команду</button>
 <div class="ok" id="o2"></div>
 <textarea id="adm" readonly style="height:70px"></textarea>
+<h2>Очистить тестовые данные</h2>
+<p>Удаляет все заявки, проверки, выплаты и историю. Аккаунты и роли остаются. Делать только до начала настоящего пилота — потом записи отчёта не удаляют.</p>
+<button id="c3">Скопировать команду очистки</button>
+<div class="ok" id="o3"></div>
+<textarea id="rst" readonly style="height:90px">truncate public.events, public.payouts, public.verifications, public.applications restart identity;
+alter sequence public.app_ref_seq restart with 1;</textarea>
 </main>
 <script>
 const $=s=>document.querySelector(s);
@@ -48,6 +54,7 @@ async function copy(text,out){
   try{await navigator.clipboard.writeText(text)}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}
   $(out).textContent='Скопировано ✓';setTimeout(()=>$(out).textContent='',3000);
 }
+$('#c3').onclick=()=>copy($('#rst').value,'#o3');
 $('#c1').onclick=()=>copy($('#sql').value,'#o1');
 const build=()=>{const e=$('#em').value.trim().replace(/'/g,"''");$('#adm').value=e?"update public.profiles set role='admin' where email='"+e+"';":''};
 $('#em').addEventListener('input',build);

@@ -48,7 +48,11 @@ h3{font-size:15px;margin:0 0 8px}
 label{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--text2)}
 input,select,textarea{width:100%;min-height:44px;padding:10px 12px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text);font:15px 'DM Sans',sans-serif}
 textarea{min-height:90px;resize:vertical}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:12px}
+.grid2>*,.stack>*,label{min-width:0}
+input[type=date]{-webkit-appearance:none;appearance:none;display:block;min-width:0;max-width:100%}
+input[type=file]{font-size:14px;max-width:100%}
+html,body{overflow-x:hidden}
 .checks{display:grid;gap:8px}
 .chk{display:flex;gap:10px;align-items:flex-start;font-weight:500;color:var(--text);font-size:14px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--card);cursor:pointer}
 .chk input{width:20px;min-height:20px;height:20px;margin-top:1px;flex:none;accent-color:var(--gold)}
