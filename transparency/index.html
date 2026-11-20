@@ -25,22 +25,23 @@
 <style>
 [data-theme="dark"]{--bg1:#0A1A11;--gold:#C9A84C;--gold2:#E8C87A;--gold3:rgba(201,168,76,.12);--text:#fff;--text2:rgba(255,255,255,.68);--text3:rgba(255,255,255,.45);--border:rgba(255,255,255,.1);--card:rgba(255,255,255,.04);--nav-bg:rgba(10,26,17,.92);--ok:#5FD39A;--ok-bg:rgba(95,211,154,.12);--bad:#FF8A8A;--bad-bg:rgba(255,138,138,.12)}
 [data-theme="light"]{--bg1:#F5F0E8;--gold:#A88528;--gold2:#8A6A12;--gold3:rgba(201,168,76,.14);--text:#1C2E1F;--text2:rgba(28,46,31,.75);--text3:rgba(28,46,31,.55);--border:rgba(28,69,50,.14);--card:rgba(255,255,255,.85);--nav-bg:rgba(245,240,232,.95);--ok:#1E7A4C;--ok-bg:rgba(30,122,76,.1);--bad:#B42318;--bad-bg:rgba(180,35,24,.08)}
+:root{--ff:'DM Sans','Noto Naskh Arabic','Noto Sans SC',system-ui,sans-serif;--fh:'Cormorant Garamond','Noto Naskh Arabic','Noto Sans SC',serif}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg1);color:var(--text);font:15px/1.6 'DM Sans',system-ui,sans-serif;min-height:100vh}
+body{background:var(--bg1);color:var(--text);font:15px/1.6 var(--ff);min-height:100vh}
 a{color:var(--gold)}
 nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 16px;height:60px;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .nav-logo img{height:34px;display:block}
 .nav-right{display:flex;gap:8px;align-items:center}
-.nbtn{min-height:38px;min-width:38px;padding:0 10px;border-radius:9px;border:1px solid var(--border);background:transparent;color:var(--text2);font:600 13px 'DM Sans',sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.nbtn{min-height:38px;min-width:38px;padding:0 10px;border-radius:9px;border:1px solid var(--border);background:transparent;color:var(--text2);font:600 13px var(--ff);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 .nbtn:hover,.nbtn[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
 .nbtn:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 main{max-width:980px;margin:0 auto;padding:28px 16px 80px}
-h1{font:700 clamp(28px,5vw,40px)/1.2 'Cormorant Garamond',serif;margin-bottom:8px}
-h2{font:700 22px/1.3 'Cormorant Garamond',serif;margin:28px 0 10px}
+h1{font:700 clamp(28px,5vw,40px)/1.2 var(--fh);margin-bottom:8px}
+h2{font:700 22px/1.3 var(--fh);margin:28px 0 10px}
 .sub{color:var(--text2);max-width:680px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0}
 .stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px}
-.stat b{display:block;font:700 30px/1.1 'Cormorant Garamond',serif;color:var(--gold);font-variant-numeric:tabular-nums}
+.stat b{display:block;font:700 30px/1.1 var(--fh);color:var(--gold);font-variant-numeric:tabular-nums}
 .stat span{font-size:13px;color:var(--text2)}
 .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
 .tw{overflow-x:auto}
@@ -49,17 +50,19 @@ th,td{padding:10px 8px;border-bottom:1px solid var(--border);text-align:start;ve
 th{font-size:12px;color:var(--text3);font-weight:600;white-space:nowrap}
 td.n{text-align:end;font-variant-numeric:tabular-nums;white-space:nowrap}
 .hash{font:11.5px ui-monospace,Menlo,monospace;color:var(--text3);overflow-wrap:anywhere}
-.btn{min-height:44px;padding:0 18px;border-radius:11px;border:1px solid var(--gold);background:var(--gold);color:#16130a;font:600 14px 'DM Sans',sans-serif;cursor:pointer}
+.btn{min-height:44px;padding:0 18px;border-radius:11px;border:1px solid var(--gold);background:var(--gold);color:#16130a;font:600 14px var(--ff);cursor:pointer}
 .msg{padding:12px 14px;border-radius:12px;font-size:14px;margin-top:12px}
 .msg.ok{background:var(--ok-bg);color:var(--ok)}.msg.err{background:var(--bad-bg);color:var(--bad)}
 ol.how{padding-inline-start:20px;display:grid;gap:6px;color:var(--text2);max-width:720px}
 .muted{color:var(--text3)}
+:lang(ar) h1,:lang(ar) h2{line-height:1.5}
+:lang(ar) body{line-height:1.8}
 .cards{display:none;gap:10px}
 .pc{border:1px solid var(--border);border-radius:14px;padding:12px 14px;background:var(--card)}
 .pc .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
 .pc .top b{font-size:17px}
 @media (max-width:680px){.tw table{display:none}.cards{display:grid}#log.card{background:transparent;border:0;padding:0}}
-.tag{display:inline-block;padding:2px 8px;border-radius:20px;background:var(--gold3);color:var(--gold);font-size:12px;font-weight:600;margin:2px 4px 2px 0}
+.tag{display:inline-block;padding:2px 8px;border-radius:20px;background:var(--gold3);color:var(--gold);font-size:12px;font-weight:600;margin-block:2px;margin-inline:0 4px}
 </style>
 </head>
 <body>
@@ -67,7 +70,7 @@ ol.how{padding-inline-start:20px;display:grid;gap:6px;color:var(--text2);max-wid
   <a class="nav-logo" href="/"><img src="/logo.webp" alt="AM Network" height="34"></a>
   <div class="nav-right">
     <a class="nbtn" href="/cabinet/" id="navCab"></a>
-    <select class="nbtn" id="langSel" aria-label="Language" style="width:auto;padding:0 8px"><option value="ru">RU</option><option value="tj">TJ</option><option value="en">EN</option></select>
+    <select class="nbtn" id="langSel" aria-label="Language" style="width:auto;padding:0 8px"><option value="ru">RU</option><option value="tj">TJ</option><option value="en">EN</option><option value="ar">AR</option><option value="id">ID</option><option value="tr">TR</option><option value="zh">中文</option><option value="ms">MS</option><option value="fr">FR</option><option value="de">DE</option></select>
     <button class="nbtn" id="themeBtn" aria-label="Theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>
   </div>
 </nav>
@@ -108,20 +111,97 @@ en:{title:'Open report',cab:'Cabinet',intro:'Every payout AM Network has verifie
  verify:'Check the chain',vOk:'The chain is intact: all {n} entries match.',vBad:'Entry #{n} does not match — please tell us: contact@amnetwork.io.',
  howT:'How the checking works',
  how:['A family applies. An AM Network verifier visits the family in person and records what they confirmed.','The admin approves help only after the in-person check. Whoever brought the family never checks it themselves.','The donor gives Zakat to the family directly: cash, Alif or Korti Milli. AM Network never holds the money.','Each payout gets a SHA-256 fingerprint linked to the previous entry. If anyone quietly changes an old entry, the chain breaks — the button above shows it.','We keep the receipt as a fingerprint, not as a file. It proves the receipt was not swapped.'],
- zakat:'Zakat',sadaqah:'Sadaqah'}
+ zakat:'Zakat',sadaqah:'Sadaqah'},
+ar:{title:'التقرير المفتوح',cab:'حسابي',intro:'كل دفعة تحققت منها AM Network: المبلغ والتاريخ والمدينة أو المنطقة والتحقق من الأسرة بزيارة شخصية. لا أسماء ولا هواتف ولا عناوين. لا يمر المال عبرنا — يعطيه المتبرع للأسرة مباشرة.',
+ families:'أسر تلقت المساعدة',payouts:'الدفعات',apps:'الطلبات المقدمة',verified:'تم التحقق ميدانياً',total:'المبلغ المسلَّم، سوموني',
+ date:'التاريخ',ref:'الطلب',region:'المدينة / المنطقة',sit:'الوضع',amount:'المبلغ',checks:'عمليات التحقق',receipt:'الإيصال',hash:'بصمة السجل',
+ yes:'نعم',no:'—',empty:'لا توجد دفعات بعد. ستظهر الأولى خلال المرحلة التجريبية.',loading:'جارٍ التحميل…',err:'تعذّر تحميل التقرير. حاول لاحقاً.',
+ verify:'فحص السلسلة',vOk:'السلسلة سليمة: جميع السجلات ({n}) متطابقة.',vBad:'السجل رقم {n} غير متطابق — أخبرنا من فضلك: contact@amnetwork.io.',
+ howT:'كيف يعمل التحقق',
+ how:['تقدّم الأسرة طلباً. يزور مدقق من AM Network الأسرة شخصياً ويسجّل ما تأكد منه.','يوافق المشرف على المساعدة فقط بعد التحقق الميداني. من أحضر الأسرة لا يتحقق منها بنفسه أبداً.','يعطي المتبرع الزكاة للأسرة مباشرة: نقداً أو عبر Alif أو Korti Milli. لا تحتفظ AM Network بالمال أبداً.','تحصل كل دفعة على بصمة SHA-256 مرتبطة بالسجل السابق. إذا غيّر أحد سجلاً قديماً بصمت، تنقطع السلسلة — ويظهر ذلك بالزر أعلاه.','نحتفظ بالإيصال كبصمة لا كملف. وهذا يثبت أن الإيصال لم يُستبدل.'],
+ zakat:'زكاة',sadaqah:'صدقة'},
+id:{title:'Laporan terbuka',cab:'Akun',intro:'Setiap penyaluran yang telah diperiksa AM Network: jumlah, tanggal, kota atau kabupaten, dan pemeriksaan keluarga secara langsung. Tanpa nama, telepon, atau alamat. Uang tidak pernah melewati kami — donatur memberikannya langsung kepada keluarga.',
+ families:'Keluarga terbantu',payouts:'Penyaluran',apps:'Permohonan',verified:'Diperiksa di tempat',total:'Tersalurkan, somoni',
+ date:'Tanggal',ref:'Permohonan',region:'Kota / kabupaten',sit:'Keadaan',amount:'Jumlah',checks:'Pemeriksaan',receipt:'Kuitansi',hash:'Sidik jari catatan',
+ yes:'ada',no:'—',empty:'Belum ada penyaluran. Yang pertama akan muncul selama uji coba.',loading:'Memuat…',err:'Laporan gagal dimuat. Coba lagi nanti.',
+ verify:'Periksa rantai',vOk:'Rantai utuh: semua {n} catatan cocok.',vBad:'Catatan #{n} tidak cocok — mohon beri tahu kami: contact@amnetwork.io.',
+ howT:'Cara kerja pemeriksaan',
+ how:['Keluarga mengajukan permohonan. Verifikator AM Network mengunjungi keluarga secara langsung dan mencatat apa yang sudah ia pastikan.','Admin menyetujui bantuan hanya setelah pemeriksaan di tempat. Orang yang membawa keluarga tidak pernah memeriksanya sendiri.','Donatur memberikan zakat langsung kepada keluarga: tunai, lewat Alif atau Korti Milli. AM Network tidak pernah memegang uang.','Setiap penyaluran mendapat sidik jari SHA-256 yang terhubung dengan catatan sebelumnya. Jika seseorang diam-diam mengubah catatan lama, rantainya putus — tombol di atas akan menunjukkannya.','Kami menyimpan kuitansi sebagai sidik jari, bukan sebagai file. Ini membuktikan kuitansi tidak ditukar.'],
+ zakat:'zakat',sadaqah:'sedekah'},
+tr:{title:'Açık rapor',cab:'Hesabım',intro:'AM Network’ün kontrol ettiği her ödeme: tutar, tarih, şehir veya ilçe ve ailenin yerinde kontrolü. İsim, telefon ve adres yok. Para bizden hiç geçmez — bağışçı onu doğrudan aileye verir.',
+ families:'Yardım alan aileler',payouts:'Ödemeler',apps:'Başvurular',verified:'Yerinde kontrol edildi',total:'Verilen, somoni',
+ date:'Tarih',ref:'Başvuru',region:'Şehir / ilçe',sit:'Durum',amount:'Tutar',checks:'Kontroller',receipt:'Makbuz',hash:'Kayıt parmak izi',
+ yes:'var',no:'—',empty:'Henüz ödeme yok. İlkleri pilot uygulama sırasında görünecek.',loading:'Yükleniyor…',err:'Rapor yüklenemedi. Lütfen daha sonra deneyin.',
+ verify:'Zinciri kontrol et',vOk:'Zincir sağlam: {n} kaydın tamamı eşleşiyor.',vBad:'{n} numaralı kayıt eşleşmiyor — lütfen bize bildirin: contact@amnetwork.io.',
+ howT:'Kontrol nasıl işliyor',
+ how:['Aile başvurur. Bir AM Network denetçisi aileyi bizzat ziyaret eder ve doğruladıklarını kaydeder.','Yönetici yardımı ancak yerinde kontrolden sonra onaylar. Aileyi getiren kişi onu asla kendisi kontrol etmez.','Bağışçı zekâtı doğrudan aileye verir: nakit, Alif veya Korti Milli ile. AM Network parayı asla elinde tutmaz.','Her ödeme, önceki kayda bağlı bir SHA-256 parmak izi alır. Biri eski bir kaydı sessizce değiştirirse zincir kopar — yukarıdaki düğme bunu gösterir.','Makbuzu dosya olarak değil, parmak izi olarak saklarız. Bu, makbuzun değiştirilmediğini kanıtlar.'],
+ zakat:'zekât',sadaqah:'sadaka'},
+zh:{title:'公开报告',cab:'个人中心',intro:'AM Network 核查过的每一笔发放：金额、日期、城市或地区，以及对家庭的上门核查。不显示姓名、电话和地址。钱从不经过我们——捐赠者直接交给家庭。',
+ families:'获得帮助的家庭',payouts:'发放笔数',apps:'申请数',verified:'已上门核查',total:'已交付（索莫尼）',
+ date:'日期',ref:'申请',region:'城市／地区',sit:'状况',amount:'金额',checks:'核查次数',receipt:'收据',hash:'记录指纹',
+ yes:'有',no:'—',empty:'暂无发放记录。第一批记录将在试点期间出现。',loading:'加载中…',err:'报告加载失败，请稍后再试。',
+ verify:'检查链条',vOk:'链条完整：全部 {n} 条记录都吻合。',vBad:'第 {n} 条记录不吻合——请告诉我们：contact@amnetwork.io。',
+ howT:'核查如何进行',
+ how:['家庭提交申请。AM Network 的核查员亲自上门走访，并记录所确认的内容。','只有在上门核查之后，管理员才会批准援助。介绍家庭的人从不亲自核查这个家庭。','捐赠者把天课直接交给家庭：现金、Alif 或 Korti Milli。AM Network 从不经手资金。','每笔发放都有一个与上一条记录相连的 SHA-256 指纹。如果有人悄悄修改旧记录，链条就会断开——上面的按钮可以检查出来。','收据以指纹形式保存，而不是保存文件本身。这可以证明收据没有被调换。'],
+ zakat:'天课',sadaqah:'施舍（萨达格）'},
+ms:{title:'Laporan terbuka',cab:'Akaun',intro:'Setiap penyerahan yang telah disemak oleh AM Network: jumlah, tarikh, bandar atau daerah dan semakan keluarga secara bersemuka. Tiada nama, telefon atau alamat. Wang tidak pernah melalui kami — penderma memberikannya terus kepada keluarga.',
+ families:'Keluarga dibantu',payouts:'Penyerahan',apps:'Permohonan',verified:'Disemak di lokasi',total:'Diserahkan, somoni',
+ date:'Tarikh',ref:'Permohonan',region:'Bandar / daerah',sit:'Keadaan',amount:'Jumlah',checks:'Semakan',receipt:'Resit',hash:'Cap jari rekod',
+ yes:'ada',no:'—',empty:'Belum ada penyerahan. Yang pertama akan muncul semasa program perintis.',loading:'Memuatkan…',err:'Laporan tidak dapat dimuatkan. Sila cuba kemudian.',
+ verify:'Semak rantaian',vOk:'Rantaian utuh: kesemua {n} rekod sepadan.',vBad:'Rekod #{n} tidak sepadan — sila maklumkan kami: contact@amnetwork.io.',
+ howT:'Cara semakan berfungsi',
+ how:['Keluarga membuat permohonan. Pengesah AM Network melawat keluarga secara bersemuka dan merekod apa yang telah disahkannya.','Pentadbir meluluskan bantuan hanya selepas semakan di lokasi. Orang yang membawa keluarga tidak sekali-kali menyemaknya sendiri.','Penderma memberikan zakat terus kepada keluarga: tunai, melalui Alif atau Korti Milli. AM Network tidak pernah memegang wang.','Setiap penyerahan mendapat cap jari SHA-256 yang dipautkan kepada rekod sebelumnya. Jika seseorang mengubah rekod lama secara senyap, rantaian terputus — butang di atas akan menunjukkannya.','Kami menyimpan resit sebagai cap jari, bukan sebagai fail. Ia membuktikan resit tidak ditukar.'],
+ zakat:'zakat',sadaqah:'sedekah'},
+fr:{title:'Rapport ouvert',cab:'Mon espace',intro:'Chaque versement vérifié par AM Network : montant, date, ville ou district et vérification de la famille sur place. Ni noms, ni téléphones, ni adresses. L’argent ne passe jamais par nous — le donateur le donne directement à la famille.',
+ families:'Familles aidées',payouts:'Versements',apps:'Demandes',verified:'Vérifiées sur place',total:'Remis, somonis',
+ date:'Date',ref:'Demande',region:'Ville / district',sit:'Situation',amount:'Montant',checks:'Vérifications',receipt:'Reçu',hash:'Empreinte de l’entrée',
+ yes:'oui',no:'—',empty:'Aucun versement pour l’instant. Les premiers apparaîtront pendant le pilote.',loading:'Chargement…',err:'Impossible de charger le rapport. Réessayez plus tard.',
+ verify:'Vérifier la chaîne',vOk:'La chaîne est intacte : les {n} entrées concordent.',vBad:'L’entrée n° {n} ne concorde pas — merci de nous écrire : contact@amnetwork.io.',
+ howT:'Comment fonctionne la vérification',
+ how:['Une famille dépose une demande. Un vérificateur d’AM Network rend visite à la famille en personne et note ce qu’il a confirmé.','L’administrateur n’approuve l’aide qu’après la vérification sur place. La personne qui a amené la famille ne la vérifie jamais elle-même.','Le donateur remet la zakât directement à la famille : en espèces, via Alif ou Korti Milli. AM Network ne détient jamais l’argent.','Chaque versement reçoit une empreinte SHA-256 liée à l’entrée précédente. Si quelqu’un modifie discrètement une ancienne entrée, la chaîne se rompt — le bouton ci-dessus le montre.','Nous gardons le reçu sous forme d’empreinte, pas de fichier. Cela prouve que le reçu n’a pas été remplacé.'],
+ zakat:'zakât',sadaqah:'sadaqa'},
+de:{title:'Offener Bericht',cab:'Mein Bereich',intro:'Jede Auszahlung, die AM Network geprüft hat: Betrag, Datum, Stadt oder Bezirk und eine persönliche Prüfung der Familie vor Ort. Keine Namen, Telefonnummern oder Adressen. Das Geld läuft nie über uns – der Spender gibt es der Familie direkt.',
+ families:'Unterstützte Familien',payouts:'Auszahlungen',apps:'Anträge',verified:'Vor Ort geprüft',total:'Übergeben, Somoni',
+ date:'Datum',ref:'Antrag',region:'Stadt / Bezirk',sit:'Lage',amount:'Betrag',checks:'Prüfungen',receipt:'Beleg',hash:'Fingerabdruck des Eintrags',
+ yes:'ja',no:'—',empty:'Noch keine Auszahlungen. Die ersten erscheinen während des Pilotprojekts.',loading:'Wird geladen…',err:'Der Bericht konnte nicht geladen werden. Bitte später erneut versuchen.',
+ verify:'Kette prüfen',vOk:'Die Kette ist intakt: alle {n} Einträge stimmen.',vBad:'Eintrag Nr. {n} stimmt nicht – bitte schreiben Sie uns: contact@amnetwork.io.',
+ howT:'So funktioniert die Prüfung',
+ how:['Eine Familie stellt einen Antrag. Ein Prüfer von AM Network besucht die Familie persönlich und hält fest, was er bestätigt hat.','Der Administrator genehmigt Hilfe erst nach der Prüfung vor Ort. Wer die Familie gebracht hat, prüft sie nie selbst.','Der Spender gibt die Zakat direkt der Familie: bar, über Alif oder Korti Milli. AM Network hält das Geld nie.','Jede Auszahlung erhält einen SHA-256-Fingerabdruck, der mit dem vorherigen Eintrag verknüpft ist. Ändert jemand heimlich einen alten Eintrag, reißt die Kette – das zeigt die Schaltfläche oben.','Wir speichern den Beleg als Fingerabdruck, nicht als Datei. So lässt sich beweisen, dass der Beleg nicht ausgetauscht wurde.'],
+ zakat:'Zakat',sadaqah:'Sadaqa'}
 };
 const CATS={widow:{ru:'вдова / одинокая мать',tj:'бевазан / модари танҳо',en:'widow / single mother'},orphan:{ru:'сироты',tj:'ятимон',en:'orphans'},elderly:{ru:'пожилые',tj:'пиронсолон',en:'elderly'},disabled:{ru:'инвалидность',tj:'маъюбӣ',en:'disability'},poverty:{ru:'бедность',tj:'камбизоатӣ',en:'poverty'},student:{ru:'студент',tj:'донишҷӯ',en:'student'},debt:{ru:'долг',tj:'қарз',en:'debt'},refugee:{ru:'беженцы',tj:'гурезаҳо',en:'refugees'},ill:{ru:'болезнь',tj:'беморӣ',en:'illness'},large:{ru:'многодетные',tj:'серфарзанд',en:'large family'},food:{ru:'нехватка еды',tj:'камии ғизо',en:'food'},convert:{ru:'новый мусульманин',tj:'навмусулмон',en:'new Muslim'},traffick:{ru:'принудительный труд',tj:'кори маҷбурӣ',en:'forced labour'},disaster:{ru:'бедствие',tj:'офат',en:'disaster'},invisible:{ru:'без другой помощи',tj:'бе кӯмаки дигар',en:'no other help'}};
+// The other seven languages, one block per language (merged into CATS below).
+const CATS_MORE={
+ ar:{widow:'أرملة / أم وحيدة',orphan:'أيتام',elderly:'مسنّون',disabled:'إعاقة',poverty:'فقر',student:'طالب',debt:'دَين',refugee:'لاجئون',ill:'مرض',large:'أسرة كبيرة',food:'نقص الغذاء',convert:'مسلم جديد',traffick:'عمل قسري',disaster:'كارثة',invisible:'بلا مساعدة أخرى'},
+ id:{widow:'janda / ibu tunggal',orphan:'yatim',elderly:'lansia',disabled:'disabilitas',poverty:'kemiskinan',student:'pelajar',debt:'utang',refugee:'pengungsi',ill:'sakit',large:'keluarga besar',food:'kurang makanan',convert:'mualaf',traffick:'kerja paksa',disaster:'bencana',invisible:'tanpa bantuan lain'},
+ tr:{widow:'dul / yalnız anne',orphan:'yetimler',elderly:'yaşlılar',disabled:'engellilik',poverty:'yoksulluk',student:'öğrenci',debt:'borç',refugee:'mülteciler',ill:'hastalık',large:'kalabalık aile',food:'yiyecek sıkıntısı',convert:'yeni Müslüman',traffick:'zorla çalıştırma',disaster:'afet',invisible:'başka yardım yok'},
+ zh:{widow:'寡妇／单身母亲',orphan:'孤儿',elderly:'老人',disabled:'残疾',poverty:'贫困',student:'学生',debt:'债务',refugee:'难民',ill:'疾病',large:'多子女家庭',food:'缺少食物',convert:'新穆斯林',traffick:'强迫劳动',disaster:'灾害',invisible:'无其他援助'},
+ ms:{widow:'balu / ibu tunggal',orphan:'anak yatim',elderly:'warga emas',disabled:'OKU',poverty:'kemiskinan',student:'pelajar',debt:'hutang',refugee:'pelarian',ill:'penyakit',large:'keluarga besar',food:'kekurangan makanan',convert:'mualaf',traffick:'buruh paksa',disaster:'bencana',invisible:'tiada bantuan lain'},
+ fr:{widow:'veuve / mère seule',orphan:'orphelins',elderly:'personnes âgées',disabled:'handicap',poverty:'pauvreté',student:'étudiant',debt:'dette',refugee:'réfugiés',ill:'maladie',large:'famille nombreuse',food:'manque de nourriture',convert:'nouveau musulman',traffick:'travail forcé',disaster:'catastrophe',invisible:'sans autre aide'},
+ de:{widow:'Witwe / alleinerziehend',orphan:'Waisen',elderly:'Ältere',disabled:'Behinderung',poverty:'Armut',student:'Studierende',debt:'Schulden',refugee:'Geflüchtete',ill:'Krankheit',large:'große Familie',food:'Nahrungsmangel',convert:'neue Muslime',traffick:'Zwangsarbeit',disaster:'Katastrophe',invisible:'keine andere Hilfe'}
+};
+for(const l in CATS_MORE)for(const k in CATS_MORE[l])if(CATS[k])CATS[k][l]=CATS_MORE[l][k];
 let LANG='ru';try{const s=localStorage.getItem('amn_lang');if(T[s])LANG=s;else if(s&&s!=='ru')LANG='en'}catch(e){}
+// Date locale per language (tj keeps ru-RU month names, as before); Latin digits and the Gregorian calendar everywhere.
+const LOCALE={ru:'ru-RU',tj:'ru-RU',en:'en-GB',ar:'ar-u-nu-latn',id:'id-ID',tr:'tr-TR',zh:'zh-CN',ms:'ms-MY',fr:'fr-FR',de:'de-DE'};
+// Arabic and Chinese fonts are loaded only when that language is chosen (Google Fonts slices them by unicode-range).
+const SCRIPT_FONT={ar:'Noto+Naskh+Arabic:wght@400;600;700',zh:'Noto+Sans+SC:wght@400;500;700'};
+function applyLang(){
+  const h=document.documentElement;h.lang=LANG==='tj'?'tg':LANG;h.dir=LANG==='ar'?'rtl':'ltr';
+  const f=SCRIPT_FONT[LANG];
+  if(f&&!document.getElementById('font-'+LANG)){const l=document.createElement('link');l.id='font-'+LANG;l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family='+f+'&display=swap';document.head.appendChild(l)}
+}
+applyLang();
 const t=(k,v)=>{let s=T[LANG][k]??T.en[k];if(v)for(const x in v)s=s.split('{'+x+'}').join(v[x]);return s};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const $=s=>document.querySelector(s);
 const n=x=>Number(x).toLocaleString('ru-RU',{maximumFractionDigits:2});
-const fmtD=d=>new Date(d+'T00:00:00').toLocaleDateString(LANG==='en'?'en-GB':'ru-RU',{day:'numeric',month:'short',year:'numeric'});
+const fmtD=d=>new Date(d+'T00:00:00').toLocaleDateString(LOCALE[LANG]||'en-GB',{day:'numeric',month:'short',year:'numeric',calendar:'gregory'});
 const sb=window.supabase.createClient(AMN_SB.url,AMN_SB.key,{auth:{persistSession:false,autoRefreshToken:false}});
 let ROWS=null,STATS=null,ERR=false;
 
 function render(){
-  document.documentElement.lang=LANG==='tj'?'tg':LANG;document.title=t('title')+' — AM Network';
+  applyLang();document.title=t('title')+' — AM Network';
   $('#langSel').value=LANG;
   $('#navCab').textContent=t('cab');$('#h1').textContent=t('title');$('#intro').textContent=t('intro');
   $('#verify').textContent=t('verify');$('#howT').textContent=t('howT');$('#how').innerHTML=t('how').map(x=>`<li>${esc(x)}</li>`).join('');
@@ -135,11 +215,11 @@ function render(){
    ${[...ROWS].reverse().map(r=>`<tr><td>${r.seq}</td><td>${esc(fmtD(r.paid_on))}</td><td>${esc(r.ref)}</td><td>${esc(r.region)}</td>
     <td>${(r.categories||[]).map(c=>`<span class="tag">${esc((CATS[c]&&CATS[c][LANG])||c)}</span>`).join('')||'—'}</td>
     <td class="n">${esc(n(r.amount))} ${esc(r.currency)}<div class="muted">${esc(t(r.kind))}</div></td><td class="n">${r.verifications}</td><td>${esc(r.has_receipt?t('yes'):t('no'))}</td></tr>
-    <tr><td></td><td colspan="7" class="hash">${esc(t('hash'))}: ${esc(r.entry_hash)}</td></tr>`).join('')}</tbody></table>
+    <tr><td></td><td colspan="7" class="hash">${esc(t('hash'))}: <bdi dir="ltr">${esc(r.entry_hash)}</bdi></td></tr>`).join('')}</tbody></table>
    <div class="cards">${[...ROWS].reverse().map(r=>`<div class="pc"><div class="top"><b>${esc(n(r.amount))} ${esc(r.currency)} · ${esc(t(r.kind))}</b><span class="muted">#${r.seq} · ${esc(fmtD(r.paid_on))}</span></div>
     <div>${esc(r.ref)} · ${esc(r.region)} · ${esc(t('checks'))}: ${r.verifications} · ${esc(t('receipt'))}: ${esc(r.has_receipt?t('yes'):t('no'))}</div>
     <div>${(r.categories||[]).map(c=>`<span class="tag">${esc((CATS[c]&&CATS[c][LANG])||c)}</span>`).join('')}</div>
-    <div class="hash">${esc(t('hash'))}: ${esc(r.entry_hash)}</div></div>`).join('')}</div>`;
+    <div class="hash">${esc(t('hash'))}: <bdi dir="ltr">${esc(r.entry_hash)}</bdi></div></div>`).join('')}</div>`;
 }
 async function sha256Hex(s){const h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join('')}
 $('#verify').addEventListener('click',async()=>{

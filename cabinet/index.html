@@ -20,17 +20,18 @@
 <style>
 [data-theme="dark"]{--bg1:#0A1A11;--bg2:#0F2117;--bg3:#1C4532;--gold:#C9A84C;--gold2:#E8C87A;--gold3:rgba(201,168,76,.12);--text:#fff;--text2:rgba(255,255,255,.68);--text3:rgba(255,255,255,.45);--border:rgba(255,255,255,.1);--card:rgba(255,255,255,.04);--nav-bg:rgba(10,26,17,.92);--input-bg:rgba(255,255,255,.06);--input-border:rgba(255,255,255,.16);--ok:#5FD39A;--ok-bg:rgba(95,211,154,.12);--warn:#E8C87A;--warn-bg:rgba(232,200,122,.12);--bad:#FF8A8A;--bad-bg:rgba(255,138,138,.12);--info:#8EC5FF;--info-bg:rgba(142,197,255,.12)}
 [data-theme="light"]{--bg1:#F5F0E8;--bg2:#EDE8DE;--bg3:#DDD0BB;--gold:#A88528;--gold2:#8A6A12;--gold3:rgba(201,168,76,.14);--text:#1C2E1F;--text2:rgba(28,46,31,.75);--text3:rgba(28,46,31,.55);--border:rgba(28,69,50,.14);--card:rgba(255,255,255,.85);--nav-bg:rgba(245,240,232,.95);--input-bg:#fff;--input-border:rgba(28,69,50,.22);--ok:#1E7A4C;--ok-bg:rgba(30,122,76,.1);--warn:#8A6A12;--warn-bg:rgba(201,168,76,.16);--bad:#B42318;--bad-bg:rgba(180,35,24,.08);--info:#1D5FA8;--info-bg:rgba(29,95,168,.08)}
+:root{--ff:'DM Sans','Noto Naskh Arabic','Noto Sans SC',system-ui,sans-serif;--fh:'Cormorant Garamond','Noto Naskh Arabic','Noto Sans SC',serif}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg1);color:var(--text);font:15px/1.55 'DM Sans',system-ui,sans-serif;min-height:100vh}
+body{background:var(--bg1);color:var(--text);font:15px/1.55 var(--ff);min-height:100vh}
 a{color:var(--gold)}
 nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 16px;height:60px;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .nav-logo img{height:34px;display:block}
 .nav-right{display:flex;gap:8px;align-items:center}
-.nbtn{min-height:38px;min-width:38px;padding:0 10px;border-radius:9px;border:1px solid var(--border);background:transparent;color:var(--text2);font:600 13px 'DM Sans',sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.nbtn{min-height:38px;min-width:38px;padding:0 10px;border-radius:9px;border:1px solid var(--border);background:transparent;color:var(--text2);font:600 13px var(--ff);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .nbtn:hover{border-color:var(--gold);color:var(--gold)}
 main{max-width:980px;margin:0 auto;padding:22px 16px 80px}
-h1{font:700 clamp(26px,4.5vw,36px)/1.2 'Cormorant Garamond',serif;margin-bottom:6px}
-h2{font:700 22px/1.25 'Cormorant Garamond',serif;margin:0 0 10px}
+h1{font:700 clamp(26px,4.5vw,36px)/1.2 var(--fh);margin-bottom:6px}
+h2{font:700 22px/1.25 var(--fh);margin:0 0 10px}
 h3{font-size:15px;margin:0 0 8px}
 .sub{color:var(--text2);font-size:14px}
 .muted{color:var(--text3)}
@@ -38,7 +39,7 @@ h3{font-size:15px;margin:0 0 8px}
 .stack{display:grid;gap:14px}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .between{justify-content:space-between}
-.btn{min-height:44px;padding:0 18px;border-radius:11px;border:1px solid var(--border);background:var(--card);color:var(--text);font:600 14px 'DM Sans',sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn{min-height:44px;padding:0 18px;border-radius:11px;border:1px solid var(--border);background:var(--card);color:var(--text);font:600 14px var(--ff);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
 .btn:hover{border-color:var(--gold)}
 .btn.primary{background:var(--gold);border-color:var(--gold);color:#16130a}
 .btn.primary:hover{background:var(--gold2)}
@@ -46,7 +47,7 @@ h3{font-size:15px;margin:0 0 8px}
 .btn:disabled{opacity:.55;cursor:wait}
 .btn:focus-visible,.nbtn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.tab:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 label{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--text2)}
-input,select,textarea{width:100%;min-height:44px;padding:10px 12px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text);font:15px 'DM Sans',sans-serif}
+input,select,textarea{width:100%;min-height:44px;padding:10px 12px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text);font:15px var(--ff)}
 textarea{min-height:90px;resize:vertical}
 .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:12px}
 .grid2>*,.stack>*,label{min-width:0}
@@ -58,7 +59,7 @@ html,body{overflow-x:hidden}
 .chk input{width:20px;min-height:20px;height:20px;margin-top:1px;flex:none;accent-color:var(--gold)}
 .chk .pts{margin-inline-start:auto;color:var(--gold);font-weight:700;white-space:nowrap}
 .tabs{display:flex;gap:6px;overflow-x:auto;padding:4px;border:1px solid var(--border);border-radius:14px;background:var(--input-bg);margin:18px 0}
-.tab{flex:1 0 auto;min-height:42px;padding:0 14px;border:0;border-radius:10px;background:transparent;color:var(--text2);font:600 14px 'DM Sans',sans-serif;cursor:pointer;white-space:nowrap}
+.tab{flex:1 0 auto;min-height:42px;padding:0 14px;border:0;border-radius:10px;background:transparent;color:var(--text2);font:600 14px var(--ff);cursor:pointer;white-space:nowrap}
 .tab[aria-current="page"]{background:var(--gold);color:#16130a}
 .pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:30px;font-size:12px;font-weight:700;white-space:nowrap}
 .s-new{background:var(--info-bg);color:var(--info)}.s-assigned{background:var(--warn-bg);color:var(--warn)}.s-verified{background:var(--warn-bg);color:var(--warn)}
@@ -70,7 +71,7 @@ html,body{overflow-x:hidden}
 .item b{font-size:15px}
 .item .meta{grid-column:1/-1;color:var(--text3);font-size:13px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
-.chipf{min-height:36px;padding:0 12px;border-radius:30px;border:1px solid var(--border);background:transparent;color:var(--text2);font:600 13px 'DM Sans',sans-serif;cursor:pointer}
+.chipf{min-height:36px;padding:0 12px;border-radius:30px;border:1px solid var(--border);background:transparent;color:var(--text2);font:600 13px var(--ff);cursor:pointer}
 .chipf[aria-pressed="true"]{background:var(--gold3);border-color:var(--gold);color:var(--gold)}
 dl.facts{display:grid;grid-template-columns:minmax(120px,max-content) 1fr;gap:6px 14px;font-size:14px}
 dl.facts dt{color:var(--text3)}
@@ -82,7 +83,7 @@ dl.facts dd{overflow-wrap:anywhere}
 .msg.err{background:var(--bad-bg);color:var(--bad);border-color:transparent}
 .msg.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}
 .msg.info{background:var(--gold3);color:var(--text);border-color:rgba(201,168,76,.3)}
-.score{font:700 34px/1 'Cormorant Garamond',serif;color:var(--gold)}
+.score{font:700 34px/1 var(--fh);color:var(--gold)}
 .hash{font:12px ui-monospace,Menlo,monospace;overflow-wrap:anywhere;color:var(--text3)}
 .back{display:inline-flex;align-items:center;gap:6px;font-size:14px;margin-bottom:12px;text-decoration:none}
 table{width:100%;border-collapse:collapse;font-size:14px}
@@ -92,6 +93,10 @@ th{font-size:12px;color:var(--text3);font-weight:600}
 .center{text-align:center}
 .spin{padding:40px 0;text-align:center;color:var(--text3)}
 .hidden{display:none!important}
+:lang(ar) h1,:lang(ar) h2{line-height:1.5}
+:lang(ar) body{line-height:1.75}
+[dir=rtl] input[type=email],[dir=rtl] input[type=password],[dir=rtl] input[type=tel]{direction:ltr;text-align:right}
+.hash,.chk .pts{direction:ltr;unicode-bidi:isolate}
 @media (max-width:420px){#navLog{display:none}}
 @media (max-width:560px){dl.facts{grid-template-columns:1fr}dl.facts dt{margin-top:6px}}
 </style>
@@ -101,7 +106,7 @@ th{font-size:12px;color:var(--text3);font-weight:600}
   <a class="nav-logo" href="/"><img src="/logo.webp" alt="AM Network" height="34"></a>
   <div class="nav-right">
     <a class="nbtn" href="/transparency/" id="navLog"></a>
-    <select class="nbtn" id="langSel" aria-label="Language" style="width:auto;padding:0 8px"><option value="ru">RU</option><option value="tj">TJ</option><option value="en">EN</option></select>
+    <select class="nbtn" id="langSel" aria-label="Language" style="width:auto;padding:0 8px"><option value="ru">RU</option><option value="tj">TJ</option><option value="en">EN</option><option value="ar">AR</option><option value="id">ID</option><option value="tr">TR</option><option value="zh">中文</option><option value="ms">MS</option><option value="fr">FR</option><option value="de">DE</option></select>
     <button class="nbtn" id="themeBtn" aria-label="Theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>
   </div>
 </nav>
@@ -394,9 +399,9 @@ ms:{title:'Akaun Saya',logLink:'Laporan terbuka',signin:'Log masuk',signup:'Daft
  errNeedVer:'Perlu semakan di lokasi dengan cadangan “Bantu” terlebih dahulu.',errSelfVer:'Orang yang membawa keluarga tidak boleh menyemaknya.',errNotApproved:'Penyerahan hanya boleh direkodkan bagi permohonan yang diluluskan.',errConsent:'Persetujuan keluarga diperlukan.',errAssignee:'Hanya pengesah boleh dilantik.',errPaidOnly:'Status “Bantuan diserahkan” hanya ditetapkan dengan merekod penyerahan.',errAdminOnly:'Untuk pentadbir sahaja.',
  notConfirmed:'E-mel belum disahkan. Buka e-mel daripada Supabase dan ketik pautannya.'},
 fr:{title:'Mon espace',logLink:'Rapport ouvert',signin:'Connexion',signup:'Inscription',email:'E-mail',password:'Mot de passe',pwHint:'Au moins 8 caractères',fullName:'Nom complet',
- doSignin:'Se connecter',doSignup:'Créer un compte',forgot:'Mot de passe oublié ?',sendReset:'Envoyer un lien pour un nouveau mot de passe',resetSent:'Si cette adresse existe, nous lui avons envoyé un lien.',
+ doSignin:'Se connecter',doSignup:'Créer un compte',forgot:'Mot de passe oublié ?',sendReset:'Envoyer un lien pour un nouveau mot de passe',resetSent:'Si cette adresse existe, nous lui avons envoyé un lien.',
  checkEmail:'Compte créé. Confirmez votre e-mail avec le lien reçu, puis connectez-vous.',newPw:'Nouveau mot de passe',savePw:'Enregistrer le mot de passe',pwSaved:'Mot de passe enregistré.',
- authIntro:'L’espace des familles, des vérificateurs, des donateurs et de l’équipe AM Network. L’argent ne passe jamais par nous : le donateur donne directement à la famille, nous vérifions la famille sur place et publions un rapport.',
+ authIntro:'L’espace des familles, des vérificateurs, des donateurs et de l’équipe AM Network. L’argent ne passe jamais par nous : le donateur donne directement à la famille, nous vérifions la famille sur place et publions un rapport.',
  signout:'Se déconnecter',hello:'Assalamou alaykoum, {n}',
  r_applicant:'Demandeur',r_donor:'Donateur',r_verifier:'Vérificateur',r_admin:'Administrateur',
  roleNote_applicant:'Vous pouvez déposer une demande et suivre son statut. Pour devenir vérificateur ou donateur, écrivez à contact@amnetwork.io.',
@@ -411,7 +416,7 @@ fr:{title:'Mon espace',logLink:'Rapport ouvert',signin:'Connexion',signup:'Inscr
  created:'Déposée le',timeline:'Historique',ref:'Numéro',status:'Statut',score:'Score de besoin',details:'Données de la famille',
  e_created:'Demande déposée',e_assigned:'Vérificateur désigné',e_verified:'Vérification sur place',e_approved:'Approuvée',e_rejected:'Refusée',e_paid:'Aide remise',e_new:'Remise parmi les nouvelles',
  v_title:'Vérification sur place',v_facts:'Ce que vous avez confirmé vous-même',v_need:'Liste des besoins (une indication — une personne décide)',v_date:'Date de la visite',v_notes:'Notes (visibles seulement par l’administrateur)',
- v_rec:'Votre recommandation',v_approve:'Aider',v_reject:'Ne pas aider',v_submit:'Envoyer la vérification',v_done:'Vérification enregistrée.',v_already:'Vous avez déjà vérifié cette famille.',v_cannot:'C’est vous qui avez amené cette famille : une autre personne la vérifie donc.',
+ v_rec:'Votre recommandation',v_approve:'Aider',v_reject:'Ne pas aider',v_submit:'Envoyer la vérification',v_done:'Vérification enregistrée.',v_already:'Vous avez déjà vérifié cette famille.',v_cannot:'C’est vous qui avez amené cette famille : une autre personne la vérifie donc.',
  c_id_seen:'J’ai vu une pièce d’identité',c_lives_here:'La famille vit à l’adresse indiquée',c_household:'Composition de la famille confirmée',c_income:'Revenus et dépenses précisés',c_no_other:'Aucune autre aide régulière',
  n_no_income:'Aucun revenu depuis 3 mois ou plus',n_below_min:'Revenu par personne sous le minimum vital',n_no_assets:'Aucun bien au-dessus du nisâb',n_dependents:'Personnes à charge (2 points chacune, jusqu’à 10)',
  n_widow:'Veuve, mère seule ou orphelins sans soutien de famille',n_illness:'Handicap ou maladie grave sans traitement',n_housing:'Pas de logement à soi ou loyers impayés',
@@ -425,8 +430,8 @@ fr:{title:'Mon espace',logLink:'Rapport ouvert',signin:'Connexion',signup:'Inscr
  pe_role:'Rôle',pe_since:'Depuis',pe_hint:'Ne donnez le rôle de vérificateur qu’à des personnes que vous connaissez personnellement.',
  g_intro:'Où est allée votre zakât. Le nom et l’adresse de la famille ne sont pas affichés.',g_verifs:'vérifications',
  pr_city:'Ville',
- err:'Erreur : {m}',errNet:'Impossible de joindre la base de données. Vérifiez votre connexion et réessayez.',errLogin:'E-mail ou mot de passe incorrect.',errExists:'Un compte existe déjà avec cet e-mail. Connectez-vous.',
- errNeedVer:'Il faut d’abord une vérification sur place qui recommande « Aider ».',errSelfVer:'La personne qui a amené la famille ne peut pas la vérifier.',errNotApproved:'Un versement ne peut être enregistré que pour une demande approuvée.',errConsent:'L’accord de la famille est nécessaire.',errAssignee:'Seul un vérificateur peut être désigné.',errPaidOnly:'Le statut « Aide remise » ne s’obtient qu’en enregistrant un versement.',errAdminOnly:'Réservé à l’administrateur.',
+ err:'Erreur : {m}',errNet:'Impossible de joindre la base de données. Vérifiez votre connexion et réessayez.',errLogin:'E-mail ou mot de passe incorrect.',errExists:'Un compte existe déjà avec cet e-mail. Connectez-vous.',
+ errNeedVer:'Il faut d’abord une vérification sur place qui recommande « Aider ».',errSelfVer:'La personne qui a amené la famille ne peut pas la vérifier.',errNotApproved:'Un versement ne peut être enregistré que pour une demande approuvée.',errConsent:'L’accord de la famille est nécessaire.',errAssignee:'Seul un vérificateur peut être désigné.',errPaidOnly:'Le statut « Aide remise » ne s’obtient qu’en enregistrant un versement.',errAdminOnly:'Réservé à l’administrateur.',
  notConfirmed:'E-mail pas encore confirmé. Ouvrez l’e-mail de Supabase et cliquez sur le lien.'},
 de:{title:'Mein Bereich',logLink:'Offener Bericht',signin:'Anmelden',signup:'Registrieren',email:'E-Mail',password:'Passwort',pwHint:'Mindestens 8 Zeichen',fullName:'Vor- und Nachname',
  doSignin:'Anmelden',doSignup:'Konto erstellen',forgot:'Passwort vergessen?',sendReset:'Link für ein neues Passwort senden',resetSent:'Falls diese Adresse existiert, haben wir einen Link dorthin gesendet.',
@@ -498,11 +503,21 @@ const STATUSES=['new','assigned','verified','approved','rejected','paid'];
 
 let LANG='ru';
 try{const s=localStorage.getItem('amn_lang');if(T[s])LANG=s;else if(s&&s!=='ru')LANG='en'}catch(e){}
+// Date locale per language (tj keeps ru-RU month names, as before); Latin digits and the Gregorian calendar everywhere.
+const LOCALE={ru:'ru-RU',tj:'ru-RU',en:'en-GB',ar:'ar-u-nu-latn',id:'id-ID',tr:'tr-TR',zh:'zh-CN',ms:'ms-MY',fr:'fr-FR',de:'de-DE'};
+// Arabic and Chinese fonts are loaded only when that language is chosen (Google Fonts slices them by unicode-range).
+const SCRIPT_FONT={ar:'Noto+Naskh+Arabic:wght@400;600;700',zh:'Noto+Sans+SC:wght@400;500;700'};
+function applyLang(){
+  const h=document.documentElement;h.lang=LANG==='tj'?'tg':LANG;h.dir=LANG==='ar'?'rtl':'ltr';
+  const f=SCRIPT_FONT[LANG];
+  if(f&&!document.getElementById('font-'+LANG)){const l=document.createElement('link');l.id='font-'+LANG;l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family='+f+'&display=swap';document.head.appendChild(l)}
+}
+applyLang();
 function t(k,v){let s=(T[LANG]&&T[LANG][k])??T.en[k]??k;if(v)for(const x in v)s=s.split('{'+x+'}').join(v[x]);return s}
 const cat=k=>(CATS[k]&&CATS[k][LANG])||k;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const $=s=>document.querySelector(s);
-const fmtD=d=>{if(!d)return '—';try{return new Date(d).toLocaleDateString(LANG==='en'?'en-GB':'ru-RU',{day:'numeric',month:'short',year:'numeric'})}catch(e){return d}};
+const fmtD=d=>{if(!d)return '—';try{return new Date(d).toLocaleDateString(LOCALE[LANG]||'en-GB',{day:'numeric',month:'short',year:'numeric',calendar:'gregory'})}catch(e){return d}};
 const money=(a,c)=>Number(a).toLocaleString('ru-RU',{maximumFractionDigits:2})+' '+(c||'');
 const pill=s=>`<span class="pill s-${esc(s)}">${esc(t('s_'+s))}</span>`;
 
@@ -542,7 +557,7 @@ function route(){const h=location.hash.replace(/^#\/?/,'');const [a,b]=h.split('
 
 // ───────────── chrome ─────────────
 function chrome(){
-  document.documentElement.lang=LANG==='tj'?'tg':LANG;
+  applyLang();
   document.title=t('title')+' — AM Network';
   $('#navLog').textContent=t('logLink');
   $('#langSel').value=LANG;
@@ -694,7 +709,7 @@ async function viewApp(id){
   if(isAdmin())facts.push([t('a_assign'),a.assigned_to?staffName(a.assigned_to):t('a_none')]);
   let html=`<a class="back" href="#${isAdmin()?'all':a.assigned_to===uid?'check':'mine'}">${esc(t('back'))}</a>${flashHTML()}
   <div class="card stack"><div class="row between"><h2 style="margin:0">${esc(a.full_name)}</h2>${pill(a.status)}</div>
-   <dl class="facts">${facts.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${v===null?pill(a.status):esc(v)}</dd>`).join('')}</dl>
+   <dl class="facts">${facts.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${v===null?pill(a.status):`<bdi>${esc(v)}</bdi>`}</dd>`).join('')}</dl>
    ${(a.categories||[]).length?`<div class="row">${a.categories.map(c=>`<span class="pill role">${esc(cat(c))}</span>`).join('')}</div>`:''}
    ${a.situation&&seePrivate?`<p style="white-space:pre-wrap">${esc(a.situation)}</p>`:''}
    ${a.admin_note&&isAdmin()?`<div class="msg info">${esc(a.admin_note)}</div>`:''}
@@ -808,7 +823,7 @@ async function viewGifts(){
   const rows=await q(sb.rpc('my_payouts'));
   return `<p class="sub" style="margin-bottom:12px">${esc(t('g_intro'))}</p>`+(rows.length?`<div class="list">${rows.map(r=>`<div class="item" style="cursor:default"><b>${esc(money(r.amount,r.currency))} · ${esc(t('k_'+r.kind))}</b><span class="pill s-paid">${esc(fmtD(r.paid_on))}</span>
     <div class="meta">${esc(r.ref)} · ${esc(r.region)} · ${r.verifications} ${esc(t('g_verifs'))}${(r.categories||[]).length?' · '+esc(r.categories.map(cat).join(', ')):''}<div class="hash">${esc(r.entry_hash)}</div></div></div>`).join('')}</div>`:`<div class="card center muted">${esc(t('empty'))}</div>`)+
-    `<p style="margin-top:14px"><a href="/transparency/">${esc(t('logLink'))} →</a></p>`;
+    `<p style="margin-top:14px"><a href="/transparency/">${esc(t('logLink'))} ${LANG==='ar'?'←':'→'}</a></p>`;
 }
 function viewProfile(){
   return `<form id="fProf" class="card stack" style="max-width:520px">

@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Roadmap — AM Network</title>
-<meta name="description" content="AM Network's path to launch — foundation, build, launch, scale — and our own honest assessment of build progress today.">
+<meta name="description" content="AM Network's honest timeline: free tools, Academy, cabinet and open report built (Oct–Nov 2026); lawyer and Hanafi scholar review (Dec 2026 – Jan 2027); pilot in Dushanbe around Ramadan 2027.">
 <link rel="canonical" href="https://amnetwork.io/roadmap/">
 <meta property="og:title" content="Roadmap — AM Network">
-<meta property="og:description" content="AM Network's path to launch — foundation, build, launch, scale — and our own honest assessment of build progress today.">
+<meta property="og:description" content="AM Network's honest timeline: free tools, Academy, cabinet and open report built (Oct–Nov 2026); lawyer and Hanafi scholar review (Dec 2026 – Jan 2027); pilot in Dushanbe around Ramadan 2027.">
 <meta property="og:url" content="https://amnetwork.io/roadmap/">
 <meta property="og:image" content="https://amnetwork.io/og-image.jpg">
 <meta property="og:type" content="website">
@@ -97,12 +97,15 @@ main{padding-top:64px;min-height:100vh}
 .prog-tag{font-size:11px;font-weight:600;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
 .prog-h{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.5vw,26px);font-weight:700;margin-bottom:6px;color:var(--text)}
 .prog-note{font-size:13px;color:var(--text3);line-height:1.6;margin-bottom:20px}
-.prog-row+.prog-row{margin-top:14px}
-.prog-row-head{display:flex;justify-content:space-between;margin-bottom:6px}
-.prog-row-head .m-label{font-size:13px;color:var(--text)}
-.prog-row-head .m-pct{font-size:13px;font-weight:600}
-.prog-track-bg{height:8px;background:var(--card);border-radius:4px;overflow:hidden;border:1px solid var(--border)}
-.prog-bar{height:100%;border-radius:4px}
+.prog-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 0;border-top:1px solid var(--border)}
+.prog-row .m-label{font-size:13.5px;color:var(--text);line-height:1.5}
+.m-state{flex:none;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--border);white-space:nowrap}
+.m-state.ready{color:#3F9E6C;background:rgba(79,175,124,.12);border-color:rgba(79,175,124,.35)}
+.m-state.built{color:var(--gold);background:var(--gold3);border-color:rgba(201,168,76,.35)}
+.m-state.next{color:var(--text2)}
+.m-state.later{color:var(--text3);border-style:dashed}
+.ritem.done .rlabel::before{content:"✓ "}
+@media(max-width:480px){.prog-row{flex-direction:column;align-items:flex-start;gap:6px}}
 
 @media(max-width:640px){.hero{padding:36px 6vw 4px}.wrap{padding:28px 5vw 48px}.roadmap{grid-template-columns:1fr}}
 @media(min-width:641px) and (max-width:860px){.roadmap{grid-template-columns:1fr 1fr}}
@@ -142,36 +145,35 @@ main{padding-top:64px;min-height:100vh}
 <main>
   <section class="hero">
     <div class="eyebrow" data-t="road_tag">Roadmap</div>
-    <h1 data-t="road_title">The path to launch.</h1>
-    <p data-t="road_teaser">From foundation to mainnet — and an honest look at how far each milestone actually is today.</p>
+    <h1 data-t="road_title">The road to the pilot.</h1>
+    <p data-t="road_teaser">What is done, what comes next and when. Nothing is marked as done before it is.</p>
   </section>
 
   <div class="wrap">
     <div class="roadmap">
-      <div class="ritem"><div class="rlabel" data-t="r1_label">Q2 2026</div><h3 data-t="r1_title">Foundation</h3><p data-t="r1_items">Waitlist · Shariah council · Legal entity · MVP design</p></div>
-      <div class="ritem"><div class="rlabel" data-t="r2_label">Q3 2026</div><h3 data-t="r2_title">Build</h3><p data-t="r2_items">Smart contracts · AI verification · Academy v1 · First transactions</p></div>
-      <div class="ritem"><div class="rlabel" data-t="r3_label">After the required reviews</div><h3 data-t="r3_title">Launch</h3><p data-t="r3_items">Mainnet · 1,000 users · Mosque partnerships · Seed funding</p></div>
-      <div class="ritem"><div class="rlabel" data-t="r4_label">2027+</div><h3 data-t="r4_title">Scale</h3><p data-t="r4_items">AM Pay · Government contracts · 50,000 users · Series A</p></div>
+      <div class="ritem done"><div class="rlabel" data-t="r1_label">Oct – Nov 2026 · done</div><h3 data-t="r1_title">The groundwork</h3><p data-t="r1_items">Free Islamic tools · AM Academy · Cabinet for families, verifiers and donors · Open report with a SHA-256 hash chain</p></div>
+      <div class="ritem"><div class="rlabel" data-t="r2_label">Dec 2026 – Jan 2027</div><h3 data-t="r2_title">Checks and preparation</h3><p data-t="r2_items">Consultation with a Tajik lawyer · Review by a Hanafi scholar · Training volunteer verifiers · Trial run with 2–3 families</p></div>
+      <div class="ritem"><div class="rlabel" data-t="r3_label">Ramadan 2027 (~Feb – Mar)</div><h3 data-t="r3_title">Pilot in Dushanbe</h3><p data-t="r3_items">10–20 families in Dushanbe · The founder's own and relatives' Zakat · Public report of every payout</p></div>
+      <div class="ritem"><div class="rlabel" data-t="r4_label">After the pilot</div><h3 data-t="r4_title">Results, then next steps</h3><p data-t="r4_items">Publish the results · Work with a registered partner charity · More cities — only if the pilot works</p></div>
     </div>
 
     <div class="prog-track">
-      <div class="prog-tag" data-t="prog_tag">Build Progress</div>
-      <div class="prog-h" data-t="prog_title">Milestones</div>
-      <p class="prog-note" data-t="prog_note">Our own assessment of readiness for a mainnet launch, not marketing figures. Where a number is low, it is low.</p>
-
-      <div class="prog-row"><div class="prog-row-head"><span class="m-label" data-t="prog_m1">Website & Products</span><span class="m-pct" style="color:var(--gold)">90%</span></div><div class="prog-track-bg"><div class="prog-bar" style="width:90%;background:linear-gradient(90deg,#10B981,#34D399)"></div></div></div>
-      <div class="prog-row"><div class="prog-row-head"><span class="m-label" data-t="prog_m7">AM Academy</span><span class="m-pct" style="color:var(--gold)">75%</span></div><div class="prog-track-bg"><div class="prog-bar" style="width:75%;background:linear-gradient(90deg,#10B981,#34D399)"></div></div></div>
-      <div class="prog-row"><div class="prog-row-head"><span class="m-label" data-t="prog_m2">AI Recipient Scoring</span><span class="m-pct" style="color:var(--gold)">60%</span></div><div class="prog-track-bg"><div class="prog-bar" style="width:60%;background:linear-gradient(90deg,var(--gold),var(--gold2))"></div></div></div>
-      <div class="prog-row"><div class="prog-row-head"><span class="m-label" data-t="prog_m3">Smart Contracts</span><span class="m-pct" style="color:var(--text2)">30%</span></div><div class="prog-track-bg"><div class="prog-bar" style="width:30%;background:linear-gradient(90deg,#E0803A,#EFA766)"></div></div></div>
-      <div class="prog-row"><div class="prog-row-head"><span class="m-label" data-t="prog_m8">Team</span><span class="m-pct" style="color:var(--text2)">25%</span></div><div class="prog-track-bg"><div class="prog-bar" style="width:25%;background:linear-gradient(90deg,#E0803A,#EFA766)"></div></div></div>
-      <div class="prog-row"><div class="prog-row-head"><span class="m-label" data-t="prog_m4">Sharia Certification</span><span class="m-pct" style="color:var(--text2)">15%</span></div><div class="prog-track-bg"><div class="prog-bar" style="width:15%;background:linear-gradient(90deg,#E0803A,#EFA766)"></div></div></div>
-      <div class="prog-row"><div class="prog-row-head"><span class="m-label" data-t="prog_m6">Security Audit</span><span class="m-pct" style="color:var(--text2)">10%</span></div><div class="prog-track-bg"><div class="prog-bar" style="width:10%;background:linear-gradient(90deg,#E0803A,#EFA766)"></div></div></div>
-      <div class="prog-row"><div class="prog-row-head"><span class="m-label" data-t="prog_m5">Legal Entity</span><span class="m-pct" style="color:var(--text3)">0%</span></div><div class="prog-track-bg"><div class="prog-bar" style="width:0%;background:linear-gradient(90deg,#5A6B60,#7A8B80)"></div></div></div>
+      <div class="prog-tag" data-t="prog_tag">Status</div>
+      <div class="prog-h" data-t="prog_title">Where things stand today</div>
+      <p class="prog-note" data-t="prog_note">Each item is marked as it is today, not as we hope it will be.</p>
+      <div class="prog-row"><span class="m-label" data-t="st_i_tools">Free Islamic tools</span><span class="m-state ready" data-t="status_live">Ready now</span></div>
+      <div class="prog-row"><span class="m-label" data-t="nav_academy">AM Academy</span><span class="m-state ready" data-t="status_live">Ready now</span></div>
+      <div class="prog-row"><span class="m-label" data-t="prog_m2">Cabinet for families, verifiers and donors</span><span class="m-state built" data-t="prog_b_built">Built, not yet in use</span></div>
+      <div class="prog-row"><span class="m-label" data-t="p1_f3">Open report with a SHA-256 hash chain</span><span class="m-state built" data-t="prog_b_built">Built, not yet in use</span></div>
+      <div class="prog-row"><span class="m-label" data-t="st_i_legal">Consultation with a Tajik lawyer</span><span class="m-state next" data-t="prog_b_next">Next</span></div>
+      <div class="prog-row"><span class="m-label" data-t="st_i_sharia">Review by a Hanafi scholar</span><span class="m-state next" data-t="prog_b_next">Next</span></div>
+      <div class="prog-row"><span class="m-label" data-t="st_i_verifier">Training volunteer verifiers</span><span class="m-state next" data-t="prog_b_next">Next</span></div>
+      <div class="prog-row"><span class="m-label" data-t="st_i_partners">Work with a registered partner charity</span><span class="m-state later" data-t="st_afterpilot">After the pilot</span></div>
     </div>
   </div>
 </main>
 
-<script src="/i18n-data.js?v=28daeb0561"></script>
+<script src="/i18n-data.js?v=70d931d350"></script>
 <script>
 let currentLang = 'en';
 function t(key){

@@ -2,7 +2,7 @@
   "id": "/",
   "name": "AM Network — Zakat, Quran & Prayer",
   "short_name": "AM Network",
-  "description": "Free Islamic tools in 10 languages: the Quran with word-by-word audio, hadith, dua & dhikr, prayer times, qibla, tasbeeh, Hijri calendar, and a Zakat calculator. Plus AM Network — blockchain-verified Zakat with AI-assisted, human-verified recipients.",
+  "description": "Free Islamic tools in 10 languages: the Quran with word-by-word audio, hadith, dua & dhikr, prayer times, qibla, tasbeeh, Hijri calendar, and a Zakat calculator. Plus AM Network — a verification and transparency service for Zakat and Sadaqah: families checked in person, an open report of every payout, and the money goes directly from donor to family.",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
@@ -24,7 +24,7 @@
     { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "screenshots": [
-    { "src": "/screenshots/home-mobile.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Zakat and Sadaqah, verified on-chain" },
+    { "src": "/screenshots/home-mobile.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Zakat and Sadaqah, checked in person" },
     { "src": "/screenshots/quran-mobile.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "The Quran with word-by-word recitation" },
     { "src": "/screenshots/prayer-mobile.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Prayer times and a daily tracker" },
     { "src": "/screenshots/zakat-mobile.png", "sizes": "1080x1920", "type": "image/png", "form_factor": "narrow", "label": "Zakat calculator for 159 countries" },
