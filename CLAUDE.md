@@ -14,6 +14,10 @@
 - **Email:** contact@amnetwork.io
 - **LinkedIn:** linkedin.com/company/amnetwork-io
 
+## ⚠️ Model decision (20 November 2026) — overrides older sections below
+
+Founder chose: **verification & transparency service, money never passes through AM Network.** Pilot = founder's own and relatives' Zakat only, no public fundraising. No outreach to funds/charities until the platform is 100% ready (then Saliheen first). No income in year one (later: optional tips, grants, service fees paid by funds — never from Zakat). Blockchain/token/NFT/DAO/ujrah-from-Zakat promises are being removed. Full record: `docs/strategy-2026-11.md`. Where the sections below (Tech Stack, Revenue, Seed Funding, Oracle Network) contradict this, this wins.
+
 ## Core Products
 
 1. **AM Zakat.ai** — AI-verified recipients (score 0–100), smart contracts on Base blockchain, local oracle network (mosque imams + AM Network volunteers + partner NGOs), Sharia-certified (ujrah model)
