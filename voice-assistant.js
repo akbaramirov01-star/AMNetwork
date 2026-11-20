@@ -31,7 +31,7 @@
 
   // [keywords, destination, labels]. Specific entries come before general ones.
   const SOCIAL = {
-    instagram:'https://www.instagram.com/amnet_io', telegram:'https://t.me/amnetwork_global',
+    instagram:'https://www.instagram.com/amnetwork.io', telegram:'https://t.me/amnetwork_global',
     x:'https://x.com/amnet_io', youtube:'https://www.youtube.com/@amnetwork_io',
     tiktok:'https://www.tiktok.com/@amnetwork.io', linkedin:'https://linkedin.com/company/amnetwork-io',
   };
