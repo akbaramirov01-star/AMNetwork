@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Кабинет — AM Network</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="AM Network cabinet: applications, in-person verification, payouts.">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0A1A11">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://pziakammdazyytxubtrj.supabase.co wss://pziakammdazyytxubtrj.supabase.co; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<script>try{var th=localStorage.getItem('amn_theme');if(th==='light'||th==='dark')document.documentElement.dataset.theme=th}catch(e){}</script>
+<style>
+[data-theme="dark"]{--bg1:#0A1A11;--bg2:#0F2117;--bg3:#1C4532;--gold:#C9A84C;--gold2:#E8C87A;--gold3:rgba(201,168,76,.12);--text:#fff;--text2:rgba(255,255,255,.68);--text3:rgba(255,255,255,.45);--border:rgba(255,255,255,.1);--card:rgba(255,255,255,.04);--nav-bg:rgba(10,26,17,.92);--input-bg:rgba(255,255,255,.06);--input-border:rgba(255,255,255,.16);--ok:#5FD39A;--ok-bg:rgba(95,211,154,.12);--warn:#E8C87A;--warn-bg:rgba(232,200,122,.12);--bad:#FF8A8A;--bad-bg:rgba(255,138,138,.12);--info:#8EC5FF;--info-bg:rgba(142,197,255,.12)}
+[data-theme="light"]{--bg1:#F5F0E8;--bg2:#EDE8DE;--bg3:#DDD0BB;--gold:#A88528;--gold2:#8A6A12;--gold3:rgba(201,168,76,.14);--text:#1C2E1F;--text2:rgba(28,46,31,.75);--text3:rgba(28,46,31,.55);--border:rgba(28,69,50,.14);--card:rgba(255,255,255,.85);--nav-bg:rgba(245,240,232,.95);--input-bg:#fff;--input-border:rgba(28,69,50,.22);--ok:#1E7A4C;--ok-bg:rgba(30,122,76,.1);--warn:#8A6A12;--warn-bg:rgba(201,168,76,.16);--bad:#B42318;--bad-bg:rgba(180,35,24,.08);--info:#1D5FA8;--info-bg:rgba(29,95,168,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg1);color:var(--text);font:15px/1.55 'DM Sans',system-ui,sans-serif;min-height:100vh}
+a{color:var(--gold)}
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 16px;height:60px;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo img{height:34px;display:block}
+.nav-right{display:flex;gap:8px;align-items:center}
+.nbtn{min-height:38px;min-width:38px;padding:0 10px;border-radius:9px;border:1px solid var(--border);background:transparent;color:var(--text2);font:600 13px 'DM Sans',sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.nbtn:hover{border-color:var(--gold);color:var(--gold)}
+main{max-width:980px;margin:0 auto;padding:22px 16px 80px}
+h1{font:700 clamp(26px,4.5vw,36px)/1.2 'Cormorant Garamond',serif;margin-bottom:6px}
+h2{font:700 22px/1.25 'Cormorant Garamond',serif;margin:0 0 10px}
+h3{font-size:15px;margin:0 0 8px}
+.sub{color:var(--text2);font-size:14px}
+.muted{color:var(--text3)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px}
+.stack{display:grid;gap:14px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.between{justify-content:space-between}
+.btn{min-height:44px;padding:0 18px;border-radius:11px;border:1px solid var(--border);background:var(--card);color:var(--text);font:600 14px 'DM Sans',sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn:hover{border-color:var(--gold)}
+.btn.primary{background:var(--gold);border-color:var(--gold);color:#16130a}
+.btn.primary:hover{background:var(--gold2)}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.btn:disabled{opacity:.55;cursor:wait}
+.btn:focus-visible,.nbtn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.tab:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+label{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--text2)}
+input,select,textarea{width:100%;min-height:44px;padding:10px 12px;border-radius:10px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text);font:15px 'DM Sans',sans-serif}
+textarea{min-height:90px;resize:vertical}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.checks{display:grid;gap:8px}
+.chk{display:flex;gap:10px;align-items:flex-start;font-weight:500;color:var(--text);font-size:14px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--card);cursor:pointer}
+.chk input{width:20px;min-height:20px;height:20px;margin-top:1px;flex:none;accent-color:var(--gold)}
+.chk .pts{margin-inline-start:auto;color:var(--gold);font-weight:700;white-space:nowrap}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px;border:1px solid var(--border);border-radius:14px;background:var(--input-bg);margin:18px 0}
+.tab{flex:1 0 auto;min-height:42px;padding:0 14px;border:0;border-radius:10px;background:transparent;color:var(--text2);font:600 14px 'DM Sans',sans-serif;cursor:pointer;white-space:nowrap}
+.tab[aria-current="page"]{background:var(--gold);color:#16130a}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:30px;font-size:12px;font-weight:700;white-space:nowrap}
+.s-new{background:var(--info-bg);color:var(--info)}.s-assigned{background:var(--warn-bg);color:var(--warn)}.s-verified{background:var(--warn-bg);color:var(--warn)}
+.s-approved{background:var(--ok-bg);color:var(--ok)}.s-paid{background:var(--ok-bg);color:var(--ok)}.s-rejected{background:var(--bad-bg);color:var(--bad)}
+.role{background:var(--gold3);color:var(--gold);border:1px solid rgba(201,168,76,.35)}
+.list{display:grid;gap:10px}
+.item{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:14px 16px;border:1px solid var(--border);border-radius:14px;background:var(--card);text-decoration:none;color:inherit;cursor:pointer}
+.item:hover{border-color:var(--gold)}
+.item b{font-size:15px}
+.item .meta{grid-column:1/-1;color:var(--text3);font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chipf{min-height:36px;padding:0 12px;border-radius:30px;border:1px solid var(--border);background:transparent;color:var(--text2);font:600 13px 'DM Sans',sans-serif;cursor:pointer}
+.chipf[aria-pressed="true"]{background:var(--gold3);border-color:var(--gold);color:var(--gold)}
+dl.facts{display:grid;grid-template-columns:minmax(120px,max-content) 1fr;gap:6px 14px;font-size:14px}
+dl.facts dt{color:var(--text3)}
+dl.facts dd{overflow-wrap:anywhere}
+.tl{list-style:none;display:grid;gap:8px;border-inline-start:2px solid var(--border);padding-inline-start:14px}
+.tl li{font-size:13.5px;position:relative}
+.tl li::before{content:'';position:absolute;inset-inline-start:-20px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.msg{padding:12px 14px;border-radius:12px;font-size:14px;border:1px solid var(--border)}
+.msg.err{background:var(--bad-bg);color:var(--bad);border-color:transparent}
+.msg.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}
+.msg.info{background:var(--gold3);color:var(--text);border-color:rgba(201,168,76,.3)}
+.score{font:700 34px/1 'Cormorant Garamond',serif;color:var(--gold)}
+.hash{font:12px ui-monospace,Menlo,monospace;overflow-wrap:anywhere;color:var(--text3)}
+.back{display:inline-flex;align-items:center;gap:6px;font-size:14px;margin-bottom:12px;text-decoration:none}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:9px 8px;border-bottom:1px solid var(--border);text-align:start;vertical-align:top}
+th{font-size:12px;color:var(--text3);font-weight:600}
+.tw{overflow-x:auto}
+.center{text-align:center}
+.spin{padding:40px 0;text-align:center;color:var(--text3)}
+.hidden{display:none!important}
+@media (max-width:420px){#navLog{display:none}}
+@media (max-width:560px){dl.facts{grid-template-columns:1fr}dl.facts dt{margin-top:6px}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/"><img src="/logo.webp" alt="AM Network" height="34"></a>
+  <div class="nav-right">
+    <a class="nbtn" href="/transparency/" id="navLog"></a>
+    <select class="nbtn" id="langSel" aria-label="Language" style="width:auto;padding:0 8px"><option value="ru">RU</option><option value="tj">TJ</option><option value="en">EN</option></select>
+    <button class="nbtn" id="themeBtn" aria-label="Theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>
+  </div>
+</nav>
+<main id="app"><div class="spin">…</div></main>
+
+<script src="/vendor/supabase-2.118.0.js"></script>
+<script src="/vendor/amn-supabase.js"></script>
+<script>
+'use strict';
+// ───────────── texts ─────────────
+const T={
+ru:{title:'Кабинет',logLink:'Открытый отчёт',signin:'Вход',signup:'Регистрация',email:'Эл. почта',password:'Пароль',pwHint:'Не меньше 8 символов',fullName:'Имя и фамилия',
+ doSignin:'Войти',doSignup:'Создать аккаунт',forgot:'Забыли пароль?',sendReset:'Отправить ссылку для нового пароля',resetSent:'Если такой адрес есть, мы отправили на него ссылку.',
+ checkEmail:'Аккаунт создан. Подтвердите почту по ссылке из письма, потом войдите.',newPw:'Новый пароль',savePw:'Сохранить пароль',pwSaved:'Пароль сохранён.',
+ authIntro:'Кабинет для семей, проверяющих, доноров и команды AM Network. Деньги через нас не проходят: донор передаёт помощь семье напрямую, мы проверяем семью на месте и публикуем отчёт.',
+ signout:'Выйти',hello:'Ассаляму алейкум, {n}',
+ r_applicant:'Заявитель',r_donor:'Донор',r_verifier:'Проверяющий',r_admin:'Администратор',
+ roleNote_applicant:'Вы можете подать заявку и следить за её статусом. Чтобы стать проверяющим или донором, напишите нам: contact@amnetwork.io.',
+ t_mine:'Мои заявки',t_new:'Новая заявка',t_check:'На проверку',t_all:'Все заявки',t_people:'Люди',t_gifts:'Мой закят',t_profile:'Профиль',
+ s_new:'Новая',s_assigned:'Назначен проверяющий',s_verified:'Проверена на месте',s_rejected:'Отклонена',s_approved:'Одобрена',s_paid:'Помощь передана',all:'Все',
+ empty:'Пока ничего нет.',loading:'Загрузка…',save:'Сохранить',saved:'Сохранено.',cancel:'Отмена',back:'← Назад',
+ f_name:'Имя и фамилия главы семьи',f_phone:'Телефон',f_region:'Город или район',f_regionHint:'Показывается в открытом отчёте. Только город или район, без села и улицы.',
+ f_address:'Адрес (видят только проверяющий и администратор)',f_hh:'Сколько человек в семье',f_dep:'Из них на иждивении',f_income:'Доход семьи в месяц',f_cur:'Валюта',
+ f_cats:'Положение семьи (можно несколько)',f_situation:'Коротко опишите положение семьи',
+ f_consent:'Семья согласна, что её данные хранятся в AM Network и видны только проверяющему и администратору. В открытом отчёте не будет имени, телефона и адреса.',
+ submit:'Отправить заявку',submitted:'Заявка {r} отправлена.',forOther:'Вы заполняете заявку за семью. Получите их устное согласие.',
+ created:'Подана',timeline:'История',ref:'Номер',status:'Статус',score:'Оценка нужды',details:'Данные семьи',
+ e_created:'Заявка подана',e_assigned:'Назначен проверяющий',e_verified:'Проверка на месте',e_approved:'Одобрена',e_rejected:'Отклонена',e_paid:'Помощь передана',e_new:'Возвращена в новые',
+ v_title:'Проверка на месте',v_facts:'Что вы подтвердили лично',v_need:'Чек-лист нужды (подсказка, решает человек)',v_date:'Дата визита',v_notes:'Заметки (видит только администратор)',
+ v_rec:'Ваша рекомендация',v_approve:'Помочь',v_reject:'Не помогать',v_submit:'Отправить проверку',v_done:'Проверка сохранена.',v_already:'Вы уже проверили эту семью.',v_cannot:'Эту семью привели вы, поэтому проверяет другой человек.',
+ c_id_seen:'Видел документ, удостоверяющий личность',c_lives_here:'Семья живёт по указанному адресу',c_household:'Состав семьи подтверждён',c_income:'Доходы и расходы уточнены',c_no_other:'Другой постоянной помощи у семьи нет',
+ n_no_income:'Нет дохода 3 месяца и больше',n_below_min:'Доход на человека ниже прожиточного минимума',n_no_assets:'Нет имущества выше нисаба',n_dependents:'Иждивенцы (по 2 балла, до 10)',
+ n_widow:'Вдова, одинокая мать или сироты без кормильца',n_illness:'Инвалидность или тяжёлая болезнь без лечения',n_housing:'Нет своего жилья или долг за аренду',
+ n_debt:'Долг на необходимое, который семья не может вернуть',n_elderly:'Пожилой человек вынужден работать',n_displaced:'Беженцы или пострадавшие от бедствия',n_food:'Не хватает еды',
+ scoreNote:'Баллы — прозрачная подсказка. Решение о помощи принимает человек после визита.',
+ a_assign:'Проверяющий',a_assignBtn:'Назначить',a_none:'— не назначен —',a_note:'Заметка администратора',a_approve:'Одобрить',a_reject:'Отклонить',a_reopen:'Вернуть в работу',
+ a_verifs:'Проверки',a_noVerifs:'Проверок пока нет.',a_by:'проверил(а)',a_pay:'Записать выплату',a_payouts:'Выплаты',a_donor:'Донор',a_donorNone:'— не указан —',
+ p_amount:'Сумма',p_method:'Как передано',p_kind:'Вид',p_date:'Дата передачи',p_receipt:'Чек или скриншот перевода',p_receiptHint:'Файл не отправляется. Сохраняется только его отпечаток SHA-256, чтобы позже можно было доказать, что чек тот же.',
+ p_note:'Заметка в открытом отчёте (без имён)',p_save:'Записать выплату',p_saved:'Выплата записана и добавлена в открытый отчёт.',
+ m_cash:'Наличными',m_alif:'Alif',m_dc:'Корти Миллӣ',m_bank:'Банковский перевод',m_other:'Другое',k_zakat:'Закят',k_sadaqah:'Садака',
+ pe_role:'Роль',pe_since:'С',pe_hint:'Давайте роль проверяющего только тем, кого знаете лично.',
+ g_intro:'Куда ушёл ваш закят. Имя и адрес семьи не показываются.',g_verifs:'проверок',
+ pr_city:'Город',
+ err:'Ошибка: {m}',errNet:'Нет связи с базой. Проверьте интернет и попробуйте ещё раз.',errLogin:'Неверная почта или пароль.',errExists:'Аккаунт с такой почтой уже есть. Войдите.',
+ errNeedVer:'Сначала нужна проверка на месте с рекомендацией «Помочь».',errSelfVer:'Тот, кто привёл семью, не может её проверять.',errNotApproved:'Выплату можно записать только по одобренной заявке.',errConsent:'Нужно согласие семьи.',errAssignee:'Назначить можно только проверяющего.',errPaidOnly:'Статус «Помощь передана» ставится только записью выплаты.',errAdminOnly:'Только для администратора.',
+ notConfirmed:'Почта ещё не подтверждена. Откройте письмо от Supabase и нажмите ссылку.'},
+tj:{title:'Кабинети шахсӣ',logLink:'Ҳисоботи кушода',signin:'Воридшавӣ',signup:'Сабти ном',email:'Почтаи электронӣ',password:'Рамз',pwHint:'На камтар аз 8 аломат',fullName:'Ному насаб',
+ doSignin:'Ворид шудан',doSignup:'Сохтани аккаунт',forgot:'Рамзро фаромӯш кардед?',sendReset:'Фиристодани пайванд барои рамзи нав',resetSent:'Агар чунин суроға бошад, ба он пайванд фиристодем.',
+ checkEmail:'Аккаунт сохта шуд. Почтаро бо пайванди мактуб тасдиқ кунед ва баъд ворид шавед.',newPw:'Рамзи нав',savePw:'Нигоҳ доштани рамз',pwSaved:'Рамз нигоҳ дошта шуд.',
+ authIntro:'Кабинет барои оилаҳо, тафтишгарон, саховатмандон ва дастаи AM Network. Пул аз мо намегузарад: саховатманд кӯмакро бевосита ба оила медиҳад, мо оиларо дар ҷой тафтиш мекунем ва ҳисобот нашр мекунем.',
+ signout:'Баромадан',hello:'Ассалому алайкум, {n}',
+ r_applicant:'Аризадиҳанда',r_donor:'Саховатманд',r_verifier:'Тафтишгар',r_admin:'Маъмур',
+ roleNote_applicant:'Шумо метавонед ариза диҳед ва вазъи онро пайгирӣ кунед. Барои тафтишгар ё саховатманд шудан ба мо нависед: contact@amnetwork.io.',
+ t_mine:'Аризаҳои ман',t_new:'Аризаи нав',t_check:'Барои тафтиш',t_all:'Ҳамаи аризаҳо',t_people:'Одамон',t_gifts:'Закоти ман',t_profile:'Профил',
+ s_new:'Нав',s_assigned:'Тафтишгар таъин шуд',s_verified:'Дар ҷой тафтиш шуд',s_rejected:'Рад шуд',s_approved:'Тасдиқ шуд',s_paid:'Кӯмак расонида шуд',all:'Ҳама',
+ empty:'Ҳоло чизе нест.',loading:'Боргирӣ…',save:'Нигоҳ доштан',saved:'Нигоҳ дошта шуд.',cancel:'Бекор кардан',back:'← Бозгашт',
+ f_name:'Ному насаби сарвари оила',f_phone:'Телефон',f_region:'Шаҳр ё ноҳия',f_regionHint:'Дар ҳисоботи кушода нишон дода мешавад. Танҳо шаҳр ё ноҳия, бе деҳа ва кӯча.',
+ f_address:'Суроға (танҳо тафтишгар ва маъмур мебинанд)',f_hh:'Шумораи аъзои оила',f_dep:'Аз онҳо дар таъминот',f_income:'Даромади оила дар як моҳ',f_cur:'Асъор',
+ f_cats:'Вазъи оила (метавон якчандто)',f_situation:'Вазъи оиларо мухтасар нависед',
+ f_consent:'Оила розӣ аст, ки маълумоти он дар AM Network нигоҳ дошта шавад ва онро танҳо тафтишгар ва маъмур бинанд. Дар ҳисоботи кушода ном, телефон ва суроға намеояд.',
+ submit:'Фиристодани ариза',submitted:'Аризаи {r} фиристода шуд.',forOther:'Шумо аризаро аз номи оила пур мекунед. Розигии шифоҳии онҳоро гиред.',
+ created:'Дода шуд',timeline:'Таърих',ref:'Рақам',status:'Вазъ',score:'Баҳои ниёз',details:'Маълумоти оила',
+ e_created:'Ариза дода шуд',e_assigned:'Тафтишгар таъин шуд',e_verified:'Тафтиш дар ҷой',e_approved:'Тасдиқ шуд',e_rejected:'Рад шуд',e_paid:'Кӯмак расонида шуд',e_new:'Ба навҳо баргашт',
+ v_title:'Тафтиш дар ҷой',v_facts:'Он чи шумо шахсан тасдиқ кардед',v_need:'Рӯйхати ниёз (маслиҳат, қарорро одам мегирад)',v_date:'Санаи боздид',v_notes:'Қайдҳо (танҳо маъмур мебинад)',
+ v_rec:'Тавсияи шумо',v_approve:'Кӯмак кардан',v_reject:'Кӯмак накардан',v_submit:'Фиристодани тафтиш',v_done:'Тафтиш нигоҳ дошта шуд.',v_already:'Шумо ин оиларо аллакай тафтиш кардаед.',v_cannot:'Ин оиларо шумо овардед, бинобар ин шахси дигар тафтиш мекунад.',
+ c_id_seen:'Ҳуҷҷати шахсиятро дидам',c_lives_here:'Оила дар суроғаи зикршуда зиндагӣ мекунад',c_household:'Ҳайати оила тасдиқ шуд',c_income:'Даромад ва хароҷот аниқ карда шуд',c_no_other:'Оила кӯмаки доимии дигар надорад',
+ n_no_income:'3 моҳ ва зиёда даромад нест',n_below_min:'Даромад ба ҳар нафар аз ҳадди ақали зиндагӣ камтар',n_no_assets:'Молу мулк аз нисоб зиёд нест',n_dependents:'Дар таъминот (ҳар нафар 2 хол, то 10)',
+ n_widow:'Бевазан, модари танҳо ё ятимони бе нафақадиҳанда',n_illness:'Маъюбӣ ё бемории вазнин бе табобат',n_housing:'Хонаи худ нест ё қарзи иҷора',
+ n_debt:'Қарз барои чизи зарурӣ, ки оила баргардонда наметавонад',n_elderly:'Шахси калонсол маҷбур аст кор кунад',n_displaced:'Гурезаҳо ё зарардидагони офат',n_food:'Ғизо намерасад',
+ scoreNote:'Холҳо маслиҳати шаффофанд. Қарор дар бораи кӯмакро одам баъди боздид мегирад.',
+ a_assign:'Тафтишгар',a_assignBtn:'Таъин кардан',a_none:'— таъин нашудааст —',a_note:'Қайди маъмур',a_approve:'Тасдиқ кардан',a_reject:'Рад кардан',a_reopen:'Ба кор баргардондан',
+ a_verifs:'Тафтишҳо',a_noVerifs:'Ҳоло тафтиш нест.',a_by:'тафтиш кард',a_pay:'Сабти пардохт',a_payouts:'Пардохтҳо',a_donor:'Саховатманд',a_donorNone:'— нишон дода нашудааст —',
+ p_amount:'Маблағ',p_method:'Чӣ тавр супорида шуд',p_kind:'Навъ',p_date:'Санаи супоридан',p_receipt:'Чек ё скриншоти интиқол',p_receiptHint:'Файл фиристода намешавад. Танҳо изи SHA-256-и он нигоҳ дошта мешавад, то баъд исбот кардан мумкин бошад, ки чек ҳамон аст.',
+ p_note:'Қайд дар ҳисоботи кушода (бе ном)',p_save:'Сабти пардохт',p_saved:'Пардохт сабт шуд ва ба ҳисоботи кушода илова гардид.',
+ m_cash:'Нақд',m_alif:'Alif',m_dc:'Корти Миллӣ',m_bank:'Интиқоли бонкӣ',m_other:'Дигар',k_zakat:'Закот',k_sadaqah:'Садақа',
+ pe_role:'Нақш',pe_since:'Аз',pe_hint:'Нақши тафтишгарро танҳо ба касоне диҳед, ки шахсан мешиносед.',
+ g_intro:'Закоти шумо ба куҷо рафт. Ном ва суроғаи оила нишон дода намешавад.',g_verifs:'тафтиш',
+ pr_city:'Шаҳр',
+ err:'Хато: {m}',errNet:'Бо пойгоҳ пайвастшавӣ нест. Интернетро санҷед ва боз кӯшиш кунед.',errLogin:'Почта ё рамз нодуруст аст.',errExists:'Аккаунт бо ин почта ҳаст. Ворид шавед.',
+ errNeedVer:'Аввал тафтиш дар ҷой бо тавсияи «Кӯмак кардан» лозим аст.',errSelfVer:'Касе, ки оиларо овард, онро тафтиш карда наметавонад.',errNotApproved:'Пардохтро танҳо барои аризаи тасдиқшуда сабт кардан мумкин аст.',errConsent:'Розигии оила лозим аст.',errAssignee:'Танҳо тафтишгарро таъин кардан мумкин аст.',errPaidOnly:'Вазъи «Кӯмак расонида шуд» танҳо бо сабти пардохт гузошта мешавад.',errAdminOnly:'Танҳо барои маъмур.',
+ notConfirmed:'Почта ҳанӯз тасдиқ нашудааст. Мактуби Supabase-ро кушоед ва пайвандро пахш кунед.'},
+en:{title:'Cabinet',logLink:'Open report',signin:'Sign in',signup:'Register',email:'Email',password:'Password',pwHint:'At least 8 characters',fullName:'Full name',
+ doSignin:'Sign in',doSignup:'Create account',forgot:'Forgot password?',sendReset:'Send a new-password link',resetSent:'If that address exists, we sent it a link.',
+ checkEmail:'Account created. Confirm your email with the link we sent, then sign in.',newPw:'New password',savePw:'Save password',pwSaved:'Password saved.',
+ authIntro:'The cabinet for families, verifiers, donors and the AM Network team. Money never passes through us: the donor gives directly to the family, we verify the family in person and publish a report.',
+ signout:'Sign out',hello:'Assalamu alaikum, {n}',
+ r_applicant:'Applicant',r_donor:'Donor',r_verifier:'Verifier',r_admin:'Admin',
+ roleNote_applicant:'You can apply and follow your application. To become a verifier or donor, write to contact@amnetwork.io.',
+ t_mine:'My applications',t_new:'New application',t_check:'To verify',t_all:'All applications',t_people:'People',t_gifts:'My Zakat',t_profile:'Profile',
+ s_new:'New',s_assigned:'Verifier assigned',s_verified:'Verified in person',s_rejected:'Declined',s_approved:'Approved',s_paid:'Help delivered',all:'All',
+ empty:'Nothing here yet.',loading:'Loading…',save:'Save',saved:'Saved.',cancel:'Cancel',back:'← Back',
+ f_name:'Head of family, full name',f_phone:'Phone',f_region:'City or district',f_regionHint:'Shown in the open report. City or district only — no village or street.',
+ f_address:'Address (only the verifier and admin see it)',f_hh:'People in the family',f_dep:'Of them dependents',f_income:'Family income per month',f_cur:'Currency',
+ f_cats:'Family situation (choose any)',f_situation:'Describe the family situation briefly',
+ f_consent:'The family agrees that its data is stored by AM Network and seen only by the verifier and admin. The open report never shows name, phone or address.',
+ submit:'Send application',submitted:'Application {r} sent.',forOther:'You are filling this in for a family. Get their spoken consent.',
+ created:'Submitted',timeline:'History',ref:'Number',status:'Status',score:'Need score',details:'Family details',
+ e_created:'Application submitted',e_assigned:'Verifier assigned',e_verified:'In-person check',e_approved:'Approved',e_rejected:'Declined',e_paid:'Help delivered',e_new:'Back to new',
+ v_title:'In-person check',v_facts:'What you confirmed in person',v_need:'Need checklist (a hint — a person decides)',v_date:'Visit date',v_notes:'Notes (only the admin sees them)',
+ v_rec:'Your recommendation',v_approve:'Help',v_reject:'Do not help',v_submit:'Send check',v_done:'Check saved.',v_already:'You have already checked this family.',v_cannot:'You brought this family, so someone else checks it.',
+ c_id_seen:'Saw an identity document',c_lives_here:'The family lives at the given address',c_household:'Family size confirmed',c_income:'Income and expenses clarified',c_no_other:'No other regular help',
+ n_no_income:'No income for 3 months or more',n_below_min:'Income per person below the subsistence minimum',n_no_assets:'No wealth above nisab',n_dependents:'Dependents (2 points each, up to 10)',
+ n_widow:'Widow, single mother or orphans without a breadwinner',n_illness:'Disability or serious illness without treatment',n_housing:'No own home or rent arrears',
+ n_debt:'Debt for necessities the family cannot repay',n_elderly:'An elderly person is forced to work',n_displaced:'Refugees or disaster-affected',n_food:'Not enough food',
+ scoreNote:'Points are a transparent hint. A person decides on help after the visit.',
+ a_assign:'Verifier',a_assignBtn:'Assign',a_none:'— not assigned —',a_note:'Admin note',a_approve:'Approve',a_reject:'Decline',a_reopen:'Reopen',
+ a_verifs:'Checks',a_noVerifs:'No checks yet.',a_by:'checked by',a_pay:'Record payout',a_payouts:'Payouts',a_donor:'Donor',a_donorNone:'— not specified —',
+ p_amount:'Amount',p_method:'How it was given',p_kind:'Type',p_date:'Date given',p_receipt:'Receipt or transfer screenshot',p_receiptHint:'The file is not uploaded. Only its SHA-256 fingerprint is kept, so we can later prove it is the same receipt.',
+ p_note:'Note in the open report (no names)',p_save:'Record payout',p_saved:'Payout recorded and added to the open report.',
+ m_cash:'Cash',m_alif:'Alif',m_dc:'Korti Milli',m_bank:'Bank transfer',m_other:'Other',k_zakat:'Zakat',k_sadaqah:'Sadaqah',
+ pe_role:'Role',pe_since:'Since',pe_hint:'Give the verifier role only to people you know personally.',
+ g_intro:'Where your Zakat went. The family\'s name and address are not shown.',g_verifs:'checks',
+ pr_city:'City',
+ err:'Error: {m}',errNet:'Cannot reach the database. Check the internet and try again.',errLogin:'Wrong email or password.',errExists:'An account with this email exists. Sign in.',
+ errNeedVer:'An in-person check recommending help is needed first.',errSelfVer:'Whoever brought the family cannot check it.',errNotApproved:'A payout can be recorded only for an approved application.',errConsent:'The family\'s consent is required.',errAssignee:'Only a verifier can be assigned.',errPaidOnly:'"Help delivered" is set only by recording a payout.',errAdminOnly:'Admin only.',
+ notConfirmed:'Email not confirmed yet. Open the email from Supabase and tap the link.'}
+};
+const CATS={
+ widow:{ru:'Вдова или одинокая мать с детьми',tj:'Бевазан ё модари танҳо бо фарзандон',en:'Widow or single mother with dependents'},
+ orphan:{ru:'Сироты до 18 лет без дохода опекуна',tj:'Ятимони то 18-сола бе даромади васӣ',en:'Orphans under 18 with no guardian income'},
+ elderly:{ru:'Пожилые, вынужденные работать',tj:'Пиронсолоне, ки маҷбуран кор мекунанд',en:'Elderly forced to work to survive'},
+ disabled:{ru:'Инвалидность, работать не может',tj:'Маъюбӣ, кор карда наметавонад',en:'Disabled, unable to work'},
+ poverty:{ru:'Ниже черты бедности',tj:'Зери хатти камбизоатӣ',en:'Below the poverty line'},
+ student:{ru:'Студент из малоимущей семьи',tj:'Донишҷӯ аз оилаи камбизоат',en:'Student from a low-income family'},
+ debt:{ru:'В долгах с процентами (риба)',tj:'Гирифтори қарзи фоизӣ (рибо)',en:'Trapped in interest (riba) debt'},
+ refugee:{ru:'Беженцы и переселенцы',tj:'Гурезаҳо ва муҳоҷирони маҷбурӣ',en:'Refugees and displaced people'},
+ ill:{ru:'Хроническая болезнь без лечения',tj:'Бемории музмин бе табобат',en:'Chronic illness without treatment'},
+ large:{ru:'Многодетная семья с одним кормильцем',tj:'Оилаи серфарзанд бо як нафақадиҳанда',en:'Large family, one breadwinner'},
+ food:{ru:'Не хватает еды',tj:'Ғизо намерасад',en:'Not enough food'},
+ convert:{ru:'Новообращённый мусульманин в трудном положении',tj:'Навмусулмон дар вазъи душвор',en:'New Muslim facing hardship'},
+ traffick:{ru:'Пострадавшие от торговли людьми или принудительного труда',tj:'Қурбониёни савдои одамон ё кори маҷбурӣ',en:'Survivor of trafficking or forced labour'},
+ disaster:{ru:'Пострадавшие от войны или бедствия',tj:'Зарардидагони ҷанг ё офат',en:'Affected by conflict or disaster'},
+ invisible:{ru:'Не получают помощи от других фондов',tj:'Аз дигар фондҳо кӯмак намегиранд',en:'Missed by other charities'}
+};
+const FACTS=['id_seen','lives_here','household','income','no_other'];
+const NEED=[['no_income',20],['below_min',14],['no_assets',10],['widow',10],['illness',12],['housing',10],['debt',8],['elderly',6],['displaced',6],['food',8]];
+const STATUSES=['new','assigned','verified','approved','rejected','paid'];
+
+let LANG='ru';
+try{const s=localStorage.getItem('amn_lang');if(T[s])LANG=s;else if(s&&s!=='ru')LANG='en'}catch(e){}
+function t(k,v){let s=(T[LANG]&&T[LANG][k])??T.en[k]??k;if(v)for(const x in v)s=s.split('{'+x+'}').join(v[x]);return s}
+const cat=k=>(CATS[k]&&CATS[k][LANG])||k;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $=s=>document.querySelector(s);
+const fmtD=d=>{if(!d)return '—';try{return new Date(d).toLocaleDateString(LANG==='en'?'en-GB':'ru-RU',{day:'numeric',month:'short',year:'numeric'})}catch(e){return d}};
+const money=(a,c)=>Number(a).toLocaleString('ru-RU',{maximumFractionDigits:2})+' '+(c||'');
+const pill=s=>`<span class="pill s-${esc(s)}">${esc(t('s_'+s))}</span>`;
+
+// ───────────── Supabase ─────────────
+const sb=window.supabase.createClient(AMN_SB.url,AMN_SB.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'amn-cabinet-auth'}});
+const S={session:null,me:null,staff:[],filter:'all',authMode:'signin',recovery:false,flash:null};
+
+function errText(e){
+  const m=String((e&&(e.message||e.error_description))||e||'');
+  if(/Failed to fetch|NetworkError|Load failed/i.test(m))return t('errNet');
+  if(/Invalid login credentials/i.test(m))return t('errLogin');
+  if(/already registered|already been registered/i.test(m))return t('errExists');
+  if(/Email not confirmed/i.test(m))return t('notConfirmed');
+  if(/at least one in-person verification/i.test(m))return t('errNeedVer');
+  if(/cannot verify it/i.test(m))return t('errSelfVer');
+  if(/only an approved application/i.test(m))return t('errNotApproved');
+  if(/consent_check/i.test(m))return t('errConsent');
+  if(/assignee must be a verifier/i.test(m))return t('errAssignee');
+  if(/set only by recording a payout/i.test(m))return t('errPaidOnly');
+  if(/admin only/i.test(m))return t('errAdminOnly');
+  if(/row-level security/i.test(m))return t('err',{m:'access denied'});
+  return t('err',{m});
+}
+const role=()=>S.me&&S.me.role||'applicant';
+const isAdmin=()=>role()==='admin';
+const isVer=()=>role()==='verifier'||isAdmin();
+
+function tabsFor(){
+  const r=role(),tabs=[];
+  if(r==='admin')tabs.push(['all','t_all'],['check','t_check'],['people','t_people']);
+  if(r==='verifier')tabs.push(['check','t_check']);
+  if(r==='donor')tabs.push(['gifts','t_gifts']);
+  tabs.push(['mine','t_mine'],['new','t_new'],['profile','t_profile']);
+  return tabs;
+}
+function route(){const h=location.hash.replace(/^#\/?/,'');const [a,b]=h.split('/');return {view:a||tabsFor()[0][0],id:b||null}}
+
+// ───────────── chrome ─────────────
+function chrome(){
+  document.documentElement.lang=LANG==='tj'?'tg':LANG;
+  document.title=t('title')+' — AM Network';
+  $('#navLog').textContent=t('logLink');
+  $('#langSel').value=LANG;
+}
+$('#langSel').addEventListener('change',e=>{LANG=e.target.value;try{localStorage.setItem('amn_lang',LANG)}catch(_){}render()});
+document.addEventListener('click',e=>{
+  if(e.target.closest('#themeBtn')){const d=document.documentElement;d.dataset.theme=d.dataset.theme==='dark'?'light':'dark';try{localStorage.setItem('amn_theme',d.dataset.theme)}catch(_){}return}
+  const it=e.target.closest('[data-href]');if(it&&!e.target.closest('a,button,input,select,textarea')){location.hash=it.dataset.href}
+});
+window.addEventListener('hashchange',()=>render());
+
+function flashHTML(){if(!S.flash)return '';const f=S.flash;return `<div class="msg ${f.kind}" role="status">${esc(f.text)}</div>`}
+function busy(btn,on){if(btn){btn.disabled=on}}
+function nav(h){if(location.hash.replace(/^#/,'')===h)render();else location.hash=h}
+
+// ───────────── auth screens ─────────────
+function viewAuth(){
+  if(S.recovery)return `<div class="card stack" style="max-width:440px;margin:30px auto">
+    <h1>${esc(t('newPw'))}</h1>${flashHTML()}
+    <form id="fPw" class="stack"><label>${esc(t('newPw'))}<input type="password" id="pw1" minlength="8" required autocomplete="new-password"><span class="muted">${esc(t('pwHint'))}</span></label>
+    <button class="btn primary">${esc(t('savePw'))}</button></form></div>`;
+  const up=S.authMode==='signup',fg=S.authMode==='forgot';
+  return `<div style="max-width:460px;margin:20px auto" class="stack">
+    <div><h1>${esc(t('title'))}</h1><p class="sub">${esc(t('authIntro'))}</p></div>
+    <div class="tabs" role="tablist"><button class="tab" data-mode="signin" ${!up&&!fg?'aria-current="page"':''}>${esc(t('signin'))}</button><button class="tab" data-mode="signup" ${up?'aria-current="page"':''}>${esc(t('signup'))}</button></div>
+    ${flashHTML()}
+    <form id="fAuth" class="card stack" novalidate>
+      ${up?`<label>${esc(t('fullName'))}<input id="aName" required maxlength="120" autocomplete="name"></label>`:''}
+      <label>${esc(t('email'))}<input id="aEmail" type="email" required autocomplete="email" inputmode="email"></label>
+      ${fg?'':`<label>${esc(t('password'))}<input id="aPw" type="password" required minlength="8" autocomplete="${up?'new-password':'current-password'}">${up?`<span class="muted">${esc(t('pwHint'))}</span>`:''}</label>`}
+      <button class="btn primary" id="aGo">${esc(fg?t('sendReset'):up?t('doSignup'):t('doSignin'))}</button>
+      ${up?'':`<button type="button" class="btn" data-mode="${fg?'signin':'forgot'}" style="min-height:38px;border:0;background:transparent;color:var(--gold)">${esc(fg?t('back'):t('forgot'))}</button>`}
+    </form></div>`;
+}
+document.addEventListener('click',e=>{const m=e.target.closest('[data-mode]');if(m){e.preventDefault();S.authMode=m.dataset.mode;render()}});
+
+async function onAuthSubmit(e){
+  e.preventDefault();const btn=$('#aGo');busy(btn,true);
+  const email=$('#aEmail').value.trim();
+  try{
+    if(S.authMode==='forgot'){
+      const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+'/cabinet/'});
+      if(error)throw error;S.flash={kind:'ok',text:t('resetSent')};S.authMode='signin';render();return;
+    }
+    const pw=$('#aPw').value;
+    if(pw.length<8)throw new Error(t('pwHint'));
+    if(S.authMode==='signup'){
+      const name=$('#aName').value.trim();
+      const {data,error}=await sb.auth.signUp({email,password:pw,options:{data:{full_name:name},emailRedirectTo:location.origin+'/cabinet/'}});
+      if(error)throw error;
+      if(data&&data.user&&Array.isArray(data.user.identities)&&!data.user.identities.length)throw new Error('already registered');
+      if(!data.session){S.flash={kind:'ok',text:t('checkEmail')};S.authMode='signin';render()}
+    }else{
+      const {error}=await sb.auth.signInWithPassword({email,password:pw});if(error)throw error;
+    }
+  }catch(err){S.flash={kind:'err',text:errText(err)};render()}
+  finally{busy(btn,false)}
+}
+async function onPwSubmit(e){
+  e.preventDefault();const pw=$('#pw1').value;
+  const {error}=await sb.auth.updateUser({password:pw});
+  if(error){S.flash={kind:'err',text:errText(error)}}else{S.recovery=false;S.flash={kind:'ok',text:t('pwSaved')}}
+  render();
+}
+
+// ───────────── data helpers ─────────────
+async function q(p){const {data,error}=await p;if(error)throw error;return data}
+async function loadMe(){
+  S.me=await q(sb.from('profiles').select('*').eq('id',S.session.user.id).maybeSingle());
+  if(!S.me)S.me={id:S.session.user.id,role:'applicant',email:S.session.user.email,full_name:''};
+  S.staff=isAdmin()?await q(sb.rpc('list_staff')):[];
+}
+const staffName=id=>{const p=S.staff.find(x=>x.id===id);return p?(p.full_name||p.email):(id===S.me.id?(S.me.full_name||S.me.email):'—')};
+
+// ───────────── views ─────────────
+function header(){
+  const n=S.me.full_name||S.session.user.email;
+  return `<div class="row between"><div><h1>${esc(t('hello',{n}))}</h1><div class="row"><span class="pill role">${esc(t('r_'+role()))}</span><span class="muted">${esc(S.session.user.email)}</span></div></div>
+  <button class="btn" id="signOut">${esc(t('signout'))}</button></div>
+  ${role()==='applicant'?`<p class="sub" style="margin-top:10px">${esc(t('roleNote_applicant'))}</p>`:''}
+  <div class="tabs" role="navigation">${tabsFor().map(([k,l])=>`<a class="tab" href="#${k}" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none" ${route().view===k||(route().view==='app'&&k===(isAdmin()?'all':isVer()?'check':'mine'))?'aria-current="page"':''}>${esc(t(l))}</a>`).join('')}</div>`;
+}
+function appItem(a){
+  const cats=(a.categories||[]).slice(0,2).map(cat).join(' · ');
+  return `<div class="item" data-href="app/${a.id}" role="link" tabindex="0"><b>${esc(a.ref)} · ${esc(a.full_name)}</b>${pill(a.status)}
+   <div class="meta">${esc(a.region)} · ${esc(t('created'))} ${esc(fmtD(a.created_at))}${a.need_score!=null?` · ${esc(t('score'))}: ${a.need_score}`:''}${cats?' · '+esc(cats):''}</div></div>`;
+}
+async function viewList(kind){
+  let rows=await q(sb.from('applications').select('*').order('created_at',{ascending:false}));
+  const uid=S.me.id;
+  if(kind==='mine')rows=rows.filter(a=>a.created_by===uid);
+  if(kind==='check')rows=rows.filter(a=>a.assigned_to===uid&&['assigned','verified'].includes(a.status));
+  let chips='';
+  if(kind==='all'){
+    const c={all:rows.length};STATUSES.forEach(s=>c[s]=rows.filter(a=>a.status===s).length);
+    chips=`<div class="chips">${['all',...STATUSES].map(s=>`<button class="chipf" data-filter="${s}" aria-pressed="${S.filter===s}">${esc(s==='all'?t('all'):t('s_'+s))} · ${c[s]}</button>`).join('')}</div>`;
+    if(S.filter!=='all')rows=rows.filter(a=>a.status===S.filter);
+  }
+  return chips+(rows.length?`<div class="list">${rows.map(appItem).join('')}</div>`:`<div class="card center muted">${esc(t('empty'))}</div>`);
+}
+document.addEventListener('click',e=>{const f=e.target.closest('[data-filter]');if(f){S.filter=f.dataset.filter;render()}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'){const it=e.target.closest&&e.target.closest('.item[data-href]');if(it)location.hash=it.dataset.href}});
+
+function viewNew(){
+  const other=role()!=='applicant';
+  return `<form id="fApp" class="card stack">
+   ${other?`<div class="msg info">${esc(t('forOther'))}</div>`:''}
+   <div class="grid2">
+    <label>${esc(t('f_name'))}<input name="full_name" required minlength="2" maxlength="120" ${other?'':`value="${esc(S.me.full_name||'')}"`}></label>
+    <label>${esc(t('f_phone'))}<input name="phone" type="tel" maxlength="40" inputmode="tel"></label>
+    <label>${esc(t('f_region'))}<input name="region" required minlength="2" maxlength="80"><span class="muted" style="font-weight:400">${esc(t('f_regionHint'))}</span></label>
+    <label>${esc(t('f_address'))}<input name="address" maxlength="200"></label>
+    <label>${esc(t('f_hh'))}<input name="household_size" type="number" min="1" max="30" inputmode="numeric"></label>
+    <label>${esc(t('f_dep'))}<input name="dependents" type="number" min="0" max="30" inputmode="numeric"></label>
+    <label>${esc(t('f_income'))}<input name="monthly_income" type="number" min="0" step="1" inputmode="numeric"></label>
+    <label>${esc(t('f_cur'))}<select name="currency">${['TJS','USD','EUR','RUB'].map(c=>`<option>${c}</option>`).join('')}</select></label>
+   </div>
+   <fieldset class="checks" style="border:0"><legend style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:6px">${esc(t('f_cats'))}</legend>
+    ${Object.keys(CATS).map(k=>`<label class="chk"><input type="checkbox" name="cat" value="${k}"><span>${esc(cat(k))}</span></label>`).join('')}</fieldset>
+   <label>${esc(t('f_situation'))}<textarea name="situation" maxlength="3000"></textarea></label>
+   <label class="chk"><input type="checkbox" name="consent" required><span>${esc(t('f_consent'))}</span></label>
+   <button class="btn primary" id="appGo">${esc(t('submit'))}</button></form>`;
+}
+async function onAppSubmit(e){
+  e.preventDefault();const f=e.target,btn=$('#appGo');
+  if(!f.reportValidity())return;
+  const num=v=>v===''?null:Number(v);
+  const row={full_name:f.full_name.value.trim(),phone:f.phone.value.trim()||null,region:f.region.value.trim(),address:f.address.value.trim()||null,
+    household_size:num(f.household_size.value),dependents:num(f.dependents.value),monthly_income:num(f.monthly_income.value),currency:f.currency.value,
+    categories:[...f.querySelectorAll('[name=cat]:checked')].map(x=>x.value),situation:f.situation.value.trim()||null,consent:f.consent.checked};
+  busy(btn,true);
+  try{const d=await q(sb.from('applications').insert(row).select('id,ref').single());S.flash={kind:'ok',text:t('submitted',{r:d.ref})};nav('app/'+d.id)}
+  catch(err){S.flash={kind:'err',text:errText(err)};render()}
+}
+
+async function viewApp(id){
+  const a=await q(sb.from('applications').select('*').eq('id',id).maybeSingle());
+  if(!a)return `<a class="back" href="#">${esc(t('back'))}</a><div class="card muted">${esc(t('empty'))}</div>`;
+  const [ev,vs,ps]=await Promise.all([
+    q(sb.from('events').select('*').eq('application_id',id).order('id')),
+    isVer()?q(sb.from('verifications').select('*').eq('application_id',id).order('created_at')):Promise.resolve([]),
+    isAdmin()?q(sb.from('payouts').select('*').eq('application_id',id).order('seq')):Promise.resolve([])]);
+  const uid=S.me.id;
+  const facts=[[t('ref'),a.ref],[t('status'),null],[t('created'),fmtD(a.created_at)],[t('f_region'),a.region]];
+  const seePrivate=isAdmin()||a.assigned_to===uid||a.created_by===uid;
+  if(seePrivate)facts.push([t('f_phone'),a.phone||'—'],[t('f_address'),a.address||'—'],[t('f_hh'),a.household_size??'—'],[t('f_dep'),a.dependents??'—'],
+    [t('f_income'),a.monthly_income!=null?money(a.monthly_income,a.currency):'—']);
+  if(a.need_score!=null)facts.push([t('score'),a.need_score+' / 100']);
+  if(isAdmin())facts.push([t('a_assign'),a.assigned_to?staffName(a.assigned_to):t('a_none')]);
+  let html=`<a class="back" href="#${isAdmin()?'all':a.assigned_to===uid?'check':'mine'}">${esc(t('back'))}</a>${flashHTML()}
+  <div class="card stack"><div class="row between"><h2 style="margin:0">${esc(a.full_name)}</h2>${pill(a.status)}</div>
+   <dl class="facts">${facts.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${v===null?pill(a.status):esc(v)}</dd>`).join('')}</dl>
+   ${(a.categories||[]).length?`<div class="row">${a.categories.map(c=>`<span class="pill role">${esc(cat(c))}</span>`).join('')}</div>`:''}
+   ${a.situation&&seePrivate?`<p style="white-space:pre-wrap">${esc(a.situation)}</p>`:''}
+   ${a.admin_note&&isAdmin()?`<div class="msg info">${esc(a.admin_note)}</div>`:''}
+  </div>`;
+  html+=`<div class="card"><h3>${esc(t('timeline'))}</h3><ul class="tl">${ev.map(x=>`<li><b>${esc(t('e_'+x.kind))}</b> <span class="muted">· ${esc(fmtD(x.at))}</span>${x.kind==='verified'&&x.detail&&x.detail.recommendation&&isVer()?` · ${esc(x.detail.recommendation==='approve'?t('v_approve'):t('v_reject'))}`:''}</li>`).join('')}</ul></div>`;
+  if(isVer()&&(a.assigned_to===uid||isAdmin())&&['assigned','verified'].includes(a.status)){
+    const mine=vs.find(v=>v.verifier_id===uid);
+    if(mine)html+=`<div class="msg ok">${esc(t('v_already'))}</div>`;
+    else if(a.created_by===uid&&!isAdmin())html+=`<div class="msg info">${esc(t('v_cannot'))}</div>`;
+    else html+=verifyForm(a);
+  }
+  if(isAdmin())html+=adminBlock(a,vs,ps);
+  else if(vs.length&&isVer())html+=verifsHTML(vs);
+  return html;
+}
+function verifyForm(a){
+  return `<form id="fVer" class="card stack" data-app="${a.id}"><h2>${esc(t('v_title'))}</h2>
+   <fieldset class="checks" style="border:0"><legend><h3>${esc(t('v_facts'))}</h3></legend>${FACTS.map(k=>`<label class="chk"><input type="checkbox" name="fact" value="${k}"><span>${esc(t('c_'+k))}</span></label>`).join('')}</fieldset>
+   <fieldset class="checks" style="border:0"><legend><h3>${esc(t('v_need'))}</h3></legend>
+    ${NEED.map(([k,p])=>`<label class="chk"><input type="checkbox" name="need" value="${k}" data-pts="${p}"><span>${esc(t('n_'+k))}</span><span class="pts">+${p}</span></label>`).join('')}
+    <label class="chk" style="align-items:center"><span>${esc(t('n_dependents'))}</span><input type="number" name="deps" min="0" max="30" value="${a.dependents??0}" style="width:90px;margin-inline-start:auto" inputmode="numeric"></label>
+   </fieldset>
+   <div class="row between"><div><div class="muted">${esc(t('score'))}</div><div class="score" id="vScore">0</div></div><p class="muted" style="max-width:420px;font-size:13px">${esc(t('scoreNote'))}</p></div>
+   <div class="grid2"><label>${esc(t('v_date'))}<input type="date" name="visited_on" value="${new Date().toISOString().slice(0,10)}" required></label>
+    <label>${esc(t('v_rec'))}<select name="rec" required><option value="approve">${esc(t('v_approve'))}</option><option value="reject">${esc(t('v_reject'))}</option></select></label></div>
+   <label>${esc(t('v_notes'))}<textarea name="notes" maxlength="4000"></textarea></label>
+   <button class="btn primary" id="verGo">${esc(t('v_submit'))}</button></form>`;
+}
+function needScore(f){
+  const on=k=>f.querySelector(`[name=need][value=${k}]`).checked;
+  let s=0;for(const [k,p] of NEED){if(k==='below_min'&&on('no_income'))continue;if(on(k))s+=p}
+  s+=Math.min(10,2*Math.max(0,Number(f.deps.value)||0));
+  return Math.min(100,s);
+}
+document.addEventListener('input',e=>{const f=e.target.closest('#fVer');if(f)$('#vScore').textContent=needScore(f)});
+document.addEventListener('change',e=>{const f=e.target.closest('#fVer');if(f)$('#vScore').textContent=needScore(f)});
+async function onVerSubmit(e){
+  e.preventDefault();const f=e.target,btn=$('#verGo');busy(btn,true);
+  const checks={facts:[...f.querySelectorAll('[name=fact]:checked')].map(x=>x.value),need:[...f.querySelectorAll('[name=need]:checked')].map(x=>x.value),dependents:Number(f.deps.value)||0};
+  try{await q(sb.from('verifications').insert({application_id:f.dataset.app,verifier_id:S.me.id,visited_on:f.visited_on.value,checks,need_score:needScore(f),recommendation:f.rec.value,notes:f.notes.value.trim()||null}));
+    S.flash={kind:'ok',text:t('v_done')}}catch(err){S.flash={kind:'err',text:errText(err)}}
+  render();
+}
+function verifsHTML(vs){
+  return `<div class="card stack"><h3>${esc(t('a_verifs'))}</h3>${vs.length?vs.map(v=>`<div class="msg">
+   <div class="row between"><b>${esc(v.recommendation==='approve'?t('v_approve'):t('v_reject'))} · ${v.need_score??'—'}/100</b><span class="muted">${esc(t('a_by'))} ${esc(staffName(v.verifier_id))} · ${esc(fmtD(v.visited_on))}</span></div>
+   <div class="muted" style="font-size:13px;margin-top:6px">${(v.checks.facts||[]).map(k=>'✓ '+esc(t('c_'+k))).join('<br>')}</div>
+   ${(v.checks.need||[]).length?`<div style="font-size:13px;margin-top:6px">${v.checks.need.map(k=>esc(t('n_'+k))).join(' · ')}</div>`:''}
+   ${v.notes?`<p style="white-space:pre-wrap;margin-top:6px">${esc(v.notes)}</p>`:''}</div>`).join(''):`<p class="muted">${esc(t('a_noVerifs'))}</p>`}</div>`;
+}
+function adminBlock(a,vs,ps){
+  const vers=S.staff.filter(p=>(p.role==='verifier'||p.role==='admin')&&(p.id!==a.created_by||p.role==='admin'));
+  const donors=S.staff.filter(p=>p.role==='donor'||p.role==='admin');
+  let h=verifsHTML(vs);
+  if(!['paid'].includes(a.status))h+=`<form id="fAdm" class="card stack" data-app="${a.id}">
+    <div class="grid2"><label>${esc(t('a_assign'))}<select name="assigned_to"><option value="">${esc(t('a_none'))}</option>${vers.map(p=>`<option value="${p.id}" ${p.id===a.assigned_to?'selected':''}>${esc(p.full_name||p.email)} · ${esc(t('r_'+p.role))}</option>`).join('')}</select></label></div>
+    <label>${esc(t('a_note'))}<textarea name="admin_note" maxlength="2000">${esc(a.admin_note||'')}</textarea></label>
+    <div class="row"><button class="btn" data-adm="save">${esc(t('save'))}</button>
+     ${['verified','assigned','new'].includes(a.status)?`<button class="btn primary" data-adm="approved">${esc(t('a_approve'))}</button><button class="btn danger" data-adm="rejected">${esc(t('a_reject'))}</button>`:''}
+     ${['rejected','approved'].includes(a.status)?`<button class="btn" data-adm="reopen">${esc(t('a_reopen'))}</button>`:''}</div></form>`;
+  if(['approved','paid'].includes(a.status))h+=`<form id="fPay" class="card stack" data-app="${a.id}"><h2>${esc(t('a_pay'))}</h2>
+    <div class="grid2"><label>${esc(t('p_amount'))}<input name="amount" type="number" min="0.01" step="0.01" required inputmode="decimal"></label>
+     <label>${esc(t('f_cur'))}<select name="currency">${['TJS','USD','EUR','RUB'].map(c=>`<option>${c}</option>`).join('')}</select></label>
+     <label>${esc(t('p_method'))}<select name="method">${['cash','alif','dc','bank','other'].map(m=>`<option value="${m}">${esc(t('m_'+m))}</option>`).join('')}</select></label>
+     <label>${esc(t('p_kind'))}<select name="kind"><option value="zakat">${esc(t('k_zakat'))}</option><option value="sadaqah">${esc(t('k_sadaqah'))}</option></select></label>
+     <label>${esc(t('p_date'))}<input name="paid_on" type="date" required value="${new Date().toISOString().slice(0,10)}"></label>
+     <label>${esc(t('a_donor'))}<select name="donor_id"><option value="">${esc(t('a_donorNone'))}</option>${donors.map(p=>`<option value="${p.id}">${esc(p.full_name||p.email)}</option>`).join('')}</select></label></div>
+    <label>${esc(t('p_receipt'))}<input name="receipt" type="file" accept="image/*,application/pdf"><span class="muted" style="font-weight:400">${esc(t('p_receiptHint'))}</span><span class="hash" id="rHash"></span></label>
+    <label>${esc(t('p_note'))}<input name="public_note" maxlength="300"></label>
+    <button class="btn primary" id="payGo">${esc(t('p_save'))}</button></form>`;
+  if(ps.length)h+=`<div class="card"><h3>${esc(t('a_payouts'))}</h3><div class="tw"><table><thead><tr><th>#</th><th>${esc(t('p_date'))}</th><th>${esc(t('p_amount'))}</th><th>${esc(t('p_method'))}</th><th>${esc(t('a_donor'))}</th></tr></thead><tbody>
+    ${ps.map(p=>`<tr><td>${p.seq}</td><td>${esc(fmtD(p.paid_on))}</td><td>${esc(money(p.amount,p.currency))} · ${esc(t('k_'+p.kind))}</td><td>${esc(t('m_'+p.method))}</td><td>${esc(p.donor_id?staffName(p.donor_id):'—')}</td></tr>`).join('')}</tbody></table></div></div>`;
+  return h;
+}
+async function sha256Hex(buf){const h=await crypto.subtle.digest('SHA-256',buf);return [...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join('')}
+document.addEventListener('change',async e=>{if(e.target.name==='receipt'&&e.target.files[0]){$('#rHash').textContent='SHA-256: '+await sha256Hex(await e.target.files[0].arrayBuffer())}});
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('[data-adm]');if(!b)return;e.preventDefault();
+  const f=b.closest('form'),act=b.dataset.adm,id=f.dataset.app;
+  const upd={assigned_to:f.assigned_to.value||null,admin_note:f.admin_note.value.trim()||null};
+  if(act==='approved'||act==='rejected')upd.status=act;
+  if(act==='reopen')upd.status=upd.assigned_to?'assigned':'new';
+  busy(b,true);
+  try{await q(sb.from('applications').update(upd).eq('id',id));S.flash={kind:'ok',text:t('saved')}}catch(err){S.flash={kind:'err',text:errText(err)}}
+  render();
+});
+async function onPaySubmit(e){
+  e.preventDefault();const f=e.target,btn=$('#payGo');if(!f.reportValidity())return;busy(btn,true);
+  try{
+    const file=f.receipt.files[0];const receipt_sha256=file?await sha256Hex(await file.arrayBuffer()):null;
+    await q(sb.from('payouts').insert({application_id:f.dataset.app,donor_id:f.donor_id.value||null,amount:Number(f.amount.value),currency:f.currency.value,
+      method:f.method.value,kind:f.kind.value,paid_on:f.paid_on.value,receipt_sha256,public_note:f.public_note.value.trim()||null}));
+    S.flash={kind:'ok',text:t('p_saved')};
+  }catch(err){S.flash={kind:'err',text:errText(err)}}
+  render();
+}
+
+async function viewPeople(){
+  S.staff=await q(sb.rpc('list_staff'));
+  return `<p class="sub" style="margin-bottom:12px">${esc(t('pe_hint'))}</p><div class="card tw"><table><thead><tr><th>${esc(t('fullName'))}</th><th>${esc(t('email'))}</th><th>${esc(t('pe_role'))}</th><th>${esc(t('pe_since'))}</th></tr></thead><tbody>
+   ${S.staff.map(p=>`<tr><td>${esc(p.full_name||'—')}${p.city?`<div class="muted">${esc(p.city)}</div>`:''}</td><td>${esc(p.email)}</td>
+    <td><select data-role="${p.id}" ${p.id===S.me.id?'disabled':''} style="min-width:150px">${['applicant','donor','verifier','admin'].map(r=>`<option value="${r}" ${r===p.role?'selected':''}>${esc(t('r_'+r))}</option>`).join('')}</select></td>
+    <td class="muted">${esc(fmtD(p.created_at))}</td></tr>`).join('')}</tbody></table></div>`;
+}
+document.addEventListener('change',async e=>{
+  const s=e.target.closest('[data-role]');if(!s)return;s.disabled=true;
+  try{await q(sb.rpc('set_role',{target:s.dataset.role,new_role:s.value}));S.flash={kind:'ok',text:t('saved')}}catch(err){S.flash={kind:'err',text:errText(err)}}
+  render();
+});
+async function viewGifts(){
+  const rows=await q(sb.rpc('my_payouts'));
+  return `<p class="sub" style="margin-bottom:12px">${esc(t('g_intro'))}</p>`+(rows.length?`<div class="list">${rows.map(r=>`<div class="item" style="cursor:default"><b>${esc(money(r.amount,r.currency))} · ${esc(t('k_'+r.kind))}</b><span class="pill s-paid">${esc(fmtD(r.paid_on))}</span>
+    <div class="meta">${esc(r.ref)} · ${esc(r.region)} · ${r.verifications} ${esc(t('g_verifs'))}${(r.categories||[]).length?' · '+esc(r.categories.map(cat).join(', ')):''}<div class="hash">${esc(r.entry_hash)}</div></div></div>`).join('')}</div>`:`<div class="card center muted">${esc(t('empty'))}</div>`)+
+    `<p style="margin-top:14px"><a href="/transparency/">${esc(t('logLink'))} →</a></p>`;
+}
+function viewProfile(){
+  return `<form id="fProf" class="card stack" style="max-width:520px">
+   <label>${esc(t('fullName'))}<input name="full_name" maxlength="120" value="${esc(S.me.full_name||'')}"></label>
+   <label>${esc(t('f_phone'))}<input name="phone" type="tel" maxlength="40" value="${esc(S.me.phone||'')}"></label>
+   <label>${esc(t('pr_city'))}<input name="city" maxlength="80" value="${esc(S.me.city||'')}"></label>
+   <button class="btn primary" id="profGo">${esc(t('save'))}</button></form>`;
+}
+async function onProfSubmit(e){
+  e.preventDefault();const f=e.target;busy($('#profGo'),true);
+  try{await q(sb.from('profiles').update({full_name:f.full_name.value.trim()||null,phone:f.phone.value.trim()||null,city:f.city.value.trim()||null}).eq('id',S.me.id));await loadMe();S.flash={kind:'ok',text:t('saved')}}
+  catch(err){S.flash={kind:'err',text:errText(err)}}
+  render();
+}
+
+// ───────────── render ─────────────
+let renderSeq=0;
+async function render(){
+  chrome();const app=$('#app');const my=++renderSeq;
+  if(!S.session||S.recovery){app.innerHTML=viewAuth();S.flash=null;bindForms();return}
+  if(!S.me){app.innerHTML=`<div class="spin">${esc(t('loading'))}</div>`;try{await loadMe()}catch(err){app.innerHTML=`<div class="msg err">${esc(errText(err))}</div>`;return}}
+  const r=route();const allowed=tabsFor().map(x=>x[0]);
+  let body;
+  try{
+    const fl=r.view==='app'?'':flashHTML();
+    if(r.view==='app'&&r.id)body=await viewApp(r.id);
+    else if(!allowed.includes(r.view)){location.replace('#'+allowed[0]);return}
+    else if(r.view==='new')body=fl+viewNew();
+    else if(r.view==='people')body=fl+await viewPeople();
+    else if(r.view==='gifts')body=fl+await viewGifts();
+    else if(r.view==='profile')body=fl+viewProfile();
+    else body=fl+await viewList(r.view);
+  }catch(err){body=`<div class="msg err">${esc(errText(err))}</div>`}
+  if(my!==renderSeq)return;
+  S.flash=null;app.innerHTML=header()+body;bindForms();
+  if($('#fVer'))$('#vScore').textContent=needScore($('#fVer'));
+}
+function bindForms(){
+  const on=(id,fn)=>{const el=$(id);if(el)el.addEventListener('submit',fn)};
+  on('#fAuth',onAuthSubmit);on('#fPw',onPwSubmit);on('#fApp',onAppSubmit);on('#fVer',onVerSubmit);on('#fPay',onPaySubmit);on('#fProf',onProfSubmit);
+  const so=$('#signOut');if(so)so.addEventListener('click',async()=>{await sb.auth.signOut();S.me=null;S.staff=[];S.authMode='signin';history.replaceState(null,'',location.pathname);render()});
+}
+
+sb.auth.onAuthStateChange((ev,session)=>{
+  if(ev==='PASSWORD_RECOVERY')S.recovery=true;
+  const changed=(S.session&&S.session.user.id)!==(session&&session.user.id);
+  S.session=session;if(changed){S.me=null;S.staff=[]}
+  if(changed||ev==='PASSWORD_RECOVERY'||ev==='INITIAL_SESSION')setTimeout(render,0);
+});
+</script>
+</body>
+</html>

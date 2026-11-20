@@ -132,6 +132,14 @@ All of the above (`/quran/`, `/hadith/`, `/dua/`, `/tasbeeh/`, `/qibla/`, `/pray
 
 **Assistant placement (historical):** homepage, Academy, `/apply/` and `/zakat/` only. It was removed from the nine utility pages in September 2026 — it cost a `/health` ping per page load and shared the tight AI budget, for pages where nobody asks it anything. Don't re-add it site-wide.
 
+### Pilot platform on Supabase (November 2026)
+- **Project:** `amnetwork` on Supabase (Free, Europe), URL `https://pziakammdazyytxubtrj.supabase.co`. Publishable key lives in `vendor/amn-supabase.js` — it is public by design; access is decided by RLS. The secret/service_role key and DB password are the founder's only and never go in the repo or chat.
+- **Schema:** `supabase/schema.sql` (run in Supabase SQL Editor; re-runnable — it drops and recreates AM Network objects, so never re-run it once real data exists without a migration). Tables: `profiles` (roles applicant/donor/verifier/admin), `applications`, `verifications`, `payouts` (SHA-256 hash chain: `payload` → `entry_hash`, linked by `prev_hash`), `events` (timeline). Rules enforced in the DB, tested on local Postgres 16: only admin changes roles (`set_role`); approval needs ≥1 in-person verification recommending help; whoever brought a family cannot verify it; "paid" only via a payout; payout only for approved; public reads only through `public_payouts()` / `public_stats()` (no names, phones, addresses).
+- **Pages:** `/cabinet/` (one page, role-based tabs, ru/tj/en, email+password auth, no analytics, noindex) and `/transparency/` (public log + in-browser chain check; noindex until the pilot). `vendor/supabase-2.118.0.js` is supabase-js UMD, self-hosted (CSP `'self'`). Neither page is linked from the homepage yet — founder wants the platform 100% ready first.
+- **Need score** in the verifier form is a visible checklist (points listed next to each item, capped at 100), described as a hint — a person decides. Keep it that way.
+- **Email:** Supabase's built-in mailer only sends to the org's own team members and a few per hour. Before verifiers/donors register, set up custom SMTP (e.g. Resend) in Auth settings.
+- First admin: the founder registers in `/cabinet/`, then runs in SQL Editor `update public.profiles set role='admin' where email='<his email>';` — the email is never written into the repo.
+
 ### Integrations working
 - **Waitlist / Apply → Web3Forms only (checked October 2026):** both forms post to `api.web3forms.com` behind hCaptcha and arrive as emails. Nothing is written to Google Sheets anymore — the old Apps Script path was removed from the frontend. `apps_script_apply.gs` remains in the repo only as reference code. If a spreadsheet is wanted again, it needs a new deployment; never commit its `/exec` URL (it is an unauthenticated write endpoint — see docs/security-deployment.md). The old URLs leaked in git history must stay archived.
 - **Email delivery:** web3forms.com (both forms)
