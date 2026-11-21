@@ -32,11 +32,11 @@ Full text: `docs/strategy-2026-11.md`, wording rules: `docs/messaging-2026-11.md
    Honest growth plan: `docs/content/growth-plan.md`. Tajikistan is not in the YPP country list — see that file before relying on it.
 
 ## 4. Media plan right now (decision 21 Nov 2026)
-- «Stories of the Prophets»: Musa parts 1–5 **done** (part 5 final). Then **one episode per prophet**: Dawud → Sulayman →
+- «Stories of the Prophets»: Musa parts 1–5 and **Dawud done** (21 Nov). Next, one episode per prophet: Sulayman →
   Zakariya & Yahya → Isa (peace be upon them). Then the prophets series ends.
 - New main format: **«What would you do?»** — 25–40 s, a family dilemma (found a wallet, a friend asks to copy homework, a brother
   is insulted…), freeze-frame with options A/B, "write A or B in the comments", the answer from Quran/Sunnah with the exact source,
-  the ending loops back to the start. **Make 2 pilot videos first**, then judge by retention and comments.
+  the ending loops back to the start. **2 pilots done 21 Nov** (wallet, homework — `docs/content/publish/what-would-you-do-1-2.md`); judge by retention and comments before making more.
 - Retention rules for everything new: a question or conflict in the first second; a new shot or new information every 2–3 s;
   payoff only in the last 3 s; no slow intros.
 
@@ -71,12 +71,15 @@ Full text: `docs/strategy-2026-11.md`, wording rules: `docs/messaging-2026-11.md
 - Voice references: Hamza `e6571c0b-969b-4183-b47c-8af358bdd990`, Maryam `6fdab1ee-fe8c-4c89-a489-10f8fb0b930b`,
   Yusuf `e204c8d7-1317-42a7-9e90-240cccd2a06c`, Khadija `4dfaabd4-079a-4a30-8929-413f95f2ac98`,
   Amina `6d7eeed4-f3f3-4bea-9f6b-87ca029bf577`, Idris `b521d339-2e75-4748-9a8d-f5250d8894d8`.
-- Sandbox: `~/m5` (and `~/m4`) hold `build.py` (assembles segments, hook/plate overlays, end card, crossfades, −16 LUFS;
+- **Build in this Claude Code container, not the Higgsfield sandbox** (sandbox_exec asks the founder every time, even in Auto). Builders:
+  `docs/content/tools/wy/` (shorts), `docs/content/tools/dawud/` (episodes). Environment network already allows Higgsfield CDN/upload,
+  Hugging Face, api.quran.com, jsDelivr. Wikimedia blocks this container (401/429) — CC0 recitation needs another route.
+- Old Higgsfield sandbox: `~/m5` (and `~/m4`) hold `build.py` (assembles segments, hook/plate overlays, end card, crossfades, −16 LUFS;
   **refuses recorded-audio overlay on talking faces** unless `ALLOW_REC=1`), `prep.py`, `tr.py`, `dchk.py`, `qa.py`, `dua.py`
   (Arabic ayah with gold word highlight). Files live 24 h after last use — if gone, the scripts' logic is described in
   `docs/content/stories-of-the-prophets.md`; rebuild them.
 - Upload: `media_upload` → `curl PUT` with `If-None-Match: *` in the same sandbox command → `media_confirm`.
-- Credits: MAX plan, ~1640 left on 21 Nov; reset ~30 Nov. A prophet episode ≈ 150 cr; a short ≈ 40–60 cr.
+- Credits: MAX plan, 1363 left on 21 Nov evening; reset ~30 Nov. A prophet episode ≈ 150 cr; a short ≈ 40–60 cr.
 
 ## 7. Publishing (rules checked Nov 2026)
 - Instagram: **max 5 hashtags** (since Dec 2025). TikTok: 3–5 hashtags, caption 100–300 characters, AI label on.

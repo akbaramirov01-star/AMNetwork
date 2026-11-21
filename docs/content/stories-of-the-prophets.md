@@ -118,3 +118,16 @@ The working files of that chat (`claude/season2-plan.md`, `claude/publish-pack-1
   line exactly once, every word once" + clip = line + ~1.5 s. Check with `chk.py` (unprompted Whisper, flags repeats and words with
   probability < 0.5) — prompting Whisper with the expected line hides real errors. A "smartphone" insert was rejected as copyright →
   "plain unbranded black mobile phone". Chat bubbles are drawn in code (no AI text).
+
+## Prophet Dawud (peace be upon him) — done 21 Nov 2026
+- Video 1:41: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/1c260b9a-9516-4848-af8d-02d2bd12fc0a.mp4
+- Cover: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/6ab98734-2d17-4507-8850-113e856b297e.jpg
+- 2:249–251 (few vs many, Talut, Jalut), 34:10–11 (iron, coats of mail), 34:10 + 38:18–19 (mountains and birds), Bukhari 2072 (ate from his
+  own work), Bukhari 1131 (fast every other day), 34:13 ("work in gratitude"). Family frame: mountain viewpoint at sunrise. Hook
+  "FEW AGAINST A GIANT ARMY?!". Card "WORK WITH GRATITUDE. · Next: Prophet Sulayman". Texts: `publish/dawud.md`. Builder: `tools/dawud/`.
+- No sling, no "boy David" — those details are not in the Quran. 34:10 is shown as Arabic text + translation (Amiri font, raqm),
+  **without recitation**: Wikimedia returned 401/429 to this container, so the CC0 Atcovi Saba file could not be fetched.
+- Cost 135.6 cr (1498.6 → 1363). Reshoots: a helmet with a cross-shaped dent → "completely smooth and plain, no markings";
+  "said, said" in a dialogue clip. seed_audio flagged "O mountains, repeat praises with him, and the birds as well" as nsfw → narrated
+  as "the mountains and the birds glorified Allah together with him" (38:18–19).
+- Whisper spells the salawat "Sallallahu Alaihi Wasallam"; build/chk now normalise all spellings before comparing.
