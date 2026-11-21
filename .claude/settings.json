@@ -23,7 +23,16 @@
       "mcp__Higgsfield_ai__show_generation_by_ids",
       "mcp__Higgsfield_ai__estimate_video_cost",
       "mcp__Higgsfield_ai__estimate_audio_cost",
-      "mcp__Higgsfield_ai__estimate_image_cost"
+      "mcp__Higgsfield_ai__estimate_image_cost",
+      "mcp__Higgsfield_ai__generate_video_batch",
+      "mcp__Higgsfield_ai__generate_audio_batch",
+      "mcp__Higgsfield_ai__generate_image_batch",
+      "mcp__Higgsfield_ai__generate_video",
+      "mcp__Higgsfield_ai__generate_audio",
+      "mcp__Higgsfield_ai__generate_image",
+      "mcp__Higgsfield_ai__models_explore",
+      "ToolSearch",
+      "mcp__Claude_Code_Remote__read_documentation"
     ]
   }
 }
