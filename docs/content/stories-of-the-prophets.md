@@ -91,3 +91,15 @@ The working files of that chat (`claude/season2-plan.md`, `claude/publish-pack-1
   segments right after Arabic recitation — re-check those segments alone.
 - Cost 146.9 cr (1949.2 → 1802.3; 3 reshoots: Medina→Madyan, a cross-shaped staff, a too-short scene).
 - Sandbox: ~/m4 (scripts rebuilt from the transcript after the sandbox was wiped; dua.py renders the ayah clip).
+
+## Musa part 5 (final) — done 21 Nov 2026
+- Video 1:54: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/3ed5fc8f-ff7d-4736-8143-f2ac6a675abd.mp4
+- Cover: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/79078945-2a8c-4a3e-bdbe-e32e95dbaad8.jpg
+- 28:29–39 (the call at Tur, sent to Pharaoh with Harun), 26:52–66 (night exodus, "we will be caught", 26:62 recited in Arabic —
+  Atcovi CC0 "Chapter 26, Ash-Shu'ara (Murattal)", 692.75–700.95 s —, the sea parts "like a great towering mountain", saved / drowned).
+  Family frame: seaside boardwalk at sunset. Hook "SEA AHEAD. ARMY BEHIND." Card "MY LORD IS WITH ME. · Next: Prophet Dawud".
+- Cost 161.5 cr (1802.3 → 1640.8; reshoots: mushroom-like dust cloud, a clip too short for its line, "My, my Lord", "our love" instead of "Allah").
+- Lessons: check recorded line length BEFORE ordering the dialogue clip (clip ≥ span + 1.5 s); always re-check "Allah", prophet names and
+  places with Whisper + initial_prompt — the model can swap them while the plain transcript ratio still passes.
+- Decision 21 Nov (Akbar): finish prophets with one episode each — Dawud, Sulayman, Zakariya & Yahya, Isa — then switch to the new
+  25–40 s format "What would you do?" (family dilemma, A/B freeze, answer from Quran/Sunnah with source). Pilot 2 videos first.
