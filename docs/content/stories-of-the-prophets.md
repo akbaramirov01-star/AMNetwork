@@ -72,3 +72,22 @@ The working files of that chat (`claude/season2-plan.md`, `claude/publish-pack-1
 - Cost 106.8 cr (2071.75 → 1964.95). Lessons: a scene prompt drifted into a modern asphalt road — say "only ancient things, no roads";
   seedance dropped "peace be upon him" in a dialogue clip (03) and doubled a word (08) — both use the recorded audio.
 - Next: Musa part 4 (28:25–28 the father of the women, marriage, 10 years; then the fire at Tur 28:29) and part 5 (the sea, 26:63).
+
+## Musa part 4 — done 21 Nov 2026
+- Video 1:50 (720×1280): https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/afa6be54-0274-4671-ac5b-f88248812feb.mp4
+- Cover: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/e63df2ad-4bb8-47df-8d9b-d3c6ce168d54.jpg
+- Story 28:25–29 (Sahih International via api.quran.com): the shy invitation, "Fear not", 28:26 "hire him… the strong and the trustworthy"
+  recited in Arabic (Atcovi CC0, from "يا أبت" at 672.78 s to 686.75 s, gold word highlight), the 8/10-year agreement, years passing,
+  the fire on the mountain. Family frame: evening garden by a fire pit (Yusuf hook, Hamza, Khadija, Maryam). Hook "10 YEARS... FOR A WEDDING?!".
+  Card "WHAT WAS THAT FIRE? · Part 5 tomorrow".
+- **Lip-sync rule (founder's complaint, 21 Nov):** parts 2–3 had drift because clips 03/04/08 used build.py "rec mode" (our recording laid
+  over a mouth that said something else). Now build.py refuses rec mode (`LIPSYNC:` error) unless `ALLOW_REC=1`; a bad dialogue clip is
+  regenerated instead. All 5 dialogue clips in part 4 are native.
+- Lessons: seed_audio flagged "nsfw" on "one of the two women came back to him… walking with shyness" → "one of the two sisters returned to
+  the well… walking with modesty and shyness" passed. A dialogue clip said "Medina" instead of "Madyan" (transcript ratio still 0.94 —
+  check proper nouns with a Whisper `initial_prompt`); the reshoot with "MAD-yan, not Medina" in the prompt was right. A "shepherd's staff
+  leaning on a rock" rendered as a cross → never ask for sticks/staffs in empty landscapes; say "no poles, no crosses, no symbols".
+  Narration longer than clip × 1.35 gets cut → make the clip long enough (scene 06 reshot at 12 s). Whole-file Whisper QA mis-hears
+  segments right after Arabic recitation — re-check those segments alone.
+- Cost 146.9 cr (1949.2 → 1802.3; 3 reshoots: Medina→Madyan, a cross-shaped staff, a too-short scene).
+- Sandbox: ~/m4 (scripts rebuilt from the transcript after the sandbox was wiped; dua.py renders the ayah clip).
