@@ -1,6 +1,6 @@
 # AM Network — Project Context for Claude
 
-> Read this file at the start of every session to restore full project context.
+> Read this file at the start of every session to restore full project context. Short current briefing (esp. for media/video sessions): `docs/BRIEFING.md`.
 
 ## What We Are Building
 
