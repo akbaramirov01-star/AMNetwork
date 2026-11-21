@@ -1,0 +1,53 @@
+{
+ "tag": "w1",
+ "out": "WY1_wallet.mp4",
+ "segs": [
+  {
+   "k": "11",
+   "kind": "vo",
+   "st": 0.15,
+   "min": 3.2,
+   "hook": [
+    0.0,
+    99,
+    "FOUND A WALLET.\nFULL OF MONEY."
+   ]
+  },
+  {
+   "k": "12",
+   "kind": "dlg"
+  },
+  {
+   "k": "13",
+   "kind": "dlg"
+  },
+  {
+   "k": "fz",
+   "kind": "freeze",
+   "dur": 3.4,
+   "a": "Keep it. Nobody saw.",
+   "b": "Find the owner."
+  },
+  {
+   "k": "14",
+   "kind": "dlg",
+   "plate": "Quran \u00b7 An-Nisa 4:58"
+  },
+  {
+   "k": "15",
+   "kind": "dlg",
+   "plate": "Sahih al-Bukhari 2429"
+  },
+  {
+   "k": "16",
+   "kind": "dlg",
+   "tail": 0.25,
+   "stamp": [
+    2.6,
+    "ANSWER: B",
+    "Return what is not yours \u00b7 Quran 4:58"
+   ]
+  }
+ ],
+ "speed": 1.1
+}

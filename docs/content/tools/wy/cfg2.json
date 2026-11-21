@@ -1,0 +1,59 @@
+{
+ "tag": "w2",
+ "out": "WY2_homework.mp4",
+ "segs": [
+  {
+   "k": "21",
+   "kind": "vo",
+   "st": 0.6,
+   "min": 3.6,
+   "hook": [
+    0.0,
+    99,
+    "COPY MY\nHOMEWORK?"
+   ],
+   "chat": [
+    0.0,
+    99,
+    "Sara",
+    "Send me your homework pls. I'll just copy it. Nobody will know"
+   ]
+  },
+  {
+   "k": "22",
+   "kind": "dlg"
+  },
+  {
+   "k": "23",
+   "kind": "dlg",
+   "cut": 7
+  },
+  {
+   "k": "fz",
+   "kind": "freeze",
+   "dur": 3.4,
+   "a": "Send it. She's my friend.",
+   "b": "Say no, but help her."
+  },
+  {
+   "k": "24",
+   "kind": "dlg",
+   "plate": "Quran \u00b7 Al-Ma'idah 5:2"
+  },
+  {
+   "k": "25",
+   "kind": "dlg"
+  },
+  {
+   "k": "26",
+   "kind": "dlg",
+   "tail": 0.25,
+   "stamp": [
+    2.6,
+    "ANSWER: B",
+    "Help in good, never in sin \u00b7 Quran 5:2"
+   ]
+  }
+ ],
+ "speed": 1.1
+}

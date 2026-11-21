@@ -103,3 +103,18 @@ The working files of that chat (`claude/season2-plan.md`, `claude/publish-pack-1
   places with Whisper + initial_prompt — the model can swap them while the plain transcript ratio still passes.
 - Decision 21 Nov (Akbar): finish prophets with one episode each — Dawud, Sulayman, Zakariya & Yahya, Isa — then switch to the new
   25–40 s format "What would you do?" (family dilemma, A/B freeze, answer from Quran/Sunnah with source). Pilot 2 videos first.
+
+## «What would you do?» pilots 1–2 — done 21 Nov 2026
+- WY1 «The wallet» 38.5 s: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/5a877545-fee4-4ac4-b5f3-511debd6f25d.mp4 (Quran 4:58, Bukhari 2429)
+- WY2 «Copy my homework» 29.9 s: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/cb911d64-b9a4-4f2d-b63d-c74f282765f3.mp4 (Quran 5:2)
+- Scripts `docs/content/what-would-you-do-pilots.md`, texts `docs/content/publish/what-would-you-do-1-2.md`, builder `docs/content/tools/wy/`.
+- Cost 142.2 cr (1640.8 → 1498.6): 12 voice lines, 12 clips + 9 reshoots/rejections.
+- **Assembly now runs in this Claude Code container, not the Higgsfield sandbox** — every sandbox_exec call asked the founder for
+  approval even in Auto mode. The AMNetwork environment allows the Higgsfield CDN/upload hosts, Hugging Face (Whisper), api.quran.com,
+  jsDelivr, Wikimedia. Locally: `pip install faster-whisper`, `HF_HUB_DISABLE_XET=1`, feed Whisper a numpy array (PyAV 19 breaks
+  `decode_audio`), Montserrat from jsDelivr fontsource.
+- Lessons: seedance mini **repeats words to fill a long clip** ("right right now", "She send it! She's…", "Teaching helping her") and
+  swaps short words ("it's a date" for "it's B", "it is in hours"). Fix that worked: put the exact line in quotes in the prompt + "says the
+  line exactly once, every word once" + clip = line + ~1.5 s. Check with `chk.py` (unprompted Whisper, flags repeats and words with
+  probability < 0.5) — prompting Whisper with the expected line hides real errors. A "smartphone" insert was rejected as copyright →
+  "plain unbranded black mobile phone". Chat bubbles are drawn in code (no AI text).
