@@ -1,6 +1,7 @@
 # Prophet Dawud (peace be upon him) — publishing texts (21 Nov 2026)
 Rules as in musa-part4.md (Instagram ≤5 hashtags; TikTok 3–5 + AI label; YouTube first 3 hashtags shown).
-Video 1:41: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/1c260b9a-9516-4848-af8d-02d2bd12fc0a.mp4
+Video 1:41: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/11f42a74-8bb5-4e6d-8ab1-90aa4717197d.mp4
+(v2, 23 Nov: Arabic 34:10 re-rendered with Scheherazade New — the v1 link 1c260b9a-9516-4848-af8d-02d2bd12fc0a.mp4 had misplaced harakat; do not use v1)
 Cover: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/6ab98734-2d17-4507-8850-113e856b297e.jpg
 
 ## YouTube Shorts

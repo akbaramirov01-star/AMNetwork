@@ -1,0 +1,13 @@
+{"order": ["01","02","03","04","05","06","07","08","09","10","11","12"],
+ "dialog": ["01","02","04","08","10","11","12"], "estab": ["03"], "estab_cap": 3.2,
+ "fadeblack_into": ["05","08","09","10"],
+ "hook": {"01": [0.0, 3.6, "WAIT!\nDON'T STEP!"]},
+ "st": {"05": 0.5, "06": 0.5, "07": 0.5, "09": 0.6},
+ "plate": {"04": "Quran · An-Naml 27:15–16", "05": "Quran · Saba 34:12 · Al-Anbiya 21:81 · An-Naml 27:16",
+           "06": "Quran · An-Naml 27:17", "07": "Quran · An-Naml 27:18", "09": "Quran · An-Naml 27:19"},
+ "arabic": {"09": ["رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ|ٱلَّتِىٓ أَنْعَمْتَ عَلَىَّ وَعَلَىٰ وَٰلِدَىَّ", "\"My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents.\" Quran 27:19"]},
+ "card": {"dur": 3.2, "lines": [["MY LORD,\nMAKE ME GRATEFUL.", 60, [236,196,96], 24], ["Next: Prophets Zakariya", 40, [245,245,238], 4],
+   ["& Yahya (peace be upon them)", 30, [245,245,238], 56], ["Prophet Sulayman (peace be upon him)", 24, [245,245,238], 14],
+   ["Sources: Quran 27:15–19, 34:12, 21:81", 24, [245,245,238], 14],
+   ["Retelling, not a fatwa · AI-animated", 24, [200,200,195], 14], ["Stories of the Prophets · AM Academy", 24, [200,200,195], 0]]},
+ "out": "SULAYMAN.mp4"}

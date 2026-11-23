@@ -1,6 +1,6 @@
 # AM Academy — production plan (23 Nov – ~30 Nov 2026)
 
-Budget: **1363 credits** on 23 Nov (Higgsfield MAX), reset expected ~30 Nov (date not confirmed by the API — check higgsfield.ai → Billing).
+Budget: **1232.85 credits** after Sulayman (23 Nov; was 1363) (Higgsfield MAX), reset expected ~30 Nov (date not confirmed by the API — check higgsfield.ai → Billing).
 Rule: the founder says "go" → one video is produced end-to-end (script → voices → clips → QA → upload → texts → QUEUE.md).
 Every source below was checked on 23 Nov 2026 against api.quran.com (Sahih International) or fawazahmed0/hadith-api (eng-bukhari),
 except items marked **[verify]**. Sahih Muslim numbers in that dataset do NOT match sunnah.com — always re-check Muslim numbers.
@@ -9,7 +9,7 @@ except items marked **[verify]**. Sahih Muslim numbers in that dataset do NOT ma
 
 | # | Shoot | Title | Format | Length | Est. credits | Status |
 |---|---|---|---|---|---|---|
-| 1 | 23 Nov | Prophet Sulayman (pbuh) — "The ant who saved her valley" | Stories of the Prophets | ~1:40 | ~100 | **in production** |
+| 1 | 23 Nov | Prophet Sulayman (pbuh) — "The ant who saved her valley" | Stories of the Prophets | 1:28 | 130 (spent) | **done 23 Nov** |
 | 2 | next "go" | Signs Before the Hour #1 — "Tall buildings" | Signs Before the Hour | ~0:45 | ~50 | script ready |
 | 3 | | Prophets Zakariya & Yahya (pbut) — "A son, when he was old?!" | Stories of the Prophets | ~1:45 | ~130 | script ready |
 | 4 | | Family Dua Moments #1 — "Exam fear" | Family Dua Moments | ~0:35 | ~40 | script ready |
@@ -31,7 +31,7 @@ Credits estimate = clip seconds × 1 cr + voices + ~25 % reshoots (measured on 2
 
 ## Scripts
 
-### 1. Prophet Sulayman (pbuh) — in production
+### 1. Prophet Sulayman (pbuh) — done 23 Nov (`publish/sulayman.md`)
 Location: backyard garden, afternoon. Cast: Yusuf, Maryam, Grandma Amina.
 Hook "WAIT! DON'T STEP!" — Yusuf wants to step on ants → Maryam: one ant once saved her valley → Amina: the army of Sulayman, son of Dawud →
 wind and language of birds (34:12, 21:81, 27:16) → soldiers of jinn, men and birds (27:17) → the ant's warning (27:18) →

@@ -131,3 +131,11 @@ The working files of that chat (`claude/season2-plan.md`, `claude/publish-pack-1
   "said, said" in a dialogue clip. seed_audio flagged "O mountains, repeat praises with him, and the birds as well" as nsfw → narrated
   as "the mountains and the birds glorified Allah together with him" (38:18–19).
 - Whisper spells the salawat "Sallallahu Alaihi Wasallam"; build/chk now normalise all spellings before comparing.
+
+## Prophet Sulayman (peace be upon him) — done 23 Nov 2026
+- Video 1:28: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/53546c32-8898-4326-a967-0f10b926c13f.mp4 · texts `publish/sulayman.md` · builder `tools/sulayman/`
+- 27:15–19 (inherited Dawud, language of birds, army of jinn/men/birds, the ant, dua of gratitude 27:19 as Arabic text), 34:12, 21:81 (wind).
+  Family frame: backyard garden, Yusuf about to step on ants. Hook "WAIT! DON'T STEP!". Card "MY LORD, MAKE ME GRATEFUL. · Next: Zakariya & Yahya".
+- Cost 130.2 cr (1363 → 1232.85). Reshoot: "ants, ants". seed_audio flagged "That army belonged to Sulayman… son of Dawud" → "It was the army of Sulayman… His father was Dawud…".
+- **Arabic text fix (also applied to Dawud → v2):** PIL/raqm with Amiri (fontsource subset and google AmiriQuran) misplaced harakat.
+  Now `ar.js` renders the Arabic overlay in Chromium (Playwright) with **Scheherazade New 700** (fontsource), fonts embedded as data URIs.

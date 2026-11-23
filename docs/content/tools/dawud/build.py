@@ -49,18 +49,10 @@ def overlay_png(path, kind, text):
             w = d.textlength(ln, font=f); x = (W - w) / 2
             d.rectangle([x - 18, y - 8, x + w + 18, y + sz + 16], fill=(0, 0, 0, 215)); d.text((x, y), ln, font=f, fill=(255, 214, 60, 255)); y += sz + 26
     elif kind == "arabic":
-        ar, tr = text; fa = ImageFont.truetype(FA, 64, layout_engine=ImageFont.Layout.RAQM)
-        w = d.textlength(ar, font=fa, direction="rtl", language="ar"); x = (W - w) / 2; y = 300
-        d.rounded_rectangle([40, y - 30, W - 40, y + 250], 24, fill=(0, 0, 0, 175))
-        d.text((x, y), ar, font=fa, fill=(240, 200, 100, 255), direction="rtl", language="ar")
-        ft = ImageFont.truetype(F, 28); lines, cur = [], ""
-        for wd in tr.split():
-            t = (cur + " " + wd).strip()
-            if d.textlength(t, font=ft) > W - 140: lines.append(cur); cur = wd
-            else: cur = t
-        lines.append(cur); y += 120
-        for ln in lines:
-            w = d.textlength(ln, font=ft); d.text(((W - w) / 2, y), ln, font=ft, fill=(245, 245, 238, 255)); y += 40
+        ar, tr = text  # Chromium + Scheherazade New shape Quranic marks correctly; PIL/raqm + Amiri misplaced them
+        r = subprocess.run(["node", "ar.js", path, ar, tr], capture_output=True, text=True, env=dict(os.environ, NODE_PATH=subprocess.run("npm root -g", shell=True, capture_output=True, text=True).stdout.strip()))
+        if r.returncode: raise SystemExit("ARABIC RENDER: " + r.stderr[-800:])
+        return
     else:
         f = ImageFont.truetype(F, 26); w = d.textlength(text, font=f); x = (W - w) / 2; y = 1140
         d.rounded_rectangle([x - 16, y - 10, x + w + 16, y + 40], 14, fill=(0, 0, 0, 170)); d.text((x, y), text, font=f, fill=(236, 200, 110, 255))
