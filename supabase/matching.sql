@@ -33,6 +33,10 @@ alter table public.applications add  constraint applications_currency_check chec
 alter table public.applications drop constraint if exists applications_monthly_income_check;
 alter table public.applications add  constraint applications_monthly_income_check check (monthly_income >= 0 and monthly_income < 100000000);
 
+-- Payouts in any currency too.
+alter table public.payouts drop constraint if exists payouts_currency_check;
+alter table public.payouts add  constraint payouts_currency_check check (currency ~ '^[A-Z]{3}$');
+
 -- Non-admins cannot set the review, the listing or the source themselves.
 create or replace function public.amn_app_guard() returns trigger
 language plpgsql security definer set search_path = public as $$
