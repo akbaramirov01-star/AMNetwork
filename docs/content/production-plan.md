@@ -1,6 +1,6 @@
 # AM Academy — production plan (23 Nov – ~30 Nov 2026)
 
-Budget: **1232.85 credits** after Sulayman (23 Nov; was 1363) (Higgsfield MAX), reset expected ~30 Nov (date not confirmed by the API — check higgsfield.ai → Billing).
+Budget: **1174.35 credits** after Signs #1 (23 Nov) (Higgsfield MAX), reset expected ~30 Nov (date not confirmed by the API — check higgsfield.ai → Billing).
 Rule: the founder says "go" → one video is produced end-to-end (script → voices → clips → QA → upload → texts → QUEUE.md).
 Every source below was checked on 23 Nov 2026 against api.quran.com (Sahih International) or fawazahmed0/hadith-api (eng-bukhari),
 except items marked **[verify]**. Sahih Muslim numbers in that dataset do NOT match sunnah.com — always re-check Muslim numbers.
@@ -10,7 +10,7 @@ except items marked **[verify]**. Sahih Muslim numbers in that dataset do NOT ma
 | # | Shoot | Title | Format | Length | Est. credits | Status |
 |---|---|---|---|---|---|---|
 | 1 | 23 Nov | Prophet Sulayman (pbuh) — "The ant who saved her valley" | Stories of the Prophets | 1:28 | 130 (spent) | **done 23 Nov** |
-| 2 | next "go" | Signs Before the Hour #1 — "Tall buildings" | Signs Before the Hour | ~0:45 | ~50 | script ready |
+| 2 | 23 Nov | Signs of the Last Day #1 — "Tall buildings" | Signs of the Last Day | 0:52 | 58.5 (spent) | **done 23 Nov** |
 | 3 | | Prophets Zakariya & Yahya (pbut) — "A son, when he was old?!" | Stories of the Prophets | ~1:45 | ~130 | script ready |
 | 4 | | Family Dua Moments #1 — "Exam fear" | Family Dua Moments | ~0:35 | ~40 | script ready |
 | 5 | | What Would You Do? #3 — "They insulted my brother" | What Would You Do? | ~0:35 | ~60 | script ready (after pilot metrics) |
@@ -23,6 +23,7 @@ except items marked **[verify]**. Sahih Muslim numbers in that dataset do NOT ma
 Credits estimate = clip seconds × 1 cr + voices + ~25 % reshoots (measured on 21 Nov: episode 136 cr, two shorts 142 cr).
 
 ## Format rules (all videos)
+- **Burned-in word-by-word captions on every video** (`caption.py`, text from the script, timing from Whisper, current word gold). Playlists/numbering: `playlists.md`.
 - First second: question or conflict on screen. New shot or new information every 2–3 s. Payoff only in the last 3 s.
 - Fixed cast: Yusuf (11), Maryam (14), Mom Khadija, Dad Hamza, Grandma Amina, Uncle Idris. Lips = voice (native lip-sync only).
 - Never show prophets, angels, jinn, Iblis, Dajjal; story scenes have no people. No crosses, poles, symbols. "Peace be upon him" after every prophet name.

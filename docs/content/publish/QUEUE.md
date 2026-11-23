@@ -7,14 +7,17 @@ Texts for each video: the file in the "Texts" column (all in `docs/content/publi
 | Date | Video | Platforms |
 |---|---|---|
 | 22 Nov 2026 | Musa part 5 (final) | YouTube, TikTok, Instagram (founder) |
+| 23 Nov 2026 | Prophet Dawud (pbuh) v2 | founder |
 
 ## Ready to publish — in this order
 | # | Planned date | Video | Length | Link | Texts |
 |---|---|---|---|---|---|
-| 1 | 23 Nov | Prophet Dawud (peace be upon him) — **v2** (fixed Arabic); Musa 5 ends with "Next: Dawud" | 1:41 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/11f42a74-8bb5-4e6d-8ab1-90aa4717197d.mp4 | dawud.md |
-| 2 | 24 Nov | What Would You Do? #1 — The wallet | 0:38 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/5a877545-fee4-4ac4-b5f3-511debd6f25d.mp4 | what-would-you-do-1-2.md |
-| 3 | 25 Nov | Prophet Sulayman (peace be upon him) — the ant | 1:28 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/53546c32-8898-4326-a967-0f10b926c13f.mp4 | sulayman.md |
-| 4 | 26 Nov | What Would You Do? #2 — Copy my homework | 0:30 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/cb911d64-b9a4-4f2d-b63d-c74f282765f3.mp4 | what-would-you-do-1-2.md |
+| 1 | 24 Nov | What Would You Do? #1 — The wallet | 0:38 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/ef136701-3c12-4f38-9b6c-3f6f79501a86.mp4 | what-would-you-do-1-2.md |
+| 2 | 25 Nov | Prophet Sulayman (peace be upon him) — the ant | 1:28 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f593034d-6e58-40f9-8c38-8e70ab38eca8.mp4 | sulayman.md |
+| 3 | 26 Nov | What Would You Do? #2 — Copy my homework | 0:30 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/c78d5447-24da-4a10-aa76-05969c3eddf8.mp4 | what-would-you-do-1-2.md |
+| 4 | 27 Nov | Signs of the Last Day #1 — Tall buildings | 0:52 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/2f44b5bd-54a5-4a0f-bfd3-ba227061cf2e.mp4 | signs-1.md |
+
+All links above are the **captioned** versions (word-by-word subtitles burned in, 23 Nov). Playlists and title numbering: `docs/content/playlists.md`.
 
 (New videos are added below as they are made; dates are shifted so formats alternate and a prophet episode comes every 2–3 days.)
 

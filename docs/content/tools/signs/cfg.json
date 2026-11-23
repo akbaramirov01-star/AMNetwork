@@ -1,0 +1,11 @@
+{"order": ["01","08","02","03","04","05","06","07"],
+ "dialog": ["01","02","05","06","07"], "estab": ["08"], "estab_cap": 2.6,
+ "fadeblack_into": ["03","05"],
+ "hook": {"01": [0.0, 3.4, "WHEN WILL THE\nLAST DAY COME?"]},
+ "st": {"03": 0.4, "04": 0.4},
+ "plate": {"02": "Quran · Luqman 31:34", "03": "Sahih al-Bukhari 50", "04": "Sahih al-Bukhari 50", "06": "Sahih al-Bukhari 50"},
+ "card": {"dur": 2.8, "lines": [["BE READY,\nNOT SCARED.", 64, [236,196,96], 30], ["Signs Before the Hour · #1", 34, [245,245,238], 50],
+   ["Next: every prophet warned", 30, [245,245,238], 4], ["about him…", 30, [245,245,238], 56],
+   ["Sources: Sahih al-Bukhari 50 · Quran 31:34", 22, [245,245,238], 14],
+   ["Not a fatwa · AI-animated", 24, [200,200,195], 14], ["AM Academy", 24, [200,200,195], 0]]},
+ "out": "SIGNS1_raw.mp4"}
