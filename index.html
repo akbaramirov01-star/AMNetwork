@@ -9,10 +9,10 @@
 <meta name="apple-mobile-web-app-title" content="AM Network">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
-<title>AM Network — Verified, transparent Zakat &amp; Sadaqah</title>
+<title>AM Network — Zakat that finds the person it is due to</title>
 <!-- OG Tags -->
-<meta property="og:title" content="AM Network — Verified, transparent Zakat &amp; Sadaqah">
-<meta property="og:description" content="AM Network is a verification and transparency service for Zakat and Sadaqah: we check each family in person, publish an open, tamper-evident report of every payout and never hold the money — the donor gives directly to the family.">
+<meta property="og:title" content="AM Network — Zakat that finds the person it is due to">
+<meta property="og:description" content="AM Network connects people in need with those who give Zakat and Sadaqah — donors and charities in any country. AI reviews each request and suggests the Zakat category and what to check; the giver verifies and helps directly. Money never passes through us.">
 <meta property="og:image" content="https://amnetwork.io/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -20,8 +20,8 @@
 <meta property="og:url" content="https://amnetwork.io/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AM Network — Verified, transparent Zakat &amp; Sadaqah">
-<meta name="twitter:description" content="We check each family in person, publish an open report of every payout and never hold the money — the donor gives directly to the family.">
+<meta name="twitter:title" content="AM Network — Zakat that finds the person it is due to">
+<meta name="twitter:description" content="AM Network connects people in need with those who give Zakat and Sadaqah — donors and charities in any country. AI reviews each request and suggests the Zakat category and what to check; the giver verifies and helps directly. Money never passes through us.">
 <!-- Google Analytics -->
 
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.web3forms.com https://script.google.com https://script.googleusercontent.com https://*.hcaptcha.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://api.worldbank.org https://amnetwork.onrender.com https://api.quran.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-src https://*.hcaptcha.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.hcaptcha.com; object-src 'none'">
@@ -40,7 +40,7 @@ if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{ana
 <meta name="theme-color" content="#C9A84C">
 
 <!-- PWA / SEO -->
-<meta name="description" content="AM Network is a verification and transparency service for Zakat and Sadaqah: we check each family in person, publish an open, tamper-evident report of every payout and never hold the money — the donor gives directly to the family. Free Islamic tools in 10 languages.">
+<meta name="description" content="AM Network connects people in need with those who give Zakat and Sadaqah — donors and charities in any country. AI reviews each request and suggests the Zakat category and what to check; the giver verifies and helps directly. Money never passes through us. Free Islamic tools in 10 languages.">
 <meta name="keywords" content="Zakat, Sadaqah, verification, transparency, Islamic tools, Quran, prayer times, Zakat calculator, Dushanbe, AM Network">
 <meta name="author" content="Akbar Amirzoda">
 <meta property="og:site_name" content="AM Network">
@@ -58,7 +58,7 @@ if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{ana
     "width": 512,
     "height": 512
   },
-  "description": "AM Network is a verification and transparency service for Zakat and Sadaqah: we check each family in person, publish an open, tamper-evident report of every payout and never hold the money — the donor gives directly to the family.",
+  "description": "AM Network connects people in need with those who give Zakat and Sadaqah — donors and charities in any country. AI reviews each request and suggests the Zakat category and what to check; the giver verifies and helps directly. Money never passes through us.",
   "founder": {
     "@type": "Person",
     "name": "Akbar Amirzoda"
@@ -846,6 +846,17 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .ex-hash code{font:12.5px ui-monospace,Menlo,monospace;color:var(--text2);background:var(--input-bg);padding:3px 8px;border-radius:6px}
 .ex-chain{font-size:12.5px;color:var(--text3);margin-top:8px;line-height:1.5}
 .how-cta{margin-top:22px}
+.steps.steps3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.steps.steps3{grid-template-columns:1fr}}
+.st-cols.st-cols3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:820px){.st-cols.st-cols3{grid-template-columns:1fr}}
+.how-note{font-size:14px;color:var(--text2);margin:16px 0 0;max-width:720px;line-height:1.6}
+.ex-need{font:700 24px/1.25 'Cormorant Garamond',serif;color:var(--gold2);margin:8px 0 10px}
+.ex-tags .ex-unv{background:rgba(255,170,80,.12);border-color:rgba(255,170,80,.4);color:#F2B36B}
+[data-theme="light"] .ex-tags .ex-unv{color:#9A5A12}
+.ex-ai{border-top:1px dashed var(--border);padding-top:10px;font-size:13.5px;color:var(--text2);line-height:1.55}
+.ex-ai b{display:block;color:var(--text);font-weight:600;margin-bottom:4px}
+.ex-ai ul{margin:4px 0 0;padding-inline-start:18px}
 .step .sbadge{justify-self:start;width:auto;margin-top:10px}
 .st-cols{gap:12px;border-top:0}
 .st-col,.st-col+.st-col{padding:18px 18px 10px;border:1px solid var(--border);border-radius:16px;background:var(--card);border-left:1px solid var(--border)}
@@ -962,7 +973,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <p class="hero-sub" data-t="hero_sub">A verification and transparency service for Zakat and Sadaqah: we check each family in person, publish an open, tamper-evident report of every payout, and never hold the money — the donor gives directly to the family.</p>
 
   <div class="hero-cta">
-    <a class="hbtn hbtn-gold" href="#waitlist" data-t="how_cta_give">I want to give Zakat</a>
+    <a class="hbtn hbtn-gold" href="#waitlist" data-t="how_cta_give">I want to help</a>
     <a class="hbtn hbtn-ghost" href="/apply/" data-t="how_cta_help">I need help — apply</a>
   </div>
   <a class="hero-calc" href="/zakat/"><span data-t="start_calc">Calculate Zakat</span> <span class="arr" aria-hidden="true">→</span></a>
@@ -998,26 +1009,27 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <section class="section" id="how">
   <h2 class="sec-title" data-t="how_title">Checked in person. Given directly. Recorded openly.</h2>
   <p class="sec-body" data-t="how_body">Five steps — from a family's application to an open record of the payout.</p>
-  <div class="steps">
+  <div class="steps steps3">
     <div class="steps-flow" aria-hidden="true"></div>
-    <div class="step reveal" style="--i:0"><span class="step-num">01</span><div class="step-icon"><img src="/icons/ui/s1.webp?v=2" alt="" width="56" height="56" loading="lazy"></div><h3 data-t="s1_h">A family applies</h3><p data-t="s1_p">A family fills in a short application — or a verifier brings in a family they know.</p><span class="sbadge sm" data-t="step_badge_1">Application</span></div>
-    <div class="step reveal" style="--i:1"><span class="step-num">02</span><div class="step-icon"><img src="/icons/ui/s2.webp?v=2" alt="" width="56" height="56" loading="lazy"></div><h3 data-t="s2_h">A visit in person</h3><p data-t="s2_p">A trained AM Network volunteer visits the family and fills in a checklist. Whoever brought the family never verifies it.</p><span class="sbadge sg" data-t="step_badge_2">In-person check</span></div>
-    <div class="step reveal" style="--i:2"><span class="step-num">03</span><div class="step-icon"><img src="/icons/ui/s3.webp?v=2" alt="" width="56" height="56" loading="lazy"></div><h3 data-t="s3_h">Approval after the visit</h3><p data-t="s3_p">The admin approves help only after the in-person check. The need checklist shows its points openly; it is a hint — a person decides.</p><span class="sbadge se" data-t="step_badge_3">A person decides</span></div>
-    <div class="step reveal" style="--i:3"><span class="step-num">04</span><div class="step-icon"><img src="/icons/ui/s4.webp?v=2" alt="" width="56" height="56" loading="lazy"></div><h3 data-t="s4_h">Directly to the family</h3><p data-t="s4_p">The donor gives the Zakat or Sadaqah to the family directly — cash, Alif, Korti Milli or a bank transfer. The money never passes through AM Network. Later: also through a registered partner charity.</p><span class="sbadge sg" data-t="step_badge_4">100% to the family</span></div>
-    <div class="step reveal" style="--i:4"><span class="step-num">05</span><div class="step-icon"><img src="/icons/ui/s5.webp?v=2" alt="" width="56" height="56" loading="lazy"></div><h3 data-t="s5_h">An open record</h3><p data-t="s5_p">The payout goes into the open report: amount, date, city or district, situation category and number of checks — no names, phones or addresses. Each entry carries a SHA-256 fingerprint linked to the previous one, so any quiet change breaks the chain. The report is in preparation for the pilot.</p><span class="sbadge sm" data-t="step_badge_5">SHA-256 chain</span></div>
+    <div class="step reveal" style="--i:0"><span class="step-num">01</span><div class="step-icon"><img src="/icons/ui/s1.webp?v=2" alt="" width="56" height="56" loading="lazy"></div><h3 data-t="s1_h">Request</h3><p data-t="s1_p">Anyone, in any country, describes their situation in their own language.</p><span class="sbadge sm" data-t="step_badge_1">Any country, any language</span></div>
+    <div class="step reveal" style="--i:1"><span class="step-num">02</span><div class="step-icon"><img src="/icons/ui/s5.webp?v=2" alt="" width="56" height="56" loading="lazy"></div><h3 data-t="s2_h">AI review</h3><p data-t="s2_p">AI suggests which of the 8 Zakat categories (9:60) the request may fit and what to check. A hint, not a fatwa.</p><span class="sbadge se" data-t="step_badge_2">A hint, not a fatwa</span></div>
+    <div class="step reveal" style="--i:2"><span class="step-num">03</span><div class="step-icon"><img src="/icons/ui/s4.webp?v=2" alt="" width="56" height="56" loading="lazy"></div><h3 data-t="s3_h">Direct help</h3><p data-t="s3_p">A charity or donor verifies the request themselves and helps directly. The money never passes through AM Network.</p><span class="sbadge sg" data-t="step_badge_3">100% to the recipient</span></div>
   </div>
+  <p class="how-note" data-t="how_note">Every request is labelled "Not verified by AM Network".</p>
   <figure class="ex-rec" aria-labelledby="exT">
-    <figcaption><b id="exT" data-t="ex_title">What a record in the open report looks like</b><span data-t="ex_note">Example. Real records will appear during the pilot.</span></figcaption>
+    <figcaption><b id="exT" data-t="ex_title">What a giver sees</b><span data-t="ex_note">Example. Name, phone and address are hidden.</span></figcaption>
     <div class="ex-card">
-      <div class="ex-top"><span class="ex-num" dir="ltr">#12 · 2027-03-14</span><span class="ex-ok">✓ <span data-t="ex_noname">No name, phone or address</span></span></div>
-      <div class="ex-amt" dir="ltr">1 500 TJS <small data-t="ex_kind">Zakat</small></div>
-      <div class="ex-tags"><span data-t="ex_region">Dushanbe</span><span data-t="ex_cat">Widow with children</span><span data-t="ex_checks">In-person checks: 2</span><span data-t="ex_receipt">Receipt: fingerprint kept</span></div>
-      <div class="ex-hash"><span data-t="ex_hash">Record fingerprint</span><code dir="ltr">3f9a7c…e21b04</code></div>
-      <p class="ex-chain" data-t="ex_chain">Linked to the previous record — any quiet change breaks the chain.</p>
+      <div class="ex-top"><span class="ex-num" dir="ltr">AMN-2026-0012</span><span class="ex-ok">✓ <span data-t="ex_noname">No name, phone or address</span></span></div>
+      <div class="ex-need" data-t="ex_need">Needs: about 1,500 somoni for 3 months</div>
+      <div class="ex-tags"><span data-t="ex_region">Dushanbe</span><span data-t="ex_cat">Widow with children</span><span class="ex-unv" data-t="ex_unv">Not verified by AM Network</span></div>
+      <div class="ex-ai"><b data-t="ex_ai">AI: may fall under "the poor" (al-fuqara, 9:60)</b>
+        <span data-t="ex_chk_h">AI suggests checking:</span>
+        <ul><li data-t="ex_chk1">The spouse's death certificate</li><li data-t="ex_chk2">A statement of income or pension</li><li data-t="ex_chk3">That there is no wealth above nisab</li></ul></div>
+      <p class="ex-chain" data-t="ex_foot">An AI hint, not a fatwa. The giver verifies and decides.</p>
     </div>
   </figure>
   <div class="how-cta">
-    <a class="hbtn hbtn-gold" href="#waitlist" data-t="how_cta_give">I want to give Zakat</a>
+    <a class="hbtn hbtn-gold" href="#waitlist" data-t="how_cta_give">I want to help</a>
     <a class="hbtn hbtn-ghost" href="/apply/" data-t="how_cta_help">I need help — apply</a>
   </div>
 </section>
@@ -1039,7 +1051,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- STATUS -->
 <section class="section st" id="trust">
   <h2 class="sec-title" data-t="st_title">What works today, and what comes next.</h2>
-  <div class="st-cols">
+  <div class="st-cols st-cols3">
     <div class="st-col st-live">
       <h3><i></i><span data-t="status_live">Ready now</span></h3>
       <ul>
@@ -1047,32 +1059,23 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         <li><a href="/academy/" data-t="nav_academy">AM Academy</a></li>
         <li><a href="/zakat/" data-t="nav_calc">Zakat Calculator</a></li>
         <li><a href="/apply/" data-t="nav_help">Apply for Assistance</a></li>
-        <li data-t="st_i_cabinet">Cabinet for families, verifiers and donors, and the open report — built, being prepared for the pilot</li>
+        <li><a href="/cabinet/" data-t="st_i_cabinet">Cabinet for applicants and givers</a></li>
       </ul>
     </div>
     <div class="st-col st-build">
-      <h3><i></i><span data-t="status_build">Next · Dec 2026 – Jan 2027</span></h3>
+      <h3><i></i><span data-t="status_build">Next · December 2026</span></h3>
       <ul>
-        <li data-t="st_i_legal">Consultation with a Tajik lawyer</li>
-        <li data-t="st_i_sharia">Review by a Hanafi scholar</li>
-        <li data-t="st_i_verifier">Training volunteer verifiers</li>
-        <li data-t="st_i_trial">Trial run with 2–3 families</li>
-      </ul>
-    </div>
-    <div class="st-col st-pilot">
-      <h3><i></i><span data-t="st_after">Pilot · Ramadan 2027</span></h3>
-      <ul>
-        <li data-t="st_i_pilot">10–20 families in Dushanbe</li>
-        <li data-t="st_i_own">The founder's own and relatives' Zakat</li>
-        <li data-t="st_i_report">Public report of every payout</li>
+        <li data-t="st_i_own">AI review of requests in 10 languages</li>
+        <li data-t="st_i_trial">Apps on the App Store and Google Play</li>
+        <li data-t="st_i_pilot">Bringing in charities from different countries</li>
       </ul>
     </div>
     <div class="st-col st-after">
-      <h3><i></i><span data-t="st_afterpilot">After the pilot</span></h3>
+      <h3><i></i><span data-t="st_after">Later — once we have income</span></h3>
       <ul>
-        <li data-t="st_i_results">Publish the results</li>
-        <li data-t="st_i_partners">Work with a registered partner charity</li>
-        <li data-t="st_i_cities">More cities — only if the pilot works</li>
+        <li data-t="st_i_verifier">Our own verifiers and a "Recommended by the AM Network team" mark</li>
+        <li data-t="st_i_sharia">Review of the model by a Hanafi scholar</li>
+        <li data-t="st_i_legal">Registering the organisation</li>
       </ul>
     </div>
   </div>
@@ -1318,7 +1321,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=63166c822d"></script>
+<script src="/i18n-data.js?v=b155bc8c41"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)
