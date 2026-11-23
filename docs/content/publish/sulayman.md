@@ -1,6 +1,6 @@
 # Prophet Sulayman (peace be upon him) — publishing texts (23 Nov 2026)
 Rules as in musa-part4.md (Instagram ≤5 hashtags; TikTok 3–5 + AI label; YouTube first 3 hashtags shown).
-Video 1:28 (captioned): https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f593034d-6e58-40f9-8c38-8e70ab38eca8.mp4
+Video 1:28 (captioned): https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f4edcf89-ceb8-4f70-a58a-ce383f79bde1.mp4
 Cover: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/e9f8303a-8e79-4996-a3e5-56e392cbb32e.jpg
 
 ## YouTube Shorts

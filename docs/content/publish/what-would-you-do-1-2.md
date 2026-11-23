@@ -1,7 +1,7 @@
 # «What would you do?» pilots 1–2 — publishing texts (21 Nov 2026)
 Rules as in musa-part4.md (Instagram ≤5 hashtags; TikTok 3–5 + AI label; YouTube first 3 hashtags shown).
-Videos: WY1 (captioned) https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/ef136701-3c12-4f38-9b6c-3f6f79501a86.mp4 (38.5 s)
-WY2 (captioned) https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/c78d5447-24da-4a10-aa76-05969c3eddf8.mp4 (29.9 s)
+Videos: WY1 (captioned) https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/c11e08de-47d6-4a0b-9c43-818e34a9ee11.mp4 (38.5 s)
+WY2 (captioned) https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/80f3d4b9-a8ea-46d3-87d3-daf58d9d4e9d.mp4 (29.9 s)
 Playlist (new): "What Would You Do?". Post WY1 and WY2 on different days, 20:00 Berlin. Judge after 72 h: average view %, % viewed past the A/B freeze, number of A/B comments.
 
 ## 1 — The wallet

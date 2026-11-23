@@ -1,6 +1,6 @@
 # Signs of the Last Day — Minor Sign #1 "Tall buildings" — publishing texts (23 Nov 2026)
 Rules as in musa-part4.md (Instagram ≤5 hashtags; TikTok 3–5 + AI label; YouTube first 3 hashtags shown).
-Video 0:52 (burned-in captions): https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/2f44b5bd-54a5-4a0f-bfd3-ba227061cf2e.mp4
+Video 0:52 (burned-in captions): https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/aa58c7c6-4c0f-4eed-b290-61780ad9773e.mp4
 Cover: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/3b181362-8d68-4795-9373-6cf9fca21647.jpg
 
 ## YouTube Shorts

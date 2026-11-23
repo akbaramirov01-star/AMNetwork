@@ -141,10 +141,14 @@ The working files of that chat (`claude/season2-plan.md`, `claude/publish-pack-1
   Now `ar.js` renders the Arabic overlay in Chromium (Playwright) with **Scheherazade New 700** (fontsource), fonts embedded as data URIs.
 
 ## Signs of the Last Day #1 "Tall buildings" — done 23 Nov 2026 (new playlist)
-- Video 0:52 with captions: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/2f44b5bd-54a5-4a0f-bfd3-ba227061cf2e.mp4 · texts `publish/signs-1.md` · builder `tools/signs/`
+- Video 0:52 with captions: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/aa58c7c6-4c0f-4eed-b290-61780ad9773e.mp4 · texts `publish/signs-1.md` · builder `tools/signs/`
 - Bukhari 50 (shepherds of black camels competing in higher buildings; ihsan), Quran 31:34. Rooftop terrace at dusk. Cost 58.5 cr.
 - **New: burned-in word-by-word captions** (`caption.py`, libass, Montserrat, current word gold, text from expect.json so spelling is right).
   Added also to Sulayman, WY1, WY2 (new links in QUEUE.md). Bug fixed on the way: uppercasing the whole line also uppercased the ASS
   `\c` colour tags → no highlight; uppercase only the words.
 - Playlist structure and numbering: `docs/content/playlists.md` (Stories of the Prophets #1–#18; Signs of the Last Day: Minor Sign #N, then
   10 Major Signs — Sahih Muslim book 54 hadith 51 in-book reference, verified in hadith-api eng-muslim #7285).
+- **Captions v2 (same day, founder: "overlap, wrong timing"):** v1 transcribed each segment window separately; windows overlap at
+  crossfades, so words were timed twice, and each phrase was held 0.25 s past its end into the next one (20 overlaps of 89 in Signs #1).
+  v2: one Whisper pass over the whole video, global alignment to the script, monotonic word times clamped to their segment,
+  phrases ≤3 words never crossing segments, and a self-check that fails the build on any overlap. All 4 queued videos re-captioned.

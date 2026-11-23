@@ -12,12 +12,12 @@ Texts for each video: the file in the "Texts" column (all in `docs/content/publi
 ## Ready to publish — in this order
 | # | Planned date | Video | Length | Link | Texts |
 |---|---|---|---|---|---|
-| 1 | 24 Nov | What Would You Do? #1 — The wallet | 0:38 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/ef136701-3c12-4f38-9b6c-3f6f79501a86.mp4 | what-would-you-do-1-2.md |
-| 2 | 25 Nov | Prophet Sulayman (peace be upon him) — the ant | 1:28 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f593034d-6e58-40f9-8c38-8e70ab38eca8.mp4 | sulayman.md |
-| 3 | 26 Nov | What Would You Do? #2 — Copy my homework | 0:30 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/c78d5447-24da-4a10-aa76-05969c3eddf8.mp4 | what-would-you-do-1-2.md |
-| 4 | 27 Nov | Signs of the Last Day #1 — Tall buildings | 0:52 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/2f44b5bd-54a5-4a0f-bfd3-ba227061cf2e.mp4 | signs-1.md |
+| 1 | 24 Nov | What Would You Do? #1 — The wallet | 0:38 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/c11e08de-47d6-4a0b-9c43-818e34a9ee11.mp4 | what-would-you-do-1-2.md |
+| 2 | 25 Nov | Prophet Sulayman (peace be upon him) — the ant | 1:28 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f4edcf89-ceb8-4f70-a58a-ce383f79bde1.mp4 | sulayman.md |
+| 3 | 26 Nov | What Would You Do? #2 — Copy my homework | 0:30 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/80f3d4b9-a8ea-46d3-87d3-daf58d9d4e9d.mp4 | what-would-you-do-1-2.md |
+| 4 | 27 Nov | Signs of the Last Day #1 — Tall buildings | 0:52 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/aa58c7c6-4c0f-4eed-b290-61780ad9773e.mp4 | signs-1.md |
 
-All links above are the **captioned** versions (word-by-word subtitles burned in, 23 Nov). Playlists and title numbering: `docs/content/playlists.md`.
+All links above are the **captioned v2** versions (23 Nov evening: one Whisper pass over the whole video, no overlapping lines — the earlier captioned links overlapped, do not use them). Playlists and title numbering: `docs/content/playlists.md`.
 
 (New videos are added below as they are made; dates are shifted so formats alternate and a prophet episode comes every 2–3 days.)
 
