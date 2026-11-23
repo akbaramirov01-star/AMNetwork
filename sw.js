@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v59-cabinet-nav';
+const CACHE = 'amnetwork-v60-icons';
 // Must match QURAN_OFFLINE_CACHE in quran/index.html byte-for-byte — that
 // page is the only writer of this bucket (a per-surah "save for offline"
 // button). It is user data (surahs someone explicitly chose to keep) and
