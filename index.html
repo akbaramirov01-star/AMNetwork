@@ -855,6 +855,12 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 @media (max-width:560px){.st-cols{grid-template-columns:1fr}}
 .pb-lbl b{unicode-bidi:isolate}
 [dir="rtl"] .hero-calc .arr{display:inline-block;transform:scaleX(-1)}
+.nav-ic{flex:none;vertical-align:-3px;margin-inline-end:6px;color:var(--gold)}
+.nav-demo,.nav-tools summary{display:inline-flex;align-items:center}
+.nav-cab{display:inline-flex;align-items:center;gap:0;min-height:44px;padding:0 14px;border:1px solid rgba(201,168,76,.55);border-radius:8px;color:var(--gold2);font:600 13px 'DM Sans',sans-serif;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.nav-cab:hover{background:var(--gold3);border-color:var(--gold)}
+@media(max-width:600px){.nav-cab span{display:none}.nav-cab{padding:0 12px}.nav-cab .nav-ic{margin:0}}
+@media(max-width:440px){#langName{display:none}#langBtn{padding:12px 10px!important;min-width:0!important;width:auto!important;gap:4px!important}#langBtn>span:last-child{margin-left:2px!important}.nav-right{gap:6px!important}}
 /* products: always visible, a bit livelier */
 .pcard{padding:26px}
 .pcard:hover{border-color:rgba(201,168,76,.5)}
@@ -891,11 +897,11 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
       </div>
     </div>
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme" data-t-aria="aria_theme">🌙</button>
-    <a class="nav-demo" href="/academy/">🎓 <span data-t="nav_academy">AM Academy</span></a>
-    <a class="nav-demo" href="/quran/">📖 <span data-t="nav_quran">The Holy Quran</span></a>
-    <a class="nav-demo" href="/zakat/">🧮 <span data-t="nav_calc">Zakat Calculator</span></a>
-    <a class="nav-demo nav-help" href="/apply/">🤲 <span data-t="nav_help">Apply for Assistance</span></a>
-    <details class="nav-tools" id="navToolsDetails"><summary>🧰 <span data-t="nav_tools">Tools</span><span class="chev">▾</span></summary><div class="nav-tools-menu">
+    <a class="nav-demo" href="/academy/"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg><span data-t="nav_academy">AM Academy</span></a>
+    <a class="nav-demo" href="/quran/"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg><span data-t="nav_quran">The Holy Quran</span></a>
+    <a class="nav-demo" href="/zakat/"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg><span data-t="nav_calc">Zakat Calculator</span></a>
+    <a class="nav-demo nav-help" href="/apply/"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21.2l8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg><span data-t="nav_help">Apply for Assistance</span></a>
+    <details class="nav-tools" id="navToolsDetails"><summary><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span data-t="nav_tools">Tools</span><span class="chev">▾</span></summary><div class="nav-tools-menu">
       <a href="/prayer-times/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-t="nav_prayertimes">Prayer Times</span></a>
       <a href="/qibla/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-t="nav_qibla">Qibla Direction</span></a>
       <a href="/tasbeeh/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="4" cy="12" r="2"/><circle cx="10" cy="7" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="20" cy="18" r="2.6"/></svg><span data-t="nav_tasbeeh">Count Your Dhikr</span></a>
@@ -924,6 +930,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
       <a href="/prayer-times/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-t="nav_prayertimes">Prayer Times</span></a>
       <a href="/apply/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span data-t="nav_help">Apply for Assistance</span></a>
     </div></details>
+    <a class="nav-cab" href="/cabinet/" aria-label="Cabinet" data-t-aria="nav_cabinet"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg><span data-t="nav_cabinet">Account</span></a>
     <a class="nav-cta" href="#waitlist" data-t="nav_cta">Join Waitlist</a>
   </div>
 </nav>
@@ -1207,6 +1214,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         <h4 data-t="footer_company">Company</h4>
         <ul>
           <li><a href="/team/" data-t="team_tag">The Team</a></li>
+          <li><a href="/cabinet/" data-t="nav_cabinet">Account</a></li>
           <li><a href="/roadmap/" data-t="road_tag">Roadmap</a></li>
           <li><a href="/faq/" data-t="faq_tag">FAQ</a></li>
           <li><a href="/why-zakat/" data-t="why_link">Why Zakat and Sadaqah matter</a></li>
@@ -1274,8 +1282,8 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 
 <script>
 </script>
-<script src="/faq-assistant.js"></script>
-<script src="/voice-assistant.js" defer></script>
+<script src="/faq-assistant.js?v=20261123"></script>
+<script src="/voice-assistant.js?v=20261123" defer></script>
 <div id="assistantPanel" role="dialog" aria-label="AM Network assistant">
   <div class="asst-head">
     <div class="asst-head-title"><span class="asst-head-logo"><img src="/icons/icon-192.png" alt="AM Network"></span><span class="asst-head-name" id="asstTitle">AI Assistant</span></div>
@@ -1296,7 +1304,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=21c24ea2e3"></script>
+<script src="/i18n-data.js?v=63166c822d"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)
