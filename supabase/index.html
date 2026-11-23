@@ -87,6 +87,24 @@ alter sequence public.app_ref_seq restart with 1;</textarea>
 <input id="ae" type="email" placeholder="почта, куда присылать уведомления" autocomplete="email" style="margin-top:8px">
 <button id="cs">Скопировать команду</button><div class="ok" id="os"></div>
 <p style="font-size:13px">Ключ хранится только в защищённом хранилище Supabase (Vault). После копирования очисти поле.</p>
+<h2>Платформа: заявки с сайта и разбор ИИ</h2>
+<p><b>А.</b> Скрипт платформы → SQL Editor → New query → вставить → Run. Данные он не удаляет.</p>
+<button id="cm">Скопировать скрипт платформы</button><div class="ok" id="om"></div>
+<textarea id="msql" readonly>Загрузка…</textarea>
+<p><b>Б.</b> Секрет — общий пароль между сайтом (Render) и базой. Он создаётся здесь, на телефоне, и никуда не отправляется.</p>
+<button id="gs">Создать секрет</button>
+<input id="sv" readonly placeholder="секрет появится здесь" style="margin-top:8px">
+<p>1) Команда для базы → SQL Editor → New query → вставить → Run:</p>
+<button id="css">Скопировать команду для базы</button><div class="ok" id="oss"></div>
+<p>2) Render → сервис <code>amnetwork</code> → Environment → Add Environment Variable. Добавь пять строк:</p>
+<ul style="line-height:1.9">
+<li><code>AMN_SVC_SECRET</code> = <button id="crs" style="min-height:32px;padding:0 10px">скопировать секрет</button> <span class="ok" id="ors"></span></li>
+<li><code>SUPABASE_URL</code> = <code>https://pziakammdazyytxubtrj.supabase.co</code></li>
+<li><code>SUPABASE_KEY</code> = <code>sb_publishable_RFk0C-Cm3mfgftfS7dygpw_XPpEBZaE</code></li>
+<li><code>AI_REVIEW_ENABLED</code> = <code>1</code></li>
+<li><code>ANTHROPIC_API_KEY</code> — уже должен быть; если нет, ключ из console.anthropic.com</li>
+</ul>
+<p>Потом <b>Save, rebuild and deploy</b>. Разбор одной заявки стоит примерно 1–3 цента; не больше 30 разборов в день (лимит хранится в базе).</p>
 </main>
 <script>
 const $=s=>document.querySelector(s);
@@ -102,6 +120,12 @@ fetch('/supabase/notify.sql',{cache:'no-store'}).then(r=>r.text()).then(t=>{$('#
 $('#cn').onclick=()=>copy($('#nsql').value,'#on');
 $('#cs').onclick=()=>{const k=$('#rk').value.trim().replace(/'/g,"''"),e=$('#ae').value.trim().replace(/'/g,"''");if(!k||!e){$('#os').textContent='Впиши ключ и почту';return}
 copy("delete from vault.secrets where name='resend_api_key';\nselect vault.create_secret('"+k+"','resend_api_key');\ninsert into public.amn_settings(key,value) values('admin_email','"+e+"') on conflict (key) do update set value=excluded.value;",'#os')};
+fetch('/supabase/matching.sql',{cache:'no-store'}).then(r=>r.text()).then(t=>{$('#msql').value=t}).catch(()=>{});
+$('#cm').onclick=()=>copy($('#msql').value,'#om');
+$('#gs').onclick=()=>{const a=new Uint8Array(24);crypto.getRandomValues(a);$('#sv').value=[...a].map(b=>b.toString(16).padStart(2,'0')).join('')};
+$('#css').onclick=()=>{const v=$('#sv').value;if(!v){$('#oss').textContent='Сначала «Создать секрет»';return}
+copy("insert into public.amn_settings(key,value) values('svc_secret','"+v+"') on conflict (key) do update set value=excluded.value;",'#oss')};
+$('#crs').onclick=()=>{const v=$('#sv').value;if(!v){$('#ors').textContent='Сначала «Создать секрет»';return}copy(v,'#ors')};
 $('#c1').onclick=()=>copy($('#sql').value,'#o1');
 const build=()=>{const e=$('#em').value.trim().replace(/'/g,"''");$('#adm').value=e?"update public.profiles set role='admin' where email='"+e+"';":''};
 $('#em').addEventListener('input',build);
