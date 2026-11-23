@@ -10,11 +10,15 @@
 
 - **Website:** amnetwork.io (live, GitHub Pages)
 - **Founder:** Akbar Amirzoda — economist, diplomat (Plekhanov University Moscow)
-- **Stage:** Pilot in preparation — Dushanbe, 10–20 families, Ramadan 2027 (~Feb–Mar). No "beta Q4 2026".
+- **Stage:** launching as an AI-assisted matching platform, all countries, apps planned for December 2026. No "beta Q4 2026".
 - **Email:** contact@amnetwork.io
 - **LinkedIn:** linkedin.com/company/amnetwork-io
 
-## ⚠️ Model decision (20 November 2026) — overrides older sections below
+## ⚠️ Model update (24 November 2026) — overrides the 20 November decision where they differ
+
+Founder: **a platform that connects people in need with givers (donors and charities, any country), with AI.** Request → AI review (suggests which of the 8 Zakat categories of 9:60 it *may* fit, what to verify, red flags — a hint, not a fatwa) → the giver verifies it themselves and helps directly. No own volunteers yet (no money); every request is labelled "Not verified by AM Network". Contacts only to admin-approved givers and only with the applicant's consent. Outreach to charities in all countries starts now. Money still never passes through us; nothing taken from Zakat. Later, with income: own verifiers, "recommended by AM Network team", Sharia review, legal entity, maybe blockchain. Wording: `docs/messaging-2026-11.md`, record: `docs/strategy-2026-11.md`.
+
+## Model decision (20 November 2026, partly superseded — see above)
 
 Founder chose: **verification & transparency service, money never passes through AM Network.** Pilot = founder's own and relatives' Zakat only, no public fundraising. No outreach to funds/charities until the platform is 100% ready (then Saliheen first). No income in year one (later: optional tips, grants, service fees paid by funds — never from Zakat). Blockchain/token/NFT/DAO/ujrah-from-Zakat promises are being removed. Full record: `docs/strategy-2026-11.md`. Where the sections below (Tech Stack, Revenue, Seed Funding, Oracle Network) contradict this, this wins.
 
