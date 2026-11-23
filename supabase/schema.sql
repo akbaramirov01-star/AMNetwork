@@ -8,7 +8,7 @@
 
 -- ───────────────────────── clean re-run ─────────────────────────
 drop trigger if exists amn_on_auth_user_created on auth.users;
-drop table if exists public.events, public.payouts, public.verifications, public.applications, public.profiles cascade;
+drop table if exists public.offers, public.deeds, public.events, public.payouts, public.verifications, public.applications, public.profiles cascade;
 drop sequence if exists public.app_ref_seq;
 drop function if exists public.amn_handle_new_user, public.my_role, public.is_admin, public.amn_app_before,
   public.amn_app_after, public.amn_ver_after, public.amn_pay_before, public.amn_pay_after,

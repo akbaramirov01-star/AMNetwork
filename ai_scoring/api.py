@@ -26,6 +26,7 @@ from hadith_translate import translate_hadiths, LANG_NAMES as HADITH_TRANSLATE_L
 from translate_cache import cache as translation_cache
 from push_store import store as push_store, VALID_KINDS as PUSH_KINDS
 import push_send
+import review as ai_review
 
 app = Flask(__name__)
 ALLOWED_ORIGINS = [
@@ -484,6 +485,135 @@ def hadith_translate_route():
 # comes from outside: a GitHub Actions cron calls /push/dispatch hourly
 # (see .github/workflows/push-reminders.yml) with PUSH_DISPATCH_TOKEN.
 MAX_SUBSCRIPTION_BYTES = 2000
+
+
+# ── Requests for help: public form → Supabase, then an AI hint (24 Nov 2026) ──
+# The form posts here instead of writing to Supabase from the browser, so the database only
+# trusts our shared secret, and every caller is rate-limited by IP. The AI review is a hint
+# for givers (Zakat category under 9:60, what to check); it never decides anything.
+import re
+import threading
+import time as _time
+
+_submit_lock = threading.Lock()
+_submit_log: dict[str, list[float]] = {}
+SUBMITS_PER_HOUR = 3
+MIN_STORY = 60
+_ISO2 = re.compile(r"^[A-Za-z]{2}$")
+_ISO3 = re.compile(r"^[A-Za-z]{3}$")
+_SLUG = re.compile(r"^[a-z_]{2,20}$")
+_PHONE = re.compile(r"\+?[0-9][0-9 ()\-]{6,}[0-9]")
+
+
+def _submit_allowed(client: str) -> bool:
+    now = _time.time()
+    with _submit_lock:
+        recent = [t for t in _submit_log.get(client, []) if now - t < 3600]
+        if len(recent) >= SUBMITS_PER_HOUR:
+            _submit_log[client] = recent
+            return False
+        recent.append(now)
+        _submit_log[client] = recent
+        if len(_submit_log) > 5000:  # keep memory bounded
+            for k in list(_submit_log)[:1000]:
+                _submit_log.pop(k, None)
+        return True
+
+
+def _ai_review_on() -> bool:
+    return os.environ.get("AI_REVIEW_ENABLED", "") == "1"
+
+
+def _review_in_background(app_id: str) -> None:
+    def work():
+        try:
+            ai_review.run_review(app_id)
+        except Exception:
+            app.logger.exception("ai review failed for %s", app_id)
+    threading.Thread(target=work, daemon=True).start()
+
+
+def _num(v, lo=0, hi=10**8):
+    if v in (None, ""):
+        return None
+    try:
+        x = float(v)
+    except (TypeError, ValueError):
+        return None
+    return x if lo <= x < hi else None
+
+
+@app.route("/requests/submit", methods=["POST"])
+def requests_submit():
+    if not cheap_limiter.allow(client_address()) or not _submit_allowed(client_address()):
+        return jsonify(error="Too many requests. Please try again later."), 429
+    p = request.get_json(force=True, silent=True) or {}
+    story = str(p.get("story") or "").strip()
+    if len(story) < MIN_STORY:
+        return jsonify(error="story_too_short"), 400
+    if len(story) > 3000:
+        return jsonify(error="story_too_long"), 400
+    city = str(p.get("city") or "").strip()[:80]
+    if len(city) < 2:
+        return jsonify(error="city_required"), 400
+    country = str(p.get("country") or "").strip()
+    currency = str(p.get("currency") or "").strip()
+    if not _ISO2.match(country) or not _ISO3.match(currency):
+        return jsonify(error="country_and_currency_required"), 400
+    def slugs(key):
+        v = p.get(key) or []
+        return [x for x in v if isinstance(x, str) and _SLUG.match(x)][:12] if isinstance(v, list) else []
+    payload = {
+        "name": str(p.get("name") or "")[:120], "email": str(p.get("email") or "")[:160],
+        "city": city, "country": country.upper(), "currency": currency.upper(),
+        "members": _num(p.get("members"), 1, 31), "children": _num(p.get("children"), 0, 31),
+        "income": _num(p.get("income")), "expenses": _num(p.get("expenses")),
+        "categories": slugs("categories"), "needs": slugs("needs"),
+        "months": _num(p.get("months"), 0, 601), "story": story,
+        "show_first_name": bool(p.get("show_first_name")),
+        "lang": str(p.get("lang") or "")[:2].lower() if re.match(r"^[a-z]{2}$", str(p.get("lang") or "")[:2]) else None,
+    }
+    for k in ("members", "children", "months"):
+        if payload[k] is not None:
+            payload[k] = int(payload[k])
+    try:
+        rows = ai_review.svc_rpc("intake_request", {"p": payload})
+    except ai_review.ReviewError as e:
+        app.logger.error("requests/submit: %s", e)
+        return jsonify(error="intake_unavailable"), 503
+    row = rows[0] if isinstance(rows, list) and rows else {}
+    if _ai_review_on() and row.get("id"):
+        _review_in_background(row["id"])
+    return jsonify(ref=row.get("ref"), reviewing=_ai_review_on())
+
+
+@app.route("/requests/review", methods=["POST"])
+def requests_review():
+    if not _ai_review_on():
+        return jsonify(error="AI review is disabled on this deployment."), 410
+    if not cheap_limiter.allow(client_address()):
+        return jsonify(error="Too many requests."), 429
+    auth = request.headers.get("Authorization", "")
+    jwt = auth[7:].strip() if auth.lower().startswith("bearer ") else ""
+    p = request.get_json(force=True, silent=True) or {}
+    app_id = str(p.get("id") or "")
+    if not jwt or not re.match(r"^[0-9a-f-]{36}$", app_id):
+        return jsonify(error="bad request"), 400
+    try:
+        if ai_review.rpc("can_review", {"p_id": app_id}, user_jwt=jwt) is not True:
+            return jsonify(error="forbidden"), 403
+        force = bool(p.get("force")) and ai_review.rpc("is_admin", {}, user_jwt=jwt) is True
+        result = ai_review.run_review(app_id, force=force)
+    except ai_review.ReviewError as e:
+        msg = str(e)
+        app.logger.error("requests/review: %s", msg)
+        if "daily cap" in msg:
+            return jsonify(error="daily_cap"), 429
+        return jsonify(error="review_unavailable"), 502
+    except Exception:
+        app.logger.exception("requests/review: unhandled")
+        return jsonify(error="review_unavailable"), 502
+    return jsonify(review=result, skipped=result is None)
 
 
 @app.route("/push/public-key", methods=["GET"])
