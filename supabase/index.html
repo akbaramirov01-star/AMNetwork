@@ -78,6 +78,15 @@ alter sequence public.app_ref_seq restart with 1;</textarea>
 &lt;/div&gt;
 </textarea>
 <p>После каждого — <b>Save changes</b>.</p>
+<h2>Уведомления на почту (новая заявка, проверка)</h2>
+<p><b>А.</b> Скрипт уведомлений → SQL Editor → New query → вставить → Run.</p>
+<button id="cn">Скопировать скрипт уведомлений</button><div class="ok" id="on"></div>
+<textarea id="nsql" readonly>Загрузка…</textarea>
+<p><b>Б.</b> В Resend → API Keys создай ещё один ключ (имя <code>notify</code>, Sending access). Впиши его и свою почту ниже — команда соберётся здесь на телефоне и никуда не отправится. Потом SQL Editor → New query → вставить → Run.</p>
+<input id="rk" placeholder="ключ Resend: re_..." autocomplete="off" autocapitalize="off" spellcheck="false">
+<input id="ae" type="email" placeholder="почта, куда присылать уведомления" autocomplete="email" style="margin-top:8px">
+<button id="cs">Скопировать команду</button><div class="ok" id="os"></div>
+<p style="font-size:13px">Ключ хранится только в защищённом хранилище Supabase (Vault). После копирования очисти поле.</p>
 </main>
 <script>
 const $=s=>document.querySelector(s);
@@ -88,6 +97,11 @@ async function copy(text,out){
 }
 $('#c3').onclick=()=>copy($('#rst').value,'#o3');
 document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>copy($('#'+b.dataset.copy).value,'#o_'+b.dataset.copy));
+
+fetch('/supabase/notify.sql',{cache:'no-store'}).then(r=>r.text()).then(t=>{$('#nsql').value=t}).catch(()=>{});
+$('#cn').onclick=()=>copy($('#nsql').value,'#on');
+$('#cs').onclick=()=>{const k=$('#rk').value.trim().replace(/'/g,"''"),e=$('#ae').value.trim().replace(/'/g,"''");if(!k||!e){$('#os').textContent='Впиши ключ и почту';return}
+copy("delete from vault.secrets where name='resend_api_key';\nselect vault.create_secret('"+k+"','resend_api_key');\ninsert into public.amn_settings(key,value) values('admin_email','"+e+"') on conflict (key) do update set value=excluded.value;",'#os')};
 $('#c1').onclick=()=>copy($('#sql').value,'#o1');
 const build=()=>{const e=$('#em').value.trim().replace(/'/g,"''");$('#adm').value=e?"update public.profiles set role='admin' where email='"+e+"';":''};
 $('#em').addEventListener('input',build);
