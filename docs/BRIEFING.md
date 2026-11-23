@@ -82,6 +82,7 @@ Full text: `docs/strategy-2026-11.md`, wording rules: `docs/messaging-2026-11.md
 - Credits: MAX plan, 1363 left on 21 Nov evening; reset ~30 Nov. A prophet episode ≈ 150 cr; a short ≈ 40–60 cr.
 
 ## 7. Publishing (rules checked Nov 2026)
+- **Publishing order lives in `docs/content/publish/QUEUE.md`** — when the founder asks "what do I post next?", answer from it and keep it updated.
 - Instagram: **max 5 hashtags** (since Dec 2025). TikTok: 3–5 hashtags, caption 100–300 characters, AI label on.
   YouTube: first 3 hashtags show above the title; title ≤ 100 chars; tags ≤ 500 chars; publish as Private first, check "Checks".
 - Templates: `docs/content/publish/musa-part4.md`, `musa-part5.md`. Always give the founder full texts for YouTube
