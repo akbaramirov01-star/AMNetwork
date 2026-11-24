@@ -32,3 +32,13 @@ tears, no lecture until the very end. Their reach comes partly from a collaborat
 | 8 | The Sadaqah Jar | Yusuf takes coins from the family Sadaqah jar for a game | Quran 2:261 [verify] + AM Network /zakat page plug |
 
 Next after #1: #2 and #6 (strongest for teens), each ~80–100 cr.
+
+## Lessons from #1 (founder feedback, 24 Nov)
+- **A clear turning point is mandatory:** the hero must *hear or see something* that makes him change (v2: Grandma's whispered dua
+  "O Allah, protect my Yusuf, make him a comfort to my eyes…" heard through the door → he takes off the headphones → "She's praying
+  for me… and I was rude to her." → he goes to her). Without it the story has no meaning.
+- **One voice per character:** seedance changes the timbre clip to clip (Yusuf measured 127–314 Hz median F0 across clips).
+  Fix: a cloned voice element per character (`create_voice_from_confirmed_audio` from his recorded lines; Yusuf =
+  `b2d57a9e-d801-4b58-9e7c-5ede83d8533f`) and `voice_change` on every dialogue clip — keeps timing, so lips stay in sync.
+  Do this for every character in every new video.
+- Watch for brand logos (an Apple logo appeared on a laptop lid → blurred only while visible).

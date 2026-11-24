@@ -1,11 +1,126 @@
-{"order": ["01","02","03","04","05","06","07","08","09","10","11"],
- "dialog": ["01","02","03","07","09","10"], "estab": ["04","05","06","08"], "estab_cap": 3.6,
- "fadeblack_into": ["05","11"],
- "hook": {"01": [0.0, 3.0, "FIVE MORE\nMINUTES…"]},
- "st": {"11": 0.8},
- "plate": {"11": "Quran · Al-Isra 17:24 · amnetwork.io/quran"},
- "card": {"dur": 3.6, "lines": [["THEY WON'T ALWAYS\nBE CALLING.", 54, [236,196,96], 40], ["Heart Stories #1", 30, [245,245,238], 40],
-   ["\"Let him be humbled… who finds his parents", 22, [245,245,238], 2], ["in old age and does not enter Paradise.\"", 22, [245,245,238], 4],
-   ["Sahih Muslim, Book 45, Hadith 10 · Quran 17:23–24", 20, [200,200,195], 36],
-   ["Read the Quran free: amnetwork.io/quran", 26, [236,196,96], 30], ["Not a fatwa · AI-animated · AM Academy", 22, [200,200,195], 0]]},
- "out": "HEART1_raw.mp4"}
+{
+ "order": [
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "13",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
+  "11"
+ ],
+ "dialog": [
+  "01",
+  "02",
+  "03",
+  "13",
+  "07",
+  "09",
+  "10"
+ ],
+ "estab": [
+  "04",
+  "06",
+  "08"
+ ],
+ "estab_cap": 3.6,
+ "fadeblack_into": [
+  "06",
+  "11"
+ ],
+ "hook": {
+  "01": [
+   0.0,
+   3.0,
+   "FIVE MORE\nMINUTES\u2026"
+  ]
+ },
+ "st": {
+  "05": 1.6,
+  "11": 0.8
+ },
+ "plate": {
+  "11": "Quran \u00b7 Al-Isra 17:24 \u00b7 amnetwork.io/quran",
+  "05": "Grandma's dua"
+ },
+ "card": {
+  "dur": 3.6,
+  "lines": [
+   [
+    "THEY WON'T ALWAYS\nBE CALLING.",
+    54,
+    [
+     236,
+     196,
+     96
+    ],
+    40
+   ],
+   [
+    "Heart Stories #1 \u00b7 Five More Minutes",
+    26,
+    [
+     245,
+     245,
+     238
+    ],
+    40
+   ],
+   [
+    "\"Let him be humbled\u2026 who finds his parents",
+    22,
+    [
+     245,
+     245,
+     238
+    ],
+    2
+   ],
+   [
+    "in old age and does not enter Paradise.\"",
+    22,
+    [
+     245,
+     245,
+     238
+    ],
+    4
+   ],
+   [
+    "Sahih Muslim, Book 45, Hadith 10 \u00b7 Quran 17:23\u201324",
+    20,
+    [
+     200,
+     200,
+     195
+    ],
+    36
+   ],
+   [
+    "Read the Quran free: amnetwork.io/quran",
+    26,
+    [
+     236,
+     196,
+     96
+    ],
+    30
+   ],
+   [
+    "Not a fatwa \u00b7 AI-animated \u00b7 AM Academy",
+    22,
+    [
+     200,
+     200,
+     195
+    ],
+    0
+   ]
+  ]
+ },
+ "out": "HEART1_raw.mp4"
+}
