@@ -581,6 +581,7 @@ def requests_submit():
         "categories": slugs("categories"), "needs": slugs("needs"),
         "months": _num(p.get("months"), 0, 601), "story": story,
         "show_first_name": bool(p.get("show_first_name")),
+        "contact_consent": bool(p.get("contact_consent")),
         "lang": str(p.get("lang") or "")[:2].lower() if re.match(r"^[a-z]{2}$", str(p.get("lang") or "")[:2]) else None,
     }
     for k in ("members", "children", "months"):

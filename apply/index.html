@@ -647,7 +647,7 @@ async function sendToPlatform(){
     categories:[...document.querySelectorAll('input[name="cat"]:checked')].map(c=>c.value),
     needs:[...document.querySelectorAll('input[name="need"]:checked')].map(c=>c.value),
     months:document.getElementById('a-duration').value,story:document.getElementById('a-desc').value.trim(),
-    show_first_name:(document.querySelector('input[name="anon"]:checked')?.value)==='partial',lang:currentLang};
+    show_first_name:(document.querySelector('input[name="anon"]:checked')?.value)==='partial',contact_consent:(document.querySelector('input[name="consent"]:checked')?.value)==='yes',lang:currentLang};
   const ac=new AbortController();const to=setTimeout(()=>ac.abort(),45000);
   try{const r=await fetch(AMN_API+'/requests/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:ac.signal});
       const j=await r.json().catch(()=>({}));return r.ok&&j.ref?j.ref:null;}

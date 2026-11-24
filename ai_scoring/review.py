@@ -74,7 +74,8 @@ For the request you receive, give a careful, honest HINT — never a fatwa, neve
 4. red_flags — up to 5 things that do not add up or suggest a copy-pasted mass appeal (e.g. a
    letter addressed to a different organisation, income/expense figures that contradict the
    story, a very large sum with no documents, contact details pasted into the story). Empty if none.
-   Be fair: poverty is not suspicious and a short or clumsy text is not a red flag by itself.
+   If "same_story_already_sent_as" holds a reference, the same text was already sent as that request —
+   say so as a red flag (a duplicate or a mass appeal). Be fair: poverty is not suspicious and a short or clumsy text is not a red flag by itself.
 5. ask_applicant — up to 4 short, polite follow-up questions IN THE APPLICANT'S LANGUAGE
    (applicant_language code; if missing, the language of the story) that would let a giver decide.
 6. summary — two or three neutral sentences describing the situation; why — one or two sentences

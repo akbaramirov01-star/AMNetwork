@@ -105,6 +105,10 @@ alter sequence public.app_ref_seq restart with 1;</textarea>
 <li><code>ANTHROPIC_API_KEY</code> — уже должен быть; если нет, ключ из console.anthropic.com</li>
 </ul>
 <p>Потом <b>Save, rebuild and deploy</b>. Разбор одной заявки стоит примерно 1–3 цента; не больше 30 разборов в день (лимит хранится в базе).</p>
+<h2>Платформа, часть 2: письма, «Соединить», удаление</h2>
+<p>Нужен после «Платформа» и «Уведомления на почту» (ключ Resend). SQL Editor → New query → вставить → Run. Данные не удаляет.</p>
+<button id="cm2">Скопировать скрипт части 2</button><div class="ok" id="om2"></div>
+<textarea id="m2sql" readonly>Загрузка…</textarea>
 </main>
 <script>
 const $=s=>document.querySelector(s);
@@ -122,6 +126,8 @@ $('#cs').onclick=()=>{const k=$('#rk').value.trim().replace(/'/g,"''"),e=$('#ae'
 copy("delete from vault.secrets where name='resend_api_key';\nselect vault.create_secret('"+k+"','resend_api_key');\ninsert into public.amn_settings(key,value) values('admin_email','"+e+"') on conflict (key) do update set value=excluded.value;",'#os')};
 fetch('/supabase/matching.sql',{cache:'no-store'}).then(r=>r.text()).then(t=>{$('#msql').value=t}).catch(()=>{});
 $('#cm').onclick=()=>copy($('#msql').value,'#om');
+fetch('/supabase/matching-2.sql',{cache:'no-store'}).then(r=>r.text()).then(t=>{$('#m2sql').value=t}).catch(()=>{});
+$('#cm2').onclick=()=>copy($('#m2sql').value,'#om2');
 $('#gs').onclick=()=>{const a=new Uint8Array(24);crypto.getRandomValues(a);$('#sv').value=[...a].map(b=>b.toString(16).padStart(2,'0')).join('')};
 $('#css').onclick=()=>{const v=$('#sv').value;if(!v){$('#oss').textContent='Сначала «Создать секрет»';return}
 copy("insert into public.amn_settings(key,value) values('svc_secret','"+v+"') on conflict (key) do update set value=excluded.value;",'#oss')};
