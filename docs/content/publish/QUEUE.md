@@ -18,6 +18,7 @@ Texts for each video: the file in the "Texts" column (all in `docs/content/publi
 | 4 | 27 Nov | Signs of the Last Day #1 — Tall buildings | 0:52 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/aa58c7c6-4c0f-4eed-b290-61780ad9773e.mp4 | signs-1.md |
 | 5 | 28 Nov | Stories of the Prophets #17 — Zakariya & Yahya | 1:11 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f4a36895-b29a-460b-bd49-7b2642d7e762.mp4 | zakariya.md |
 | 6 | 29 Nov | Duas for Every Day #1 — Exam in 10 minutes | 0:32 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f39fcc59-5199-460e-8d2e-55c14d48bb97.mp4 | dua-1.md |
+| 7 | 30 Nov | Heart Stories #1 — Five More Minutes | 0:58 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/1bb5a373-2b75-490a-9752-9c6478ff231c.mp4 | heart-1.md |
 
 All links above are the **captioned v2** versions (23 Nov evening: one Whisper pass over the whole video, no overlapping lines — the earlier captioned links overlapped, do not use them). Playlists and title numbering: `docs/content/playlists.md`.
 

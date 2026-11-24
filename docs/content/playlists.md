@@ -11,6 +11,7 @@ e.g. `… | Stories of the Prophets #16`. The same name goes on the end card. Ti
 | 3 | **What Would You Do?** | family dilemmas A/B with the answer from Quran/Sunnah | #1, #2 … | new |
 | 4 | **Duas for Every Day** | one real-life moment + one dua (Arabic on screen, translation, source): exam, rain, travel, fear, sleep | #1, #2 … | new |
 | 5 | **After This Life** | grave, Barzakh, the Day of Judgement, Jannah — calm, comforting | #1, #2 … | new |
+| 7 | **Heart Stories** | emotional family stories (Quranly-style), lesson + source at the end, real AM Network page on a phone | #1, #2 … | new (24 Nov) |
 | 6 | **True or Myth?** | a common saying checked against Quran/Sunnah | #1, #2 … | new |
 
 Why not one big "Lessons" playlist: separate, clearly named series make people binge the next number ("#2", "#3"),
