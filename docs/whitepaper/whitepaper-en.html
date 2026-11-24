@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>AM Network Whitepaper v2.0</title>
+<html lang="en"><head><meta charset="utf-8"><title>AM Network Whitepaper v2.1</title>
 <style>
 @page{size:Letter;margin:22mm 22mm 24mm}
 :root{--green:#1E4D2E;--gold:#B8860B;--soft:#FDF6E3;--mint:#E8F5EA;--ink:#1d1d1d;--mute:#6b6b6b}
@@ -49,16 +49,16 @@ td.pts{text-align:right;white-space:nowrap;font-weight:700;color:var(--green)}
   <div class="tag">Where Every Donation Finds Its Purpose.</div>
   <div class="band">
     <h2>WHITEPAPER</h2>
-    <div>Version 2.0 · November 2026</div>
-    <div>Zakat &amp; Sadaqah: Every Family Checked in Person, Every Payout in an Open Report</div>
-    <div class="g">The money never passes through us</div>
+    <div>Version 2.1 · November 2026</div>
+    <div>Zakat &amp; Sadaqah: Connecting People in Need with Givers in Any Country</div>
+    <div class="g">AI suggests · the giver verifies · the money never passes through us</div>
   </div>
   <div class="stats">
     <div><b>$50–600B</b><span>Annual Zakat potential</span><i>World Bank &amp; IRTI/IsDB, 2016</i></div>
     <div><b>&lt;$25B</b><span>Distributed formally</span><i>The rest is informal or untracked</i></div>
-    <div><b>100%</b><span>From donor to family</span><i>No fees taken from Zakat</i></div>
+    <div><b>100%</b><span>From giver to recipient</span><i>Nothing taken from Zakat</i></div>
   </div>
-  <p style="text-align:center;color:var(--mute);margin-top:22px">Version 2.0 replaces Version 1.1 (October 2026) and describes a different model. See “What changed since v1.1” at the end.</p>
+  <p style="text-align:center;color:var(--mute);margin-top:22px">Version 2.1 replaces Version 2.0 (20 November 2026), which described in-person checks by our own volunteers in a small pilot in Dushanbe. See “How we got here” at the end.</p>
   <p style="text-align:center"><span style="color:var(--gold)">amnetwork.io · contact@amnetwork.io</span></p>
 </div>
 
@@ -66,298 +66,315 @@ td.pts{text-align:right;white-space:nowrap;font-weight:700;color:var(--green)}
   <h1>Table of Contents</h1>
   <div class="m"><span>1. Summary</span></div>
   <div class="m"><span>2. The Problem</span></div>
-  <div class="m"><span>3. The Model — Five Steps</span></div>
-  <div class="m"><span>4. How a Family Is Checked</span></div>
-  <div class="s"><span>4.1 Who checks</span></div>
-  <div class="s"><span>4.2 The visit</span></div>
-  <div class="s"><span>4.3 The need checklist</span></div>
-  <div class="s"><span>4.4 Rules the database enforces</span></div>
-  <div class="m"><span>5. The Open Report</span></div>
-  <div class="s"><span>5.1 What is shown, and what never is</span></div>
-  <div class="s"><span>5.2 The SHA-256 hash chain</span></div>
-  <div class="s"><span>5.3 Receipts kept as fingerprints</span></div>
-  <div class="s"><span>5.4 Check it yourself</span></div>
-  <div class="m"><span>6. Data Protection</span></div>
-  <div class="m"><span>7. Sharia Approach</span></div>
-  <div class="m"><span>8. Legal Approach</span></div>
-  <div class="m"><span>9. Sustainability</span></div>
-  <div class="m"><span>10. Status and Roadmap</span></div>
-  <div class="m"><span>11. Risks and Limits</span></div>
-  <div class="m"><span>12. Team, Disclosures and Contacts</span></div>
-  <div class="m"><span>What changed since v1.1</span></div>
+  <div class="m"><span>3. How It Works</span></div>
+  <div class="s"><span>3.1 What AM Network does not do</span></div>
+  <div class="s"><span>3.2 The label on every request</span></div>
+  <div class="m"><span>4. The AI Review</span></div>
+  <div class="s"><span>4.1 What it reads, and what it never sees</span></div>
+  <div class="s"><span>4.2 What it returns</span></div>
+  <div class="s"><span>4.3 The eight categories of Zakat (9:60)</span></div>
+  <div class="s"><span>4.4 Limits and cost</span></div>
+  <div class="m"><span>5. Givers and Connections</span></div>
+  <div class="s"><span>5.1 Who can be a giver</span></div>
+  <div class="s"><span>5.2 What a giver sees</span></div>
+  <div class="s"><span>5.3 “I want to help” and consent</span></div>
+  <div class="s"><span>5.4 Rules the database enforces</span></div>
+  <div class="m"><span>6. The Open Report (optional)</span></div>
+  <div class="m"><span>7. Data Protection</span></div>
+  <div class="m"><span>8. Sharia Approach</span></div>
+  <div class="m"><span>9. Legal Approach</span></div>
+  <div class="m"><span>10. Sustainability</span></div>
+  <div class="m"><span>11. Status and Roadmap</span></div>
+  <div class="m"><span>12. Risks and Limits</span></div>
+  <div class="m"><span>13. Team, Disclosures and Contacts</span></div>
+  <div class="m"><span>How we got here</span></div>
 </div>
 
 <div class="sec">
 <h1>1. Summary</h1>
-<div class="quote">“The most powerful force in Islamic giving is trust. We are not replacing that trust — we are giving it proof.”<small>— Akbar Amirzoda, Founder</small></div>
-<p>Zakat is the third pillar of Islam: one-fortieth of qualifying wealth, owed every lunar year by each Muslim whose wealth exceeds the nisab. The World Bank and IRTI/IsDB estimate the annual Zakat <em>potential</em> — what is owed, not what is collected — at <b>$50–600 billion</b>. Less than <b>$25 billion</b> of it is distributed through formal institutions. The rest is given in cash, through intermediaries, or not at all, and the person who gave it can rarely check whether it reached a family in real need.</p>
-<p><b>AM Network is a verification and transparency service for Zakat and Sadaqah: we check each family in person, publish an open, tamper-evident report of every payout, and never hold the money — the donor gives directly to the family.</b></p>
+<div class="quote">“The most powerful force in Islamic giving is trust. We are not replacing that trust — we are helping it find the right person.”<small>— Akbar Amirzoda, Founder</small></div>
+<p>Zakat is the third pillar of Islam: one-fortieth of qualifying wealth, owed every lunar year by each Muslim whose wealth exceeds the nisab. The World Bank and IRTI/IsDB estimate the annual Zakat <em>potential</em> — what is owed, not what is collected — at <b>$50–600 billion</b>. Less than <b>$25 billion</b> of it is distributed through formal institutions. People in need often have no way to reach a giver, and givers often cannot tell which requests are real.</p>
+<p><b>AM Network connects people in need with those who give Zakat and Sadaqah — private donors and charities in any country. AI reads each request and suggests which Zakat category it may fall under and what to check; the giver checks, decides and gives directly. The money never passes through AM Network.</b></p>
 <h3>What that means in practice</h3>
 <ul>
-<li><b>In person.</b> A trained AM Network volunteer visits the family and fills a checklist. Whoever brought the family never verifies it.</li>
-<li><b>A person decides.</b> The need checklist shows its points openly and is capped at 100. It is a hint; the admin approves help only after an in-person check that recommends it.</li>
-<li><b>No custody.</b> The donor gives to the family directly — cash, Alif, Korti Milli or bank transfer. 100% reaches the family. We take no fee from Zakat, and there is no token.</li>
-<li><b>Open report.</b> Each payout appears at amnetwork.io/transparency/ without names, phones or addresses. Every entry carries a SHA-256 fingerprint linked to the one before it, so a quiet change breaks the chain, and anyone can check that in the browser.</li>
+<li><b>Open to every country.</b> A person in need sends a request at amnetwork.io/apply/, in their own language.</li>
+<li><b>AI gives a hint, not a fatwa.</b> AI suggests which of the eight Zakat categories of the Quran (9:60) the request may fit, what to verify, what does not add up and what to ask the applicant. It never sees the applicant’s name, phone, email or address.</li>
+<li><b>The giver verifies.</b> Every request carries the label <b>“Not verified by AM Network — the giver verifies.”</b> We do not have our own verifiers yet, and we say so.</li>
+<li><b>Contacts with consent only.</b> Givers see requests without contact details. Contact goes only to givers we approved, and only with the applicant’s consent.</li>
+<li><b>Optional open report.</b> A gift can be recorded in a public report where each entry carries a SHA-256 fingerprint linked to the one before it, so a quiet change breaks the chain.</li>
 </ul>
 <h3>Stage</h3>
-<p>Pilot in preparation: <b>Dushanbe, Tajikistan, 10–20 families, around Ramadan 2027 (February–March)</b>, using only the founder’s own and his relatives’ Zakat. There is no public fundraising. The software for families, verifiers, donors and the admin is built; before the pilot we will consult a lawyer in Tajikistan, seek review by a Hanafi scholar, train volunteers and run a trial with 2–3 families. We are not raising investment now.</p>
+<p>The request form, the AI review and the givers’ area are built (November 2026). We are now writing to charities in all countries. Mobile apps are planned for December 2026. We take nothing from Zakat, there is no token, no income in year one, and we are not raising investment.</p>
 <h3>Also available</h3>
 <p><b>AM Academy</b> — Sharia-compliant financial literacy, explained for four audiences, with a downloadable certificate — and free Islamic tools in 10 languages: Quran, hadith, dua, prayer times, Qibla, Islamic calendar, 99 Names, tasbeeh and a Zakat calculator.</p>
 </div>
 
 <div class="sec">
 <h1>2. The Problem</h1>
-<h2>2.1 Zakat is large, and mostly invisible</h2>
+<h2>2.1 Zakat is large, and the two sides rarely meet</h2>
 <ul>
 <li>Of an estimated $50–600 billion owed each year, less than $25 billion is distributed through formal institutions.</li>
-<li>Donors have no reliable way to see whether their Zakat reached an eligible family.</li>
-<li>Many intermediaries publish little or no accounting, and what is published is usually a yearly total that an outsider cannot check.</li>
-<li>Many of the people most in need are invisible to formal charity: they do not know how to apply, or nobody speaks for them.</li>
+<li>Many of the people most in need are invisible to formal charity: they do not know whom to ask, they live far from any charity, or nobody speaks for them.</li>
+<li>Charities and donors receive appeals they cannot easily assess: a story in a language they do not read, no clear link to a Zakat category, no idea what to check first.</li>
+<li>Copy-pasted mass appeals and invented stories make every giver more cautious, and that caution hurts the honest applicant most.</li>
 </ul>
-<div class="quote">“A donor gives his Zakat. Weeks later he still does not know whether the family was really in need, or whether the money arrived.”<small>— The gap AM Network works on.</small></div>
+<div class="quote">“A family in one country needs help. A charity in another has Zakat to give. Neither knows the other exists.”<small>— The gap AM Network works on.</small></div>
 <h2>2.2 Why it is hard to fix</h2>
 <ul>
-<li><b>Documents are easy to forge.</b> Paper certificates always were; with generative AI, digital ones are too. A remote check of documents misses what a visit sees.</li>
-<li><b>Every extra hand costs something.</b> When money passes through intermediaries, there are costs, delays and room for leakage at each step.</li>
-<li><b>Reports are not verifiable.</b> A spreadsheet can be edited after the fact and nobody would know.</li>
-<li><b>Trust is personal.</b> In practice, Muslims give through people they know. A system that asks them to trust a distant institution instead has to earn it.</li>
+<li><b>Reading requests takes time.</b> A charity that gets requests from many countries cannot study each one in depth.</li>
+<li><b>Eligibility needs knowledge.</b> Whether a situation fits one of the eight Zakat categories is a fiqh question, not only a question of poverty.</li>
+<li><b>Documents are easy to forge.</b> With generative AI, digital ones are too. Only the giver, close to the case, can verify in the way that suits them.</li>
+<li><b>Every extra hand on the money costs something</b> — fees, delays and room for leakage.</li>
+<li><b>Privacy matters.</b> A person asking for help should not have their name and phone number passed around.</li>
 </ul>
-<p>AM Network does not try to replace personal trust. It adds two things to it: a careful, recorded check of each family by a person who visited, and a public record of each payout that cannot be quietly changed.</p>
+<p>AM Network does not try to replace the giver’s judgment. It makes requests easier to find and easier to read, points to what should be checked, protects the applicant’s privacy, and keeps the money out of our hands.</p>
 </div>
 
 <div class="sec">
-<h1>3. The Model — Five Steps</h1>
+<h1>3. How It Works</h1>
+<p>In short: <b>request → AI review → direct help.</b> In detail:</p>
 <div class="steps">
-  <div class="st"><div class="n">1</div><div class="t"><b>A family applies</b>The family applies in the AM Network cabinet, or a verifier brings a family it knows and fills the application with the family’s spoken consent. The family receives a reference number (for example AMN-2027-0001) and can follow its status.</div></div>
-  <div class="st"><div class="n">2</div><div class="t"><b>A volunteer visits in person</b>The admin assigns a trained AM Network volunteer, who visits the family, confirms the facts and fills the need checklist (Section 4). Whoever brought the family never verifies it.</div></div>
-  <div class="st"><div class="n">3</div><div class="t"><b>The admin approves</b>Help is approved only after at least one in-person check that recommends it. The checklist score informs the decision; it does not make it.</div></div>
-  <div class="st"><div class="n">4</div><div class="t"><b>The donor gives directly</b>The donor gives the Zakat or Sadaqah to the family directly — cash, Alif, Korti Milli or bank transfer. Later, a donor may also give through a registered partner charity. The money never passes through AM Network.</div></div>
-  <div class="st"><div class="n">5</div><div class="t"><b>The payout enters the open report</b>The admin records the payout. It appears at amnetwork.io/transparency/ with amount, date, city or district, situation category and number of checks — no names, phones or addresses — and a SHA-256 fingerprint linked to the entry before it.</div></div>
+  <div class="st"><div class="n">1</div><div class="t"><b>A person sends a request</b>At amnetwork.io/apply/, from any country, in their own language and currency: the situation, household, income and expenses, what help is needed, and consent. No account is needed. They receive a reference number.</div></div>
+  <div class="st"><div class="n">2</div><div class="t"><b>AI reviews it</b>Claude (Anthropic) reads the request without name, email, phone or address, with contact details in the story masked, and suggests which of the eight Zakat categories of 9:60 it may fit, what to verify, red flags and questions (Section 4). A hint, not a fatwa.</div></div>
+  <div class="st"><div class="n">3</div><div class="t"><b>The admin lists it for approved givers</b>The admin reads the request and the review and decides whether to show it to approved givers. Nothing is listed automatically.</div></div>
+  <div class="st"><div class="n">4</div><div class="t"><b>A giver finds it and offers help</b>An approved charity or donor sees it without contact details, labelled “Not verified by AM Network”, and presses “I want to help”. We connect the two by hand, only with the applicant’s consent (Section 5).</div></div>
+  <div class="st"><div class="n">5</div><div class="t"><b>The giver verifies and helps directly</b>The giver checks in their own way — documents, a call, a visit, a local contact — decides, and gives directly. The money never passes through AM Network. Optionally, the gift is recorded in the open report (Section 6).</div></div>
 </div>
 <h2>3.1 What AM Network does not do</h2>
 <ul>
-<li>We do not collect, hold, pool or distribute Zakat. There is no AM Network account that Zakat passes through, and no escrow.</li>
-<li>We take nothing from Zakat — no fee, no percentage, no deduction.</li>
-<li>No algorithm approves or rejects a family. A person decides after a visit.</li>
-<li>We do not publish anything that identifies a family.</li>
+<li>We do not collect, hold, pool or distribute Zakat, and take nothing from it — no account, no escrow, no fee.</li>
+<li>No algorithm approves or rejects a request, and the AI issues no religious ruling. People decide: the admin decides what is listed, the giver decides whom to help.</li>
+<li>We share no contact details without the applicant’s consent, and publish nothing that identifies them.</li>
 </ul>
-<h2>3.2 Whose money is in the pilot</h2>
-<p>Only the founder’s own Zakat and that of his relatives. We do not ask the public for money. That keeps the pilot small and honest: if something goes wrong, it is our own Zakat and our own responsibility, and we can learn before anyone else depends on the process.</p>
+<h2>3.2 The label on every request</h2>
+<p>Every request a giver sees says <b>“Not verified by AM Network — the giver verifies.”</b> We have no verifiers of our own yet, and we do not imply a check we did not make. Later, with income, we plan our own verifiers and a separate mark, “Recommended by the AM Network team”, for requests they have checked. We give no date for that.</p>
 </div>
 
 <div class="sec">
-<h1>4. How a Family Is Checked</h1>
-<h2>4.1 Who checks</h2>
-<p>Trained AM Network volunteers. Only the admin can give someone the verifier role, and only to people the admin knows personally. Later, staff of registered partner charities may also verify. Mosques and imams are not a fixed part of the process: the system must work without depending on any religious institution.</p>
-<h2>4.2 The visit</h2>
-<p>The volunteer visits the family where it lives and records what was confirmed in person:</p>
-<ul>
-<li>an identity document was seen;</li>
-<li>the family lives at the address given;</li>
-<li>the size of the household;</li>
-<li>income and expenses were clarified;</li>
-<li>whether the family receives other regular help.</li>
-</ul>
-<p>The volunteer then recommends <b>help</b> or <b>do not help</b>, and may add notes that only the admin sees.</p>
-<h2>4.3 The need checklist</h2>
-<p>The checklist is shown to the volunteer with its points next to each item, so nobody has to guess how the number is made. The total is capped at 100. It is a transparent hint for the person who decides, not a decision.</p>
+<h1>4. The AI Review</h1>
+<p>The review exists to save the giver time and to point at what matters. It is a reading aid. It does not decide whether a person is helped, and it is not a fatwa.</p>
+<h2>4.1 What it reads, and what it never sees</h2>
 <table>
-<tr><th>Item confirmed during the visit</th><th style="width:16%;text-align:right">Points</th></tr>
-<tr><td>No income for 3 months or more</td><td class="pts">+20</td></tr>
-<tr><td>Income per person below the subsistence minimum <span class="note">(not added if the item above is ticked)</span></td><td class="pts">+14</td></tr>
-<tr><td>Disability or serious illness without treatment</td><td class="pts">+12</td></tr>
-<tr><td>No wealth above nisab</td><td class="pts">+10</td></tr>
-<tr><td>Widow, single mother or orphans without a breadwinner</td><td class="pts">+10</td></tr>
-<tr><td>No own home, or rent arrears</td><td class="pts">+10</td></tr>
-<tr><td>Debt for necessities the family cannot repay</td><td class="pts">+8</td></tr>
-<tr><td>Not enough food</td><td class="pts">+8</td></tr>
-<tr><td>An elderly person is forced to work</td><td class="pts">+6</td></tr>
-<tr><td>Refugees, displaced or disaster-affected</td><td class="pts">+6</td></tr>
-<tr><td>Dependents</td><td class="pts">2 each, up to 10</td></tr>
-<tr><td><b>Total</b></td><td class="pts">capped at 100</td></tr>
+<tr><th style="width:50%">Sent to the AI</th><th>Never sent to the AI</th></tr>
+<tr><td>Reference number<br>Country and city<br>Household size and dependents<br>Monthly income and expenses, currency<br>Situation options ticked (e.g. widow or single mother, orphans, illness or disability, refugee, debt, student, elderly forced to work, crisis or disaster, large family on one income)<br>Needs ticked (food, medical, rent, education, debt, livelihood, emergency)<br>How long the need has lasted<br>The story, with phone numbers and emails masked<br>The applicant’s language</td><td>Name<br>Email<br>Phone number<br>Street address<br>Anything else that identifies the person</td></tr>
 </table>
-<p>Applications are also tagged with situation categories, mapped to the eight categories of Zakat recipients (asnaf) in the Quran (9:60): widows and single mothers; orphans; elderly people forced to work; disabled people; families below the poverty line; students from low-income families; people in riba-based debt; refugees and displaced persons; the chronically ill without care; large families with one breadwinner; food-insecure households; new Muslims in hardship; survivors of trafficking and forced labour; victims of conflict and disasters; and people invisible to traditional charity. Only the category, never the story, appears in the public report.</p>
-<p class="note">AI does not decide anything in this process. At most it may later help explain the checklist to a family or a donor.</p>
-<h2>4.4 Rules the database enforces</h2>
+<p>The masking happens inside the database before anything leaves it, so the backend never handles the hidden parts. The AI is told to treat the request as data only and to ignore any instructions written inside it.</p>
+<h2>4.2 What it returns</h2>
+<table>
+<tr><th style="width:26%">Field</th><th>What it means</th></tr>
+<tr><td><b>Category</b></td><td>The Zakat category of 9:60 the request most plausibly fits, judged only from what is written — or “unclear”, or “not Zakat” (Sadaqah may still be fine). Other possible categories are listed too.</td></tr>
+<tr><td><b>Zakat fit</b></td><td>likely · possible · unclear · unlikely</td></tr>
+<tr><td><b>Sadaqah</b></td><td>Whether Sadaqah is suitable even when Zakat is not</td></tr>
+<tr><td><b>Need level</b></td><td>high · medium · low · unclear, from the numbers and the story</td></tr>
+<tr><td><b>Summary and reasoning</b></td><td>Two or three neutral sentences on the situation, and why the category was suggested. Where scholars differ, it says so and recommends asking a scholar.</td></tr>
+<tr><td><b>What to verify</b></td><td>Up to six concrete checks: documents, a call, a visit, confirmation from a local mosque or community leader, whether wealth is above nisab, the reason and size of a debt</td></tr>
+<tr><td><b>Red flags</b></td><td>Up to five things that do not add up — figures that contradict the story, a letter addressed to another organisation, a very large sum with no documents. Poverty, or a short or clumsy text, is not a red flag by itself.</td></tr>
+<tr><td><b>Questions for the applicant</b></td><td>Up to four short, polite questions in the applicant’s own language that would help a giver decide</td></tr>
+</table>
+<h2>4.3 The eight categories of Zakat (9:60)</h2>
+<table>
+<tr><th style="width:30%">Category</th><th>As the review uses it</th></tr>
+<tr><td><b>Fuqara</b> — the poor</td><td>Little or no means to cover basic needs</td></tr>
+<tr><td><b>Masakin</b> — the needy</td><td>Some means, not enough to live on</td></tr>
+<tr><td><b>Amilin</b> — those who administer Zakat</td><td>Almost never applies to a request. AM Network is not an amil and claims no share (Section 8).</td></tr>
+<tr><td><b>Muallafa</b> — those whose hearts are reconciled</td><td>For example, new Muslims in hardship</td></tr>
+<tr><td><b>Riqab</b> — freeing those in bondage</td><td>For example, survivors of trafficking or forced labour</td></tr>
+<tr><td><b>Gharimin</b> — debtors</td><td>A debt taken for a permissible need that the person cannot repay. Paying off an interest-bearing debt from Zakat is a question on which scholars differ; the review says so.</td></tr>
+<tr><td><b>Fi sabilillah</b> — in the way of Allah</td><td>Scholars differ on its scope; the review says so</td></tr>
+<tr><td><b>Ibn as-sabil</b> — the stranded traveller</td><td>Someone cut off from their means while away from home</td></tr>
+</table>
+<p class="note">The review follows the mainstream Hanafi understanding. It is not reviewed by a scholar request by request, and it cannot replace one.</p>
+<h2>4.4 Limits and cost</h2>
+<ul>
+<li><b>A daily cap kept in the database.</b> The number of reviews per day is capped (30 by default). The cap is counted in the database, not on the server’s disk, so restarting or redeploying the server cannot reset it.</li>
+<li><b>Low cost.</b> A review costs roughly one to three US cents. The founder covers it.</li>
+<li><b>If the AI is unavailable</b>, the request is still saved, and the admin can run the review later. A request is never lost or rejected because the AI failed.</li>
+<li><b>The AI can be wrong.</b> It sees only what was written, it cannot check a single fact, and it may misjudge a category. That is why every review is labelled a hint and every request “Not verified by AM Network”.</li>
+</ul>
+</div>
+
+<div class="sec">
+<h1>5. Givers and Connections</h1>
+<h2>5.1 Who can be a giver</h2>
+<p>Any charity or private donor, in any country. They sign up at amnetwork.io/cabinet/, add their organisation’s name if any, and ask to help. The admin approves each giver by hand before they see any request. Approval is not an endorsement of their work.</p>
+<h2>5.2 What a giver sees</h2>
+<table>
+<tr><th style="width:50%">Shown in the givers’ feed</th><th>Never shown in the feed</th></tr>
+<tr><td>Reference number and date<br>Country and city<br>First name only, if the applicant chose to show it<br>Household, income and expenses, currency<br>Situation and needs ticked<br>The story, with phone numbers and emails masked<br>The AI review<br>The label “Not verified by AM Network”<br>How many givers have offered help</td><td>Full name<br>Email<br>Phone number<br>Address<br>Other givers’ names or messages</td></tr>
+</table>
+<h2>5.3 “I want to help” and consent</h2>
+<p>A giver presses “I want to help” and may add a short message. The admin sees each offer and connects the giver and the applicant by hand. On the form, the applicant answers a separate question: may a charity or donor approved by AM Network contact them, through us, to verify the request? Without that consent, no contact details are passed on. We take no part in the gift itself.</p>
+<h2>5.4 Rules the database enforces</h2>
 <p>These rules are written into the database itself, not only into the web page, so a modified page or a direct request cannot get around them:</p>
 <ul>
-<li>Whoever brought a family cannot be assigned to verify it.</li>
-<li>An application can be approved only if at least one in-person check recommends help.</li>
-<li>A payout can be recorded only for an approved application.</li>
-<li>A family is marked “help delivered” only by recording a payout, never by hand.</li>
-<li>Only the admin can change anyone’s role.</li>
-<li>Every step — submitted, assigned, checked, approved, paid — is written to the application’s history.</li>
+<li>The public form cannot write to the database directly. Requests arrive only through our backend, which holds a shared secret.</li>
+<li>Nobody but the admin and our backend can set a request’s AI review or whether it is listed.</li>
+<li>Only approved givers can read the feed or make an offer, and only on a listed, open request. The feed never returns a full name, email, phone or address.</li>
+<li>A giver sees only their own offers; only the admin sees who offered what.</li>
+<li>The daily AI cap is checked in the database; only the admin can change roles.</li>
 </ul>
 </div>
 
 <div class="sec">
-<h1>5. The Open Report</h1>
-<p>Every payout is published at <b>amnetwork.io/transparency/</b>. The page is public and needs no account.</p>
-<h2>5.1 What is shown, and what never is</h2>
+<h1>6. The Open Report (optional)</h1>
+<p>A giver who wants their help to be visible, without exposing the person helped, can have the gift recorded in the public open report at <b>amnetwork.io/transparency/</b>. Recording is optional; the gift itself always goes directly from giver to recipient.</p>
+<h2>6.1 What is shown, and what never is</h2>
 <table>
-<tr><th style="width:50%">Shown for each payout</th><th>Never shown</th></tr>
-<tr><td>Entry number and date given<br>Reference number (e.g. AMN-2027-0001)<br>City or district<br>Situation category<br>Amount and currency<br>Type: Zakat or Sadaqah<br>How it was given: cash, Alif, Korti Milli, bank<br>Number of in-person checks<br>Whether a receipt fingerprint exists<br>The entry’s fingerprints (previous and own)</td><td>Names<br>Phone numbers<br>Addresses<br>Photos<br>The family’s story<br>Volunteers’ notes<br>Who the donor is</td></tr>
+<tr><th style="width:50%">Shown for each recorded gift</th><th>Never shown</th></tr>
+<tr><td>Entry number and date given<br>Reference number (e.g. AMN-2026-0001)<br>City or district<br>Situation category<br>Amount and currency<br>Type: Zakat or Sadaqah<br>How it was given<br>Whether a receipt fingerprint exists<br>The entry’s fingerprints (previous and own)</td><td>Names<br>Phone numbers<br>Addresses<br>Photos<br>The person’s story<br>Who the giver is</td></tr>
 </table>
-<p>The page also shows totals: families helped, payouts, applications, families checked, and the sum given in somoni. The public can read the report only through two read-only database functions that return these fields and nothing else.</p>
-<h2>5.2 The SHA-256 hash chain</h2>
-<p>When a payout is recorded, the database builds one line of text from the entry’s facts and the fingerprint of the entry before it:</p>
+<h2>6.2 The SHA-256 hash chain</h2>
+<p>When a gift is recorded, the database builds one line of text from the entry’s facts and the fingerprint of the entry before it:</p>
 <div class="code">payload = prev_hash | ref | amount | currency | kind | date | receipt_sha256<br>entry_hash = sha256(payload)</div>
-<p>An illustrative entry (the hashes are shortened): <span class="code" style="display:block">0000…0000|AMN-2027-0001|1500.00|TJS|zakat|2027-02-20|9f2c…e41a</span>The opening entry links to a fingerprint of 64 zeros. Each later entry includes the previous entry’s <code>entry_hash</code> as its <code>prev_hash</code>. Change any past amount, date or reference, and that entry’s fingerprint no longer matches — nor does every entry after it. The fingerprints are computed by the database at the moment of recording, and the app has no way to edit or delete a payout: entries can only be added.</p>
-<h2>5.3 Receipts kept as fingerprints</h2>
-<p>A receipt or a transfer screenshot is never uploaded. The admin’s browser computes its SHA-256 fingerprint on the device, and only those 64 characters are stored and included in the payload. If a question arises later, showing the original file to an auditor proves it is the same receipt: any change to the file produces a different fingerprint.</p>
-<h2>5.4 Check it yourself</h2>
-<p>The “Check the chain” button on the report page re-checks every entry in the visitor’s own browser: that the payload matches the fields shown, that <code>sha256(payload)</code> equals the entry’s fingerprint, and that each entry points to the one before it. The same can be done with any SHA-256 tool, for example <code>printf '%s' "&lt;payload&gt;" | sha256sum</code>.</p>
-<h3>What the chain proves, and what it does not</h3>
-<p>It proves that a published entry has not been quietly changed: an edit breaks the chain. It does not prove by itself that the money changed hands — that rests on the in-person check, the receipt fingerprint and the people involved. And whoever runs the database could, in principle, rebuild the whole chain; anyone who saved an earlier copy of the report, or its latest fingerprint, would then see that it no longer matches. We state this plainly rather than call the report “immutable”.</p>
+<p>The opening entry links to a fingerprint of 64 zeros. Each later entry includes the previous entry’s <code>entry_hash</code> as its <code>prev_hash</code>. Change any past entry, and its fingerprint no longer matches — nor does any after it. The app has no way to edit or delete a recorded entry: entries can only be added.</p>
+<h2>6.3 Receipts kept as fingerprints</h2>
+<p>A receipt is never uploaded. The browser computes its SHA-256 fingerprint on the device, and only those 64 characters are stored; showing the original file later proves it is the same receipt.</p>
+<h2>6.4 Check it yourself</h2>
+<p>The “Check the chain” button re-checks every entry in the visitor’s own browser; any SHA-256 tool can do the same. The chain proves that a published entry has not been quietly changed: an edit breaks the chain. It does not prove that the money changed hands — that rests on the giver, the recipient and the receipt. Whoever runs the database could in principle rebuild the whole chain, but anyone who saved its latest fingerprint would see the mismatch. So we do not call the report “immutable”.</p>
 </div>
 
 <div class="sec">
-<h1>6. Data Protection</h1>
-<p>Families trust us with sensitive information: income, health, debts, household. We collect only what the check needs, keep it private, and publish none of it.</p>
+<h1>7. Data Protection</h1>
+<p>People asking for help trust us with sensitive information: income, health, debts, family. We collect only what a giver needs to understand the request, show it without contact details, and publish none of it.</p>
 <ul>
-<li><b>Where it lives.</b> The pilot runs on Supabase (managed PostgreSQL), hosted in the EU region.</li>
+<li><b>Where it lives.</b> Requests are stored in Supabase (managed PostgreSQL), hosted in the EU region. A copy of each request also reaches our inbox through our form provider (Web3Forms).</li>
 <li><b>Row-level security.</b> Every table is locked by default. The database decides, row by row, who may read what — not the web page.</li>
-<li><b>Consent.</b> An application cannot be saved without the family’s consent to its data being stored and seen only by the verifier and the admin.</li>
-<li><b>No files.</b> Receipts are kept only as fingerprints (Section 5.3). The cabinet uses no analytics and is hidden from search engines.</li>
+<li><b>Consent.</b> A request cannot be sent without consent to how it is used: stored, reviewed by AI without contact details, shown to approved givers without contact details, kept for up to 24 months. Contact by a giver needs a separate consent. Deletion can be requested at any time at contact@amnetwork.io.</li>
+<li><b>The AI provider</b> (Anthropic) receives only the de-identified request described in Section 4.1.</li>
+<li><b>No files.</b> Receipts are kept only as fingerprints. The givers’ area uses no analytics and is hidden from search engines.</li>
 <li><b>Keys.</b> The key embedded in the page is public by design; it grants nothing that row-level security does not allow. The service key and database password are held by the founder only and never appear in code.</li>
 </ul>
 <table>
-<tr><th style="width:18%">Role</th><th>Can see and do</th></tr>
-<tr><td><b>Applicant</b></td><td>Submit an application; see their own applications, status and history.</td></tr>
-<tr><td><b>Donor</b></td><td>See the payouts linked to them — where their Zakat went — in the same anonymised form as the public report.</td></tr>
-<tr><td><b>Verifier</b></td><td>See only the families assigned to them and their own checks; record an in-person check. Cannot check a family they brought.</td></tr>
-<tr><td><b>Admin</b></td><td>Assign verifiers, approve or decline, record payouts, assign roles. Cannot edit or delete a recorded payout through the app.</td></tr>
+<tr><th style="width:20%">Who</th><th>Can see and do</th></tr>
+<tr><td><b>Applicant</b></td><td>Send a request; agree or not to be contacted; ask for deletion.</td></tr>
+<tr><td><b>Approved giver</b></td><td>See listed requests without contact details, with the AI review; offer help; see their own offers.</td></tr>
+<tr><td><b>Admin</b></td><td>Read requests and reviews; list or unlist them; approve givers; see offers and connect people with the applicant’s consent; record gifts in the open report.</td></tr>
 <tr><td><b>Public</b></td><td>The open report and totals only, with no personal data.</td></tr>
 </table>
-<p>A privacy policy written for the pilot and the family’s consent to the processing of data and photos will be in place before the pilot starts, checked by the lawyer consultation in Section 8.</p>
 </div>
 
 <div class="sec">
-<h1>7. Sharia Approach</h1>
-<p>Our starting point is the Hanafi school, which most Muslims in Tajikistan follow.</p>
+<h1>8. Sharia Approach</h1>
+<p>Our starting point is the Hanafi school.</p>
 <ul>
-<li><b>Zakat is the donor’s act.</b> Zakat is fulfilled when ownership passes to an eligible recipient (tamlik). In our model the donor hands the Zakat to the family directly, so ownership passes from donor to recipient without anyone in between. The intention (niyyah) stays with the donor.</li>
-<li><b>We are not an amil.</b> In Hanafi fiqh a private organisation not appointed by the authorities is not a Zakat collector (amil), and so has no claim on the collectors’ share. At most it acts as the donor’s agent. AM Network goes further: it does not handle the money at all, and takes nothing from Zakat.</li>
-<li><b>Eligibility is checked, not assumed.</b> The visit confirms, among other things, that the family has no wealth above nisab. The final judgment of eligibility is a person’s, after a visit.</li>
-<li><b>Sadaqah is recorded separately</b> from Zakat in the report, because the rules for the two differ.</li>
+<li><b>Zakat is the giver’s act.</b> Zakat is fulfilled when ownership passes to an eligible recipient (tamlik). In our model the giver hands the Zakat to the recipient directly, or through their own charity, so ownership never passes through us. The intention (niyyah) stays with the giver.</li>
+<li><b>We are not an amil.</b> In Hanafi fiqh a private organisation not appointed by the authorities is not a Zakat collector (amil), and so has no claim on the collectors’ share. AM Network does not handle the money at all, and takes nothing from Zakat.</li>
+<li><b>The category is a suggestion.</b> The AI review suggests which of the eight categories of 9:60 a request may fit. Eligibility — including whether the person has wealth above nisab — is for the giver to establish, with a scholar where needed.</li>
+<li><b>Sadaqah is kept separate</b> from Zakat, in the review and in the report, because the rules for the two differ.</li>
 </ul>
 <h3>Status</h3>
-<p>We are seeking review of this model by a Hanafi scholar before the pilot. AM Network is <b>not certified</b> by any scholar or Sharia board, and we name no one as an advisor until they have agreed.</p>
+<p>We are seeking review of this model by a Hanafi scholar. AM Network is <b>not certified</b> by any scholar or Sharia board, and we name no one as an advisor until they have agreed.</p>
 <p class="note">Our free tools do not issue religious rulings. Quran text, translations and recitations are shown live from Quran.com exactly as published; hadith come from an open dataset with sources; any AI translation is labelled as such.</p>
 
-<h1 style="margin-top:22px">8. Legal Approach</h1>
+<h1 style="margin-top:22px">9. Legal Approach</h1>
 <ul>
-<li><b>No custody.</b> AM Network never receives, holds or forwards other people’s money. On our reading, this means it does not need a money-transfer licence; it is not a bank, a payment provider or a fund.</li>
-<li><b>Confirm before the pilot.</b> We will consult a lawyer in Tajikistan before the pilot to confirm that reading and to check the rules for processing families’ personal data and photos.</li>
-<li><b>Partner charities later.</b> When a donor wants to give through an organisation, that will be a registered charity operating under its own licence. No partner is confirmed today.</li>
-<li><b>A legal entity</b> for AM Network is not needed for a pilot that handles no money; we will decide on it after the pilot, with legal advice.</li>
+<li><b>No custody.</b> AM Network never receives, holds or forwards other people’s money. On our reading, it is not a bank, a payment provider or a fund, and needs no money-transfer licence.</li>
+<li><b>Givers act under their own rules.</b> A charity that helps through AM Network does so under its own registration and the law of its own country.</li>
+<li><b>Personal data.</b> Requests come from many countries. We keep data minimal, hosted in the EU, and based on the applicant’s consent; we will take legal advice as the platform grows.</li>
+<li><b>A legal entity</b> for AM Network is planned for later, once there is income to support it, with legal advice.</li>
 </ul>
 </div>
 
 <div class="sec">
-<h1>9. Sustainability</h1>
-<p><b>There is no income in year one, and that is a deliberate choice.</b> The pilot’s costs are small — hosting on free tiers and the founder’s time — and the founder covers them.</p>
+<h1>10. Sustainability</h1>
+<p><b>There is no income in year one, and that is a deliberate choice.</b> Costs are small — hosting on free tiers, a few cents of AI per request under a daily cap, and the founder’s time — and the founder covers them.</p>
 <h3>Later, and only in ways that never touch Zakat</h3>
 <ul>
-<li><b>Optional donor tips</b>, shown as a separate line and paid separately — never deducted from Zakat.</li>
+<li><b>Optional tips</b> from givers, shown as a separate line and paid separately — never deducted from Zakat.</li>
 <li><b>Grants</b> for transparency and social-impact work.</li>
-<li><b>Service fees from partner charities</b>, paid from their own funds, for the verification and reporting we do for them.</li>
+<li><b>Service fees from charities</b>, paid from their own funds, for the service we provide to them.</li>
 </ul>
 <h3>Never</h3>
 <ul>
 <li>A fee or percentage taken from Zakat.</li>
 <li>A token or any speculative instrument.</li>
-<li>Selling or sharing families’ data; advertising.</li>
+<li>Selling or sharing applicants’ data; advertising.</li>
 </ul>
-<p>We are not raising investment now.</p>
-
+<h3>What income would make possible</h3>
+<p>Our own verifiers and the “Recommended by the AM Network team” mark; a Hanafi scholar’s formal review; legal registration. A blockchain record is something we may consider later; we promise nothing about it. We are not raising investment now.</p>
 </div>
 
 <div class="sec">
-<h1>10. Status and Roadmap</h1>
+<h1>11. Status and Roadmap</h1>
 <table>
 <tr><th style="width:34%">Now (November 2026)</th><th>Status</th></tr>
-<tr><td><b>Cabinet</b> for families, verifiers, donors, admin</td><td><span class="status live">READY</span>applications, in-person checks, approval, payouts (ru/tj/en)</td></tr>
-<tr><td><b>Open report</b></td><td><span class="status live">READY</span>public log with in-browser chain check; no entries until the pilot</td></tr>
+<tr><td><b>Request form</b> at /apply/</td><td><span class="status live">READY</span>any country, 10 languages, own currency; consent questions; reference number</td></tr>
+<tr><td><b>AI review</b></td><td><span class="status live">READY</span>9:60 category hint, what to verify, red flags, questions; daily cap in the database</td></tr>
+<tr><td><b>Givers’ area</b> in the cabinet</td><td><span class="status live">READY</span>giver approval, feed without contacts, “I want to help”, admin connects by hand</td></tr>
+<tr><td><b>Open report</b></td><td><span class="status live">READY</span>public log with in-browser chain check; no entries yet</td></tr>
 <tr><td><b>AM Academy</b></td><td><span class="status live">LIVE</span>four audiences, downloadable certificate</td></tr>
 <tr><td><b>Free Islamic tools</b></td><td><span class="status live">LIVE</span>Quran, hadith, dua, prayer times, Qibla, calendar, 99 Names, tasbeeh, Zakat calculator — 10 languages</td></tr>
 </table>
-<h2>Next — December 2026 to January 2027</h2>
+<h2>Next</h2>
 <ul>
-<li><span class="status wip">NEXT</span>Consultation with a lawyer in Tajikistan</li>
-<li><span class="status wip">NEXT</span>Review of the model by a Hanafi scholar</li>
-<li><span class="status wip">NEXT</span>Training of the volunteer verifiers</li>
-<li><span class="status wip">NEXT</span>Trial run with 2–3 families from the founder’s own Zakat</li>
+<li><span class="status wip">NOW</span>Writing to charities in all countries; approving the first givers</li>
+<li><span class="status wip">NOW</span>Seeking review of the model by a Hanafi scholar</li>
+<li><span class="status plan">PLANNED</span>Mobile apps — December 2026</li>
 </ul>
-<h2>Pilot — Ramadan 2027 (about February–March)</h2>
-<ul><li><span class="status plan">PLANNED</span>10–20 families in Dushanbe; the founder’s own and relatives’ Zakat; every payout in the public report</li></ul>
-<h2>After the pilot</h2>
+<h2>Later, with income — no dates</h2>
 <ul>
-<li><span class="status plan">PLANNED</span>Publish the results, including what went wrong</li>
-<li><span class="status plan">PLANNED</span>A relationship with a registered partner charity in Dushanbe</li>
-<li><span class="status plan">PLANNED</span>More cities — only if the pilot works</li>
+<li><span class="status plan">LATER</span>Our own verifiers and the “Recommended by the AM Network team” mark</li>
+<li><span class="status plan">LATER</span>A formal Sharia review; legal registration</li>
+<li><span class="status plan">MAYBE</span>A blockchain record — only if it is ever needed</li>
 </ul>
 <p class="note">No partners are confirmed. We do not name any organisation as a partner until it has agreed.</p>
 </div>
 
 <div class="sec">
-<h1>11. Risks and Limits</h1>
-<p>A pilot of 10–20 families is small on purpose. These are the risks we see, and what we do about them.</p>
+<h1>12. Risks and Limits</h1>
+<p>These are the risks we see, and what we do about them.</p>
 <table>
 <tr><th style="width:27%">Risk or limit</th><th style="width:9%">Level</th><th>Mitigation</th></tr>
-<tr><td><b>Small pilot</b> — 10–20 families say little about scale</td><td class="md">Med</td><td>Treat it as a test, not proof. Publish results honestly, including problems. Expand only if it works.</td></tr>
-<tr><td><b>Volunteer quality</b> — a careless or biased check</td><td class="hi">High</td><td>Training before the pilot; a written checklist with visible points; verifier role only for people known personally; whoever brought a family cannot verify it; a second visit when in doubt.</td></tr>
-<tr><td><b>Fake documents or a staged situation</b></td><td class="hi">High</td><td>The decision rests on a visit to the home, not on documents alone; facts are confirmed in person (address, household, other help); the admin looks for repeat applications.</td></tr>
-<tr><td><b>Collusion</b> between a volunteer and a family</td><td class="md">Med</td><td>Separation between who brings and who checks; every step recorded in the application’s history; the admin can order another check.</td></tr>
-<tr><td><b>One admin</b> in the pilot</td><td class="md">Med</td><td>Every action is logged; payouts cannot be edited or deleted through the app, and any change breaks the hash chain. A second reviewer after the pilot.</td></tr>
-<tr><td><b>The chain can be rebuilt</b> by whoever runs the database</td><td class="md">Med</td><td>Stated openly (Section 5.4). Anyone can save the report or its latest fingerprint; a rebuilt chain would not match it.</td></tr>
-<tr><td><b>Data leak</b></td><td class="md">Med</td><td>Minimal data; row-level security; no files stored; EU hosting; nothing personal is ever public.</td></tr>
-<tr><td><b>Legal or Sharia objection</b></td><td class="md">Med</td><td>Lawyer consultation and a Hanafi scholar’s review before the pilot; the pilot waits if either raises a problem.</td></tr>
-<tr><td><b>Dependence on free hosting tiers</b></td><td class="md">Low</td><td>Regular exports of the database; the report can be re-published from a copy and re-checked.</td></tr>
+<tr><td><b>False or exaggerated requests</b></td><td class="hi">High</td><td>Every request is labelled “Not verified by AM Network”; the AI lists red flags and what to verify; the admin lists requests by hand; the giver verifies before giving.</td></tr>
+<tr><td><b>The AI misjudges a category or a case</b></td><td class="md">Med</td><td>The review is a hint, labelled as such; it explains its reasoning and flags where scholars differ; the giver decides, with a scholar where needed.</td></tr>
+<tr><td><b>A giver who is not what they claim</b></td><td class="hi">High</td><td>Givers are approved by hand; the feed has no contact details; contact only through us and only with the applicant’s consent.</td></tr>
+<tr><td><b>Few givers respond</b></td><td class="md">Med</td><td>Outreach to charities in all countries; we tell applicants honestly that help is not guaranteed.</td></tr>
+<tr><td><b>One admin</b></td><td class="md">Med</td><td>Each offer and connection is recorded; report entries cannot be edited or deleted through the app. A second reviewer when the team grows.</td></tr>
+<tr><td><b>Data leak</b></td><td class="md">Med</td><td>Minimal data; row-level security; contact details never in the feed or sent to the AI; no files stored; EU hosting.</td></tr>
+<tr><td><b>AI cost grows</b></td><td class="md">Low</td><td>A daily cap kept in the database; low effort per review; the request is saved even without a review.</td></tr>
+<tr><td><b>Legal or Sharia objection</b></td><td class="md">Med</td><td>A Hanafi scholar’s review is sought; legal advice as we grow; we change the model if either raises a problem.</td></tr>
+<tr><td><b>The chain can be rebuilt</b> by whoever runs the database</td><td class="md">Low</td><td>Stated openly (Section 6.4). Anyone can save the report or its latest fingerprint.</td></tr>
 </table>
 <h3>What this system cannot do</h3>
 <ul>
-<li>It cannot make a dishonest person honest. It makes dishonesty harder to hide.</li>
-<li>It does not prove that money changed hands — people and receipts do. It proves that the record was not quietly changed afterwards.</li>
-<li>It does not replace the donor’s own responsibility for his Zakat.</li>
+<li>It cannot tell whether a story is true. The giver has to check.</li>
+<li>It cannot guarantee that a request will be answered.</li>
+<li>It does not replace a scholar, or the giver’s own responsibility for his Zakat.</li>
 </ul>
 </div>
 
 <div class="sec">
-<h1>12. Team, Disclosures and Contacts</h1>
+<h1>13. Team, Disclosures and Contacts</h1>
 <div style="background:var(--mint);border-top:1px solid var(--green);padding:14px 18px;margin:8px 0 14px;break-inside:avoid">
   <div style="font-size:17pt;font-weight:700;color:var(--green)">Akbar Amirzoda</div>
   <div style="color:var(--gold);margin-bottom:6px">Founder</div>
-  <p>Economist (Plekhanov Russian University of Economics, Moscow) and diplomat with a background in international relations. Building AM Network to bring transparency and justice to Islamic giving.</p>
+  <p>Economist (Plekhanov Russian University of Economics, Moscow) and diplomat with a background in international relations. Building AM Network to help Zakat and Sadaqah reach the people who need them.</p>
   <div style="color:var(--gold);font-size:9.6pt">linkedin.com/in/akbar-amirzoda-65845840b · contact@amnetwork.io</div>
 </div>
-<p>For the pilot, volunteer verifiers are chosen among people the founder knows personally. We are not hiring and not raising investment now.</p>
-<h3>Nature of the service</h3><p>AM Network is a verification and reporting service. It is not a bank, payment provider, charity or fund. It does not accept, hold, transfer or invest anyone’s money. No payments are processed today. Dates and plans in this paper are intentions, not guarantees.</p>
-<h3>Islamic rulings</h3><p>AM Network is not certified by a scholar or a Sharia board; we are seeking a Hanafi scholar’s review. Donors remain responsible for their own Zakat and are encouraged to consult qualified scholars.</p>
-<h3>Sources</h3><p class="note">Zakat potential: World Bank &amp; IRTI/IsDB, “Global Report on Islamic Finance” (2016), which gives a range of $50–600 billion a year and under $25 billion distributed formally. Muslim population: Pew Research Center.</p>
+<p>We are not hiring and not raising investment now.</p>
+<h3>Nature of the service</h3><p>AM Network is a platform that connects people in need with givers and helps givers read requests. It is not a bank, payment provider, charity or fund. It does not accept, hold, transfer or invest anyone’s money, and it does not verify requests itself today. Dates and plans in this paper are intentions, not guarantees.</p>
+<h3>Islamic rulings</h3><p>AM Network is not certified by a scholar or a Sharia board; we are seeking a Hanafi scholar’s review. The AI review is a hint, not a fatwa. Givers remain responsible for their own Zakat and are encouraged to consult qualified scholars.</p>
+<h3>Sources</h3><p class="note">Zakat potential: World Bank &amp; IRTI/IsDB, “Global Report on Islamic Finance” (2016), which gives a range of $50–600 billion a year and under $25 billion distributed formally. The eight categories of Zakat recipients: Quran, Surah At-Tawbah 9:60.</p>
 <div class="quote">“I want to build something beneficial that truly serves the Ummah. A product or system that becomes the reason the Almighty Allah rewards us and has mercy upon us. May the Almighty Allah help us in this noble endeavor. Ameen!”<small>— Akbar Amirzoda</small></div>
 <div class="contact">
   <h2>Contact AM Network</h2>
-  <div>General: <b>contact@amnetwork.io</b> · Web: <b>amnetwork.io</b> · Open report: <b>amnetwork.io/transparency/</b></div>
+  <div>General: <b>contact@amnetwork.io</b> · Web: <b>amnetwork.io</b> · Request help: <b>amnetwork.io/apply/</b></div>
   <div>LinkedIn: <b>linkedin.com/company/amnetwork-io</b></div>
-  <div>Instagram <b>@amnet_io</b> · Telegram <b>@amnetwork_global</b> · X <b>@amnet_io</b></div>
+  <div>Instagram <b>@amnetwork.io</b> · Telegram <b>@amnetwork_global</b> · X <b>@amnet_io</b></div>
   <div>YouTube <b>@amnetwork_io</b> · TikTok <b>@amnetwork.io</b></div>
 </div>
 </div>
 
 <div class="sec">
-<h1>What changed since v1.1</h1>
-<p>Version 1.1 (October 2026) described a different product. In November 2026 the founder chose a simpler model. What was dropped, and why:</p>
+<h1>How we got here</h1>
+<p><b>Version 1.1 (October 2026)</b> described Zakat moving through escrow smart contracts on the Base blockchain, a 1–2.5% ujrah fee, an “oracle network” of local verifiers including mosque imams, an AI score of 0–100 and a seed round. <b>Version 2.0 (20 November 2026)</b> dropped all of that for a verification and transparency service: our own trained volunteers would visit each family in person, with a first pilot of 10–20 families in Dushanbe around Ramadan 2027, funded only by the founder’s and his relatives’ Zakat.</p>
+<p><b>Version 2.1 (24 November 2026)</b> keeps the principles of 2.0 and changes who checks. We have no volunteers yet and no money to train them, and people in need are not only in one city. So the platform opens now, to every country: AI helps givers read requests, and the giver verifies. What changed:</p>
 <ul>
-<li><b>Blockchain and smart contracts removed.</b> v1.1 planned to move Zakat through escrow smart contracts on the Base blockchain, with Solana as a backup and LayerZero between chains, settled in stablecoins. Holding other people’s Zakat brings licensing, custody, security-audit and Sharia questions that a small pilot does not need. Transparency does not require holding the money: a public, SHA-256-chained report gives tamper-evidence without it. The Solidity code stays in the repository as an archived prototype; it is not used or deployed.</li>
-<li><b>The “ujrah 1–2.5%” fee removed.</b> Under Hanafi fiqh a private organisation is the donor’s agent, not an amil, and nothing passes through us to charge on. We take nothing from Zakat. Sustainability is now described in Section 9.</li>
-<li><b>No token, NFT or DAO.</b> The planned NFT certificates for AM Academy are dropped; the certificate is a downloadable file.</li>
-<li><b>“Oracle network” replaced by trained volunteers.</b> Mosque imams are no longer a fixed part of verification; the process should not depend on any religious institution.</li>
-<li><b>“AI need score 0–100” replaced</b> by a transparent checklist with visible points, capped at 100. A person decides after a visit.</li>
-<li><b>Dates.</b> “Testnet beta, Q4 2026” replaced by a pilot in Dushanbe around Ramadan 2027.</li>
-<li><b>Sharia status.</b> “Designed to comply; fatwa pending” replaced by: seeking a Hanafi scholar’s review before the pilot; not certified.</li>
-<li><b>Removed:</b> the seed round and use of funds, revenue projections, the Islamic finance and fintech market sizes, and the hiring list. We are not raising investment, and those figures do not describe a verification pilot.</li>
-<li><b>Kept:</b> the Zakat potential as a range ($50–600 billion owed, under $25 billion distributed formally), the 15 situation categories mapped to the eight asnaf, and the honest-status rule: nothing is described as live before it is.</li>
+<li><b>In-person checks by our volunteers → the giver verifies.</b> Every request is labelled “Not verified by AM Network”. Our own verifiers come later, with income.</li>
+<li><b>A Dushanbe pilot of 10–20 families → open to all countries.</b> Requests in any language and currency; outreach to charities in all countries starts now.</li>
+<li><b>AI is back, as a reading aid.</b> It suggests a 9:60 category, what to verify and red flags; it never sees contact details and decides nothing. The visible need checklist built for volunteers waits for that later stage.</li>
+<li><b>The open report becomes optional.</b> The SHA-256 hash chain stays, for givers who want their gift recorded.</li>
+<li><b>Unchanged:</b> the money never passes through us; nothing is taken from Zakat; no token, NFT or DAO; no income in year one; not Sharia-certified, a Hanafi scholar’s review is sought; no partners named; the Zakat potential cited only as a range ($50–600 billion owed, under $25 billion distributed formally). The Solidity code from v1.1 stays in the repository as an archived prototype; it is not used or deployed.</li>
 </ul>
 </div>
 

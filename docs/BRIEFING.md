@@ -24,8 +24,8 @@ Full text: `docs/strategy-2026-11.md`, wording rules: `docs/messaging-2026-11.md
 - Never call AM Network **"the first"**. Zakat potential = "**$50B–$600B a year**" (World Bank + IRTI/IsDB 2016), under $25B formal.
 
 ## 3. Where we are going (goals, insha'Allah)
-1. Platform 100% ready (done: cabinet for families/verifiers/donors/admin, open report, site rewritten). Next: email (Resend),
-   privacy/consent done, trial with 2–3 families, lawyer + scholar.
+1. Platform 100% ready (done: cabinet for families/verifiers/donors/admin, open report, site rewritten, email via Resend,
+   privacy/consent). Next: trial with 2–3 families, then lawyer + Hanafi scholar review.
 2. Ramadan 2027 pilot in Dushanbe with a public report; after it — a registered partner charity (first candidate Saliheen).
 3. Media: grow the channel to YouTube Partner Program level-1 (500 subs + 3M Shorts views / 90 days) through daily short videos;
    side income: Ramadan workbook (Jan–Feb 2027), commissioned animations for Islamic schools/brands, donations link.

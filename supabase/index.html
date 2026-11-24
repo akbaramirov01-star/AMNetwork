@@ -46,6 +46,65 @@ input{font:16px system-ui,sans-serif;min-height:48px}
 <div class="ok" id="o3"></div>
 <textarea id="rst" readonly style="height:90px">truncate public.events, public.payouts, public.verifications, public.applications restart identity;
 alter sequence public.app_ref_seq restart with 1;</textarea>
+<h2>Письма (Authentication → Emails → Templates)</h2>
+<p><b>1. «Confirm signup»</b>. Тема:</p>
+<button data-copy="s1">Скопировать тему</button><div class="ok" id="o_s1"></div>
+<textarea id="s1" readonly style="height:48px">AM Network — тасдиқи почта · подтвердите почту · confirm your email</textarea>
+<p>Текст письма (вкладка Source / Message body):</p>
+<button data-copy="b1">Скопировать текст письма</button><div class="ok" id="o_b1"></div>
+<textarea id="b1" readonly>&lt;div style=&quot;font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;padding:24px;color:#1C2E1F&quot;&gt;
+  &lt;h2 style=&quot;color:#0A1A11;margin:0 0 16px&quot;&gt;AM Network&lt;/h2&gt;
+  &lt;p&gt;&lt;b&gt;Тасдиқи почта&lt;/b&gt; — барои фаъол кардани аккаунт тугмаро пахш кунед.&lt;br&gt;
+  &lt;b&gt;Подтвердите почту&lt;/b&gt; — нажмите кнопку, чтобы активировать аккаунт.&lt;br&gt;
+  &lt;b&gt;Confirm your email&lt;/b&gt; — tap the button to activate your account.&lt;/p&gt;
+  &lt;p style=&quot;margin:24px 0&quot;&gt;&lt;a href=&quot;{{ .ConfirmationURL }}&quot; style=&quot;background:#C9A84C;color:#16130a;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:bold&quot;&gt;Тасдиқ · Подтвердить · Confirm&lt;/a&gt;&lt;/p&gt;
+  &lt;p style=&quot;font-size:13px;color:#555&quot;&gt;Агар шумо сабти ном накарда бошед, ин мактубро нодида гиред. · Если вы не регистрировались, просто проигнорируйте письмо. · If you did not sign up, ignore this email.&lt;/p&gt;
+  &lt;p style=&quot;font-size:12px;color:#888&quot;&gt;AM Network · amnetwork.io · contact@amnetwork.io&lt;/p&gt;
+&lt;/div&gt;
+</textarea>
+<p><b>2. «Reset password»</b>. Тема:</p>
+<button data-copy="s2">Скопировать тему</button><div class="ok" id="o_s2"></div>
+<textarea id="s2" readonly style="height:48px">AM Network — рамзи нав · новый пароль · new password</textarea>
+<p>Текст письма:</p>
+<button data-copy="b2">Скопировать текст письма</button><div class="ok" id="o_b2"></div>
+<textarea id="b2" readonly>&lt;div style=&quot;font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;padding:24px;color:#1C2E1F&quot;&gt;
+  &lt;h2 style=&quot;color:#0A1A11;margin:0 0 16px&quot;&gt;AM Network&lt;/h2&gt;
+  &lt;p&gt;&lt;b&gt;Рамзи нав&lt;/b&gt; — барои гузоштани рамзи нав тугмаро пахш кунед.&lt;br&gt;
+  &lt;b&gt;Новый пароль&lt;/b&gt; — нажмите кнопку, чтобы задать новый пароль.&lt;br&gt;
+  &lt;b&gt;New password&lt;/b&gt; — tap the button to set a new password.&lt;/p&gt;
+  &lt;p style=&quot;margin:24px 0&quot;&gt;&lt;a href=&quot;{{ .ConfirmationURL }}&quot; style=&quot;background:#C9A84C;color:#16130a;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:bold&quot;&gt;Рамзи нав · Новый пароль · New password&lt;/a&gt;&lt;/p&gt;
+  &lt;p style=&quot;font-size:13px;color:#555&quot;&gt;Агар шумо рамзро дархост накарда бошед, ин мактубро нодида гиред. · Если вы не запрашивали смену пароля, проигнорируйте письмо. · If you did not ask for this, ignore this email.&lt;/p&gt;
+  &lt;p style=&quot;font-size:12px;color:#888&quot;&gt;AM Network · amnetwork.io · contact@amnetwork.io&lt;/p&gt;
+&lt;/div&gt;
+</textarea>
+<p>После каждого — <b>Save changes</b>.</p>
+<h2>Уведомления на почту (новая заявка, проверка)</h2>
+<p><b>А.</b> Скрипт уведомлений → SQL Editor → New query → вставить → Run.</p>
+<button id="cn">Скопировать скрипт уведомлений</button><div class="ok" id="on"></div>
+<textarea id="nsql" readonly>Загрузка…</textarea>
+<p><b>Б.</b> В Resend → API Keys создай ещё один ключ (имя <code>notify</code>, Sending access). Впиши его и свою почту ниже — команда соберётся здесь на телефоне и никуда не отправится. Потом SQL Editor → New query → вставить → Run.</p>
+<input id="rk" placeholder="ключ Resend: re_..." autocomplete="off" autocapitalize="off" spellcheck="false">
+<input id="ae" type="email" placeholder="почта, куда присылать уведомления" autocomplete="email" style="margin-top:8px">
+<button id="cs">Скопировать команду</button><div class="ok" id="os"></div>
+<p style="font-size:13px">Ключ хранится только в защищённом хранилище Supabase (Vault). После копирования очисти поле.</p>
+<h2>Платформа: заявки с сайта и разбор ИИ</h2>
+<p><b>А.</b> Скрипт платформы → SQL Editor → New query → вставить → Run. Данные он не удаляет.</p>
+<button id="cm">Скопировать скрипт платформы</button><div class="ok" id="om"></div>
+<textarea id="msql" readonly>Загрузка…</textarea>
+<p><b>Б.</b> Секрет — общий пароль между сайтом (Render) и базой. Он создаётся здесь, на телефоне, и никуда не отправляется.</p>
+<button id="gs">Создать секрет</button>
+<input id="sv" readonly placeholder="секрет появится здесь" style="margin-top:8px">
+<p>1) Команда для базы → SQL Editor → New query → вставить → Run:</p>
+<button id="css">Скопировать команду для базы</button><div class="ok" id="oss"></div>
+<p>2) Render → сервис <code>amnetwork</code> → Environment → Add Environment Variable. Добавь пять строк:</p>
+<ul style="line-height:1.9">
+<li><code>AMN_SVC_SECRET</code> = <button id="crs" style="min-height:32px;padding:0 10px">скопировать секрет</button> <span class="ok" id="ors"></span></li>
+<li><code>SUPABASE_URL</code> = <code>https://pziakammdazyytxubtrj.supabase.co</code></li>
+<li><code>SUPABASE_KEY</code> = <code>sb_publishable_RFk0C-Cm3mfgftfS7dygpw_XPpEBZaE</code></li>
+<li><code>AI_REVIEW_ENABLED</code> = <code>1</code></li>
+<li><code>ANTHROPIC_API_KEY</code> — уже должен быть; если нет, ключ из console.anthropic.com</li>
+</ul>
+<p>Потом <b>Save, rebuild and deploy</b>. Разбор одной заявки стоит примерно 1–3 цента; не больше 30 разборов в день (лимит хранится в базе).</p>
 </main>
 <script>
 const $=s=>document.querySelector(s);
@@ -55,6 +114,18 @@ async function copy(text,out){
   $(out).textContent='Скопировано ✓';setTimeout(()=>$(out).textContent='',3000);
 }
 $('#c3').onclick=()=>copy($('#rst').value,'#o3');
+document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>copy($('#'+b.dataset.copy).value,'#o_'+b.dataset.copy));
+
+fetch('/supabase/notify.sql',{cache:'no-store'}).then(r=>r.text()).then(t=>{$('#nsql').value=t}).catch(()=>{});
+$('#cn').onclick=()=>copy($('#nsql').value,'#on');
+$('#cs').onclick=()=>{const k=$('#rk').value.trim().replace(/'/g,"''"),e=$('#ae').value.trim().replace(/'/g,"''");if(!k||!e){$('#os').textContent='Впиши ключ и почту';return}
+copy("delete from vault.secrets where name='resend_api_key';\nselect vault.create_secret('"+k+"','resend_api_key');\ninsert into public.amn_settings(key,value) values('admin_email','"+e+"') on conflict (key) do update set value=excluded.value;",'#os')};
+fetch('/supabase/matching.sql',{cache:'no-store'}).then(r=>r.text()).then(t=>{$('#msql').value=t}).catch(()=>{});
+$('#cm').onclick=()=>copy($('#msql').value,'#om');
+$('#gs').onclick=()=>{const a=new Uint8Array(24);crypto.getRandomValues(a);$('#sv').value=[...a].map(b=>b.toString(16).padStart(2,'0')).join('')};
+$('#css').onclick=()=>{const v=$('#sv').value;if(!v){$('#oss').textContent='Сначала «Создать секрет»';return}
+copy("insert into public.amn_settings(key,value) values('svc_secret','"+v+"') on conflict (key) do update set value=excluded.value;",'#oss')};
+$('#crs').onclick=()=>{const v=$('#sv').value;if(!v){$('#ors').textContent='Сначала «Создать секрет»';return}copy(v,'#ors')};
 $('#c1').onclick=()=>copy($('#sql').value,'#o1');
 const build=()=>{const e=$('#em').value.trim().replace(/'/g,"''");$('#adm').value=e?"update public.profiles set role='admin' where email='"+e+"';":''};
 $('#em').addEventListener('input',build);

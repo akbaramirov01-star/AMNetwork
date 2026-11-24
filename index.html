@@ -9,10 +9,10 @@
 <meta name="apple-mobile-web-app-title" content="AM Network">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
-<title>AM Network — Verified, transparent Zakat &amp; Sadaqah</title>
+<title>AM Network — Zakat that finds the person it is due to</title>
 <!-- OG Tags -->
-<meta property="og:title" content="AM Network — Verified, transparent Zakat &amp; Sadaqah">
-<meta property="og:description" content="AM Network is a verification and transparency service for Zakat and Sadaqah: we check each family in person, publish an open, tamper-evident report of every payout and never hold the money — the donor gives directly to the family.">
+<meta property="og:title" content="AM Network — Zakat that finds the person it is due to">
+<meta property="og:description" content="AM Network connects people in need with those who give Zakat and Sadaqah — donors and charities in any country. AI reviews each request and suggests the Zakat category and what to check; the giver verifies and helps directly. Money never passes through us.">
 <meta property="og:image" content="https://amnetwork.io/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -20,8 +20,8 @@
 <meta property="og:url" content="https://amnetwork.io/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AM Network — Verified, transparent Zakat &amp; Sadaqah">
-<meta name="twitter:description" content="We check each family in person, publish an open report of every payout and never hold the money — the donor gives directly to the family.">
+<meta name="twitter:title" content="AM Network — Zakat that finds the person it is due to">
+<meta name="twitter:description" content="AM Network connects people in need with those who give Zakat and Sadaqah — donors and charities in any country. AI reviews each request and suggests the Zakat category and what to check; the giver verifies and helps directly. Money never passes through us.">
 <!-- Google Analytics -->
 
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.web3forms.com https://script.google.com https://script.googleusercontent.com https://*.hcaptcha.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://api.worldbank.org https://amnetwork.onrender.com https://api.quran.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-src https://*.hcaptcha.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.hcaptcha.com; object-src 'none'">
@@ -40,7 +40,7 @@ if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{ana
 <meta name="theme-color" content="#C9A84C">
 
 <!-- PWA / SEO -->
-<meta name="description" content="AM Network is a verification and transparency service for Zakat and Sadaqah: we check each family in person, publish an open, tamper-evident report of every payout and never hold the money — the donor gives directly to the family. Free Islamic tools in 10 languages.">
+<meta name="description" content="AM Network connects people in need with those who give Zakat and Sadaqah — donors and charities in any country. AI reviews each request and suggests the Zakat category and what to check; the giver verifies and helps directly. Money never passes through us. Free Islamic tools in 10 languages.">
 <meta name="keywords" content="Zakat, Sadaqah, verification, transparency, Islamic tools, Quran, prayer times, Zakat calculator, Dushanbe, AM Network">
 <meta name="author" content="Akbar Amirzoda">
 <meta property="og:site_name" content="AM Network">
@@ -58,7 +58,7 @@ if(localStorage.getItem('amn_cookie')==='accepted'){gtag('consent','update',{ana
     "width": 512,
     "height": 512
   },
-  "description": "AM Network is a verification and transparency service for Zakat and Sadaqah: we check each family in person, publish an open, tamper-evident report of every payout and never hold the money — the donor gives directly to the family.",
+  "description": "AM Network connects people in need with those who give Zakat and Sadaqah — donors and charities in any country. AI reviews each request and suggests the Zakat category and what to check; the giver verifies and helps directly. Money never passes through us.",
   "founder": {
     "@type": "Person",
     "name": "Akbar Amirzoda"
@@ -846,6 +846,17 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .ex-hash code{font:12.5px ui-monospace,Menlo,monospace;color:var(--text2);background:var(--input-bg);padding:3px 8px;border-radius:6px}
 .ex-chain{font-size:12.5px;color:var(--text3);margin-top:8px;line-height:1.5}
 .how-cta{margin-top:22px}
+.steps.steps3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.steps.steps3{grid-template-columns:1fr}}
+.st-cols.st-cols3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:820px){.st-cols.st-cols3{grid-template-columns:1fr}}
+.how-note{font-size:14px;color:var(--text2);margin:16px 0 0;max-width:720px;line-height:1.6}
+.ex-need{font:700 24px/1.25 'Cormorant Garamond',serif;color:var(--gold2);margin:8px 0 10px}
+.ex-tags .ex-unv{background:rgba(255,170,80,.12);border-color:rgba(255,170,80,.4);color:#F2B36B}
+[data-theme="light"] .ex-tags .ex-unv{color:#9A5A12}
+.ex-ai{border-top:1px dashed var(--border);padding-top:10px;font-size:13.5px;color:var(--text2);line-height:1.55}
+.ex-ai b{display:block;color:var(--text);font-weight:600;margin-bottom:4px}
+.ex-ai ul{margin:4px 0 0;padding-inline-start:18px}
 .step .sbadge{justify-self:start;width:auto;margin-top:10px}
 .st-cols{gap:12px;border-top:0}
 .st-col,.st-col+.st-col{padding:18px 18px 10px;border:1px solid var(--border);border-radius:16px;background:var(--card);border-left:1px solid var(--border)}
@@ -855,6 +866,24 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 @media (max-width:560px){.st-cols{grid-template-columns:1fr}}
 .pb-lbl b{unicode-bidi:isolate}
 [dir="rtl"] .hero-calc .arr{display:inline-block;transform:scaleX(-1)}
+.nav-ic{flex:none;vertical-align:-3px;margin-inline-end:6px;color:var(--gold)}
+.nav-demo,.nav-tools summary{display:inline-flex;align-items:center}
+.nav-cab{display:inline-flex;align-items:center;gap:0;min-height:44px;padding:0 14px;border:1px solid rgba(201,168,76,.55);border-radius:8px;color:var(--gold2);font:600 13px 'DM Sans',sans-serif;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.nav-cab:hover{background:var(--gold3);border-color:var(--gold)}
+@media(max-width:600px){.nav-cab span{display:none}.nav-cab{padding:0 12px}.nav-cab .nav-ic{margin:0}}
+@media(max-width:440px){#langName{display:none}#langBtn{padding:12px 10px!important;min-width:0!important;width:auto!important;gap:4px!important}#langBtn>span:last-child{margin-left:2px!important}.nav-right{gap:6px!important}}
+/* generated icon set (Higgsfield, Nov 2026) */
+.tl-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;border:0}
+.tl-grid li{border:0}
+.tl-grid a{flex-direction:column;justify-content:flex-start;text-align:center;gap:10px;padding:16px 10px;border:1px solid var(--border);border-radius:18px;background:var(--card);height:100%;font-weight:600}
+.tl-grid a:hover{border-color:rgba(201,168,76,.6);background:var(--gold3);color:var(--text)}
+@media (prefers-reduced-motion:no-preference){.tl-grid a{transition:transform .2s,border-color .2s,background .2s}.tl-grid a:hover{transform:translateY(-3px)}}
+.tl-ic{width:64px;height:64px;border-radius:16px;box-shadow:0 8px 22px rgba(0,0,0,.28),0 0 0 1px rgba(201,168,76,.25)}
+@media(max-width:820px){.tl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tl-grid a{flex-direction:row;text-align:start;padding:12px}.tl-ic{width:52px;height:52px;border-radius:13px}}
+.step-icon img{width:56px;height:56px;border-radius:14px;display:block;box-shadow:0 6px 18px rgba(0,0,0,.25),0 0 0 1px rgba(201,168,76,.25)}
+.step-icon{background:none!important;border:0!important;width:auto!important;height:auto!important;padding:0!important}
+.picon{background:none!important;border:0!important;width:auto!important;height:auto!important;padding:0!important}
+.picon img{width:72px;height:72px;border-radius:18px;display:block;box-shadow:0 10px 26px rgba(0,0,0,.3),0 0 0 1px rgba(201,168,76,.3)}
 /* products: always visible, a bit livelier */
 .pcard{padding:26px}
 .pcard:hover{border-color:rgba(201,168,76,.5)}
@@ -891,11 +920,11 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
       </div>
     </div>
     <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme" data-t-aria="aria_theme">🌙</button>
-    <a class="nav-demo" href="/academy/">🎓 <span data-t="nav_academy">AM Academy</span></a>
-    <a class="nav-demo" href="/quran/">📖 <span data-t="nav_quran">The Holy Quran</span></a>
-    <a class="nav-demo" href="/zakat/">🧮 <span data-t="nav_calc">Zakat Calculator</span></a>
-    <a class="nav-demo nav-help" href="/apply/">🤲 <span data-t="nav_help">Apply for Assistance</span></a>
-    <details class="nav-tools" id="navToolsDetails"><summary>🧰 <span data-t="nav_tools">Tools</span><span class="chev">▾</span></summary><div class="nav-tools-menu">
+    <a class="nav-demo" href="/academy/"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg><span data-t="nav_academy">AM Academy</span></a>
+    <a class="nav-demo" href="/quran/"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg><span data-t="nav_quran">The Holy Quran</span></a>
+    <a class="nav-demo" href="/zakat/"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg><span data-t="nav_calc">Zakat Calculator</span></a>
+    <a class="nav-demo nav-help" href="/apply/"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21.2l8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg><span data-t="nav_help">Apply for Assistance</span></a>
+    <details class="nav-tools" id="navToolsDetails"><summary><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span data-t="nav_tools">Tools</span><span class="chev">▾</span></summary><div class="nav-tools-menu">
       <a href="/prayer-times/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-t="nav_prayertimes">Prayer Times</span></a>
       <a href="/qibla/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-t="nav_qibla">Qibla Direction</span></a>
       <a href="/tasbeeh/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="4" cy="12" r="2"/><circle cx="10" cy="7" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="20" cy="18" r="2.6"/></svg><span data-t="nav_tasbeeh">Count Your Dhikr</span></a>
@@ -924,6 +953,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
       <a href="/prayer-times/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-t="nav_prayertimes">Prayer Times</span></a>
       <a href="/apply/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span data-t="nav_help">Apply for Assistance</span></a>
     </div></details>
+    <a class="nav-cab" href="/cabinet/" aria-label="Cabinet" data-t-aria="nav_cabinet"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg><span data-t="nav_cabinet">Account</span></a>
     <a class="nav-cta" href="#waitlist" data-t="nav_cta">Join Waitlist</a>
   </div>
 </nav>
@@ -943,7 +973,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <p class="hero-sub" data-t="hero_sub">A verification and transparency service for Zakat and Sadaqah: we check each family in person, publish an open, tamper-evident report of every payout, and never hold the money — the donor gives directly to the family.</p>
 
   <div class="hero-cta">
-    <a class="hbtn hbtn-gold" href="#waitlist" data-t="how_cta_give">I want to give Zakat</a>
+    <a class="hbtn hbtn-gold" href="#waitlist" data-t="how_cta_give">I want to help</a>
     <a class="hbtn hbtn-ghost" href="/apply/" data-t="how_cta_help">I need help — apply</a>
   </div>
   <a class="hero-calc" href="/zakat/"><span data-t="start_calc">Calculate Zakat</span> <span class="arr" aria-hidden="true">→</span></a>
@@ -979,26 +1009,27 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <section class="section" id="how">
   <h2 class="sec-title" data-t="how_title">Checked in person. Given directly. Recorded openly.</h2>
   <p class="sec-body" data-t="how_body">Five steps — from a family's application to an open record of the payout.</p>
-  <div class="steps">
+  <div class="steps steps3">
     <div class="steps-flow" aria-hidden="true"></div>
-    <div class="step reveal" style="--i:0"><span class="step-num">01</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div><h3 data-t="s1_h">A family applies</h3><p data-t="s1_p">A family fills in a short application — or a verifier brings in a family they know.</p><span class="sbadge sm" data-t="step_badge_1">Application</span></div>
-    <div class="step reveal" style="--i:1"><span class="step-num">02</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="m9 15 2 2 4-4"/></svg></div><h3 data-t="s2_h">A visit in person</h3><p data-t="s2_p">A trained AM Network volunteer visits the family and fills in a checklist. Whoever brought the family never verifies it.</p><span class="sbadge sg" data-t="step_badge_2">In-person check</span></div>
-    <div class="step reveal" style="--i:2"><span class="step-num">03</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></svg></div><h3 data-t="s3_h">Approval after the visit</h3><p data-t="s3_p">The admin approves help only after the in-person check. The need checklist shows its points openly; it is a hint — a person decides.</p><span class="sbadge se" data-t="step_badge_3">A person decides</span></div>
-    <div class="step reveal" style="--i:3"><span class="step-num">04</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 7h17m-4-4 4 4-4 4M21 17H4m4-4-4 4 4 4"/></svg></div><h3 data-t="s4_h">Directly to the family</h3><p data-t="s4_p">The donor gives the Zakat or Sadaqah to the family directly — cash, Alif, Korti Milli or a bank transfer. The money never passes through AM Network. Later: also through a registered partner charity.</p><span class="sbadge sg" data-t="step_badge_4">100% to the family</span></div>
-    <div class="step reveal" style="--i:4"><span class="step-num">05</span><div class="step-icon"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg></div><h3 data-t="s5_h">An open record</h3><p data-t="s5_p">The payout goes into the open report: amount, date, city or district, situation category and number of checks — no names, phones or addresses. Each entry carries a SHA-256 fingerprint linked to the previous one, so any quiet change breaks the chain. The report is in preparation for the pilot.</p><span class="sbadge sm" data-t="step_badge_5">SHA-256 chain</span></div>
+    <div class="step reveal" style="--i:0"><span class="step-num">01</span><div class="step-icon"><img src="/icons/ui/s1.webp?v=2" alt="" width="56" height="56" loading="lazy"></div><h3 data-t="s1_h">Request</h3><p data-t="s1_p">Anyone, in any country, describes their situation in their own language.</p><span class="sbadge sm" data-t="step_badge_1">Any country, any language</span></div>
+    <div class="step reveal" style="--i:1"><span class="step-num">02</span><div class="step-icon"><img src="/icons/ui/s5.webp?v=2" alt="" width="56" height="56" loading="lazy"></div><h3 data-t="s2_h">AI review</h3><p data-t="s2_p">AI suggests which of the 8 Zakat categories (9:60) the request may fit and what to check. A hint, not a fatwa.</p><span class="sbadge se" data-t="step_badge_2">A hint, not a fatwa</span></div>
+    <div class="step reveal" style="--i:2"><span class="step-num">03</span><div class="step-icon"><img src="/icons/ui/s4.webp?v=2" alt="" width="56" height="56" loading="lazy"></div><h3 data-t="s3_h">Direct help</h3><p data-t="s3_p">A charity or donor verifies the request themselves and helps directly. The money never passes through AM Network.</p><span class="sbadge sg" data-t="step_badge_3">100% to the recipient</span></div>
   </div>
+  <p class="how-note" data-t="how_note">Every request is labelled "Not verified by AM Network".</p>
   <figure class="ex-rec" aria-labelledby="exT">
-    <figcaption><b id="exT" data-t="ex_title">What a record in the open report looks like</b><span data-t="ex_note">Example. Real records will appear during the pilot.</span></figcaption>
+    <figcaption><b id="exT" data-t="ex_title">What a giver sees</b><span data-t="ex_note">Example. Name, phone and address are hidden.</span></figcaption>
     <div class="ex-card">
-      <div class="ex-top"><span class="ex-num" dir="ltr">#12 · 2027-03-14</span><span class="ex-ok">✓ <span data-t="ex_noname">No name, phone or address</span></span></div>
-      <div class="ex-amt" dir="ltr">1 500 TJS <small data-t="ex_kind">Zakat</small></div>
-      <div class="ex-tags"><span data-t="ex_region">Dushanbe</span><span data-t="ex_cat">Widow with children</span><span data-t="ex_checks">In-person checks: 2</span><span data-t="ex_receipt">Receipt: fingerprint kept</span></div>
-      <div class="ex-hash"><span data-t="ex_hash">Record fingerprint</span><code dir="ltr">3f9a7c…e21b04</code></div>
-      <p class="ex-chain" data-t="ex_chain">Linked to the previous record — any quiet change breaks the chain.</p>
+      <div class="ex-top"><span class="ex-num" dir="ltr">AMN-2026-0012</span><span class="ex-ok">✓ <span data-t="ex_noname">No name, phone or address</span></span></div>
+      <div class="ex-need" data-t="ex_need">Needs: about 1,500 somoni for 3 months</div>
+      <div class="ex-tags"><span data-t="ex_region">Dushanbe</span><span data-t="ex_cat">Widow with children</span><span class="ex-unv" data-t="ex_unv">Not verified by AM Network</span></div>
+      <div class="ex-ai"><b data-t="ex_ai">AI: may fall under "the poor" (al-fuqara, 9:60)</b>
+        <span data-t="ex_chk_h">AI suggests checking:</span>
+        <ul><li data-t="ex_chk1">The spouse's death certificate</li><li data-t="ex_chk2">A statement of income or pension</li><li data-t="ex_chk3">That there is no wealth above nisab</li></ul></div>
+      <p class="ex-chain" data-t="ex_foot">An AI hint, not a fatwa. The giver verifies and decides.</p>
     </div>
   </figure>
   <div class="how-cta">
-    <a class="hbtn hbtn-gold" href="#waitlist" data-t="how_cta_give">I want to give Zakat</a>
+    <a class="hbtn hbtn-gold" href="#waitlist" data-t="how_cta_give">I want to help</a>
     <a class="hbtn hbtn-ghost" href="/apply/" data-t="how_cta_help">I need help — apply</a>
   </div>
 </section>
@@ -1009,8 +1040,8 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <section class="section" id="products">
   <h2 class="sec-title" data-t="prod_title">Two products. One mission.</h2>
   <div class="products">
-    <div class="pcard reveal"><div class="picon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div><div class="plabel" data-t="p1_title">AM Zakat</div><h3 data-t="p1_h">Verified, transparent giving</h3><p data-t="p1_p">A verification and transparency service: trained volunteers check each family in person, the donor gives directly to the family, and every payout goes into an open, tamper-evident report.</p><ul class="pfeats"><li data-t="p1_f1">In-person check of every family</li><li data-t="p1_f2">Money goes from donor to family — never through us</li><li data-t="p1_f3">Open report with a SHA-256 hash chain</li><li data-t="p1_f4">No fees taken from Zakat</li></ul><a class="pdemo-btn" href="/faq/"><span data-t="p1_demo">Questions and answers</span> →</a></div>
-    <div class="pcard reveal"><div class="picon" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5"/></svg></div><div class="plabel" data-t="p2_title">AM Academy</div><h3 data-t="p2_h">Financial freedom</h3><p data-t="p2_p">Sharia-compliant financial literacy in plain language, explained for four audiences. Every statement links to a source.</p><ul class="pfeats"><li data-t="p2_f1">5 free courses</li><li data-t="p2_f2">Certificate after passing at 85%</li><li data-t="p2_f3">Explained for your level — 4 audiences</li><li data-t="p2_f4">Halal investment screening</li></ul><a class="pdemo-btn" href="/academy/" target="_blank">🎓 <span data-t="p2_demo">Start learning free</span> →</a></div>
+    <div class="pcard reveal"><div class="picon" aria-hidden="true"><img src="/icons/ui/amzakat.webp?v=2" alt="" width="72" height="72" loading="lazy"></div><div class="plabel" data-t="p1_title">AM Zakat</div><h3 data-t="p1_h">Verified, transparent giving</h3><p data-t="p1_p">A verification and transparency service: trained volunteers check each family in person, the donor gives directly to the family, and every payout goes into an open, tamper-evident report.</p><ul class="pfeats"><li data-t="p1_f1">In-person check of every family</li><li data-t="p1_f2">Money goes from donor to family — never through us</li><li data-t="p1_f3">Open report with a SHA-256 hash chain</li><li data-t="p1_f4">No fees taken from Zakat</li></ul><a class="pdemo-btn" href="/faq/"><span data-t="p1_demo">Questions and answers</span> →</a></div>
+    <div class="pcard reveal"><div class="picon" aria-hidden="true"><img src="/icons/ui/academy.webp?v=2" alt="" width="72" height="72" loading="lazy"></div><div class="plabel" data-t="p2_title">AM Academy</div><h3 data-t="p2_h">Financial freedom</h3><p data-t="p2_p">Sharia-compliant financial literacy in plain language, explained for four audiences. Every statement links to a source.</p><ul class="pfeats"><li data-t="p2_f1">5 free courses</li><li data-t="p2_f2">Certificate after passing at 85%</li><li data-t="p2_f3">Explained for your level — 4 audiences</li><li data-t="p2_f4">Halal investment screening</li></ul><a class="pdemo-btn" href="/academy/" target="_blank">🎓 <span data-t="p2_demo">Start learning free</span> →</a></div>
   </div>
 </section>
 
@@ -1020,7 +1051,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- STATUS -->
 <section class="section st" id="trust">
   <h2 class="sec-title" data-t="st_title">What works today, and what comes next.</h2>
-  <div class="st-cols">
+  <div class="st-cols st-cols3">
     <div class="st-col st-live">
       <h3><i></i><span data-t="status_live">Ready now</span></h3>
       <ul>
@@ -1028,32 +1059,23 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         <li><a href="/academy/" data-t="nav_academy">AM Academy</a></li>
         <li><a href="/zakat/" data-t="nav_calc">Zakat Calculator</a></li>
         <li><a href="/apply/" data-t="nav_help">Apply for Assistance</a></li>
-        <li data-t="st_i_cabinet">Cabinet for families, verifiers and donors, and the open report — built, being prepared for the pilot</li>
+        <li><a href="/cabinet/" data-t="st_i_cabinet">Cabinet for applicants and givers</a></li>
       </ul>
     </div>
     <div class="st-col st-build">
-      <h3><i></i><span data-t="status_build">Next · Dec 2026 – Jan 2027</span></h3>
+      <h3><i></i><span data-t="status_build">Next · December 2026</span></h3>
       <ul>
-        <li data-t="st_i_legal">Consultation with a Tajik lawyer</li>
-        <li data-t="st_i_sharia">Review by a Hanafi scholar</li>
-        <li data-t="st_i_verifier">Training volunteer verifiers</li>
-        <li data-t="st_i_trial">Trial run with 2–3 families</li>
-      </ul>
-    </div>
-    <div class="st-col st-pilot">
-      <h3><i></i><span data-t="st_after">Pilot · Ramadan 2027</span></h3>
-      <ul>
-        <li data-t="st_i_pilot">10–20 families in Dushanbe</li>
-        <li data-t="st_i_own">The founder's own and relatives' Zakat</li>
-        <li data-t="st_i_report">Public report of every payout</li>
+        <li data-t="st_i_own">AI review of requests in 10 languages</li>
+        <li data-t="st_i_trial">Apps on the App Store and Google Play</li>
+        <li data-t="st_i_pilot">Bringing in charities from different countries</li>
       </ul>
     </div>
     <div class="st-col st-after">
-      <h3><i></i><span data-t="st_afterpilot">After the pilot</span></h3>
+      <h3><i></i><span data-t="st_after">Later — once we have income</span></h3>
       <ul>
-        <li data-t="st_i_results">Publish the results</li>
-        <li data-t="st_i_partners">Work with a registered partner charity</li>
-        <li data-t="st_i_cities">More cities — only if the pilot works</li>
+        <li data-t="st_i_verifier">Our own verifiers and a "Recommended by the AM Network team" mark</li>
+        <li data-t="st_i_sharia">Review of the model by a Hanafi scholar</li>
+        <li data-t="st_i_legal">Registering the organisation</li>
       </ul>
     </div>
   </div>
@@ -1070,14 +1092,16 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <h2 class="sec-title" data-t="tools_title">Free tools for every day.</h2>
   <p class="tl-body" data-t="tools_body">Free for every Muslim, no sign-up needed.</p>
   <ul class="tl-grid">
-    <li><a href="/quran/"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg><span data-t="nav_quran">The Holy Quran</span></a></li>
-    <li><a href="/hadith/"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10M7 11h10M7 15h6"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span data-t="nav_hadith">Hadith Collection</span></a></li>
-    <li><a href="/dua/"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c-4-2-7-5.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.5-3 8-7 10z"/></svg><span data-t="nav_dua">Dua & Dhikr</span></a></li>
-    <li><a href="/tasbeeh/"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="17" cy="9" r="2"/><circle cx="17" cy="15" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="7" cy="15" r="2"/><circle cx="7" cy="9" r="2"/></svg><span data-t="nav_tasbeeh">Tasbih</span></a></li>
-    <li><a href="/prayer-times/"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-t="nav_prayertimes">Prayer Times</span></a></li>
-    <li><a href="/qibla/"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg><span data-t="nav_qibla">Qibla Direction</span></a></li>
-    <li><a href="/calendar/"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span data-t="nav_calendar">Islamic Calendar</span></a></li>
-    <li><a href="/zakat/"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2"/></svg><span data-t="nav_calc">Zakat Calculator</span></a></li>
+    <li><a href="/quran/"><img class="tl-ic" src="/icons/ui/quran.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_quran">The Holy Quran</span></a></li>
+    <li><a href="/hadith/"><img class="tl-ic" src="/icons/ui/hadith.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_hadith">Hadith Collection</span></a></li>
+    <li><a href="/dua/"><img class="tl-ic" src="/icons/ui/dua.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_dua">Dua & Dhikr</span></a></li>
+    <li><a href="/tasbeeh/"><img class="tl-ic" src="/icons/ui/tasbeeh.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_tasbeeh">Tasbih</span></a></li>
+    <li><a href="/prayer-times/"><img class="tl-ic" src="/icons/ui/prayer.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_prayertimes">Prayer Times</span></a></li>
+    <li><a href="/qibla/"><img class="tl-ic" src="/icons/ui/qibla.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_qibla">Qibla Direction</span></a></li>
+    <li><a href="/calendar/"><img class="tl-ic" src="/icons/ui/calendar.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_calendar">Islamic Calendar</span></a></li>
+    <li><a href="/zakat/"><img class="tl-ic" src="/icons/ui/zakat.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_calc">Zakat Calculator</span></a></li>
+      <li><a href="/names/"><img class="tl-ic" src="/icons/ui/names.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_names">99 Names of Allah</span></a></li>
+    <li><a href="/live/"><img class="tl-ic" src="/icons/ui/live.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_live">Live: Makkah &amp; Madinah</span></a></li>
   </ul>
 </section>
 
@@ -1207,6 +1231,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         <h4 data-t="footer_company">Company</h4>
         <ul>
           <li><a href="/team/" data-t="team_tag">The Team</a></li>
+          <li><a href="/cabinet/" data-t="nav_cabinet">Account</a></li>
           <li><a href="/roadmap/" data-t="road_tag">Roadmap</a></li>
           <li><a href="/faq/" data-t="faq_tag">FAQ</a></li>
           <li><a href="/why-zakat/" data-t="why_link">Why Zakat and Sadaqah matter</a></li>
@@ -1274,8 +1299,10 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 
 <script>
 </script>
-<script src="/faq-assistant.js"></script>
-<script src="/voice-assistant.js" defer></script>
+<script src="/faq-assistant.js?v=20261124"></script>
+<script src="/assistant-ui.js?v=20261124"></script>
+<script src="/site-motion.js?v=20261124" defer></script>
+<script src="/voice-assistant.js?v=20261123" defer></script>
 <div id="assistantPanel" role="dialog" aria-label="AM Network assistant">
   <div class="asst-head">
     <div class="asst-head-title"><span class="asst-head-logo"><img src="/icons/icon-192.png" alt="AM Network"></span><span class="asst-head-name" id="asstTitle">AI Assistant</span></div>
@@ -1296,7 +1323,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=21c24ea2e3"></script>
+<script src="/i18n-data.js?v=edf4469818"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)
@@ -1600,16 +1627,16 @@ if(navCta) navCta.addEventListener('click', e=>{e.preventDefault();document.getE
 // ── AI ASSISTANT WIDGET ──
 const ASSISTANT_API_BASE = 'https://amnetwork.onrender.com';
 const ASST_STR = {
-  en:{title:'AI Assistant',placeholder:'Ask about Zakat, AM Network…',welcome:"Assalamu alaikum! I'm the AM Network assistant. Ask me about Zakat, how the platform works, or the pilot.",error:"Sorry, I couldn't respond just now — please try again in a moment, or email contact@amnetwork.io.",nudge:"👋 Need anything? I'm here to help.", busy:"You've sent a few messages quickly — please wait {s} seconds and try again.",},
-  ru:{title:'ИИ-ассистент',placeholder:'Спросите про Закят, AM Network…',welcome:'Ассаляму алейкум! Я ассистент AM Network. Спросите меня про Закят, как работает платформа, или про пилот.',error:'Извините, не получилось ответить — попробуйте ещё раз через момент, либо напишите на contact@amnetwork.io.',nudge:'👋 Нужна помощь? Я рядом, спрашивайте.', busy:"Вы отправили несколько сообщений подряд — подождите {s} секунд и попробуйте снова.",},
-  ar:{title:'مساعد الذكاء الاصطناعي',placeholder:'اسأل عن الزكاة، AM Network…',welcome:'السلام عليكم! أنا مساعد AM Network. اسألني عن الزكاة، أو كيف تعمل المنصة، أو المرحلة التجريبية.',error:'عذرًا، لم أتمكن من الرد الآن — حاول مرة أخرى بعد قليل، أو راسلنا على contact@amnetwork.io.',nudge:'👋 تحتاج شيئاً؟ أنا هنا للمساعدة.', busy:"لقد أرسلت عدة رسائل بسرعة — يرجى الانتظار {s} ثانية والمحاولة مرة أخرى.",},
-  tj:{title:'ИИ-ассистент',placeholder:'Дар бораи Закот бипурсед…',welcome:'Ассалому алейкум! Ман ёрдамчии AM Network ҳастам. Дар бораи Закот, чӣ гуна кор кардани платформа ё дар бораи пилот бипурсед.',error:'Мутаассифона, ҳозир натавонистам ҷавоб диҳам — лутфан баъд аз лаҳзае боз кӯшиш кунед ё ба contact@amnetwork.io нависед.',nudge:'👋 Чизе лозим? Ман инҷоям, бипурсед.', busy:"Шумо якчанд паём зуд фиристодед — лутфан {s} сония интизор шавед ва боз кӯшиш кунед.",},
-  id:{title:'Asisten AI',placeholder:'Tanya soal Zakat, AM Network…',welcome:'Assalamu alaikum! Saya asisten AM Network. Tanyakan tentang Zakat, cara kerja platform, atau uji coba.',error:'Maaf, belum bisa merespons — coba lagi sesaat lagi, atau email contact@amnetwork.io.',nudge:'👋 Butuh bantuan? Saya di sini.', busy:"Anda mengirim beberapa pesan dengan cepat — silakan tunggu {s} detik dan coba lagi.",},
-  tr:{title:'AI Asistanı',placeholder:'Zekat, AM Network hakkında sorun…',welcome:'Esselamü aleyküm! Ben AM Network asistanıyım. Zekat, platformun nasıl çalıştığı veya pilot hakkında sorabilirsiniz.',error:'Üzgünüm, şu an yanıt veremedim — birazdan tekrar deneyin veya contact@amnetwork.io adresine yazın.',nudge:'👋 Bir şeye mi ihtiyacın var? Buradayım.', busy:"Kısa sürede birkaç mesaj gönderdiniz — lütfen {s} saniye bekleyip tekrar deneyin.",},
-  zh:{title:'AI 助手',placeholder:'询问天课、AM Network…',welcome:'愿真主赐予您平安！我是 AM Network 助手。可以问我关于天课、平台如何运作或试点的问题。',error:'抱歉，暂时无法回复 — 请稍后再试，或发邮件至 contact@amnetwork.io。',nudge:'👋 需要帮助吗？我随时都在。', busy:"您发送消息的速度太快了——请等待 {s} 秒后重试。",},
-  ms:{title:'Pembantu AI',placeholder:'Tanya tentang Zakat, AM Network…',welcome:'Assalamualaikum! Saya pembantu AM Network. Tanya saya tentang Zakat, cara platform berfungsi, atau perintis.',error:'Maaf, tidak dapat membalas sekarang — cuba lagi sebentar, atau emel contact@amnetwork.io.',nudge:'👋 Perlukan bantuan? Saya di sini.', busy:"Anda menghantar beberapa mesej dengan cepat — sila tunggu {s} saat dan cuba lagi.",},
-  fr:{title:'Assistant IA',placeholder:'Demandez sur la Zakat, AM Network…',welcome:"Assalamu alaikum ! Je suis l'assistant AM Network. Demandez-moi tout sur la Zakat, le fonctionnement de la plateforme, ou notre projet pilote.",error:"Désolé, je n'ai pas pu répondre — réessayez dans un instant, ou écrivez à contact@amnetwork.io.",nudge:"👋 Besoin d'aide ? Je suis là.", busy:"Vous avez envoyé plusieurs messages rapidement — veuillez attendre {s} secondes et réessayer.",},
-  de:{title:'KI-Assistent',placeholder:'Frag zu Zakat, AM Network…',welcome:'Assalamu alaikum! Ich bin der AM Network Assistent. Frag mich zu Zakat, wie die Plattform funktioniert, oder zum Pilotprojekt.',error:'Entschuldigung, gerade keine Antwort möglich — bitte gleich nochmal versuchen oder contact@amnetwork.io schreiben.',nudge:'👋 Brauchst du etwas? Ich bin für dich da.', busy:"Sie haben mehrere Nachrichten schnell gesendet — bitte warten Sie {s} Sekunden und versuchen Sie es erneut.",},
+  en:{title:"AI Assistant",placeholder:"Ask about Zakat, AM Network…",welcome:"Assalamu alaikum! I'm the AM Network AI assistant. Ask me about Zakat, how to ask for help, or how to help others.",error:"Sorry, I couldn't respond just now — please try again in a moment, or email contact@amnetwork.io.",nudge:"👋 Need anything? I'm here to help.",busy:"You've sent a few messages quickly — please wait {s} seconds and try again.",},
+  ru:{title:"ИИ-ассистент",placeholder:"Спросите про Закят, AM Network…",welcome:"Ассаляму алейкум! Я ИИ-ассистент AM Network. Спросите меня про закят, как попросить о помощи или как помочь другим.",error:"Извините, не получилось ответить — попробуйте ещё раз через момент, либо напишите на contact@amnetwork.io.",nudge:"👋 Нужна помощь? Я рядом, спрашивайте.",busy:"Вы отправили несколько сообщений подряд — подождите {s} секунд и попробуйте снова.",},
+  ar:{title:"مساعد الذكاء الاصطناعي",placeholder:"اسأل عن الزكاة، AM Network…",welcome:"السلام عليكم! أنا المساعد الذكي لـ AM Network. اسألني عن الزكاة، أو كيف تطلب المساعدة، أو كيف تساعد غيرك.",error:"عذرًا، لم أتمكن من الرد الآن — حاول مرة أخرى بعد قليل، أو راسلنا على contact@amnetwork.io.",nudge:"👋 تحتاج شيئاً؟ أنا هنا للمساعدة.",busy:"لقد أرسلت عدة رسائل بسرعة — يرجى الانتظار {s} ثانية والمحاولة مرة أخرى.",},
+  tj:{title:"ИИ-ассистент",placeholder:"Дар бораи Закот бипурсед…",welcome:"Ассалому алейкум! Ман ИИ-ёрдамчии AM Network ҳастам. Дар бораи закот, чӣ тавр кӯмак пурсидан ё чӣ тавр ба дигарон кӯмак кардан бипурсед.",error:"Мутаассифона, ҳозир натавонистам ҷавоб диҳам — лутфан баъд аз лаҳзае боз кӯшиш кунед ё ба contact@amnetwork.io нависед.",nudge:"👋 Чизе лозим? Ман инҷоям, бипурсед.",busy:"Шумо якчанд паём зуд фиристодед — лутфан {s} сония интизор шавед ва боз кӯшиш кунед.",},
+  id:{title:"Asisten AI",placeholder:"Tanya soal Zakat, AM Network…",welcome:"Assalamu alaikum! Saya asisten AI AM Network. Tanyakan tentang zakat, cara meminta bantuan, atau cara membantu orang lain.",error:"Maaf, belum bisa merespons — coba lagi sesaat lagi, atau email contact@amnetwork.io.",nudge:"👋 Butuh bantuan? Saya di sini.",busy:"Anda mengirim beberapa pesan dengan cepat — silakan tunggu {s} detik dan coba lagi.",},
+  tr:{title:"AI Asistanı",placeholder:"Zekat, AM Network hakkında sorun…",welcome:"Esselamü aleyküm! Ben AM Network'ün yapay zekâ asistanıyım. Zekât, nasıl yardım isteyeceğiniz veya başkalarına nasıl yardım edebileceğiniz hakkında sorabilirsiniz.",error:"Üzgünüm, şu an yanıt veremedim — birazdan tekrar deneyin veya contact@amnetwork.io adresine yazın.",nudge:"👋 Bir şeye mi ihtiyacın var? Buradayım.",busy:"Kısa sürede birkaç mesaj gönderdiniz — lütfen {s} saniye bekleyip tekrar deneyin.",},
+  zh:{title:"AI 助手",placeholder:"询问天课、AM Network…",welcome:"愿真主赐予您平安！我是 AM Network 的 AI 助手。可以问我关于天课、如何申请帮助或如何帮助他人的问题。",error:"抱歉，暂时无法回复 — 请稍后再试，或发邮件至 contact@amnetwork.io。",nudge:"👋 需要帮助吗？我随时都在。",busy:"您发送消息的速度太快了——请等待 {s} 秒后重试。",},
+  ms:{title:"Pembantu AI",placeholder:"Tanya tentang Zakat, AM Network…",welcome:"Assalamualaikum! Saya pembantu AI AM Network. Tanya saya tentang zakat, cara memohon bantuan, atau cara membantu orang lain.",error:"Maaf, tidak dapat membalas sekarang — cuba lagi sebentar, atau emel contact@amnetwork.io.",nudge:"👋 Perlukan bantuan? Saya di sini.",busy:"Anda menghantar beberapa mesej dengan cepat — sila tunggu {s} saat dan cuba lagi.",},
+  fr:{title:"Assistant IA",placeholder:"Demandez sur la Zakat, AM Network…",welcome:"Assalamu alaikum ! Je suis l'assistant IA d'AM Network. Posez-moi vos questions sur la Zakat, sur la façon de demander de l'aide ou d'aider les autres.",error:"Désolé, je n'ai pas pu répondre — réessayez dans un instant, ou écrivez à contact@amnetwork.io.",nudge:"👋 Besoin d'aide ? Je suis là.",busy:"Vous avez envoyé plusieurs messages rapidement — veuillez attendre {s} secondes et réessayer.",},
+  de:{title:"KI-Assistent",placeholder:"Frag zu Zakat, AM Network…",welcome:"Assalamu alaikum! Ich bin der KI-Assistent von AM Network. Frag mich zu Zakat, wie man um Hilfe bittet oder wie man anderen helfen kann.",error:"Entschuldigung, gerade keine Antwort möglich — bitte gleich nochmal versuchen oder contact@amnetwork.io schreiben.",nudge:"👋 Brauchst du etwas? Ich bin für dich da.",busy:"Sie haben mehrere Nachrichten schnell gesendet — bitte warten Sie {s} Sekunden und versuchen Sie es erneut.",},
 };
 let asstHistory = [];
 let asstOpened = false;
@@ -2161,5 +2188,6 @@ function calcZakat(){
 })();
 </script>
 <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+<script src="/amn-site.js?v=20261124" defer></script>
 </body>
 </html>

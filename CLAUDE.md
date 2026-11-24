@@ -10,11 +10,15 @@
 
 - **Website:** amnetwork.io (live, GitHub Pages)
 - **Founder:** Akbar Amirzoda — economist, diplomat (Plekhanov University Moscow)
-- **Stage:** Pilot in preparation — Dushanbe, 10–20 families, Ramadan 2027 (~Feb–Mar). No "beta Q4 2026".
+- **Stage:** launching as an AI-assisted matching platform, all countries, apps planned for December 2026. No "beta Q4 2026".
 - **Email:** contact@amnetwork.io
 - **LinkedIn:** linkedin.com/company/amnetwork-io
 
-## ⚠️ Model decision (20 November 2026) — overrides older sections below
+## ⚠️ Model update (24 November 2026) — overrides the 20 November decision where they differ
+
+Founder: **a platform that connects people in need with givers (donors and charities, any country), with AI.** Request → AI review (suggests which of the 8 Zakat categories of 9:60 it *may* fit, what to verify, red flags — a hint, not a fatwa) → the giver verifies it themselves and helps directly. No own volunteers yet (no money); every request is labelled "Not verified by AM Network". Contacts only to admin-approved givers and only with the applicant's consent. Outreach to charities in all countries starts now. Money still never passes through us; nothing taken from Zakat. Later, with income: own verifiers, "recommended by AM Network team", Sharia review, legal entity, maybe blockchain. Wording: `docs/messaging-2026-11.md`, record: `docs/strategy-2026-11.md`.
+
+## Model decision (20 November 2026, partly superseded — see above)
 
 Founder chose: **verification & transparency service, money never passes through AM Network.** Pilot = founder's own and relatives' Zakat only, no public fundraising. No outreach to funds/charities until the platform is 100% ready (then Saliheen first). No income in year one (later: optional tips, grants, service fees paid by funds — never from Zakat). Blockchain/token/NFT/DAO/ujrah-from-Zakat promises are being removed. Full record: `docs/strategy-2026-11.md`. Where the sections below (Tech Stack, Revenue, Seed Funding, Oracle Network) contradict this, this wins.
 
@@ -137,10 +141,18 @@ All of the above (`/quran/`, `/hadith/`, `/dua/`, `/tasbeeh/`, `/qibla/`, `/pray
 - **Schema:** `supabase/schema.sql` (run in Supabase SQL Editor; re-runnable — it drops and recreates AM Network objects, so never re-run it once real data exists without a migration). Tables: `profiles` (roles applicant/donor/verifier/admin), `applications`, `verifications`, `payouts` (SHA-256 hash chain: `payload` → `entry_hash`, linked by `prev_hash`), `events` (timeline). Rules enforced in the DB, tested on local Postgres 16: only admin changes roles (`set_role`); approval needs ≥1 in-person verification recommending help; whoever brought a family cannot verify it; "paid" only via a payout; payout only for approved; public reads only through `public_payouts()` / `public_stats()` (no names, phones, addresses).
 - **Pages:** `/cabinet/` (one page, role-based tabs, ru/tj/en, email+password auth, no analytics, noindex) and `/transparency/` (public log + in-browser chain check; noindex until the pilot). `vendor/supabase-2.118.0.js` is supabase-js UMD, self-hosted (CSP `'self'`). Neither page is linked from the homepage yet — founder wants the platform 100% ready first.
 - **Need score** in the verifier form is a visible checklist (points listed next to each item, capped at 100), described as a hint — a person decides. Keep it that way.
-- **Email:** Supabase's built-in mailer only sends to the org's own team members and a few per hour. Before verifiers/donors register, set up custom SMTP (e.g. Resend) in Auth settings.
+- **Email (done 23 Nov 2026):** custom SMTP via Resend (EU region), sender `AM Network <no-reply@amnetwork.io>`, DNS at Namecheap: DKIM `resend._domainkey`, CNAME `rsend`/`send` → `*.forge.rmta.net`, DMARC `p=none`. Google Workspace MX for contact@ untouched. Auth email limit 30/h. Confirm-signup and reset-password templates are trilingual (tj/ru/en), source in `supabase/email/`, copy buttons on `amnetwork.io/supabase/`. Tested: signup email delivered to an external inbox.
 - First admin: the founder registers in `/cabinet/`, then runs in SQL Editor `update public.profiles set role='admin' where email='<his email>';` — the email is never written into the repo.
 
 - **Site rewrite to the new model (20 November 2026):** every page, the assistant (offline KB + `/chat` prompt), Academy, whitepaper v2.0 (EN+RU, PDF rebuilt; header in `build-pdf.cjs`), deck (rebuilt from `deck-src`), investors page (now "partners & supporters", not raising), privacy and terms (cabinet data, Supabase EU). Old outreach drafts are marked ARCHIVED. Homepage v3 design: clear hero ("Your Zakat goes to a family we checked in person"), 4 trust chips, compact step cards, an example open-report record, status as cards; `.reveal` no longer hides content (it caused large empty areas on phones). Cabinet and open report are in all 10 languages (Arabic RTL).
+
+### Matching platform (24 November 2026)
+- **Flow:** `/apply/` posts JSON to the backend `/requests/submit` (rate-limited per IP, story ≥60 chars, ISO country + currency) → Supabase RPC `intake_request` (guarded by the shared secret `amn_settings.svc_secret` = Render `AMN_SVC_SECRET`) → AI review in a background thread (`ai_scoring/review.py`, Claude, effort low, structured JSON: 9:60 category hint, zakat_fit, need_level, verify, red_flags, ask_applicant in the applicant's language). Web3Forms still emails a copy (with `saved_in_cabinet` yes/no).
+- **Privacy:** Claude never receives name, email, phone or address; `amn_mask()` hides phone numbers/emails inside the story for Claude and for givers.
+- **Daily AI cap** lives in the DB (`amn_settings.ai_daily_cap`, default 30), not on Render's disk — redeploys can't reset it (lesson from the hadith-translation spend).
+- **Givers:** any signed-up user can ask to help (org name in Profile); admin approves in People (`set_giver`) → role donor + `giver_approved`. Feed = `open_requests()` (only `listed` requests, admin toggles "Show to approved givers"), every card labelled "Not verified by AM Network". "I want to help" → `make_offer`; admin sees `list_offers()` and connects people by hand.
+- **SQL:** `supabase/matching.sql` (additive, safe to re-run; tested on local Postgres). Setup steps incl. secret generator on `amnetwork.io/supabase/`. Render env: `AMN_SVC_SECRET`, `SUPABASE_URL`, `SUPABASE_KEY` (publishable), `AI_REVIEW_ENABLED=1`, `ANTHROPIC_API_KEY`. Tests: `ai_scoring/test_review.py`.
+- Real applications that arrived by email before this (Egypt, Uzbekistan) contain personal data — never put them in the repo.
 
 ### Integrations working
 - **Waitlist / Apply → Web3Forms only (checked October 2026):** both forms post to `api.web3forms.com` behind hCaptcha and arrive as emails. Nothing is written to Google Sheets anymore — the old Apps Script path was removed from the frontend. `apps_script_apply.gs` remains in the repo only as reference code. If a spreadsheet is wanted again, it needs a new deployment; never commit its `/exec` URL (it is an unauthenticated write endpoint — see docs/security-deployment.md). The old URLs leaked in git history must stay archived.

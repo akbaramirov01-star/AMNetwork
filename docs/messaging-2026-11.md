@@ -1,16 +1,37 @@
-# AM Network — how we describe ourselves (November 2026)
+# AM Network — how we describe ourselves (updated 24 November 2026)
 
 Single source of truth for every page, document, post and the AI assistant.
 Decision record: `docs/strategy-2026-11.md`. If any text contradicts this file, this file wins.
 
 ## One line
-**AM Network is a verification and transparency service for Zakat and Sadaqah: we check each family in person,
-publish an open, tamper-evident report of every payout, and never hold the money — the donor gives directly to the family.**
+**AM Network connects people in need with those who give Zakat and Sadaqah — private donors and charities in any country.
+AI reads each request and suggests which Zakat category it may fall under and what to check; the giver checks and decides,
+and gives directly. Money never passes through AM Network.**
 
-RU: **AM Network — сервис проверки и прозрачности для закята и садаки: мы лично проверяем каждую семью, публикуем открытый
-отчёт о каждой выплате, который нельзя незаметно изменить, и никогда не держим деньги — донор передаёт помощь семье напрямую.**
+RU: **AM Network соединяет тех, кому нужна помощь, с теми, кто даёт закят и садаку — людьми и фондами в любой стране.
+ИИ разбирает каждую заявку: подсказывает, к какой категории закята она может относиться и что проверить. Проверяет и решает
+тот, кто даёт, и помогает напрямую. Деньги через AM Network не проходят.**
 
-## How it works (5 steps)
+## How it works (3 steps)
+1. **Request.** A person in any country describes their situation, in their own language.
+2. **AI review.** AI suggests which of the 8 Zakat categories (Quran 9:60) the request may fit, lists what to verify
+   (documents, questions) and flags anything that does not add up. A hint, not a fatwa.
+3. **Direct help.** A charity or donor finds the request, verifies it themselves and helps directly. Contact details
+   are shared only with givers approved by AM Network, and only with the applicant's consent. Optionally the gift is
+   recorded in the open report (SHA-256 hash chain).
+
+Every request carries the label **"Not verified by AM Network — the giver verifies."** Later, with income: our own
+verifiers and a "Recommended by the AM Network team" mark. Do not promise dates for that.
+
+## Say / don't say (24 Nov additions — these override the table below)
+| Say | Never say |
+|---|---|
+| AI suggests a category / what to check; a person decides | "AI-verified", "AI approves", "AI fatwa", "guaranteed genuine" |
+| the giver (charity or donor) verifies the request | "every family checked in person by us" (not true now) |
+| open to people and charities in every country | "Dushanbe only", "pilot of 10–20 families" |
+| not verified by AM Network (label) | "verified family" for unverified requests |
+
+## Old 5-step model (20 Nov, superseded — in-person volunteers are a later stage)
 1. A family applies (or a verifier brings a family it knows).
 2. A trained AM Network volunteer visits the family in person and fills a checklist. Whoever brought the family never verifies it.
 3. The admin approves help only after the in-person check.
