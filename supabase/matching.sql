@@ -173,6 +173,41 @@ grant  execute on function public.intake_request(text, jsonb), public.claim_revi
 revoke execute on function public.can_review(uuid), public.is_giver(), public.set_giver(uuid, boolean) from public, anon;
 grant  execute on function public.can_review(uuid), public.is_giver(), public.set_giver(uuid, boolean) to authenticated;
 
+-- Approval rule for the matching model (replaces the one in schema.sql).
+create or replace function public.amn_app_before() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if tg_op = 'INSERT' then
+    if not public.is_admin() then
+      new.created_by := auth.uid(); new.status := 'new'; new.assigned_to := null;
+      new.need_score := null; new.admin_note := null;
+    end if;
+    return new;
+  end if;
+  new.updated_at := now();
+  new.ref := old.ref; new.created_by := old.created_by; new.created_at := old.created_at;
+  if new.assigned_to is distinct from old.assigned_to and new.assigned_to is not null then
+    if not exists (select 1 from public.profiles where id = new.assigned_to and role in ('verifier','admin')) then
+      raise exception 'assignee must be a verifier';
+    end if;
+    if new.assigned_to = old.created_by and not exists (select 1 from public.profiles where id = new.assigned_to and role = 'admin') then
+      raise exception 'the person who brought the family cannot verify it';
+    end if;
+    if new.status = 'new' then new.status := 'assigned'; end if;
+  end if;
+  -- 24 Nov 2026: givers verify requests themselves, so approval needs either a check recommending
+  -- help or a giver who has been connected with the applicant.
+  if new.status = 'approved' and old.status <> 'approved'
+     and not exists (select 1 from public.verifications v where v.application_id = new.id and v.recommendation = 'approve')
+     and not exists (select 1 from public.offers o where o.application_id = new.id and o.status in ('connected','helped')) then
+    raise exception 'approval needs a check recommending help or a connected giver';
+  end if;
+  if new.status = 'paid' and old.status <> 'paid' and coalesce(current_setting('amn.internal', true), '') <> '1' then
+    raise exception 'status "paid" is set only by recording a payout';
+  end if;
+  return new;
+end $$;
+
 -- ── the givers' feed ──
 create or replace function public.open_requests()
 returns table (id uuid, ref text, first_name text, country text, region text, household_size int,
