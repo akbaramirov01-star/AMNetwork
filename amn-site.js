@@ -50,7 +50,7 @@
 .amn-logo .ring{position:relative;width:40px;height:40px;flex:none}
 .amn-logo .ring::before{content:"";position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(#E8C87A,#C9A84C 30%,rgba(201,168,76,.06) 60%,#E8C87A);animation:amnRingSpin 6s linear infinite}
 .amn-logo .ring img{position:relative;width:40px;height:40px;border-radius:50%;background:#0A1A11;padding:2px;display:block}
-.amn-logo .wm{font:700 19px/1 'Cormorant Garamond',Georgia,serif;letter-spacing:.14em;white-space:nowrap;background:linear-gradient(100deg,#C9A84C 20%,#FFF3C4 45%,#C9A84C 70%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:amnShineTxt 5s ease-in-out infinite}
+.amn-logo .wm{font:700 18px/1 'Cinzel','Cormorant Garamond',Georgia,serif;letter-spacing:.1em;white-space:nowrap;background:linear-gradient(100deg,#C9A84C 20%,#FFF3C4 45%,#C9A84C 70%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:amnShineTxt 5s ease-in-out infinite}
 [data-theme="light"] .amn-logo .wm{background-image:linear-gradient(100deg,#8A6A12 20%,#E8C87A 45%,#8A6A12 70%)}
 @keyframes amnRingSpin{to{transform:rotate(360deg)}}
 @keyframes amnShineTxt{0%,60%{background-position:100% 0}100%{background-position:-120% 0}}
@@ -59,6 +59,12 @@
 .tl-ic,.page-ic,.amn-tile img,.step-icon img,.picon img{border-radius:50%!important;object-fit:cover;box-shadow:0 0 0 2px #C9A84C,0 0 0 5px rgba(201,168,76,.18),0 10px 24px rgba(0,0,0,.25)!important}
 @media (prefers-reduced-motion:reduce){.amn-logo .ring::before,.amn-logo .wm{animation:none}}`;
   const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+  // Cinzel for the wordmark only — a tiny subset with just these letters.
+  if (!document.getElementById('amn-cinzel')) {
+    const f = document.createElement('link'); f.id = 'amn-cinzel'; f.rel = 'stylesheet';
+    f.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@700&text=AMNETWORK%20&display=swap';
+    document.head.appendChild(f);
+  }
 
   function tiles(animate) {
     const here = location.pathname.replace(/index\.html$/, '');
