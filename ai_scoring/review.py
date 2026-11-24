@@ -138,9 +138,10 @@ def review_request(data: dict) -> dict:
 
 # ── Supabase RPC ──────────────────────────────────────────────────────────────
 def _sb():
-    url = os.environ.get("SUPABASE_URL", "").rstrip("/")
-    key = os.environ.get("SUPABASE_KEY", "")
-    secret = os.environ.get("AMN_SVC_SECRET", "")
+    # Values pasted into a dashboard often carry a stray space or newline — strip them.
+    url = os.environ.get("SUPABASE_URL", "").strip().rstrip("/")
+    key = os.environ.get("SUPABASE_KEY", "").strip()
+    secret = os.environ.get("AMN_SVC_SECRET", "").strip()
     if not (url and key and len(secret) >= 24):
         raise ReviewError("Supabase service settings missing")
     return url, key, secret
@@ -151,7 +152,10 @@ def rpc(fn: str, args: dict, user_jwt: str | None = None):
     headers = {"apikey": key, "Content-Type": "application/json"}
     if user_jwt:
         headers["Authorization"] = "Bearer " + user_jwt
-    r = requests.post(f"{url}/rest/v1/rpc/{fn}", headers=headers, json=args, timeout=15)
+    try:
+        r = requests.post(f"{url}/rest/v1/rpc/{fn}", headers=headers, json=args, timeout=15)
+    except Exception as e:  # bad URL/header, DNS, timeout — never a 500 without a reason
+        raise ReviewError(f"{fn}: {type(e).__name__}") from e
     if r.status_code >= 400:
         raise ReviewError(f"{fn}: HTTP {r.status_code}: {r.text[:200]}")
     return r.json() if r.content else None

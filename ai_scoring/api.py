@@ -520,6 +520,16 @@ def _submit_allowed(client: str) -> bool:
         return True
 
 
+def _why(msg: str) -> str:
+    """A short, secret-free reason for the founder's diagnosis ("settings", "HTTP 401", ...)."""
+    if "settings missing" in msg:
+        return "settings_missing"
+    m = re.search(r"HTTP (\d{3})", msg)
+    if m:
+        return "supabase_http_" + m.group(1) + (" not_allowed" if "not allowed" in msg else "")
+    return msg.split(": ")[-1][:40]
+
+
 def _ai_review_on() -> bool:
     return os.environ.get("AI_REVIEW_ENABLED", "") == "1"
 
@@ -580,7 +590,10 @@ def requests_submit():
         rows = ai_review.svc_rpc("intake_request", {"p": payload})
     except ai_review.ReviewError as e:
         app.logger.error("requests/submit: %s", e)
-        return jsonify(error="intake_unavailable"), 503
+        return jsonify(error="intake_unavailable", why=_why(str(e))), 503
+    except Exception as e:
+        app.logger.exception("requests/submit: unhandled")
+        return jsonify(error="intake_unavailable", why=type(e).__name__), 503
     row = rows[0] if isinstance(rows, list) and rows else {}
     if _ai_review_on() and row.get("id"):
         _review_in_background(row["id"])
