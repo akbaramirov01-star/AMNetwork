@@ -45,21 +45,22 @@
 .nav-cab.amn-in-acc{border-color:var(--gold,#C9A84C)!important;background:rgba(201,168,76,.12)}
 .nav-cab.amn-in-acc::after{content:"";width:7px;height:7px;border-radius:50%;background:#5FD39A;margin-inline-start:6px;box-shadow:0 0 0 3px rgba(95,211,154,.2)}
 @media (prefers-reduced-motion:reduce){.amn-sheet,.amn-sheet-bg{transition:none}.amn-tile{animation:none;opacity:1}}
-/* Logo 1: emblem in a slowly turning gold ring + wordmark with a passing shine (24 Nov 2026) */
+/* Logo (24 Nov 2026, founder's revision): the emblem as it is — no ring — with a soft breathing glow,
+   and "AM NETWORK" in Cinzel as plain text: "AM" gold, "NETWORK" follows the theme (light on dark, dark on light).
+   Plain colour on purpose: gradient-clipped text can vanish in iOS Safari while a web font loads. */
 .amn-logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none}
 .amn-logo .ring{position:relative;width:40px;height:40px;flex:none}
-.amn-logo .ring::before{content:"";position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(#E8C87A,#C9A84C 30%,rgba(201,168,76,.06) 60%,#E8C87A);animation:amnRingSpin 6s linear infinite}
-.amn-logo .ring img{position:relative;width:40px;height:40px;border-radius:50%;background:#0A1A11;padding:2px;display:block}
-.amn-logo .wm{font:700 18px/1 'Cinzel','Cormorant Garamond',Georgia,serif;letter-spacing:.1em;white-space:nowrap;background:linear-gradient(100deg,#C9A84C 20%,#FFF3C4 45%,#C9A84C 70%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:amnShineTxt 5s ease-in-out infinite}
-[data-theme="light"] .amn-logo .wm{background-image:linear-gradient(100deg,#8A6A12 20%,#E8C87A 45%,#8A6A12 70%)}
-@keyframes amnRingSpin{to{transform:rotate(360deg)}}
-@keyframes amnShineTxt{0%,60%{background-position:100% 0}100%{background-position:-120% 0}}
-@media (max-width:480px){.amn-logo{gap:7px}.amn-logo .ring,.amn-logo .ring img{width:32px;height:32px}.amn-logo .wm{font-size:13px;letter-spacing:.05em}}
-@media (max-width:350px){.amn-logo .wm{display:none}}
+.amn-logo .ring img{width:40px;height:40px;display:block;animation:amnGlow 4s ease-in-out infinite}
+.amn-logo .wm{font:700 18px/1 'Cinzel','Cormorant Garamond',Georgia,serif;letter-spacing:.1em;white-space:nowrap;color:#F5EEDC}
+.amn-logo .wm b{color:#D4B25A;font-weight:700}
+[data-theme="light"] .amn-logo .wm{color:#1C2E1F}[data-theme="light"] .amn-logo .wm b{color:#A88528}
+@keyframes amnGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(201,168,76,0))}50%{filter:drop-shadow(0 0 7px rgba(201,168,76,.55))}}
+@media (max-width:480px){.amn-logo{gap:7px}.amn-logo .ring,.amn-logo .ring img{width:34px;height:34px}.amn-logo .wm{font-size:13px;letter-spacing:.05em}}
+@media (max-width:340px){.amn-logo .wm{display:none}}
 html,body{overflow-x:clip}
 /* Icons 3: round medallions with a gold ring, everywhere */
 .tl-ic,.page-ic,.amn-tile img,.step-icon img,.picon img{border-radius:50%!important;object-fit:cover;box-shadow:0 0 0 2px #C9A84C,0 0 0 5px rgba(201,168,76,.18),0 10px 24px rgba(0,0,0,.25)!important}
-@media (prefers-reduced-motion:reduce){.amn-logo .ring::before,.amn-logo .wm{animation:none}}`;
+@media (prefers-reduced-motion:reduce){.amn-logo .ring img{animation:none}}`;
   const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
   // Cinzel for the wordmark only — a tiny subset with just these letters.
   if (!document.getElementById('amn-cinzel')) {
@@ -102,7 +103,7 @@ html,body{overflow-x:clip}
       a.dataset.amnLogo = '1';
       const wrap = document.createElement('span');
       wrap.className = 'amn-logo';
-      wrap.innerHTML = '<span class="ring"><img src="/favicon.svg" alt="" width="40" height="40"></span><span class="wm">AM NETWORK</span>';
+      wrap.innerHTML = '<span class="ring"><img src="/favicon.svg" alt="" width="40" height="40"></span><span class="wm"><b>AM</b> NETWORK</span>';
       wrap.setAttribute('aria-label', 'AM Network');
       img.replaceWith(wrap);
     });

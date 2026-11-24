@@ -241,6 +241,6 @@ Promise.all([sb.rpc('public_payouts'),sb.rpc('public_stats')]).then(([a,b])=>{
   if(a.error||b.error)throw a.error||b.error;ROWS=a.data||[];STATS=(b.data&&b.data[0])||{};render();
 }).catch(()=>{ERR=true;render()});
 </script>
-<script src="/amn-site.js?v=20261124d" defer></script>
+<script src="/amn-site.js?v=20261124e" defer></script>
 </body>
 </html>
