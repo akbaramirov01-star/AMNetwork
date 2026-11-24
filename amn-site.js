@@ -54,7 +54,9 @@
 [data-theme="light"] .amn-logo .wm{background-image:linear-gradient(100deg,#8A6A12 20%,#E8C87A 45%,#8A6A12 70%)}
 @keyframes amnRingSpin{to{transform:rotate(360deg)}}
 @keyframes amnShineTxt{0%,60%{background-position:100% 0}100%{background-position:-120% 0}}
-@media (max-width:380px){.amn-logo .wm{font-size:16px;letter-spacing:.1em}}
+@media (max-width:480px){.amn-logo{gap:7px}.amn-logo .ring,.amn-logo .ring img{width:32px;height:32px}.amn-logo .wm{font-size:13px;letter-spacing:.05em}}
+@media (max-width:350px){.amn-logo .wm{display:none}}
+html,body{overflow-x:clip}
 /* Icons 3: round medallions with a gold ring, everywhere */
 .tl-ic,.page-ic,.amn-tile img,.step-icon img,.picon img{border-radius:50%!important;object-fit:cover;box-shadow:0 0 0 2px #C9A84C,0 0 0 5px rgba(201,168,76,.18),0 10px 24px rgba(0,0,0,.25)!important}
 @media (prefers-reduced-motion:reduce){.amn-logo .ring::before,.amn-logo .wm{animation:none}}`;
