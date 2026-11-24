@@ -1,0 +1,141 @@
+{
+ "order": [
+  "01",
+  "02",
+  "03",
+  "04",
+  "06",
+  "07",
+  "05",
+  "08",
+  "09",
+  "12",
+  "10"
+ ],
+ "dialog": [
+  "01",
+  "04",
+  "06",
+  "08",
+  "09"
+ ],
+ "estab": [
+  "02",
+  "03",
+  "07",
+  "05",
+  "12"
+ ],
+ "estab_cap": 3.6,
+ "estab_dur": {
+  "02": 3.4,
+  "03": 3.6,
+  "07": 4.6,
+  "05": 4.6,
+  "12": 3.2
+ },
+ "fadeblack_into": [
+  "06",
+  "10"
+ ],
+ "hook": {
+  "01": [
+   0.0,
+   3.0,
+   "DECLINED.\nAGAIN."
+  ]
+ },
+ "st": {
+  "10": 0.8
+ },
+ "plate": {
+  "10": "Quran \u00b7 Luqman 31:14 \u00b7 amnetwork.io/quran",
+  "03": "Mom \u00b7 calling\u2026"
+ },
+ "card": {
+  "dur": 3.8,
+  "lines": [
+   [
+    "ONE CALL BACK.\nTHAT'S ALL SHE NEEDED.",
+    50,
+    [
+     236,
+     196,
+     96
+    ],
+    40
+   ],
+   [
+    "Heart Stories #2 \u00b7 Eleven Missed Calls",
+    26,
+    [
+     245,
+     245,
+     238
+    ],
+    40
+   ],
+   [
+    "\"Who deserves my good company most?\"",
+    22,
+    [
+     245,
+     245,
+     238
+    ],
+    2
+   ],
+   [
+    "\"Your mother, your mother, your mother,",
+    22,
+    [
+     245,
+     245,
+     238
+    ],
+    2
+   ],
+   [
+    "then your father.\"",
+    22,
+    [
+     245,
+     245,
+     238
+    ],
+    4
+   ],
+   [
+    "Sahih al-Bukhari 5971 \u00b7 Quran 31:14",
+    20,
+    [
+     200,
+     200,
+     195
+    ],
+    36
+   ],
+   [
+    "Read the Quran free: amnetwork.io/quran",
+    26,
+    [
+     236,
+     196,
+     96
+    ],
+    30
+   ],
+   [
+    "Not a fatwa \u00b7 AI-animated \u00b7 AM Academy",
+    22,
+    [
+     200,
+     200,
+     195
+    ],
+    0
+   ]
+  ]
+ },
+ "out": "HEART2_raw.mp4"
+}

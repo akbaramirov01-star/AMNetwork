@@ -23,7 +23,7 @@ tears, no lecture until the very end. Their reach comes partly from a collaborat
 | # | Title | Conflict → turn | Source |
 |---|---|---|---|
 | 1 | **Five More Minutes** (done 24 Nov, 0:58, 84.3 cr, `publish/heart-1.md`) | Yusuf games, ignores Grandma's calls; finds the covered plate and her note | Quran 17:23–24 (verified); Sahih Muslim book 45 hadith 10 (verified) |
-| 2 | Mom's Phone Call | Maryam rolls her eyes and hangs up on Mom; later sees what Mom was calling about | Quran 31:14 (verified) |
+| 2 | **Eleven Missed Calls** (done 24 Nov, 0:57, ~75 cr, `publish/heart-2.md`) | Maryam declines Mom's calls; Dad: "She called you eleven times"; she sees Mom crying on the prayer rug | Quran 31:14 (verified); Bukhari 5971 (verified) |
 | 3 | The Friend Who Left | Yusuf mocks a poorer classmate's old shoes; next day he learns why | hadith on not belittling a Muslim brother [verify] |
 | 4 | Dad's Hands | Teen embarrassed by Dad's work clothes at school | Bukhari 2072 (eating from your own work, verified) |
 | 5 | Last in Line | Maryam pushes ahead at the bakery, an old man stays behind | mercy to elders hadith [verify] |
@@ -42,3 +42,13 @@ Next after #1: #2 and #6 (strongest for teens), each ~80–100 cr.
   `b2d57a9e-d801-4b58-9e7c-5ede83d8533f`) and `voice_change` on every dialogue clip — keeps timing, so lips stay in sync.
   Do this for every character in every new video.
 - Watch for brand logos (an Apple logo appeared on a laptop lid → blurred only while visible).
+
+## Lessons from #2 (24 Nov)
+- **Higgsfield allows only 3 cloned voices** and has no delete tool here. Clones: Yusuf `b2d57a9e-d801-4b58-9e7c-5ede83d8533f`,
+  Khadija `b1db31e6-1a51-4b7e-9467-6ef9c50a2ff4`, Hamza `b85e6fca-cab6-481c-b3da-21255d613a93`. Maryam has no clone: her clips are
+  `voice_change`d to the preset voice **Zoe** (`d0374db1-44b9-4f05-939e-0a9ae9dbbe6a`) and then pitched +2 semitones locally
+  (`asetrate=48000*1.12246,aresample=48000,atempo=0.8909`), so all her lines sound like one teenage girl. Do the same for her in every video.
+  To clone another character, the founder has to delete a voice in the Higgsfield web app first.
+- Seedance repeated a word again ("little, little kid") — a reshoot of the 4 s clip fixed it. tr.py flags it only via ratio; read the transcript.
+- Order the turning point as: someone tells her the cost (Dad) → her face changes → we see what she sees (Mom praying with the phone beside her).
+- Builder for this one: `docs/content/tools/heart2/` (build.py now takes per-clip `estab_dur`; calls.py draws the missed-calls lock screen).

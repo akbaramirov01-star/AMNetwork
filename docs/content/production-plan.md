@@ -23,7 +23,7 @@ Budget now: **894.7 credits** (24 Nov). Higgsfield resets ~30 Nov and the remain
 ### Next — in this order
 | # | Shoot | Title | Series | Length | Est. credits | Status |
 |---|---|---|---|---|---|---|
-| 1 | 25 Nov | **Heart Stories #2 — "Eleven Missed Calls"** | Heart Stories | ~1:10 | ~95 | **script ready (below)** |
+| 1 | 25 Nov | **Heart Stories #2 — "Eleven Missed Calls"** | Heart Stories | 0:57 | ~75 | **DONE 24 Nov — in QUEUE.md (#8, 2 Dec)** |
 | 2 | 25 Nov | Prophet Isa (pbuh) #18 — "He spoke from the cradle" (series finale) | Stories of the Prophets | ~1:50 | ~140 | script ready |
 | 3 | 26 Nov | Signs of the Last Day #2 — "Every prophet warned about him" | Signs of the Last Day | ~0:50 | ~55 | needs 1 source [verify] |
 | 4 | 26 Nov | Heart Stories #3 — "The Phone at the Table" | Heart Stories | ~1:10 | ~95 | idea (heart-stories.md #6) |
