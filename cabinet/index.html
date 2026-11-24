@@ -729,10 +729,14 @@ async function viewApp(id){
     q(sb.from('events').select('*').eq('application_id',id).order('id')),
     isVer()?q(sb.from('verifications').select('*').eq('application_id',id).order('created_at')):Promise.resolve([]),
     isAdmin()?q(sb.from('payouts').select('*').eq('application_id',id).order('seq')):Promise.resolve([])]);
+  const offs=isAdmin()?await q(sb.from('offers').select('status').eq('application_id',id)).catch(()=>[]):[];
+  a._connected=offs.some(o=>o.status==='connected'||o.status==='helped');a._offers=offs.length;
   const uid=S.me.id;
   const facts=[[t('ref'),a.ref],[t('status'),null],[t('created'),fmtD(a.created_at)],[t('f_region'),a.region]];
   const seePrivate=isAdmin()||a.assigned_to===uid||a.created_by===uid;
-  if(seePrivate)facts.push([t('f_phone'),a.phone||'—'],[t('f_address'),a.address||'—'],[t('f_hh'),a.household_size??'—'],[t('f_dep'),a.dependents??'—'],
+  if(seePrivate&&a.phone)facts.push([t('f_phone'),a.phone]);
+  if(seePrivate&&a.address)facts.push([t('f_address'),a.address]);
+  if(seePrivate)facts.push([t('f_hh'),a.household_size??'—'],[t('f_dep'),a.dependents??'—'],
     [t('f_income'),a.monthly_income!=null?money(a.monthly_income,a.currency):'—']);
   if(seePrivate&&a.country)facts.push([t('f_country'),a.country]);
   if(seePrivate&&a.email)facts.push([t('f_email'),a.email]);
@@ -741,7 +745,8 @@ async function viewApp(id){
   if(seePrivate&&a.months_in_need!=null)facts.push([t('f_months'),a.months_in_need]);
   if(isAdmin()&&a.source==='web')facts.push(['',t('src_web')]);
   if(a.need_score!=null)facts.push([t('score'),a.need_score+' / 100']);
-  if(isAdmin())facts.push([t('a_assign'),a.assigned_to?staffName(a.assigned_to):t('a_none')]);
+  if(isAdmin()&&a.assigned_to)facts.push([t('a_assign'),staffName(a.assigned_to)]);
+  if(isAdmin()&&a._offers)facts.push([t('t_offers'),String(a._offers)]);
   let html=`<a class="back" href="#${isAdmin()?'all':a.assigned_to===uid?'check':'mine'}">${esc(t('back'))}</a>${flashHTML()}
   <div class="card stack"><div class="row between"><h2 style="margin:0">${esc(a.full_name)}</h2>${pill(a.status)}</div>
    <dl class="facts">${facts.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${v===null?pill(a.status):`<bdi>${esc(v)}</bdi>`}</dd>`).join('')}</dl>
@@ -800,12 +805,14 @@ function verifsHTML(vs){
 function adminBlock(a,vs,ps){
   const vers=S.staff.filter(p=>(p.role==='verifier'||p.role==='admin')&&(p.id!==a.created_by||p.role==='admin'));
   const donors=S.staff.filter(p=>p.role==='donor'||p.role==='admin');
-  let h=verifsHTML(vs);
+  const realVers=vers.filter(p=>p.role==='verifier');
+  const canApprove=vs.some(v=>v.recommendation==='approve')||a._connected;
+  let h=vs.length?verifsHTML(vs):'';
   if(!['paid'].includes(a.status))h+=`<form id="fAdm" class="card stack" data-app="${a.id}">
-    <div class="grid2"><label>${esc(t('a_assign'))}<select name="assigned_to"><option value="">${esc(t('a_none'))}</option>${vers.map(p=>`<option value="${p.id}" ${p.id===a.assigned_to?'selected':''}>${esc(p.full_name||p.email)} · ${esc(t('r_'+p.role))}</option>`).join('')}</select></label></div>
+    <div class="grid2" ${realVers.length||a.assigned_to?'':'style="display:none"'}><label>${esc(t('a_assign'))}<select name="assigned_to"><option value="">${esc(t('a_none'))}</option>${vers.map(p=>`<option value="${p.id}" ${p.id===a.assigned_to?'selected':''}>${esc(p.full_name||p.email)} · ${esc(t('r_'+p.role))}</option>`).join('')}</select></label></div>
     <label>${esc(t('a_note'))}<textarea name="admin_note" maxlength="2000">${esc(a.admin_note||'')}</textarea></label>
     <div class="row"><button class="btn" data-adm="save">${esc(t('save'))}</button>
-     ${['verified','assigned','new'].includes(a.status)?`<button class="btn primary" data-adm="approved">${esc(t('a_approve'))}</button><button class="btn danger" data-adm="rejected">${esc(t('a_reject'))}</button>`:''}
+     ${['verified','assigned','new'].includes(a.status)?`${canApprove?`<button class="btn primary" data-adm="approved">${esc(t('a_approve'))}</button>`:''}<button class="btn danger" data-adm="rejected">${esc(t('a_reject'))}</button>`:''}
      ${['rejected','approved'].includes(a.status)?`<button class="btn" data-adm="reopen">${esc(t('a_reopen'))}</button>`:''}</div></form>`;
   if(['approved','paid'].includes(a.status))h+=`<form id="fPay" class="card stack" data-app="${a.id}"><h2>${esc(t('a_pay'))}</h2>
     <div class="grid2"><label>${esc(t('p_amount'))}<input name="amount" type="number" min="0.01" step="0.01" required inputmode="decimal"></label>
