@@ -890,7 +890,7 @@ function calculateZakat() {
   }
 })();
 </script>
-<script src="/faq-assistant.js?v=20261123"></script>
+<script src="/faq-assistant.js?v=20261124"></script>
 <script src="/assistant-ui.js?v=20261124"></script>
 <script src="/voice-assistant.js?v=20261123" defer></script>
 <div id="assistantPanel" role="dialog" aria-label="AM Network assistant">
@@ -913,15 +913,16 @@ function calculateZakat() {
 // ── AI ASSISTANT WIDGET ──
 const ASSISTANT_API_BASE = 'https://amnetwork.onrender.com';
 const ASST_STR = {
-  en:{title:'AI Assistant',placeholder:'Ask about Zakat, AM Network…',welcome:"Assalamu alaikum! I'm the AM Network assistant. Ask me about Zakat, how we check families, or when the pilot starts.",error:"Sorry, I couldn't respond just now — please try again in a moment, or email contact@amnetwork.io.",},
-  ru:{title:'ИИ-ассистент',placeholder:'Спросите про Закят, AM Network…',welcome:'Ассаляму алейкум! Я ассистент AM Network. Спросите меня про закят, как мы проверяем семьи или когда начнётся пилот.',error:'Извините, не получилось ответить — попробуйте ещё раз через момент, либо напишите на contact@amnetwork.io.',},
-  ar:{title:'مساعد الذكاء الاصطناعي',placeholder:'اسأل عن الزكاة، AM Network…',welcome:'السلام عليكم! أنا مساعد AM Network. اسألني عن الزكاة، أو كيف نتحقق من الأسر، أو متى تبدأ المرحلة التجريبية.',error:'عذرًا، لم أتمكن من الرد الآن — حاول مرة أخرى بعد قليل، أو راسلنا على contact@amnetwork.io.',},
-  tj:{title:'ИИ-ассистент',placeholder:'Дар бораи Закот бипурсед…',welcome:'Ассалому алейкум! Ман ёрдамчии AM Network ҳастам. Дар бораи закот, чӣ тавр санҷидани оилаҳо ё вақти оғози барномаи озмоишӣ бипурсед.',error:'Мутаассифона, ҳозир натавонистам ҷавоб диҳам — лутфан баъд аз лаҳзае боз кӯшиш кунед ё ба contact@amnetwork.io нависед.',},
-  id:{title:'Asisten AI',placeholder:'Tanya soal Zakat, AM Network…',welcome:'Assalamu alaikum! Saya asisten AM Network. Tanyakan tentang zakat, cara kami memeriksa keluarga, atau kapan uji coba dimulai.',error:'Maaf, belum bisa merespons — coba lagi sesaat lagi, atau email contact@amnetwork.io.',},
-  tr:{title:'AI Asistanı',placeholder:'Zekat, AM Network hakkında sorun…',welcome:'Esselamü aleyküm! Ben AM Network asistanıyım. Zekât, aileleri nasıl kontrol ettiğimiz veya pilot uygulamanın ne zaman başlayacağı hakkında sorabilirsiniz.',error:'Üzgünüm, şu an yanıt veremedim — birazdan tekrar deneyin veya contact@amnetwork.io adresine yazın.',},
-  zh:{title:'AI 助手',placeholder:'询问天课、AM Network…',welcome:'愿真主赐予您平安！我是 AM Network 助手。可以问我关于天课、我们如何核实家庭或试点何时开始的问题。',error:'抱歉，暂时无法回复 — 请稍后再试，或发邮件至 contact@amnetwork.io。',},
-  ms:{title:'Pembantu AI',placeholder:'Tanya tentang Zakat, AM Network…',welcome:'Assalamualaikum! Saya pembantu AM Network. Tanya saya tentang zakat, cara kami menyemak keluarga, atau bila perintis bermula.',error:'Maaf, tidak dapat membalas sekarang — cuba lagi sebentar, atau emel contact@amnetwork.io.',},
-  de:{title:'KI-Assistent',placeholder:'Frag zu Zakat, AM Network…',welcome:'Assalamu alaikum! Ich bin der AM Network Assistent. Frag mich zu Zakat, wie wir Familien prüfen, oder wann das Pilotprojekt beginnt.',error:'Entschuldigung, gerade keine Antwort möglich — bitte gleich nochmal versuchen oder contact@amnetwork.io schreiben.',},
+  en:{title:"AI Assistant",placeholder:"Ask about Zakat, AM Network…",welcome:"Assalamu alaikum! I'm the AM Network AI assistant. Ask me about Zakat, how to ask for help, or how to help others.",error:"Sorry, I couldn't respond just now — please try again in a moment, or email contact@amnetwork.io.",},
+  ru:{title:"ИИ-ассистент",placeholder:"Спросите про Закят, AM Network…",welcome:"Ассаляму алейкум! Я ИИ-ассистент AM Network. Спросите меня про закят, как попросить о помощи или как помочь другим.",error:"Извините, не получилось ответить — попробуйте ещё раз через момент, либо напишите на contact@amnetwork.io.",},
+  ar:{title:"مساعد الذكاء الاصطناعي",placeholder:"اسأل عن الزكاة، AM Network…",welcome:"السلام عليكم! أنا المساعد الذكي لـ AM Network. اسألني عن الزكاة، أو كيف تطلب المساعدة، أو كيف تساعد غيرك.",error:"عذرًا، لم أتمكن من الرد الآن — حاول مرة أخرى بعد قليل، أو راسلنا على contact@amnetwork.io.",},
+  tj:{title:"ИИ-ассистент",placeholder:"Дар бораи Закот бипурсед…",welcome:"Ассалому алейкум! Ман ИИ-ёрдамчии AM Network ҳастам. Дар бораи закот, чӣ тавр кӯмак пурсидан ё чӣ тавр ба дигарон кӯмак кардан бипурсед.",error:"Мутаассифона, ҳозир натавонистам ҷавоб диҳам — лутфан баъд аз лаҳзае боз кӯшиш кунед ё ба contact@amnetwork.io нависед.",},
+  id:{title:"Asisten AI",placeholder:"Tanya soal Zakat, AM Network…",welcome:"Assalamu alaikum! Saya asisten AI AM Network. Tanyakan tentang zakat, cara meminta bantuan, atau cara membantu orang lain.",error:"Maaf, belum bisa merespons — coba lagi sesaat lagi, atau email contact@amnetwork.io.",},
+  tr:{title:"AI Asistanı",placeholder:"Zekat, AM Network hakkında sorun…",welcome:"Esselamü aleyküm! Ben AM Network'ün yapay zekâ asistanıyım. Zekât, nasıl yardım isteyeceğiniz veya başkalarına nasıl yardım edebileceğiniz hakkında sorabilirsiniz.",error:"Üzgünüm, şu an yanıt veremedim — birazdan tekrar deneyin veya contact@amnetwork.io adresine yazın.",},
+  zh:{title:"AI 助手",placeholder:"询问天课、AM Network…",welcome:"愿真主赐予您平安！我是 AM Network 的 AI 助手。可以问我关于天课、如何申请帮助或如何帮助他人的问题。",error:"抱歉，暂时无法回复 — 请稍后再试，或发邮件至 contact@amnetwork.io。",},
+  ms:{title:"Pembantu AI",placeholder:"Tanya tentang Zakat, AM Network…",welcome:"Assalamualaikum! Saya pembantu AI AM Network. Tanya saya tentang zakat, cara memohon bantuan, atau cara membantu orang lain.",error:"Maaf, tidak dapat membalas sekarang — cuba lagi sebentar, atau emel contact@amnetwork.io.",},
+  fr:{title:"Assistant IA",placeholder:"Demandez sur la Zakat, AM Network…",welcome:"Assalamu alaikum ! Je suis l'assistant IA d'AM Network. Posez-moi vos questions sur la Zakat, sur la façon de demander de l'aide ou d'aider les autres.",error:"Désolé, je n'ai pas pu répondre — réessayez dans un instant, ou écrivez à contact@amnetwork.io.",},
+  de:{title:"KI-Assistent",placeholder:"Frag zu Zakat, AM Network…",welcome:"Assalamu alaikum! Ich bin der KI-Assistent von AM Network. Frag mich zu Zakat, wie man um Hilfe bittet oder wie man anderen helfen kann.",error:"Entschuldigung, gerade keine Antwort möglich — bitte gleich nochmal versuchen oder contact@amnetwork.io schreiben.",},
 };
 let asstHistory = [];
 let asstOpened = false;
