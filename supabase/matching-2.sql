@@ -157,15 +157,26 @@ language sql stable security definer set search_path = public as $$
    order by o.created_at desc
 $$;
 
--- Admin: delete a test or spam request (not one that already has a recorded payout).
-create or replace function public.delete_request(p_id uuid) returns void
+-- Admin: delete a test or spam request. With payouts only when p_force and only if they are the
+-- LATEST entries of the open report, so the SHA-256 chain of everything before stays intact.
+drop function if exists public.delete_request(uuid);
+create or replace function public.delete_request(p_id uuid, p_force boolean default false) returns text
 language plpgsql security definer set search_path = public as $$
+declare first_seq bigint;
 begin
   if not public.is_admin() then raise exception 'admin only'; end if;
-  if exists (select 1 from public.payouts where application_id = p_id) then raise exception 'has payouts'; end if;
+  select min(seq) into first_seq from public.payouts where application_id = p_id;
+  if first_seq is not null then
+    if not p_force then return 'has_payouts'; end if;
+    if exists (select 1 from public.payouts where seq > first_seq and application_id <> p_id) then
+      return 'later_payouts';
+    end if;
+    delete from public.payouts where application_id = p_id;
+  end if;
   delete from public.applications where id = p_id;
+  return 'deleted';
 end $$;
 
-revoke execute on function public.connect_offer(uuid), public.my_connections(), public.delete_request(uuid) from public, anon;
-grant  execute on function public.connect_offer(uuid), public.my_connections(), public.delete_request(uuid) to authenticated;
+revoke execute on function public.connect_offer(uuid), public.my_connections(), public.delete_request(uuid, boolean) from public, anon;
+grant  execute on function public.connect_offer(uuid), public.my_connections(), public.delete_request(uuid, boolean) to authenticated;
 revoke execute on function public.amn_t(text, text) from public, anon, authenticated;
