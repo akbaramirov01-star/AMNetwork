@@ -1,0 +1,13 @@
+{"order": ["01","02","03","04","05","06","07","08","09","10"],
+ "dialog": ["01","03","06","09","10"], "estab": ["02"], "estab_cap": 3.0,
+ "fadeblack_into": ["04","06","07","09"],
+ "hook": {"01": [0.0, 3.6, "MY DUA ISN'T\nWORKING?!"]},
+ "st": {"04": 0.5, "05": 0.5, "07": 0.5, "08": 0.5},
+ "plate": {"04": "Quran · Maryam 19:4–5", "05": "Quran · Al-Anbiya 21:89", "07": "Quran · Maryam 19:7", "08": "Quran · Maryam 19:12–14", "09": "Quran · Maryam 19:4"},
+ "arabic": {"05": ["رَبِّ لَا تَذَرْنِى فَرْدًا|وَأَنتَ خَيْرُ ٱلْوَٰرِثِينَ", "\"My Lord, do not leave me alone, while You are the best of inheritors.\" Quran 21:89"]},
+ "card": {"dur": 3.4, "lines": [["NEVER STOP\nASKING.", 66, [236,196,96], 26], ["Next: Prophet Isa", 40, [245,245,238], 4],
+   ["(peace be upon him)", 30, [245,245,238], 40], ["Read Surah Maryam: amnetwork.io/quran", 26, [236,196,96], 30],
+   ["Stories of the Prophets #17 · Zakariya & Yahya", 22, [245,245,238], 4], ["(peace be upon them)", 22, [245,245,238], 14],
+   ["Sources: Quran 19:3–14, 21:89–90", 22, [245,245,238], 14],
+   ["Retelling, not a fatwa · AI-animated", 22, [200,200,195], 0]]},
+ "out": "ZAKARIYA_raw.mp4"}

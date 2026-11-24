@@ -1,6 +1,6 @@
 # AM Academy — production plan (23 Nov – ~30 Nov 2026)
 
-Budget: **1174.35 credits** after Signs #1 (23 Nov) (Higgsfield MAX), reset expected ~30 Nov (date not confirmed by the API — check higgsfield.ai → Billing).
+Budget: **1043.1 credits** after Zakariya #17 + Dua #1 (24 Nov) (Higgsfield MAX), reset expected ~30 Nov (date not confirmed by the API — check higgsfield.ai → Billing).
 Rule: the founder says "go" → one video is produced end-to-end (script → voices → clips → QA → upload → texts → QUEUE.md).
 Every source below was checked on 23 Nov 2026 against api.quran.com (Sahih International) or fawazahmed0/hadith-api (eng-bukhari),
 except items marked **[verify]**. Sahih Muslim numbers in that dataset do NOT match sunnah.com — always re-check Muslim numbers.
@@ -97,3 +97,16 @@ only fog, an empty road, a lamp. Calm ending: "Allah protects those who prepare.
   one clear benefit per video ("save this for your next exam").
 - TikTok Creator Rewards needs videos over 1 minute (growth-plan.md) — prophet episodes are 1:40+, shorts are for reach.
 - Measure per video after 72 h: average % watched, % past second 3, comments. Keep what works, drop what doesn't.
+
+## Added 24 Nov
+- **Done 24 Nov:** Stories of the Prophets #17 Zakariya & Yahya (1:11) and Duas for Every Day #1 "Exam" (0:35) — 131.3 cr for both.
+- **Platform plug in every video (founder, 24 Nov):** where an ayah/dua/hadith/Zakat is read, show a generic unbranded phone with the
+  REAL AM Network page (Playwright screenshot of the repo page opened from file://, e.g. /quran/ for an ayah; `tools/phone/phone.py`).
+  End cards name the page (amnetwork.io/quran, /dua, /hadith, /zakat). Founder will send Quranly-style examples.
+- **Wording follows the 24 Nov model** (`docs/messaging-2026-11.md`): AI suggests a Zakat category, the giver verifies and decides,
+  money never passes through AM Network. Never "every family checked by us".
+- **New format idea from founder's reference video** (Russian, 36 s, "we accepted bad manners as culture: smacking → ASMR, bragging →
+  unboxing, pranks…"): our version **"They Renamed It"** — calm voice-over, one scene per line, ends with a hadith on good character
+  (source to verify, e.g. Tirmidhi on the heaviest thing on the Scale being good character). Rules: no music, no people mocked,
+  no intimate scenes (the reference had a bedroom line — we drop it), family cast only. Playlist: Muslim Life Lessons.
+- Next: Prophet Isa #18 (series finale) → Signs #2 → "They Renamed It" #1 → WYWD #3.
