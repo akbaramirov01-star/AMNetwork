@@ -1,24 +1,58 @@
 # AM Academy — production plan (23 Nov – ~30 Nov 2026)
 
-Budget: **1043.1 credits** after Zakariya #17 + Dua #1 (24 Nov) (Higgsfield MAX), reset expected ~30 Nov (date not confirmed by the API — check higgsfield.ai → Billing).
+Budget: **894.7 credits** (24 Nov evening) (Higgsfield MAX), reset expected ~30 Nov (date not confirmed by the API — check higgsfield.ai → Billing).
 Rule: the founder says "go" → one video is produced end-to-end (script → voices → clips → QA → upload → texts → QUEUE.md).
 Every source below was checked on 23 Nov 2026 against api.quran.com (Sahih International) or fawazahmed0/hadith-api (eng-bukhari),
 except items marked **[verify]**. Sahih Muslim numbers in that dataset do NOT match sunnah.com — always re-check Muslim numbers.
 
-## Schedule
+## Schedule (updated 24 Nov, evening)
 
-| # | Shoot | Title | Format | Length | Est. credits | Status |
+Budget now: **894.7 credits** (24 Nov). Higgsfield resets ~30 Nov and the remainder is lost — spend it on the list below.
+
+### Done
+| Date | Title | Series | Length | Credits |
+|---|---|---|---|---|
+| 21 Nov | What Would You Do? #1 Wallet, #2 Homework | What Would You Do? | 0:38 / 0:30 | 142 |
+| 21 Nov | Prophet Dawud (pbuh) #15 | Stories of the Prophets | 1:41 | 136 |
+| 23 Nov | Prophet Sulayman (pbuh) #16 | Stories of the Prophets | 1:28 | 130 |
+| 23 Nov | Signs of the Last Day #1 — Tall buildings | Signs of the Last Day | 0:52 | 59 |
+| 24 Nov | Zakariya & Yahya (pbut) #17 | Stories of the Prophets | 1:11 | ~90 |
+| 24 Nov | Duas for Every Day #1 — Exam | Duas for Every Day | 0:32 | ~40 |
+| 24 Nov | Heart Stories #1 — Five More Minutes (v2) | Heart Stories | 1:09 | 148 (incl. v2 fixes) |
+
+### Next — in this order
+| # | Shoot | Title | Series | Length | Est. credits | Status |
 |---|---|---|---|---|---|---|
-| 1 | 23 Nov | Prophet Sulayman (pbuh) — "The ant who saved her valley" | Stories of the Prophets | 1:28 | 130 (spent) | **done 23 Nov** |
-| 2 | 23 Nov | Signs of the Last Day #1 — "Tall buildings" | Signs of the Last Day | 0:52 | 58.5 (spent) | **done 23 Nov** |
-| 3 | | Prophets Zakariya & Yahya (pbut) — "A son, when he was old?!" | Stories of the Prophets | ~1:45 | ~130 | script ready |
-| 4 | | Family Dua Moments #1 — "Exam fear" | Family Dua Moments | ~0:35 | ~40 | script ready |
-| 5 | | What Would You Do? #3 — "They insulted my brother" | What Would You Do? | ~0:35 | ~60 | script ready (after pilot metrics) |
-| 6 | | Prophet Isa (pbuh) — "He spoke from the cradle" (series finale) | Stories of the Prophets | ~1:50 | ~140 | script ready |
-| 7 | | After This Life #1 — "What happens in the grave?" | After This Life | ~0:50 | ~50 | script ready |
-| 8 | | True or Myth? #1 — "Bismillah before eating" | True or Myth? | ~0:35 | ~40 | script ready |
-| 9 | | Signs Before the Hour #2 — "Every prophet warned about him" (Dajjal) | Signs Before the Hour | ~0:50 | ~50 | needs 1 source **[verify]** |
-| | | **Total** | | | **~660** | leaves ~700 cr spare for reshoots / more shorts |
+| 1 | 25 Nov | **Heart Stories #2 — "Eleven Missed Calls"** | Heart Stories | ~1:10 | ~95 | **script ready (below)** |
+| 2 | 25 Nov | Prophet Isa (pbuh) #18 — "He spoke from the cradle" (series finale) | Stories of the Prophets | ~1:50 | ~140 | script ready |
+| 3 | 26 Nov | Signs of the Last Day #2 — "Every prophet warned about him" | Signs of the Last Day | ~0:50 | ~55 | needs 1 source [verify] |
+| 4 | 26 Nov | Heart Stories #3 — "The Phone at the Table" | Heart Stories | ~1:10 | ~95 | idea (heart-stories.md #6) |
+| 5 | 27 Nov | After This Life #1 — "What happens in the grave?" | After This Life | ~0:50 | ~55 | script ready |
+| 6 | 27 Nov | Duas for Every Day #2 — "Leaving the house" | Duas for Every Day | ~0:35 | ~40 | to write |
+| 7 | 28 Nov | True or Myth? #1 — "Bismillah before eating" | True or Myth? | ~0:35 | ~45 | script ready |
+| 8 | 28 Nov | What Would You Do? #3 — "They insulted my brother" | What Would You Do? | ~0:35 | ~60 | script ready |
+| 9 | 29 Nov | Heart Stories #4 — "Dad's Hands" | Heart Stories | ~1:10 | ~95 | idea |
+| | | **Total** | | | **~680** | leaves ~200 for reshoots; anything left by 29 Nov → one more Heart Story |
+
+Every new video: cloned voice per character + `voice_change` (one consistent voice), a clear turning point, real AM Network page on a
+phone with the ayah/dua highlighted in sync, one-word captions for Heart Stories.
+
+### Heart Stories #2 — "Eleven Missed Calls" (script)
+Cast: Maryam, Mom Khadija, Dad Hamza. Sources: Quran 31:14 (verified 23 Nov), Sahih al-Bukhari 5971 "Your mother… your mother…
+your mother…" (verified 24 Nov).
+1. **0–3 s, hook "DECLINED. AGAIN."** Maryam at a bus stop at dusk, phone buzzing: "Mom again?! I'm not a little kid anymore!" — declines.
+2. Phone screen (drawn in code): "Mom · 7 missed calls" + bubble "Maryam, where are you? Please answer 🤍".
+3. Silent: Mom at the dark window at home, phone to her ear, worried; the clock.
+4. Maryam walking: "I'll call her later. She always overreacts."
+5. Silent: Maryam opens the front door; Dad in the hallway, serious.
+6. **Turning point — Dad:** "She called you eleven times, Maryam. She thought something had happened to you."
+7. Maryam freezes; she sees Mom in the kitchen doorway, eyes red (silent close-up of Maryam's face changing).
+8. Mom (relieved tears): "Alhamdulillah… you're safe. That's all I wanted to know."
+9. Maryam (crying): "I'm sorry, Mom. Next time, I'll answer the first time."
+10. Phone: amnetwork.io/quran, Luqman 31:14 highlighted in sync — "His mother carried him, weakness upon weakness… Be grateful to Me
+    and to your parents." (Dad's voice)
+11. End card: "ONE CALL BACK. THAT'S ALL SHE NEEDED." · "Your mother, then your mother, then your mother" — Sahih al-Bukhari 5971 ·
+    Heart Stories #2.
 
 Credits estimate = clip seconds × 1 cr + voices + ~25 % reshoots (measured on 21 Nov: episode 136 cr, two shorts 142 cr).
 
