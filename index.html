@@ -24,7 +24,7 @@
 <meta name="twitter:description" content="AM Network connects people in need with those who give Zakat and Sadaqah — donors and charities in any country. AI reviews each request and suggests the Zakat category and what to check; the giver verifies and helps directly. Money never passes through us.">
 <!-- Google Analytics -->
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.web3forms.com https://script.google.com https://script.googleusercontent.com https://*.hcaptcha.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://api.worldbank.org https://amnetwork.onrender.com https://api.quran.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-src https://*.hcaptcha.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.hcaptcha.com; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://flagcdn.com https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://pziakammdazyytxubtrj.supabase.co https://api.web3forms.com https://script.google.com https://script.googleusercontent.com https://*.hcaptcha.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://api.worldbank.org https://amnetwork.onrender.com https://api.quran.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-src https://*.hcaptcha.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.hcaptcha.com; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
@@ -134,7 +134,11 @@ nav{position:fixed;top:3px;left:0;right:0;z-index:100;display:flex;align-items:c
 .nav-cta:hover{background:var(--gold2);transform:translateY(-1px)}
 .nav-demo{padding:7px 14px;border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:12px;font-weight:500;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all 0.2s;white-space:nowrap;flex-shrink:0}
 .nav-demo:hover{border-color:var(--gold);color:var(--gold)}
-@media(max-width:768px){.nav-demo{display:none!important}}
+@media(max-width:768px){.nav-demo{display:none!important}
+@media(max-width:480px){nav .nav-right{gap:6px}nav .theme-btn,nav .nav-cab,nav .nav-menu{width:40px!important;height:40px!important;min-height:40px!important}nav .nav-cab{padding:0!important;justify-content:center}nav .nav-cab .nav-ic{margin:0}
+  nav .amn-logo .wm{font-size:15px;letter-spacing:.08em}nav .amn-logo{gap:8px}nav .amn-logo .ring,nav .amn-logo .ring img{width:34px;height:34px}}
+@media(max-width:360px){nav .amn-logo .wm{display:none}}
+@media(max-width:820px){.steps.steps3{background:transparent!important;border:0!important}}}
 
 /* ── HERO ── */
 .hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 5vw 80px;overflow:hidden}
@@ -696,6 +700,53 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 .nav-products{display:none;position:relative;color:var(--text)}.nav-products summary{list-style:none;display:flex;align-items:center;justify-content:center;width:38px;height:40px;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:var(--card)}.nav-products summary::-webkit-details-marker{display:none}.nav-products-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.nav-products-menu{position:absolute;inset-inline-end:0;top:48px;width:230px;padding:8px;background:var(--bg2);z-index:1001;border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px #0002}.nav-products-menu a{display:flex;align-items:center;gap:11px;padding:12px;color:var(--text);font-size:14px;text-decoration:none;border-radius:6px}.nav-products-menu a:hover{background:var(--gold3)}.nav-products summary:focus-visible,.nav-products-menu a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}@media(max-width:768px){.nav-products{display:block}.nav-right{gap:6px}}
 .nav-tools{display:block;position:relative;color:var(--text)}.nav-tools summary{list-style:none;display:flex;align-items:center;gap:5px;padding:7px 14px;border:1px solid var(--border);border-radius:6px;cursor:pointer;background:transparent;color:var(--text2);font-size:12px;font-weight:500;font-family:'DM Sans',sans-serif;white-space:nowrap}.nav-tools summary::-webkit-details-marker{display:none}.nav-tools summary .chev{color:var(--gold);font-size:10px}.nav-tools-menu{position:absolute;inset-inline-end:0;top:44px;width:220px;padding:8px;background:var(--bg2);z-index:1001;border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px #0002}.nav-tools-menu a{display:flex;align-items:center;gap:11px;padding:12px;color:var(--text);font-size:14px;text-decoration:none;border-radius:6px}.nav-tools-menu a:hover{background:var(--gold3)}.nav-tools summary:focus-visible,.nav-tools-menu a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}@media(max-width:768px){.nav-tools{display:none!important}}
 .menu-ic{flex-shrink:0;color:var(--gold);opacity:.85}
+
+/* ── Homepage v4 (24 Nov 2026): variant A «two doors» ── */
+.nav-menu{width:44px;height:44px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text2);display:grid;place-items:center;cursor:pointer;flex-shrink:0}
+.nav-menu:hover{border-color:var(--gold);color:var(--gold2)}
+.nav-demo{display:none!important}
+.doors{display:grid;gap:12px;width:100%;max-width:520px;margin:24px auto 0;animation:fadeUp .7s .3s ease both}
+.door{display:flex;gap:14px;align-items:center;padding:16px 18px;border-radius:22px;border:1px solid rgba(201,168,76,.4);background:linear-gradient(135deg,rgba(201,168,76,.16),rgba(255,255,255,.04));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);text-decoration:none;color:var(--text);text-align:start;transition:transform .25s cubic-bezier(.3,1.4,.5,1),box-shadow .25s}
+.door:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(0,0,0,.25)}.door:active{transform:scale(.98)}
+.door img{width:58px;height:58px;border-radius:50%;flex:none;box-shadow:0 0 0 2px #C9A84C,0 0 0 5px rgba(201,168,76,.18)}
+.door-t{display:flex;flex-direction:column;gap:2px;min-width:0}.door-t b{font-size:18px;line-height:1.25}.door-t small{font-size:13.5px;color:var(--text2)}
+.door i{margin-inline-start:auto;font-style:normal;font-size:22px;color:var(--gold2)}[dir="rtl"] .door i{transform:scaleX(-1)}
+.door-give{background:linear-gradient(135deg,#E8C87A,#B8963E);border:0;color:#1a1405;box-shadow:0 14px 34px rgba(201,168,76,.3)}
+.door-give .door-t small{color:rgba(26,20,5,.75)}.door-give i{color:#1a1405}.door-give img{box-shadow:0 0 0 2px #1a1405,0 0 0 5px rgba(26,20,5,.15)}
+[data-theme="light"] .door:not(.door-give){background:rgba(255,255,255,.78)}
+.hstats{display:flex;justify-content:space-around;gap:8px;width:100%;max-width:520px;margin:16px auto 0;padding:14px 10px;border-radius:18px;background:rgba(10,26,17,.45);border:1px solid var(--border);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);text-align:center}
+.hstats b{display:block;font:700 26px/1 'Cormorant Garamond',serif;color:var(--gold2)}.hstats span{font-size:11.5px;color:var(--text3)}
+[data-theme="light"] .hstats{background:rgba(255,255,255,.7)}
+.hstats[hidden]{display:none}
+.hero-trust,.hero-calc,.hero-cta{display:none!important}
+.pb{display:block!important}.pb-one{max-width:720px}
+.pb-big{font:700 clamp(52px,12vw,88px)/1 'Cormorant Garamond',serif;background:linear-gradient(135deg,#F3DE95,#C9A84C);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pb-one .pb-body{font-size:18px;margin:8px 0 6px;color:var(--text)}.pb-one .pb-src a{font-size:13px;color:var(--text3)}
+.tl-body{display:none}
+.tl-scroll li{background:transparent!important;box-shadow:none!important}
+.tl-scroll a,.tl-scroll a:hover{border:0!important;box-shadow:none!important;transform:none}
+.eyebrow-s{font:700 11.5px 'DM Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+@media(max-width:820px){
+  .steps.steps3{gap:0;position:relative;padding-inline-start:30px}
+  .steps.steps3::before{content:"";position:absolute;inset-inline-start:10px;top:10px;bottom:24px;width:2px;background:linear-gradient(var(--gold),rgba(201,168,76,.08))}
+  .steps.steps3 .step{border:0!important;background:transparent!important;padding:0 0 22px!important;display:block!important;box-shadow:none!important}
+  .steps.steps3 .step-num{position:absolute;inset-inline-start:0;width:22px;height:22px;border-radius:50%;background:var(--gold);color:#1a1405!important;font:800 11px/22px 'DM Sans'!important;text-align:center;margin:0!important;transform:translateY(2px)}
+  .steps.steps3 .step{position:relative;margin-inline-start:-30px;padding-inline-start:30px!important}
+  .steps.steps3 .step-icon{display:none}
+  .steps.steps3 .sbadge{margin-top:6px}
+}
+.tl-scroll{display:flex!important;gap:14px!important;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px!important;border:0!important;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tl-scroll::-webkit-scrollbar{display:none}
+.tl-scroll li{flex:0 0 96px;scroll-snap-align:start;border:0!important}
+.tl-scroll a{flex-direction:column!important;align-items:center!important;text-align:center!important;gap:8px!important;padding:6px 0!important;background:transparent!important;font-size:12.5px!important;font-weight:600}
+.tl-scroll .tl-ic{width:68px!important;height:68px!important}
+@media(min-width:821px){.tl-scroll{justify-content:center;flex-wrap:wrap}}
+.tl-all{margin-top:6px;border:0;background:none;color:var(--gold2);font:700 15px 'DM Sans',sans-serif;cursor:pointer;padding:8px 0}
+.join{max-width:880px;margin:10px auto 40px;padding:30px 22px;border-radius:26px;text-align:center;background:linear-gradient(135deg,#1C4532,#0F2117);border:1px solid rgba(201,168,76,.35);position:relative;overflow:hidden}
+.join::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(rgba(232,200,122,.25),transparent 70%)}
+.join h2{font:700 clamp(28px,6vw,40px)/1.1 'Cormorant Garamond',serif;color:#fff;margin-bottom:10px}.join p{color:rgba(255,255,255,.75);max-width:520px;margin:0 auto 18px}
+.join .hbtn{display:inline-flex;min-width:220px;justify-content:center}
+@media(max-width:600px){.join{margin:10px 16px 34px}}
 </style>
 <style id="home-v2">
 /* ── Homepage v2 (October 2026): 9 blocks, one visual idea per block ── */
@@ -924,37 +975,8 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
     <a class="nav-demo" href="/quran/"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg><span data-t="nav_quran">The Holy Quran</span></a>
     <a class="nav-demo" href="/zakat/"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg><span data-t="nav_calc">Zakat Calculator</span></a>
     <a class="nav-demo nav-help" href="/apply/"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21.2l8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg><span data-t="nav_help">Apply for Assistance</span></a>
-    <details class="nav-tools" id="navToolsDetails"><summary><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span data-t="nav_tools">Tools</span><span class="chev">▾</span></summary><div class="nav-tools-menu">
-      <a href="/prayer-times/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-t="nav_prayertimes">Prayer Times</span></a>
-      <a href="/qibla/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-t="nav_qibla">Qibla Direction</span></a>
-      <a href="/tasbeeh/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="4" cy="12" r="2"/><circle cx="10" cy="7" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="20" cy="18" r="2.6"/></svg><span data-t="nav_tasbeeh">Count Your Dhikr</span></a>
-      <a href="/calendar/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span data-t="nav_calendar">Islamic Calendar</span></a>
-    
-      <a href="/hadith/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span data-t="nav_hadith">Hadith Collection</span></a>
-      <a href="/dua/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V7a5 5 0 0 1 10 0v4"/><path d="M5 11h14l-1.5 9a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2z"/></svg><span data-t="nav_dua">Dua &amp; Dhikr</span></a>
-      <a href="/live/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg><span data-t="nav_live">Live: Makkah &amp; Madinah</span></a>
-      <a href="/names/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.5 6.5L21 9l-5 4.5 1.5 7-5.5-3.5L6.5 20.5 8 13.5 3 9l6.5-.5z"/></svg><span data-t="nav_names">99 Names of Allah</span></a>
-    </div></details>
-    <details class="nav-products" id="navProductsDetails"><summary><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2l2.5 6.5L21 9l-5 4.5 1.5 7-5.5-3.5L6.5 20.5 8 13.5 3 9l6.5-.5z"/></svg><span class="nav-products-label" data-t="footer_products">Products</span></summary><div class="nav-products-menu">
-      <a href="#how"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/><line x1="8" y1="14" x2="8" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="16" y1="14" x2="16" y2="14.01"/><line x1="8" y1="18" x2="8" y2="18.01"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg><span>AM Zakat</span></a>
-      <a href="/academy/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5"/></svg><span data-t="nav_academy">AM Academy</span></a>
-      <a href="#waitlist"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/></svg><span data-t="nav_cta">Join Waitlist</span></a>
-    </div></details>
-    <details class="nav-products" id="navMobileToolsDetails"><summary><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span class="nav-products-label" data-t="nav_tools">Tools</span></summary><div class="nav-products-menu">
-      <a href="/quran/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span data-t="nav_quran">The Holy Quran</span></a>
-      <a href="/hadith/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span data-t="nav_hadith">Hadith Collection</span></a>
-      <a href="/dua/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V7a5 5 0 0 1 10 0v4"/><path d="M5 11h14l-1.5 9a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2z"/></svg><span data-t="nav_dua">Dua &amp; Dhikr</span></a>
-      <a href="/live/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg><span data-t="nav_live">Live: Makkah &amp; Madinah</span></a>
-      <a href="/names/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.5 6.5L21 9l-5 4.5 1.5 7-5.5-3.5L6.5 20.5 8 13.5 3 9l6.5-.5z"/></svg><span data-t="nav_names">99 Names of Allah</span></a>
-      <a href="/zakat/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/><line x1="8" y1="14" x2="8" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="16" y1="14" x2="16" y2="14.01"/><line x1="8" y1="18" x2="8" y2="18.01"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg><span data-t="nav_calc">Zakat Calculator</span></a>
-      <a href="/tasbeeh/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><circle cx="4" cy="12" r="2"/><circle cx="10" cy="7" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="20" cy="18" r="2.6"/></svg><span data-t="nav_tasbeeh">Count Your Dhikr</span></a>
-      <a href="/calendar/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span data-t="nav_calendar">Islamic Calendar</span></a>
-      <a href="/qibla/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><span data-t="nav_qibla">Qibla Direction</span></a>
-      <a href="/prayer-times/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-t="nav_prayertimes">Prayer Times</span></a>
-      <a href="/apply/"><svg class="menu-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span data-t="nav_help">Apply for Assistance</span></a>
-    </div></details>
     <a class="nav-cab" href="/cabinet/" aria-label="Cabinet" data-t-aria="nav_cabinet"><svg class="nav-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg><span data-t="nav_cabinet">Account</span></a>
-    <a class="nav-cta" href="#waitlist" data-t="nav_cta">Join Waitlist</a>
+    <button class="nav-menu" type="button" data-amn-menu aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </nav>
 
@@ -972,41 +994,25 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   <h1><span id="heroL1" data-t="hero_l1">Where Every Dollar</span><span class="line2" id="heroL2" data-t="hero_l2">Finds Its Purpose.</span></h1>
   <p class="hero-sub" data-t="hero_sub">A verification and transparency service for Zakat and Sadaqah: we check each family in person, publish an open, tamper-evident report of every payout, and never hold the money — the donor gives directly to the family.</p>
 
-  <div class="hero-cta">
-    <a class="hbtn hbtn-gold" href="#waitlist" data-t="how_cta_give">I want to help</a>
-    <a class="hbtn hbtn-ghost" href="/apply/" data-t="how_cta_help">I need help — apply</a>
+  <div class="doors">
+    <a class="door door-give" href="/cabinet/"><img src="/icons/ui/s4.webp?v=2" alt="" width="58" height="58"><span class="door-t"><b data-t="how_cta_give">I want to help</b><small data-t="door_give_sub">For charities and donors — free</small></span><i aria-hidden="true">→</i></a>
+    <a class="door" href="/apply/"><img src="/icons/ui/s1.webp?v=2" alt="" width="58" height="58"><span class="door-t"><b data-t="how_cta_help">I need help — apply</b><small data-t="door_help_sub">A request in 3 minutes, from any country</small></span><i aria-hidden="true">→</i></a>
   </div>
-  <a class="hero-calc" href="/zakat/"><span data-t="start_calc">Calculate Zakat</span> <span class="arr" aria-hidden="true">→</span></a>
-  <ul class="hero-trust">
-    <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h18M15 6l6 6-6 6"/><path d="M3 5v14"/></svg><span data-t="tr_1">Money never passes through us</span></li>
-    <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="m9 15 2 2 4-4"/></svg><span data-t="tr_2">Every family checked in person</span></li>
-    <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg><span data-t="tr_3">Open report of every payout</span></li>
-    <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg><span data-t="tr_4">Nothing taken from Zakat</span></li>
-  </ul>
+  <div class="hstats" id="hstats" hidden><div><b id="hsReq">–</b><span data-t="stat_requests">requests</span></div><div><b id="hsCty">–</b><span data-t="stat_countries">countries</span></div><div><b>0%</b><span data-t="stat_fee">taken from Zakat</span></div></div>
 </section>
 
 <!-- PROBLEM -->
 <section class="section pb" id="zakat-context">
-  <div class="pb-text">
-    <h2 class="sec-title" data-t="pb_title">Only part of Zakat goes through formal channels.</h2>
-    <p class="pb-body" data-t="pb_body">Zakat potential is estimated at $50–600 billion a year. Under $25 billion is distributed through formal institutions.</p>
-    <p class="pb-src"><span data-t="clock_disclaimer">World Bank &amp; IRTI/IsDB, Global Report on Islamic Finance, 2016.</span> <a href="https://openknowledge.worldbank.org/entities/publication/fb5e614a-2a30-5f5c-a94e-91fbd5ae902c" target="_blank" rel="noopener" data-t="source_read">Read the source</a></p>
+  <div class="pb-one">
+    <div class="pb-big" dir="ltr">$50–600B</div>
+    <p class="pb-body" data-t="pb_short">of Zakat potential a year — and only part of it goes through formal channels.</p>
+    <p class="pb-src"><a href="https://openknowledge.worldbank.org/entities/publication/fb5e614a-2a30-5f5c-a94e-91fbd5ae902c" target="_blank" rel="noopener" data-t="pb_src_short">World Bank &amp; IRTI/IsDB, 2016</a></p>
   </div>
-  <figure class="pb-chart" aria-label="Zakat potential estimated at $50–600 billion a year; less than $25 billion distributed through formal institutions">
-    <div class="pb-row">
-      <div class="pb-lbl"><b dir="ltr">$50–600B</b><span data-t="pb_owed">Estimated annual potential</span></div>
-      <div class="pb-track"><i class="pb-bar pb-owed"></i></div>
-    </div>
-    <div class="pb-row">
-      <div class="pb-lbl"><b dir="ltr">&lt;$25B</b><span data-t="pb_formal">Distributed through formal institutions</span></div>
-      <div class="pb-track"><i class="pb-bar pb-formal"></i></div>
-    </div>
-    <div class="pb-scale" aria-hidden="true" dir="ltr"><span>$0</span><span>$300B</span><span>$600B</span></div>
-  </figure>
 </section>
 
 <!-- HOW IT WORKS -->
 <section class="section" id="how">
+  <div class="eyebrow-s" data-t="how_eyebrow">How it works</div>
   <h2 class="sec-title" data-t="how_title">Checked in person. Given directly. Recorded openly.</h2>
   <p class="sec-body" data-t="how_body">Five steps — from a family's application to an open record of the payout.</p>
   <div class="steps steps3">
@@ -1028,10 +1034,6 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
       <p class="ex-chain" data-t="ex_foot">An AI hint, not a fatwa. The giver verifies and decides.</p>
     </div>
   </figure>
-  <div class="how-cta">
-    <a class="hbtn hbtn-gold" href="#waitlist" data-t="how_cta_give">I want to help</a>
-    <a class="hbtn hbtn-ghost" href="/apply/" data-t="how_cta_help">I need help — apply</a>
-  </div>
 </section>
 
 <hr class="div">
@@ -1040,7 +1042,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <section class="section" id="products">
   <h2 class="sec-title" data-t="prod_title">Two products. One mission.</h2>
   <div class="products">
-    <div class="pcard reveal"><div class="picon" aria-hidden="true"><img src="/icons/ui/amzakat.webp?v=2" alt="" width="72" height="72" loading="lazy"></div><div class="plabel" data-t="p1_title">AM Zakat</div><h3 data-t="p1_h">Verified, transparent giving</h3><p data-t="p1_p">A verification and transparency service: trained volunteers check each family in person, the donor gives directly to the family, and every payout goes into an open, tamper-evident report.</p><ul class="pfeats"><li data-t="p1_f1">In-person check of every family</li><li data-t="p1_f2">Money goes from donor to family — never through us</li><li data-t="p1_f3">Open report with a SHA-256 hash chain</li><li data-t="p1_f4">No fees taken from Zakat</li></ul><a class="pdemo-btn" href="/faq/"><span data-t="p1_demo">Questions and answers</span> →</a></div>
+    <div class="pcard reveal"><div class="picon" aria-hidden="true"><img src="/icons/ui/s4.webp?v=2" alt="" width="72" height="72" loading="lazy"></div><div class="plabel" data-t="p1_title">AM Zakat</div><h3 data-t="p1_h">Verified, transparent giving</h3><p data-t="p1_p">A verification and transparency service: trained volunteers check each family in person, the donor gives directly to the family, and every payout goes into an open, tamper-evident report.</p><ul class="pfeats"><li data-t="p1_f1">In-person check of every family</li><li data-t="p1_f2">Money goes from donor to family — never through us</li><li data-t="p1_f3">Open report with a SHA-256 hash chain</li><li data-t="p1_f4">No fees taken from Zakat</li></ul><a class="pdemo-btn" href="/faq/"><span data-t="p1_demo">Questions and answers</span> →</a></div>
     <div class="pcard reveal"><div class="picon" aria-hidden="true"><img src="/icons/ui/academy.webp?v=2" alt="" width="72" height="72" loading="lazy"></div><div class="plabel" data-t="p2_title">AM Academy</div><h3 data-t="p2_h">Financial freedom</h3><p data-t="p2_p">Sharia-compliant financial literacy in plain language, explained for four audiences. Every statement links to a source.</p><ul class="pfeats"><li data-t="p2_f1">5 free courses</li><li data-t="p2_f2">Certificate after passing at 85%</li><li data-t="p2_f3">Explained for your level — 4 audiences</li><li data-t="p2_f4">Halal investment screening</li></ul><a class="pdemo-btn" href="/academy/" target="_blank">🎓 <span data-t="p2_demo">Start learning free</span> →</a></div>
   </div>
 </section>
@@ -1060,12 +1062,12 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         <li><a href="/zakat/" data-t="nav_calc">Zakat Calculator</a></li>
         <li><a href="/apply/" data-t="nav_help">Apply for Assistance</a></li>
         <li><a href="/cabinet/" data-t="st_i_cabinet">Cabinet for applicants and givers</a></li>
+        <li data-t="st_i_ai">AI review of every request</li>
       </ul>
     </div>
     <div class="st-col st-build">
       <h3><i></i><span data-t="status_build">Next · December 2026</span></h3>
       <ul>
-        <li data-t="st_i_own">AI review of requests in 10 languages</li>
         <li data-t="st_i_trial">Apps on the App Store and Google Play</li>
         <li data-t="st_i_pilot">Bringing in charities from different countries</li>
       </ul>
@@ -1074,7 +1076,6 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
       <h3><i></i><span data-t="st_after">Later — once we have income</span></h3>
       <ul>
         <li data-t="st_i_verifier">Our own verifiers and a "Recommended by the AM Network team" mark</li>
-        <li data-t="st_i_sharia">Review of the model by a Hanafi scholar</li>
         <li data-t="st_i_legal">Registering the organisation</li>
       </ul>
     </div>
@@ -1091,18 +1092,19 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
   </blockquote>
   <h2 class="sec-title" data-t="tools_title">Free tools for every day.</h2>
   <p class="tl-body" data-t="tools_body">Free for every Muslim, no sign-up needed.</p>
-  <ul class="tl-grid">
-    <li><a href="/quran/"><img class="tl-ic" src="/icons/ui/quran.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_quran">The Holy Quran</span></a></li>
-    <li><a href="/hadith/"><img class="tl-ic" src="/icons/ui/hadith.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_hadith">Hadith Collection</span></a></li>
-    <li><a href="/dua/"><img class="tl-ic" src="/icons/ui/dua.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_dua">Dua & Dhikr</span></a></li>
-    <li><a href="/tasbeeh/"><img class="tl-ic" src="/icons/ui/tasbeeh.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_tasbeeh">Tasbih</span></a></li>
-    <li><a href="/prayer-times/"><img class="tl-ic" src="/icons/ui/prayer.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_prayertimes">Prayer Times</span></a></li>
-    <li><a href="/qibla/"><img class="tl-ic" src="/icons/ui/qibla.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_qibla">Qibla Direction</span></a></li>
-    <li><a href="/calendar/"><img class="tl-ic" src="/icons/ui/calendar.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_calendar">Islamic Calendar</span></a></li>
-    <li><a href="/zakat/"><img class="tl-ic" src="/icons/ui/zakat.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_calc">Zakat Calculator</span></a></li>
-      <li><a href="/names/"><img class="tl-ic" src="/icons/ui/names.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_names">99 Names of Allah</span></a></li>
-    <li><a href="/live/"><img class="tl-ic" src="/icons/ui/live.webp?v=2" alt="" width="64" height="64" loading="lazy"><span data-t="nav_live">Live: Makkah &amp; Madinah</span></a></li>
+  <ul class="tl-grid tl-scroll" id="tlScroll">
+    <li><a href="/quran/"><img class="tl-ic" src="/icons/ui/quran.webp?v=2" alt="" width="64" height="64"><span data-t="nav_quran">The Holy Quran</span></a></li>
+    <li><a href="/hadith/"><img class="tl-ic" src="/icons/ui/hadith.webp?v=2" alt="" width="64" height="64"><span data-t="nav_hadith">Hadith Collection</span></a></li>
+    <li><a href="/dua/"><img class="tl-ic" src="/icons/ui/dua.webp?v=2" alt="" width="64" height="64"><span data-t="nav_dua">Dua & Dhikr</span></a></li>
+    <li><a href="/tasbeeh/"><img class="tl-ic" src="/icons/ui/tasbeeh.webp?v=2" alt="" width="64" height="64"><span data-t="nav_tasbeeh">Tasbih</span></a></li>
+    <li><a href="/prayer-times/"><img class="tl-ic" src="/icons/ui/prayer.webp?v=2" alt="" width="64" height="64"><span data-t="nav_prayertimes">Prayer Times</span></a></li>
+    <li><a href="/qibla/"><img class="tl-ic" src="/icons/ui/qibla.webp?v=2" alt="" width="64" height="64"><span data-t="nav_qibla">Qibla Direction</span></a></li>
+    <li><a href="/calendar/"><img class="tl-ic" src="/icons/ui/calendar.webp?v=2" alt="" width="64" height="64"><span data-t="nav_calendar">Islamic Calendar</span></a></li>
+    <li><a href="/zakat/"><img class="tl-ic" src="/icons/ui/zakat.webp?v=2" alt="" width="64" height="64"><span data-t="nav_calc">Zakat Calculator</span></a></li>
+      <li><a href="/names/"><img class="tl-ic" src="/icons/ui/names.webp?v=2" alt="" width="64" height="64"><span data-t="nav_names">99 Names of Allah</span></a></li>
+    <li><a href="/live/"><img class="tl-ic" src="/icons/ui/live.webp?v=2" alt="" width="64" height="64"><span data-t="nav_live">Live: Makkah &amp; Madinah</span></a></li>
   </ul>
+  <button class="tl-all" type="button" data-amn-menu><span data-t="tools_all">All tools</span> →</button>
 </section>
 
 <!-- FAQ -->
@@ -1123,74 +1125,12 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 
 
 
-<div class="wl-section" id="waitlist">
-  <span id="countdown" style="position:absolute;margin-top:-90px"></span>
-  <div class="wl-inner">
-    <h2 class="sec-title" data-t="wl_title">Stay informed about the pilot.</h2>
-    <p style="font-size:15px;color:var(--text2);line-height:1.7" data-t="wl_sub">Leave your email. We will write to you personally when there is news about the pilot and its report.</p>
+<section class="join" id="waitlist">
+  <h2 data-t="join_title">Are you a charity or a donor?</h2>
+  <p data-t="join_sub">Sign up — once approved, you will see requests without names or contact details. Free.</p>
+  <a class="hbtn hbtn-gold" href="/cabinet/" data-t="join_btn">Join</a>
+</section>
 
-    <div class="form-card" id="wl-card">
-      <!-- Form view -->
-      <div id="wl-form-wrap">
-        <div class="waitlist-mark"><svg class="am-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg></div>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;margin-bottom:8px;color:var(--text)" data-t="wl_form_h">Join the Waitlist</h3>
-        <p style="font-size:13px;color:var(--text2);margin-bottom:24px;line-height:1.7" data-t="wl_sub">Leave your email. We will write to you personally when there is news about the pilot and its report.</p>
-
-        <div class="wl-err-banner" id="wl-err-banner"><span id="wl-err-text" data-t="wl_err_generic">Something went wrong. Please try again or email</span> <a href="mailto:contact@amnetwork.io" style="color:#EF4444">contact@amnetwork.io</a><a class="wl-err-mail" id="wl-err-mail" href="mailto:contact@amnetwork.io" data-t="wl_err_mail">Send by email instead</a><small class="wl-err-detail" id="wl-err-detail"></small></div>
-
-        <form class="wl-form" id="wl-form" novalidate>
-          <input type="hidden" name="access_key" value="e895783d-8868-41ba-8b9d-fa4aa6a47628">
-          <input type="hidden" name="subject" value="New AM Network Waitlist Signup">
-          <input type="hidden" name="from_name" value="AM Network Waitlist">
-          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);opacity:0;pointer-events:none">
-
-          <div class="wl-field">
-            <label for="wl-name" data-t="wl_name_lbl">Full Name</label>
-            <input type="text" id="wl-name" name="name" placeholder="Ahmed Al-Farisi" autocomplete="name" data-t-ph="wl_name_ph">
-            <div class="wl-field-err" id="err-name" data-t="wl_err_name">Please enter your name</div>
-          </div>
-
-          <div class="wl-field">
-            <label for="wl-email" data-t="wl_email_lbl">Email Address</label>
-            <input type="email" id="wl-email" name="email" placeholder="you@example.com" autocomplete="email" data-t-ph="wl_email_ph">
-            <div class="wl-field-err" id="err-email" data-t="wl_err_email">Please enter a valid email</div>
-          </div>
-
-          <div class="wl-field">
-            <label for="wl-role" data-t="wl_role_lbl">I am joining as</label>
-            <select id="wl-role" name="role"></select>
-            <div class="wl-field-err" id="err-role" data-t="wl_err_role">Please select your role</div>
-          </div>
-
-          <div class="wl-field">
-            <label for="wl-country" data-t="wl_country_lbl">Country</label>
-            <input type="text" id="wl-country" name="country" placeholder="Egypt, Malaysia, UK…" autocomplete="country-name" data-t-ph="wl_country_ph">
-          </div>
-
-          <div class="h-captcha" id="wl-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" data-theme="dark" style="margin-bottom:14px"></div>
-
-          <button type="submit" class="wl-btn" id="wl-btn">
-            <span class="btn-text" data-t="submit">Keep me informed</span>
-            <span class="btn-spinner"></span>
-          </button>
-        </form>
-
-        <p style="font-size:11px;color:var(--text3);margin-top:14px;text-align:center" data-t="form_note">No spam. No data selling. Only news about the pilot.</p>
-        <p style="font-size:11px;color:var(--text3);margin-top:6px;text-align:center"><span data-t="wl_team_note">Want to join the team?</span> <a href="mailto:team@amnetwork.io" style="color:var(--gold);text-decoration:none">team@amnetwork.io</a></p>
-      </div>
-
-      <!-- Success view -->
-      <div class="wl-success" id="wl-success">
-        <div class="wl-success-icon">✅</div>
-        <h3 data-t="wl_success_h">You're on the list!</h3>
-        <p><span data-t="wl_success_p">Thank you. We will write to you personally when there is news about the pilot.</span><br><br>
-        <span style="font-family:'Noto Naskh Arabic',serif;font-size:20px;color:var(--gold);display:block;margin-top:10px">جَزَاكَ اللَّهُ خَيْرًا</span></p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- COMMUNITY -->
 <section class="cm" id="community">
   <h2 data-t="comm_title">Follow Our Journey</h2>
   <ul class="cm-row"><li><a class="cm-ig" href="https://www.instagram.com/amnetwork.io" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg><span>Instagram</span></a></li><li><a class="cm-tg" href="https://t.me/amnetwork_global" target="_blank" rel="noopener" aria-label="Telegram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg><span>Telegram</span></a></li><li><a class="cm-xx" href="https://x.com/amnet_io" target="_blank" rel="noopener" aria-label="X"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span>X</span></a></li><li><a class="cm-li" href="https://linkedin.com/company/amnetwork-io" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span>LinkedIn</span></a></li><li><a class="cm-yt" href="https://www.youtube.com/@amnetwork_io" target="_blank" rel="noopener" aria-label="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg><span>YouTube</span></a></li><li><a class="cm-tt" href="https://www.tiktok.com/@amnetwork.io" target="_blank" rel="noopener" aria-label="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg><span>TikTok</span></a></li></ul>
@@ -1212,22 +1152,6 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
         </ul>
       </div>
       <div class="fcol">
-        <h4 data-t="nav_tools">Tools</h4>
-        <ul>
-          <li><a href="/quran/" data-t="nav_quran">The Holy Quran</a></li>
-          <li><a href="/hadith/" data-t="nav_hadith">Hadith Collection</a></li>
-          <li><a href="/dua/" data-t="nav_dua">Dua &amp; Dhikr</a></li>
-          <li><a href="/live/" data-t="nav_live">Live: Makkah &amp; Madinah</a></li>
-          <li><a href="/names/" data-t="nav_names">99 Names of Allah</a></li>
-          <li><a href="/zakat/" data-t="f_calc">Zakat Calculator</a></li>
-          <li><a href="/tasbeeh/" data-t="nav_tasbeeh">Count Your Dhikr</a></li>
-          <li><a href="/calendar/" data-t="nav_calendar">Islamic Calendar</a></li>
-          <li><a href="/qibla/" data-t="nav_qibla">Qibla Direction</a></li>
-          <li><a href="/prayer-times/" data-t="nav_prayertimes">Prayer Times</a></li>
-          <li><a href="/apply/" data-t="f_apply">Apply for support</a></li>
-        </ul>
-      </div>
-      <div class="fcol">
         <h4 data-t="footer_company">Company</h4>
         <ul>
           <li><a href="/team/" data-t="team_tag">The Team</a></li>
@@ -1235,14 +1159,6 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
           <li><a href="/roadmap/" data-t="road_tag">Roadmap</a></li>
           <li><a href="/faq/" data-t="faq_tag">FAQ</a></li>
           <li><a href="/why-zakat/" data-t="why_link">Why Zakat and Sadaqah matter</a></li>
-        </ul>
-      </div>
-      <div class="fcol">
-        <h4 data-t="footer_built">Principles</h4>
-        <ul>
-          <li data-t="f_pr1">We never hold the money</li>
-          <li data-t="f_pr2">No fees from Zakat</li>
-          <li data-t="f_pr3">Open, tamper-evident report</li>
         </ul>
       </div>
       <div class="fcol">
@@ -1323,7 +1239,7 @@ button:focus-visible,a:focus-visible,.fq:focus-visible,.lang-sel:focus-visible{o
 <!-- Bump ?v= whenever i18n-data.js content changes — this file is cached
      separately from the HTML on purpose, so without a version bump browsers
      silently keep serving stale translations after an update. -->
-<script src="/i18n-data.js?v=edf4469818"></script>
+<script src="/i18n-data.js?v=a02812d893"></script>
 <script>
 // <!--AMNET_DATA_START-->
 // (T, C, CURR now load from /i18n-data.js so this ~190KB payload is cached separately from the HTML)
@@ -2187,7 +2103,14 @@ function calcZakat(){
   });
 })();
 </script>
-<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-<script src="/amn-site.js?v=20261124" defer></script>
+
+<script>
+// Live numbers for the hero (public, no personal data). Hidden if the call fails.
+(function(){try{fetch('https://pziakammdazyytxubtrj.supabase.co/rest/v1/rpc/match_stats',{method:'POST',headers:{'apikey':'sb_publishable_RFk0C-Cm3mfgftfS7dygpw_XPpEBZaE','Content-Type':'application/json'},body:'{}'})
+ .then(r=>r.ok?r.json():null).then(d=>{const x=Array.isArray(d)?d[0]:d;if(!x||!(x.requests>=10))return; // small numbers look odd in public — show from 10
+  document.getElementById('hsReq').textContent=x.requests;document.getElementById('hsCty').textContent=Math.max(1,x.countries||0);
+  document.getElementById('hstats').hidden=false}).catch(()=>{});}catch(e){}})();
+</script>
+<script src="/amn-site.js?v=20261124b" defer></script>
 </body>
 </html>
