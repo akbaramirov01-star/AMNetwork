@@ -106,12 +106,16 @@ th{font-size:12px;color:var(--text3);font-weight:600}
 <nav>
   <a class="nav-logo" href="/"><img src="/logo.webp" alt="AM Network" height="34"></a>
   <div class="nav-right">
+    <a class="nbtn" href="/" aria-label="Home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg></a>
+    <button class="nbtn" data-amn-menu type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
     <a class="nbtn" href="/transparency/" id="navLog"></a>
     <select class="nbtn" id="langSel" aria-label="Language" style="width:auto;padding:0 8px"><option value="ru">RU</option><option value="tj">TJ</option><option value="en">EN</option><option value="ar">AR</option><option value="id">ID</option><option value="tr">TR</option><option value="zh">中文</option><option value="ms">MS</option><option value="fr">FR</option><option value="de">DE</option></select>
     <button class="nbtn" id="themeBtn" aria-label="Theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>
   </div>
 </nav>
 <main id="app"><div class="spin">…</div></main>
+<section class="amn-strip" id="amnStrip" aria-label="AM Network"></section>
+<script src="/amn-site.js?v=20261124" defer></script>
 
 <script src="/vendor/supabase-2.118.0.js"></script>
 <script src="/vendor/amn-supabase.js"></script>

@@ -750,6 +750,7 @@ document.addEventListener('click', function(e){
 </script>
 <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 <script src="/faq-assistant.js?v=20261123"></script>
+<script src="/assistant-ui.js?v=20261124"></script>
 <script src="/voice-assistant.js?v=20261123" defer></script>
 <div id="assistantPanel" role="dialog" aria-label="AM Network assistant">
   <div class="asst-head">
@@ -854,5 +855,6 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(()=>{}));
 }
 </script>
+<script src="/amn-site.js?v=20261124" defer></script>
 </body>
 </html>
