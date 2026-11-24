@@ -6,7 +6,8 @@ import numpy as np
 from faster_whisper import WhisperModel
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 IN, OUT = sys.argv[1], sys.argv[2]; SEGS = sys.argv[3] if len(sys.argv) > 3 else "segs.json"; Y = int(sys.argv[4]) if len(sys.argv) > 4 else 930
-E = json.load(open("expect.json")); S = [g for g in json.load(open(SEGS)) if g["k"] in E]
+E = json.load(open("expect.json")); SKIP = set(filter(None, os.environ.get("CAP_SKIP", "").split(",")))
+S = [g for g in json.load(open(SEGS)) if g["k"] in E and g["k"] not in SKIP]
 def tok(w): return re.sub(r"[^a-z0-9]", "", w.lower().replace("judgment", "judgement"))
 x = np.frombuffer(subprocess.run(f"ffmpeg -v error -i {IN} -vn -ac 1 -ar 16000 -f s16le -", shell=True, capture_output=True).stdout, np.int16).astype(np.float32) / 32768
 m = WhisperModel("medium.en", compute_type="int8")

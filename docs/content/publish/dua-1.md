@@ -1,5 +1,5 @@
 # Duas for Every Day #1 — "Exam in 10 minutes" — publishing texts (24 Nov 2026)
-Video 0:35 (captions, real AM Network Quran screen in a phone): https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/9b76b6c5-686a-4dd8-81ab-301e08f6fc53.mp4
+Video 0:32 v2 (real AM Network Quran screen in a phone, ayah highlighted in sync with the reading, player bar): https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f39fcc59-5199-460e-8d2e-55c14d48bb97.mp4
 Cover: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/9ab9c7d4-49e5-41d3-aab6-7c73289229c5.jpg
 
 ## YouTube Shorts

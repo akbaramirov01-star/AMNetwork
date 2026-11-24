@@ -110,3 +110,8 @@ only fog, an empty road, a lamp. Calm ending: "Allah protects those who prepare.
   (source to verify, e.g. Tirmidhi on the heaviest thing on the Scale being good character). Rules: no music, no people mocked,
   no intimate scenes (the reference had a bedroom line — we drop it), family cast only. Playlist: Muslim Life Lessons.
 - Next: Prophet Isa #18 (series finale) → Signs #2 → "They Renamed It" #1 → WYWD #3.
+- **Phone v2 (founder, 24 Nov): highlight what is being read + a player.** `tools/phone/shot2.js` screenshots the real page once per
+  ayah with that ayah outlined (same scroll window); `phone2.py` switches screens at the narration's pause times (silencedetect) and
+  draws a bottom "Playing · AM Network Quran" bar with a moving progress line. Captions are skipped over the phone (`CAP_SKIP=03`).
+  **Audio stays our own narration** — the site's reciters (famous qaris) trigger YouTube Content ID (Ayyub #12 was blocked twice);
+  Arabic recitation only from CC0 files, which this container cannot download from Wikimedia yet.
