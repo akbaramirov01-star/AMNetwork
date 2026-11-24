@@ -23,7 +23,7 @@ tears, no lecture until the very end. Their reach comes partly from a collaborat
 | # | Title | Conflict → turn | Source |
 |---|---|---|---|
 | 1 | **Five More Minutes** (done 24 Nov, 0:58, 84.3 cr, `publish/heart-1.md`) | Yusuf games, ignores Grandma's calls; finds the covered plate and her note | Quran 17:23–24 (verified); Sahih Muslim book 45 hadith 10 (verified) |
-| 2 | **Eleven Missed Calls** (done 24 Nov, 0:57, ~75 cr, `publish/heart-2.md`) | Maryam declines Mom's calls; Dad: "She called you eleven times"; she sees Mom crying on the prayer rug | Quran 31:14 (verified); Bukhari 5971 (verified) |
+| 2 | **Eleven Missed Calls** v2 (24 Nov, 1:19, ~150 cr incl. v1, `publish/heart-2.md`) | Maryam at a cafe with friends declines Mom ("I don't need anyone controlling me"); Mom leaves a voice message; Grandma: "Let us make dua for her"; Uncle Idris finds her: "That's not control. That's what love sounds like when it's scared"; she plays Mom's voice message; apology; Grandma: "One day you will wish that phone was still ringing" | Quran 31:14 (verified); Bukhari 5971 (verified) |
 | 3 | The Friend Who Left | Yusuf mocks a poorer classmate's old shoes; next day he learns why | hadith on not belittling a Muslim brother [verify] |
 | 4 | Dad's Hands | Teen embarrassed by Dad's work clothes at school | Bukhari 2072 (eating from your own work, verified) |
 | 5 | Last in Line | Maryam pushes ahead at the bakery, an old man stays behind | mercy to elders hadith [verify] |
@@ -52,3 +52,12 @@ Next after #1: #2 and #6 (strongest for teens), each ~80–100 cr.
 - Seedance repeated a word again ("little, little kid") — a reshoot of the 4 s clip fixed it. tr.py flags it only via ratio; read the transcript.
 - Order the turning point as: someone tells her the cost (Dad) → her face changes → we see what she sees (Mom praying with the phone beside her).
 - Builder for this one: `docs/content/tools/heart2/` (build.py now takes per-clip `estab_dur`; calls.py draws the missed-calls lock screen).
+
+## Founder feedback on #2 v1 (24 Nov) → v2
+- v1 felt pointless: no reason why she ignores Mom, too few characters. **Every story needs a believable motive** (here: she is with
+  friends and does not want to be controlled) **and the wider family** (Grandma Amina, Uncle Idris), each with a line that adds meaning.
+- v1 opening repeated her words: the lock-screen clip reused the first clip's sound track. **Never take a phone-screen clip's audio
+  from a dialogue clip** — `calls2.py` now makes its own sound (buzz + room tone).
+- Mom must speak where she appears with a phone (voice message), not stand silent.
+- Grandma has no clone: preset voice **Mabel** (`fa64fba4-ad02-405e-99d0-1f085d87c706`) via voice_change, then −2 semitones locally.
+  Idris's native voice was consistent (111–123 Hz), so no change.

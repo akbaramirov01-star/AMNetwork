@@ -19,7 +19,7 @@ Texts for each video: the file in the "Texts" column (all in `docs/content/publi
 | 5 | 28 Nov | Stories of the Prophets #17 — Zakariya & Yahya | 1:11 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f4a36895-b29a-460b-bd49-7b2642d7e762.mp4 | zakariya.md |
 | 6 | 29 Nov | Duas for Every Day #1 — Exam in 10 minutes | 0:32 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f39fcc59-5199-460e-8d2e-55c14d48bb97.mp4 | dua-1.md |
 | 7 | 30 Nov | Heart Stories #1 — Five More Minutes (v2) | 1:09 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/c5593441-baeb-435c-9684-fd2d4b8899a7.mp4 | heart-1.md |
-| 8 | 2 Dec | Heart Stories #2 — Eleven Missed Calls | 0:57 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/ad22fcaf-234f-4e4b-9f12-c0466158c0f9.mp4 | heart-2.md (cover heart-2-cover.jpg) |
+| 8 | 2 Dec | Heart Stories #2 — Eleven Missed Calls (v2) | 1:19 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/67715ce2-a2e0-41f0-895b-834620a9c363.mp4 | heart-2.md (cover heart-2-cover.jpg) |
 
 All links above are the **captioned v2** versions (23 Nov evening: one Whisper pass over the whole video, no overlapping lines — the earlier captioned links overlapped, do not use them). Playlists and title numbering: `docs/content/playlists.md`.
 

@@ -37,7 +37,7 @@ def words(f):
     if W_ is None:
         from faster_whisper import WhisperModel
         W_ = WhisperModel("medium.en", compute_type="int8")
-    s, _ = W_.transcribe(pcm(f), beam_size=5, word_timestamps=True, initial_prompt="Allah, Mom, Maryam, Alhamdulillah.")
+    s, _ = W_.transcribe(pcm(f), beam_size=5, word_timestamps=True, initial_prompt="Allah, Mom, Maryam, Khadija, dua, Alhamdulillah.")
     return [(w.word.strip(), float(w.start), float(w.end)) for z in s for w in z.words]
 def overlay_png(path, kind, text):
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
