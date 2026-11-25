@@ -1,0 +1,106 @@
+{
+ "order": [
+  "01",
+  "02",
+  "03",
+  "04"
+ ],
+ "dialog": [
+  "01",
+  "02",
+  "03"
+ ],
+ "estab": [],
+ "fadeblack_into": [
+  "04"
+ ],
+ "hook": {
+  "01": [
+   0.0,
+   3.4,
+   "BEFORE YOU STEP\nOUTSIDE\u2026"
+  ]
+ },
+ "st": {
+  "04": 1.0
+ },
+ "plate": {
+  "04": "Jami at-Tirmidhi 3426 \u00b7 amnetwork.io/dua"
+ },
+ "card": {
+  "dur": 3.8,
+  "lines": [
+   [
+    "SAY IT AT THE DOOR.\nEVERY DAY.",
+    50,
+    [
+     236,
+     196,
+     96
+    ],
+    36
+   ],
+   [
+    "Duas for Every Day #2 \u00b7 Leaving the house",
+    22,
+    [
+     245,
+     245,
+     238
+    ],
+    36
+   ],
+   [
+    "Bismillah, tawakkaltu 'ala Allah,",
+    24,
+    [
+     245,
+     245,
+     238
+    ],
+    4
+   ],
+   [
+    "la hawla wa la quwwata illa billah",
+    24,
+    [
+     245,
+     245,
+     238
+    ],
+    30
+   ],
+   [
+    "Jami at-Tirmidhi 3426",
+    22,
+    [
+     200,
+     200,
+     195
+    ],
+    30
+   ],
+   [
+    "All daily duas free: amnetwork.io/dua",
+    24,
+    [
+     236,
+     196,
+     96
+    ],
+    30
+   ],
+   [
+    "Not a fatwa \u00b7 AI-animated \u00b7 AM Academy",
+    20,
+    [
+     200,
+     200,
+     195
+    ],
+    0
+   ]
+  ]
+ },
+ "out": "DUA2_raw.mp4"
+}

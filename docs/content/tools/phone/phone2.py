@@ -1,6 +1,6 @@
 # Unbranded phone showing REAL AM Network screens that switch in sync with narration (highlighted ayah), plus a bottom
 # "now playing" bar with a moving progress line. usage: phone2.py BG.mp4 OUT.mp4 DUR "bar label" "player title" t0:img0 t1:img1 ...
-import sys, subprocess
+import sys, os, subprocess
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 BG, OUT, DUR, LABEL, TITLE = sys.argv[1], sys.argv[2], float(sys.argv[3]), sys.argv[4], sys.argv[5]
@@ -29,7 +29,7 @@ def screen(img, path):
     d.rounded_rectangle([(SW - w) / 2 - 18, 40, (SW + w) / 2 + 18, 70], 15, fill=(36, 52, 46)); d.text(((SW - w) / 2, 43), LABEL, font=f22, fill=(230, 200, 120))
     y0 = SH - PL; d.rectangle([0, y0, SW, SH], fill=(20, 34, 29)); d.line([0, y0, SW, y0], fill=(60, 80, 70), width=2)
     d.ellipse([24, y0 + 22, 80, y0 + 78], fill=(230, 184, 74)); d.rectangle([43, y0 + 38, 49, y0 + 62], fill=(20, 34, 29)); d.rectangle([55, y0 + 38, 61, y0 + 62], fill=(20, 34, 29))  # pause icon = playing
-    d.text((100, y0 + 26), TITLE, font=f26, fill=(245, 245, 238)); d.text((100, y0 + 60), "Playing · AM Network Quran", font=f20, fill=(170, 190, 180))
+    d.text((100, y0 + 26), TITLE, font=f26, fill=(245, 245, 238)); d.text((100, y0 + 60), os.environ.get("PLAYER_SUB", "Playing · AM Network Quran"), font=f20, fill=(170, 190, 180))
     s.save(path)
 names = []
 for i, (t, img) in enumerate(SCR): screen(img, f"{U}/scr{i}.png"); names.append((t, f"{U}/scr{i}.png"))

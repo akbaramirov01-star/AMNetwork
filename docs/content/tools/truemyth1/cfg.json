@@ -1,0 +1,100 @@
+{
+ "order": [
+  "01",
+  "02",
+  "03",
+  "04",
+  "05"
+ ],
+ "dialog": [
+  "01",
+  "03",
+  "04",
+  "05"
+ ],
+ "estab": [
+  "02"
+ ],
+ "estab_dur": {
+  "02": 3.4
+ },
+ "fadeblack_into": [],
+ "hook": {
+  "01": [
+   0.0,
+   3.6,
+   "TRUE OR MYTH?"
+  ],
+  "02": [
+   0.0,
+   3.4,
+   "TRUE OR MYTH?\nCOMMENT FIRST!"
+  ],
+  "05": [
+   0.6,
+   4.4,
+   "TRUE \u2014\nIT'S SUNNAH!"
+  ]
+ },
+ "st": {},
+ "plate": {
+  "03": "Sahih al-Bukhari 5376",
+  "04": "Sahih al-Bukhari 5376"
+ },
+ "card": {
+  "dur": 3.8,
+  "lines": [
+   [
+    "BISMILLAH. RIGHT HAND.\nFROM YOUR SIDE.",
+    46,
+    [
+     236,
+     196,
+     96
+    ],
+    36
+   ],
+   [
+    "True or Myth? #1",
+    26,
+    [
+     245,
+     245,
+     238
+    ],
+    36
+   ],
+   [
+    "Sahih al-Bukhari 5376",
+    22,
+    [
+     200,
+     200,
+     195
+    ],
+    36
+   ],
+   [
+    "Read the hadith free: amnetwork.io/hadith",
+    24,
+    [
+     236,
+     196,
+     96
+    ],
+    30
+   ],
+   [
+    "Not a fatwa \u00b7 AI-animated \u00b7 AM Academy",
+    20,
+    [
+     200,
+     200,
+     195
+    ],
+    0
+   ]
+  ]
+ },
+ "out": "TM1_raw.mp4"
+}

@@ -1,0 +1,97 @@
+{
+ "order": [
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08"
+ ],
+ "dialog": [
+  "02",
+  "03",
+  "06",
+  "07",
+  "08"
+ ],
+ "estab": [],
+ "fadeblack_into": [
+  "04"
+ ],
+ "hook": {
+  "01": [
+   0.0,
+   3.6,
+   "HE HEARS YOUR\nFOOTSTEPS LEAVING\u2026"
+  ]
+ },
+ "st": {
+  "01": 0.3,
+  "04": 0.5,
+  "05": 0.5
+ },
+ "plate": {
+  "01": "After This Life #1",
+  "03": "Sahih al-Bukhari 1338",
+  "04": "Sahih al-Bukhari 1338",
+  "05": "Sahih al-Bukhari 1338"
+ },
+ "card": {
+  "dur": 4.0,
+  "lines": [
+   [
+    "THE ANSWER IS\nLEARNED NOW.",
+    54,
+    [
+     236,
+     196,
+     96
+    ],
+    36
+   ],
+   [
+    "After This Life #1 \u00b7 What happens in the grave?",
+    22,
+    [
+     245,
+     245,
+     238
+    ],
+    36
+   ],
+   [
+    "Sahih al-Bukhari 1338",
+    22,
+    [
+     200,
+     200,
+     195
+    ],
+    36
+   ],
+   [
+    "Read the hadith free: amnetwork.io/hadith",
+    24,
+    [
+     236,
+     196,
+     96
+    ],
+    30
+   ],
+   [
+    "Not a fatwa \u00b7 AI-animated \u00b7 AM Academy",
+    20,
+    [
+     200,
+     200,
+     195
+    ],
+    0
+   ]
+  ]
+ },
+ "out": "AFTER1_raw.mp4"
+}

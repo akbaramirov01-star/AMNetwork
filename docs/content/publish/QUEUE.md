@@ -24,6 +24,9 @@ Texts for each video: the file in the "Texts" column (all in `docs/content/publi
 | 10 | 3 Dec | Signs of the Last Day #2 — Every prophet warned about him | 0:53 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/532c3bf4-4965-404b-987d-d6ca96b266bb.mp4 | signs-2.md (cover signs-2-cover.jpg) |
 | 11 | 5 Dec | Signs of the Last Day #3 — The Dajjal decoded (one day like a year) | 1:42 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f8afb286-476d-48ae-bc37-f19953e3f046.mp4 | signs-3.md (cover signs-3-cover.jpg) |
 | 12 | 4 Dec | Heart Stories #3 — The Phone at the Table | 0:56 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/627193d5-ab9d-411c-9394-330efa1a9e5e.mp4 | heart-3.md (cover heart-3-cover.jpg) |
+| 13 | 6 Dec | After This Life #1 — What happens in the grave? | 0:54 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/6944c3d7-f2d3-4e28-b181-1ee4fbe585e4.mp4 | after-1.md (cover after-1-cover.jpg) |
+| 14 | 7 Dec | True or Myth? #1 — Bismillah before eating | 0:33 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/61ee7203-4f35-4d1c-87f4-553bacdfae86.mp4 | true-myth-1.md (cover true-myth-1-cover.jpg) |
+| 15 | 8 Dec | Duas for Every Day #2 — Leaving the house | 0:33 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/65b6cc91-ae1e-4f25-92a6-4f7084190d3c.mp4 | dua-2.md (cover dua-2-cover.jpg) |
 
 All links above are the **captioned v2** versions (23 Nov evening: one Whisper pass over the whole video, no overlapping lines — the earlier captioned links overlapped, do not use them). Playlists and title numbering: `docs/content/playlists.md`.
 

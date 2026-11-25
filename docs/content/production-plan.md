@@ -202,3 +202,11 @@ Moved after the reset: What Would You Do? #3 (WYWD #1 posted: 117–212 views, w
 
 - Budget after Signs #3: **306 credits** (25 Nov). Next per plan: Heart #3, After This Life #1, True or Myth #1, Dua #2 (~235).
 - `tools/signs3/dub.py CLEAN.wav TAKE.mp4 OUT.mp4` — automatic dub with phrase alignment (used for a slurred 'ten ayat').
+
+## Done 25 Nov (budget plan complete) — 47.9 credits left
+Heart Stories #3 (0:56), After This Life #1 (0:54), True or Myth? #1 (0:33), Duas for Every Day #2 (0:33) — QUEUE #12–15.
+Lessons: voice_change can also DROP a negation ("what if I don't know" → "what if I know") — re-check meaning after every voice change,
+in the final cut too; rewrite fragile lines without negations ("what if I forget"). Cemeteries from the model came with crosses —
+use a single bare earth mound in an open field. Album photos: prompt "every woman wears a headscarf". phone2.py: PLAYER_SUB env for non-Quran pages.
+Builder: cfg "tail" (per-clip tail after last word) and "skip"; initial_prompt must be set per video (stale prompts make Whisper hallucinate words).
+Next after the Higgsfield reset: What Would You Do? #3, Heart Stories #4.
