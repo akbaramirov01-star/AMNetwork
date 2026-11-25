@@ -21,11 +21,11 @@ Money never passes through AM Network. No fees are taken from Zakat, and there i
 
 - **Ready:** free Islamic tools (Quran, hadith, dua, prayer times, Qibla, calendar, 99 Names, tasbeeh, Zakat calculator),
   AM Academy, the cabinet for families, verifiers, donors and the admin (`/cabinet/`), and the open report (`/transparency/`).
-- **Next (Dec 2026 – Jan 2027):** consultation with a lawyer in Tajikistan, review by a Hanafi scholar, training the
+- **Next (Dec 2026 – Jan 2027):** consultation with a lawyer in Tajikistan, review by qualified Islamic scholars, training the
   volunteer verifiers, a trial run with 2–3 families.
 - **Pilot (Ramadan 2027, ~Feb–Mar):** 10–20 families in Dushanbe, the founder's own and relatives' Zakat only, public report.
 
-No partners are confirmed. AM Network is not Sharia-certified; we are seeking review by a Hanafi scholar before the pilot.
+No partners are confirmed. AM Network is not Sharia-certified; we are seeking review by qualified Islamic scholars before the pilot.
 
 ## Repository
 
