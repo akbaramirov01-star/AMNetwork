@@ -1,5 +1,5 @@
 # Signs of the Last Day #2 — "Every prophet warned about him" — publishing texts (25 Nov 2026)
-Video 0:53: https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/4a8e42ee-8ae9-435e-a586-48915d20db3c.mp4
+Video v2 0:54 (Hamza now says "Surah Al-Kahf, the Cave" correctly; v1 said "Al-Kahib" — do not post v1): https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/532c3bf4-4965-404b-987d-d6ca96b266bb.mp4
 Cover: `signs-2-cover.jpg` (foggy night road + "EVERY PROPHET WARNED US ABOUT HIM…"). The Dajjal is never shown.
 
 ## YouTube Shorts

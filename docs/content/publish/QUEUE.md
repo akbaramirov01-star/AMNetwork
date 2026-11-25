@@ -21,7 +21,7 @@ Texts for each video: the file in the "Texts" column (all in `docs/content/publi
 | 7 | 30 Nov | Heart Stories #1 — Five More Minutes (v2) | 1:09 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/c5593441-baeb-435c-9684-fd2d4b8899a7.mp4 | heart-1.md |
 | 8 | 2 Dec | Heart Stories #2 — Eleven Missed Calls (v2) | 1:19 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/67715ce2-a2e0-41f0-895b-834620a9c363.mp4 | heart-2.md (cover heart-2-cover.jpg) |
 | 9 | 1 Dec | Stories of the Prophets #18 — Prophet Isa (peace be upon him), series finale | 1:37 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/32de58ef-ec3c-4d78-bb75-1f42b7e0d6aa.mp4 | isa.md (cover isa-cover.jpg) |
-| 10 | 3 Dec | Signs of the Last Day #2 — Every prophet warned about him | 0:53 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/4a8e42ee-8ae9-435e-a586-48915d20db3c.mp4 | signs-2.md (cover signs-2-cover.jpg) |
+| 10 | 3 Dec | Signs of the Last Day #2 — Every prophet warned about him | 0:53 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/532c3bf4-4965-404b-987d-d6ca96b266bb.mp4 | signs-2.md (cover signs-2-cover.jpg) |
 
 All links above are the **captioned v2** versions (23 Nov evening: one Whisper pass over the whole video, no overlapping lines — the earlier captioned links overlapped, do not use them). Playlists and title numbering: `docs/content/playlists.md`.
 

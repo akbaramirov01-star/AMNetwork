@@ -168,3 +168,23 @@ Rules we take from it:
   one word from the native take (pitch-matched, 30 ms crossfades) rather than accept a broken salawat.
 - A vertical light beam crossing a cloud band reads as a cross — prompt "only round soft glows, no beams, no lines, no clouds".
 - Whisper can hallucinate the initial prompt words at the end of a short clip → use cfg "cut" to keep only the real words.
+
+## Draft — Signs of the Last Day #3 "40 Days" (founder idea 25 Nov: our version of a Towards Eternity Dajjal video)
+Source (verified 25 Nov, hadith-api eng-muslim #7373 = Sahih Muslim, Book 54, Hadith 134, an-Nawwas ibn Sam'an) — every line below is
+from this hadith; nothing added. The Dajjal, Isa (peace be upon him), angels and people are NEVER shown — only places, weather, light.
+Cast: Yusuf, Hamza (rooftop, same set as #2 — a direct sequel). Target 1:20–1:40 (TikTok rewards > 1 min).
+1. Hook (0–3 s): a desert day where the sun does not move, the shadow of a palm frozen; text "ONE DAY… AS LONG AS A YEAR."
+   VO: "He will stay on earth forty days. One day like a year. One day like a month. One day like a week."
+2. Yusuf: "A day like a YEAR? Then how do we pray?!" — Hamza: "The companions asked the same. He said: estimate the time, and pray."
+3. "He moves like a cloud driven by the wind" — storm clouds racing over plains (timelapse).
+4. Two villages: rain and green fields for those who follow him / drought for those who refuse — "that is his test".
+5. "He says to the wasteland: bring out your treasures — and they follow him like swarms of bees" (gold glints swarming over sand, no people).
+6. Yusuf: "How can anyone stand against that?" — Hamza: "The Prophet, peace be upon him, said: recite over him the opening ayat of
+   Surah Al-Kahf." (callback to #2, phone with 18:1 on amnetwork.io/quran).
+7. Payoff: dawn, a white minaret in the east of Damascus (only the minaret and sky) — "Then Allah will send Isa, son of Maryam,
+   peace be upon him… and he will reach him at the gate of Ludd." (an old stone gate at dawn, empty). Calm ending.
+8. Yusuf: "So the liar loses." Hamza: "Always. Hold on to the truth." Card: "HOLD ON TO THE TRUTH. · Sahih Muslim 54:134 · Next: …".
+Not used (too graphic or would require showing people): the young man cut in two, Gog and Magog details.
+- seedance re-voices the line itself and mispronounced "Al-Kahf" as "Al-Kahib" in 3 takes even with a correct reference audio. Fix that
+  works: keep the take's picture, dub the clean seed_audio line over it, time-warped phrase by phrase to the take's word timings
+  (atempo per segment), ambience kept under it. Check Arabic names with Whisper large-v3 WITHOUT an initial prompt (the prompt hides errors).
