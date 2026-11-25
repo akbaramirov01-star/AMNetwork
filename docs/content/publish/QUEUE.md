@@ -8,11 +8,11 @@ Texts for each video: the file in the "Texts" column (all in `docs/content/publi
 |---|---|---|
 | 22 Nov 2026 | Musa part 5 (final) | YouTube, TikTok, Instagram (founder) |
 | 23 Nov 2026 | Prophet Dawud (pbuh) v2 | founder |
+| 24–25 Nov 2026 | What Would You Do? #1 — The wallet | TikTok 212, Instagram 117 views by 25 Nov (founder screenshots) |
 
 ## Ready to publish — in this order
 | # | Planned date | Video | Length | Link | Texts |
 |---|---|---|---|---|---|
-| 1 | 24 Nov | What Would You Do? #1 — The wallet | 0:38 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/c11e08de-47d6-4a0b-9c43-818e34a9ee11.mp4 | what-would-you-do-1-2.md |
 | 2 | 25 Nov | Prophet Sulayman (peace be upon him) — the ant | 1:28 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f4edcf89-ceb8-4f70-a58a-ce383f79bde1.mp4 | sulayman.md |
 | 3 | 26 Nov | What Would You Do? #2 — Copy my homework | 0:30 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/80f3d4b9-a8ea-46d3-87d3-daf58d9d4e9d.mp4 | what-would-you-do-1-2.md |
 | 4 | 27 Nov | Signs of the Last Day #1 — Tall buildings | 0:52 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/aa58c7c6-4c0f-4eed-b290-61780ad9773e.mp4 | signs-1.md |
