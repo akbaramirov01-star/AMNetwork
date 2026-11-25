@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v71-givers';
+const CACHE = 'amnetwork-v72-unity';
 // Must match QURAN_OFFLINE_CACHE in quran/index.html byte-for-byte — that
 // page is the only writer of this bucket (a per-surah "save for offline"
 // button). It is user data (surahs someone explicitly chose to keep) and
@@ -9,12 +9,12 @@ const STATIC = [
   '/',
   '/index.html',
   '/i18n-data.js',
-  '/faq-assistant.js?v=20261124b',
+  '/faq-assistant.js?v=20261125a',
   '/voice-assistant.js?v=20261123',
   '/assistant-ui.js?v=20261124',
   '/site-motion.js?v=20261124',
   '/amn-site.js?v=20261124e',
-  '/i18n-data.js?v=26beb208b5',
+  '/i18n-data.js?v=762ac13dd0',
   '/logo.webp',
   '/favicon.svg?v=20260914',
   '/manifest.json',

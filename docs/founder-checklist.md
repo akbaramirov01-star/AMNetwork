@@ -116,9 +116,10 @@ Not a website task, but the one that decides whether the pilot can start:
   directly — so no money-transfer licence should be needed. Confirm that with
   a Tajik lawyer before the pilot, together with the rules for processing
   families' personal data and photos.
-- **Hanafi scholar's review.** Ask a Hanafi scholar to review the model
+- **Review by Islamic scholars.** Ask qualified Islamic scholars to review the model
   (AM Network as the donor's agent, taking nothing from Zakat). Until someone
   has reviewed it, say "we are seeking review" — never "certified".
+- **Never name a madhab or a sect (Sunni/Shia etc.) in anything public; say 'Islamic scholars'. Unity, not division (founder, 25 Nov 2026).**
 
 ---
 

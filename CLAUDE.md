@@ -8,6 +8,8 @@
 
 ⚠️ **Never call AM Network "the first"** (checked October 2026). Blockchain Zakat platforms already exist (e.g. Benevolence by IBF Net, Zakat Chain, ZakatDAO) and AI-matched verified-recipient Zakat apps too (MyZakat, Poket). Describe what we do — in-person verification by trained volunteers, a transparent need checklist (a person decides), donor gives directly, open hash-chained report, nothing taken from Zakat — not a ranking.
 
+⚠️ **Never name a madhab or a sect (Sunni/Shia etc.) in anything public; say 'Islamic scholars'. Unity, not division (founder, 25 Nov 2026).** All 10 languages, the assistant and AI-review prompts included. Where rulings differ (Academy, Zakat calculator): "scholars differ: some hold A, others B; if unsure, the more cautious view is A — or ask a scholar you trust". The prayer-times Asr setting is labelled "Standard Asr (shadow length 1×)" / "Later Asr (shadow length 2×)" (AlAdhan `school` 0/1). `/team/` shows only the founder — no recruiting or adviser cards.
+
 - **Website:** amnetwork.io (live, GitHub Pages)
 - **Founder:** Akbar Amirzoda — economist, diplomat (Plekhanov University Moscow)
 - **Stage:** launching as an AI-assisted matching platform, all countries, apps planned for December 2026. No "beta Q4 2026".
@@ -52,7 +54,7 @@ Founder chose: **verification & transparency service, money never passes through
 - TikTok: @amnetwork.io (tiktok.com/@amnetwork.io)
 - LinkedIn: linkedin.com/company/amnetwork-io
 
-## Sharia Compliance (historical — now: no fee from Zakat, seeking a Hanafi scholar's review, not certified)
+## Sharia Compliance (historical — now: no fee from Zakat, seeking review by qualified Islamic scholars, not certified)
 
 - **Model:** Ujrah only (service fee) — NO riba, NO speculative token
 - **Why no token:** Gharar/maysir risk — scholars divided on speculative tokens

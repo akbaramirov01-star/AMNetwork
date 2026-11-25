@@ -19,13 +19,14 @@ Full text: `docs/strategy-2026-11.md`, wording rules: `docs/messaging-2026-11.md
 - Transparency = open report with a **SHA-256 hash chain** (`amnetwork.io/transparency/`, hidden until the pilot).
 - Need assessment = a transparent checklist; **a person decides** after an in-person visit. Never "AI-verified recipients".
 - **Pilot:** Dushanbe, 10–20 families, **Ramadan 2027 (~Feb–Mar)**, founder's own and relatives' Zakat only, no public fundraising.
-- Before the pilot: Tajik lawyer + review by a Hanafi scholar. **Not Sharia-certified** — never claim it.
+- Before the pilot: Tajik lawyer + review by qualified Islamic scholars. **Not Sharia-certified** — never claim it.
+- **Never name a madhab or a sect (Sunni/Shia etc.) in anything public; say 'Islamic scholars'. Unity, not division (founder, 25 Nov 2026).**
 - No income in year one. Not raising investment. **No partners confirmed** — never name any organisation as a partner.
 - Never call AM Network **"the first"**. Zakat potential = "**$50B–$600B a year**" (World Bank + IRTI/IsDB 2016), under $25B formal.
 
 ## 3. Where we are going (goals, insha'Allah)
 1. Platform 100% ready (done: cabinet for families/verifiers/donors/admin, open report, site rewritten, email via Resend,
-   privacy/consent). Next: trial with 2–3 families, then lawyer + Hanafi scholar review.
+   privacy/consent). Next: trial with 2–3 families, then lawyer + review by Islamic scholars.
 2. Ramadan 2027 pilot in Dushanbe with a public report; after it — a registered partner charity (first candidate Saliheen).
 3. Media: grow the channel to YouTube Partner Program level-1 (500 subs + 3M Shorts views / 90 days) through daily short videos;
    side income: Ramadan workbook (Jan–Feb 2027), commissioned animations for Islamic schools/brands, donations link.
