@@ -1,0 +1,113 @@
+{
+ "order": [
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08"
+ ],
+ "dialog": [
+  "02",
+  "03",
+  "05",
+  "06",
+  "08"
+ ],
+ "estab": [],
+ "cut": {
+  "06": 24,
+  "02": 5
+ },
+ "fadeblack_into": [
+  "04",
+  "07"
+ ],
+ "hook": {
+  "01": [
+   0.0,
+   3.6,
+   "EVERY PROPHET\nWARNED US\nABOUT HIM\u2026"
+  ]
+ },
+ "st": {
+  "01": 0.25,
+  "04": 0.5,
+  "07": 0.9
+ },
+ "plate": {
+  "01": "Signs of the Last Day #2",
+  "04": "Sahih al-Bukhari 7131",
+  "06": "Sahih Muslim, Book 6, Hadith 311",
+  "07": "Quran \u00b7 Al-Kahf 18:1 \u00b7 amnetwork.io/quran",
+  "08": "Save this \u00b7 start tonight"
+ },
+ "card": {
+  "dur": 4.0,
+  "lines": [
+   [
+    "10 AYAT. 10 NIGHTS.\nSTART TONIGHT.",
+    54,
+    [
+     236,
+     196,
+     96
+    ],
+    36
+   ],
+   [
+    "Signs of the Last Day #2",
+    26,
+    [
+     245,
+     245,
+     238
+    ],
+    40
+   ],
+   [
+    "Sahih al-Bukhari 7131",
+    22,
+    [
+     200,
+     200,
+     195
+    ],
+    4
+   ],
+   [
+    "Sahih Muslim, Book 6, Hadith 311 \u00b7 Quran 18:1",
+    22,
+    [
+     200,
+     200,
+     195
+    ],
+    36
+   ],
+   [
+    "Read Surah Al-Kahf free: amnetwork.io/quran",
+    24,
+    [
+     236,
+     196,
+     96
+    ],
+    30
+   ],
+   [
+    "Not a fatwa \u00b7 AI-animated \u00b7 AM Academy",
+    20,
+    [
+     200,
+     200,
+     195
+    ],
+    0
+   ]
+  ]
+ },
+ "out": "SIGNS2_raw.mp4"
+}

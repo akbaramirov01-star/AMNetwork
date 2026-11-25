@@ -24,8 +24,8 @@ Budget now: **894.7 credits** (24 Nov). Higgsfield resets ~30 Nov and the remain
 | # | Shoot | Title | Series | Length | Est. credits | Status |
 |---|---|---|---|---|---|---|
 | 1 | 25 Nov | **Heart Stories #2 — "Eleven Missed Calls"** | Heart Stories | 0:57 | ~75 | **DONE 24 Nov — in QUEUE.md (#8, 2 Dec)** |
-| 2 | 25 Nov | Prophet Isa (pbuh) #18 — "He spoke from the cradle" (series finale) | Stories of the Prophets | ~1:50 | ~140 | script ready |
-| 3 | 26 Nov | Signs of the Last Day #2 — "Every prophet warned about him" | Signs of the Last Day | ~0:50 | ~55 | needs 1 source [verify] |
+| 2 | 25 Nov | Prophet Isa (pbuh) #18 — "He spoke from the cradle" (series finale) | Stories of the Prophets | 1:37 | ~110 | **DONE 25 Nov — QUEUE #9** |
+| 3 | 26 Nov | Signs of the Last Day #2 — "Every prophet warned about him" | Signs of the Last Day | 0:53 | ~60 | **DONE 25 Nov — QUEUE #10** (Muslim Book 6 Hadith 311 verified) |
 | 4 | 26 Nov | Heart Stories #3 — "The Phone at the Table" | Heart Stories | ~1:10 | ~95 | idea (heart-stories.md #6) |
 | 5 | 27 Nov | After This Life #1 — "What happens in the grave?" | After This Life | ~0:50 | ~55 | script ready |
 | 6 | 27 Nov | Duas for Every Day #2 — "Leaving the house" | Duas for Every Day | ~0:35 | ~40 | to write |
@@ -149,3 +149,22 @@ only fog, an empty road, a lamp. Calm ending: "Allah protects those who prepare.
   draws a bottom "Playing · AM Network Quran" bar with a moving progress line. Captions are skipped over the phone (`CAP_SKIP=03`).
   **Audio stays our own narration** — the site's reciters (famous qaris) trigger YouTube Content ID (Ayyub #12 was blocked twice);
   Arabic recitation only from CC0 files, which this container cannot download from Wikimedia yet.
+
+## What the numbers say (founder screenshots, 25 Nov 13:13)
+Instagram: "EVERYTHING… then lost it ALL. What did he say?" (Ayyub) **26.9k**, Episode 7 **22k** (both pinned), Lut "A whole city
+UPSIDE DOWN" **1,907**, Yusuf "Thrown into a well… by his own brothers?!" **1,430**, "who left them there?" 797, the scale 450–563;
+most "boy-face" covers (Musa parts, WYWD) 117–366. TikTok ~180–350 each (Yunus best, 350). YouTube Shorts 3–28 views.
+Rules we take from it:
+1. **The first frame is the event, not the narrator.** Winners show the miracle/disaster (a ruined valley, a city upside down, a well);
+   the Yusuf-reaction covers sit at ~150. Open on the strongest image, the family comes in after.
+2. **An unanswered question with a person at its centre** ("What did he say?", "by his own brothers?!"). The answer comes late.
+3. **One complete story per video** beat multi-part series (Musa parts 1–5: 142–366). No more "Part N".
+4. Story first, lesson last; the platform plug (phone with the ayah) sits at the payoff, not the start.
+5. YouTube Shorts barely gets shown — upload anyway, but judge growth on Instagram/TikTok; reuse winners' structure, not the topic.
+
+## Lessons 25 Nov (Isa #18, Signs #2)
+- seed_audio refuses some Quran sentences (19:30, 18:1 flagged "nsfw") — record them in two halves and join locally (atrim + concat).
+- voice_change can swallow a word ("peace be upon **him**" became "upon and") — always re-run Whisper after voice_change; patch the
+  one word from the native take (pitch-matched, 30 ms crossfades) rather than accept a broken salawat.
+- A vertical light beam crossing a cloud band reads as a cross — prompt "only round soft glows, no beams, no lines, no clouds".
+- Whisper can hallucinate the initial prompt words at the end of a short clip → use cfg "cut" to keep only the real words.
