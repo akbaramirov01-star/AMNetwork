@@ -1,0 +1,136 @@
+{
+ "order": [
+  "00",
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
+  "11"
+ ],
+ "dialog": [
+  "01",
+  "02",
+  "03",
+  "06",
+  "07",
+  "08",
+  "10"
+ ],
+ "estab": [
+  "00",
+  "04",
+  "05",
+  "09"
+ ],
+ "estab_cap": 4.0,
+ "estab_dur": {
+  "00": 4.0,
+  "04": 4.2,
+  "05": 4.6,
+  "09": 4.4
+ },
+ "cut": {
+  "02": 3
+ },
+ "fadeblack_into": [
+  "11"
+ ],
+ "hook": {
+  "00": [
+   0.0,
+   3.8,
+   "NOBODY IS\nLISTENING\u2026"
+  ]
+ },
+ "st": {
+  "11": 0.8
+ },
+ "plate": {
+  "11": "Quran \u00b7 Al-Isra 17:23 \u00b7 amnetwork.io/quran"
+ },
+ "card": {
+  "dur": 4.0,
+  "lines": [
+   [
+    "THEY WON'T ALWAYS\nBE AT YOUR TABLE.",
+    50,
+    [
+     236,
+     196,
+     96
+    ],
+    36
+   ],
+   [
+    "Heart Stories #3 \u00b7 The Phone at the Table",
+    24,
+    [
+     245,
+     245,
+     238
+    ],
+    36
+   ],
+   [
+    "\"Whoever loves that his life be prolonged,",
+    21,
+    [
+     245,
+     245,
+     238
+    ],
+    2
+   ],
+   [
+    "let him keep good relations with his kin.\"",
+    21,
+    [
+     245,
+     245,
+     238
+    ],
+    4
+   ],
+   [
+    "Sahih al-Bukhari 5986 \u00b7 Quran 17:23",
+    20,
+    [
+     200,
+     200,
+     195
+    ],
+    34
+   ],
+   [
+    "Read the Quran free: amnetwork.io/quran",
+    24,
+    [
+     236,
+     196,
+     96
+    ],
+    28
+   ],
+   [
+    "Not a fatwa \u00b7 AI-animated \u00b7 AM Academy",
+    20,
+    [
+     200,
+     200,
+     195
+    ],
+    0
+   ]
+  ]
+ },
+ "out": "HEART3_raw.mp4",
+ "tail": {
+  "02": 0.15
+ }
+}

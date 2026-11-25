@@ -23,6 +23,7 @@ Texts for each video: the file in the "Texts" column (all in `docs/content/publi
 | 9 | 1 Dec | Stories of the Prophets #18 — Prophet Isa (peace be upon him), series finale | 1:37 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/32de58ef-ec3c-4d78-bb75-1f42b7e0d6aa.mp4 | isa.md (cover isa-cover.jpg) |
 | 10 | 3 Dec | Signs of the Last Day #2 — Every prophet warned about him | 0:53 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/532c3bf4-4965-404b-987d-d6ca96b266bb.mp4 | signs-2.md (cover signs-2-cover.jpg) |
 | 11 | 5 Dec | Signs of the Last Day #3 — The Dajjal decoded (one day like a year) | 1:42 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/f8afb286-476d-48ae-bc37-f19953e3f046.mp4 | signs-3.md (cover signs-3-cover.jpg) |
+| 12 | 4 Dec | Heart Stories #3 — The Phone at the Table | 0:56 | https://d2ol7oe51mr4n9.cloudfront.net/user_3EkfyAdwC1v8WM8AwCLFBGF9HDQ/627193d5-ab9d-411c-9394-330efa1a9e5e.mp4 | heart-3.md (cover heart-3-cover.jpg) |
 
 All links above are the **captioned v2** versions (23 Nov evening: one Whisper pass over the whole video, no overlapping lines — the earlier captioned links overlapped, do not use them). Playlists and title numbering: `docs/content/playlists.md`.
 
