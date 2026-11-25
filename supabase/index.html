@@ -109,6 +109,10 @@ alter sequence public.app_ref_seq restart with 1;</textarea>
 <p>Нужен после «Платформа» и «Уведомления на почту» (ключ Resend). SQL Editor → New query → вставить → Run. Данные не удаляет.</p>
 <button id="cm2">Скопировать скрипт части 2</button><div class="ok" id="om2"></div>
 <textarea id="m2sql" readonly>Загрузка…</textarea>
+<h2>Платформа, часть 3: перевод, вопросы, чат, двухэтапный вход</h2>
+<p>После частей 1 и 2. SQL Editor → New query → вставить → Run. Данные не удаляет.</p>
+<button id="cm3">Скопировать скрипт части 3</button><div class="ok" id="om3"></div>
+<textarea id="m3sql" readonly>Загрузка…</textarea>
 </main>
 <script>
 const $=s=>document.querySelector(s);
@@ -128,6 +132,8 @@ fetch('/supabase/matching.sql',{cache:'no-store'}).then(r=>r.text()).then(t=>{$(
 $('#cm').onclick=()=>copy($('#msql').value,'#om');
 fetch('/supabase/matching-2.sql',{cache:'no-store'}).then(r=>r.text()).then(t=>{$('#m2sql').value=t}).catch(()=>{});
 $('#cm2').onclick=()=>copy($('#m2sql').value,'#om2');
+fetch('/supabase/matching-3.sql',{cache:'no-store'}).then(r=>r.text()).then(t=>{$('#m3sql').value=t}).catch(()=>{});
+$('#cm3').onclick=()=>copy($('#m3sql').value,'#om3');
 $('#gs').onclick=()=>{const a=new Uint8Array(24);crypto.getRandomValues(a);$('#sv').value=[...a].map(b=>b.toString(16).padStart(2,'0')).join('')};
 $('#css').onclick=()=>{const v=$('#sv').value;if(!v){$('#oss').textContent='Сначала «Создать секрет»';return}
 copy("insert into public.amn_settings(key,value) values('svc_secret','"+v+"') on conflict (key) do update set value=excluded.value;",'#oss')};

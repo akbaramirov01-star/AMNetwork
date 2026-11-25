@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AM Network — Chat</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src https://pziakammdazyytxubtrj.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
+<link rel="icon" href="/favicon.svg">
+<script>try{var th=localStorage.getItem('amn_theme');if(th==='light'||th==='dark')document.documentElement.dataset.theme=th}catch(e){}</script>
+<style>
+[data-theme="dark"]{--bg:#0A1A11;--card:rgba(255,255,255,.05);--line:rgba(255,255,255,.12);--text:#fff;--text2:rgba(255,255,255,.72);--me:rgba(201,168,76,.18)}
+[data-theme="light"]{--bg:#F5F0E8;--card:#fff;--line:rgba(28,69,50,.14);--text:#1C2E1F;--text2:rgba(28,46,31,.7);--me:rgba(201,168,76,.2)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,'Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line)}
+header img{width:32px;height:32px}header b{font-weight:700;letter-spacing:.04em}header span{color:var(--text2);font-size:13px}
+main{flex:1;max-width:720px;width:100%;margin:0 auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.warn{padding:12px 14px;border-radius:14px;background:rgba(232,176,74,.12);border:1px solid rgba(232,176,74,.4);font-size:13.5px}
+#msgs{flex:1;display:flex;flex-direction:column;gap:8px;overflow-y:auto;padding:4px 0}
+.m{max-width:85%;padding:9px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line);white-space:pre-wrap}
+.m.me{align-self:flex-end;background:var(--me);border-color:rgba(201,168,76,.45)}
+.m small{display:block;color:var(--text2);font-size:11.5px;margin-bottom:2px}
+form{display:flex;gap:8px;position:sticky;bottom:0;padding:10px 0 calc(10px + env(safe-area-inset-bottom));background:var(--bg)}
+textarea{flex:1;min-height:48px;max-height:160px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;resize:vertical}
+button{min-height:48px;padding:0 18px;border:0;border-radius:12px;background:#C9A84C;color:#1a1405;font:700 15px system-ui,sans-serif;cursor:pointer}
+button.ghost{background:transparent;border:1px solid var(--line);color:var(--text2);min-height:38px;font-size:13px;font-weight:600}
+.err{padding:14px;border-radius:14px;background:rgba(224,82,82,.12);border:1px solid rgba(224,82,82,.4)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+</style>
+</head>
+<body>
+<header><img src="/favicon.svg" alt=""><div><b>AM NETWORK</b><br><span id="sub"></span></div></header>
+<main>
+  <div class="warn" id="warn"></div>
+  <div id="msgs" aria-live="polite"></div>
+  <form id="f"><textarea id="body" maxlength="2000" required></textarea><button id="send"></button></form>
+  <div class="row"><span style="font-size:12px;color:var(--text2)" id="ref"></span><button class="ghost" id="report" type="button"></button></div>
+</main>
+<script src="/vendor/supabase-2.118.0.js"></script>
+<script src="/vendor/amn-supabase.js"></script>
+<script>
+const L={
+ en:{sub:'Private chat',warn:'This chat is private. Never pay anyone and never send money for help — AM Network and the charities never ask for it. Share documents only if you want to.',ph:'Write a message…',send:'Send',report:'Report a problem',reported:'Thank you. AM Network will look at this chat.',you:'You',giver:'Charity / donor',admin:'AM Network',bad:'This link is not valid or has expired. Write to contact@amnetwork.io.',err:'Could not send. Try again.'},
+ ru:{sub:'Закрытый чат',warn:'Это закрытый чат. Никогда никому не платите и не отправляйте деньги за помощь — AM Network и фонды этого не просят. Документы отправляйте только если хотите.',ph:'Напишите сообщение…',send:'Отправить',report:'Сообщить о проблеме',reported:'Спасибо. AM Network посмотрит этот чат.',you:'Вы',giver:'Фонд / донор',admin:'AM Network',bad:'Ссылка недействительна или устарела. Напишите на contact@amnetwork.io.',err:'Не удалось отправить. Попробуйте ещё раз.'},
+ tj:{sub:'Чати пӯшида',warn:'Ин чати пӯшида аст. Ҳеҷ гоҳ ба касе пул пардохт накунед ва барои кӯмак пул нафиристед — AM Network ва фондҳо инро талаб намекунанд. Ҳуҷҷатҳоро танҳо бо хоҳиши худ фиристед.',ph:'Паём нависед…',send:'Фиристодан',report:'Хабар додан дар бораи мушкил',reported:'Ташаккур. AM Network ин чатро мебинад.',you:'Шумо',giver:'Фонд / хайрхоҳ',admin:'AM Network',bad:'Пайванд нодуруст ё кӯҳна аст. Ба contact@amnetwork.io нависед.',err:'Фиристода нашуд. Боз кӯшиш кунед.'},
+ ar:{sub:'محادثة خاصة',warn:'هذه محادثة خاصة. لا تدفع لأحد أبدًا ولا ترسل مالًا مقابل المساعدة — لا يطلب AM Network ولا الجمعيات ذلك. أرسل المستندات فقط إن رغبت.',ph:'اكتب رسالة…',send:'إرسال',report:'الإبلاغ عن مشكلة',reported:'شكرًا. سيراجع فريق AM Network هذه المحادثة.',you:'أنت',giver:'جمعية / محسن',admin:'AM Network',bad:'هذا الرابط غير صالح أو منتهي. راسلنا على contact@amnetwork.io.',err:'تعذّر الإرسال. حاول مرة أخرى.'},
+ id:{sub:'Obrolan pribadi',warn:'Obrolan ini pribadi. Jangan pernah membayar siapa pun atau mengirim uang demi bantuan — AM Network dan lembaga tidak pernah memintanya. Kirim dokumen hanya jika Anda mau.',ph:'Tulis pesan…',send:'Kirim',report:'Laporkan masalah',reported:'Terima kasih. AM Network akan memeriksa obrolan ini.',you:'Anda',giver:'Lembaga / donatur',admin:'AM Network',bad:'Tautan tidak valid atau kedaluwarsa. Tulis ke contact@amnetwork.io.',err:'Gagal mengirim. Coba lagi.'},
+ tr:{sub:'Özel sohbet',warn:'Bu sohbet özeldir. Yardım için asla kimseye para ödemeyin veya göndermeyin — AM Network ve vakıflar bunu istemez. Belgeleri yalnızca isterseniz gönderin.',ph:'Bir mesaj yazın…',send:'Gönder',report:'Sorun bildir',reported:'Teşekkürler. AM Network bu sohbete bakacak.',you:'Siz',giver:'Vakıf / bağışçı',admin:'AM Network',bad:'Bu bağlantı geçersiz veya süresi dolmuş. contact@amnetwork.io adresine yazın.',err:'Gönderilemedi. Tekrar deneyin.'},
+ zh:{sub:'私密聊天',warn:'这是私密聊天。请勿为获得帮助向任何人付款或汇款——AM Network 和慈善机构从不索要。只在您愿意时发送材料。',ph:'输入消息…',send:'发送',report:'举报问题',reported:'谢谢。AM Network 会查看此聊天。',you:'您',giver:'慈善机构 / 捐助者',admin:'AM Network',bad:'链接无效或已过期。请写信至 contact@amnetwork.io。',err:'发送失败，请重试。'},
+ ms:{sub:'Sembang peribadi',warn:'Sembang ini peribadi. Jangan sekali-kali membayar sesiapa atau menghantar wang untuk mendapat bantuan — AM Network dan badan amal tidak memintanya. Hantar dokumen hanya jika anda mahu.',ph:'Tulis mesej…',send:'Hantar',report:'Laporkan masalah',reported:'Terima kasih. AM Network akan menyemak sembang ini.',you:'Anda',giver:'Badan amal / penderma',admin:'AM Network',bad:'Pautan tidak sah atau telah tamat. Tulis kepada contact@amnetwork.io.',err:'Gagal menghantar. Cuba lagi.'},
+ fr:{sub:'Discussion privée',warn:"Cette discussion est privée. Ne payez jamais personne et n'envoyez jamais d'argent pour obtenir de l'aide — AM Network et les associations ne le demandent jamais. N'envoyez des documents que si vous le souhaitez.",ph:'Écrivez un message…',send:'Envoyer',report:'Signaler un problème',reported:'Merci. AM Network examinera cette discussion.',you:'Vous',giver:'Association / donateur',admin:'AM Network',bad:"Ce lien n'est pas valide ou a expiré. Écrivez à contact@amnetwork.io.",err:"Échec de l'envoi. Réessayez."},
+ de:{sub:'Privater Chat',warn:'Dieser Chat ist privat. Zahlen Sie niemandem etwas und schicken Sie nie Geld, um Hilfe zu bekommen — AM Network und die Organisationen verlangen das nie. Senden Sie Unterlagen nur, wenn Sie möchten.',ph:'Nachricht schreiben…',send:'Senden',report:'Problem melden',reported:'Danke. AM Network sieht sich diesen Chat an.',you:'Sie',giver:'Organisation / Spender',admin:'AM Network',bad:'Dieser Link ist ungültig oder abgelaufen. Schreiben Sie an contact@amnetwork.io.',err:'Senden fehlgeschlagen. Bitte erneut versuchen.'}};
+let lang=(navigator.language||'en').slice(0,2);try{const s=localStorage.getItem('amn_lang');if(L[s])lang=s}catch(e){}if(lang==='tg')lang='tj';if(!L[lang])lang='en';
+const t=k=>L[lang][k];document.documentElement.lang=lang==='tj'?'tg':lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+const $=s=>document.querySelector(s);
+$('#sub').textContent=t('sub');$('#warn').textContent=t('warn');$('#body').placeholder=t('ph');$('#send').textContent=t('send');$('#report').textContent=t('report');
+// The secret is in the URL fragment, which browsers never send to any server. Remove it from the
+// address bar right away so it is not left in screenshots; keep it only in this page's memory.
+const token=(location.hash||'').slice(1);
+if(token)history.replaceState(null,'',location.pathname);
+const sb=window.supabase.createClient(AMN_SB.url,AMN_SB.key,{auth:{persistSession:false,autoRefreshToken:false}});
+function paint(v){
+  $('#ref').textContent=(v.ref||'')+' · '+(v.giver||'');
+  const box=$('#msgs');const near=box.scrollHeight-box.scrollTop-box.clientHeight<80;
+  box.innerHTML='';(v.messages||[]).forEach(m=>{const d=document.createElement('div');d.className='m'+(m.sender==='applicant'?' me':'');
+    const s=document.createElement('small');s.textContent=(m.sender==='applicant'?t('you'):t(m.sender))+' · '+new Date(m.at).toLocaleString(lang==='tj'?'ru':lang,{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+    const b=document.createElement('div');b.dir='auto';b.textContent=m.body;d.append(s,b);box.appendChild(d)});
+  if(near)box.scrollTop=box.scrollHeight;
+  if(v.status!=='open')$('#f').style.display='none';
+}
+function fail(){document.querySelector('main').innerHTML='';const e=document.createElement('div');e.className='err';e.textContent=t('bad');document.querySelector('main').appendChild(e)}
+async function load(){if(!token)return fail();const {data,error}=await sb.rpc('chat_view',{p_token:token});if(error)return fail();paint(data)}
+$('#f').addEventListener('submit',async e=>{e.preventDefault();const b=$('#body').value.trim();if(!b)return;$('#send').disabled=true;
+  const {data,error}=await sb.rpc('chat_post',{p_token:token,p_body:b});$('#send').disabled=false;
+  if(error){alert(t('err'));return}$('#body').value='';paint(data);$('#msgs').scrollTop=$('#msgs').scrollHeight});
+$('#report').addEventListener('click',async()=>{const {error}=await sb.rpc('chat_report',{p_token:token});if(!error){$('#report').disabled=true;$('#report').textContent=t('reported')}});
+load();setInterval(()=>{if(!document.hidden)load()},15000);
+</script>
+</body>
+</html>

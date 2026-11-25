@@ -582,6 +582,8 @@ def requests_submit():
         "months": _num(p.get("months"), 0, 601), "story": story,
         "show_first_name": bool(p.get("show_first_name")),
         "contact_consent": bool(p.get("contact_consent")),
+        "phone": re.sub(r"[^0-9+]", "", str(p.get("phone") or ""))[:20],
+        "channel": str(p.get("channel") or "") if p.get("channel") in ("whatsapp", "telegram", "email") else None,
         "lang": str(p.get("lang") or "")[:2].lower() if re.match(r"^[a-z]{2}$", str(p.get("lang") or "")[:2]) else None,
     }
     for k in ("members", "children", "months"):
@@ -628,6 +630,32 @@ def requests_review():
         app.logger.exception("requests/review: unhandled")
         return jsonify(error="review_unavailable"), 502
     return jsonify(review=result, skipped=result is None)
+
+
+@app.route("/requests/translate", methods=["POST"])
+def requests_translate():
+    """Translate a request's (masked) story for the admin or an approved giver; cached per language."""
+    if not _ai_review_on():
+        return jsonify(error="AI review is disabled on this deployment."), 410
+    if not cheap_limiter.allow(client_address()):
+        return jsonify(error="Too many requests."), 429
+    auth = request.headers.get("Authorization", "")
+    jwt = auth[7:].strip() if auth.lower().startswith("bearer ") else ""
+    p = request.get_json(force=True, silent=True) or {}
+    app_id, lang = str(p.get("id") or ""), str(p.get("lang") or "")
+    if not jwt or not re.match(r"^[0-9a-f-]{36}$", app_id) or lang not in ai_review.LANG_NAMES:
+        return jsonify(error="bad request"), 400
+    try:
+        if ai_review.rpc("may_translate", {"p_id": app_id}, user_jwt=jwt) is not True:
+            return jsonify(error="forbidden"), 403
+        text = ai_review.run_translate(app_id, lang)
+    except ai_review.ReviewError as e:
+        app.logger.error("requests/translate: %s", e)
+        return jsonify(error="daily_cap" if "daily cap" in str(e) else "translate_unavailable"), 502
+    except Exception:
+        app.logger.exception("requests/translate: unhandled")
+        return jsonify(error="translate_unavailable"), 502
+    return jsonify(text=text)
 
 
 @app.route("/push/public-key", methods=["GET"])

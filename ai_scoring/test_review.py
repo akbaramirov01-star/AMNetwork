@@ -47,6 +47,15 @@ assert c.post("/requests/review", json={"id": app_id}, headers={"Authorization":
 r = c.post("/requests/review", json={"id": app_id}, headers={"Authorization": "Bearer good"})
 assert r.status_code == 200 and r.json["review"] == {"category": "gharimin"}, r.json
 
+review.run_translate = lambda app_id, lang: "перевод"
+r = c.post("/requests/translate", json={"id": app_id, "lang": "ru"}, headers={"Authorization": "Bearer good"})
+assert r.status_code == 403, r.json   # may_translate is not mocked → None → forbidden
+_old = review.rpc
+review.rpc = lambda fn, args, user_jwt=None: True if fn == "may_translate" else _old(fn, args, user_jwt)
+r = c.post("/requests/translate", json={"id": app_id, "lang": "ru"}, headers={"Authorization": "Bearer good"})
+assert r.status_code == 200 and r.json["text"] == "перевод", r.json
+assert c.post("/requests/translate", json={"id": app_id, "lang": "xx"}, headers={"Authorization": "Bearer good"}).status_code == 400
+
 os.environ["AI_REVIEW_ENABLED"] = ""
 assert c.post("/requests/review", json={"id": app_id}, headers={"Authorization": "Bearer good"}).status_code == 410
 print("OK — request intake and AI review routes")

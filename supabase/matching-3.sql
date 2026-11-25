@@ -287,10 +287,11 @@ begin c := public.amn_chat_by_token(p_token); update public.chats set reported =
 grant execute on function public.chat_view(text), public.chat_post(text, text), public.chat_report(text) to anon, authenticated;
 
 -- Giver and admin (accounts).
-create or replace function public.my_chats()
-returns table (id uuid, ref text, giver text, status text, reported boolean, last_at timestamptz, unread_hint int)
+drop function if exists public.my_chats();
+create function public.my_chats()
+returns table (id uuid, application_id uuid, offer_id uuid, ref text, giver text, status text, reported boolean, last_at timestamptz, recent_from_applicant int)
 language sql stable security definer set search_path = public as $$
-  select c.id, a.ref, coalesce(nullif(p.org_name, ''), p.full_name, p.email), c.status, c.reported, c.last_at,
+  select c.id, c.application_id, c.offer_id, a.ref, coalesce(nullif(p.org_name, ''), p.full_name, p.email), c.status, c.reported, c.last_at,
          (select count(*)::int from public.chat_messages m where m.chat_id = c.id and m.sender = 'applicant' and m.at > now() - interval '7 days')
     from public.chats c join public.applications a on a.id = c.application_id join public.profiles p on p.id = c.giver_id
    where c.giver_id = auth.uid() or public.is_admin()
