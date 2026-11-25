@@ -1,0 +1,139 @@
+{
+ "order": [
+  "01",
+  "02",
+  "03",
+  "04",
+  "05",
+  "06",
+  "07",
+  "08",
+  "09",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14"
+ ],
+ "dialog": [
+  "02",
+  "03",
+  "05",
+  "08",
+  "09",
+  "11",
+  "12",
+  "13"
+ ],
+ "estab": [
+  "14"
+ ],
+ "estab_dur": {
+  "14": 4.0
+ },
+ "fadeblack_into": [
+  "06",
+  "10",
+  "14"
+ ],
+ "hook": {
+  "01": [
+   0.0,
+   3.6,
+   "ONE DAY\u2026\nAS LONG AS A YEAR?!"
+  ]
+ },
+ "st": {
+  "01": 0.25,
+  "04": 0.4,
+  "06": 0.4,
+  "07": 0.4,
+  "10": 0.4
+ },
+ "plate": {
+  "01": "The Dajjal \u00b7 Sahih Muslim 54:134",
+  "03": "Bediuzzaman Said Nursi \u00b7 Risale-i Nur",
+  "04": "An interpretation \u00b7 Allah knows best",
+  "06": "Central Asia, 20th century",
+  "07": "Sahih Muslim 54:134 \u00b7 Sahih al-Bukhari 1881",
+  "10": "Sahih Muslim 54:128",
+  "13": "Surah Al-Kahf (The Cave) \u00b7 Sahih Muslim 6:311",
+  "14": "Read Al-Kahf free \u00b7 amnetwork.io/quran"
+ },
+ "card": {
+  "dur": 4.4,
+  "lines": [
+   [
+    "STAY AWAKE.\nHOLD ON TO THE TRUTH.",
+    48,
+    [
+     236,
+     196,
+     96
+    ],
+    34
+   ],
+   [
+    "Signs of the Last Day #3 \u00b7 The Dajjal decoded",
+    24,
+    [
+     245,
+     245,
+     238
+    ],
+    34
+   ],
+   [
+    "Sahih Muslim 54:134, 54:128, 6:311 \u00b7 Sahih al-Bukhari 1881",
+    19,
+    [
+     200,
+     200,
+     195
+    ],
+    4
+   ],
+   [
+    "Interpretation: Bediuzzaman Said Nursi (Risale-i Nur)",
+    19,
+    [
+     200,
+     200,
+     195
+    ],
+    4
+   ],
+   [
+    "Inspired by the video of Towards Eternity",
+    19,
+    [
+     200,
+     200,
+     195
+    ],
+    30
+   ],
+   [
+    "Read Surah Al-Kahf free: amnetwork.io/quran",
+    24,
+    [
+     236,
+     196,
+     96
+    ],
+    28
+   ],
+   [
+    "Not a fatwa \u00b7 Allah knows best \u00b7 AI-animated",
+    19,
+    [
+     200,
+     200,
+     195
+    ],
+    0
+   ]
+  ]
+ },
+ "out": "SIGNS3_raw.mp4"
+}

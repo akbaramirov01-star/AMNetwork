@@ -188,3 +188,17 @@ Not used (too graphic or would require showing people): the young man cut in two
 - seedance re-voices the line itself and mispronounced "Al-Kahf" as "Al-Kahib" in 3 takes even with a correct reference audio. Fix that
   works: keep the take's picture, dub the clean seed_audio line over it, time-warped phrase by phrase to the take's word timings
   (atempo per segment), ambience kept under it. Check Arabic names with Whisper large-v3 WITHOUT an initial prompt (the prompt hides errors).
+
+## Budget plan (25 Nov, 442.9 credits left; Higgsfield reset ~30 Nov, date unconfirmed)
+| # | Video | Est. | Why now |
+|---|---|---|---|
+| 1 | Signs of the Last Day #3 — "Dajjal decoded" (founder approved 25 Nov) — **DONE 25 Nov, 1:42, QUEUE #11** | ~137 | founder's request; story + mystery = our best-performing pattern |
+| 2 | Heart Stories #3 — "The Phone at the Table" | ~95 | emotional family story, widest audience |
+| 3 | After This Life #1 — "What happens in the grave?" | ~55 | big question hook, short |
+| 4 | True or Myth? #1 — "Bismillah before eating" | ~45 | comment-bait format, cheap |
+| 5 | Duas for Every Day #2 — "Leaving the house" | ~40 | useful, saveable, cheap |
+| | **Total** | **~345** | leaves ~95 for reshoots/fixes |
+Moved after the reset: What Would You Do? #3 (WYWD #1 posted: 117–212 views, weakest format so far) and Heart Stories #4.
+
+- Budget after Signs #3: **306 credits** (25 Nov). Next per plan: Heart #3, After This Life #1, True or Myth #1, Dua #2 (~235).
+- `tools/signs3/dub.py CLEAN.wav TAKE.mp4 OUT.mp4` — automatic dub with phrase alignment (used for a slurred 'ten ayat').
