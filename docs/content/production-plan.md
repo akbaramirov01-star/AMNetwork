@@ -218,3 +218,14 @@ Next after the Higgsfield reset: What Would You Do? #3, Heart Stories #4.
   story + ayah on screen) and change one variable; later test one video in another language (ru/tr/id/ur).
 - Risk to keep in mind: YouTube's inauthentic-content rules (mass-produced/template AI; AI personas on sensitive topics) — our
   defence is real sources on screen, verified hadith, original scripts, "Not a fatwa · AI-animated", no daily mass uploads.
+
+## Strategy change (founder, 26 Nov): long-form first
+- Shorts did not take off → max 1–2 Shorts per week (the best of QUEUE.md); the main effort goes to long videos (8–15 min,
+  16:9), with Shorts cut from them. Ratio long : short effort ≈ 50/50 or more toward long.
+- "Stories of the Prophets" is now crowded and none of our Shorts appear in YouTube search for it → long videos need a
+  different angle in the title (event + question, e.g. "Dajjal decoded", "The ant that stopped an army") and chapters.
+- Budget: Max plan = 3,600 credits/month (founder screenshot, 26 Nov); seedance ≈ 1 credit/s → a fully animated 10-min video
+  would cost ~600 credits. Cheaper long-form recipe: narration + fewer, longer clips reused, stills with slow zoom, family
+  scenes only at the hook/turning point/ending.
+- Zero-credit first step: a 16:9 compilation of our finished episodes (Dawud, Sulayman, Zakariya & Yahya, Isa) with an intro,
+  chapters and an end screen.
