@@ -64,3 +64,7 @@ Settings: AI info — on.
 Your best friend wants to copy your homework 😬 A — send it, or B — say no but help her? Comment before the answer! Quran 5:2. AI-animated · Not a fatwa.
 #WhatWouldYouDo #MuslimTikTok #School #IslamicStories
 Settings: AI-generated content — on.
+
+## #2 v2 texts (26 Nov) — use these; cover `wywd-2-cover.jpg` ("NOBODY WILL KNOW…" + A or B)
+YouTube title: "Nobody Will Know…" — My Best Friend Wants to Copy My Homework. A or B? | What Would You Do? #2
+Instagram first line: "Send me your homework. Nobody will know…" 😬 A — send it, or B — say no but help her?
