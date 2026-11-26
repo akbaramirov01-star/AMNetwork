@@ -3,7 +3,12 @@
 - Views 56,628 · watch time **115.8 h** · subscribers +1,372 · thumbnail impressions 23,796 · CTR **2.05%** · 56 videos.
 - YPP long-form path needs 4,000 public watch hours/12 months → we are at ~3% (115.8 h in 90 days).
 - **Two videos = 85% of all views:** Ayyub #12 (38,737 views, 56.2 h) and Ibrahim #7 "Thrown into fire" (9,647, 31.2 h).
-## Paid vs organic (needs owner confirmation)
+## YPP status (Studio → Monetisation, data as of 21 Nov 2026 — founder screenshots)
+- **Qualifying public watch hours (365 days): 1** of 3,000 / 4,000. **Qualifying Shorts views (90 days): 3.2k** of 3M / 10M.
+- Owner confirmed (26 Nov): everything except ~1 hour came from paid ads, which do not count. Organic baseline ≈ zero.
+- So every sprint test is measured from zero organic; the goal is the first organic watch hours from long-form.
+
+## Paid vs organic (owner confirmed: ads ≈ all of the 115.8 h)
 - Ayyub: 2–6k views/day 11–22 Nov, then **10 / 4 / 2 views/day from 23 Nov** — a cliff like this is what an ad campaign
   ending looks like; only 515 thumbnail impressions for 38,737 views and only 11 subscribers → almost certainly paid.
 - Ibrahim #7: a steady 140–560 views/day for 5+ weeks (19 Oct → 25 Nov) — either a long-running ad or our one evergreen

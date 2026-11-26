@@ -64,6 +64,13 @@ Credits estimate = clip seconds × 1 cr + voices + ~25 % reshoots (measured on 2
 - Sources on screen and in the description. Labels: "Retelling, not a fatwa · AI-animated" (shorts: "Not a fatwa · AI-animated").
 - Arabic only as on-screen text until a CC0 recitation can be downloaded (Wikimedia blocks this container: 401/429).
 
+### Script rules for YouTube auto-dubbing (21 languages, brief 26 Nov)
+- English master only; short plain sentences (≤ 15 words), no idioms, puns or slang; one idea per sentence.
+- Arabic names and terms: said once clearly, always also shown on screen (plate/caption); add the meaning once
+  ("Surah Al-Kahf, the Cave"). Avoid names the voice models mispronounce — check with Whisper large-v3, no prompt.
+- Quran/hadith quotes: keep the exact translation wording; never paraphrase inside quotation marks.
+- After publishing: check a few dubbed tracks (ru, tr, id, ar, ur) for meaning errors in religious terms; log them in sprint/.
+
 ## Scripts
 
 ### 1. Prophet Sulayman (pbuh) — done 23 Nov (`publish/sulayman.md`)
