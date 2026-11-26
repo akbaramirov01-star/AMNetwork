@@ -210,3 +210,11 @@ in the final cut too; rewrite fragile lines without negations ("what if I forget
 use a single bare earth mound in an open field. Album photos: prompt "every woman wears a headscarf". phone2.py: PLAYER_SUB env for non-Quran pages.
 Builder: cfg "tail" (per-clip tail after last word) and "skip"; initial_prompt must be set per video (stale prompts make Whisper hallucinate words).
 Next after the Higgsfield reset: What Would You Do? #3, Heart Stories #4.
+
+## Channel setup check (founder, 26 Nov)
+- Google 2FA: on. YouTube advanced features: on. Nothing left to do there.
+- Growth levers we keep (from the "faceless AI channel" video the founder sent): check every idea with YouTube search sorted by
+  "this week" (0–2 videos on the topic → make it, 5+ → skip); reuse our own winning core ("[event] — what did he say?" + prophet
+  story + ayah on screen) and change one variable; later test one video in another language (ru/tr/id/ur).
+- Risk to keep in mind: YouTube's inauthentic-content rules (mass-produced/template AI; AI personas on sensitive topics) — our
+  defence is real sources on screen, verified hadith, original scripts, "Not a fatwa · AI-animated", no daily mass uploads.
