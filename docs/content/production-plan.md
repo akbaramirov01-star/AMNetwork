@@ -229,3 +229,11 @@ Next after the Higgsfield reset: What Would You Do? #3, Heart Stories #4.
   scenes only at the hook/turning point/ending.
 - Zero-credit first step: a 16:9 compilation of our finished episodes (Dawud, Sulayman, Zakariya & Yahya, Isa) with an intro,
   chapters and an end screen.
+
+## Decision 26 Nov (founder)
+- Wait for the Higgsfield top-up, then decide the first native 16:9 long video (proposal: "Dajjal decoded", 8–10 min, ~250–350 cr).
+- Channel name stays as is on all platforms.
+- Lesson from the 19-min "Episodes 1–7" compilation (71 views in a month) and "Zamzam" 3:00 (53 views): vertical Shorts inside a
+  blurred 16:9 frame + text-only thumbnail + generic "Stories of the Prophets" title do not work as long-form. Long videos must be
+  shot in 16:9 with an event-first thumbnail and a searchable, specific title.
+- Until then: Shorts from QUEUE.md, 1–2 per week.
