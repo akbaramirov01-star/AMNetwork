@@ -50,7 +50,7 @@
    Plain colour on purpose: gradient-clipped text can vanish in iOS Safari while a web font loads. */
 .amn-logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none}
 .amn-logo .ring{position:relative;width:40px;height:40px;flex:none}
-.amn-logo .ring img{width:40px;height:40px;display:block;animation:amnGlow 4s ease-in-out infinite}
+.amn-logo .ring img{width:40px;height:40px;display:block;animation:amnGlow 4s ease-in-out 2}
 .amn-logo .wm{font:700 18px/1 'Cinzel','Cormorant Garamond',Georgia,serif;letter-spacing:.1em;white-space:nowrap;color:#F5EEDC}
 .amn-logo .wm b{color:#D4B25A;font-weight:700}
 [data-theme="light"] .amn-logo .wm{color:#1C2E1F}[data-theme="light"] .amn-logo .wm b{color:#A88528}
@@ -58,6 +58,13 @@
 @media (max-width:480px){.amn-logo{gap:7px}.amn-logo .ring,.amn-logo .ring img{width:34px;height:34px}.amn-logo .wm{font-size:13px;letter-spacing:.05em}}
 @media (max-width:340px){.amn-logo .wm{display:none}}
 html,body{overflow-x:clip}
+/* Home-screen app (standalone): drop endless animations and live blur — they made iPhones stutter. */
+@media (display-mode: standalone){
+  *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  .amn-logo .ring img,.hbtn-gold::after,#bttBtn::before,#bttBtn .amn-spark,#assistantPanel .asst-head::after,#assistantPanel .asst-head-logo::before,.amn-asst-status i,.hero-bg-img,.tl-grid a:hover .tl-ic{animation:none!important}
+  nav,.amn-sheet,.rq-tabs,.rq-bar{background:var(--bg2,#0F2117)!important}
+  [data-theme="light"] nav,[data-theme="light"] .rq-tabs,[data-theme="light"] .rq-bar{background:#F5F0E8!important}
+}
 /* Icons 3: round medallions with a gold ring, everywhere */
 .tl-ic,.page-ic,.amn-tile img,.step-icon img,.picon img{border-radius:50%!important;object-fit:cover;box-shadow:0 0 0 2px #C9A84C,0 0 0 5px rgba(201,168,76,.18),0 10px 24px rgba(0,0,0,.25)!important}
 @media (prefers-reduced-motion:reduce){.amn-logo .ring img{animation:none}}`;

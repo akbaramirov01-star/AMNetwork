@@ -1,4 +1,4 @@
-const CACHE = 'amnetwork-v74-fx';
+const CACHE = 'amnetwork-v75-smooth';
 // Must match QURAN_OFFLINE_CACHE in quran/index.html byte-for-byte — that
 // page is the only writer of this bucket (a per-surah "save for offline"
 // button). It is user data (surahs someone explicitly chose to keep) and
@@ -13,7 +13,7 @@ const STATIC = [
   '/voice-assistant.js?v=20261123',
   '/assistant-ui.js?v=20261124',
   '/site-motion.js?v=20261124',
-  '/amn-site.js?v=20261124e',
+  '/amn-site.js?v=20261126',
   '/i18n-data.js?v=762ac13dd0',
   '/logo.webp',
   '/favicon.svg?v=20260914',
@@ -119,20 +119,25 @@ self.addEventListener('fetch', e => {
   if (reqUrl.pathname.startsWith('/media/') || e.request.headers.has('range')) return;
 
   // Network-first для HTML-страниц — всегда свежий контент
+  // Network-first for pages, but never hang: on a slow or flaky connection (common in the
+  // home-screen app) show the saved copy after 3.5 s and let the fresh one update the cache.
   if (e.request.mode === 'navigate') {
-    e.respondWith(
-      fetch(e.request)
-        .then(r => {
-          const copy = r.clone();
-          // Storage can be full or blocked (private mode); a failed write
-          // must not surface as an unhandled rejection.
-          caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
-          return r;
-        })
-        .catch(() => caches.match(e.request)
-          .then(hit => hit || caches.match('/offline.html'))
-          .then(hit => hit || caches.match('/')))
-    );
+    const net = fetch(e.request).then(r => {
+      if (r && r.ok) { const copy = r.clone(); caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {}); }
+      return r;
+    });
+    const fallback = () => caches.match(e.request, { ignoreSearch: true })
+      .then(hit => hit || caches.match('/offline.html'))
+      .then(hit => hit || caches.match('/'));
+    e.respondWith(new Promise(resolve => {
+      let done = false;
+      const timer = setTimeout(() => {
+        caches.match(e.request, { ignoreSearch: true }).then(hit => { if (hit && !done) { done = true; resolve(hit); } });
+      }, 3500);
+      net.then(r => { if (!done) { done = true; clearTimeout(timer); resolve(r); } })
+         .catch(() => { if (!done) { done = true; clearTimeout(timer); resolve(fallback()); } });
+    }));
+    e.waitUntil(net.catch(() => {}));
     return;
   }
 

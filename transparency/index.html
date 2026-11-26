@@ -70,7 +70,7 @@ ol.how{padding-inline-start:20px;display:grid;gap:6px;color:var(--text2);max-wid
   <a class="nav-logo" href="/"><img src="/logo.webp" alt="AM Network" height="34"></a>
   <div class="nav-right">
     <a class="nbtn" href="/cabinet/" id="navCab"></a>
-    <select class="nbtn" id="langSel" aria-label="Language" style="width:auto;padding:0 8px"><option value="ru">RU</option><option value="tj">TJ</option><option value="en">EN</option><option value="ar">AR</option><option value="id">ID</option><option value="tr">TR</option><option value="zh">中文</option><option value="ms">MS</option><option value="fr">FR</option><option value="de">DE</option></select>
+    <select class="nbtn" id="langSel" aria-label="Language" style="width:auto;padding:0 8px"><option value="ru">🇷🇺 Русский</option><option value="tj">🇹🇯 Тоҷикӣ</option><option value="en">🇬🇧 English</option><option value="ar">🇸🇦 العربية</option><option value="id">🇮🇩 Indonesia</option><option value="tr">🇹🇷 Türkçe</option><option value="zh">🇨🇳 中文</option><option value="ms">🇲🇾 Melayu</option><option value="fr">🇫🇷 Français</option><option value="de">🇩🇪 Deutsch</option></select>
     <button class="nbtn" id="themeBtn" aria-label="Theme"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></button>
   </div>
 </nav>
@@ -241,6 +241,6 @@ Promise.all([sb.rpc('public_payouts'),sb.rpc('public_stats')]).then(([a,b])=>{
   if(a.error||b.error)throw a.error||b.error;ROWS=a.data||[];STATS=(b.data&&b.data[0])||{};render();
 }).catch(()=>{ERR=true;render()});
 </script>
-<script src="/amn-site.js?v=20261124e" defer></script>
+<script src="/amn-site.js?v=20261126" defer></script>
 </body>
 </html>
